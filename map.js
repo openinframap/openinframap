@@ -1,4 +1,4 @@
-var power = L.tileLayer('http://{s}.tiles.openinframap.org/power/{z}/{x}/{y}.png');
+var power = L.tileLayer('https://tiles-{s}.openinframap.org/power/{z}/{x}/{y}.png');
 var base = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
 });
