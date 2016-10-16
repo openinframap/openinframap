@@ -1,8 +1,18 @@
-var map = L.Mapzen.map('map', {
+var power = L.tileLayer('http://{s}.tiles.openinframap.org/power/{z}/{x}/{y}.png');
+var base = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
+});
+
+
+var map = L.map('map', {
   center: [0,0],
   zoom: 4,
-  scene: L.Mapzen.BasemapStyles.ZincNoLabels
 });
+
+map.addLayer(base);
+
+map.addLayer(power);
+power.bringToFront();
 
 var locator = L.Mapzen.locator();
 locator.setPosition('topleft');
