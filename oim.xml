@@ -1,0 +1,414 @@
+<Map srs="+init=epsg:3857">
+  <Parameters></Parameters>
+  <FontSet name="fontset-1">
+    <Font face-name="Arial Regular"></Font>
+  </FontSet>
+  <Style name="power_line" filter-mode="first">
+    <Rule>
+      <!--Zoom{>=14}-->
+      <MaxScaleDenominator>50000</MaxScaleDenominator>
+      <Filter>(([tunnel] = &#39;yes&#39;) and ([voltage] &gt; 0))</Filter>
+      <TextSymbolizer dy="15" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" placement="line" size="9">[name] + &#39; &#39; + [voltage] + &#39;kV&#39;</TextSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=14}-->
+      <MaxScaleDenominator>50000</MaxScaleDenominator>
+      <Filter>([voltage] &gt; 0)</Filter>
+      <TextSymbolizer dy="5" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" placement="line" size="9">[name] + &#39; &#39; + [voltage] + &#39;kV&#39;</TextSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=14}-->
+      <MaxScaleDenominator>50000</MaxScaleDenominator>
+      <Filter>([tunnel] = &#39;yes&#39;)</Filter>
+      <TextSymbolizer dy="15" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" placement="line" size="9">[name]</TextSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([tunnel] = &#39;yes&#39;)</Filter>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=14}-->
+      <MaxScaleDenominator>50000</MaxScaleDenominator>
+      <TextSymbolizer dy="5" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" placement="line" size="9">[name]</TextSymbolizer>
+    </Rule>
+    <Rule></Rule>
+  </Style>
+  <Style name="power_line-case" filter-mode="first">
+    <Rule>
+      <!--Zoom{>=16}-->
+      <MaxScaleDenominator>12500</MaxScaleDenominator>
+      <Filter>([tunnel] = &#39;yes&#39;)</Filter>
+      <LineSymbolizer stroke="#7c4544" stroke-linecap="round" stroke-linejoin="round" stroke-width="15"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=10}-->
+      <MaxScaleDenominator>750000</MaxScaleDenominator>
+      <Filter>([tunnel] = &#39;yes&#39;)</Filter>
+      <LineSymbolizer stroke="#7c4544" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([tunnel] = &#39;yes&#39;)</Filter>
+      <LineSymbolizer stroke="#7c4544" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></LineSymbolizer>
+    </Rule>
+  </Style>
+  <Style name="power_line-fill" filter-mode="first">
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 300))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 200))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 100))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 50))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 25))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 10))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 300))</Filter>
+      <LineSymbolizer stroke="#ff00ff" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 200))</Filter>
+      <LineSymbolizer stroke="#ff0000" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 100))</Filter>
+      <LineSymbolizer stroke="#ffa500" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 50))</Filter>
+      <LineSymbolizer stroke="#ffff00" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 25))</Filter>
+      <LineSymbolizer stroke="#008000" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 10))</Filter>
+      <LineSymbolizer stroke="#0000ff" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underwater&#39;) and ([tunnel] != &#39;yes&#39;))</Filter>
+      <LineSymbolizer stroke="#000000" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 300))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 200))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 100))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 50))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 25))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 10))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 300))</Filter>
+      <LineSymbolizer stroke="#ff00ff" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 200))</Filter>
+      <LineSymbolizer stroke="#ff0000" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 100))</Filter>
+      <LineSymbolizer stroke="#ffa500" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 50))</Filter>
+      <LineSymbolizer stroke="#ffff00" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 25))</Filter>
+      <LineSymbolizer stroke="#008000" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;) and ([voltage] &gt; 10))</Filter>
+      <LineSymbolizer stroke="#0000ff" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([location] = &#39;underground&#39;) and ([tunnel] != &#39;yes&#39;))</Filter>
+      <LineSymbolizer stroke="#000000" stroke-dasharray="10, 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([voltage] &gt; 300))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([voltage] &gt; 200))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([voltage] &gt; 100))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([voltage] &gt; 50))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([voltage] &gt; 25))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>(([frequency] = 0) and ([voltage] &gt; 10))</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([frequency] = 0)</Filter>
+      <LineSymbolizer stroke="#45057c" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([voltage] &gt; 300)</Filter>
+      <LineSymbolizer stroke="#ff00ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([voltage] &gt; 200)</Filter>
+      <LineSymbolizer stroke="#ff0000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([voltage] &gt; 100)</Filter>
+      <LineSymbolizer stroke="#ffa500" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([voltage] &gt; 50)</Filter>
+      <LineSymbolizer stroke="#ffff00" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([voltage] &gt; 25)</Filter>
+      <LineSymbolizer stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([voltage] &gt; 10)</Filter>
+      <LineSymbolizer stroke="#0000ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></LineSymbolizer>
+    </Rule>
+    <Rule>
+      <LineSymbolizer stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></LineSymbolizer>
+    </Rule>
+  </Style>
+  <Style name="power_tower" filter-mode="first">
+    <Rule>
+      <MarkersSymbolizer file="/home/osm/styles/symbols/power_tower.svg" width="5"></MarkersSymbolizer>
+    </Rule>
+  </Style>
+  <Style name="substation" filter-mode="first">
+    <Rule>
+      <!--Zoom{>=16}-->
+      <MaxScaleDenominator>12500</MaxScaleDenominator>
+      <Filter>([voltage] &gt; 0)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name] + &#39; &#39; + [voltage] + &#39;kV&#39;</TextSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=16}-->
+      <MaxScaleDenominator>12500</MaxScaleDenominator>
+      <Filter>([voltage] &gt;= 101)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name] + &#39; &#39; + [voltage] + &#39;kV&#39;</TextSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=14}-->
+      <MaxScaleDenominator>50000</MaxScaleDenominator>
+      <Filter>([voltage] &gt;= 101)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name] + &#39; &#39; + [voltage] + &#39;kV&#39;</TextSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=16}-->
+      <MaxScaleDenominator>12500</MaxScaleDenominator>
+      <Filter>([voltage] &gt; 100)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name]</TextSymbolizer>
+      <PolygonSymbolizer fill="#ffa500"></PolygonSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=14}-->
+      <MaxScaleDenominator>50000</MaxScaleDenominator>
+      <Filter>([voltage] &gt; 100)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name]</TextSymbolizer>
+      <PolygonSymbolizer fill="#ffa500"></PolygonSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=16}-->
+      <MaxScaleDenominator>12500</MaxScaleDenominator>
+      <Filter>([voltage] &gt;= 201)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name] + &#39; &#39; + [voltage] + &#39;kV&#39;</TextSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=11}-->
+      <MaxScaleDenominator>400000</MaxScaleDenominator>
+      <Filter>([voltage] &gt;= 201)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name] + &#39; &#39; + [voltage] + &#39;kV&#39;</TextSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=16}-->
+      <MaxScaleDenominator>12500</MaxScaleDenominator>
+      <Filter>([voltage] &gt; 200)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name]</TextSymbolizer>
+      <PolygonSymbolizer fill="#ff0000"></PolygonSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=11}-->
+      <MaxScaleDenominator>400000</MaxScaleDenominator>
+      <Filter>([voltage] &gt; 200)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name]</TextSymbolizer>
+      <PolygonSymbolizer fill="#ff0000"></PolygonSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=16}-->
+      <MaxScaleDenominator>12500</MaxScaleDenominator>
+      <Filter>([voltage] &gt; 300)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name]</TextSymbolizer>
+      <PolygonSymbolizer fill="#ff00ff"></PolygonSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([voltage] &gt; 300)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <PolygonSymbolizer fill="#ff00ff"></PolygonSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([voltage] &gt; 200)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <PolygonSymbolizer fill="#ff0000"></PolygonSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([voltage] &gt; 100)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <PolygonSymbolizer fill="#ffa500"></PolygonSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=16}-->
+      <MaxScaleDenominator>12500</MaxScaleDenominator>
+      <Filter>([voltage] &gt; 50)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name]</TextSymbolizer>
+      <PolygonSymbolizer fill="#ffff00"></PolygonSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([voltage] &gt; 50)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <PolygonSymbolizer fill="#ffff00"></PolygonSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=16}-->
+      <MaxScaleDenominator>12500</MaxScaleDenominator>
+      <Filter>([voltage] &gt; 25)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name]</TextSymbolizer>
+      <PolygonSymbolizer fill="#008000"></PolygonSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>([voltage] &gt; 25)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <PolygonSymbolizer fill="#008000"></PolygonSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=16}-->
+      <MaxScaleDenominator>12500</MaxScaleDenominator>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name]</TextSymbolizer>
+    </Rule>
+    <Rule>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+    </Rule>
+  </Style>
+  <Style name="power_plant" filter-mode="first">
+    <Rule>
+      <!--Zoom{>=11}-->
+      <MaxScaleDenominator>400000</MaxScaleDenominator>
+      <Filter>([source] != &#39;&#39;)</Filter>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name] + &#39; (&#39; + [source] + &#39;)&#39;</TextSymbolizer>
+    </Rule>
+    <Rule>
+      <!--Zoom{>=11}-->
+      <MaxScaleDenominator>400000</MaxScaleDenominator>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+      <TextSymbolizer dy="10" fill="#000000" fontset-name="fontset-1" halo-fill="rgba(255, 255, 255, 0.80000)" halo-radius="2" size="12" wrap-width="50">[name]</TextSymbolizer>
+    </Rule>
+    <Rule>
+      <LineSymbolizer stroke="#000000" stroke-width="1"></LineSymbolizer>
+    </Rule>
+  </Style>
+  <Layer name="power_line" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>power_line</StyleName>
+    <StyleName>power_line-case</StyleName>
+    <StyleName>power_line-fill</StyleName>
+    <Datasource>
+      <Parameter name="geometry_field">way</Parameter>
+      <Parameter name="dbname">osm</Parameter>
+      <Parameter name="extent">-20037508.34 -20037508.34 20037508.34 20037508.34</Parameter>
+      <Parameter name="table">( SELECT way, tunnel, location, frequency, power AS type, name, NULLIF(regexp_replace(voltage, &#39;[^0-9]+|(;.*)&#39;, &#39;&#39;), &#39;&#39;)::integer / 1000 AS voltage, operator, circuits FROM planet_osm_line&#xA;  WHERE power IN (&#39;line&#39;, &#39;cable&#39;)) AS data</Parameter>
+      <Parameter name="type">postgis</Parameter>
+    </Datasource>
+  </Layer>
+  <Layer name="power_tower" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>power_tower</StyleName>
+    <Datasource>
+      <Parameter name="geometry_field">way</Parameter>
+      <Parameter name="dbname">osm</Parameter>
+      <Parameter name="extent">-20037508.34 -20037508.34 20037508.34 20037508.34</Parameter>
+      <Parameter name="table">( SELECT way, power AS type, name, ref, operator FROM planet_osm_line&#xA;  WHERE power IN (&#39;tower&#39;, &#39;pole&#39;)) AS data</Parameter>
+      <Parameter name="type">postgis</Parameter>
+    </Datasource>
+  </Layer>
+  <Layer name="substation" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>substation</StyleName>
+    <Datasource>
+      <Parameter name="geometry_field">way</Parameter>
+      <Parameter name="dbname">osm</Parameter>
+      <Parameter name="extent">-20037508.34 -20037508.34 20037508.34 20037508.34</Parameter>
+      <Parameter name="table">( SELECT way, name, NULLIF(regexp_replace(voltage, &#39;[^0-9]+|(;.*)&#39;, &#39;&#39;), &#39;&#39;)::integer / 1000 AS voltage, operator, circuits FROM planet_osm_polygon&#xA;  WHERE power = &#39;substation&#39;) AS data</Parameter>
+      <Parameter name="type">postgis</Parameter>
+    </Datasource>
+  </Layer>
+  <Layer name="power_plant" srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>power_plant</StyleName>
+    <Datasource>
+      <Parameter name="geometry_field">way</Parameter>
+      <Parameter name="dbname">osm</Parameter>
+      <Parameter name="extent">-20037508.34 -20037508.34 20037508.34 20037508.34</Parameter>
+      <Parameter name="table">( SELECT way, name, operator, &#34;plant:output:electricity&#34; AS output, &#34;plant:source&#34; as source, NULLIF(regexp_replace(voltage, &#39;[^0-9]+|(;.*)&#39;, &#39;&#39;), &#39;&#39;)::integer / 1000 AS voltage, operator FROM planet_osm_polygon&#xA;  WHERE power = &#39;plant&#39;) AS data</Parameter>
+      <Parameter name="type">postgis</Parameter>
+    </Datasource>
+  </Layer>
+</Map>

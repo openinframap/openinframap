@@ -1,0 +1,121 @@
+{
+  "name": "OpenInfraMap",
+  "Layer": [
+    {
+      "Datasource": {
+        "dbname": "osm", 
+        "extent": "-20037508.34 -20037508.34 20037508.34 20037508.34", 
+        "geometry_field": "way", 
+        "id": "power_line", 
+        "key_field": "", 
+        "project": "foss4g-2011", 
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
+        "table": "( SELECT way, tunnel, location, frequency, power AS type, name, NULLIF(regexp_replace(voltage, '[^0-9]+|(;.*)', ''), '')::integer / 1000 AS voltage, operator, circuits FROM planet_osm_line\n  WHERE power IN ('line', 'cable')) AS data", 
+        "type": "postgis",
+	"dbname": "osm"
+      }, 
+      "class": "", 
+      "geometry": "linestring", 
+      "id": "power_line", 
+      "name": "power_line", 
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
+      "srs-name": "900913", 
+      "status": "on"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm", 
+        "extent": "-20037508.34 -20037508.34 20037508.34 20037508.34", 
+        "geometry_field": "way", 
+        "id": "power_tower", 
+        "key_field": "", 
+        "project": "foss4g-2011", 
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
+        "table": "( SELECT way, power AS type, name, ref, operator FROM planet_osm_line\n  WHERE power IN ('tower', 'pole')) AS data", 
+        "type": "postgis",
+	"dbname": "osm"
+      }, 
+      "class": "", 
+      "geometry": "linestring", 
+      "id": "power_tower", 
+      "name": "power_tower", 
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
+      "srs-name": "900913", 
+      "status": "on"
+    },
+
+  {
+      "Datasource": {
+        "dbname": "osm", 
+        "extent": "-20037508.34 -20037508.34 20037508.34 20037508.34", 
+        "geometry_field": "way", 
+        "id": "power_generator", 
+        "key_field": "", 
+        "project": "foss4g-2011", 
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
+        "table": "( SELECT way, operator, name, \"generator:source\" AS source, NULLIF(regexp_replace(voltage, '[^0-9]+|(;.*)', ''), '')::integer / 1000 AS voltage, operator FROM planet_osm_polygon\n  WHERE power = 'generator') AS data", 
+        "type": "postgis",
+	"dbname": "osm"
+      }, 
+      "class": "", 
+      "geometry": "linestring", 
+      "id": "power_generator", 
+      "name": "power_generator", 
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
+      "srs-name": "900913", 
+      "status": "on"
+    },
+
+    {
+      "Datasource": {
+		"dbname": "osm", 
+		"extent": "-20037508.34 -20037508.34 20037508.34 20037508.34", 
+		"geometry_field": "way", 
+		"id": "substation", 
+		"key_field": "", 
+		"project": "foss4g-2011", 
+		"srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
+		"table": "( SELECT way, name, NULLIF(regexp_replace(voltage, '[^0-9]+|(;.*)', ''), '')::integer / 1000 AS voltage, operator, circuits FROM planet_osm_polygon\n  WHERE power = 'substation') AS data", 
+		"type": "postgis",
+		"dbname": "osm"
+		}, 
+		"class": "", 
+		"geometry": "linestring", 
+		"id": "substation", 
+		"name": "substation", 
+		"srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
+		"srs-name": "900913", 
+		"status": "on"
+	},
+	{
+      "Datasource": {
+        "dbname": "osm", 
+        "extent": "-20037508.34 -20037508.34 20037508.34 20037508.34", 
+        "geometry_field": "way", 
+        "id": "power_plant", 
+        "key_field": "", 
+        "project": "foss4g-2011", 
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
+        "table": "( SELECT way, name, operator, \"plant:output:electricity\" AS output, \"plant:source\" as source, NULLIF(regexp_replace(voltage, '[^0-9]+|(;.*)', ''), '')::integer / 1000 AS voltage, operator FROM planet_osm_polygon\n  WHERE power = 'plant') AS data", 
+        "type": "postgis",
+	"dbname": "osm"
+      }, 
+      "class": "", 
+      "geometry": "linestring", 
+      "id": "power_plant", 
+      "name": "power_plant", 
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
+      "srs-name": "900913", 
+      "status": "on"
+    },
+
+  ],
+  "Stylesheet": [
+    "base.mss", 
+  ],
+  "format": "png",
+  "interactivity": false, 
+  "maxzoom": 18, 
+  "minzoom": 0, 
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+}

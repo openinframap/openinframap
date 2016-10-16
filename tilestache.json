@@ -1,0 +1,31 @@
+{
+  "cache": {
+    "name": "Disk",
+    "path": "/tmp/stache",
+    "umask": "0000",
+    "dirs": "portable",
+    "gzip": ["xml", "json"]
+	},
+  "layers": {
+    "power": {
+	      "provider":
+	      {
+		"name": "mapnik", 
+		"mapfile": "oim.xml"
+	      },
+	      "metatile": 
+	      {
+		"rows": 4,
+		"columns": 4,
+		"buffer": 64
+	      },
+	     "preview":
+      {
+        "lat": 52,
+        "lon": 0,
+        "zoom": 10,
+        "ext": "jpg"
+      }
+	}
+  }
+}
