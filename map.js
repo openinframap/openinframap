@@ -12,13 +12,15 @@ var base_layers = {
 };
 
 var power = L.tileLayer('https://tiles-{s}.openinframap.org/power/{z}/{x}/{y}.png');
+var comms = L.tileLayer('https://tiles-{s}.openinframap.org/telecoms/{z}/{x}/{y}.png');
 var overlay_layers = {
-  'Power': power
+  'Power': power,
+  'Telecoms': comms
 }
 
 var map = L.map('map', {
   center: [0,0],
-  zoom: 4,
+  zoom: 2,
   layers: [base_carto, power]
 });
 
