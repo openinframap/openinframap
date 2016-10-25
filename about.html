@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About &mdash; Open Infrastructure Map</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+   <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+      <h1>About Open Infrastructure Map</h1>
+
+      <p class="lead"><a href="/">Open Infrastructure Map</a> is a view of the world's hidden infrastructure mapped in the
+      <a href="http://www.openstreetmap.org/">OpenStreetMap database</a>.</p>
+      <p>By and large, this data isn't exposed on the main OSM map, so I built
+        Open Infrastructure Map to visualise it.</p>
+
+      <p>If you want to edit the data and you're new to OSM, check out the
+      <a href="http://wiki.openstreetmap.org/wiki/Beginners%27_guide">beginners' guide.</a></p>
+      <p>
+          If you already have some OSM experience and want to start tagging infrastructure things,
+          take a look at the tagging guidelines for
+          <a href="http://wiki.openstreetmap.org/wiki/Power">power</a> and <a href="http://wiki.openstreetmap.org/wiki/WikiProject_Telecoms">WikiProject Telecoms</a>.
+      </p>
+
+      <h2>How is OIM made?</h2>
+      <p>The following mess of tools and services make Open Infrastructure Map run:</p>
+      <ul>
+        <li><a href="https://www.postgresql.org/">Postgres</a>/<a href="http://postgis.net/">PostGIS</a> for data storage
+        <li><a href="https://imposm.org/">Imposm3</a> for filtering and importing the OSM data
+        <li><a href="https://github.com/openstreetmap/osmosis">Osmosis</a> for fetching OSM updates
+        <li><a href="http://mapnik.org/">Mapnik</a> for rendering
+        <li><a href="https://github.com/omniscale/magnacarto">Magnacarto</a> for style processing
+        <li><a href="http://tilestache.org/">Tilestache</a> for tile-serving
+        <li>The <a href="http://leafletjs.com/">Leaflet</a> web interface (with some of <a href="https://mapzen.com/documentation/mapzen-js/">Mapzen's extensions</a>)
+        <li><a href="https://carto.com/">Carto</a>'s lovely <a href="https://carto.com/location-data-services/basemaps/">Positron basemap</a>
+      </ul>
+
+      <h2>Where's the code?</h2>
+      <p>You can find some bits of OIM on the
+          <a href="https://github.com/openinframap/">openinframap Github organisation</a>.
+          More to come, soon.</p>
+
+      <h2>Who made this?</h2>
+      <p>I'm <a href="https://russ.garrett.co.uk">Russ</a>, and I like infrastructure.
+         Please don't contact me about copyright claims or similar, these should properly
+         be directed to OpenStreetMap.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
