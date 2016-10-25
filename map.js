@@ -11,8 +11,12 @@ var base_layers = {
   'OSM': base_osm
 };
 
-var power = L.tileLayer('https://tiles-{s}.openinframap.org/power/{z}/{x}/{y}.png');
-var comms = L.tileLayer('https://tiles-{s}.openinframap.org/telecoms/{z}/{x}/{y}.png');
+var oim_attr = '<a href="/about.html">About OpenInfraMap</a>'
+
+var power = L.tileLayer('https://tiles-{s}.openinframap.org/power/{z}/{x}/{y}.png',
+                        {attribution: oim_attr});
+var comms = L.tileLayer('https://tiles-{s}.openinframap.org/telecoms/{z}/{x}/{y}.png',
+                        {attribution: oim_attr});
 var overlay_layers = {
   'Power': power,
   'Telecoms': comms
@@ -25,13 +29,14 @@ var map = L.map('map', {
 });
 
 L.control.layers(base_layers, overlay_layers).addTo(map);
-
 var locator = L.Mapzen.locator();
 locator.setPosition('topleft');
 locator.addTo(map);
+
 L.Mapzen.hash({
   map: map
 })
-
+/*
 var geocoder = L.Mapzen.geocoder('mapzen-h6pU6jc');
 geocoder.addTo(map);
+*/
