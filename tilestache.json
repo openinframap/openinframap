@@ -11,21 +11,27 @@
 	      "provider":
 	      {
 		"name": "mapnik", 
-		"mapfile": "oim.xml"
+		"mapfile": "power.xml"
 	      },
 	      "metatile": 
 	      {
 		"rows": 4,
 		"columns": 4,
 		"buffer": 64
+	      }
+	},
+    "telecoms": {
+	      "provider":
+	      {
+		"name": "mapnik", 
+		"mapfile": "telecoms.xml"
 	      },
-	     "preview":
-      {
-        "lat": 52,
-        "lon": 0,
-        "zoom": 10,
-        "ext": "jpg"
-      }
+	      "metatile": 
+	      {
+		"rows": 4,
+		"columns": 4,
+		"buffer": 64
+	      }
 	}
   }
 }
