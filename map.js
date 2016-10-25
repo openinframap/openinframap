@@ -13,7 +13,7 @@ var base_layers = {
 
 var oim_attr = '<a href="/about.html">About OpenInfraMap</a>'
 
-var power = L.tileLayer('https://tiles-{s}.openinframap.org/power/{z}/{x}/{y}.png?1',
+var power = L.tileLayer('https://tiles-{s}.openinframap.org/power/{z}/{x}/{y}.png?2',
                         {attribution: oim_attr});
 var comms = L.tileLayer('https://tiles-{s}.openinframap.org/telecoms/{z}/{x}/{y}.png',
                         {attribution: oim_attr});
