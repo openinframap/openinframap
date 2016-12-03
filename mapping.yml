@@ -169,3 +169,80 @@ tables:
       - line
       - cable
     type: linestring
+  pipeline:           # Pipelines cover oil/gas and water, etc
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - key: name
+      name: name
+      type: string
+    - key: location
+      name: location
+      type: string
+    - key: diameter
+      name: diameter
+      type: string
+    - key: operator
+      name: operator
+      type: string
+    - key: type
+      name: type
+      type: string
+    - key: substance
+      name: substance
+      type: string
+    - key: usage
+      name: usage
+      type: string
+    - key: ref
+      name: ref
+      type: string
+    mapping:
+      man_made:
+      - pipeline
+  pipeline_feature:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: type
+      type: mapping_value
+    - key: name
+      name: name
+      type: string
+    - key: operator
+      name: operator
+      type: string
+    - key: ref
+      name: ref
+      type: string
+    mapping:
+      pipeline:
+      - marker
+      - valve
+      - substation
+      - flare
+  petroleum_well:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: type
+      type: mapping_value
+    - key: name
+      name: name
+      type: string
+    - key: operator
+      name: operator
+      type: string
+    - key: ref
+      name: ref
+      type: string
+    mapping:
+      man_made:
+      - petroleum_well
+      - oil_well
