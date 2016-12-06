@@ -1,4 +1,4 @@
-@font_face: "DejaVu Sans Book"
+@font_face: "DejaVu Sans Book";
 
 #data_center {
         line-color: blue;

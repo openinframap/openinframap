@@ -1,4 +1,4 @@
-@font_face: "DejaVu Sans Book"
+@font_face: "DejaVu Sans Book";
 
 @unknown: #555;
 @v10:	blue;
