@@ -3,7 +3,7 @@
   "Layer": [
     {
       "Datasource": {
-        "dbname": "imposm", 
+        "dbname": "osm", 
         "extent": "-20037508.34 -20037508.34 20037508.34 20037508.34", 
         "geometry_field": "geometry", 
         "id": "power_line", 
@@ -23,7 +23,7 @@
     },
     {
       "Datasource": {
-        "dbname": "imposm", 
+        "dbname": "osm", 
         "extent": "-20037508.34 -20037508.34 20037508.34 20037508.34", 
         "geometry_field": "geometry", 
         "id": "ower_tower", 
@@ -43,7 +43,7 @@
     },
     {
       "Datasource": {
-	"dbname": "imposm", 
+	"dbname": "osm", 
 	"extent": "-20037508.34 -20037508.34 20037508.34 20037508.34", 
 	"geometry_field": "geometry", 
 	"id": "substation", 
@@ -63,7 +63,7 @@
 	},
 	{
       "Datasource": {
-        "dbname": "imposm", 
+        "dbname": "osm", 
         "extent": "-20037508.34 -20037508.34 20037508.34 20037508.34", 
         "geometry_field": "geometry", 
         "id": "power_plant", 
