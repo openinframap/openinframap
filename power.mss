@@ -1,3 +1,5 @@
+@font_face: "DejaVu Sans Book"
+
 @unknown: #555;
 @v10:	blue;
 @v25: 	green;
@@ -117,7 +119,7 @@
 		text-dy:15;
 	}
 	text-halo-fill: @text_halo;
-	text-face-name: 'Arial Regular';
+	text-face-name: @font_face;
 	text-fill: black;
 	text-min-path-length: 100;
 	[zoom>13] {
@@ -147,7 +149,7 @@
 		text-halo-radius: 4;
 	}
 	text-halo-fill: @text_halo;
-	text-face-name: 'Arial Regular';
+	text-face-name: @font_face;
 	text-fill: black;
 	text-wrap-width: 50;
 	text-name: "[name]";
@@ -167,7 +169,7 @@
 		text-halo-radius: 4;
 	}
 	text-halo-fill: @text_halo;
-	text-face-name: 'Arial Regular';
+	text-face-name: @font_face;
 	text-fill: black;
 	text-wrap-width: 50;
 
