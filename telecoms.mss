@@ -15,7 +15,7 @@
         text-name: "[name]";
 }
 
-#commuincation_line {
+#communication_line {
 	line-color: blue;
 	line-width:1;
 }
