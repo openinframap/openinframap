@@ -1,0 +1,29 @@
+- name: power
+  layers:
+    - name: power_line
+      query: "SELECT geometry, tunnel, location, frequency, type, name,
+                      convert_voltage(voltage) / 1000 AS voltage, operator
+              FROM osm_power_lines"
+      geometry: linestring
+    - name: power_tower
+      query: "SELECT geometry, type, name, ref, operator
+              FROM osm_power_tower"
+      geometry: point
+    - name: substation
+      query: "SELECT geometry, name, convert_voltage(voltage) / 1000 AS voltage, operator
+              FROM osm_power_substation"
+      geometry: linestring
+    - name: power_plant
+      query: "SELECT geometry, name, operator, convert_power(output)/1e6 AS output, source, operator
+              FROM osm_power_plant"
+      geometry: linestring
+- name: telecoms
+  layers:
+    - name: communication_line
+      query: "SELECT geometry, operator, name, location FROM osm_comms_cable"
+      geometry: linestring
+- name: petroleum
+  layers:
+    - name: pipeline
+      query: "SELECT geometry, operator, name, location FROM osm_pipeline WHERE substance IN ('natural_gas', 'oil', 'fuel', 'cng')"
+      geometry: linestring

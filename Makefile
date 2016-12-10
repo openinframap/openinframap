@@ -1,7 +1,10 @@
-SOURCES = $(wildcard *.mml)
-OBJECTS = $(SOURCES:.mml=.xml)
+SOURCES = $(wildcard *.mss)
+OBJECTS = $(SOURCES:.mss=.xml)
 
-all: $(OBJECTS)
+all: config $(OBJECTS)
+
+config: layers.yml
+	python ./util/generate_mml.py ./layers.yml
 
 %.xml: %.mml %.mss
 	magnacarto -mml $<  > $@
