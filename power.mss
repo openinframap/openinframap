@@ -3,11 +3,11 @@
 @unknown: #555;
 @v10:	blue;
 @v25: 	green;
-@v50: 	#bd9300;
-@v100: 	orange;
-@v200:  #ff0303;
-@v300:  #ff22ff;
-@hvdc:  #45057C;
+@v50: 	#B58D00;
+@v100: 	#B55D00;
+@v200:  #B50000;
+@v300:  #B500B1;
+@hvdc:  #4E01B5;
 
 @tunnel_case: #7C4544;
 @station_outline: #593815;
@@ -44,7 +44,7 @@
 		}
 	}
 
-	[voltage >= 10][voltage < 25] { 
+	[voltage >= 10][voltage < 25] {
 		[zoom >= 10] {
 			line-width:1;
 			line-color: @v10;
@@ -67,11 +67,11 @@
 	[voltage >= 100][voltage < 200] {
 		[zoom >= 5] {
 			line-color: @v100;
-			line-width:1;	
+			line-width:1;
 		}
 		[zoom >= 9] {
 			line-color: @v100;
-			line-width:2;	
+			line-width:2;
 		}
 	}
 
@@ -80,7 +80,7 @@
 		line-width: 1;
 		[zoom >= 9] {
 			line-color: @v200;
-			line-width: 2;	
+			line-width: 2;
 		}
 	}
 
@@ -91,7 +91,7 @@
 			line-width: 2;
 		}
 		[zoom >= 8] {
-			line-width: 4;	
+			line-width: 4;
 		}
 	}
 }
