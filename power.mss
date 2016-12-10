@@ -17,7 +17,7 @@
 #power_line::case[tunnel=1] {
 	line-color: @tunnel_case;
 	line-width: 3;
-	[zoom > 11] { 
+	[zoom > 11] {
 		line-width: 8;
 	}
 	[zoom > 15] {
@@ -27,8 +27,9 @@
 	line-cap: round;
 }
 
-#power_line::fill {
-  	line-join: round;
+#power_line::fill [frequency != "0"] {
+  // AC power lines
+  line-join: round;
 	line-cap: round;
 
 	[location="underground"][tunnel != 1],
@@ -93,22 +94,23 @@
 			line-width: 4;	
 		}
 	}
-
-	[frequency = "0"] {
-		// HVDC interconnectors
-		line-color: @hvdc;
-		line-width: 1;
-		line-dasharray: 10, 5;
-		[zoom >= 3] {
-			line-color: @hvdc;
-			line-width: 2;
-		}
-		[zoom >= 8] {
-			line-color: @hvdc;
-			line-width: 4;	
-		}
-	}
 }
+
+#power_line::fill [frequency = "0"] {
+  // HVDC interconnectors
+  line-color: @hvdc;
+  line-width: 1;
+  line-dasharray: 10, 5;
+  [zoom >= 3] {
+    line-color: @hvdc;
+    line-width: 2;
+  }
+  [zoom >= 8] {
+    line-color: @hvdc;
+    line-width: 4;	
+  }
+}
+
 
 #power_line {
 	text-size: 9;
@@ -127,6 +129,9 @@
 		[voltage > 0] {
 			text-name: "[name] + ' ' + [voltage] + 'kV'";
 		}
+    [frequency = "0"] {
+      text-name: "[name] + ' (HVDC)'"
+    }
 	}
 }
 
@@ -178,7 +183,7 @@
 	[zoom >= 10][voltage > 200] {
 		line-color: @station_outline;
 		line-width:1;
-		
+
 		[zoom >= 13] {
 			line-color: @station_outline;
 			line-width:1;
