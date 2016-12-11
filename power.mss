@@ -16,7 +16,9 @@
 
 #power_line::case[tunnel=1] {
 	line-color: @tunnel_case;
-	line-width: 3;
+  [zoom > 7] {
+  	line-width: 3;
+  }
 	[zoom > 11] {
 		line-width: 8;
 	}
@@ -87,7 +89,7 @@
 	[voltage >= 300] {
 		line-color: @v300;
 		line-width: 1;
-		[zoom >= 3] {
+		[zoom >= 4] {
 			line-width: 2;
 		}
 		[zoom >= 8] {
@@ -107,7 +109,7 @@
   }
   [zoom >= 8] {
     line-color: @hvdc;
-    line-width: 4;	
+    line-width: 4;
   }
 }
 
