@@ -33,7 +33,7 @@ var overlay_layers = {
 var map = L.map('map', {
   center: [31.99,-40.91],
   zoom: 4,
-  layers: [base_carto, power]
+  layers: [base_carto, power, comms]
 });
 
 L.control.layers(base_layers, overlay_layers).addTo(map);
