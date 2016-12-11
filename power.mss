@@ -92,8 +92,8 @@
 		[zoom >= 4] {
 			line-width: 2;
 		}
-		[zoom >= 8] {
-			line-width: 4;
+		[zoom >= 9] {
+			line-width: 3;
 		}
 	}
 }
