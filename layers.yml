@@ -27,3 +27,8 @@
     - name: pipeline
       query: "SELECT geometry, operator, name, location FROM osm_pipeline WHERE substance IN ('natural_gas', 'oil', 'fuel', 'cng')"
       geometry: linestring
+- name: water
+  layers:
+    - name: pipeline
+      query: "SELECT geometry, operator, name, location FROM osm_pipeline WHERE substance = 'water'"
+      geometry: linestring
