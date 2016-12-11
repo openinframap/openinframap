@@ -24,7 +24,7 @@
 
     [zoom > 6] {
       marker-width: 10;
-      marker_height: 10;
+      marker-height: 10;
       text-size: 10;
       text-halo-radius: 2;
       text-halo-fill: rgba(255,255,255,0.8);
