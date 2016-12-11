@@ -1,8 +1,8 @@
 @font_face: "DejaVu Sans Book";
 
-@unknown: #555;
-@v10:	blue;
-@v25: 	green;
+@unknown: #32324C;
+@v10:	  #0000B5;
+@v25: 	#00B500;
 @v50: 	#B58D00;
 @v100: 	#B55D00;
 @v200:  #B50000;
