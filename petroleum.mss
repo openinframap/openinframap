@@ -16,7 +16,7 @@
     }
 }
 
-#petroleum_well {
+#well {
     marker-fill: brown;
     marker-line-width: 0;
     marker-width: 2;
