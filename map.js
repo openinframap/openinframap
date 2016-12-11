@@ -31,8 +31,8 @@ var overlay_layers = {
 }
 
 var map = L.map('map', {
-  center: [0,0],
-  zoom: 2,
+  center: [31.99,-40.91],
+  zoom: 4,
   layers: [base_carto, power]
 });
 
