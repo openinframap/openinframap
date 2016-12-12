@@ -19,6 +19,10 @@
 	  line-color: blue;
 	  line-width:1;
 
+    [location = 'underground'] {
+      line-dasharray: 10, 5;
+    }
+
     [zoom > 6] {
       text-size: 10;
       text-placement: line;
@@ -28,5 +32,6 @@
       text-fill: black;
       text-min-path-length: 100;
       text-name: "[name]";
+      text-min-distance: 2;
     }
 }
