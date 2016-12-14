@@ -230,6 +230,7 @@ tables:
         - telephone_office
     type: polygon
   mast:
+    fields:
     - name: osm_id
       type: id
     - name: geometry
