@@ -162,9 +162,11 @@ tables:
       type: string
     type_mappings:
       points:
-        power: generator
+        power:
+          - generator
       polygons:
-        power: generator
+        power:
+          - generator
     type: geometry
   comms_cable:
     fields:
