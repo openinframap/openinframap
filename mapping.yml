@@ -1,3 +1,5 @@
+areas:
+  area_tags: [building]
 tables:
   power_lines:
     fields:
@@ -80,8 +82,6 @@ tables:
     - key: name
       name: name
       type: string
-    - name: type
-      type: mapping_value
     - key: substation
       name: substation
       type: string
@@ -117,8 +117,6 @@ tables:
     - key: name
       name: name
       type: string
-    - name: type
-      type: mapping_value
     - key: operator
       name: operator
       type: string
@@ -135,6 +133,39 @@ tables:
       power:
       - plant
     type: polygon
+  power_generator:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - key: name
+      name: name
+      type: string
+    - key: operator
+      name: operator
+      type: string
+    - key: generator:source
+      name: source
+      type: string
+    - key: generator:method
+      name: method
+      type: string
+    - key: generator:type
+      name: type
+      type: string
+    - key: generator:output
+      name: output
+      type: string
+    - key: ref
+      name: ref
+      type: string
+    type_mappings:
+      points:
+        power: generator
+      polygons:
+        power: generator
+    type: geometry
   comms_cable:
     fields:
     - name: osm_id
@@ -169,6 +200,83 @@ tables:
       - line
       - cable
     type: linestring
+  data_center:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - key: name
+      name: name
+      type: string
+    - key: operator
+      name: operator
+      type: string
+    - key: ref
+      name: ref
+      type: string
+    mapping:
+      building:
+      - data_center
+      - data_centre
+      - telephone_exchange
+      telecom:
+      - data_center
+      - data_centre
+      - central_office
+      office:
+      - telecommunication
+      man_made:
+      - telephone_office
+    type: polygon
+  mast:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - name: type
+      type: mapping_value
+    - key: mast:type
+      name: mast_type
+      type: string
+    - key: tower:type
+      name: tower_type
+      type: string
+    - key: communication:mobile_phone
+      name: mobile_phone
+      type: bool
+    - key: communication:radio
+      name: radio
+      type: bool
+    - key: communication:bos
+      name: bos
+      type: bool
+    - key: communication:microwave
+      name: microwave
+      type: bool
+    - key: communication:television
+      name: television
+      type: bool
+    - key: communication:amateur_radio
+      name: amateur_radio
+      type: bool
+    - key: height
+      name: height
+      type: string
+    - key: name
+      name: name
+      type: string
+    - key: operator
+      name: operator
+      type: string
+    - key: ref
+      name: ref
+      type: string
+    mapping:
+      man_made:
+        - mast
+        - tower
+        - communications_tower
+    type: point
   pipeline:           # Pipelines cover oil/gas and water, etc
     fields:
     - name: osm_id
