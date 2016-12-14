@@ -201,6 +201,7 @@ tables:
       - cable
     type: linestring
   data_center:
+    fields:
     - name: osm_id
       type: id
     - name: geometry
