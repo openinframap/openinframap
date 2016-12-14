@@ -216,17 +216,17 @@ tables:
       type: string
     mapping:
       building:
-      - data_center
-      - data_centre
-      - telephone_exchange
+        - data_center
+        - data_centre
+        - telephone_exchange
       telecom:
-      - data_center
-      - data_centre
-      - central_office
+        - data_center
+        - data_centre
+        - central_office
       office:
-      - telecommunication
+        - telecommunication
       man_made:
-      - telephone_office
+        - telephone_office
     type: polygon
   mast:
     - name: osm_id
