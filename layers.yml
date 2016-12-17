@@ -22,6 +22,9 @@
     - name: communication_line
       query: "SELECT geometry, operator, name, location FROM osm_comms_cable"
       geometry: linestring
+    - name: data_center
+      query: "SELECT geometry, operator, name, ref FROM osm_data_center"
+      geometry: linestring
 - name: petroleum
   layers:
     - name: pipeline
