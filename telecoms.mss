@@ -11,12 +11,11 @@
       text-face-name: @font_face;
       text-fill: black;
       text-wrap-width: 50;
-      [name != ''] {
-        text-name: "[name]";
-      }
+      text-name: "[name]";
+
       [operator != ''] {
         text-name: "[operator]";
-        [name != '' ][name != operator] {
+        [name != '' ] {
             text-name: "[name] + ' (' + [operator] + ')'";
         }
       }
