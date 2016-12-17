@@ -1,25 +1,26 @@
 @font_face: "DejaVu Sans Book";
 
-#data_center {
+#data_center::fill {
     line-color: #6A37AB;
     line-width:1;
     polygon-fill: #7D59AB;
-    text-size: 12;
-    [zoom > 10] {
-      text-halo-radius: 2;
-      text-halo-fill: rgba(255,255,255,0.8);
-      text-face-name: @font_face;
-      text-fill: black;
-      text-wrap-width: 50;
-      text-name: "[name]";
+}
 
-      [operator != ''] {
-        text-name: "[operator]";
-        [name != '' ] {
-            text-name: "[name] + ' (' + [operator] + ')'";
-        }
+#data_center::label[zoom > 10] {
+    text-size: 12;
+    text-halo-radius: 2;
+    text-halo-fill: rgba(255,255,255,0.8);
+    text-face-name: @font_face;
+    text-fill: black;
+    text-wrap-width: 50;
+    text-name: "[name]";
+
+    [operator != ''] {
+      text-name: "[operator]";
+      [name != '' ] {
+          text-name: "[name] + ' (' + [operator] + ')'";
       }
-  }
+    }
 }
 
 #communication_line {
