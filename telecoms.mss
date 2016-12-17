@@ -11,7 +11,15 @@
       text-face-name: @font_face;
       text-fill: black;
       text-wrap-width: 50;
-      text-name: "[name] + ' (' + [operator] + ')'";
+      [name != ''] {
+        text-name: "[name]";
+      }
+      [operator != ''] {
+        text-name: "[operator]";
+        [name != '' ][name != operator] {
+            text-name: "[name] + ' (' + [operator] + ')'";
+        }
+      }
   }
 }
 
