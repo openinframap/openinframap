@@ -220,3 +220,7 @@
 	}
 }
 
+#power_generator[source = "wind"][zoom > 10] {
+  marker-file: url('symbols/power_wind.svg');
+  marker-width: 10;
+}
