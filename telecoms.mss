@@ -65,7 +65,7 @@
     text-name: "[name]";
 
     [operator != ''] {
-      text-name: "[name] + ' (' + [operator] + ')'";}
+      text-name: "[name] + ' (' + [operator] + ')'";
     }
   }
 }
