@@ -29,6 +29,9 @@
     - name: data_center
       query: "SELECT geometry, operator, name, ref FROM osm_data_center"
       geometry: linestring
+    - name: mast
+      query: "SELECT geometry, operator, name, ref FROM osm_mast"
+      geometry: point
 - name: petroleum
   layers:
     - name: pipeline
