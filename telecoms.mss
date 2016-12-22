@@ -44,9 +44,15 @@
     }
 }
 
-#mast[zoom > 6] {
+#mast[zoom > 8] {
   marker-file: url('symbols/comms_tower.svg');
   marker-width: 8;
+  [zoom > 10] {
+    marker-width: 10;
+  }
+  [zoom > 12] {
+    marker-width: 14;
+  }
 
   text-size: 10;
   text-placement-type: simple;
