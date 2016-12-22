@@ -6,7 +6,7 @@
     polygon-fill: #7D59AB;
 }
 
-#data_center::label[zoom > 10] {
+#data_center::label[zoom > 12] {
     text-size: 12;
     text-halo-radius: 2;
     text-halo-fill: rgba(255,255,255,0.8);
