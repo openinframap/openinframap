@@ -18,21 +18,26 @@ var power = L.tileLayer(oim_tileserver + '/power/{z}/{x}/{y}.png',
                         {attribution: oim_attr});
 var comms = L.tileLayer(oim_tileserver + '/telecoms/{z}/{x}/{y}.png',
                         {attribution: oim_attr});
-var petroleum = L.tileLayer(oim_tileserver + '/petroleum/{z}/{x}/{y}.png?2',
+var petroleum = L.tileLayer(oim_tileserver + '/petroleum/{z}/{x}/{y}.png',
                         {attribution: oim_attr});
 var water = L.tileLayer(oim_tileserver + '/water/{z}/{x}/{y}.png',
                         {attribution: oim_attr});
+var hft = L.tileLayer(oim_tileserver + '/microwave_hft/{z}/{x}/{y}.png',
+                        {attribution: oim_attr});
+
 
 var overlay_layers = {
   'Power': power,
   'Telecoms': comms,
   'Petroleum': petroleum,
-  'Water': water
+  'Water': water,
+  'Microwave (HFT)': hft
 }
 
 var map = L.map('map', {
   center: [31.99,-40.91],
   zoom: 4,
+  editInOSMControlOptions: {},
   layers: [base_carto, power, comms]
 });
 
@@ -45,6 +50,19 @@ L.Mapzen.hash({
   map: map
 })
 /*
-var geocoder = L.Mapzen.geocoder('mapzen-h6pU6jc');
-geocoder.addTo(map);
+L.Control.JOSMEdit = L.Control.extend({
+  onAdd: function(map) {
+    var link = L.DomUtil.create('div', 'editlink');
+    link.innerHTML = '<a href="">Edit</a>';
+    L.DomEvent.on(link, 'click', function(e) {
+      console.log('click');
+    });
+    return link;
+  },
+  onRemove: function(map) {
+    L.DomEvent.off(L.DomUtil.get('editlink'));
+  }
+});
+
+(new L.Control.JOSMEdit({position: 'bottomright'})).addTo(map);
 */
