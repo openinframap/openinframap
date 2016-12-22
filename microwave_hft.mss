@@ -14,7 +14,7 @@
       name/text-min-path-length: 100;
       name/text-name: "[operator]";
       [zoom > 12] {
-        name/text-name: "[operator] + ' (' + [length] + 'km)'"
+        name/text-name: "[operator] + ' (' + [ref] + ', ' + [length] + 'km)'"
       }
       name/text-min-distance: 10;
       name/text-dy: -9;
