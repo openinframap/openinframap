@@ -46,6 +46,6 @@
   layers:
     - name: microwave_link
       query: "SELECT geometry, name AS operator, ref, type
-              FROM microwave_operator, microwave_link
+              FROM microwave_link, microwave_operator
               WHERE microwave_operator.id = microwave_link.operator;"
       geometry: linestring
