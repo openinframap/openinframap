@@ -54,15 +54,18 @@
     marker-width: 14;
   }
 
-  text-size: 10;
-  text-placement-type: simple;
-  text-placements: "E,NE,SE,W,NW,SW";
-  text-halo-radius: 2;
-  text-halo-fill: rgba(255,255,255,0.8);
-  text-face-name: @font_face;
-  text-fill: black;
-  text-name: "[name]";
+  [zoom > 14] {
+    text-size: 10;
+    text-placement-type: simple;
+    text-placements: "E,NE,SE,W,NW,SW";
+    text-halo-radius: 2;
+    text-halo-fill: rgba(255,255,255,0.8);
+    text-face-name: @font_face;
+    text-fill: black;
+    text-name: "[name]";
 
-  [operator != ''] {
-    text-name: "[name] + ' (' + [operator] + ')'";}
+    [operator != ''] {
+      text-name: "[name] + ' (' + [operator] + ')'";}
+    }
   }
+}
