@@ -46,7 +46,7 @@
   layers:
     - name: microwave_link
       query: "SELECT geometry, name AS operator, ref, type,
-              round(st_length(geometry)/1000) AS length
+              round(ST_Length(ST_Transform(geometry, 4326)::geography)/1000) AS length
               FROM microwave_link, microwave_operator
               WHERE microwave_operator.id = microwave_link.operator"
       geometry: linestring
