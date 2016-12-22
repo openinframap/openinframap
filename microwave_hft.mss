@@ -6,6 +6,9 @@
 
     [zoom > 10] {
       name/text-size: 10;
+      [zoom > 12] {
+         name/text-size: 14;
+      }
       name/text-placement: line;
       name/text-halo-radius: 2;
       name/text-halo-fill: rgba(255,255,255,0.8);
