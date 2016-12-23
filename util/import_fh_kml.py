@@ -43,7 +43,6 @@ TELCO = {
     'Sure (Guernsey) Limited',
     'Scot-Tel Ltd',
     'Airspeed Telecom',
-    'Aviat Networks UK Ltd',
     'AB Internet Ltd',
     'Guernsey Airtel Limited',
 }
@@ -68,6 +67,7 @@ FINANCIAL = {
     'Mckay Brothers International SA',
     'Mckay Brothers Communications Ltd',
     'Smartable LLC',
+    'Aviat Networks UK Ltd',
     'Decyben'
 }
 
