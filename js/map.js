@@ -22,8 +22,8 @@ var petroleum = L.tileLayer(oim_tileserver + '/petroleum/{z}/{x}/{y}.png',
                         {attribution: oim_attr});
 var water = L.tileLayer(oim_tileserver + '/water/{z}/{x}/{y}.png',
                         {attribution: oim_attr});
-var hft = L.tileLayer(oim_tileserver + '/microwave_hft/{z}/{x}/{y}.png',
-                        {attribution: oim_attr});
+var hft = L.tileLayer(oim_tileserver + '/microwave_hft/{z}/{x}/{y}.png?1',
+                        {attribution: 'Ofcom, <a href="https://carte-fh.lafibre.info/">carte-fh.lafibre.info</a>'});
 
 
 var overlay_layers = {
