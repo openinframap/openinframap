@@ -12,7 +12,7 @@ CREATE = [
     'DROP TABLE IF EXISTS microwave_link',
     'DROP TABLE IF EXISTS microwave_operator',
     'CREATE TABLE microwave_operator(id SERIAL NOT NULL PRIMARY KEY, name TEXT, type TEXT)',
-    '''CREATE TABLE microwave_link(ref TEXT,
+    '''CREATE TABLE microwave_link(id SERIAL NOT NULL, ref TEXT,
         operator INTEGER REFERENCES microwave_operator(id))''',
     "SELECT AddGeometryColumn('microwave_link', 'geometry', 3857, 'LINESTRING', 3)"
 ]
