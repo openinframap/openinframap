@@ -1,14 +1,27 @@
 - name: power
   layers:
     - name: power_line
-      query: "SELECT geometry, tunnel, location, frequency, type, name,
+      query: "SELECT geometry, location, frequency, type, name,
                       convert_voltage(voltage) / 1000 AS voltage, operator
               FROM osm_power_lines"
+      geometry: linestring
+    - name: power_cable
+      query: "SELECT geometry, tunnel, location, frequency, type, name,
+                      convert_voltage(voltage) / 1000 AS voltage, operator
+              FROM osm_power_cables"
       geometry: linestring
     - name: power_tower
       query: "SELECT geometry, type, name, ref, operator
               FROM osm_power_tower"
       geometry: point
+    - name: power_pole
+      query: "SELECT geometry, type, name, ref, operator
+              FROM osm_power_pole"
+      geometry: point
+    - name: power_portal
+      query: "SELECT geometry, type, name, ref, operator
+              FROM osm_power_portal"
+      geometry: linestring
     - name: substation
       query: "SELECT geometry, name, convert_voltage(voltage) / 1000 AS voltage, operator
               FROM osm_power_substation"
