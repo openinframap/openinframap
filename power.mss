@@ -34,20 +34,19 @@
 	line-cap: round;
 }
 #power_cable::fill {
-	line-color: @tunnel_case;
 	[location="underground"][tunnel != 1],
 	[location="underwater"][tunnel != 1] {
 		line-dasharray: 10, 5;
 	}
 	
 	[zoom > 7] {
-  		line-width: 3;
+  		line-width: 1;
  	}
 	[zoom > 11] {
-		line-width: 8;
+		line-width: 4;
 	}
 	[zoom > 15] {
-		line-width: 15;
+		line-width: 9;
 	}
   	line-join: round;
 	line-cap: round;
