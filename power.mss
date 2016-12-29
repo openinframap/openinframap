@@ -1,24 +1,48 @@
 @font_face: "DejaVu Sans Book";
 
 @unknown: #32324C;
-@v10:	  #0000B5;
-@v25: 	#00B500;
-@v50: 	#B58D00;
-@v100: 	#B55D00;
-@v200:  #B50000;
-@v300:  #B500B1;
+@v1:    #00FF21;
+@v25: 	#18A553;
+@v45:   #CC5EFF;
+@v100: 	#7FD9F8;
+@v190: 	#4759BC;
+@v250:  #EB47CF;
+@v450:  #FF9960;
+@v1000: #E23131;
 @hvdc:  #4E01B5;
 
+@busbar_case:   #FFD800;
+@bay_case:      #A0A0A0;
 @tunnel_case: #7C4544;
-@station_outline: #593815;
+
+@substation_outline: #593815;
 @text_halo: rgba(230,230,230,0.9);
+@portal: #808080;
 
-
-#power_line::case[tunnel=1] {
+#power_cable::case[tunnel=1] {
 	line-color: @tunnel_case;
-  [zoom > 7] {
-  	line-width: 3;
-  }
+	[zoom > 7] {
+  		line-width: 3;
+ 	}
+	[zoom > 11] {
+		line-width: 8;
+	}
+	[zoom > 15] {
+		line-width: 15;
+	}
+  	line-join: round;
+	line-cap: round;
+}
+#power_cable::fill {
+	line-color: @tunnel_case;
+	[location="underground"][tunnel != 1],
+	[location="underwater"][tunnel != 1] {
+		line-dasharray: 10, 5;
+	}
+	
+	[zoom > 7] {
+  		line-width: 3;
+ 	}
 	[zoom > 11] {
 		line-width: 8;
 	}
@@ -29,15 +53,11 @@
 	line-cap: round;
 }
 
+#power_cable::fill [frequency != "0"],
 #power_line::fill [frequency != "0"] {
-  // AC power lines
-  line-join: round;
+	// AC power lines and cables
+  	line-join: round;
 	line-cap: round;
-
-	[location="underground"][tunnel != 1],
-	[location="underwater"][tunnel != 1] {
-		line-dasharray: 10, 5;
-	}
 
 	[voltage = null], [voltage < 10] {
 		[zoom >= 11] {
@@ -45,28 +65,25 @@
 			line-width: 1;
 		}
 	}
-
-	[voltage >= 10][voltage < 25] {
+	[voltage >= 0][voltage <= 1] {
 		[zoom >= 10] {
 			line-width:1;
-			line-color: @v10;
+			line-color: @v1;
 		}
 	}
-	[voltage >= 25][voltage < 50] {
+	[voltage > 1][voltage <= 25] {
 		[zoom >= 10] {
 			line-width:1;
 			line-color: @v25;
 		}
 	}
-
-	[voltage >= 50][voltage < 100] {
+	[voltage > 25][voltage <= 45] {
 		[zoom >= 10] {
 			line-width: 1;
-			line-color: @v50;
+			line-color: @v45;
 		}
 	}
-
-	[voltage >= 100][voltage < 200] {
+	[voltage > 45][voltage <= 100] {
 		[zoom >= 5] {
 			line-color: @v100;
 			line-width:1;
@@ -76,18 +93,34 @@
 			line-width:2;
 		}
 	}
-
-	[voltage >= 200][voltage < 300] {
-		line-color: @v200;
+	[voltage > 100][voltage <= 190] {
+		line-color: @v190;
 		line-width: 1;
 		[zoom >= 9] {
-			line-color: @v200;
+			line-color: @v190;
 			line-width: 2;
 		}
 	}
-
-	[voltage >= 300] {
-		line-color: @v300;
+	[voltage > 190][voltage <= 250] {
+		line-color: @v250;
+		line-width: 1;
+		[zoom >= 9] {
+			line-color: @v250;
+			line-width: 2;
+		}
+	}
+	[voltage > 250][voltage <= 450] {
+		line-color: @v450;
+		line-width: 1;
+		[zoom >= 4] {
+			line-width: 2;
+		}
+		[zoom >= 9] {
+			line-width: 3;
+		}
+	}
+	[voltage > 450] {
+		line-color: @v1000;
 		line-width: 1;
 		[zoom >= 4] {
 			line-width: 2;
@@ -98,23 +131,24 @@
 	}
 }
 
-#power_line::fill [frequency = "0"] {
-  // HVDC interconnectors
-  line-color: @hvdc;
-  line-width: 1;
-  line-dasharray: 10, 5;
-  [zoom >= 3] {
-    line-color: @hvdc;
-    line-width: 2;
-  }
-  [zoom >= 8] {
-    line-color: @hvdc;
-    line-width: 4;
-  }
+#power_cables::fill [frequency = "0"],
+#power_line::fill [frequency = "0"]{
+	// HVDC interconnectors
+	line-color: @hvdc;
+	line-width: 1;
+	line-dasharray: 10, 5;
+ 	[zoom >= 3] {
+		line-color: @hvdc;
+		line-width: 2;
+	}
+	[zoom >= 8] {
+		line-color: @hvdc;
+		line-width: 4;
+	}
 }
 
-
-#power_line {
+#power_line,
+#power_cables {
 	text-size: 9;
 	text-placement: line;
 	text-halo-radius: 2;
@@ -131,9 +165,9 @@
 		[voltage > 0] {
 			text-name: "[name] + ' ' + [voltage] + 'kV'";
 		}
-    [frequency = "0"] {
-      text-name: "[name] + ' (HVDC)'"
-    }
+		[frequency = "0"] {
+			text-name: "[name] + ' (HVDC)'"
+		}
 	}
 }
 
@@ -142,6 +176,14 @@
    	marker-width: 8;
 }
 
+// Need styles for poles (SVG Symbol)
+
+#power_portal[zoom>14] {
+	line-color: @portal;
+	line-width: 2;
+}
+
+// Power generation
 #power_plant[zoom>=6] {
 	line-color: @station_outline;
 	line-width:1;
@@ -168,6 +210,12 @@
 	}
 }
 
+#power_generator[source = "wind"][zoom > 10] {
+  marker-file: url('symbols/power_wind.svg');
+  marker-width: 10;
+}
+
+// Substations
 #substation {
 	text-size: 12;
 	text-dy: 10;
@@ -203,24 +251,31 @@
 }
 
 #substation {
-	[voltage >= 25][voltage < 50] {
+	[voltage = null], [voltage < 10] {
+		polygon-fill: @unknown;
+	}
+	[voltage >= 0][voltage <= 1] {
+		polygon-fill: @v1;
+	}
+	[voltage > 1][voltage <= 25] {
 		polygon-fill: @v25;
 	}
-	[voltage >= 50][voltage < 100] {
-		polygon-fill: @v50;
+	[voltage > 25][voltage <= 45] {
+		polygon-fill: @v45;
 	}
-	[voltage >= 100][voltage < 200] {
+	[voltage > 45][voltage <= 100] {
 		polygon-fill: @v100;
 	}
-	[voltage >= 200][voltage < 300] {
-		polygon-fill: @v200;
+	[voltage > 100][voltage <= 190] {
+		polygon-fill: @v190;
 	}
-	[voltage >= 300] {
-		polygon-fill: @v300;
+	[voltage > 190][voltage <= 250] {
+		polygon-fill: @v250;
 	}
-}
-
-#power_generator[source = "wind"][zoom > 10] {
-  marker-file: url('symbols/power_wind.svg');
-  marker-width: 10;
+	[voltage > 250][voltage <= 450] {
+		polygon-fill: @v450;
+	}
+	[voltage > 450] {
+		polygon-fill: @v1000;
+	}
 }
