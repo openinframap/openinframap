@@ -43,7 +43,7 @@
 - name: water
   layers:
     - name: pipeline
-      query: "SELECT geometry, operator, name, location FROM osm_pipeline WHERE substance = 'water'"
+      query: "SELECT geometry, operator, name, location FROM osm_pipeline WHERE substance = 'water' OR type = 'water'"
       geometry: linestring
 - name: microwave_hft
   layers:
