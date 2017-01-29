@@ -22,7 +22,7 @@
     marker-width: 2;
     marker-height: 2;
 
-    [zoom > 12] {
+    [zoom > 9] {
       marker-width: 10;
       marker-height: 10;
       text-placement-type: simple;
