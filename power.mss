@@ -1,6 +1,6 @@
 @font_face: "DejaVu Sans Book";
 
-@unknown: #32324C;
+@unknown: #7A7A85;
 @v10:	  #0000B5;
 @v25: 	#00B500;
 @v50: 	#B58D00;
@@ -40,27 +40,27 @@
 	}
 
 	[voltage = null], [voltage < 10] {
-		[zoom >= 11] {
+		[zoom >= 9] {
 			line-color: @unknown;
 			line-width: 1;
 		}
 	}
 
 	[voltage >= 10][voltage < 25] {
-		[zoom >= 10] {
+		[zoom >= 9] {
 			line-width:1;
 			line-color: @v10;
 		}
 	}
 	[voltage >= 25][voltage < 50] {
-		[zoom >= 10] {
+		[zoom >= 9] {
 			line-width:1;
 			line-color: @v25;
 		}
 	}
 
 	[voltage >= 50][voltage < 100] {
-		[zoom >= 10] {
+		[zoom >= 9] {
 			line-width: 1;
 			line-color: @v50;
 		}
