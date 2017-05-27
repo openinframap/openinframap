@@ -30,7 +30,7 @@
       query: "SELECT geometry, operator, name, ref FROM osm_data_center"
       geometry: linestring
     - name: mast
-      query: "SELECT geometry, operator, name, ref FROM osm_mast"
+      query: "SELECT geometry, operator, name, ref FROM osm_mast WHERE type = 'communications_tower' OR tower_type IN ('communication', 'radio', 'antenna')"
       geometry: point
 - name: petroleum
   layers:
