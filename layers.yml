@@ -43,12 +43,12 @@
       query: "SELECT geometry, operator, name, ref FROM osm_data_center"
       geometry: linestring
     - name: mast
-      query: "SELECT geometry, operator, name, ref FROM osm_mast"
+      query: "SELECT geometry, operator, name, ref FROM osm_mast WHERE type = 'communications_tower' OR tower_type IN ('communication', 'radio', 'antenna')"
       geometry: point
 - name: petroleum
   layers:
     - name: pipeline
-      query: "SELECT geometry, operator, name, location FROM osm_pipeline WHERE substance IN ('natural_gas', 'oil', 'fuel', 'cng')"
+      query: "SELECT geometry, operator, name, location FROM osm_pipeline WHERE substance IN ('natural_gas', 'oil', 'fuel', 'cng') OR type IN ('natural_gas', 'oil', 'fuel', 'cng')"
       geometry: linestring
     - name: well
       query: "SELECT geometry, operator, name FROM osm_petroleum_well"
@@ -56,7 +56,7 @@
 - name: water
   layers:
     - name: pipeline
-      query: "SELECT geometry, operator, name, location FROM osm_pipeline WHERE substance = 'water'"
+      query: "SELECT geometry, operator, name, location FROM osm_pipeline WHERE substance = 'water' OR type = 'water'"
       geometry: linestring
 - name: microwave_hft
   layers:

@@ -59,7 +59,7 @@
 	line-cap: round;
 
 	[voltage = null], [voltage < 10] {
-		[zoom >= 11] {
+		[zoom >= 9] {
 			line-color: @unknown;
 			line-width: 1;
 		}

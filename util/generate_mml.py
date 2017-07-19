@@ -60,6 +60,8 @@ for out_layer in config:
         json.dump(mml, f, sort_keys=True, indent=2)
 
     tilestache_conf['layers'][out_layer['name']] = {
+        "cache lifespan": "259200",
+        "maximum cache age": "18000",
         "provider": {
             "name": "mapnik",
             "mapfile": "%s.xml" % out_layer['name']
