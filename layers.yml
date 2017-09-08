@@ -35,7 +35,7 @@
 - name: petroleum
   layers:
     - name: pipeline
-      query: "SELECT geometry, operator, name, location FROM osm_pipeline WHERE substance IN ('natural_gas', 'oil', 'fuel', 'cng') OR type IN ('natural_gas', 'oil', 'fuel', 'cng')"
+      query: "SELECT geometry, operator, name, location FROM osm_pipeline WHERE substance IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng') OR type IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng')"
       geometry: linestring
     - name: well
       query: "SELECT geometry, operator, name FROM osm_petroleum_well"
