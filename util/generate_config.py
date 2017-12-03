@@ -4,19 +4,30 @@ import sys
 import yaml
 import json
 
-srs = '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over'
+srs = '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 '\
+      '+x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over'
 dbname = "osm"
 extent = "-20037508.34 -20037508.34 20037508.34 20037508.34"
 geometry_field = "geometry"
 
+cache_conf = {
+    "name": "Disk",
+    "path": "/tmp/stache",
+    "umask": "0000",
+    "dirs": "portable",
+    "gzip": ["xml", "json"]
+}
+
+try:
+    # Allow configuring local caching
+    with open('tilestache_cache.json') as f:
+        cache_conf = json.load(f)
+except IOError:
+    pass
+
+
 tilestache_conf = {
-    "cache": {
-        "name": "Disk",
-        "path": "/tmp/stache",
-        "umask": "0000",
-        "dirs": "portable",
-        "gzip": ["xml", "json"]
-    },
+    "cache": cache_conf,
     "layers": {}
 }
 
@@ -36,6 +47,9 @@ for out_layer in config:
     for layer in out_layer['layers']:
         layer_config = {
             "Datasource": {
+                "host": "db",
+                "user": "osm",
+                "password": "osm",
                 "dbname": dbname,
                 "extent": extent,
                 "id": layer['name'],
