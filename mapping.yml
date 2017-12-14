@@ -27,6 +27,41 @@ tables:
     - key: wires
       name: wires
       type: string
+    - key: operator
+      name: operator
+      type: string
+    - key: ref
+      name: ref
+      type: string
+    mapping:
+      power: ['line', 'minor_line']
+    type: linestring
+  power_cables:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - key: name
+      name: name
+      type: string
+    - name: type
+      type: mapping_value
+    - key: location
+      name: location
+      type: string
+    - key: voltage
+      name: voltage
+      type: string
+    - key: frequency
+      name: frequency
+      type: string
+    - key: cables
+      name: cables
+      type: integer
+    - key: wires
+      name: wires
+      type: string
     - key: tunnel
       name: tunnel
       type: bool
@@ -37,7 +72,7 @@ tables:
       name: ref
       type: string
     mapping:
-      power: ['line', 'minor_line', 'cable']
+      power: ['cable']
     type: linestring
   power_tower:
     fields:
@@ -69,10 +104,72 @@ tables:
       name: ref
       type: string
     mapping:
-      power:
-      - tower
-      - pole
+      power: ['tower']
     type: point
+  power_pole:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - key: name
+      name: name
+      type: string
+    - name: type
+      type: mapping_value
+    - key: material
+      name: material
+      type: string
+    - key: structure
+      name: structure
+      type: string
+    - key: height
+      name: height
+      type: integer
+    - key: colour
+      name: colour
+      type: string
+    - key: operator
+      name: operator
+      type: string
+    - key: ref
+      name: ref
+      type: string
+    mapping:
+      power:['pole']
+    type: point
+  power_portal:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - key: name
+      name: name
+      type: string
+    - name: type
+      type: mapping_value
+    - key: material
+      name: material
+      type: string
+    - key: structure
+      name: structure
+      type: string
+    - key: height
+      name: height
+      type: integer
+    - key: colour
+      name: colour
+      type: string
+    - key: operator
+      name: operator
+      type: string
+    - key: ref
+      name: ref
+      type: string
+    mapping:
+      power:['portal']
+    type: linestring
   power_substation:
     fields:
     - name: osm_id
