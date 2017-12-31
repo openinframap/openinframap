@@ -40,7 +40,7 @@
 	}
 
 	[voltage = null], [voltage < 10] {
-		[zoom >= 9] {
+		[zoom >= 10] {
 			line-color: @unknown;
 			line-width: 1;
 		}
