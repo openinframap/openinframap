@@ -114,28 +114,6 @@
 }
 
 
-#power_line {
-	text-size: 9;
-	text-placement: line;
-	text-halo-radius: 2;
-	text-dy: 5;
-	[tunnel=1] {
-		text-dy:15;
-	}
-	text-halo-fill: @text_halo;
-	text-face-name: @font_face;
-	text-fill: black;
-	text-min-path-length: 100;
-	[zoom>13] {
-		text-name: "[name]";
-		[voltage > 0] {
-			text-name: "[name] + ' ' + [voltage] + 'kV'";
-		}
-    [frequency = "0"] {
-      text-name: "[name] + ' (HVDC)'"
-    }
-	}
-}
 
 #power_tower[zoom>14] {
 	marker-file: url('symbols/power_tower.svg');
@@ -145,27 +123,6 @@
 #power_plant[zoom>=6] {
 	line-color: @station_outline;
 	line-width:1;
-}
-
-#power_plant[zoom>=9][output>100],
-  #power_plant[zoom>=12] {
-	text-size: 12;
-	text-dy: 10;
-	text-halo-radius: 2;
-	[zoom >= 14] {
-		text-halo-radius: 4;
-	}
-	text-halo-fill: @text_halo;
-	text-face-name: @font_face;
-	text-fill: black;
-	text-wrap-width: 50;
-	text-name: "[name]";
-	[source != ""] {
-		text-name: "[name] + ' (' + [source] + ')'";
-		[output != ""] {
-			text-name: "[name] + '\n (' + [source] + ', ' + [output] + 'MW)'";
-		}
-	}
 }
 
 /* Render substations as circles at lower zooms */
@@ -194,7 +151,7 @@
 
 #substation::body[zoom >= 13] {
         line-color: @station_outline;
-        line-width:2;
+        line-width:3;
 
 	[voltage >= 25][voltage < 50] {
 		polygon-fill: @v25;
@@ -213,7 +170,12 @@
 	}
 }
 
-#substation::text[zoom >= 13] {
+#power_generator[source = "wind"][zoom > 10] {
+  marker-file: url('symbols/power_wind.svg');
+  marker-width: 10;
+}
+
+#substation::label[zoom >= 13] {
 	text-size: 12;
 	text-dy: 10;
 	text-halo-radius: 2;
@@ -236,8 +198,48 @@
         }
 }
 
-
-#power_generator[source = "wind"][zoom > 10] {
-  marker-file: url('symbols/power_wind.svg');
-  marker-width: 10;
+#power_line::label {
+	text-size: 9;
+	text-placement: line;
+	text-halo-radius: 2;
+	text-dy: 5;
+	[tunnel=1] {
+		text-dy:10;
+	}
+	text-halo-fill: @text_halo;
+	text-face-name: @font_face;
+	text-fill: black;
+	text-min-path-length: 100;
+        text-spacing: 400;
+	[zoom>13] {
+		text-name: "[name]";
+		[voltage > 0] {
+			text-name: "[name] + ' ' + [voltage] + 'kV'";
+		}
+                [frequency = "0"] {
+                    text-name: "[name] + ' (HVDC)'"
+                }
+	}
 }
+
+#power_plant::label[zoom>=9][output>100],
+  #power_plant::label[zoom>=12] {
+	text-size: 12;
+	text-dy: 10;
+	text-halo-radius: 2;
+	[zoom >= 14] {
+		text-halo-radius: 4;
+	}
+	text-halo-fill: @text_halo;
+	text-face-name: @font_face;
+	text-fill: black;
+	text-wrap-width: 50;
+	text-name: "[name]";
+	[source != ""] {
+		text-name: "[name] + ' (' + [source] + ')'";
+		[output != ""] {
+			text-name: "[name] + '\n (' + [source] + ', ' + [output] + 'MW)'";
+		}
+	}
+}
+
