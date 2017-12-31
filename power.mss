@@ -192,32 +192,10 @@
     }
 }
 
-#substation[zoom >= 13] {
-	text-size: 12;
-	text-dy: 10;
-	text-halo-radius: 2;
-	[zoom >= 14] {
-		text-halo-radius: 4;
-	}
-	text-halo-fill: @text_halo;
-	text-face-name: @font_face;
-	text-fill: black;
-	text-wrap-width: 50;
-
+#substation::body[zoom >= 13] {
         line-color: @station_outline;
         line-width:2;
-        [name != ""] {
-                text-name: "[name]";
-        }
-        [voltage > 0] {
-                text-name: "'Substation ' + [voltage] + 'kV'";
-                [name != ""] {
-                        text-name: "[name] + ' ' + [voltage] + 'kV'";
-                }
-        }
-}
 
-#substation::fill[zoom >= 13] {
 	[voltage >= 25][voltage < 50] {
 		polygon-fill: @v25;
 	}
@@ -234,6 +212,30 @@
 		polygon-fill: @v300;
 	}
 }
+
+#substation::text[zoom >= 13] {
+	text-size: 12;
+	text-dy: 10;
+	text-halo-radius: 2;
+	[zoom >= 14] {
+		text-halo-radius: 4;
+	}
+	text-halo-fill: @text_halo;
+	text-face-name: @font_face;
+	text-fill: black;
+	text-wrap-width: 50;
+
+        [name != ""] {
+                text-name: "[name]";
+        }
+        [voltage > 0] {
+                text-name: "'Substation ' + [voltage] + 'kV'";
+                [name != ""] {
+                        text-name: "[name] + ' ' + [voltage] + 'kV'";
+                }
+        }
+}
+
 
 #power_generator[source = "wind"][zoom > 10] {
   marker-file: url('symbols/power_wind.svg');
