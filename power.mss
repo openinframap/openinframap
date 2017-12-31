@@ -168,7 +168,31 @@
 	}
 }
 
-#substation {
+/* Render substations as circles at lower zooms */
+#substation_point[zoom > 8][zoom < 13][substation = "transmission"][voltage >= 100] {
+    marker-type: ellipse;
+    marker-line-width: 2;
+    marker-line-color: black;
+
+    /* Mapnik is extremely choosy about this rule ordering, beware. */
+    marker-fill: @v300;
+    marker-width: 15;
+
+    [voltage >= 200][voltage < 300] {
+            /* I have *no idea* why but mangacarto wants line styles
+             * redefined here and here only. */
+            marker-line-width: 2;
+            marker-line-color: black;
+            marker-fill: @v200;
+            marker-width: 12;
+    }
+    [voltage >= 100][voltage < 200] {
+            marker-fill: @v100;
+            marker-width: 10;
+    }
+}
+
+#substation[zoom >= 13] {
 	text-size: 12;
 	text-dy: 10;
 	text-halo-radius: 2;
@@ -180,29 +204,20 @@
 	text-fill: black;
 	text-wrap-width: 50;
 
-	[zoom >= 13],
-	[zoom >= 12][voltage > 100],
-	[zoom >= 10][voltage > 200] {
-		line-color: @station_outline;
-		line-width:1;
-
-		[zoom >= 13] {
-			line-color: @station_outline;
-			line-width:1;
-			[name != ""] {
-				text-name: "[name]";
-			}
-			[voltage > 0] {
-				text-name: "'Substation ' + [voltage] + 'kV'";
-				[name != ""] {
-					text-name: "[name] + ' ' + [voltage] + 'kV'";
-				}
-			}
-		}
-	}
+        line-color: @station_outline;
+        line-width:2;
+        [name != ""] {
+                text-name: "[name]";
+        }
+        [voltage > 0] {
+                text-name: "'Substation ' + [voltage] + 'kV'";
+                [name != ""] {
+                        text-name: "[name] + ' ' + [voltage] + 'kV'";
+                }
+        }
 }
 
-#substation {
+#substation::fill[zoom >= 13] {
 	[voltage >= 25][voltage < 50] {
 		polygon-fill: @v25;
 	}
