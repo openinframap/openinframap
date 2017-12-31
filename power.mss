@@ -30,8 +30,8 @@
 }
 
 #power_line::fill [frequency != "0"] {
-  // AC power lines
-  line-join: round;
+        // AC power lines
+        line-join: round;
 	line-cap: round;
 
 	[location="underground"][tunnel != 1],
@@ -67,7 +67,7 @@
 	}
 
 	[voltage >= 100][voltage < 200] {
-		[zoom >= 5] {
+		[zoom >= 6] {
 			line-color: @v100;
 			line-width:1;
 		}
@@ -78,8 +78,10 @@
 	}
 
 	[voltage >= 200][voltage < 300] {
-		line-color: @v200;
-		line-width: 1;
+                [zoom >= 6] {
+                        line-color: @v200;
+                        line-width: 1;
+                }
 		[zoom >= 9] {
 			line-color: @v200;
 			line-width: 2;
