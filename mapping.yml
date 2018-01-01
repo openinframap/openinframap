@@ -207,6 +207,46 @@ tables:
       power:
       - plant
     type: polygon
+
+  power_plant_relation:
+    fields:
+    - name: osm_id
+      type: id
+    - key: name
+      name: name
+      type: string
+    - key: operator
+      name: operator
+      type: string
+    - key: plant:output:electricity
+      name: output
+      type: string
+    - key: plant:source
+      name: source
+      type: string
+    - key: ref
+      name: ref
+      type: string
+    mapping:
+      power:
+      - plant
+    type: relation
+    relation_type: [site]
+
+  power_plant_relation_member:
+    fields:
+    - name: osm_id
+      type: id
+    - name: member
+      type: member_id
+    - name: geometry
+      type: geometry
+    mapping:
+      power:
+      - plant
+    type: relation_member
+    relation_type: [site]
+
   power_generator:
     fields:
     - name: osm_id
