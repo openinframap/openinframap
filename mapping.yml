@@ -76,6 +76,7 @@ tables:
       power:
       - tower
       - pole
+      - portal
     type: point
 
   power_substation:
