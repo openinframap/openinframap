@@ -151,10 +151,13 @@
     }
 }
 
-#substation::body[zoom >= 13] {
-        line-color: @station_outline;
-        line-width:3;
+#substation::outline[zoom >= 13] {
+    line-color: @station_outline;
+    line-width:3;
+}
 
+/* Fill substations with their corresponding colour at medium zooms */
+#substation::body[zoom >= 13][zoom < 15] {
 	[voltage >= 25][voltage < 50] {
 		polygon-fill: @v25;
 	}
@@ -171,6 +174,7 @@
 		polygon-fill: @v300;
 	}
 }
+
 
 #power_generator[source = "wind"][zoom > 10] {
   marker-file: url('symbols/power_wind.svg');
