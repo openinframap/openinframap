@@ -109,16 +109,36 @@ tables:
     - key: ref
       name: ref
       type: string
+    - name: type
+      type: mapping_value
     type_mappings:
       points:
         power:
         - substation
         - sub_station
+        - converter
       polygons:
         power:
         - substation
         - sub_station
+        - converter
     type: geometry
+
+  power_switchgear:
+    fields:
+    - name: osm_id
+      type: id
+    - key: name
+      name: name
+      type: string
+    - name: type
+      type: mapping_value
+    mapping:
+      power:
+        - switch
+        - transformer
+        - compensator
+    type: point
 
   power_substation_relation:
     fields:
@@ -148,10 +168,13 @@ tables:
     - key: ref
       name: ref
       type: string
+    - name: type
+      type: mapping_value
     mapping:
       power:
         - substation
         - sub_station
+        - converter
     type: relation
     relation_type: [site]
 
@@ -183,6 +206,7 @@ tables:
       power:
       - substation
       - sub_station
+      - converter
     type: relation_member
     relation_type: [site]
 
