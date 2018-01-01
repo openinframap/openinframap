@@ -181,6 +181,32 @@
 	}
 }
 
+/* Render substations mapped as points */
+#substation["mapnik::geometry_type" = 1][zoom >= 13] {
+    marker-width:5;
+    marker-type: ellipse;
+    marker-line-width: 1;
+    marker-line-color: black;
+    [voltage <= 25], [voltage = null] {
+       marker-fill: @unknown;
+    }
+    [voltage >= 25][voltage < 50] {
+            marker-fill: @v25;
+    }
+    [voltage >= 50][voltage < 100] {
+            marker-fill: @v50;
+    }
+    [voltage >= 100][voltage < 200] {
+            marker-fill: @v100;
+    }
+    [voltage >= 200][voltage < 300] {
+            marker-fill: @v200;
+    }
+    [voltage >= 300] {
+            marker-fill: @v300;
+    }
+}
+
 
 #power_generator[source = "wind"][zoom > 10] {
   marker-file: url('symbols/power_wind.svg');
@@ -235,7 +261,7 @@
 	}
 }
 
-#power_plant::label[zoom>=9][output>100],
+#power_plant::label[zoom>=9][zoom < 12][output>100],
   #power_plant::label[zoom>=12] {
 	text-size: 12;
 	text-dy: 10;

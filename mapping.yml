@@ -39,6 +39,7 @@ tables:
     mapping:
       power: ['line', 'minor_line', 'cable']
     type: linestring
+
   power_tower:
     fields:
     - name: osm_id
@@ -73,6 +74,7 @@ tables:
       - tower
       - pole
     type: point
+
   power_substation:
     fields:
     - name: osm_id
@@ -103,11 +105,83 @@ tables:
     - key: ref
       name: ref
       type: string
+    type_mappings:
+      points:
+        power:
+        - substation
+        - sub_station
+      polygons:
+        power:
+        - substation
+        - sub_station
+    type: geometry
+
+  power_substation_relation:
+    fields:
+    - name: osm_id
+      type: id
+    - key: name
+      name: name
+      type: string
+    - key: substation
+      name: substation
+      type: string
+    - key: location
+      name: location
+      type: string
+    - key: voltage
+      name: voltage
+      type: string
+    - key: frequency
+      name: frequency
+      type: string
+    - key: tunnel
+      name: tunnel
+      type: bool
+    - key: operator
+      name: operator
+      type: string
+    - key: ref
+      name: ref
+      type: string
+    mapping:
+      power:
+        - substation
+        - sub_station
+    type: relation
+    relation_type: [site]
+
+  power_substation_relation_member:
+    fields:
+    - name: osm_id
+      type: id
+    - name: member
+      type: member_id
+    - name: geometry
+      type: geometry
+    - key: substation
+      name: substation
+      from_member: true
+      type: string
+    - key: operator
+      name: operator
+      from_member: true
+      type: string
+    - key: voltage
+      name: voltage
+      from_member: true
+      type: string
+    - key: name
+      name: name
+      from_member: true
+      type: string
     mapping:
       power:
       - substation
       - sub_station
-    type: polygon
+    type: relation_member
+    relation_type: [site]
+
   power_plant:
     fields:
     - name: osm_id
