@@ -11,20 +11,20 @@
       geometry: point
     - name: substation
       query: "SELECT geometry, name, convert_voltage(voltage) / 1000 AS voltage, substation, operator
-              FROM osm_power_substation"
+              FROM substation"
       geometry: linestring
     - name: substation_point
       query: "SELECT ST_Centroid(geometry) AS geometry, name, convert_voltage(voltage) / 1000 AS voltage,
               substation
-              FROM osm_power_substation"
+              FROM substation"
       geometry: point
     - name: power_plant
       query: "SELECT geometry, name, operator, convert_power(output)/1e6 AS output, source
-              FROM osm_power_plant"
+              FROM power_plant"
       geometry: linestring
     - name: power_plant_point
       query: "SELECT ST_Centroid(geometry) AS geometry, name, convert_power(output)/1e6 AS output, source
-              FROM osm_power_plant"
+              FROM power_plant"
       geometry: point
     - name: power_generator
       query: "SELECT geometry, name, operator, convert_power(output)/1e3 AS output, source, type, ref
