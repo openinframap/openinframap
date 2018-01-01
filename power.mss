@@ -10,6 +10,7 @@
 @hvdc:  #4E01B5;
 
 @tunnel_case: #7C4544;
+@power_pole: #AB6D03;
 @station_outline: #593815;
 @text_halo: rgba(230,230,230,0.9);
 
@@ -115,11 +116,16 @@
   }
 }
 
-
-
-#power_tower[zoom>14] {
+#power_tower[zoom>14][type="tower"] {
 	marker-file: url('symbols/power_tower.svg');
    	marker-width: 8;
+}
+
+#power_tower[zoom>14][type="pole"] {
+        marker-type: ellipse;
+        marker-fill: @power_pole;
+        marker-line-width: 0;
+   	marker-width: 4;
 }
 
 #power_plant[zoom>=6] {
