@@ -457,6 +457,28 @@ tables:
       man_made:
       - pipeline
     type: linestring
+
+  petroleum_site:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - key: name
+      name: name
+      type: string
+    - key: operator
+      name: operator
+      type: string
+    mapping:
+      industrial:
+      - oil
+      - gas
+      - natural_gas
+      - wellsite
+      - well_cluster
+    type: polygon
+
   pipeline_feature:
     fields:
     - name: osm_id
