@@ -15,6 +15,9 @@ tables:
     - key: location
       name: location
       type: string
+    - key: line
+      name: line
+      type: string
     - key: voltage
       name: voltage
       type: string
