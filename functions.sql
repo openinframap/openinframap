@@ -3,7 +3,7 @@ DECLARE
   parts TEXT[];
   val NUMERIC;
 BEGIN
-  parts := regexp_matches(value, '([0-9][0-9\.,]+)[ ]?([KMG]?W)?', '');
+  parts := regexp_matches(value, '([0-9][0-9\.,]*)[ ]?([KMG]?W)?', '');
   val := replace(parts[1], ',', '.');
   IF parts[2] = 'KW' THEN
     val := val * 1e3;
