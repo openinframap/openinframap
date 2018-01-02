@@ -36,6 +36,9 @@ tables:
     - key: operator
       name: operator
       type: string
+    - key: material
+      name: material
+      type: string
     - key: ref
       name: ref
       type: string
@@ -69,6 +72,9 @@ tables:
     - key: operator
       name: operator
       type: string
+    - key: location:transition
+      name: transition
+      type: bool
     - key: ref
       name: ref
       type: string
@@ -138,6 +144,8 @@ tables:
         - switch
         - transformer
         - compensator
+        - insulator
+        - terminal
     type: point
 
   power_substation_relation:
@@ -446,6 +454,9 @@ tables:
       type: string
     - key: substance
       name: substance
+      type: string
+    - key: material
+      name: material
       type: string
     - key: usage
       name: usage
