@@ -132,10 +132,27 @@ tables:
 
   power_switchgear:
     fields:
+    - name: geometry
+      type: geometry
     - name: osm_id
       type: id
     - key: name
       name: name
+      type: string
+    - key: voltage
+      name: voltage
+      type: string
+    - key: voltage:primary
+      name: voltage_primary
+      type: string
+    - key: voltage:secondary
+      name: voltage_secondary
+      type: string
+    - key: frequency
+      name: frequency
+      type: string
+    - key: ref
+      name: ref
       type: string
     - name: type
       type: mapping_value
@@ -146,7 +163,7 @@ tables:
         - compensator
         - insulator
         - terminal
-    type: point
+    type: geometry
 
   power_substation_relation:
     fields:
