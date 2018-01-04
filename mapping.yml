@@ -163,7 +163,7 @@ tables:
         - compensator
         - insulator
         - terminal
-    type: geometry
+    type: point
 
   power_substation_relation:
     fields:
