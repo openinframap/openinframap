@@ -1,7 +1,8 @@
 - name: power
   layers:
     - name: power_line
-      query: "SELECT geometry, tunnel, location, frequency, type, name,
+      query: "SELECT geometry, tunnel, location, frequency, type, name, line,
+                      ref, char_length(ref) AS ref_len,
                       convert_voltage(voltage) / 1000 AS voltage, operator
               FROM osm_power_lines"
       geometry: linestring

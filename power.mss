@@ -10,21 +10,21 @@
 @hvdc:  #4E01B5;
 
 @tunnel_case: #7C4544;
-@power_pole: #AB6D03;
+@power_pole: black;
 @station_outline: #593815;
 @text_halo: rgba(230,230,230,0.9);
 
 
 #power_line::case[tunnel=1] {
-	line-color: @tunnel_case;
-  [zoom > 7] {
-  	line-width: 3;
-  }
+        line-color: @tunnel_case;
+        [zoom > 7] {
+            line-width: 3;
+        }
 	[zoom > 11] {
-		line-width: 8;
+	    line-width: 8;
 	}
 	[zoom > 15] {
-		line-width: 15;
+	    line-width: 15;
 	}
   	line-join: round;
 	line-cap: round;
@@ -72,7 +72,7 @@
 			line-color: @v100;
 			line-width:1;
 		}
-		[zoom >= 9] {
+		[zoom >= 9][line=""] {
 			line-color: @v100;
 			line-width:2;
 		}
@@ -83,7 +83,7 @@
                         line-color: @v200;
                         line-width: 1;
                 }
-		[zoom >= 9] {
+		[zoom >= 9][line=""] {
 			line-color: @v200;
 			line-width: 2;
 		}
@@ -92,10 +92,13 @@
 	[voltage >= 300] {
 		line-color: @v300;
 		line-width: 1;
-		[zoom >= 4] {
+                [line="bay"], [line="busbar"] {
+                    line-width: 1;
+                }
+		[zoom >= 4][line=""] {
 			line-width: 2;
 		}
-		[zoom >= 9] {
+		[zoom >= 9][line=""] {
 			line-width: 3;
 		}
 	}
@@ -128,13 +131,8 @@
    	marker-width: 4;
 }
 
-#power_plant[zoom>=6] {
-	line-color: @station_outline;
-	line-width:1;
-}
-
 /* Render substations as circles at lower zooms */
-#substation_point[zoom > 8][zoom < 13][substation = "transmission"][voltage >= 100] {
+#substation_point[zoom > 8][zoom < 13][substation != "transition"][voltage >= 100] {
     marker-type: ellipse;
     marker-line-width: 2;
     marker-line-color: black;
@@ -207,9 +205,49 @@
     }
 }
 
+#power_plant_point[zoom < 13][zoom > 5][output > 100],
+    #power_plant_point[zoom < 13][zoom > 11][output < 100] {
+    marker-file: url('symbols/power_plant.svg');
+    [source = "coal"] {
+        marker-file: url('symbols/power_plant_coal.svg');
+    }
+    [source = "geothermal"] {
+        marker-file: url('symbols/power_plant_geothermal.svg');
+    }
+    [source = "hydro"] {
+        marker-file: url('symbols/power_plant_hydro.svg');
+    }
+    [source = "nuclear"] {
+        marker-file: url('symbols/power_plant_nuclear.svg');
+    }
+    [source = "oil"], [source="gas"] {
+        marker-file: url('symbols/power_plant_oilgas.svg');
+    }
+    [source = "solar"] {
+        marker-file: url('symbols/power_plant_solar.svg');
+    }
+    [source = "wind"] {
+        marker-file: url('symbols/power_plant_wind.svg');
+    }
+
+    marker-width: 15;
+    /* Render these on top of substations, as they're
+     * always next door and the power plant is more important. */
+    marker-allow-overlap: true;
+}
+
+#power_plant[zoom>=13] {
+	line-color: @station_outline;
+	line-width:1;
+}
 
 #power_generator[source = "wind"][zoom > 10] {
   marker-file: url('symbols/power_wind.svg');
+  marker-width: 10;
+}
+
+#power_transformer[zoom > 10] {
+  marker-file: url('symbols/power_transformer.svg');
   marker-width: 10;
 }
 
@@ -237,7 +275,10 @@
         }
 }
 
-#power_line::label {
+/* Label power lines
+ * (but not line=busbar or line=bay)
+ */
+#power_line::label[line = ''] {
 	text-size: 9;
 	text-placement: line;
 	text-halo-radius: 2;
@@ -249,7 +290,7 @@
 	text-face-name: @font_face;
 	text-fill: black;
 	text-min-path-length: 100;
-        text-spacing: 400;
+        text-spacing: 700;
 	[zoom>13] {
 		text-name: "[name]";
 		[voltage > 0] {
@@ -259,6 +300,28 @@
                     text-name: "[name] + ' (HVDC)'"
                 }
 	}
+}
+
+/* Label power line references as a shield.
+ * This currently only supports references shorter than 5 characters.
+ */
+#power_line::ref[ref != ''][ref_len < 5][zoom > 11] {
+    shield-file: url('symbols/power_line_ref.svg');
+    shield-name: "[ref]";
+    shield-face-name: @font_face;
+    shield-fill: black;
+    shield-size: 9;
+    shield-placement: line;
+    shield-spacing: 400;
+}
+
+#power_tower::ref[ref != ''][zoom > 15] {
+    text-size: 9;
+    text-name: "[ref]";
+    text-fill: black;
+    text-face-name: @font_face;
+    text-halo-fill: @text_halo;
+    text-halo-radius: 2;
 }
 
 #power_plant::label[zoom>=9][zoom < 12][output>100],

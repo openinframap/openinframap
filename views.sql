@@ -13,8 +13,8 @@ CREATE OR REPLACE VIEW substation AS
 CREATE OR REPLACE VIEW power_plant AS
     SELECT geometry, name, operator, output, source
               FROM osm_power_plant
-    UNION ALL
-    SELECT ST_ConvexHull(ST_Union(mem.geometry)) AS geometry, rel.name, rel.source, rel.operator, rel.output
+    UNION
+    SELECT ST_ConvexHull(ST_Union(mem.geometry)) AS geometry, rel.name, rel.operator, rel.output, rel.source
         FROM osm_power_plant_relation as rel, osm_power_plant_relation_member as mem
         WHERE mem.osm_id = rel.osm_id
         GROUP BY rel.osm_id, rel.name, rel.output, rel.source, rel.operator;
