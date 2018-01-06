@@ -54,6 +54,9 @@
     - name: well
       query: "SELECT geometry, operator, name FROM osm_petroleum_well"
       geometry: point
+    - name: site
+      query: "SELECT geometry, name, operator FROM osm_petroleum_site"
+      geometry: linestring
 - name: water
   layers:
     - name: pipeline
