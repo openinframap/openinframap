@@ -10,6 +10,7 @@
 @hvdc:  #4E01B5;
 
 @tunnel_case: #7C4544;
+@busbar_case: #ABA668;
 @power_pole: black;
 @station_outline: #593815;
 @text_halo: rgba(230,230,230,0.9);
@@ -28,6 +29,11 @@
 	}
   	line-join: round;
 	line-cap: round;
+}
+
+#power_line::case[line="busbar"][zoom > 14] {
+        line-color: @busbar_case;
+        line-width: 5;
 }
 
 #power_line::fill [frequency != "0"] {
@@ -92,9 +98,6 @@
 	[voltage >= 300] {
 		line-color: @v300;
 		line-width: 1;
-                [line="bay"], [line="busbar"] {
-                    line-width: 1;
-                }
 		[zoom >= 4][line=""] {
 			line-width: 2;
 		}
