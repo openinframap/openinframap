@@ -34,3 +34,19 @@
       text-name: "[name]";
     }
 }
+
+#site {
+    line-color: brown;
+    line-width: 3;
+     [zoom > 8] {
+      text-size: 10;
+      text-halo-radius: 2;
+      text-halo-fill: rgba(255,255,255,0.8);
+      text-face-name: @font_face;
+      text-fill: black;
+      text-name: "[name]";
+      [operator != ""] {
+       text-name: "[name] + ' (' + [operator] + ')'";
+      }
+    }
+}
