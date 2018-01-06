@@ -263,7 +263,7 @@
 }
 
 #substation::label[zoom >= 13],
-    #substation::label[zoom >= 11][zoom < 13][voltage >= 300]{
+    #substation::label[zoom >= 11][zoom < 13][voltage >= 100]{
 	text-size: 12;
 	text-dy: 10;
 	text-halo-radius: 2;
