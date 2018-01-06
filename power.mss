@@ -132,7 +132,8 @@
 }
 
 /* Render substations as circles at lower zooms */
-#substation_point[zoom > 8][zoom < 13][substation != "transition"][voltage >= 100] {
+#substation_point[zoom = 8][substation != "transition"][voltage >= 200],
+    #substation_point[zoom > 8][zoom < 13][substation != "transition"][voltage >= 100]{
     marker-type: ellipse;
     marker-line-width: 2;
     marker-line-color: black;
@@ -140,6 +141,9 @@
     /* Mapnik is extremely choosy about this rule ordering, beware. */
     marker-fill: @v300;
     marker-width: 15;
+    [zoom = 8] {
+        marker-width: 8;
+    }
 
     [voltage >= 200][voltage < 300] {
             /* I have *no idea* why but mangacarto wants line styles
@@ -148,6 +152,9 @@
             marker-line-color: black;
             marker-fill: @v200;
             marker-width: 12;
+            [zoom = 8] {
+                marker-width: 8;
+            }
     }
     [voltage >= 100][voltage < 200] {
             marker-fill: @v100;
@@ -204,6 +211,7 @@
             marker-fill: @v300;
     }
 }
+
 
 #power_plant_point[zoom < 13][zoom > 5][output > 100],
     #power_plant_point[zoom < 13][zoom > 11][output < 100] {
