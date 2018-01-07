@@ -42,13 +42,8 @@ var map = L.map('map', {
 });
 
 L.control.layers(base_layers, overlay_layers).addTo(map);
-var locator = L.Mapzen.locator();
-locator.setPosition('topleft');
-locator.addTo(map);
+new L.Hash(map, overlay_layers);
 
-L.Mapzen.hash({
-  map: map
-})
 /*
 L.Control.JOSMEdit = L.Control.extend({
   onAdd: function(map) {
