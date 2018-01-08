@@ -335,8 +335,8 @@
     text-halo-radius: 2;
 }
 
-#power_plant::label[zoom>=9][zoom < 12][output>100],
-  #power_plant::label[zoom>=12] {
+#power_plant::label[zoom >= 9][zoom < 12][output > 100],
+  #power_plant::label[zoom >= 12] {
 	text-size: 12;
 	text-dy: 10;
 	text-halo-radius: 2;
@@ -347,12 +347,5 @@
 	text-face-name: @font_face;
 	text-fill: black;
 	text-wrap-width: 50;
-	text-name: "[name]";
-	[source != ""] {
-		text-name: "[name] + ' (' + [source] + ')'";
-		[output != ""] {
-			text-name: "[name] + '\n (' + [source] + ', ' + [output] + 'MW)'";
-		}
-	}
+        text-name: "[label]";
 }
-

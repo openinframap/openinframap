@@ -74,4 +74,19 @@ CREATE AGGREGATE field_agg (TEXT)
     initcond = ''
 );
 
-
+CREATE OR REPLACE FUNCTION plant_label(name TEXT, output TEXT, source TEXT) RETURNS TEXT AS $$
+DECLARE
+    out_v INTEGER;
+BEGIN
+    out_v = round(convert_power(output) / 1e6);
+    IF name = '' THEN
+        RETURN '';
+    ELSIF name != '' AND output = '' AND source = '' THEN
+        RETURN name;
+    ELSIF name != '' AND output != '' AND source = '' THEN
+        RETURN name || E'\n (' || out_v || ' MW)';
+    ELSE
+        RETURN name || E'\n (' || source || ', ' || out_v || ' MW)';
+    END IF;
+END
+$$ LANGUAGE plpgsql;

@@ -22,11 +22,13 @@
               "
       geometry: point
     - name: power_plant
-      query: "SELECT geometry, name, operator, convert_power(output)/1e6 AS output, source
+      query: "SELECT geometry, name, operator, convert_power(output)/1e6 AS output, source,
+              plant_label(name, output, source) AS label
               FROM power_plant"
       geometry: linestring
     - name: power_plant_point
-      query: "SELECT ST_Centroid(geometry) AS geometry, name, convert_power(output)/1e6 AS output, source
+      query: "SELECT ST_Centroid(geometry) AS geometry, name, convert_power(output)/1e6 AS output, source,
+              plant_label(name, output, source) AS label
               FROM power_plant
               WHERE geometry && !bbox!
               "
