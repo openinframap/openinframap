@@ -43,12 +43,7 @@ var map = L.map('map', {
 
 L.control.layers(base_layers, overlay_layers).addTo(map);
 
-var all_layers = base_layers;
-for (var attrname in overlay_layers) {
-    all_layers[attrname] = overlay_layers[attrname]
-}
-
-new L.Hash(map, all_layers);
+new L.Hash(map, overlay_layers);
 
 function getJosmURL() {
     var url = 'http://127.0.0.1:8111/load_and_zoom';

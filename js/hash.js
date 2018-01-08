@@ -123,13 +123,14 @@
 					options = this.options,
 					that = this;
 				//Add/remove layers
-				this.map.eachLayer(function(layer) {
-					that.map.removeLayer(layer);
-				});
+				for (var key in options) {
+					that.map.removeLayer(options[key]);
+				}
 
-				layers.forEach(function(element, index, array) {
-					//console.log(options[element]);
-					that.map.addLayer(options[element]);
+                                layers.forEach(function(element, index, array) {
+                                        if (element in options) {
+   					    that.map.addLayer(options[element]);
+                                        }
 				});			
 
 				this.movingMap = false;
