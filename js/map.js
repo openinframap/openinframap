@@ -42,15 +42,36 @@ var map = L.map('map', {
 });
 
 L.control.layers(base_layers, overlay_layers).addTo(map);
-new L.Hash(map, overlay_layers);
 
-/*
+var all_layers = base_layers;
+for (var attrname in overlay_layers) {
+    all_layers[attrname] = overlay_layers[attrname]
+}
+
+new L.Hash(map, all_layers);
+
+function getJosmURL() {
+    var url = 'http://127.0.0.1:8111/load_and_zoom';
+    var bounds = map.getBounds();
+    return url + L.Util.getParamString({
+                            left: bounds.getNorthWest().lng,
+                            right: bounds.getSouthEast().lng,
+                            top: bounds.getNorthWest().lat,
+                            bottom: bounds.getSouthEast().lat
+                        });
+}
+
 L.Control.JOSMEdit = L.Control.extend({
   onAdd: function(map) {
     var link = L.DomUtil.create('div', 'editlink');
-    link.innerHTML = '<a href="">Edit</a>';
+    link.innerHTML = '<a href="#">Edit in JOSM</a>';
+    
     L.DomEvent.on(link, 'click', function(e) {
-      console.log('click');
+        console.log('click ' + getJosmURL());
+        var oReq = new XMLHttpRequest();
+        oReq.open("GET", getJosmURL());
+        oReq.send();
+        e.preventDefault();
     });
     return link;
   },
@@ -60,4 +81,3 @@ L.Control.JOSMEdit = L.Control.extend({
 });
 
 (new L.Control.JOSMEdit({position: 'bottomright'})).addTo(map);
-*/
