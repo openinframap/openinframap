@@ -37,6 +37,9 @@
       query: "SELECT geometry, name, operator, convert_power(output)/1e3 AS output, source, type, ref
               FROM osm_power_generator"
       geometry: geometry
+    - name: power_transformer
+      query: "SELECT geometry, name FROM osm_power_switchgear WHERE type = 'transformer'"
+      geometry: point
 - name: telecoms
   layers:
     - name: communication_line

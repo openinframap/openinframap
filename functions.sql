@@ -33,6 +33,16 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
+-- Get the first element of a semicolon-delimited list
+CREATE OR REPLACE FUNCTION first_semi(input TEXT) RETURNS TEXT AS $$
+DECLARE
+    parts TEXT[];
+BEGIN
+    parts = string_to_array(input, ';');
+    RETURN parts[1];
+END
+$$ LANGUAGE plpgsql;
+
 -- Combine two voltage fields into one
 CREATE OR REPLACE FUNCTION combine_voltage(a TEXT, b TEXT) RETURNS TEXT AS $$
 DECLARE
