@@ -57,6 +57,7 @@ for out_layer in config:
                 "project": "openinframap",
                 "geometry_field": geometry_field,
                 "srs": srs,
+                "srid": 3857,
                 "table": "(%s) AS data" % layer['query'],
                 "type": "postgis"
             },
