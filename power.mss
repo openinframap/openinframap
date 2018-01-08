@@ -257,7 +257,7 @@
   marker-width: 10;
 }
 
-#power_transformer[zoom > 10] {
+#power_transformer[zoom > 14] {
   marker-file: url('symbols/power_transformer.svg');
   marker-width: 10;
 }
