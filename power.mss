@@ -231,31 +231,39 @@
 
 
 #power_plant_point[zoom < 13][zoom > 5][output > 100],
-    #power_plant_point[zoom < 13][zoom > 11][output < 100] {
+    #power_plant_point[zoom < 13][zoom > 9][output < 100][output > 10],
+    #power_plant_point[zoom < 13][zoom > 11][output < 10]{
+    marker-width: 15;
     marker-file: url('symbols/power_plant.svg');
     [source = "coal"] {
+        marker-width: 15;
         marker-file: url('symbols/power_plant_coal.svg');
     }
     [source = "geothermal"] {
+        marker-width: 15;
         marker-file: url('symbols/power_plant_geothermal.svg');
     }
     [source = "hydro"] {
+        marker-width: 15;
         marker-file: url('symbols/power_plant_hydro.svg');
     }
     [source = "nuclear"] {
+        marker-width: 15;
         marker-file: url('symbols/power_plant_nuclear.svg');
     }
     [source = "oil"], [source="gas"] {
+        marker-width: 15;
         marker-file: url('symbols/power_plant_oilgas.svg');
     }
     [source = "solar"] {
+        marker-width: 15;
         marker-file: url('symbols/power_plant_solar.svg');
     }
     [source = "wind"] {
+        marker-width: 15;
         marker-file: url('symbols/power_plant_wind.svg');
     }
 
-    marker-width: 15;
     /* Render these on top of substations, as they're
      * always next door and the power plant is more important. */
     marker-allow-overlap: true;
