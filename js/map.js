@@ -6,9 +6,14 @@ var base_osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
 
+var base_topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    attribution: 'Data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, SRTM | Map &copy; <a href="http://opentopomap.org/">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+});
+
 var base_layers = {
-  'Carto Positron': base_carto,
-  'OSM': base_osm
+    'Carto Positron': base_carto,
+    'OpenTopoMap': base_topo,
+    'OSM': base_osm
 };
 
 var oim_attr = '<a href="/about.html">About OpenInfraMap</a>'
