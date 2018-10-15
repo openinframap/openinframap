@@ -1,0 +1,10 @@
+{
+  "tilejson": "2.2.0",
+  "name": "openinframap",
+  "attribution": "<a href=\"https://www.openstreetmap.org/copyright\">© OpenStreetMap contributors</a>, OpenInfraMap",
+  "bounds": [-180, -85.0511, 180, 85.0511],
+  "center": [0, 0, 0],
+  "minzoom": 2,
+  "maxzoom": 17,
+  "tiles": ["https://openinframap.org/tiles/{z}/{x}/{y}.pbf"]
+}

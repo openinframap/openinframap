@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="15" height="25.604" viewBox="0, 0, 15, 25.604">
+  <g id="Layer_1">
+    <g id="path1061">
+      <path d="M8.563,5.157 C8.554,5.725 8.034,6.179 7.401,6.173 C6.768,6.166 6.26,5.702 6.266,5.134 C6.271,4.566 6.788,4.11 7.421,4.113 C8.054,4.116 8.565,4.579 8.563,5.146" fill="#000000"/>
+      <path d="M8.563,5.157 C8.554,5.725 8.034,6.179 7.401,6.173 C6.768,6.166 6.26,5.702 6.266,5.134 C6.271,4.566 6.788,4.11 7.421,4.113 C8.054,4.116 8.565,4.579 8.563,5.146" fill-opacity="0" stroke="#000000" stroke-width="0.125" stroke-linecap="round"/>
+    </g>
+    <path d="M4.026,22.46 C10.409,22.46 10.409,22.46 10.409,22.46" fill-opacity="0" stroke="#000000" stroke-width="0.774" id="path2935"/>
+    <path d="M5.155,19.753 C11.05,19.753 8.363,19.753 9.224,19.753" fill-opacity="0" stroke="#000000" stroke-width="0.774" id="path3557"/>
+    <path d="M7.387,6.031 C7.387,6.046 7.387,6.062 7.387,6.077 C7.387,7.312 7.561,18.068 2.67,25.12" fill-opacity="0" stroke="#000000" stroke-width="0.967" id="path1686"/>
+    <path d="M7.373,6.007 C7.373,6.023 7.373,6.038 7.373,6.054 C7.373,7.289 7.199,18.045 12.089,25.097" fill-opacity="0" stroke="#000000" stroke-width="0.967" id="path2308"/>
+    <path d="M12.393,0.117 C14.102,1.482 15.015,3.477 14.869,5.525 C14.723,7.573 13.535,9.448 11.647,10.607" fill-opacity="0" stroke="#5A5A5A" stroke-width="0.247" stroke-linecap="round" id="path4190"/>
+    <path d="M10.387,1.78 C11.607,2.646 12.277,3.993 12.179,5.386 C12.081,6.778 11.227,8.039 9.895,8.76" fill-opacity="0" stroke="#5A5A5A" stroke-width="0.247" stroke-linecap="round" id="path4196"/>
+    <path d="M8.924,3.439 C9.537,3.874 9.874,4.552 9.825,5.252 C9.776,5.953 9.346,6.587 8.676,6.95" fill-opacity="0" stroke="#5A5A5A" stroke-width="0.247" stroke-linecap="round" id="path4198"/>
+    <path d="M2.607,0.127 C0.898,1.493 -0.015,3.487 0.131,5.535 C0.277,7.583 1.465,9.458 3.353,10.618" fill-opacity="0" stroke="#5A5A5A" stroke-width="0.247" stroke-linecap="round" id="path4209"/>
+    <path d="M4.613,1.79 C3.393,2.656 2.723,4.003 2.821,5.396 C2.919,6.789 3.773,8.05 5.105,8.771" fill-opacity="0" stroke="#5A5A5A" stroke-width="0.247" stroke-linecap="round" id="path4210"/>
+    <path d="M6.077,3.449 C5.463,3.884 5.126,4.562 5.175,5.263 C5.224,5.963 5.654,6.597 6.324,6.96" fill-opacity="0" stroke="#5A5A5A" stroke-width="0.247" stroke-linecap="round" id="path4212"/>
+  </g>
+</svg>
