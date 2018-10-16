@@ -326,7 +326,7 @@ const layers = [
     layout: {
       'icon-image': 'power_tower',
       'icon-size': ["interpolate", ["linear"], ["zoom"],
-        13, 0.5,
+        13, 0.4,
         17, 1
       ],
       'text-field': '{ref}',
