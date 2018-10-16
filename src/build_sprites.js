@@ -14,9 +14,9 @@ var path = require('path');
     });
   var basename;
   if (pxRatio == 1) {
-    basename = path.join(__dirname, '../dist/sprite');
+    basename = path.join(__dirname, '../dist/style/sprite');
   } else {
-    basename = path.join(__dirname, '../dist/sprite@' + pxRatio + 'x');
+    basename = path.join(__dirname, '../dist/style/sprite@' + pxRatio + 'x');
   }
 
   var pngPath = path.resolve(basename + '.png');

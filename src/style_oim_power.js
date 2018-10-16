@@ -60,8 +60,12 @@ const substation_visible_p = ["all",
       [">", ['zoom'], 8]
     ],
     ['all',
-      [">", ['coalesce', ['get', 'voltage'], 0], 50],
+      [">", ['coalesce', ['get', 'voltage'], 0], 19],
       [">", ['zoom'], 9]
+    ],
+    ['all',
+      [">", ['coalesce', ['get', 'voltage'], 0], 9],
+      [">", ['zoom'], 10]
     ],
     [">", ['zoom'], 11]
   ],
@@ -279,6 +283,39 @@ const layers = [
     }
   },
   {
+    id: 'power_transformer',
+    type: 'symbol',
+    source: 'openinframap',
+    'source-layer': 'power_transformer',
+    minzoom: 14,
+    paint: text_paint,
+    layout: {
+      'icon-image': 'power_transformer',
+    }
+  },
+  {
+    id: 'power_compensator',
+    type: 'symbol',
+    source: 'openinframap',
+    'source-layer': 'power_compensator',
+    minzoom: 14,
+    paint: text_paint,
+    layout: {
+      'icon-image': 'power_compensator',
+    }
+  },
+  {
+    id: 'power_switch',
+    type: 'symbol',
+    source: 'openinframap',
+    'source-layer': 'power_switch',
+    minzoom: 14,
+    paint: text_paint,
+    layout: {
+      'icon-image': 'power_switch',
+    }
+  },
+  {
     id: 'power_tower',
     type: 'symbol',
     filter: ['==', ['get', 'type'], 'tower'],
@@ -288,6 +325,10 @@ const layers = [
     paint: text_paint,
     layout: {
       'icon-image': 'power_tower',
+      'icon-size': ["interpolate", ["linear"], ["zoom"],
+        13, 0.5,
+        17, 1
+      ],
       'text-field': '{ref}',
       'text-size': ["step", 
         // Set visibility by using size
@@ -322,17 +363,6 @@ const layers = [
     }
   },
   {
-    id: 'power_transformer',
-    type: 'symbol',
-    source: 'openinframap',
-    'source-layer': 'power_transformer',
-    minzoom: 14,
-    paint: text_paint,
-    layout: {
-      'icon-image': 'power_transformer',
-    }
-  },
-  {
     id: 'power_wind_turbine',
     type: 'symbol',
     source: 'openinframap',
@@ -351,7 +381,7 @@ const layers = [
     source: 'openinframap',
     'source-layer': 'power_substation_point',
     minzoom: 7,
-    maxzoom: 12,
+    maxzoom: 13,
     layout: {},
     paint: {
       'circle-radius': substation_radius,
