@@ -412,6 +412,7 @@ const layers = [
     minzoom: 8,
     maxzoom: 24,
     layout: {
+      'symbol-z-order': 'source',
       'text-field': substation_label,
       'text-anchor': 'top',
       'text-offset': [0, 1],
@@ -428,6 +429,7 @@ const layers = [
     minzoom: 6,
     maxzoom: 24,
     layout: {
+      'symbol-z-order': 'source',
       'icon-image': plant_image,
       'icon-size': 0.8,
       'text-field': ['case',
