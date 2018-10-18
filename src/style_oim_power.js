@@ -184,12 +184,21 @@ const freq = ["case",
   ""
 ];
 
+// TODO: circuits not in DB :(
+const circuits = ["case",
+  ["all", 
+    ["has", "circuits"],
+    [">", ["to-number", ["get", "circuits"]], 1]
+  ],
+  ["concat", ["get", "circuits"], "×"],
+  ""
+]
 
 const line_label = ["case",
   ["all", ["has", "voltage"], ["!=", ["get", "name"], ""]],
-    ["concat", ["get", "name"], " (", ["get", "voltage"], " kV", freq, ")"],
+    ["concat", ["get", "name"], " (", circuits, ["get", "voltage"], " kV", freq, ")"],
   ["has", "voltage"],
-    ["concat", ["get", "voltage"], " kV", freq],
+    ["concat", circuits, ["get", "voltage"], " kV", freq],
   ["get", "name"]
 ];
 
