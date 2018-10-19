@@ -216,6 +216,8 @@ const substation_label = ["step",
   ]
 ];
 
+
+
 const layers = [
   {
     id: 'power_line_case',
@@ -381,8 +383,34 @@ const layers = [
     paint: text_paint,
     layout: {
       'icon-image': 'power_wind',
+      'text-field': '{name}',
+      'text-size': ["step",
+        ["zoom"],
+        0,
+        11, 9
+      ],
+      'text-offset': [0, 1],
+      'text-anchor': 'top',
     }
   },
+  {
+    id: 'power_wind_turbine_point',
+    type: 'circle',
+    source: 'openinframap',
+    'source-layer': 'power_generator',
+    filter: //['all',
+      ['==', ['get', 'source'], 'wind'],
+//      ['has', 'output'],
+//      ['>', ['get', 'output'], 1]
+//    ],
+    minzoom: 9,
+    maxzoom: 11,
+    paint: {
+      'circle-radius': 1.5,
+      'circle-color': '#444444'
+    }
+  },
+
   {
     id: 'power_substation_point',
     type: 'circle',
