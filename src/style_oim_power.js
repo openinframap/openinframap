@@ -383,11 +383,18 @@ const layers = [
     paint: text_paint,
     layout: {
       'icon-image': 'power_wind',
+      'icon-anchor': 'bottom',
+      'icon-size': ["interpolate", 
+        ["linear"], 
+        ["zoom"],
+        11, 0.5,
+        14, 1
+      ],
       'text-field': '{name}',
       'text-size': ["step",
         ["zoom"],
         0,
-        11, 9
+        12, 9
       ],
       'text-offset': [0, 1],
       'text-anchor': 'top',

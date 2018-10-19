@@ -27,7 +27,10 @@ var path = require('path');
   spritezero.generateLayout(
     {imgs: svgs, pixelRatio: pxRatio, format: true},
     function(err, dataLayout) {
-      if (err) return;
+      if (err) {
+        console.log(err);
+        return;
+      }
       fs.writeFileSync(jsonPath, JSON.stringify(dataLayout));
     },
   );
@@ -38,7 +41,10 @@ var path = require('path');
     {imgs: svgs, pixelRatio: pxRatio, format: false},
     function(err, imageLayout) {
       spritezero.generateImage(imageLayout, function(err, image) {
-        if (err) return;
+        if (err) {
+          console.log(err);
+          return;
+        }
         fs.writeFileSync(pngPath, image);
       });
     },

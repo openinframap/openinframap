@@ -45,6 +45,7 @@ const layers = [
     paint: text_paint,
     layout: {
       'icon-image': 'comms_tower',
+      'icon-anchor': 'bottom',
       'icon-size': ['interpolate', ["linear"], ["zoom"],
         10, 0.6,
         14, 1
