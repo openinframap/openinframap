@@ -448,6 +448,42 @@ const layers = [
     },
   },
   {
+    id: 'power_line_ref',
+    type: 'symbol',
+    filter: ['all', 
+      power_visible_p,
+      ['!=', ['coalesce', ['get', 'ref'], ''], ''],
+      ['<', ['length', ['get', 'ref']], 5]
+    ],
+    source: 'openinframap',
+    'source-layer': 'power_line',
+    minzoom: 10,
+    layout: {
+      'icon-image': 'power_line_ref',
+      'text-field': '{ref}',
+      'symbol-placement': 'line-center',
+      'text-size': 10,
+      'text-max-angle': 10
+    }
+  },
+  {
+    id: 'power_line_label',
+    type: 'symbol',
+    filter: ['all', power_visible_p],
+    source: 'openinframap',
+    'source-layer': 'power_line',
+    minzoom: 11,
+    paint: text_paint,
+    layout: {
+      'text-field': line_label,
+      'symbol-placement': 'line',
+      'symbol-spacing': 400,
+      'text-size': 10,
+      'text-offset': [0, 1],
+      'text-max-angle': 10
+    }
+  },
+  {
     id: 'power_substation_label',
     type: 'symbol',
     source: 'openinframap',
@@ -493,42 +529,6 @@ const layers = [
                   11, 0
                 ],
     }),
-  },
-  {
-    id: 'power_line_ref',
-    type: 'symbol',
-    filter: ['all', 
-      power_visible_p,
-      ['!=', ['coalesce', ['get', 'ref'], ''], ''],
-      ['<', ['length', ['get', 'ref']], 5]
-    ],
-    source: 'openinframap',
-    'source-layer': 'power_line',
-    minzoom: 10,
-    layout: {
-      'icon-image': 'power_line_ref',
-      'text-field': '{ref}',
-      'symbol-placement': 'line-center',
-      'text-size': 10,
-      'text-max-angle': 10
-    }
-  },
-  {
-    id: 'power_line_label',
-    type: 'symbol',
-    filter: ['all', power_visible_p],
-    source: 'openinframap',
-    'source-layer': 'power_line',
-    minzoom: 11,
-    paint: text_paint,
-    layout: {
-      'text-field': line_label,
-      'symbol-placement': 'line',
-      'symbol-spacing': 400,
-      'text-size': 10,
-      'text-offset': [0, 1],
-      'text-max-angle': 10
-    }
   },
 ];
 
