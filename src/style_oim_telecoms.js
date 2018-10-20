@@ -1,27 +1,8 @@
-import {text_paint} from './style_oim_common.js';
-
-const operator_text = ["step", ["zoom"],
-        ['get', 'name'],
-        14, ["case", ['!=', ['get', 'operator'], ''], 
-              ["concat", ['get', 'name'], ' (', ['get', 'operator'], ')'],
-              ['get', 'name']
-        ]
-      ];
+import {text_paint, operator_text} from './style_oim_common.js';
 
 const layers = [
   {
-    id: 'data_center',
-    type: 'fill',
-    source: 'openinframap',
-    minzoom: 10,
-    'source-layer': 'telecoms_data_center',
-    paint: {
-      'fill-opacity': 0.3,
-      'fill-color': '#7D59AB',
-      'fill-outline-color': 'rgba(0, 0, 0, 1)',
-    },
-  },
-  {
+    zorder: 40,
     id: 'communication_line',
     type: 'line',
     source: 'openinframap',
@@ -37,6 +18,20 @@ const layers = [
     },
   },
   {
+    zorder: 140,
+    id: 'data_center',
+    type: 'fill',
+    source: 'openinframap',
+    minzoom: 10,
+    'source-layer': 'telecoms_data_center',
+    paint: {
+      'fill-opacity': 0.3,
+      'fill-color': '#7D59AB',
+      'fill-outline-color': 'rgba(0, 0, 0, 1)',
+    },
+  },
+  {
+    zorder: 141,
     id: 'mast',
     type: 'symbol',
     source: 'openinframap',

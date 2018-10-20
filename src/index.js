@@ -7,6 +7,8 @@ import EditButton from './editbutton.js';
 import style_base from './style_base.js';
 import style_oim_power from './style_oim_power.js';
 import style_oim_telecoms from './style_oim_telecoms.js';
+import style_oim_petroleum from './style_oim_petroleum.js';
+import style_oim_water from './style_oim_water.js';
 
 function init() {
   /*
@@ -22,8 +24,15 @@ function init() {
       "tileSize": 256
   };
   */
-  map_style.layers = style_base;
-  map_style.layers = map_style.layers.concat(style_oim_power, style_oim_telecoms);
+  var oim_layers = style_oim_power.concat(style_oim_petroleum, style_oim_telecoms, style_oim_water);
+
+  oim_layers.sort((a, b) => {
+    if (a['zorder'] < b['zorder']) return -1;
+    if (a['zorder'] > b['zorder']) return 1;
+    return 0;
+  });
+
+  map_style.layers = style_base.concat(oim_layers);
 
   if (DEV) {
     map_style['sprite'] = 'http://localhost:8080/style/sprite';

@@ -1,4 +1,4 @@
-import {text_paint} from './style_oim_common.js';
+import {text_paint, underground_p} from './style_oim_common.js';
 // OpenInfraMap layers
 
 // Stepwise function to assign colour by voltage:
@@ -43,13 +43,6 @@ const label_offset = {
     [13, [0, 1]]
   ]
 }
-
-// Expression to match undergound/underwater
-const underground_p = ["any", 
-  ['==', ['get', 'location'], 'underground'],
-  ['==', ['get', 'location'], 'underwater'],
-  ['==', ['get', 'tunnel'], true]
-]
 
 // Determine substation visibility
 const substation_visible_p = ["all", 
@@ -220,6 +213,7 @@ const substation_label = ["step",
 
 const layers = [
   {
+    zorder: 60,
     id: 'power_line_case',
     type: 'line',
     source: 'openinframap',
@@ -237,6 +231,7 @@ const layers = [
     }
   },
   {
+    zorder: 61,
     id: 'power_line_underground',
     type: 'line',
     filter: ['all', underground_p, power_visible_p],
@@ -254,6 +249,7 @@ const layers = [
     }
   },
   {
+    zorder: 160,
     id: 'power_plant',
     type: 'fill',
     source: 'openinframap',
@@ -265,6 +261,7 @@ const layers = [
     },
   },
   {
+    zorder: 161,
     id: 'power_substation',
     type: 'fill',
     filter: substation_visible_p,
@@ -278,6 +275,7 @@ const layers = [
     },
   },
   {
+    zorder: 260,
     id: 'power_line',
     type: 'line',
     source: 'openinframap',
@@ -294,6 +292,7 @@ const layers = [
     }
   },
   {
+    zorder: 261,
     id: 'power_transformer',
     type: 'symbol',
     source: 'openinframap',
@@ -305,6 +304,7 @@ const layers = [
     }
   },
   {
+    zorder: 262,
     id: 'power_compensator',
     type: 'symbol',
     source: 'openinframap',
@@ -316,6 +316,7 @@ const layers = [
     }
   },
   {
+    zorder: 263,
     id: 'power_switch',
     type: 'symbol',
     source: 'openinframap',
@@ -327,6 +328,7 @@ const layers = [
     }
   },
   {
+    zorder: 264,
     id: 'power_tower',
     type: 'symbol',
     filter: ['==', ['get', 'type'], 'tower'],
@@ -352,6 +354,7 @@ const layers = [
     }
   },
   {
+    zorder: 265,
     id: 'power_pole',
     type: 'symbol',
     filter: ['==', ['get', 'type'], 'pole'],
@@ -374,6 +377,7 @@ const layers = [
     }
   },
   {
+    zorder: 266,
     id: 'power_wind_turbine',
     type: 'symbol',
     source: 'openinframap',
@@ -401,6 +405,7 @@ const layers = [
     }
   },
   {
+    zorder: 267,
     id: 'power_wind_turbine_point',
     type: 'circle',
     source: 'openinframap',
@@ -419,6 +424,7 @@ const layers = [
   },
 
   {
+    zorder: 268,
     id: 'power_substation_point',
     type: 'circle',
     filter: substation_visible_p,
@@ -434,6 +440,7 @@ const layers = [
     },
   },
   {
+    zorder: 269,
     id: 'power_substation_point_map',
     type: 'circle',
     filter: ['==', ['geometry-type'], 'point'],
@@ -448,6 +455,7 @@ const layers = [
     },
   },
   {
+    zorder: 560,
     id: 'power_line_ref',
     type: 'symbol',
     filter: ['all', 
@@ -467,6 +475,7 @@ const layers = [
     }
   },
   {
+    zorder: 561,
     id: 'power_line_label',
     type: 'symbol',
     filter: ['all', power_visible_p],
@@ -484,6 +493,7 @@ const layers = [
     }
   },
   {
+    zorder: 562,
     id: 'power_substation_label',
     type: 'symbol',
     source: 'openinframap',
@@ -501,6 +511,7 @@ const layers = [
     paint: text_paint,
   },
   {
+    zorder: 563,
     id: 'power_plant_label',
     type: 'symbol',
     source: 'openinframap',
