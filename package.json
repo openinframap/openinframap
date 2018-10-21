@@ -27,16 +27,16 @@
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "spritezero-webpack-plugin": "^0.1.1",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.0.1",
-    "spritezero-webpack-plugin": "^0.1.0",
-    "webpack": "^4.20.2",
+    "webpack": "^4.22.0",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9",
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "mapbox-gl": "^0.50.0-beta.1",
-    "redom": "^3.14.2"
+    "mapbox-gl": "^0.50.0",
+    "redom": "^3.14.3"
   }
 }
