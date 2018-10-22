@@ -14,6 +14,14 @@ import style_oim_petroleum from './style_oim_petroleum.js';
 import style_oim_water from './style_oim_water.js';
 
 function init() {
+  if (!mapboxgl.supported({failIfMajorPerformanceCaveat: true})) {
+      const infobox = new InfoBox('Warning');
+      infobox.update('Your browser may have performance or functionality issues with OpenInfraMap.<br/>' +
+      '<a href="http://webglreport.com">WebGL</a> with hardware acceleration is required for this site ' +
+      'to perform well.');
+      mount(document.body, infobox);
+  }
+
   /*
   // Old carto positron basemap in case of issues.
   map_style.layers = [{
@@ -51,15 +59,7 @@ function init() {
     maxZoom: 17.9
   });
   map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-  map.addControl(new EditButton(), 'bottom-right');
-  
-  if (!mapboxgl.supported({failIfMajorPerformanceCaveat: true})) {
-      const infobox = new InfoBox('Warning');
-      infobox.update('Your browser may have performance or functionality issues with OpenInfraMap.<br/>' +
-      '<a href="http://webglreport.com">WebGL</a> with hardware acceleration is required for this site ' +
-      'to perform well.');
-      mount(document.body, infobox);
-  }
+  map.addControl(new EditButton(), 'bottom-right'); 
 }
 
 if (document.readyState != 'loading') {
