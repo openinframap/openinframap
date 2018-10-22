@@ -43,3 +43,33 @@ h1 {
 a {
   color: #333;
 }
+
+.infobox {
+    display: block;
+    position: absolute;
+    bottom: 40px;
+    min-width: 60px;
+    max-width: 300px;
+    left: 5%;
+    background-color: white;
+    padding: 5px;
+    border: 1px solid #999;
+    border-radius: 4px;
+}
+
+.infobox-header {
+    font-weight: bold;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #bbb;
+    margin-bottom: 4px;
+}
+
+.infobox-header a {
+    cursor: pointer;
+    float: right;
+    margin-top: -3px;
+}
+
+.infobox-content {
+    clear: both;
+}

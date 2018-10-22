@@ -2,7 +2,10 @@ import './index.css';
 import mapboxgl from 'mapbox-gl';
 import map_style from './style.json';
 
+import { mount } from 'redom';
+
 import EditButton from './editbutton.js';
+import InfoBox from './infobox.js';
 
 import style_base from './style_base.js';
 import style_oim_power from './style_oim_power.js';
@@ -49,6 +52,14 @@ function init() {
   });
   map.addControl(new mapboxgl.NavigationControl(), 'top-right');
   map.addControl(new EditButton(), 'bottom-right');
+  
+  if (!mapboxgl.supported({failIfMajorPerformanceCaveat: true})) {
+      const infobox = new InfoBox('Warning');
+      infobox.update('Your browser may have performance or functionality issues with OpenInfraMap.<br/>' +
+      '<a href="http://webglreport.com">WebGL</a> with hardware acceleration is required for this site ' +
+      'to perform well.');
+      mount(document.body, infobox);
+  }
 }
 
 if (document.readyState != 'loading') {
