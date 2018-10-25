@@ -56,7 +56,8 @@ function init() {
     style: map_style,
     hash: true,
     minZoom: 2,
-    maxZoom: 17.9
+    maxZoom: 17.9,
+    center: [12, 26]
   });
   map.addControl(new mapboxgl.NavigationControl(), 'top-right');
   map.addControl(new EditButton(), 'bottom-right'); 
