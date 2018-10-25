@@ -7,17 +7,14 @@ html {
   color: #333;
 }
 
-body {
-  display: block !important;
+body, #container, #map {
   width: 100%;
   height: 100%;
   margin: 0px;
 }
 
-#map { 
-  width: 100%;
-  height: 100%;
-  background-color: white;
+#container {
+  display: block !important;
 }
 
 header {
