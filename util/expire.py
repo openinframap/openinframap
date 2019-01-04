@@ -10,14 +10,14 @@ for path in pathlist:
             "/home/osm/go/bin/tegola",
             "cache",
             "purge",
+            "tile-list",
+            path,
             "--config",
             "/home/osm/styles/config.toml",
             "--max-zoom",
             "17",
             "--min-zoom",
             "7",
-            "--tile-list",
-            path,
         ]
     )
     os.remove(path)
