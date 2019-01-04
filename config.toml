@@ -1,0 +1,192 @@
+[[maps]]
+name = "openinframap"
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.power_line"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.power_tower"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.power_substation"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.power_substation_point"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.power_plant"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.power_plant_point"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.power_generator"
+
+[[maps.layers]]
+min_zoom = 8
+max_zoom = 17
+provider_layer = "postgis.power_transformer"
+
+[[maps.layers]]
+min_zoom = 8
+max_zoom = 17
+provider_layer = "postgis.power_compensator"
+
+[[maps.layers]]
+min_zoom = 8
+max_zoom = 17
+provider_layer = "postgis.power_switch"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.telecoms_communication_line"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.telecoms_data_center"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.telecoms_mast"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.petroleum_pipeline"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.petroleum_well"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.petroleum_site"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.water_pipeline"
+
+
+[[providers]]
+max_connections = 20
+host = "localhost"
+name = "postgis"
+database = "osm"
+password = "osm"
+srid = 3857
+type = "postgis"
+port = 5432
+user = "osm"
+[[providers.layers]]
+name = "power_line"
+dont_simplify = true
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 6)) AS geom, tunnel, location, frequency, type, name, line, ref, char_length(ref) AS ref_len, convert_voltage(voltage) / 1000 AS voltage, operator FROM osm_power_lines WHERE geometry && !BBOX! AND ST_Length(geometry) > ZRes(!ZOOM!) AND (line NOT IN ('bay', 'busbar') OR !ZOOM! > 10) ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
+
+[[providers.layers]]
+name = "power_tower"
+min_zoom = 10
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, type, name, ref, operator FROM osm_power_tower WHERE geometry && !BBOX! AND 9 < !ZOOM!"
+
+[[providers.layers]]
+name = "power_substation"
+min_zoom = 8
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, convert_voltage(voltage) / 1000 AS voltage, substation, operator FROM substation WHERE geometry && !BBOX! AND 7 < !ZOOM! ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
+
+[[providers.layers]]
+name = "power_substation_point"
+min_zoom = 5
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, convert_voltage(voltage) / 1000 AS voltage, substation FROM substation WHERE geometry && !BBOX! AND 4 < !ZOOM! ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
+
+[[providers.layers]]
+name = "power_plant"
+min_zoom = 8
+dont_simplify = true
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator, convert_power(output)/1e6 AS output, source, plant_label(name, output, source) AS label FROM power_plant WHERE geometry && !BBOX! AND 7 < !ZOOM! ORDER BY convert_power(output) ASC NULLS FIRST"
+
+[[providers.layers]]
+name = "power_plant_point"
+min_zoom = 2
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, convert_power(output)/1e6 AS output, source, plant_label(name, output, source) AS label FROM power_plant WHERE geometry && !BBOX! AND 1 < !ZOOM! AND NOT ST_IsEmpty(geometry) ORDER BY convert_power(output) ASC NULLS FIRST"
+
+[[providers.layers]]
+name = "power_generator"
+min_zoom = 8
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, operator, convert_power(output)/1e3 AS output, source, type, ref FROM osm_power_generator WHERE geometry && !BBOX! AND 7 < !ZOOM!"
+
+[[providers.layers]]
+name = "power_transformer"
+min_zoom = 10
+dont_simplify = true
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name FROM osm_power_switchgear WHERE type = 'transformer' AND geometry && !BBOX! AND 9 < !ZOOM!"
+
+[[providers.layers]]
+name = "power_compensator"
+min_zoom = 10
+dont_simplify = true
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name FROM osm_power_switchgear WHERE type = 'compensator' AND geometry && !BBOX! AND !ZOOM! > 9"
+
+[[providers.layers]]
+name = "power_switch"
+min_zoom = 10
+dont_simplify = true
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name FROM osm_power_switchgear WHERE type = 'switch' AND geometry && !BBOX! AND !ZOOM! > 9"
+
+[[providers.layers]]
+name = "telecoms_communication_line"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, operator, name, location FROM osm_comms_cable WHERE geometry && !BBOX! AND 1 < !ZOOM! AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
+
+[[providers.layers]]
+name = "telecoms_data_center"
+min_zoom = 8
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, operator, name, ref FROM osm_data_center WHERE geometry && !BBOX! AND 7 < !ZOOM!"
+
+[[providers.layers]]
+name = "telecoms_mast"
+min_zoom = 8
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, operator, name, ref FROM osm_mast WHERE (mast_type IN ('communication', 'communications', 'broadcast') OR tower_type IN ('communication', 'radio', 'antenna')) AND geometry && !BBOX! AND 7 < !ZOOM!"
+
+[[providers.layers]]
+name = "petroleum_pipeline"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, operator, substance, type, name, location FROM osm_pipeline WHERE (substance IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng') OR type IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng')) AND geometry && !BBOX! AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
+
+[[providers.layers]]
+name = "petroleum_well"
+min_zoom = 4
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, operator, name FROM osm_petroleum_well WHERE geometry && !BBOX! AND 3 < !ZOOM!"
+
+[[providers.layers]]
+name = "petroleum_site"
+min_zoom = 4
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator FROM osm_petroleum_site WHERE geometry && !BBOX! AND 3 < !ZOOM!"
+
+[[providers.layers]]
+name = "water_pipeline"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, operator, name, location FROM osm_pipeline WHERE (substance = 'water' OR type = 'water') AND geometry && !BBOX! AND 3 < !ZOOM! AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
+
+[webserver]
+port = ":8081"
+hostname = "vector.openinframap.org"
+cors_allowed_origin = "*"
+
+[cache]
+type="file"             # cache type
+basepath="/tmp/tegola"  # cache specific config
