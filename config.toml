@@ -99,7 +99,7 @@ user = "osm"
 [[providers.layers]]
 name = "power_line"
 dont_simplify = true
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 6)) AS geom, tunnel, location, frequency, type, name, line, ref, char_length(ref) AS ref_len, convert_voltage(voltage) / 1000 AS voltage, operator FROM osm_power_lines WHERE geometry && !BBOX! AND ST_Length(geometry) > ZRes(!ZOOM!) AND (line NOT IN ('bay', 'busbar') OR !ZOOM! > 10) ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 6)) AS geom, tunnel, location, frequency, type, name, line, ref, char_length(ref) AS ref_len, convert_voltage(voltage) / 1000 AS voltage, operator FROM osm_power_lines WHERE geometry && !BBOX! AND ST_Length(geometry) > ZRes(!ZOOM!) AND (line NOT IN ('bay', 'busbar') OR !ZOOM! > 10) ORDER BY convert_voltage(voltage) DESC NULLS LAST"
 
 [[providers.layers]]
 name = "power_tower"
@@ -109,23 +109,23 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, type, name, ref, ope
 [[providers.layers]]
 name = "power_substation"
 min_zoom = 8
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, convert_voltage(voltage) / 1000 AS voltage, substation, operator FROM substation WHERE geometry && !BBOX! AND 7 < !ZOOM! ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, convert_voltage(voltage) / 1000 AS voltage, substation, operator FROM substation WHERE geometry && !BBOX! AND 7 < !ZOOM! ORDER BY convert_voltage(voltage) DESC NULLS LAST"
 
 [[providers.layers]]
 name = "power_substation_point"
 min_zoom = 5
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, convert_voltage(voltage) / 1000 AS voltage, substation FROM substation WHERE geometry && !BBOX! AND 4 < !ZOOM! ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, convert_voltage(voltage) / 1000 AS voltage, substation FROM substation WHERE geometry && !BBOX! AND 4 < !ZOOM! ORDER BY convert_voltage(voltage) DESC NULLS LAST"
 
 [[providers.layers]]
 name = "power_plant"
 min_zoom = 8
 dont_simplify = true
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator, convert_power(output)/1e6 AS output, source, plant_label(name, output, source) AS label FROM power_plant WHERE geometry && !BBOX! AND 7 < !ZOOM! ORDER BY convert_power(output) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator, convert_power(output)/1e6 AS output, source, plant_label(name, output, source) AS label FROM power_plant WHERE geometry && !BBOX! AND 7 < !ZOOM! ORDER BY convert_power(output) DESC NULLS LAST"
 
 [[providers.layers]]
 name = "power_plant_point"
 min_zoom = 2
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, convert_power(output)/1e6 AS output, source, plant_label(name, output, source) AS label FROM power_plant WHERE geometry && !BBOX! AND 1 < !ZOOM! AND NOT ST_IsEmpty(geometry) ORDER BY convert_power(output) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, convert_power(output)/1e6 AS output, source, plant_label(name, output, source) AS label FROM power_plant WHERE geometry && !BBOX! AND 1 < !ZOOM! AND NOT ST_IsEmpty(geometry) ORDER BY convert_power(output) DESC NULLS LAST"
 
 [[providers.layers]]
 name = "power_generator"
