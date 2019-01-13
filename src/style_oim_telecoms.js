@@ -87,7 +87,7 @@ const layers = [
     id: 'communication_line_label',
     type: 'symbol',
     source: 'openinframap',
-    minzoom: 8,
+    minzoom: 9,
     'source-layer': 'telecoms_communication_line',
     paint: text_paint,
     layout: {
