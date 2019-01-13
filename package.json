@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "mapbox-gl": "^0.50.0",
-    "redom": "^3.17.1"
+    "redom": "^3.17.1",
+    "title-case": "^2.1.1"
   }
 }

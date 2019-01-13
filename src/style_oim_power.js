@@ -360,7 +360,7 @@ const layers = [
         0,
         14, 10
       ],
-      'text-offset': [0, 1],
+      'text-offset': [0, 1.5],
       'text-max-angle': 10
     }
   },
