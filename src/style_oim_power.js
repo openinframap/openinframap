@@ -60,7 +60,7 @@ const substation_visible_p = ["all",
     ],
     ['all',
       [">", ['coalesce', ['get', 'voltage'], 0], 19],
-      [">", ['zoom'], 8]
+      [">", ['zoom'], 9]
     ],
     ['all',
       [">", ['coalesce', ['get', 'voltage'], 0], 9],
@@ -87,7 +87,7 @@ const substation_radius = [
 
 const substation_label_visible_p = ["all",
   ["any",
-    [">", ['coalesce', ['get', 'voltage'], 0], 300],
+    [">", ['coalesce', ['get', 'voltage'], 0], 399],
     ['all',
       [">", ['coalesce', ['get', 'voltage'], 0], 200],
       [">", ['zoom'], 8]
@@ -141,15 +141,19 @@ const power_visible_p = ["all",
 const plant_label_visible_p = ["any",
   [">", ['coalesce', ['get', 'output'], 0], 1000],
   ['all',
-    [">", ['coalesce', ['get', 'output'], 0], 500],
-    [">", ['zoom'], 7]
+    [">", ['coalesce', ['get', 'output'], 0], 750],
+    [">", ['zoom'], 6]
   ],
   ['all',
     [">", ['coalesce', ['get', 'output'], 0], 250],
-    [">", ['zoom'], 8]
+    [">", ['zoom'], 7]
   ],
   ['all',
     [">", ['coalesce', ['get', 'output'], 0], 100],
+    [">", ['zoom'], 8]
+  ],
+  ['all',
+    [">", ['coalesce', ['get', 'output'], 0], 10],
     [">", ['zoom'], 9]
   ],
   [">", ['zoom'], 10]
@@ -209,9 +213,9 @@ const substation_label = ["step",
   ["get", "name"],
   12, ["case",
     ['all', ['!=', ['get', 'name'], ''], ["has", "voltage"]],
-      ["concat", ["get", "name"], " (", ["get", "voltage"], " kV)"],
+      ["concat", ["get", "name"], " ", ["get", "voltage"], " kV"],
     ['all', ['==', ['get', 'name'], ''], ['has', 'voltage']],
-      ["concat", "Substation (", ["get", "voltage"], " kV)"],
+      ["concat", "Substation ", ["get", "voltage"], " kV"],
     ["get", "name"]
   ]
 ];
@@ -260,7 +264,7 @@ const layers = [
     id: 'power_plant',
     type: 'fill',
     source: 'openinframap',
-    minzoom: 5,
+    minzoom: 11,
     'source-layer': 'power_plant',
     paint: {
       'fill-opacity': 0.3,
@@ -517,7 +521,14 @@ const layers = [
       'text-field': substation_label,
       'text-anchor': 'top',
       'text-offset': [0, 1],
-      'text-size': 12,
+      'text-size': ["interpolate", ["linear"], ["zoom"], 
+                    8, 10,
+                    18, ["interpolate", ["linear"], ["coalesce", ["get", "voltage"], 0],
+                      0, 10,
+                      400, 16
+                    ]
+      ],
+      'text-max-width': 8,
     },
     paint: text_paint,
   },
@@ -533,23 +544,36 @@ const layers = [
     layout: {
       'symbol-z-order': 'source',
       'icon-image': plant_image,
-      'icon-size': 0.8,
+      'icon-size': ["interpolate", ["linear"], ["zoom"],
+                    6, 0.6,
+                    10, 0.8,
+      ],
       'text-field': ['case',
-        ['has', 'output'], ['concat', ['get', 'name'], ' \n(', ['get', 'output'], ' MW)'],
+        ['all', ['==', ['get', 'name'], ''], ['has', 'output']], ['concat', ['get', 'output'], ' MW'],
+        ['has', 'output'], ['concat', ['get', 'name'], ' \n', ['get', 'output'], ' MW'],
         ['get', 'name'],
       ],
       'text-anchor': 'top',
       'text-offset': [0, 1],
-      'text-size': 12,
+      'text-size': ["interpolate", ["linear"], ["zoom"], 
+                    7, 10,
+                    18, ["interpolate", ["linear"], ["coalesce", ["get", "output"], 0],
+                      0, 10,
+                      2000, 16
+                    ]
+      ],
       'text-optional': true,
     },
     paint: Object.assign({}, text_paint, {
       // Control visibility using the opacity property...
-      'icon-opacity': ["step", 
-                  ["zoom"],
+      'icon-opacity': ["step", ["zoom"],
                   1,
                   11, 0
-                ],
+      ],
+      'text-opacity': ["step", ["zoom"],
+                  0,
+                  7, 1
+      ],
     }),
   },
 ];

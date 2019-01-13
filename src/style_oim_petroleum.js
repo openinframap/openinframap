@@ -95,7 +95,7 @@ const layers = [
     type: 'symbol',
     source: 'openinframap',
     'source-layer': 'petroleum_pipeline',
-    minzoom: 11,
+    minzoom: 12,
     paint: text_paint,
     layout: {
       'text-field': substance_operator,
@@ -112,7 +112,7 @@ const layers = [
     type: 'symbol',
     source: 'openinframap',
     'source-layer': 'petroleum_site',
-    minzoom: 11,
+    minzoom: 12,
     layout: {
       'text-field': '{name}',
       'text-anchor': 'top',
