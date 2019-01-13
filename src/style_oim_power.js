@@ -49,14 +49,18 @@ const label_offset = {
 // Determine substation visibility
 const substation_visible_p = ["all", 
   ["any",
-    [">", ['coalesce', ['get', 'voltage'], 0], 200],
+    [">", ['coalesce', ['get', 'voltage'], 0], 399],
+    ['all',
+      [">", ['coalesce', ['get', 'voltage'], 0], 200],
+      [">", ['zoom'], 6]
+    ],
     ['all',
       [">", ['coalesce', ['get', 'voltage'], 0], 100],
-      [">", ['zoom'], 8]
+      [">", ['zoom'], 7]
     ],
     ['all',
       [">", ['coalesce', ['get', 'voltage'], 0], 19],
-      [">", ['zoom'], 9]
+      [">", ['zoom'], 8]
     ],
     ['all',
       [">", ['coalesce', ['get', 'voltage'], 0], 9],
@@ -71,12 +75,13 @@ const substation_radius = [
   'interpolate',
   ['linear'],
   ['zoom'],
-  7, 4,
+  5, 1,
   12, ['interpolate',
         ['linear'],
         ["coalesce", ['get', 'voltage'], 0],
         0, 2,
-        300, 7
+        300, 7,
+        600, 9
       ]
 ]
 
@@ -269,7 +274,7 @@ const layers = [
     filter: substation_visible_p,
     source: 'openinframap',
     'source-layer': 'power_substation',
-    minzoom: 12,
+    minzoom: 13,
     paint: {
       'fill-opacity': 0.3,
       'fill-color': voltage_color,
@@ -432,13 +437,17 @@ const layers = [
     filter: substation_visible_p,
     source: 'openinframap',
     'source-layer': 'power_substation_point',
-    minzoom: 7,
+    minzoom: 5,
     maxzoom: 13,
     layout: {},
     paint: {
       'circle-radius': substation_radius,
       'circle-color': voltage_color,
-      'circle-stroke-width': 1
+      'circle-stroke-width': ['interpolate', ['linear'], ['zoom'],
+          5, 0,
+          6, 0.01,
+          12, 1.5,
+      ]
     },
   },
   {
