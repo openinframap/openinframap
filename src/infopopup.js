@@ -75,7 +75,7 @@ class InfoPopup {
     let attrs_table = el('table', {'class': 'item_info'});
     setChildren(
       attrs_table,
-      Object.keys(feature.properties).map(key =>
+      Object.keys(feature.properties).sort().map(key =>
         this.renderKey(key, feature.properties[key]),
       ),
     );
