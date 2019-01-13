@@ -433,7 +433,6 @@ const layers = [
       'circle-color': '#444444'
     }
   },
-
   {
     zorder: 268,
     id: 'power_substation_point',
@@ -458,9 +457,9 @@ const layers = [
     zorder: 269,
     id: 'power_substation_point_map',
     type: 'circle',
-    filter: ['==', ['geometry-type'], 'point'],
+    filter: ['get', 'is_node'],
     source: 'openinframap',
-    'source-layer': 'power_substation',
+    'source-layer': 'power_substation_point',
     minzoom: 13,
     layout: {},
     paint: {
