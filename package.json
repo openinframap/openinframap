@@ -36,7 +36,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "mapbox-gl": "^0.50.0",
+    "mapbox-gl": "^0.52.0",
     "redom": "^3.17.1",
     "title-case": "^2.1.1"
   }
