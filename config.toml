@@ -36,6 +36,11 @@ max_zoom = 17
 provider_layer = "postgis.power_generator"
 
 [[maps.layers]]
+min_zoom = 7
+max_zoom = 17
+provider_layer = "postgis.power_generator_area"
+
+[[maps.layers]]
 min_zoom = 8
 max_zoom = 17
 provider_layer = "postgis.power_transformer"
