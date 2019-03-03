@@ -286,6 +286,19 @@ const layers = [
     },
   },
   {
+    zorder: 162,
+    id: 'power_solar_panel',
+    type: 'fill',
+    source: 'openinframap',
+    'source-layer': 'power_generator_area',
+    filter: ['==', ['get', 'source'], 'solar'],
+    minzoom: 13,
+    paint: {
+      'fill-color': '#726BA9',
+      'fill-outline-color': 'rgba(50, 50, 50, 1)',
+    },
+  },
+  {
     zorder: 260,
     id: 'power_line',
     type: 'line',
