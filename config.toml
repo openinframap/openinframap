@@ -133,6 +133,11 @@ min_zoom = 8
 sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, operator, convert_power(output)/1e3 AS output, source, type, ref FROM osm_power_generator WHERE geometry && !BBOX! AND 7 < !ZOOM!"
 
 [[providers.layers]]
+name = "power_generator_area"
+min_zoom = 8
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator, convert_power(output)/1e3 AS output, source, type, ref FROM osm_power_generator WHERE geometry && !BBOX! AND 7 < !ZOOM!"
+
+[[providers.layers]]
 name = "power_transformer"
 min_zoom = 10
 dont_simplify = true
