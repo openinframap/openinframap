@@ -36,7 +36,7 @@ max_zoom = 17
 provider_layer = "postgis.power_generator"
 
 [[maps.layers]]
-min_zoom = 7
+min_zoom = 13
 max_zoom = 17
 provider_layer = "postgis.power_generator_area"
 
@@ -139,8 +139,8 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, o
 
 [[providers.layers]]
 name = "power_generator_area"
-min_zoom = 8
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator, convert_power(output)/1e3 AS output, source, type, ref FROM osm_power_generator WHERE geometry && !BBOX! AND 7 < !ZOOM!"
+min_zoom = 13
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator, convert_power(output)/1e3 AS output, source, type, ref FROM osm_power_generator WHERE geometry && !BBOX! AND 12 < !ZOOM! AND ST_GeometryType(geometry) = 'ST_Polygon'"
 
 [[providers.layers]]
 name = "power_transformer"
