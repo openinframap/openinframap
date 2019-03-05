@@ -15,7 +15,11 @@ const operator_text = ["step", ["zoom"],
 const underground_p = ["any",
   ['==', ['get', 'location'], 'underground'],
   ['==', ['get', 'location'], 'underwater'],
-  ['==', ['get', 'tunnel'], true]
+  ['==', ['get', 'tunnel'], true],
+  ['all', // Power cables are underground by default
+    ['==', ['get', 'type'], 'cable'],
+    ['==', ['get', 'location'], '']
+  ]
 ];
 
 export {text_paint, operator_text, underground_p};
