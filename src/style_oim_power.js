@@ -142,15 +142,15 @@ const plant_label_visible_p = ["any",
   [">", ['coalesce', ['get', 'output'], 0], 1000],
   ['all',
     [">", ['coalesce', ['get', 'output'], 0], 750],
-    [">", ['zoom'], 6]
+    [">", ['zoom'], 5]
   ],
   ['all',
     [">", ['coalesce', ['get', 'output'], 0], 250],
-    [">", ['zoom'], 7]
+    [">", ['zoom'], 6]
   ],
   ['all',
     [">", ['coalesce', ['get', 'output'], 0], 100],
-    [">", ['zoom'], 8]
+    [">", ['zoom'], 7]
   ],
   ['all',
     [">", ['coalesce', ['get', 'output'], 0], 10],
