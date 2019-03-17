@@ -5,7 +5,7 @@ DROP VIEW substation;
 DROP VIEW power_plant;
 
 -- Convert a power value into a numeric value in watts
-CREATE OR REPLACE FUNCTION convert_power(value TEXT) RETURNS NUMERIC AS $$
+CREATE OR REPLACE FUNCTION convert_power(value TEXT) RETURNS NUMERIC IMMUTABLE AS $$
 DECLARE
   parts TEXT[];
   val NUMERIC;
@@ -24,7 +24,7 @@ END
 $$ LANGUAGE plpgsql;
 
 -- Select the highest voltage from a semicolon-delimited list
-CREATE OR REPLACE FUNCTION convert_voltage(value TEXT) RETURNS NUMERIC AS $$
+CREATE OR REPLACE FUNCTION convert_voltage(value TEXT) RETURNS NUMERIC IMMUTABLE AS $$
 DECLARE
   parts TEXT[];
 BEGIN
@@ -33,8 +33,18 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
+-- Get the nth element of a semicolon-delimited list
+CREATE OR REPLACE FUNCTION nth_semi(input TEXT, index INTEGER) RETURNS TEXT IMMUTABLE AS $$
+DECLARE
+    parts TEXT[];
+BEGIN
+    parts = string_to_array(input, ';');
+    RETURN parts[index];
+END
+$$ LANGUAGE plpgsql;
+
 -- Get the first element of a semicolon-delimited list
-CREATE OR REPLACE FUNCTION first_semi(input TEXT) RETURNS TEXT AS $$
+CREATE OR REPLACE FUNCTION first_semi(input TEXT) RETURNS TEXT IMMUTABLE AS $$
 DECLARE
     parts TEXT[];
 BEGIN
@@ -44,7 +54,7 @@ END
 $$ LANGUAGE plpgsql;
 
 -- Combine two voltage fields into one
-CREATE OR REPLACE FUNCTION combine_voltage(a TEXT, b TEXT) RETURNS TEXT AS $$
+CREATE OR REPLACE FUNCTION combine_voltage(a TEXT, b TEXT) RETURNS TEXT IMMUTABLE AS $$
 DECLARE
     parts INT[];
 BEGIN
@@ -64,7 +74,7 @@ CREATE AGGREGATE voltage_agg (TEXT)
 );
 
 -- Combine two fields with a semicolon
-CREATE OR REPLACE FUNCTION combine_field(a TEXT, b TEXT) RETURNS TEXT AS $$
+CREATE OR REPLACE FUNCTION combine_field(a TEXT, b TEXT) RETURNS TEXT IMMUTABLE AS $$
 DECLARE
 BEGIN
     IF a = '' OR a IS NULL THEN
@@ -84,7 +94,7 @@ CREATE AGGREGATE field_agg (TEXT)
     initcond = ''
 );
 
-CREATE OR REPLACE FUNCTION plant_label(name TEXT, output TEXT, source TEXT) RETURNS TEXT AS $$
+CREATE OR REPLACE FUNCTION plant_label(name TEXT, output TEXT, source TEXT) RETURNS TEXT IMMUTABLE AS $$
 DECLARE
     out_v INTEGER;
 BEGIN
