@@ -130,7 +130,7 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator, conv
 [[providers.layers]]
 name = "power_plant_point"
 min_zoom = 2
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, convert_power(output)/1e6 AS output, source, plant_label(name, output, source) AS label FROM power_plant WHERE geometry && !BBOX! AND 1 < !ZOOM! AND NOT ST_IsEmpty(geometry) ORDER BY convert_power(output) DESC NULLS LAST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, convert_power(output)/1e6 AS output, first_semi(source) AS source, plant_label(name, output, source) AS label FROM power_plant WHERE geometry && !BBOX! AND 1 < !ZOOM! AND NOT ST_IsEmpty(geometry) ORDER BY convert_power(output) DESC NULLS LAST"
 
 [[providers.layers]]
 name = "power_generator"
