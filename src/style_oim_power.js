@@ -45,6 +45,9 @@ function voltage_offset(index) {
   if (index == 2) {
     offset = 2
   }
+  if (index == 3) {
+    offset = 6
+  }
 
   return ['interpolate', ['linear'], ['zoom'],
         4, ['case', ['has', 'voltage_2'], offset * 0.25, 0],
@@ -205,6 +208,7 @@ const plant_image = ["match",
     'wind', 'power_plant_wind',
     'biomass', 'power_plant_biomass',
     'waste', 'power_plant_waste',
+    'battery', 'power_plant_battery',
     'power_plant'
 ];
 
@@ -321,6 +325,25 @@ const layers = [
     }
   },
   {
+    zorder: 61,
+    id: 'power_line_underground_3',
+    type: 'line',
+    filter: ['all', underground_p, power_visible_p, ['has', 'voltage_3']],
+    source: 'openinframap',
+    'source-layer': 'power_line',
+    minzoom: 0,
+    paint: {
+      'line-color': voltage_color('voltage_3'),
+      'line-width': voltage_line_thickness,
+      'line-dasharray': [3, 2],
+      'line-offset': voltage_offset(3),
+    },
+    layout: {
+      'line-join': 'round',
+      'line-cap': 'round'
+    }
+  },
+  {
     zorder: 160,
     id: 'power_plant',
     type: 'fill',
@@ -384,11 +407,29 @@ const layers = [
     source: 'openinframap',
     'source-layer': 'power_line',
     filter: ['all', ['!', underground_p], power_visible_p, ['has', 'voltage_2']],
-    minzoom: 0,
+    minzoom: 6,
     paint: {
       'line-color': voltage_color('voltage_2'),
       'line-width': voltage_line_thickness,
       'line-offset': voltage_offset(2),
+    },
+    layout: {
+      'line-join': 'round',
+      'line-cap': 'round'
+    }
+  },
+  {
+    zorder: 260,
+    id: 'power_line_3',
+    type: 'line',
+    source: 'openinframap',
+    'source-layer': 'power_line',
+    filter: ['all', ['!', underground_p], power_visible_p, ['has', 'voltage_3']],
+    minzoom: 8,
+    paint: {
+      'line-color': voltage_color('voltage_3'),
+      'line-width': voltage_line_thickness,
+      'line-offset': voltage_offset(3),
     },
     layout: {
       'line-join': 'round',
@@ -595,7 +636,10 @@ const layers = [
       'symbol-placement': 'line',
       'symbol-spacing': 400,
       'text-size': 10,
-      'text-offset': ['case', ['has', 'voltage_2'], ['literal', [0, 1.25]], ['literal', [0, 1]]],
+      'text-offset': ['case', 
+              ['has', 'voltage_3'], ['literal', [0, 1.5]], 
+              ['has', 'voltage_2'], ['literal', [0, 1.25]], 
+          ['literal', [0, 1]]],
       'text-max-angle': 10
     }
   },
