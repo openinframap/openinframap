@@ -50,7 +50,7 @@ class InfoPopup {
       return null;
     }
 
-    if (key == 'voltage') {
+    if (key.startsWith('voltage')) {
       value += ' kV';
     }
 

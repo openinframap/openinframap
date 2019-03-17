@@ -1,22 +1,56 @@
 import {text_paint, underground_p} from './style_oim_common.js';
 // OpenInfraMap layers
 
+// === Frequency predicates
+const traction_freq_p = ["all", 
+    ['has', 'frequency'],
+    ["!=", ["get", "frequency"], ''],
+    ["!=", ["to-number", ["get", "frequency"]], 50],
+    ["!=", ["to-number", ["get", "frequency"]], 60]
+];
+
+const hvdc_p = ["all", 
+    ['has', 'frequency'],
+    ["!=", ["get", "frequency"], ''],
+    ["==", ["to-number", ["get", "frequency"]], 0]
+];
+
+
 // Stepwise function to assign colour by voltage:
-const voltage_color = ["match", 
-  ['string', ['coalesce', ['get', 'frequency'], '50']], 
-  '0', '#4E01B5', // HVDC (frequency == 0)
-  ['step',
-    ["coalesce", ['get', 'voltage'], 0],
-    '#7A7A85',
-    9.9, '#6E97B8',
-    24.1, '#55B555',
-    52.1, '#B59F10',
-    123.1, '#B55D00',
-    219.9, '#C73030',
-    300.1, '#B54EB2',
-    500.1, '#00C1CF'
+function voltage_color(field) {
+  return ["case", 
+    hvdc_p, '#4E01B5', // HVDC (frequency == 0)
+    traction_freq_p, '#A8B596', // Traction power
+    ['step',
+      ["coalesce", ['get', field], 0],
+      '#7A7A85',
+      9.9, '#6E97B8',
+      24.1, '#55B555',
+      52.1, '#B59F10',
+      123.1, '#B55D00',
+      219.9, '#C73030',
+      300.1, '#B54EB2',
+      500.1, '#00C1CF'
+    ]
   ]
-]
+}
+
+// Generate an expression to determine the offset of a power line
+// segment with multiple voltages
+function voltage_offset(index) {
+  let offset = 0;
+  if (index == 1) {
+    offset = -2;
+  }
+  if (index == 2) {
+    offset = 2
+  }
+
+  return ['interpolate', ['linear'], ['zoom'],
+        4, ['case', ['has', 'voltage_2'], offset * 0.25, 0],
+        10, ['case', ['has', 'voltage_2'], offset, 0],
+      ]
+}
 
 // Function to assign power line thickness.
 // Interpolate first by zoom level and then by voltage.
@@ -169,22 +203,14 @@ const plant_image = ["match",
     'gas', 'power_plant_oilgas',
     'solar', 'power_plant_solar',
     'wind', 'power_plant_wind',
+    'biomass', 'power_plant_biomass',
+    'waste', 'power_plant_waste',
     'power_plant'
 ];
 
-
 const freq = ["case", 
-  ["all", 
-    ["!=", ["get", "frequency"], ''],
-    ["==", ["to-number", ["get", "frequency"]], 0]
-  ],
-  " DC",
-  ["all", 
-    ["!=", ["get", "frequency"], ''],
-    ["!=", ["to-number", ["get", "frequency"]], 50],
-    ["!=", ["to-number", ["get", "frequency"]], 60]
-  ],
-  ["concat", " ", ["get", "frequency"], " Hz"],
+  hvdc_p, " DC",
+  traction_freq_p, ["concat", " ", ["get", "frequency"], " Hz"],
   ""
 ];
 
@@ -198,24 +224,39 @@ const circuits = ["case",
   ""
 ]
 
+const line_voltage = ["case",
+  ["has", "voltage_3"],
+    ["concat", 
+      ["get", "voltage"], "/",
+      ["get", "voltage_2"], "/",
+      ["get", "voltage_3"], " kV"],
+  ["has", "voltage_2"],
+    ["concat", 
+      ["get", "voltage"], "/",
+      ["get", "voltage_2"], " kV"],
+  ["has", "voltage"],
+    ["concat", 
+      ["get", "voltage"], " kV"],
+  ""
+]
+
 const line_label = ["case",
   ["all", ["has", "voltage"], ["!=", ["get", "name"], ""]],
-    ["concat", ["get", "name"], " (", circuits, ["get", "voltage"], " kV", freq, ")"],
+    ["concat", ["get", "name"], " (", line_voltage, freq, ")"],
   ["has", "voltage"],
-    ["concat", circuits, ["get", "voltage"], " kV", freq],
+    ["concat", circuits, line_voltage, freq],
   ["get", "name"]
 ];
 
 
-// TODO: frequency would be nice here but it's not in the DB.
 const substation_label = ["step",
   ["zoom"],
   ["get", "name"],
   12, ["case",
     ['all', ['!=', ['get', 'name'], ''], ["has", "voltage"]],
-      ["concat", ["get", "name"], " ", ["get", "voltage"], " kV"],
+      ["concat", ["get", "name"], " ", ["get", "voltage"], " kV", freq],
     ['all', ['==', ['get', 'name'], ''], ['has', 'voltage']],
-      ["concat", "Substation ", ["get", "voltage"], " kV"],
+      ["concat", "Substation ", ["get", "voltage"], " kV", freq],
     ["get", "name"]
   ]
 ];
@@ -243,16 +284,36 @@ const layers = [
   },
   {
     zorder: 61,
-    id: 'power_line_underground',
+    id: 'power_line_underground_1',
     type: 'line',
     filter: ['all', underground_p, power_visible_p],
     source: 'openinframap',
     'source-layer': 'power_line',
     minzoom: 0,
     paint: {
-      'line-color': voltage_color,
+      'line-color': voltage_color('voltage'),
       'line-width': voltage_line_thickness,
-      'line-dasharray': [3, 2]
+      'line-dasharray': [3, 2],
+      'line-offset': voltage_offset(1),
+    },
+    layout: {
+      'line-join': 'round',
+      'line-cap': 'round'
+    }
+  },
+  {
+    zorder: 61,
+    id: 'power_line_underground_2',
+    type: 'line',
+    filter: ['all', underground_p, power_visible_p, ['has', 'voltage_2']],
+    source: 'openinframap',
+    'source-layer': 'power_line',
+    minzoom: 0,
+    paint: {
+      'line-color': voltage_color('voltage_2'),
+      'line-width': voltage_line_thickness,
+      'line-dasharray': [3, 2],
+      'line-offset': voltage_offset(2),
     },
     layout: {
       'line-join': 'round',
@@ -281,7 +342,7 @@ const layers = [
     minzoom: 13,
     paint: {
       'fill-opacity': 0.3,
-      'fill-color': voltage_color,
+      'fill-color': voltage_color('voltage'),
       'fill-outline-color': 'rgba(0, 0, 0, 1)',
     },
   },
@@ -300,15 +361,34 @@ const layers = [
   },
   {
     zorder: 260,
-    id: 'power_line',
+    id: 'power_line_1',
     type: 'line',
     source: 'openinframap',
     'source-layer': 'power_line',
     filter: ['all', ['!', underground_p], power_visible_p],
     minzoom: 0,
     paint: {
-      'line-color': voltage_color,
+      'line-color': voltage_color('voltage'),
       'line-width': voltage_line_thickness,
+      'line-offset': voltage_offset(1)
+    },
+    layout: {
+      'line-join': 'round',
+      'line-cap': 'round',
+    }
+  },
+  {
+    zorder: 260,
+    id: 'power_line_2',
+    type: 'line',
+    source: 'openinframap',
+    'source-layer': 'power_line',
+    filter: ['all', ['!', underground_p], power_visible_p, ['has', 'voltage_2']],
+    minzoom: 0,
+    paint: {
+      'line-color': voltage_color('voltage_2'),
+      'line-width': voltage_line_thickness,
+      'line-offset': voltage_offset(2),
     },
     layout: {
       'line-join': 'round',
@@ -361,7 +441,7 @@ const layers = [
     minzoom: 13,
     paint: text_paint,
     layout: {
-      'icon-image': 'power_tower',
+      'icon-image': ["case", ["get", "transition"], 'power_tower_transition', 'power_tower'],
       'icon-size': ["interpolate", ["linear"], ["zoom"],
         13, 0.4,
         17, 1
@@ -387,7 +467,7 @@ const layers = [
     minzoom: 14,
     paint: text_paint,
     layout: {
-      'icon-image': 'power_pole',
+      'icon-image': ["case", ["get", "transition"], 'power_pole_transition', 'power_pole'],
       'icon-size': 0.5,
       'text-field': '{ref}',
       'text-size': ["step", 
@@ -458,7 +538,7 @@ const layers = [
     layout: {},
     paint: {
       'circle-radius': substation_radius,
-      'circle-color': voltage_color,
+      'circle-color': voltage_color('voltage'),
       'circle-stroke-width': ['interpolate', ['linear'], ['zoom'],
           5, 0,
           6, 0.01,
@@ -477,7 +557,7 @@ const layers = [
     layout: {},
     paint: {
       'circle-radius': 4,
-      'circle-color': voltage_color,
+      'circle-color': voltage_color('voltage'),
       'circle-stroke-width': 1
     },
   },
@@ -515,7 +595,7 @@ const layers = [
       'symbol-placement': 'line',
       'symbol-spacing': 400,
       'text-size': 10,
-      'text-offset': [0, 1],
+      'text-offset': ['case', ['has', 'voltage_2'], ['literal', [0, 1.25]], ['literal', [0, 1]]],
       'text-max-angle': 10
     }
   },
