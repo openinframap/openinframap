@@ -38,20 +38,18 @@ function voltage_color(field) {
 // Generate an expression to determine the offset of a power line
 // segment with multiple voltages
 function voltage_offset(index) {
-  let offset = 0;
-  if (index == 1) {
-    offset = -2;
-  }
-  if (index == 2) {
-    offset = 2
-  }
-  if (index == 3) {
-    offset = 6
-  }
+  const spacing = 5;
 
+  let offset = (index - 1) * spacing;
   return ['interpolate', ['linear'], ['zoom'],
-        4, ['case', ['has', 'voltage_2'], offset * 0.25, 0],
-        10, ['case', ['has', 'voltage_2'], offset, 0],
+        6, ['case', 
+              ['has', 'voltage_3'], (offset - spacing) * 0.5,
+              ['has', 'voltage_2'], (offset - (spacing / 2)) * 0.5, 
+            0],
+        13, ['case', 
+              ['has', 'voltage_3'], (offset - spacing),
+              ['has', 'voltage_2'], (offset - (spacing / 2)),
+            0]
       ]
 }
 
