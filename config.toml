@@ -104,7 +104,7 @@ user = "osm"
 [[providers.layers]]
 name = "power_line"
 dont_simplify = true
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 6)) AS geom, tunnel, location, frequency, type, name, line, ref, char_length(ref) AS ref_len, convert_voltage(voltage) / 1000 AS voltage, convert_voltage(nth_semi(voltage, 2)) AS voltage_2, convert_voltage(nth_semi(voltage, 3)) AS voltage_3, operator FROM osm_power_lines WHERE geometry && !BBOX! AND ST_Length(geometry) > ZRes(!ZOOM!) AND (line NOT IN ('bay', 'busbar') OR !ZOOM! > 10) ORDER BY convert_voltage(voltage) DESC NULLS LAST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 6)) AS geom, tunnel, location, frequency, type, name, line, ref, char_length(ref) AS ref_len, convert_voltage(voltage) / 1000 AS voltage, convert_voltage(nth_semi(voltage, 2)) / 1000 AS voltage_2, convert_voltage(nth_semi(voltage, 3)) / 1000 AS voltage_3, operator FROM osm_power_lines WHERE geometry && !BBOX! AND ST_Length(geometry) > ZRes(!ZOOM!) AND (line NOT IN ('bay', 'busbar') OR !ZOOM! > 10) ORDER BY convert_voltage(voltage) DESC NULLS LAST"
 
 [[providers.layers]]
 name = "power_tower"
