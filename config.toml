@@ -109,7 +109,7 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 6)
 [[providers.layers]]
 name = "power_tower"
 min_zoom = 10
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, type, name, ref, operator FROM osm_power_tower WHERE geometry && !BBOX! AND 9 < !ZOOM!"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, type, name, transition, ref, operator FROM osm_power_tower WHERE geometry && !BBOX! AND 9 < !ZOOM!"
 
 [[providers.layers]]
 name = "power_substation"
