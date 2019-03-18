@@ -34,15 +34,19 @@ class InfoPopup {
     }
   }
 
-  osmLink(id) {
+  osmLink(id, is_node) {
     if (id > 0) {
-      return `https://openstreetmap.org/way/${id}`;
+      if (is_node) {
+        return `https://openstreetmap.org/node/${id}`;
+      } else {
+        return `https://openstreetmap.org/way/${id}`;
+      }
     } else {
       return `https://openstreetmap.org/relation/${-id}`;
     }
   }
 
-  renderKey(key, value) {
+  renderKey(key, value, other_props) {
     if (key == 'name') {
       return null;
     }
@@ -61,7 +65,7 @@ class InfoPopup {
     if (key == 'gid') {
       key = 'OSM ID';
       value = el('a', value, {
-        href: this.osmLink(value),
+        href: this.osmLink(value, other_props['is_node']),
         target: '_blank',
       });
     } else {
@@ -76,7 +80,7 @@ class InfoPopup {
     setChildren(
       attrs_table,
       Object.keys(feature.properties).sort().map(key =>
-        this.renderKey(key, feature.properties[key]),
+        this.renderKey(key, feature.properties[key], feature.properties),
       ),
     );
 
