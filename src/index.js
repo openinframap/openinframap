@@ -1,6 +1,5 @@
 import './index.css';
 import mapboxgl from 'mapbox-gl';
-import map_style from './style.json';
 
 import { mount } from 'redom';
 
@@ -8,11 +7,12 @@ import EditButton from './editbutton.js';
 import InfoBox from './infobox.js';
 import InfoPopup from './infopopup.js';
 
-import style_base from './style_base.js';
-import style_oim_power from './style_oim_power.js';
-import style_oim_telecoms from './style_oim_telecoms.js';
-import style_oim_petroleum from './style_oim_petroleum.js';
-import style_oim_water from './style_oim_water.js';
+import map_style from './style/style.json';
+import style_base from './style/style_base.js';
+import style_oim_power from './style/style_oim_power.js';
+import style_oim_telecoms from './style/style_oim_telecoms.js';
+import style_oim_petroleum from './style/style_oim_petroleum.js';
+import style_oim_water from './style/style_oim_water.js';
 
 function init() {
   if (!mapboxgl.supported({failIfMajorPerformanceCaveat: true})) {
