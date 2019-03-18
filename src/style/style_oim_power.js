@@ -1,6 +1,36 @@
 import {text_paint, underground_p} from './style_oim_common.js';
 // OpenInfraMap layers
 
+const voltage_scale = [
+  [null, '#7A7A85'],
+  [10, '#6E97B8'],
+  [25, '#55B555'],
+  [52, '#B59F10'],
+  [132, '#B55D00'],
+  [220, '#C73030'],
+  [330, '#B54EB2'],
+  [550, '#00C1CF']
+]
+
+const special_voltages = {
+  'HVDC': '#4E01B5',
+  'Traction (<50 Hz)': '#A8B596'
+}
+
+const plant_types = {
+  coal: 'power_plant_coal',
+  geothermal: 'power_plant_geothermal',
+  hydro: 'power_plant_hydro',
+  nuclear: 'power_plant_nuclear',
+  oil: 'power_plant_oilgas',
+  gas: 'power_plant_oilgas',
+  solar: 'power_plant_solar',
+  wind: 'power_plant_wind',
+  biomass: 'power_plant_biomass',
+  waste: 'power_plant_waste',
+  battery: 'power_plant_battery',
+}
+
 // === Frequency predicates
 const traction_freq_p = ["all", 
     ['has', 'frequency'],
@@ -18,20 +48,20 @@ const hvdc_p = ["all",
 
 // Stepwise function to assign colour by voltage:
 function voltage_color(field) {
+  let voltage_func = ['step', ["coalesce", ['get', field], 0]]
+  for (let row of voltage_scale) {
+    if (row[0] == null) {
+      voltage_func.push(row[1])
+      continue;
+    }
+    voltage_func.push(row[0] - 0.01);
+    voltage_func.push(row[1]);
+  }
+
   return ["case", 
-    hvdc_p, '#4E01B5', // HVDC (frequency == 0)
-    traction_freq_p, '#A8B596', // Traction power
-    ['step',
-      ["coalesce", ['get', field], 0],
-      '#7A7A85',
-      9.9, '#6E97B8',
-      24.1, '#55B555',
-      52.1, '#B59F10',
-      123.1, '#B55D00',
-      219.9, '#C73030',
-      300.1, '#B54EB2',
-      500.1, '#00C1CF'
-    ]
+    hvdc_p, special_voltages['HVDC'], // HVDC (frequency == 0)
+    traction_freq_p, special_voltages['Traction (<50 Hz)'], // Traction power
+    voltage_func
   ]
 }
 
@@ -194,21 +224,14 @@ const plant_label_visible_p = ["any",
   [">", ['zoom'], 10]
 ];
 
-const plant_image = ["match",
-    ['get', 'source'],
-    'coal', 'power_plant_coal',
-    'geothermal', 'power_plant_geothermal',
-    'hydro', 'power_plant_hydro',
-    'nuclear', 'power_plant_nuclear',
-    'oil', 'power_plant_oilgas',
-    'gas', 'power_plant_oilgas',
-    'solar', 'power_plant_solar',
-    'wind', 'power_plant_wind',
-    'biomass', 'power_plant_biomass',
-    'waste', 'power_plant_waste',
-    'battery', 'power_plant_battery',
-    'power_plant'
-];
+function plant_image() {
+  let expr = ["match", ['get', 'source']]
+  for (const [key, value] of Object.entries(plant_types)) {
+    expr.push(key, value);
+  }
+  expr.push('power_plant'); // default
+  return expr;
+}
 
 const freq = ["case", 
   hvdc_p, " DC",
@@ -677,7 +700,7 @@ const layers = [
     maxzoom: 24,
     layout: {
       'symbol-z-order': 'source',
-      'icon-image': plant_image,
+      'icon-image': plant_image(),
       'icon-size': ["interpolate", ["linear"], ["zoom"],
                     6, 0.6,
                     10, 0.8,
@@ -712,4 +735,4 @@ const layers = [
   },
 ];
 
-export default layers;
+export {layers as default, voltage_scale, special_voltages, plant_types};

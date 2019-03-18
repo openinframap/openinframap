@@ -6,6 +6,7 @@ import { mount } from 'redom';
 import EditButton from './editbutton.js';
 import InfoBox from './infobox.js';
 import InfoPopup from './infopopup.js';
+import KeyControl from './key/key.js';
 
 import map_style from './style/style.json';
 import style_base from './style/style_base.js';
@@ -61,6 +62,7 @@ function init() {
     center: [12, 26]
   });
   map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+  map.addControl(new KeyControl(), 'top-right');
   map.addControl(new EditButton(), 'bottom-right');
 
   (new InfoPopup(oim_layers.map(layer => layer['id']), 9)).add(map);

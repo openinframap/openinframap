@@ -138,4 +138,4 @@ const layers = [
   },
 ];
 
-export default layers;
+export {layers as default, colour_gas, colour_oil};

@@ -1,0 +1,75 @@
+.oim-key-control {
+  min-height: 30px;
+  min-width: 30px;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  background-position: center;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' viewBox='0 0 64 80' style='enable-background:new 0 0 64 64;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0{fill:none;stroke:%23000000;stroke-width:2;stroke-miterlimit:10;} .st1{fill:none;stroke:%23000000;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;} .st2{fill:%23231F20;} %3C/style%3E%3Cg%3E%3Cline class='st1' x1='1' y1='60' x2='25' y2='35.563'/%3E%3Cline class='st2' x1='1' y1='60' x2='25' y2='35.563'/%3E%3C/g%3E%3Cg%3E%3Cg%3E%3Cpath class='st0' d='M36.63,37.518c6.907,2.903,15.181,1.542,20.805-4.083c7.42-7.42,7.42-19.45,0-26.87s-19.45-7.42-26.87,0 c-5.569,5.569-6.958,13.734-4.168,20.598L1,53v10c0,0,11,0,11,0l3-3c0,0,0-6.5,0-6.5l6,0c0,0,0-4,0-4c0,0,4,0,4,0c0,0,0-6,0-6l6,0 C31,43.5,36.63,37.518,36.63,37.518z'/%3E%3Cellipse transform='matrix(0.7071 -0.7071 0.7071 0.7071 3.2807 38.8492)' class='st0' cx='48.536' cy='15.464' rx='4' ry='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.oim-key-panel {
+  display: none;
+  min-width: 220px;
+  min-height: 300px;
+  margin: 0px 0px 8px 0px !important; 
+}
+
+.oim-key-pane {
+  padding-left: 8px;
+  padding-right: 2px;
+  overflow-y: scroll;
+}
+
+.oim-key-pane h3 {
+  margin-top: 0;
+  margin-bottom: 3px;
+  border-bottom: 1px #eee solid;
+  clear: both;
+}
+
+.oim-key-pane table {
+  width: 100%;
+  padding: 0px;
+}
+.oim-key-pane table tr {
+  padding: 0px;
+}
+
+
+.oim-key-pane table td {
+  vertical-align: center;
+}
+
+.oim-key-pane table tr td:nth-child(2) {
+  width: 30px;
+  text-align: center;
+}
+
+
+.oim-plant-sprite {
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;
+}
+
+.oim-key-header {
+  width: 100%;
+  height: 20px;
+  padding-bottom: 5px;
+  padding-top: 2px;
+  padding-left: 8px;
+  background-color: #eee;
+}
+
+.oim-key-header h2 {
+  margin: 0px;
+  display: inline;
+}
+
+.oim-key-close {
+  padding-right: 14px;
+  float: right;
+  font-weight: bold;
+  font-size: 1.6em;
+  cursor: pointer;
+}
