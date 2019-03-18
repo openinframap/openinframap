@@ -1,7 +1,7 @@
 import './index.css';
 import mapboxgl from 'mapbox-gl';
 
-import { mount } from 'redom';
+import {mount} from 'redom';
 
 import EditButton from './editbutton.js';
 import InfoBox from './infobox.js';
@@ -17,27 +17,20 @@ import style_oim_water from './style/style_oim_water.js';
 
 function init() {
   if (!mapboxgl.supported({failIfMajorPerformanceCaveat: true})) {
-      const infobox = new InfoBox('Warning');
-      infobox.update('Your browser may have performance or functionality issues with OpenInfraMap.<br/>' +
-      '<a href="http://webglreport.com">WebGL</a> with hardware acceleration is required for this site ' +
-      'to perform well.');
-      mount(document.body, infobox);
+    const infobox = new InfoBox('Warning');
+    infobox.update(
+      'Your browser may have performance or functionality issues with OpenInfraMap.<br/>' +
+        '<a href="http://webglreport.com">WebGL</a> with hardware acceleration is required for this site ' +
+        'to perform well.',
+    );
+    mount(document.body, infobox);
   }
 
-  /*
-  // Old carto positron basemap in case of issues.
-  map_style.layers = [{
-    "id": "carto-positron",
-    "type": "raster",
-    "source": "carto-positron"
-  }]
-  map_style.sources["carto-positron"] = {
-      "type": "raster",
-      "url": "https://openinframap.org/carto.json",
-      "tileSize": 256
-  };
-  */
-  var oim_layers = style_oim_power.concat(style_oim_petroleum, style_oim_telecoms, style_oim_water);
+  var oim_layers = style_oim_power.concat(
+    style_oim_petroleum,
+    style_oim_telecoms,
+    style_oim_water,
+  );
 
   oim_layers.sort((a, b) => {
     if (a['zorder'] < b['zorder']) return -1;
@@ -59,13 +52,21 @@ function init() {
     hash: true,
     minZoom: 2,
     maxZoom: 17.9,
-    center: [12, 26]
+    center: [12, 26],
   });
   map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+  map.addControl(
+    new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true,
+      },
+      trackUserLocation: true,
+    }),
+  );
   map.addControl(new KeyControl(), 'top-right');
   map.addControl(new EditButton(), 'bottom-right');
 
-  (new InfoPopup(oim_layers.map(layer => layer['id']), 9)).add(map);
+  new InfoPopup(oim_layers.map(layer => layer['id']), 9).add(map);
 }
 
 if (document.readyState != 'loading') {
