@@ -124,7 +124,7 @@ const substation_visible_p = ["all",
       [">", ['zoom'], 7]
     ],
     ['all',
-      [">", ['coalesce', ['get', 'voltage'], 0], 19],
+      [">", ['coalesce', ['get', 'voltage'], 0], 25],
       [">", ['zoom'], 9]
     ],
     ['all',
@@ -148,6 +148,21 @@ const substation_radius = [
         300, 7,
         600, 9
       ]
+]
+
+// Determine the minimum zoom a point is visible at (before it can be seen as an
+// area), based on the area of the substation.
+const substation_point_visible_p = ["any",
+  ["==", ["coalesce", ["get", "area"], 0], 0], // Area = 0 - mapped as node
+  ["all", 
+    ["<", ["coalesce", ["get", "area"], 0], 100],
+    ["<", ["zoom"], 16]
+  ],
+  ["all", 
+    ["<", ["coalesce", ["get", "area"], 0], 250],
+    ["<", ["zoom"], 15]
+  ],
+  ["<", ["zoom"], 13]
 ]
 
 const substation_label_visible_p = ["all",
@@ -592,11 +607,10 @@ const layers = [
     zorder: 268,
     id: 'power_substation_point',
     type: 'circle',
-    filter: substation_visible_p,
+    filter: ["all", substation_visible_p, substation_point_visible_p],
     source: 'openinframap',
     'source-layer': 'power_substation_point',
     minzoom: 5,
-    maxzoom: 13,
     layout: {},
     paint: {
       'circle-radius': substation_radius,
@@ -606,21 +620,6 @@ const layers = [
           6, 0.01,
           12, 1.5,
       ]
-    },
-  },
-  {
-    zorder: 269,
-    id: 'power_substation_point_map',
-    type: 'circle',
-    filter: ['get', 'is_node'],
-    source: 'openinframap',
-    'source-layer': 'power_substation_point',
-    minzoom: 13,
-    layout: {},
-    paint: {
-      'circle-radius': 4,
-      'circle-color': voltage_color('voltage'),
-      'circle-stroke-width': 1
     },
   },
   {
