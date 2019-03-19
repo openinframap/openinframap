@@ -117,7 +117,7 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, first_semi(fre
 
 [[providers.layers]]
 name = "power_substation_point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, (ST_GeometryType(geometry) = 'ST_Point') AS is_node, name, first_semi(frequency) AS frequency, convert_voltage(voltage) / 1000 AS voltage, convert_voltage(nth_semi(voltage, 2)) / 1000 AS voltage_2, convert_voltage(nth_semi(voltage, 3)) / 1000 AS voltage_3, substation FROM substation WHERE geometry && !BBOX! AND !ZOOM! >= 5 ORDER BY convert_voltage(voltage) DESC NULLS LAST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, (ST_GeometryType(geometry) = 'ST_Point') AS is_node, round(ST_Area(geometry)) AS area, name, first_semi(frequency) AS frequency, convert_voltage(voltage) / 1000 AS voltage, convert_voltage(nth_semi(voltage, 2)) / 1000 AS voltage_2, convert_voltage(nth_semi(voltage, 3)) / 1000 AS voltage_3, substation FROM substation WHERE geometry && !BBOX! AND !ZOOM! >= 5 ORDER BY convert_voltage(voltage) DESC NULLS LAST"
 
 [[providers.layers]]
 name = "power_plant"
@@ -126,7 +126,7 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator, conv
 
 [[providers.layers]]
 name = "power_plant_point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, convert_power(output)/1e6 AS output, first_semi(source) AS source, plant_label(name, output, source) AS label FROM power_plant WHERE geometry && !BBOX! AND !ZOOM! >= 2 AND NOT ST_IsEmpty(geometry) ORDER BY convert_power(output) DESC NULLS LAST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, round(ST_Area(geometry)) AS area, name, convert_power(output)/1e6 AS output, first_semi(source) AS source, plant_label(name, output, source) AS label FROM power_plant WHERE geometry && !BBOX! AND !ZOOM! >= 2 AND NOT ST_IsEmpty(geometry) ORDER BY convert_power(output) DESC NULLS LAST"
 
 [[providers.layers]]
 name = "power_generator"
