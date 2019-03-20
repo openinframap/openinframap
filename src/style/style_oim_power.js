@@ -186,7 +186,7 @@ const substation_label_visible_p = ["all",
 ];
 
 
-// Power line visibility
+// Power line / substation visibility
 const power_visible_p = ["all",
   ["any",
     [">", ['coalesce', ['get', 'voltage'], 0], 199],
@@ -205,6 +205,33 @@ const power_visible_p = ["all",
     ['all',
       [">", ['coalesce', ['get', 'voltage'], 0], 9],
       [">", ['zoom'], 7]
+    ],
+    [">", ['zoom'], 10]
+  ],
+  ["any",
+    ['all', 
+      ["!=", ['get', 'line'], 'busbar'],
+      ["!=", ['get', 'line'], 'bay'],
+    ],
+    [">", ['zoom'], 12]
+  ]
+];
+
+
+// Power line ref visibility
+const power_ref_visible_p = ["all",
+  ["any",
+    ['all',
+      [">", ['coalesce', ['get', 'voltage'], 0], 330],
+      [">", ['zoom'], 7]
+    ],
+    ['all',
+      [">", ['coalesce', ['get', 'voltage'], 0], 200],
+      [">", ['zoom'], 8]
+    ],
+    ['all',
+      [">", ['coalesce', ['get', 'voltage'], 0], 100],
+      [">", ['zoom'], 9]
     ],
     [">", ['zoom'], 10]
   ],
@@ -238,6 +265,7 @@ const plant_label_visible_p = ["any",
   ],
   [">", ['zoom'], 10]
 ];
+
 
 function plant_image() {
   let expr = ["match", ['get', 'source']]
@@ -627,13 +655,13 @@ const layers = [
     id: 'power_line_ref',
     type: 'symbol',
     filter: ['all', 
-      power_visible_p,
+      power_ref_visible_p,
       ['!=', ['coalesce', ['get', 'ref'], ''], ''],
       ['<', ['length', ['get', 'ref']], 5]
     ],
     source: 'openinframap',
     'source-layer': 'power_line',
-    minzoom: 10,
+    minzoom: 7,
     layout: {
       'icon-image': 'power_line_ref',
       'text-field': '{ref}',
