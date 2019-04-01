@@ -111,6 +111,16 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
+-- Get the area of a geometry in square meters.
+CREATE OR REPLACE FUNCTION area_sqm(geom GEOMETRY) RETURNS DOUBLE PRECISION IMMUTABLE AS $$
+DECLARE
+BEGIN
+	IF ST_GeometryType(geom) != 'ST_Polygon' THEN
+		RETURN 0;
+	END IF;
+	RETURN ST_Area(Geography(ST_Transform(geom, 4326)));
+END
+$$ LANGUAGE plpgsql;
 
 -- Rendering functions
 

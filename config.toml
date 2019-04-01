@@ -130,7 +130,7 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, round(S
 
 [[providers.layers]]
 name = "power_generator"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, operator, convert_power(output)/1e3 AS output, source, type, ref FROM osm_power_generator WHERE geometry && !BBOX! AND !ZOOM! >= 5"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, operator, area_sqm(geom) AS area_sqm, convert_power(output)/1e3 AS output, source, type, ref FROM osm_power_generator WHERE geometry && !BBOX! AND !ZOOM! >= 5"
 
 [[providers.layers]]
 name = "power_generator_area"
