@@ -139,7 +139,7 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, o
 
 [[providers.layers]]
 name = "power_heatmap_solar"
-sql = "SELECT ST_AsBinary(ST_SnapToGrid(ST_Centroid(geometry), ZRes(0), ZRes(0))) AS geom, round(sum(coalesce(convert_power(output), solar_output(geometry), 0)) / 1e3) AS output FROM osm_power_generator WHERE source = 'solar' AND geometry && !BBOX! GROUP BY geom"
+sql = "SELECT ST_AsBinary(ST_SnapToGrid(ST_Centroid(geometry), ZRes(!ZOOM!), ZRes(!ZOOM!))) AS geom, round(sum(coalesce(convert_power(output), solar_output(geometry), 0)) / 1e3) AS output FROM osm_power_generator WHERE source = 'solar' AND geometry && !BBOX! GROUP BY geom"
 
 [[providers.layers]]
 name = "power_generator_area"
