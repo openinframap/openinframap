@@ -36,7 +36,7 @@ max_zoom = 17
 provider_layer = "postgis.power_generator"
 
 [[maps.layers]]
-min_zoom = 9
+min_zoom = 2
 max_zoom = 17
 provider_layer = "postgis.power_heatmap_solar"
 
