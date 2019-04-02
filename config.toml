@@ -36,6 +36,11 @@ max_zoom = 17
 provider_layer = "postgis.power_generator"
 
 [[maps.layers]]
+min_zoom = 9
+max_zoom = 17
+provider_layer = "postgis.power_heatmap_solar"
+
+[[maps.layers]]
 min_zoom = 13
 max_zoom = 17
 provider_layer = "postgis.power_generator_area"
@@ -131,6 +136,10 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, round(S
 [[providers.layers]]
 name = "power_generator"
 sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, operator, convert_power(output)/1e3 AS output, source, type, ref FROM osm_power_generator WHERE geometry && !BBOX! AND !ZOOM! >= 9"
+
+[[providers.layers]]
+name = "power_heatmap_solar"
+sql = "SELECT ST_AsBinary(ST_SnapToGrid(ST_Centroid(geometry), ZRes(0), ZRes(0))) AS geom, round(sum(coalesce(convert_power(output), solar_output(geometry), 0)) / 1e3) AS output FROM osm_power_generator WHERE source = 'solar' AND geometry && !BBOX! GROUP BY geom"
 
 [[providers.layers]]
 name = "power_generator_area"

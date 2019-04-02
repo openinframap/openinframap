@@ -122,6 +122,18 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
+
+-- Estimate the output of a generator:type=solar (in watts) from its geometry.
+CREATE OR REPLACE FUNCTION solar_output(geom GEOMETRY) RETURNS DOUBLE PRECISION IMMUTABLE AS $$
+DECLARE
+BEGIN
+	IF ST_GeometryType(geom) = 'ST_Point' THEN
+		RETURN 5000; -- Assume point generators have a fixed output of 5 kW
+	END IF;
+	RETURN area_sqm(geom) * 150; -- 150 W/m^2
+END
+$$ LANGUAGE plpgsql;
+
 -- Rendering functions
 
 create or replace function ZRes (z integer)
