@@ -128,7 +128,7 @@ CREATE OR REPLACE FUNCTION solar_output(geom GEOMETRY) RETURNS DOUBLE PRECISION 
 DECLARE
 BEGIN
 	IF ST_GeometryType(geom) = 'ST_Point' THEN
-		RETURN 5000; -- Assume point generators have a fixed output of 5 kW
+		RETURN 1000; -- Assume point generators have a fixed output of 1 kW
 	END IF;
 	RETURN area_sqm(geom) * 150; -- 150 W/m^2
 END
