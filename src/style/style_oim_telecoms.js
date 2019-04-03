@@ -3,7 +3,7 @@ import {text_paint, operator_text} from './style_oim_common.js';
 const layers = [
   {
     zorder: 40,
-    id: 'communication_line',
+    id: 'telecoms_line',
     type: 'line',
     source: 'openinframap',
     minzoom: 3,
@@ -19,7 +19,7 @@ const layers = [
   },
   {
     zorder: 140,
-    id: 'data_center',
+    id: 'telecoms_data_center',
     type: 'fill',
     source: 'openinframap',
     minzoom: 10,
@@ -32,7 +32,7 @@ const layers = [
   },
   {
     zorder: 141,
-    id: 'mast',
+    id: 'telecoms_mast',
     type: 'symbol',
     source: 'openinframap',
     minzoom: 10,
@@ -64,7 +64,7 @@ const layers = [
     },
   },
   {
-    id: 'data_center_symbol',
+    id: 'telecoms_data_center_symbol',
     type: 'symbol',
     source: 'openinframap',
     minzoom: 11,
@@ -84,7 +84,7 @@ const layers = [
     },
   },
   {
-    id: 'communication_line_label',
+    id: 'telecoms_line_label',
     type: 'symbol',
     source: 'openinframap',
     minzoom: 9,
