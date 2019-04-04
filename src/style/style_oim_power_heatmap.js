@@ -3,10 +3,10 @@ const generator_weight = ['interpolate',
   ['linear'], 
   ['get', 'output'], 
   0, 0, 
-  30, 0.25,
+  70, 0.25,
   250, 0.5,
   1000, 0.7,
-  2000, 1
+  7000, 1
 ];
 
 const layers = [
@@ -20,7 +20,7 @@ const layers = [
     maxzoom: 13,
     paint: {
       'heatmap-weight': generator_weight,
-      'heatmap-intensity': 1,//['interpolate', ['linear'], ['zoom'], 2, 2, 10, 1],
+      'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 2, 2, 5, 1],
       'heatmap-color': [
         'interpolate',
         ['linear'],
@@ -45,7 +45,13 @@ const layers = [
         'rgb(128,0,38)',
       ],
       // Adjust the heatmap radius by zoom level
-      'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 2, 2, 12, 10],
+      'heatmap-radius': ['interpolate', 
+        ['linear'], ['zoom'], 
+        2, 2, 
+        6, 6,
+        10, 12,
+        12, 20
+    ],
     },
     layout: {
       'visibility': 'none'
