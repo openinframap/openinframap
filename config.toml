@@ -143,7 +143,7 @@ sql = "SELECT ST_AsBinary(ST_SnapToGrid(ST_Centroid(geometry), ZRes(!ZOOM!), ZRe
 
 [[providers.layers]]
 name = "power_generator_area"
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator, convert_power(output)/1e3 AS output, source, type, ref FROM osm_power_generator WHERE geometry && !BBOX! AND !ZOOM! >= 13 AND ST_GeometryType(geometry) = 'ST_Polygon'"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator, convert_power(output)/1e3 AS output, solar_output(geometry)/1e3 AS estimated_output, source, type, ref FROM osm_power_generator WHERE geometry && !BBOX! AND !ZOOM! >= 13 AND ST_GeometryType(geometry) = 'ST_Polygon'"
 
 [[providers.layers]]
 name = "power_transformer"
