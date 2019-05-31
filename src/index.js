@@ -45,10 +45,10 @@ function init() {
     'Power': 'power_',
     'Solar Generation': 'heatmap_',
     'Telecoms': 'telecoms_',
-    'Petroleum': 'petroleum_',
+    'Oil & Gas': 'petroleum_',
     'Water': 'water_',
   };
-  const layers_enabled = ['Power', 'Telecoms', 'Petroleum', 'Water'];
+  const layers_enabled = ['Power', 'Telecoms', 'Oil & Gas', 'Water'];
   const layer_switcher = new LayerSwitcher(layers, layers_enabled);
 
   map_style.layers = style_base.concat(oim_layers);
