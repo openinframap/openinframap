@@ -24,7 +24,7 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "https://free.tilehosting.com/data/v3.json?key=KrA0CJW6jsPhth0IuUu8"
+      "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=4HQAZUSrAg563kYxgVEy"
     },
     "openinframap": {
       "type": "vector",
@@ -32,7 +32,7 @@
     }
   },
   "sprite": "",
-  "glyphs": "https://free.tilehosting.com/fonts/{fontstack}/{range}.pbf?key=KrA0CJW6jsPhth0IuUu8",
+  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=4HQAZUSrAg563kYxgVEy",
   "layers": [],
   "id": "openinframap"
 }
