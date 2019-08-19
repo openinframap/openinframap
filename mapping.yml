@@ -369,7 +369,7 @@ tables:
       - line
       - cable
     type: linestring
-  data_center:
+  data_center_polygon:
     fields:
     - name: osm_id
       type: id
@@ -393,11 +393,38 @@ tables:
         - data_center
         - data_centre
         - central_office
+        - exchange
       office:
         - telecommunication
       man_made:
         - telephone_office
     type: polygon
+  data_center_point:
+    fields:
+    - name: osm_id
+      type: id
+    - name: geometry
+      type: geometry
+    - key: name
+      name: name
+      type: string
+    - key: operator
+      name: operator
+      type: string
+    - key: ref
+      name: ref
+      type: string
+    mapping:
+      telecom:
+        - data_center
+        - data_centre
+        - central_office
+        - exchange
+      office:
+        - telecommunication
+      man_made:
+        - telephone_office
+    type: point
   mast:
     fields:
     - name: osm_id

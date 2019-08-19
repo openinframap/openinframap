@@ -166,7 +166,7 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5,
 
 [[providers.layers]]
 name = "telecoms_data_center"
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, operator, name, ref FROM osm_data_center WHERE geometry && !BBOX! AND !ZOOM! >= 10"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, operator, name, ref FROM (SELECT osm_id, geometry, operator, name, ref FROM osm_data_center_polygon WHERE geometry && !BBOX! AND !ZOOM! >= 10 UNION ALL SELECT osm_id, geometry, operator, name, ref FROM osm_data_center_point WHERE geometry && !BBOX! AND !ZOOM! >= 10) AS data_center_all"
 
 [[providers.layers]]
 name = "telecoms_mast"
