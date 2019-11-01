@@ -60,7 +60,9 @@ With postgres user:
 #### Mapbox vt-utils
 Download https://github.com/mapbox/postgis-vt-util/blob/master/postgis-vt-util.sql
 
+As osm user:
     psql -f postgis-vt-util.sql -d osm
+    psql -f functions.sql -d osm
 
 ### Import OSM data
 Download pbf of your choice at https://download.geofabrik.de/
@@ -70,6 +72,6 @@ Download pbf of your choice at https://download.geofabrik.de/
 ## Running
 
 ### Manage tile server
-    /home/osm/go/bin/tegola serve --config /opt/openinframap-styles/config.toml
+    /home/osm/go/bin/tegola serve --config /opt/oim-styles/config.toml
 
 ### Continuous OSM data update
