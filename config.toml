@@ -11,10 +11,24 @@ max_zoom = 17
 provider_layer = "postgis.power_tower"
 
 [[maps.layers]]
+min_zoom = 13
+max_zoom = 17
+provider_layer = "postgis.power_substation"
+
+[[maps.layers]]
 min_zoom = 5
 max_zoom = 17
 provider_layer = "postgis.power_substation_point"
 
+[[maps.layers]]
+min_zoom = 11
+max_zoom = 17
+provider_layer = "postgis.power_plant"
+
+[[maps.layers]]
+min_zoom = 2
+max_zoom = 17
+provider_layer = "postgis.power_plant_point"
 
 [[maps.layers]]
 min_zoom = 9
