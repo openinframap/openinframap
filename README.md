@@ -15,7 +15,7 @@ Follow OSM guidelines at https://wiki.openstreetmap.org/wiki/Debian/Stretch/FR:I
 
 ### Install dependencies
 #### DB
-    apt install postgresql postgis
+    apt install postgresql postgis osmosis
 
 #### Golang
 Download binaries at https://golang.org/dl/
@@ -61,13 +61,24 @@ With postgres user:
 Download https://github.com/mapbox/postgis-vt-util/blob/master/postgis-vt-util.sql
 
 As osm user:
+
     psql -f postgis-vt-util.sql -d osm
     psql -f functions.sql -d osm
 
 ### Import OSM data
 Download pbf of your choice at https://download.geofabrik.de/
+    
+    sudo mkdir /data/files
+    sudo chmod osm:osm /data/files
 
-    ./imposm3 import -cachedir /tmp/lol -config /opt/openinframap-styles/conf.json -mapping /opt/openinframap-styles/mapping.yml -deployproduction  -read /data/files/france-latest.osm.pbf -write -optimize -overwritecache
+And then do the initial import with Imposm3
+    
+    sudo mkdir /data/updates
+    sudo chown osm:osm /data/updates
+    sudo chmod 2774 /data/updates
+    cd /data/updates
+    /opt/imposm3/imposm3 import -cachedir . -config /opt/oim-styles/osmosis/imposm3.conf -mapping /opt/oim-styles/mapping.yml -deployproduction -read /data/files/france-latest.osm.pbf -write -optimize -overwritecache -diff
+    cp /data/updates/last.state.txt /data/updates/state.txt
 
 ## Running
 
@@ -75,3 +86,11 @@ Download pbf of your choice at https://download.geofabrik.de/
     /home/osm/go/bin/tegola serve --config /opt/oim-styles/config.toml
 
 ### Continuous OSM data update
+Osmosis is used to maintain the database uptodate with the last imposm3 known state.
+This repository provides all needed scripts and services and you only need to link them as follow:
+
+    sudo ln -s /opt/oim-styles/osmosis/update.service /etc/systemd/system/osm-update.service
+    sudo ln -s /opt/oim-styles/osmosis/update.timer /etc/systemd/system/osm-update.timer
+    sudo systemctl daemon-reload
+    sudo systemctl enable osm-update.timer
+    sudo systemctl start osm-update.timer 
