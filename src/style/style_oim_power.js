@@ -144,7 +144,7 @@ const substation_radius = [
   12, ['interpolate',
         ['linear'],
         ["coalesce", ['get', 'voltage'], 0],
-        0, 2,
+        0, 3,
         300, 7,
         600, 9
       ]
@@ -316,17 +316,18 @@ const line_label = ["case",
   ["get", "name"]
 ];
 
-
-const substation_label = ["step",
-  ["zoom"],
-  ["get", "name"],
-  12, ["case",
+const substation_label_detail = ["case",
     ['all', ['!=', ['get', 'name'], ''], ["has", "voltage"]],
       ["concat", ["get", "name"], " ", ["get", "voltage"], " kV", freq],
     ['all', ['==', ['get', 'name'], ''], ['has', 'voltage']],
       ["concat", "Substation ", ["get", "voltage"], " kV", freq],
     ["get", "name"]
-  ]
+];
+
+const substation_label = ["step",
+  ["zoom"],
+  ["get", "name"],
+  12, substation_label_detail
 ];
 
 
@@ -643,10 +644,12 @@ const layers = [
     paint: {
       'circle-radius': substation_radius,
       'circle-color': voltage_color('voltage'),
+      'circle-stroke-color': '#333',
       'circle-stroke-width': ['interpolate', ['linear'], ['zoom'],
           5, 0,
-          6, 0.01,
-          12, 1.5,
+          6, 0.1,
+          8, 0.5,
+          15, 1,
       ]
     },
   },
@@ -693,6 +696,26 @@ const layers = [
   },
   {
     zorder: 562,
+    id: 'power_substation_ref_label',
+    type: 'symbol',
+    source: 'openinframap',
+    'source-layer': 'power_substation_point',
+    minzoom: 14.5,
+    layout: {
+      'symbol-z-order': 'source',
+      'text-field': '{ref}',
+      'text-anchor': 'bottom',
+      'text-offset': [0, -0.5],
+      'text-size': ["interpolate", ["linear"], ["zoom"], 
+                    14, 9,
+                    18, 12
+      ],
+      'text-max-width': 8,
+    },
+    paint: text_paint,
+  },
+  {
+    zorder: 562,
     id: 'power_substation_label',
     type: 'symbol',
     source: 'openinframap',
@@ -704,7 +727,7 @@ const layers = [
       'symbol-z-order': 'source',
       'text-field': substation_label,
       'text-anchor': 'top',
-      'text-offset': [0, 1],
+      'text-offset': [0, 0.5],
       'text-size': ["interpolate", ["linear"], ["zoom"], 
                     8, 10,
                     18, ["interpolate", ["linear"], ["coalesce", ["get", "voltage"], 0],
