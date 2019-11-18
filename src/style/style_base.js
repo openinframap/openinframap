@@ -607,7 +607,7 @@ const layers = [
     },
     source: 'openmaptiles',
     'source-layer': 'transportation',
-    minzoom: 13,
+    minzoom: 9,
     filter: [
       'all',
       ['==', '$type', 'LineString'],
@@ -618,10 +618,10 @@ const layers = [
       'line-join': 'round',
     },
     paint: {
-      'line-color': '#dddddd',
+      'line-color': '#c0c0c0',
       'line-width': {
         base: 1.3,
-        stops: [[16, 3], [20, 7]],
+        stops: [[9, 1], [20, 7]],
       },
     },
   },
@@ -633,7 +633,7 @@ const layers = [
     },
     source: 'openmaptiles',
     'source-layer': 'transportation',
-    minzoom: 13,
+    minzoom: 11,
     filter: [
       'all',
       ['==', '$type', 'LineString'],
@@ -647,7 +647,7 @@ const layers = [
       'line-color': '#fafafa',
       'line-width': {
         base: 1.3,
-        stops: [[16, 2], [20, 6]],
+        stops: [[11, 1], [20, 6]],
       },
       'line-dasharray': [3, 3],
     },
