@@ -16,10 +16,10 @@ CREATE INDEX power_substation_relation_geom ON power_substation_relation USING G
 ANALYZE power_substation_relation;
 
 CREATE OR REPLACE VIEW substation AS
-    SELECT osm_id, geometry, name, voltage, frequency, substation, operator
+    SELECT osm_id, geometry, name, voltage, frequency, substation, operator, ref
                   FROM osm_power_substation
     UNION
-    SELECT osm_id, geometry, name, voltage, frequency, substation, operator
+    SELECT osm_id, geometry, name, voltage, frequency, substation, operator, null as ref
                   FROM power_substation_relation;
 
 DROP VIEW IF EXISTS power_plant;
