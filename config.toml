@@ -142,7 +142,7 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, round(S
 [[providers.layers]]
 name = "power_generator"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, operator, convert_power(output)/1e3 AS output, source, type, ref FROM osm_power_generator WHERE geometry && !BBOX! AND !ZOOM! >= 9"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, operator, convert_power(output)/1e3 AS output, source, type, ref, (ST_GeometryType(geometry) = 'ST_Point') AS is_node FROM osm_power_generator WHERE geometry && !BBOX! AND !ZOOM! >= 9"
 
 [[providers.layers]]
 name = "power_heatmap_solar"
@@ -185,7 +185,7 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, operator, name, ref 
 [[providers.layers]]
 name = "telecoms_mast"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, operator, name, ref FROM osm_mast WHERE (mast_type IN ('communication', 'communications', 'broadcast') OR tower_type IN ('communication', 'radio', 'antenna')) AND geometry && !BBOX! AND !ZOOM! >= 10"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, operator, name, ref, (ST_GeometryType(geometry) = 'ST_Point') AS is_node FROM osm_mast WHERE (mast_type IN ('communication', 'communications', 'broadcast') OR tower_type IN ('communication', 'radio', 'antenna')) AND geometry && !BBOX! AND !ZOOM! >= 10"
 
 [[providers.layers]]
 name = "petroleum_pipeline"
