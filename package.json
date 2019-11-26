@@ -5,8 +5,7 @@
   "main": "webpack.common.js",
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js --mode development",
-    "build": "webpack --config webpack.prod.js --mode production",
-    "serve": "node server.js"
+    "build": "webpack --config webpack.prod.js --mode production"
   },
   "repository": {
     "type": "git",
