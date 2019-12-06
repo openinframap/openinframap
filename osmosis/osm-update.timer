@@ -1,0 +1,8 @@
+[Unit]
+Description=Run update-osm.service every 5 minutes
+
+[Timer]
+OnCalendar=*:0/5
+
+[Install]
+WantedBy=multi-user.target
