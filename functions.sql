@@ -1,8 +1,9 @@
-CREATE EXTENSION intarray;
+CREATE EXTENSION IF NOT EXISTS intarray;
+CREATE EXTENSION IF NOT EXISTS hstore;
 
 -- Drop all views here so that imposm3 can swap tables around
-DROP VIEW substation;
-DROP VIEW power_plant;
+DROP VIEW IF EXISTS substation;
+DROP VIEW IF EXISTS power_plant;
 
 -- Convert a power value into a numeric value in watts
 CREATE OR REPLACE FUNCTION convert_power(value TEXT) RETURNS NUMERIC IMMUTABLE AS $$

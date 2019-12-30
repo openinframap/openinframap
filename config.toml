@@ -98,7 +98,7 @@ provider_layer = "postgis.water_pipeline"
 
 [[providers]]
 max_connections = 20
-host = "localhost"
+host = "db"
 name = "postgis"
 database = "osm"
 password = "osm"
@@ -111,38 +111,38 @@ user = "osm"
 name = "power_line"
 dont_simplify = true
 geometry_type = "LineString"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, tunnel, location, first_semi(frequency) AS frequency, type, name, line, ref, char_length(ref) AS ref_len, convert_voltage(voltage) / 1000 AS voltage, convert_voltage(nth_semi(voltage, 2)) / 1000 AS voltage_2, convert_voltage(nth_semi(voltage, 3)) / 1000 AS voltage_3, operator FROM osm_power_lines WHERE geometry && !BBOX! AND ST_Length(geometry) > ZRes(!ZOOM!) AND (line NOT IN ('bay', 'busbar') OR !ZOOM! > 10) ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, tunnel, location, first_semi(frequency) AS frequency, tags -> 'name' AS name, line, tags -> 'ref' AS ref, char_length(tags -> 'ref') AS ref_len, convert_voltage(voltage) / 1000 AS voltage, convert_voltage(nth_semi(voltage, 2)) / 1000 AS voltage_2, convert_voltage(nth_semi(voltage, 3)) / 1000 AS voltage_3, tags -> 'operator' AS operator FROM osm_power_line WHERE geometry && !BBOX! AND ST_Length(geometry) > ZRes(!ZOOM!) AND (line NOT IN ('bay', 'busbar') OR !ZOOM! > 10) ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
 
 [[providers.layers]]
 name = "power_tower"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, type, name, transition, ref, operator, (ST_GeometryType(geometry) = 'ST_Point') AS is_node FROM osm_power_tower WHERE geometry && !BBOX! AND !ZOOM! >= 13"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, type, tags -> 'name' AS name, transition, tags -> 'ref' AS ref, tags -> 'operator' AS operator, (ST_GeometryType(geometry) = 'ST_Point') AS is_node FROM osm_power_tower WHERE geometry && !BBOX! AND !ZOOM! >= 13"
 
 [[providers.layers]]
 name = "power_substation"
 geometry_type = "Polygon"
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, first_semi(frequency) AS frequency, convert_voltage(voltage) / 1000 AS voltage, convert_voltage(nth_semi(voltage, 2)) / 1000 AS voltage_2, convert_voltage(nth_semi(voltage, 3)) / 1000 AS voltage_3, substation, operator, ref FROM substation WHERE geometry && !BBOX! AND !ZOOM! >= 13 ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, first_semi(tags -> 'frequency') AS frequency, convert_voltage(voltage) / 1000 AS voltage, convert_voltage(nth_semi(voltage, 2)) / 1000 AS voltage_2, convert_voltage(nth_semi(voltage, 3)) / 1000 AS voltage_3, substation, tags -> 'operator' AS operator, tags -> 'ref' AS ref FROM substation WHERE geometry && !BBOX! AND !ZOOM! >= 13 ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
 
 [[providers.layers]]
 name = "power_substation_point"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, (ST_GeometryType(geometry) = 'ST_Point') AS is_node, round(ST_Area(geometry)) AS area, name, first_semi(frequency) AS frequency, convert_voltage(voltage) / 1000 AS voltage, convert_voltage(nth_semi(voltage, 2)) / 1000 AS voltage_2, convert_voltage(nth_semi(voltage, 3)) / 1000 AS voltage_3, substation, ref FROM substation WHERE geometry && !BBOX! AND !ZOOM! >= 5 ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, (ST_GeometryType(geometry) = 'ST_Point') AS is_node, round(ST_Area(geometry)) AS area, name, first_semi(tags -> 'frequency') AS frequency, convert_voltage(voltage) / 1000 AS voltage, convert_voltage(nth_semi(voltage, 2)) / 1000 AS voltage_2, convert_voltage(nth_semi(voltage, 3)) / 1000 AS voltage_3, substation, tags -> 'ref' AS ref FROM substation WHERE geometry && !BBOX! AND !ZOOM! >= 5 ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
 
 [[providers.layers]]
 name = "power_plant"
 geometry_type = "Polygon"
 dont_simplify = true
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator, convert_power(output)/1e6 AS output, first_semi(source) AS source, plant_label(name, output, source) AS label FROM power_plant WHERE geometry && !BBOX! AND !ZOOM! >= 11 ORDER BY convert_power(output) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, tags -> 'operator' AS operator, convert_power(output)/1e6 AS output, first_semi(source) AS source, plant_label(name, output, source) AS label FROM power_plant WHERE geometry && !BBOX! AND !ZOOM! >= 11 ORDER BY convert_power(output) ASC NULLS FIRST"
 
 [[providers.layers]]
 name = "power_plant_point"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, round(ST_Area(geometry)) AS area, name, convert_power(output)/1e6 AS output, first_semi(source) AS source, plant_label(name, output, source) AS label FROM power_plant WHERE geometry && !BBOX! AND !ZOOM! >= 2 AND NOT ST_IsEmpty(geometry) ORDER BY convert_power(output) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, round(ST_Area(geometry)) AS area, name, tags -> 'operator' AS operator, convert_power(output)/1e6 AS output, first_semi(source) AS source FROM power_plant WHERE geometry && !BBOX! AND !ZOOM! >= 2 AND NOT ST_IsEmpty(geometry) ORDER BY convert_power(output) ASC NULLS FIRST"
 
 [[providers.layers]]
 name = "power_generator"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name, operator, convert_power(output)/1e3 AS output, source, type, ref, (ST_GeometryType(geometry) = 'ST_Point') AS is_node FROM osm_power_generator WHERE geometry && !BBOX! AND !ZOOM! >= 9"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name, tags -> 'operator' AS operator, convert_power(output)/1e3 AS output, source, type, tags -> 'ref' AS ref, (ST_GeometryType(geometry) = 'ST_Point') AS is_node FROM osm_power_generator WHERE geometry && !BBOX! AND !ZOOM! >= 9"
 
 [[providers.layers]]
 name = "power_heatmap_solar"
@@ -152,64 +152,63 @@ sql = "SELECT ST_AsBinary(ST_SnapToGrid(ST_Centroid(geometry), ZRes(!ZOOM!), ZRe
 [[providers.layers]]
 name = "power_generator_area"
 geometry_type = "Polygon"
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator, convert_power(output)/1e3 AS output, round(solar_output(geometry)/1e3) AS estimated_output, source, type, ref FROM osm_power_generator WHERE geometry && !BBOX! AND !ZOOM! >= 13 AND ST_GeometryType(geometry) = 'ST_Polygon'"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'name' AS name, tags -> 'operator' AS operator, convert_power(output)/1e3 AS output, round(solar_output(geometry)/1e3) AS estimated_output, source, type, tags -> 'ref' AS ref FROM osm_power_generator WHERE geometry && !BBOX! AND !ZOOM! >= 13 AND ST_GeometryType(geometry) = 'ST_Polygon'"
 
 [[providers.layers]]
 name = "power_transformer"
 dont_simplify = true
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name FROM osm_power_switchgear WHERE type = 'transformer' AND geometry && !BBOX! AND !ZOOM! >= 14"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name FROM osm_power_switchgear WHERE type = 'transformer' AND geometry && !BBOX! AND !ZOOM! >= 14"
 
 [[providers.layers]]
 name = "power_compensator"
 dont_simplify = true
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name FROM osm_power_switchgear WHERE type = 'compensator' AND geometry && !BBOX! AND !ZOOM! >= 14"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name FROM osm_power_switchgear WHERE type = 'compensator' AND geometry && !BBOX! AND !ZOOM! >= 14"
 
 [[providers.layers]]
 name = "power_switch"
 dont_simplify = true
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, name FROM osm_power_switchgear WHERE type = 'switch' AND geometry && !BBOX! AND !ZOOM! >= 14"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name FROM osm_power_switchgear WHERE type = 'switch' AND geometry && !BBOX! AND !ZOOM! >= 14"
 
 [[providers.layers]]
 name = "telecoms_communication_line"
 geometry_type = "LineString"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, operator, name, location FROM osm_comms_cable WHERE geometry && !BBOX! AND 1 < !ZOOM! AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, tags -> 'operator' AS operator, tags -> 'name' AS name, tags -> 'location' AS location FROM osm_telecom_cable WHERE geometry && !BBOX! AND 1 < !ZOOM! AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
 
 [[providers.layers]]
 name = "telecoms_data_center"
 geometry_type = "Polygon"
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, operator, name, ref FROM osm_data_center WHERE geometry && !BBOX! AND !ZOOM! >= 10"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'operator' AS operator, tags -> 'name' AS name, tags -> 'ref' AS ref FROM osm_telecom_building WHERE geometry && !BBOX! AND !ZOOM! >= 10"
 
 [[providers.layers]]
 name = "telecoms_mast"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, operator, name, ref, (ST_GeometryType(geometry) = 'ST_Point') AS is_node FROM osm_mast WHERE (mast_type IN ('communication', 'communications', 'broadcast') OR tower_type IN ('communication', 'radio', 'antenna')) AND geometry && !BBOX! AND !ZOOM! >= 10"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'operator' AS operator, tags -> 'name' AS name, tags -> 'ref' AS ref, (ST_GeometryType(geometry) = 'ST_Point') AS is_node FROM osm_mast WHERE (tags -> 'mast:type' IN ('communication', 'communications', 'broadcast') OR tags -> 'tower:type' IN ('communication', 'radio', 'antenna')) AND geometry && !BBOX! AND !ZOOM! >= 10"
 
 [[providers.layers]]
 name = "petroleum_pipeline"
 geometry_type = "LineString"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, operator, substance, type, name, location FROM osm_pipeline WHERE (substance IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng') OR type IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng')) AND geometry && !BBOX! AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, tags -> 'operator' AS operator, substance, type, tags -> 'name' AS name, tags -> 'location' AS location FROM osm_pipeline WHERE COALESCE(substance, type) IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng') AND geometry && !BBOX! AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
 
 [[providers.layers]]
 name = "petroleum_well"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, operator, name FROM osm_petroleum_well WHERE geometry && !BBOX! AND !ZOOM! >= 10"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'operator' AS operator, tags -> 'name' AS name FROM osm_petroleum_well WHERE geometry && !BBOX! AND !ZOOM! >= 10"
 
 [[providers.layers]]
 name = "petroleum_site"
 geometry_type = "Polygon"
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, operator FROM osm_petroleum_site WHERE geometry && !BBOX! AND !ZOOM! >= 8"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'name' AS name, tags -> 'operator' AS operator FROM osm_petroleum_site WHERE geometry && !BBOX! AND !ZOOM! >= 8"
 
 [[providers.layers]]
 name = "water_pipeline"
 geometry_type = "LineString"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, operator, name, location FROM osm_pipeline WHERE (substance = 'water' OR type = 'water') AND geometry && !BBOX! AND !ZOOM! >= 3 AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, tags -> 'operator' AS operator, tags -> 'name' AS name, tags -> 'location' AS location FROM osm_pipeline WHERE COALESCE(substance, type) = 'water' AND geometry && !BBOX! AND !ZOOM! >= 3 AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
 
 [webserver]
 port = ":8081"
-hostname = "vector.openinframap.org"
 cors_allowed_origin = "*"
 
 [cache]
