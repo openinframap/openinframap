@@ -3,43 +3,68 @@ from funcs import table, relation_tables, str_col, int_col, bool_col, type_col
 
 table(
     "power_line",
-    {"power": ["line", "minor_line", "cable", "minor_cable"]},
+    {
+        "power": ["line", "minor_line", "cable", "minor_cable"],
+        "construction:power": ["line", "minor_line", "cable", "minor_cable"],
+    },
     "linestring",
     columns=[
+        type_col,
         str_col("location"),
         str_col("line"),
         str_col("voltage"),
         str_col("frequency"),
         int_col("circuits"),
+        str_col("construction:power", "construction"),
         bool_col("tunnel"),
     ],
 )
 
 table(
     "power_tower",
-    {"power": ["tower", "pole", "portal"]},
+    {
+        "power": ["tower", "pole", "portal"],
+        "construction:power": ["tower", "pole", "portal"],
+    },
     ["points", "linestrings"],
-    columns=[type_col, bool_col("location:transition", "transition")],
+    columns=[
+        type_col,
+        bool_col("location:transition", "transition"),
+        str_col("construction:power", "construction"),
+    ],
 )
 
 table(
     "power_substation",
-    {"power": ["substation", "sub_station"]},
+    {
+        "power": ["substation", "sub_station"],
+        "construction:power": ["substation", "sub_station"],
+    },
     ["points", "polygons"],
     columns=[
         type_col,
         str_col("substation"),
         str_col("voltage"),
         str_col("frequency"),
+        str_col("construction:power", "construction"),
         bool_col("tunnel"),
     ],
 )
 
 relation_tables(
     "power_substation_relation",
-    {"power": ["substation", "sub_station"]},
+    {
+        "power": ["substation", "sub_station"],
+        "construction:power": ["substation", "sub_station"],
+    },
     relation_types=["site"],
-    relation_columns=[str_col("voltage")],
+    relation_columns=[
+        str_col("substation"),
+        str_col("voltage"),
+        str_col("frequency"),
+        str_col("construction:power", "construction"),
+        bool_col("tunnel"),
+    ],
 )
 
 
@@ -82,9 +107,15 @@ relation_tables(
     ],
 )
 
-table("power_generator", {"power": ['generator']}, ["points", "polygons"], columns=[
-    str_col("generator:source", "source"),
-    str_col("generator:method", "method"),
-    str_col("generator:type", "type"),
-    str_col("generator:output", "output")
-])
+table(
+    "power_generator",
+    {"power": ["generator"], "construction:power": ["generator"]},
+    ["points", "polygons"],
+    columns=[
+        str_col("generator:source", "source"),
+        str_col("generator:method", "method"),
+        str_col("generator:type", "type"),
+        str_col("generator:output", "output"),
+        str_col("construction_power", "construction"),
+    ],
+)
