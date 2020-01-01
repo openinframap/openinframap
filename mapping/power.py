@@ -1,4 +1,12 @@
-from funcs import table, relation_tables, str_col, int_col, bool_col, type_col
+from funcs import (
+    table,
+    relation_tables,
+    generalized_table,
+    str_col,
+    int_col,
+    bool_col,
+    type_col,
+)
 
 
 table(
@@ -18,6 +26,22 @@ table(
         str_col("construction:power", "construction"),
         bool_col("tunnel"),
     ],
+)
+
+generalized_table(
+    "power_line_gen_100",
+    "power_line",
+    100,
+    "coalesce(convert_voltage(voltage), 0) > 100000 AND ST_length(geometry) > 200 "
+    "AND line NOT IN ('bay', 'busbar')",
+)
+
+generalized_table(
+    "power_line_gen_500",
+    "power_line",
+    500,
+    "coalesce(convert_voltage(voltage), 0) > 100000 AND ST_length(geometry) > 600 "
+    "AND line NOT IN ('bay', 'busbar')",
 )
 
 table(

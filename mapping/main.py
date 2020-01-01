@@ -1,5 +1,5 @@
 import json
-from funcs import tables
+from funcs import tables, generalized_tables
 
 import power  # noqa
 import telecoms  # noqa
@@ -63,7 +63,8 @@ data = {
             "wheelchair",
         ],
     },
-    "tables": tables
+    "tables": tables,
+    "generalized_tables": generalized_tables
 }
 
 print(json.dumps(data, indent=3))

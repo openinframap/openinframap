@@ -9,9 +9,13 @@ table(
 
 table(
     "pipeline",
-    {"man_made": ["pipeline"]},
+    {"man_made": ["pipeline"], "construction:man_made": ["pipeline"]},
     "linestring",
-    columns=[str_col("substance"), str_col("type")],
+    columns=[
+        str_col("substance"),
+        str_col("type"),
+        str_col("construction:man_made", "construction"),
+    ],
 )
 
 table(

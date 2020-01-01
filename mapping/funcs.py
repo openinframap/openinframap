@@ -14,6 +14,7 @@ type_col = {"name": "type", "type": "mapping_value"}
 
 
 tables = {}
+generalized_tables = {}
 
 
 def table(name, mappings, geom_type, columns=None, tags_from_member=False, **kwargs):
@@ -59,3 +60,13 @@ def relation_tables(name, mappings, relation_types, relation_columns=None):
         relation_types=relation_types,
         tags_from_member=True,
     )
+
+
+def generalized_table(name, source, tolerance, sql_filter=None):
+    gt = {
+        "source": source,
+        "tolerance": tolerance
+    }
+    if sql_filter:
+        gt['sql_filter'] = sql_filter
+    generalized_tables[name] = gt

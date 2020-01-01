@@ -1,7 +1,14 @@
 from funcs import table, type_col
 
 
-table("telecom_cable", {"communication": ["line", "cable"]}, "linestring")
+table(
+    "telecom_cable",
+    {
+        "communication": ["line", "cable"],
+        "construction:communication": ["line", "cable"],
+    },
+    "linestring",
+)
 
 table(
     "telecom_building",
@@ -23,5 +30,8 @@ table(
 )
 
 table(
-    "mast", {"man_made": ["mast", "tower", "communications_tower"]}, "point", columns=[type_col]
+    "mast",
+    {"man_made": ["mast", "tower", "communications_tower"]},
+    "point",
+    columns=[type_col],
 )

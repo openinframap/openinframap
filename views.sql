@@ -44,3 +44,49 @@ CREATE OR REPLACE VIEW power_plant AS
     UNION
     SELECT osm_id, geometry, name, output, source, tags
               FROM power_plant_relation;
+
+
+
+/* Dispatch power line query to the appropriate generalised table based on zoom. */
+CREATE OR REPLACE FUNCTION power_lines(zoom INT) RETURNS
+	TABLE (gid bigint,
+		geometry geometry(LineString, 3857),
+		type character varying,
+		location character varying,
+		line character varying,
+		voltage character varying,
+		frequency character varying,
+		circuits integer,
+		construction character varying,
+		tunnel boolean,
+		tags hstore)
+	LANGUAGE plpgsql
+AS $$
+DECLARE
+BEGIN
+	IF zoom < 5 THEN
+		RETURN QUERY SELECT osm_id, osm_power_line_gen_500.geometry, 
+			osm_power_line_gen_500.type, osm_power_line_gen_500.location,
+			osm_power_line_gen_500.line, osm_power_line_gen_500.voltage,
+			osm_power_line_gen_500.frequency, osm_power_line_gen_500.circuits,
+			osm_power_line_gen_500.construction, osm_power_line_gen_500.tunnel,
+			osm_power_line_gen_500.tags
+			FROM osm_power_line_gen_500;
+	ELSIF zoom < 8 THEN
+		RETURN QUERY SELECT osm_id, osm_power_line_gen_100.geometry, 
+			osm_power_line_gen_100.type, osm_power_line_gen_100.location,
+			osm_power_line_gen_100.line, osm_power_line_gen_100.voltage,
+			osm_power_line_gen_100.frequency, osm_power_line_gen_100.circuits,
+			osm_power_line_gen_100.construction, osm_power_line_gen_100.tunnel,
+			osm_power_line_gen_100.tags
+			FROM osm_power_line_gen_100;
+	ELSE
+		RETURN QUERY SELECT osm_id, osm_power_line.geometry, 
+			osm_power_line.type, osm_power_line.location, osm_power_line.line,
+			osm_power_line.voltage, osm_power_line.frequency,
+			osm_power_line.circuits, osm_power_line.construction, osm_power_line.tunnel,
+			osm_power_line.tags
+			FROM osm_power_line;
+	END IF;
+END
+$$;
