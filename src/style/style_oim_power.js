@@ -69,17 +69,19 @@ function voltage_color(field) {
   ];
 }
 
+const multi_voltage_min_zoom = 10;
+
 // Generate an expression to determine the offset of a power line
 // segment with multiple voltages
 function voltage_offset(index) {
-  const spacing = 5;
+  const spacing = 7;
 
   let offset = (index - 1) * spacing;
   return [
     'interpolate',
     ['linear'],
     ['zoom'],
-    6,
+    multi_voltage_min_zoom,
     [
       'case',
       ['has', 'voltage_3'],
@@ -309,7 +311,7 @@ const circuits = [
 
 const line_voltage = [
   'case',
-  ['has', 'voltage_3'],
+  ['all', ['has', 'voltage_3'], ["!=", ['get', 'voltage_3'], ['get', 'voltage_2']]],
   [
     'concat',
     ['get', 'voltage'],
@@ -319,7 +321,7 @@ const line_voltage = [
     ['get', 'voltage_3'],
     ' kV',
   ],
-  ['has', 'voltage_2'],
+  ['all', ['has', 'voltage_2'], ["!=", ['get', 'voltage_2'], ['get', 'voltage']]],
   ['concat', ['get', 'voltage'], '/', ['get', 'voltage_2'], ' kV'],
   ['has', 'voltage'],
   ['concat', ['get', 'voltage'], ' kV'],
@@ -400,7 +402,7 @@ const layers = [
     filter: ['all', underground_p, power_visible_p, ['has', 'voltage_2']],
     source: 'openinframap',
     'source-layer': 'power_line',
-    minzoom: 0,
+    minzoom: multi_voltage_min_zoom,
     paint: {
       'line-color': voltage_color('voltage_2'),
       'line-width': voltage_line_thickness,
@@ -420,7 +422,7 @@ const layers = [
     filter: ['all', underground_p, power_visible_p, ['has', 'voltage_3']],
     source: 'openinframap',
     'source-layer': 'power_line',
-    minzoom: 0,
+    minzoom: multi_voltage_min_zoom,
     paint: {
       'line-color': voltage_color('voltage_3'),
       'line-width': voltage_line_thickness,
@@ -503,7 +505,7 @@ const layers = [
       power_visible_p,
       ['has', 'voltage_2'],
     ],
-    minzoom: 6,
+    minzoom: multi_voltage_min_zoom,
     paint: {
       'line-color': voltage_color('voltage_2'),
       'line-width': voltage_line_thickness,
@@ -527,7 +529,7 @@ const layers = [
       power_visible_p,
       ['has', 'voltage_3'],
     ],
-    minzoom: 8,
+    minzoom: multi_voltage_min_zoom,
     paint: {
       'line-color': voltage_color('voltage_3'),
       'line-width': voltage_line_thickness,
