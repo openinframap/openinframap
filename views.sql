@@ -26,7 +26,7 @@ CREATE MATERIALIZED VIEW power_plant_relation AS
         (rel.tags -> 'name') AS name, rel.output, rel.source, rel.tags, rel.construction
         FROM osm_power_plant_relation as rel, osm_power_plant_relation_member as mem
         WHERE mem.osm_id = rel.osm_id
-        GROUP BY rel.osm_id, rel.tags -> 'name', rel.output, rel.source, rel.tags;
+        GROUP BY rel.osm_id, rel.tags -> 'name', rel.output, rel.source, rel.tags, rel.construction;
 
 CREATE INDEX power_plant_relation_geom ON power_plant_relation USING GIST (geometry);
 
