@@ -42,7 +42,7 @@ CREATE OR REPLACE VIEW power_plant AS
 
 
 /* Dispatch power line query to the appropriate generalised table based on zoom. */
-CREATE OR REPLACE FUNCTION power_lines(zoom INT) RETURNS
+CREATE OR REPLACE FUNCTION power_lines(zoom INT, search_geom geometry) RETURNS
 	TABLE (gid bigint,
 		geometry geometry(LineString, 3857),
 		type character varying,
@@ -65,7 +65,8 @@ BEGIN
 			osm_power_line_gen_500.frequency, osm_power_line_gen_500.circuits,
 			osm_power_line_gen_500.construction, osm_power_line_gen_500.tunnel,
 			osm_power_line_gen_500.tags
-			FROM osm_power_line_gen_500;
+			FROM osm_power_line_gen_500
+			WHERE osm_power_line_gen_500.geometry && search_geom;
 	ELSIF zoom < 8 THEN
 		RETURN QUERY SELECT osm_id, osm_power_line_gen_100.geometry, 
 			osm_power_line_gen_100.type, osm_power_line_gen_100.location,
@@ -73,14 +74,16 @@ BEGIN
 			osm_power_line_gen_100.frequency, osm_power_line_gen_100.circuits,
 			osm_power_line_gen_100.construction, osm_power_line_gen_100.tunnel,
 			osm_power_line_gen_100.tags
-			FROM osm_power_line_gen_100;
+			FROM osm_power_line_gen_100
+			WHERE osm_power_line_gen_100.geometry && search_geom;
 	ELSE
 		RETURN QUERY SELECT osm_id, osm_power_line.geometry, 
 			osm_power_line.type, osm_power_line.location, osm_power_line.line,
 			osm_power_line.voltage, osm_power_line.frequency,
 			osm_power_line.circuits, osm_power_line.construction, osm_power_line.tunnel,
 			osm_power_line.tags
-			FROM osm_power_line;
+			FROM osm_power_line
+			WHERE osm_power_line.geometry && search_geom;
 	END IF;
 END
 $$;
