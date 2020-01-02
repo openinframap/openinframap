@@ -56,6 +56,33 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
+-- Return an array of voltage values (in kV) for a power line
+CREATE OR REPLACE FUNCTION line_voltages(voltage TEXT, circuits INTEGER)
+RETURNS INTEGER[] IMMUTABLE
+AS $$
+DECLARE
+    parts TEXT[];
+    voltage_int INTEGER;
+    retval INTEGER[];
+BEGIN
+    parts = string_to_array(voltage, ';');
+    IF array_length(parts::anyarray, 1) > 1 THEN
+	FOR I IN array_lower(parts::anyarray, 1)..array_upper(parts::anyarray, 1) LOOP
+	  retval[I] = convert_voltage(parts[I]) / 1000;
+	END LOOP;
+    ELSIF circuits != NULL THEN
+	voltage_int = convert_voltage(voltage) / 1000;
+	FOR I IN 1..circuits LOOP
+	  retval[I] = voltage_int;
+	END LOOP;
+    ELSE
+	retval[1] = convert_voltage(voltage) / 1000;
+    END IF;
+
+    return sort_desc(retval);
+END
+$$ LANGUAGE plpgsql;
+
 -- Combine two voltage fields into one
 CREATE OR REPLACE FUNCTION combine_voltage(a TEXT, b TEXT) RETURNS TEXT IMMUTABLE AS $$
 DECLARE

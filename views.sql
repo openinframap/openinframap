@@ -50,9 +50,9 @@ CREATE OR REPLACE FUNCTION power_lines(zoom INT, search_geom geometry) RETURNS
 		line character varying,
 		voltage character varying,
 		frequency character varying,
-		circuits integer,
 		construction character varying,
 		tunnel boolean,
+		voltages INTEGER[],
 		tags hstore)
 	LANGUAGE plpgsql
 AS $$
@@ -62,8 +62,9 @@ BEGIN
 		RETURN QUERY SELECT osm_id, osm_power_line_gen_500.geometry, 
 			osm_power_line_gen_500.type, osm_power_line_gen_500.location,
 			osm_power_line_gen_500.line, osm_power_line_gen_500.voltage,
-			osm_power_line_gen_500.frequency, osm_power_line_gen_500.circuits,
+			osm_power_line_gen_500.frequency,
 			osm_power_line_gen_500.construction, osm_power_line_gen_500.tunnel,
+			line_voltages(osm_power_line_gen_500.voltage, osm_power_line_gen_500.circuits) AS voltages,
 			osm_power_line_gen_500.tags
 			FROM osm_power_line_gen_500
 			WHERE osm_power_line_gen_500.geometry && search_geom;
@@ -71,8 +72,9 @@ BEGIN
 		RETURN QUERY SELECT osm_id, osm_power_line_gen_100.geometry, 
 			osm_power_line_gen_100.type, osm_power_line_gen_100.location,
 			osm_power_line_gen_100.line, osm_power_line_gen_100.voltage,
-			osm_power_line_gen_100.frequency, osm_power_line_gen_100.circuits,
+			osm_power_line_gen_100.frequency,
 			osm_power_line_gen_100.construction, osm_power_line_gen_100.tunnel,
+			line_voltages(osm_power_line_gen_100.voltage, osm_power_line_gen_100.circuits) AS voltages,
 			osm_power_line_gen_100.tags
 			FROM osm_power_line_gen_100
 			WHERE osm_power_line_gen_100.geometry && search_geom;
@@ -80,7 +82,8 @@ BEGIN
 		RETURN QUERY SELECT osm_id, osm_power_line.geometry, 
 			osm_power_line.type, osm_power_line.location, osm_power_line.line,
 			osm_power_line.voltage, osm_power_line.frequency,
-			osm_power_line.circuits, osm_power_line.construction, osm_power_line.tunnel,
+			osm_power_line.construction, osm_power_line.tunnel,
+			line_voltages(osm_power_line.voltage, osm_power_line.circuits) AS voltages,
 			osm_power_line.tags
 			FROM osm_power_line
 			WHERE osm_power_line.geometry && search_geom;
