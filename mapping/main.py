@@ -32,7 +32,6 @@ data = {
             "maxspeed",
             "lanes",
             "access",
-            "type",
             "ele",
             "attribution",
             "tracktype",
