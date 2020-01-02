@@ -174,7 +174,7 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags ->
 [[providers.layers]]
 name = "telecoms_communication_line"
 geometry_type = "LineString"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, tags -> 'operator' AS operator, tags -> 'name' AS name, tags -> 'location' AS location FROM osm_telecom_cable WHERE construction != '' AND geometry && !BBOX! AND 1 < !ZOOM! AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, tags -> 'operator' AS operator, tags -> 'name' AS name, tags -> 'location' AS location FROM osm_telecom_cable WHERE tags -> 'construction' != '' AND geometry && !BBOX! AND 1 < !ZOOM! AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
 
 [[providers.layers]]
 name = "telecoms_data_center"
