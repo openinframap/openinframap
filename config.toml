@@ -189,22 +189,22 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags ->
 [[providers.layers]]
 name = "petroleum_pipeline"
 geometry_type = "LineString"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, tags -> 'operator' AS operator, substance, type, tags -> 'name' AS name, tags -> 'location' AS location FROM osm_pipeline WHERE COALESCE(substance, type) IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng') AND construction != '' AND geometry && !BBOX! AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, tags -> 'operator' AS operator, substance, type, tags -> 'name' AS name, tags -> 'location' AS location, tags -> 'ref' AS ref FROM osm_pipeline WHERE COALESCE(substance, type) IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng') AND construction != '' AND geometry && !BBOX! AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
 
 [[providers.layers]]
 name = "petroleum_well"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'operator' AS operator, tags -> 'name' AS name FROM osm_petroleum_well WHERE geometry && !BBOX! AND !ZOOM! >= 10"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'operator' AS operator, tags -> 'name' AS name, tags -> 'ref' AS ref FROM osm_petroleum_well WHERE geometry && !BBOX! AND !ZOOM! >= 10"
 
 [[providers.layers]]
 name = "petroleum_site"
 geometry_type = "Polygon"
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'name' AS name, tags -> 'operator' AS operator FROM osm_petroleum_site WHERE geometry && !BBOX! AND !ZOOM! >= 8"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'name' AS name, tags -> 'operator' AS operator, tags -> 'ref' AS ref FROM osm_petroleum_site WHERE geometry && !BBOX! AND !ZOOM! >= 8"
 
 [[providers.layers]]
 name = "water_pipeline"
 geometry_type = "LineString"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, tags -> 'operator' AS operator, tags -> 'name' AS name, tags -> 'location' AS location FROM osm_pipeline WHERE COALESCE(substance, type) = 'water' AND geometry && !BBOX! AND !ZOOM! >= 3 AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Simplify(geometry, ZRes(!ZOOM!) / 5, true)) AS geom, tags -> 'operator' AS operator, tags -> 'name' AS name, tags -> 'location' AS location, tags -> 'ref' AS ref FROM osm_pipeline WHERE COALESCE(substance, type) = 'water' AND geometry && !BBOX! AND !ZOOM! >= 3 AND ST_Length(geometry) > ZRes(!ZOOM!) * 2"
 
 [webserver]
 port = ":8081"
