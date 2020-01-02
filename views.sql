@@ -1,6 +1,3 @@
-DROP VIEW IF EXISTS substation;
-DROP MATERIALIZED VIEW IF EXISTS power_substation_relation;
-
 CREATE MATERIALIZED VIEW power_substation_relation AS
     SELECT rel.osm_id, ST_ConvexHull(ST_Union(mem.geometry)) AS geometry, rel.tags -> 'name' AS name,
         combine_voltage(rel.voltage, voltage_agg(mem.tags -> 'voltage')) AS voltage,
@@ -23,9 +20,6 @@ CREATE OR REPLACE VIEW substation AS
     UNION
     SELECT osm_id, geometry, name, voltage, substation, tags
                   FROM power_substation_relation;
-
-DROP VIEW IF EXISTS power_plant;
-DROP MATERIALIZED VIEW IF EXISTS power_plant_relation;
 
 CREATE MATERIALIZED VIEW power_plant_relation AS
     SELECT rel.osm_id, ST_ConvexHull(ST_Union(mem.geometry)) AS geometry, 

@@ -2,6 +2,8 @@ CREATE EXTENSION IF NOT EXISTS intarray;
 CREATE EXTENSION IF NOT EXISTS hstore;
 
 -- Drop all views here so that imposm3 can swap tables around
+DROP MATERIALIZED VIEW IF EXISTS power_substation_relation;
+DROP MATERIALIZED VIEW IF EXISTS power_plant_relation;
 DROP VIEW IF EXISTS substation;
 DROP VIEW IF EXISTS power_plant;
 
