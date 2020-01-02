@@ -110,7 +110,7 @@ user = "osm"
 [[providers.layers]]
 name = "power_line"
 geometry_type = "LineString"
-sql = "SELECT gid, ST_AsBinary(geometry) AS geom, tunnel, location, first_semi(frequency) AS frequency, tags -> 'name' AS name, line, tags -> 'ref' AS ref, char_length(tags -> 'ref') AS ref_len, voltages[1] AS voltage, voltages[2] AS voltage_2, voltages[3] AS voltage_3, tags -> 'operator' AS operator, construction != '' AS construction FROM power_lines(!ZOOM!, !BBOX!) ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
+sql = "SELECT gid, ST_AsBinary(geometry) AS geom, tunnel, location, first_semi(frequency) AS frequency, tags -> 'name' AS name, line, tags -> 'ref' AS ref, char_length(tags -> 'ref') AS ref_len, voltages[1] AS voltage, voltages[2] AS voltage_2, voltages[3] AS voltage_3, circuits, tags -> 'operator' AS operator, construction != '' AS construction FROM power_lines(!ZOOM!, !BBOX!) ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
 
 [[providers.layers]]
 name = "power_tower"

@@ -70,7 +70,7 @@ BEGIN
 	FOR I IN array_lower(parts::anyarray, 1)..array_upper(parts::anyarray, 1) LOOP
 	  retval[I] = convert_voltage(parts[I]) / 1000;
 	END LOOP;
-    ELSIF circuits != NULL THEN
+    ELSIF circuits IS NOT NULL THEN
 	voltage_int = convert_voltage(voltage) / 1000;
 	FOR I IN 1..circuits LOOP
 	  retval[I] = voltage_int;
@@ -79,7 +79,7 @@ BEGIN
 	retval[1] = convert_voltage(voltage) / 1000;
     END IF;
 
-    return sort_desc(retval);
+    return retval;
 END
 $$ LANGUAGE plpgsql;
 
