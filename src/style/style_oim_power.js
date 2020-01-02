@@ -362,9 +362,11 @@ const layers = [
     filter: ['==', ['get', 'tunnel'], true],
     minzoom: 12,
     paint: {
-      'line-opacity': ['case', construction_p, 0.1, 0.3],
+      'line-opacity': ['case', construction_p, 0.2, 0.4],
       'line-color': '#7C4544',
-      'line-width': 8,
+      'line-width': ['interpolate', ['linear'], ['zoom'],
+        12, 4, 18, 10
+      ],
     },
     layout: {
       'line-join': 'round',
