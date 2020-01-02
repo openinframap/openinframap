@@ -362,7 +362,7 @@ const layers = [
     filter: ['==', ['get', 'tunnel'], true],
     minzoom: 12,
     paint: {
-      'line-opacity': 0.6,
+      'line-opacity': ['case', construction_p, 0.1, 0.3],
       'line-color': '#7C4544',
       'line-width': 8,
     },
