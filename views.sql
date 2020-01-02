@@ -4,21 +4,21 @@ CREATE MATERIALIZED VIEW power_substation_relation AS
         rel.tags -> 'frequency' AS frequency,
         combine_field(rel.tags -> 'substation', field_agg(mem.tags -> 'substation')) AS substation,
         combine_field(rel.tags -> 'operator', field_agg(mem.tags -> 'operator')) AS operator,
-	rel.tags
+	rel.tags, rel.construction
         FROM osm_power_substation_relation as rel, osm_power_substation_relation_member as mem
         WHERE mem.osm_id = rel.osm_id
         GROUP BY rel.osm_id, rel.tags -> 'name', rel.voltage, rel.tags -> 'frequency',
-			rel.tags -> 'substation', rel.tags -> 'operator', rel.tags;
+			rel.tags -> 'substation', rel.tags -> 'operator', rel.tags, rel.construction;
 
 CREATE INDEX power_substation_relation_geom ON power_substation_relation USING GIST (geometry);
 
 ANALYZE power_substation_relation;
 
 CREATE OR REPLACE VIEW substation AS
-    SELECT osm_id, geometry, tags -> 'name' AS name, voltage, substation, tags
+    SELECT osm_id, geometry, tags -> 'name' AS name, voltage, substation, tags, construction
                   FROM osm_power_substation
     UNION
-    SELECT osm_id, geometry, name, voltage, substation, tags
+    SELECT osm_id, geometry, name, voltage, substation, tags, construction
                   FROM power_substation_relation;
 
 CREATE MATERIALIZED VIEW power_plant_relation AS
