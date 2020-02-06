@@ -110,7 +110,7 @@ user = "osm"
 [[providers.layers]]
 name = "power_line"
 geometry_type = "LineString"
-sql = "SELECT gid, ST_AsBinary(geometry) AS geom, tunnel, location, first_semi(frequency) AS frequency, tags -> 'name' AS name, line, tags -> 'ref' AS ref, char_length(tags -> 'ref') AS ref_len, voltages[1] AS voltage, voltages[2] AS voltage_2, voltages[3] AS voltage_3, circuits, tags -> 'operator' AS operator, construction != '' AS construction, tags -> 'wikidata' AS wikidata, tags -> 'wikipedia' AS wikipedia, tags -> 'url' AS url FROM power_lines(!ZOOM!, !BBOX!) ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
+sql = "SELECT gid, ST_AsBinary(geometry) AS geom, tunnel, location, first_semi(frequency) AS frequency, tags -> 'name' AS name, line, tags -> 'ref' AS ref, char_length(tags -> 'ref') AS ref_len, voltages[1] AS voltage, voltages[2] AS voltage_2, voltages[3] AS voltage_3, circuits, tags -> 'operator' AS operator, construction != '' AS construction, tags -> 'wikidata' AS wikidata, tags -> 'wikipedia' AS wikipedia, osm_url(tags) AS url FROM power_lines(!ZOOM!, !BBOX!) ORDER BY convert_voltage(voltage) ASC NULLS FIRST"
 
 [[providers.layers]]
 name = "power_tower"
@@ -131,12 +131,12 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, (ST_Geo
 name = "power_plant"
 geometry_type = "Polygon"
 dont_simplify = true
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, tags -> 'operator' AS operator, convert_power(output)/1e6 AS output, first_semi(source) AS source, plant_label(name, output, source) AS label, construction = '' AS construction, tags -> 'wikidata' AS wikidata, tags -> 'wikipedia' AS wikipedia, tags -> 'url' AS url FROM power_plant WHERE construction = '' AND geometry && !BBOX! AND !ZOOM! >= 11 ORDER BY convert_power(output) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, tags -> 'operator' AS operator, convert_power(output)/1e6 AS output, first_semi(source) AS source, plant_label(name, output, source) AS label, construction = '' AS construction, tags -> 'wikidata' AS wikidata, tags -> 'wikipedia' AS wikipedia, osm_url(tags) AS url FROM power_plant WHERE construction = '' AND geometry && !BBOX! AND !ZOOM! >= 11 ORDER BY convert_power(output) ASC NULLS FIRST"
 
 [[providers.layers]]
 name = "power_plant_point"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, round(ST_Area(geometry)) AS area, name, tags -> 'operator' AS operator, convert_power(output)/1e6 AS output, first_semi(source) AS source, construction = '' AS construction, tags -> 'wikidata' AS wikidata, tags -> 'wikipedia' AS wikipedia, tags -> 'url' AS url  FROM power_plant WHERE construction = '' AND geometry && !BBOX! AND !ZOOM! >= 2 AND NOT ST_IsEmpty(geometry) ORDER BY convert_power(output) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, round(ST_Area(geometry)) AS area, name, tags -> 'operator' AS operator, convert_power(output)/1e6 AS output, first_semi(source) AS source, construction = '' AS construction, tags -> 'wikidata' AS wikidata, tags -> 'wikipedia' AS wikipedia, osm_url(tags) AS url  FROM power_plant WHERE construction = '' AND geometry && !BBOX! AND !ZOOM! >= 2 AND NOT ST_IsEmpty(geometry) ORDER BY convert_power(output) ASC NULLS FIRST"
 
 [[providers.layers]]
 name = "power_generator"
