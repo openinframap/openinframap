@@ -49,6 +49,7 @@ CREATE OR REPLACE FUNCTION power_lines(zoom INT, search_geom geometry) RETURNS
 		location character varying,
 		line character varying,
 		voltage character varying,
+		circuits integer,
 		frequency character varying,
 		construction character varying,
 		tunnel boolean,
@@ -62,7 +63,7 @@ BEGIN
 		RETURN QUERY SELECT osm_id, osm_power_line_gen_500.geometry, 
 			osm_power_line_gen_500.type, osm_power_line_gen_500.location,
 			osm_power_line_gen_500.line, osm_power_line_gen_500.voltage,
-			osm_power_line_gen_500.frequency,
+			osm_power_line_gen_500.circuits, osm_power_line_gen_500.frequency,
 			osm_power_line_gen_500.construction, osm_power_line_gen_500.tunnel,
 			line_voltages(osm_power_line_gen_500.voltage, osm_power_line_gen_500.circuits) AS voltages,
 			osm_power_line_gen_500.tags
@@ -72,7 +73,7 @@ BEGIN
 		RETURN QUERY SELECT osm_id, osm_power_line_gen_100.geometry, 
 			osm_power_line_gen_100.type, osm_power_line_gen_100.location,
 			osm_power_line_gen_100.line, osm_power_line_gen_100.voltage,
-			osm_power_line_gen_100.frequency,
+			osm_power_line_gen_100.circuits, osm_power_line_gen_100.frequency,
 			osm_power_line_gen_100.construction, osm_power_line_gen_100.tunnel,
 			line_voltages(osm_power_line_gen_100.voltage, osm_power_line_gen_100.circuits) AS voltages,
 			osm_power_line_gen_100.tags
@@ -81,7 +82,7 @@ BEGIN
 	ELSE
 		RETURN QUERY SELECT osm_id, osm_power_line.geometry, 
 			osm_power_line.type, osm_power_line.location, osm_power_line.line,
-			osm_power_line.voltage, osm_power_line.frequency,
+			osm_power_line.voltage, osm_power_line.circuits, osm_power_line.frequency,
 			osm_power_line.construction, osm_power_line.tunnel,
 			line_voltages(osm_power_line.voltage, osm_power_line.circuits) AS voltages,
 			osm_power_line.tags
