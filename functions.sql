@@ -181,3 +181,11 @@ create or replace function ZRes (z float)
 $func$
 select (40075016.6855785/(256*2^z));
 $func$;
+
+create or replace function osm_url (tags HSTORE)
+    returns text
+    immutable
+    returns null on null input AS $$
+SELECT COALESCE(tags -> 'website', tags -> 'contact:website', tags -> 'url');
+$$ LANGUAGE sql;
+    
