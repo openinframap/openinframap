@@ -2,6 +2,7 @@ import './infopopup.css';
 
 import mapboxgl from 'mapbox-gl';
 import titleCase from 'title-case';
+import browserLanguage from 'in-browser-language';
 import {el, text, mount, unmount, setChildren, setStyle} from 'redom';
 
 const hidden_keys = [
@@ -115,10 +116,6 @@ class InfoPopup {
     }
 
     let links_container = el('div');
-    let wp_link = this.wp_link(feature.properties['wikipedia']);
-    if (wp_link) {
-      mount(links_container, wp_link);
-    }
 
     mount(
       links_container,
@@ -137,11 +134,17 @@ class InfoPopup {
       wikidata_div = el('div');
       this.fetch_wikidata(
         feature.properties['wikidata'],
-        feature.properties['wikipedia'],
         wikidata_div,
         links_container,
       );
+    } else {
+      let wp_link = this.wp_link(feature.properties['wikipedia']);
+      if (wp_link) {
+        mount(links_container, wp_link);
+      }
     }
+
+
     let content = el(
       'div',
       el('h3', title_text),
@@ -163,7 +166,7 @@ class InfoPopup {
       .addTo(this._map);
   }
 
-  fetch_wikidata(id, wp_link, container, links_container) {
+  fetch_wikidata(id, container, links_container) {
     fetch(`https://openinframap.org/wikidata/${id}`)
       .then(response => {
         return response.json();
@@ -187,15 +190,20 @@ class InfoPopup {
           );
         }
 
-        if (data['sitelinks']['enwiki'] && !wp_link) {
-          mount(
-            links_container,
-            el('a', el('div.ext_link.wikipedia_link'), {
-              href: data['sitelinks']['enwiki']['url'],
-              target: '_blank',
-              title: 'Wikipedia',
-            }),
-          );
+        let languages = browserLanguage.list();
+        languages.push("en");
+        for (const lang of languages) {
+          if (data['sitelinks'][`${lang}wiki`]) {
+            mount(
+              links_container,
+              el('a', el('div.ext_link.wikipedia_link'), {
+                href: data['sitelinks'][`${lang}wiki`]['url'],
+                target: '_blank',
+                title: 'Wikipedia',
+              }),
+            );
+            break;
+          }
         }
 
         if (data['sitelinks']['commonswiki']) {
