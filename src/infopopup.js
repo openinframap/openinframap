@@ -14,7 +14,7 @@ const hidden_keys = [
   'is_node',
   'area',
   'gid',
-  'ref_len'
+  'ref_len',
 ];
 
 class InfoPopup {
@@ -84,6 +84,10 @@ class InfoPopup {
       value += ' MW';
     }
 
+    if (key == 'frequency' && value == '0') {
+      value = 'DC';
+    }
+
     if (key == 'url') {
       value = el('a', 'Website', {
         href: value,
@@ -92,7 +96,17 @@ class InfoPopup {
       key = 'Website';
     }
 
-    key = titleCase(key);
+    if (key == 'repd_id') {
+      key = 'REPD ID';
+      value = value.split(';').map(id =>
+        el('span', el('a', id, {
+          href: `https://repd.russss.dev/repd/repd/${id}`,
+          target: '_blank',
+        }), text(', ')),
+      );
+    } else { 
+      key = titleCase(key);
+    }
 
     return el('tr', el('th', key), el('td', value));
   }
@@ -144,7 +158,6 @@ class InfoPopup {
       }
     }
 
-
     let content = el(
       'div',
       el('h3', title_text),
@@ -191,7 +204,7 @@ class InfoPopup {
         }
 
         let languages = browserLanguage.list();
-        languages.push("en");
+        languages.push('en');
         for (const lang of languages) {
           if (data['sitelinks'][`${lang}wiki`]) {
             mount(
