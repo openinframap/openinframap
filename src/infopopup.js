@@ -13,6 +13,7 @@ const hidden_keys = [
   'is_node',
   'area',
   'gid',
+  'ref_len'
 ];
 
 class InfoPopup {
