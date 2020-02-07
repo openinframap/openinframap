@@ -197,6 +197,17 @@ class InfoPopup {
           );
         }
 
+        if (data['sitelinks']['commonswiki']) {
+          mount(
+            links_container,
+            el('a', el('div.ext_link.commons_link'), {
+              href: data['sitelinks']['commonswiki']['url'],
+              target: '_blank',
+              title: 'Wikimedia Commons',
+            }),
+          );
+        }
+
         mount(
           links_container,
           el('a', el('div.ext_link.wikidata_link'), {
