@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.common.js",
   "scripts": {
-    "start": "webpack-dev-server --open --config webpack.dev.js --mode development",
+    "start": "webpack-dev-server --open --config webpack.dev.js --mode development --host 0.0.0.0",
     "build": "webpack --config webpack.prod.js --mode production"
   },
   "repository": {

@@ -1,10 +1,10 @@
 .oim-key-control {
   min-height: 30px;
   min-width: 30px;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>') white;
   background-repeat: no-repeat;
   background-size: 20px 20px;
   background-position: center;
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' viewBox='0 0 64 80' style='enable-background:new 0 0 64 64;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0{fill:none;stroke:%23000000;stroke-width:2;stroke-miterlimit:10;} .st1{fill:none;stroke:%23000000;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;} .st2{fill:%23231F20;} %3C/style%3E%3Cg%3E%3Cline class='st1' x1='1' y1='60' x2='25' y2='35.563'/%3E%3Cline class='st2' x1='1' y1='60' x2='25' y2='35.563'/%3E%3C/g%3E%3Cg%3E%3Cg%3E%3Cpath class='st0' d='M36.63,37.518c6.907,2.903,15.181,1.542,20.805-4.083c7.42-7.42,7.42-19.45,0-26.87s-19.45-7.42-26.87,0 c-5.569,5.569-6.958,13.734-4.168,20.598L1,53v10c0,0,11,0,11,0l3-3c0,0,0-6.5,0-6.5l6,0c0,0,0-4,0-4c0,0,4,0,4,0c0,0,0-6,0-6l6,0 C31,43.5,36.63,37.518,36.63,37.518z'/%3E%3Cellipse transform='matrix(0.7071 -0.7071 0.7071 0.7071 3.2807 38.8492)' class='st0' cx='48.536' cy='15.464' rx='4' ry='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 .oim-key-panel {

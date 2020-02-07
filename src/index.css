@@ -23,14 +23,18 @@ header {
   z-index: 2;
   padding: 4px;
   border-radius: 0px 0px 4px 0px;
-  border-right: 1px #ddd solid;
-  border-bottom: 1px #ddd solid;
-  background-color: rgba(255, 255, 255, 0.75);
+  border-right: 1px #eee solid;
+  border-bottom: 1px #eee solid;
+  background-color: rgba(255, 255, 255, 0.5);
   top: 0px;
   left: 0px;
   position: absolute;
   display: block;
   font-size: 13px;
+}
+
+header, .mapboxgl-ctrl.mapboxgl-ctrl-attrib {
+  backdrop-filter: blur(3px) saturate(80%);
 }
 
 h1 {

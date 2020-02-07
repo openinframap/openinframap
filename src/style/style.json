@@ -31,7 +31,7 @@
       "url": "https://openinframap.org/map.json"
     }
   },
-  "sprite": "",
+  "sprite": "https://openinframap.org/style/sprite",
   "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=4HQAZUSrAg563kYxgVEy",
   "layers": [],
   "id": "openinframap"

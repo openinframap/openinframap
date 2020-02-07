@@ -4,6 +4,17 @@ import mapboxgl from 'mapbox-gl';
 import titleCase from 'title-case';
 import {el, text, mount, unmount, setChildren, setStyle} from 'redom';
 
+const hidden_keys = [
+  'name',
+  'wikidata',
+  'wikipedia',
+  'construction',
+  'tunnel',
+  'is_node',
+  'area',
+  'gid',
+];
+
 class InfoPopup {
   constructor(layers, min_zoom) {
     this.layers = layers;
@@ -35,19 +46,28 @@ class InfoPopup {
   }
 
   osmLink(id, is_node) {
+    let url = '';
+    let value = '';
     if (id > 0) {
       if (is_node) {
-        return `https://openstreetmap.org/node/${id}`;
+        url = `https://openstreetmap.org/node/${id}`;
+        value = `Node ${id}`;
       } else {
-        return `https://openstreetmap.org/way/${id}`;
+        url = `https://openstreetmap.org/way/${id}`;
+        value = `Way ${id}`;
       }
     } else {
-      return `https://openstreetmap.org/relation/${-id}`;
+      url = `https://openstreetmap.org/relation/${-id}`;
+      value = `Relation ${-id}`;
     }
+    return el('a', value, {
+      href: url,
+      target: '_blank',
+    });
   }
 
   renderKey(key, value, other_props) {
-    if (key == 'name') {
+    if (hidden_keys.includes(key)) {
       return null;
     }
     if (!value) {
@@ -62,26 +82,28 @@ class InfoPopup {
       value += ' MW';
     }
 
-    if (key == 'gid') {
-      key = 'OSM ID';
-      value = el('a', value, {
-        href: this.osmLink(value, other_props['is_node']),
+    if (key == 'url') {
+      value = el('a', 'Website', {
+        href: value,
         target: '_blank',
       });
-    } else {
-      key = titleCase(key);
+      key = 'Website';
     }
+
+    key = titleCase(key);
 
     return el('tr', el('th', key), el('td', value));
   }
 
   popupHtml(feature) {
-    let attrs_table = el('table', {'class': 'item_info'});
+    let attrs_table = el('table', {class: 'item_info'});
     setChildren(
       attrs_table,
-      Object.keys(feature.properties).sort().map(key =>
-        this.renderKey(key, feature.properties[key], feature.properties),
-      ),
+      Object.keys(feature.properties)
+        .sort()
+        .map(key =>
+          this.renderKey(key, feature.properties[key], feature.properties),
+        ),
     );
 
     let title_text = '';
@@ -90,7 +112,42 @@ class InfoPopup {
     } else {
       title_text = feature.layer['id'];
     }
-    let content = el('div', el('h3', title_text), attrs_table);
+
+    let links_container = el('div');
+    let wp_link = this.wp_link(feature.properties['wikipedia']);
+    if (wp_link) {
+      mount(links_container, wp_link);
+    }
+
+    mount(
+      links_container,
+      el('a', el('div.ext_link.osm_link'), {
+        href: this.osmLink(
+          feature.properties['gid'],
+          feature.properties['is_node'],
+        ),
+        target: '_blank',
+        title: 'OpenStreetMap',
+      }),
+    );
+
+    let wikidata_div = null;
+    if (feature.properties['wikidata']) {
+      wikidata_div = el('div');
+      this.fetch_wikidata(
+        feature.properties['wikidata'],
+        feature.properties['wikipedia'],
+        wikidata_div,
+        links_container,
+      );
+    }
+    let content = el(
+      'div',
+      el('h3', title_text),
+      links_container,
+      wikidata_div,
+      attrs_table,
+    );
     return content;
   }
 
@@ -98,10 +155,72 @@ class InfoPopup {
     if (this.popup_obj && this.popup_obj.isOpen()) {
       this.popup_obj.remove();
     }
+
     this.popup_obj = new mapboxgl.Popup()
       .setLngLat(e.lngLat)
       .setDOMContent(this.popupHtml(e.features[0]))
       .addTo(this._map);
+  }
+
+  fetch_wikidata(id, wp_link, container, links_container) {
+    fetch(`https://openinframap.org/wikidata/${id}`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        if (data['thumbnail']) {
+          mount(
+            container,
+            el(
+              'a',
+              el('img.wikidata_image', {
+                src: data['thumbnail'],
+              }),
+              {
+                href: `https://commons.wikimedia.org/wiki/File:${
+                  data['image']
+                }`,
+                target: '_blank',
+              },
+            ),
+          );
+        }
+
+        if (data['sitelinks']['enwiki'] && !wp_link) {
+          mount(
+            links_container,
+            el('a', el('div.ext_link.wikipedia_link'), {
+              href: data['sitelinks']['enwiki']['url'],
+              target: '_blank',
+              title: 'Wikipedia',
+            }),
+          );
+        }
+
+        mount(
+          links_container,
+          el('a', el('div.ext_link.wikidata_link'), {
+            href: `https://wikidata.org/wiki/${id}`,
+            target: '_blank',
+            title: 'Wikidata',
+          }),
+        );
+      });
+  }
+
+  wp_link(value) {
+    if (!value) {
+      return null;
+    }
+    let parts = value.split(':', 2);
+    if (parts.length > 1) {
+      let url = `https://${parts[0]}.wikipedia.org/wiki/${parts[1]}`;
+      return el('a', el('div.ext_link.wikipedia_link'), {
+        href: url,
+        target: '_blank',
+        title: 'Wikipedia',
+      });
+    }
   }
 }
 

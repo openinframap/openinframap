@@ -55,8 +55,7 @@ function init() {
 
   if (DEV) {
     map_style['sprite'] = 'http://localhost:8080/style/sprite';
-  } else {
-    map_style['sprite'] = 'https://openinframap.org/style/sprite';
+    //map_style['sources']['openinframap']['url'] = 'http://localhost:8081/capabilities/openinframap.json'
   }
 
   var map = new mapboxgl.Map({
