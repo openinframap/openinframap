@@ -2,8 +2,8 @@ import {text_paint, operator_text, underground_p} from './style_oim_common.js';
 
 const substance = ["coalesce", ["get", "substance"], ["get", "type"], ""];
 
-const colour_gas = '#E0DC7E';
-const colour_oil = '#E5B393';
+const colour_gas = '#BFBC6B';
+const colour_oil = '#CC9F83';
 
 const pipeline_colour = ["match",
   substance,
@@ -34,7 +34,7 @@ const layers = [
       'line-color': '#666666',
       'line-width': ['interpolate', ['linear'], ['zoom'],
         8, 1.5,
-        13, 4
+        13, 5
       ],
     },
     layout: {
@@ -52,8 +52,8 @@ const layers = [
     paint: {
       'line-color': pipeline_colour,
       'line-width': ['interpolate', ['linear'], ['zoom'],
-        3, 0.3,
-        13, 2
+        3, 1,
+        13, 3.5
       ],
     },
   },
