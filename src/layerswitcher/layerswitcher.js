@@ -1,12 +1,41 @@
 import {el, text} from 'redom';
+import invert from 'lodash.invert';
+import isEqual from 'lodash.isequal';
 import './layerswitcher.css';
 
 class LayerSwitcher {
-  constructor(layers, visible = []) {
+  constructor(layers, default_visible = []) {
     this._layers = layers;
-    this._visible = visible;
+    this._identifiers = this._initLayerIdentifiers();
+    this._default_visible = default_visible;
     this._container = el('div', {class: 'mapboxgl-ctrl layer-switcher-list'});
     this._container.appendChild(el('h3', 'Layers'));
+    this._visible = [...default_visible];
+  }
+
+  _initLayerIdentifiers() {
+    let identifiers = {};
+    Object.keys(this._layers)
+      .sort()
+      .forEach(layer_name => {
+        let size = 1;
+        let ident = null;
+        do {
+          ident = layer_name.slice(0, size);
+          size++;
+        } while (ident in identifiers);
+        identifiers[ident] = layer_name;
+      });
+    return identifiers;
+  }
+
+  _getLayerIdentifiers() {
+    let identifiers = [];
+    let id_map = invert(this._identifiers);
+    this._visible.sort().forEach(layer_name => {
+      identifiers.push(id_map[layer_name]);
+    });
+    return identifiers;
   }
 
   _updateVisibility() {
@@ -24,10 +53,13 @@ class LayerSwitcher {
         }
       }
     }
+    if (this.urlhash) {
+      this.urlhash._updateHash();
+    }
   }
 
   setInitialVisibility(style) {
-    /** 
+    /**
      * Modify a map style before adding to the map to set initial visibility states.
      * This prevents flash-of-invisible-layers.
      */
@@ -45,6 +77,29 @@ class LayerSwitcher {
         }
       }
     }
+  }
+
+  getURLString() {
+    if (!isEqual(this._visible.sort(), this._default_visible.sort())) {
+      return this._getLayerIdentifiers().join(',');
+    }
+    return null;
+  }
+
+  setURLString(string) {
+    if (string) {
+      const ids = string.split(',');
+      if (ids.length == 0) {
+        this._visible = [...this._default_visible];
+      } else {
+        this._visible = ids.map(id => this._identifiers[id]).filter(id => id);
+      }
+    } else {
+      this._visible = [...this._default_visible];
+    }
+    if (this._map) {
+      this._updateVisibility();
+    } 
   }
 
   onAdd(map) {
@@ -91,7 +146,8 @@ class LayerSwitcher {
         this._updateVisibility();
       };
 
-      list.appendChild(el('li', [checkbox, label]));
+      let li = el('li', [label, checkbox]);
+      list.appendChild(li);
       i++;
     }
     this._container.appendChild(list);

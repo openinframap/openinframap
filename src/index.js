@@ -4,13 +4,15 @@ import mapboxgl from 'mapbox-gl';
 import {mount} from 'redom';
 
 import EditButton from './editbutton.js';
+import URLHash from './urlhash.js';
 import InfoBox from './infobox.js';
 import InfoPopup from './infopopup.js';
 import KeyControl from './key/key.js';
-import LayerSwitcher from './layerswitcher.js';
+import LayerSwitcher from './layerswitcher/layerswitcher.js';
 
 import map_style from './style/style.json';
 import style_base from './style/style_base.js';
+import style_labels from './style/style_labels.js';
 import style_oim_power from './style/style_oim_power.js';
 import style_oim_power_heatmap from './style/style_oim_power_heatmap.js';
 import style_oim_telecoms from './style/style_oim_telecoms.js';
@@ -53,25 +55,32 @@ function init() {
     Telecoms: 'telecoms_',
     'Oil & Gas': 'petroleum_',
     Water: 'water_',
+    Labels: 'place_',
   };
-  const layers_enabled = ['Power', 'Telecoms'];
+  const layers_enabled = ['Power', 'Telecoms', 'Labels'];
   const layer_switcher = new LayerSwitcher(layers, layers_enabled);
+  var url_hash = new URLHash(layer_switcher);
+  layer_switcher.urlhash = url_hash;
 
-  map_style.layers = style_base.concat(oim_layers);
+  map_style.layers = style_base.concat(oim_layers, style_labels);
+
+  layer_switcher.setInitialVisibility(map_style);
 
   if (DEV) {
     map_style['sprite'] = 'http://localhost:8080/style/sprite';
     //map_style['sources']['openinframap']['url'] = 'http://localhost:8081/capabilities/openinframap.json'
   }
 
-  var map = new mapboxgl.Map({
+  var map = new mapboxgl.Map(Object.assign({
     container: 'map',
     style: map_style,
-    hash: true,
+    hash: false,
     minZoom: 2,
     maxZoom: 17.9,
     center: [12, 26],
-  });
+  }, url_hash.getPosition()));
+
+  url_hash.onAdd(map);
   map.addControl(new mapboxgl.NavigationControl(), 'top-right');
   map.addControl(
     new mapboxgl.GeolocateControl({
