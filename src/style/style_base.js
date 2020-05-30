@@ -136,9 +136,6 @@ const layers = [
   {
     id: 'tunnel_motorway_casing',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 6,
@@ -164,9 +161,6 @@ const layers = [
   {
     id: 'tunnel_motorway_inner',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 6,
@@ -191,9 +185,6 @@ const layers = [
   {
     id: 'aeroway-taxiway',
     type: 'line',
-    metadata: {
-      'mapbox:group': '1444849345966.4436',
-    },
     source: 'openmaptiles',
     'source-layer': 'aeroway',
     minzoom: 12,
@@ -215,9 +206,6 @@ const layers = [
   {
     id: 'aeroway-runway-casing',
     type: 'line',
-    metadata: {
-      'mapbox:group': '1444849345966.4436',
-    },
     source: 'openmaptiles',
     'source-layer': 'aeroway',
     minzoom: 11,
@@ -239,9 +227,6 @@ const layers = [
   {
     id: 'aeroway-area',
     type: 'fill',
-    metadata: {
-      'mapbox:group': '1444849345966.4436',
-    },
     source: 'openmaptiles',
     'source-layer': 'aeroway',
     minzoom: 4,
@@ -264,9 +249,6 @@ const layers = [
   {
     id: 'aeroway-runway',
     type: 'line',
-    metadata: {
-      'mapbox:group': '1444849345966.4436',
-    },
     source: 'openmaptiles',
     'source-layer': 'aeroway',
     minzoom: 11,
@@ -288,9 +270,6 @@ const layers = [
   {
     id: 'highway_path',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     filter: ['all', ['==', '$type', 'LineString'], ['==', 'class', 'path']],
@@ -311,9 +290,6 @@ const layers = [
   {
     id: 'highway_minor_casing',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 8,
@@ -338,9 +314,6 @@ const layers = [
   {
     id: 'highway_minor',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 8,
@@ -365,9 +338,6 @@ const layers = [
   {
     id: 'highway_major_casing',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 11,
@@ -393,9 +363,6 @@ const layers = [
   {
     id: 'highway_major_inner',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 11,
@@ -420,9 +387,6 @@ const layers = [
   {
     id: 'highway_major_subtle',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     maxzoom: 11,
@@ -444,9 +408,6 @@ const layers = [
   {
     id: 'highway_motorway_casing',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 6,
@@ -477,9 +438,6 @@ const layers = [
   {
     id: 'highway_motorway_inner',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 6,
@@ -511,9 +469,6 @@ const layers = [
   {
     id: 'highway_motorway_subtle',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     maxzoom: 6,
@@ -534,9 +489,6 @@ const layers = [
   {
     id: 'railway_transit',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 16,
@@ -557,9 +509,6 @@ const layers = [
   {
     id: 'railway_transit_dashline',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 16,
@@ -581,9 +530,6 @@ const layers = [
   {
     id: 'railway_service',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 16,
@@ -604,9 +550,6 @@ const layers = [
   {
     id: 'railway_service_dashline',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 16,
@@ -629,9 +572,6 @@ const layers = [
   {
     id: 'railway',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 7,
@@ -655,9 +595,6 @@ const layers = [
   {
     id: 'railway_dashline',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 11,
@@ -682,9 +619,6 @@ const layers = [
   {
     id: 'highway_motorway_bridge_casing',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 6,
@@ -711,9 +645,6 @@ const layers = [
   {
     id: 'highway_motorway_bridge_inner',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
-    },
     source: 'openmaptiles',
     'source-layer': 'transportation',
     minzoom: 6,
@@ -741,9 +672,6 @@ const layers = [
   {
     id: 'boundary_country',
     type: 'line',
-    metadata: {
-      'mapbox:group': 'a14c9607bc7954ba1df7205bf660433f',
-    },
     source: 'openmaptiles',
     'source-layer': 'boundary',
     filter: ['==', 'admin_level', 2],
