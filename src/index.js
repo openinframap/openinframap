@@ -28,6 +28,12 @@ function init() {
     mount(document.body, infobox);
   }
 
+  mapboxgl.setRTLTextPlugin(
+    'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
+    null,
+    true, // Lazy load the plugin
+  );
+
   var oim_layers = style_oim_power.concat(
     style_oim_power_heatmap,
     style_oim_petroleum,
@@ -42,13 +48,13 @@ function init() {
   });
 
   const layers = {
-    'Power': 'power_',
+    Power: 'power_',
     'Solar Generation': 'heatmap_',
-    'Telecoms': 'telecoms_',
+    Telecoms: 'telecoms_',
     'Oil & Gas': 'petroleum_',
-    'Water': 'water_',
+    Water: 'water_',
   };
-  const layers_enabled = ['Power', 'Telecoms', 'Oil & Gas', 'Water'];
+  const layers_enabled = ['Power', 'Telecoms'];
   const layer_switcher = new LayerSwitcher(layers, layers_enabled);
 
   map_style.layers = style_base.concat(oim_layers);
