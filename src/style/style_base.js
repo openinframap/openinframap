@@ -1,4 +1,5 @@
 // Base Style, adapted from MapTiler's Positron theme.
+
 const layers = [
   {
     id: 'background',
@@ -30,7 +31,7 @@ const layers = [
       visibility: 'visible',
     },
     paint: {
-      'fill-color': 'rgb(194, 200, 202)',
+      'fill-color': 'hsl(207, 12%, 78%)',
       'fill-antialias': true,
     },
   },
@@ -100,7 +101,7 @@ const layers = [
       visibility: 'visible',
     },
     paint: {
-      'fill-color': 'rgb(220,224,220)',
+      'fill-color': 'rgb(220,226,220)',
       'fill-opacity': {
         base: 1,
         stops: [[8, 0], [12, 1]],
@@ -117,7 +118,7 @@ const layers = [
       visibility: 'visible',
     },
     paint: {
-      'line-color': 'hsl(195, 17%, 78%)',
+      'line-color': 'hsl(207, 20%, 78%)',
     },
   },
   {
@@ -308,6 +309,33 @@ const layers = [
     },
   },
   {
+    id: 'highway_minor_casing',
+    type: 'line',
+    metadata: {
+      'mapbox:group': 'b6371a3f2f5a9932464fa3867530a2e5',
+    },
+    source: 'openmaptiles',
+    'source-layer': 'transportation',
+    minzoom: 8,
+    filter: [
+      'all',
+      ['==', '$type', 'LineString'],
+      ['in', 'class', 'minor', 'service', 'track'],
+    ],
+    layout: {
+      'line-cap': 'round',
+      'line-join': 'round',
+      visibility: 'visible',
+    },
+    paint: {
+      'line-color': 'hsl(0, 0%, 83%)',
+      'line-width': {
+        base: 1.3,
+        stops: [[13, 1.9], [20, 21]],
+      },
+    },
+  },
+  {
     id: 'highway_minor',
     type: 'line',
     metadata: {
@@ -327,12 +355,11 @@ const layers = [
       visibility: 'visible',
     },
     paint: {
-      'line-color': 'hsl(0, 0%, 88%)',
+      'line-color': 'hsl(0, 0%, 92%)',
       'line-width': {
         base: 1.55,
         stops: [[13, 1.8], [20, 20]],
       },
-      'line-opacity': 0.9,
     },
   },
   {
@@ -411,7 +438,7 @@ const layers = [
     },
     paint: {
       'line-color': 'hsla(0, 0%, 85%, 0.69)',
-      'line-width': 2,
+      'line-width': 1,
     },
   },
   {
@@ -499,8 +526,8 @@ const layers = [
     paint: {
       'line-color': 'hsla(0, 0%, 85%, 0.53)',
       'line-width': {
-        base: 1.4,
-        stops: [[4, 2], [6, 1.3]],
+        base: 1,
+        stops: [[4, 1], [6, 1.3]],
       },
     },
   },
@@ -607,7 +634,7 @@ const layers = [
     },
     source: 'openmaptiles',
     'source-layer': 'transportation',
-    minzoom: 9,
+    minzoom: 7,
     filter: [
       'all',
       ['==', '$type', 'LineString'],
@@ -712,31 +739,6 @@ const layers = [
     },
   },
   {
-    id: 'boundary_state',
-    type: 'line',
-    metadata: {
-      'mapbox:group': 'a14c9607bc7954ba1df7205bf660433f',
-    },
-    source: 'openmaptiles',
-    'source-layer': 'boundary',
-    filter: ['==', 'admin_level', 4],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round',
-      visibility: 'visible',
-    },
-    paint: {
-      'line-color': 'rgb(230, 204, 207)',
-      'line-width': {
-        base: 1.3,
-        stops: [[3, 1], [22, 15]],
-      },
-      'line-blur': 0.4,
-      'line-dasharray': [2, 2],
-      'line-opacity': 1,
-    },
-  },
-  {
     id: 'boundary_country',
     type: 'line',
     metadata: {
@@ -759,7 +761,7 @@ const layers = [
         base: 1,
         stops: [[0, 0.4], [22, 4]],
       },
-      'line-opacity': 1,
+      'line-dasharray': [4, 4]
     },
   },
 ];
