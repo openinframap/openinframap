@@ -814,6 +814,7 @@ const layers = [
     minzoom: 8,
     maxzoom: 24,
     layout: {
+      'symbol-sort-key': ['-', 10000, ['get', 'voltage']],
       'symbol-z-order': 'source',
       'text-field': substation_label,
       'text-anchor': 'top',
@@ -849,7 +850,9 @@ const layers = [
     minzoom: 6,
     maxzoom: 24,
     layout: {
+      'symbol-sort-key': ['-', 10000, ['get', 'output']],
       'symbol-z-order': 'source',
+      'icon-allow-overlap': true,
       'icon-image': plant_image(),
       'icon-size': ['interpolate', ['linear'], ['zoom'], 6, 0.6, 10, 0.8],
       'text-field': plant_label,

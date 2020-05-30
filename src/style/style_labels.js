@@ -80,7 +80,7 @@ const layers = [
     source: 'openmaptiles',
     'source-layer': 'place',
     minzoom: 7.5,
-    maxzoom: 14,
+    maxzoom: 12,
     filter: [
       'all',
       ['==', '$type', 'Point'],
