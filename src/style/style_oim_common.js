@@ -6,7 +6,7 @@ const text_paint = {
 
 const operator_text = ["step", ["zoom"],
         ['get', 'name'],
-        14, ["case", ['!=', ['get', 'operator'], ''],
+        14, ["case", ['has', 'operator'],
               ["concat", ['get', 'name'], ' (', ['get', 'operator'], ')'],
               ['get', 'name']
         ]
