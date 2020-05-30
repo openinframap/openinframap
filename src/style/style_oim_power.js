@@ -272,6 +272,15 @@ const plant_label_visible_p = [
   ['>', ['zoom'], 10],
 ];
 
+const plant_label = [
+  'case',
+  ['all', ['!', ['has', 'name']], ['has', 'output']],
+  ['concat', ['get', 'output'], ' MW'],
+  ['has', 'output'],
+  ['concat', ['get', 'name'], ' \n', ['get', 'output'], ' MW'],
+  ['get', 'name'],
+];
+
 function plant_image() {
   let expr = ['match', ['get', 'source']];
   for (const [key, value] of Object.entries(plant_types)) {
@@ -289,8 +298,8 @@ const construction_label = [
   'case',
   construction_p,
   ' (under construction) ',
-  ''
-]
+  '',
+];
 
 const freq = [
   'case',
@@ -301,7 +310,6 @@ const freq = [
   '',
 ];
 
-// TODO: circuits not in DB :(
 const circuits = [
   'case',
   ['all', ['has', 'circuits'], ['>', ['to-number', ['get', 'circuits']], 1]],
@@ -311,7 +319,11 @@ const circuits = [
 
 const line_voltage = [
   'case',
-  ['all', ['has', 'voltage_3'], ["!=", ['get', 'voltage_3'], ['get', 'voltage_2']]],
+  [
+    'all',
+    ['has', 'voltage_3'],
+    ['!=', ['get', 'voltage_3'], ['get', 'voltage_2']],
+  ],
   [
     'concat',
     ['get', 'voltage'],
@@ -321,7 +333,11 @@ const line_voltage = [
     ['get', 'voltage_3'],
     ' kV',
   ],
-  ['all', ['has', 'voltage_2'], ["!=", ['get', 'voltage_2'], ['get', 'voltage']]],
+  [
+    'all',
+    ['has', 'voltage_2'],
+    ['!=', ['get', 'voltage_2'], ['get', 'voltage']],
+  ],
   ['concat', ['get', 'voltage'], '/', ['get', 'voltage_2'], ' kV'],
   ['has', 'voltage'],
   ['concat', ['get', 'voltage'], ' kV'],
@@ -331,7 +347,15 @@ const line_voltage = [
 const line_label = [
   'case',
   ['all', ['has', 'voltage'], ['!=', ['get', 'name'], '']],
-  ['concat', ['get', 'name'], ' (', line_voltage, freq, ')', construction_label],
+  [
+    'concat',
+    ['get', 'name'],
+    ' (',
+    line_voltage,
+    freq,
+    ')',
+    construction_label,
+  ],
   ['has', 'voltage'],
   ['concat', circuits, line_voltage, freq, construction_label],
   ['get', 'name'],
@@ -340,9 +364,24 @@ const line_label = [
 const substation_label_detail = [
   'case',
   ['all', ['!=', ['get', 'name'], ''], ['has', 'voltage']],
-  ['concat', ['get', 'name'], ' ', ['get', 'voltage'], ' kV', freq, construction_label],
+  [
+    'concat',
+    ['get', 'name'],
+    ' ',
+    ['get', 'voltage'],
+    ' kV',
+    freq,
+    construction_label,
+  ],
   ['all', ['==', ['get', 'name'], ''], ['has', 'voltage']],
-  ['concat', 'Substation ', ['get', 'voltage'], ' kV', freq, construction_label],
+  [
+    'concat',
+    'Substation ',
+    ['get', 'voltage'],
+    ' kV',
+    freq,
+    construction_label,
+  ],
   ['get', 'name'],
 ];
 
@@ -366,9 +405,7 @@ const layers = [
     paint: {
       'line-opacity': ['case', construction_p, 0.2, 0.4],
       'line-color': '#7C4544',
-      'line-width': ['interpolate', ['linear'], ['zoom'],
-        12, 4, 18, 10
-      ],
+      'line-width': ['interpolate', ['linear'], ['zoom'], 12, 4, 18, 10],
     },
     layout: {
       'line-join': 'round',
@@ -815,14 +852,7 @@ const layers = [
       'symbol-z-order': 'source',
       'icon-image': plant_image(),
       'icon-size': ['interpolate', ['linear'], ['zoom'], 6, 0.6, 10, 0.8],
-      'text-field': [
-        'case',
-        ['all', ['==', ['get', 'name'], ''], ['has', 'output']],
-        ['concat', ['get', 'output'], ' MW'],
-        ['has', 'output'],
-        ['concat', ['get', 'name'], ' \n', ['get', 'output'], ' MW'],
-        ['get', 'name'],
-      ],
+      'text-field': plant_label,
       'text-anchor': 'top',
       'text-offset': [0, 1],
       'text-size': [
