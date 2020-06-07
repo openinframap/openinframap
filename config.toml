@@ -26,7 +26,7 @@ max_zoom = 17
 provider_layer = "postgis.power_plant"
 
 [[maps.layers]]
-min_zoom = 2
+min_zoom = 5
 max_zoom = 17
 provider_layer = "postgis.power_plant_point"
 
@@ -136,22 +136,22 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, tags -> 'opera
 [[providers.layers]]
 name = "power_plant_point"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, round(ST_Area(geometry)) AS area, name, tags -> 'operator' AS operator, convert_power(output)/1e6 AS output, first_semi(source) AS source, tags -> 'wikidata' AS wikidata, tags -> 'wikipedia' AS wikipedia, osm_url(tags) AS url, tags -> 'plant:storage' AS storage, tags -> 'repd:id' AS repd_id, tags -> 'construction:power' IS NOT NULL AS construction FROM power_plant WHERE AND geometry && !BBOX! AND !ZOOM! >= 2 AND NOT ST_IsEmpty(geometry) ORDER BY convert_power(output) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, round(ST_Area(geometry)) AS area, name, tags -> 'operator' AS operator, convert_power(output)/1e6 AS output, first_semi(source) AS source, tags -> 'wikidata' AS wikidata, tags -> 'wikipedia' AS wikipedia, osm_url(tags) AS url, tags -> 'plant:storage' AS storage, tags -> 'repd:id' AS repd_id, tags -> 'construction:power' IS NOT NULL AS construction FROM power_plant WHERE geometry && !BBOX! AND !ZOOM! >= 6 AND NOT ST_IsEmpty(geometry) ORDER BY convert_power(output) ASC NULLS FIRST"
 
 [[providers.layers]]
 name = "power_generator"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name, tags -> 'operator' AS operator, convert_power(output)/1e3 AS output, source, type, tags -> 'ref' AS ref, (ST_GeometryType(geometry) = 'ST_Point') AS is_node FROM osm_power_generator WHERE construction = '' AND geometry && !BBOX! AND !ZOOM! >= 9"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name, tags -> 'operator' AS operator, convert_power(tags -> 'generator:output:electricity')/1e3 AS output, source, type, tags -> 'ref' AS ref, (ST_GeometryType(geometry) = 'ST_Point') AS is_node FROM osm_power_generator WHERE construction = '' AND geometry && !BBOX! AND !ZOOM! >= 9"
 
 [[providers.layers]]
 name = "power_heatmap_solar"
 geometry_type = "Point"
-sql = "SELECT ST_AsBinary(ST_SnapToGrid(ST_Centroid(geometry), ZRes(!ZOOM!), ZRes(!ZOOM!))) AS geom, round(sum(coalesce(convert_power(output), solar_output(geometry), 0)) / 1e3) AS output FROM osm_power_generator WHERE source = 'solar' AND construction = '' AND geometry && !BBOX! GROUP BY geom"
+sql = "SELECT ST_AsBinary(ST_SnapToGrid(ST_Centroid(geometry), ZRes(!ZOOM!), ZRes(!ZOOM!))) AS geom, round(sum(coalesce(convert_power(tags -> 'generator:output:electricity'), solar_output(geometry), 0)) / 1e3) AS output FROM osm_power_generator WHERE source = 'solar' AND construction = '' AND geometry && !BBOX! GROUP BY geom"
 
 [[providers.layers]]
 name = "power_generator_area"
 geometry_type = "Polygon"
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'name' AS name, tags -> 'operator' AS operator, convert_power(output)/1e3 AS output, round(solar_output(geometry)/1e3) AS estimated_output, source, type, tags -> 'ref' AS ref FROM osm_power_generator WHERE geometry && !BBOX! AND construction = '' AND !ZOOM! >= 13 AND ST_GeometryType(geometry) = 'ST_Polygon'"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'name' AS name, tags -> 'operator' AS operator, convert_power(tags -> 'generator:output:electricity')/1e3 AS output, round(solar_output(geometry)/1e3) AS estimated_output, source, type, tags -> 'ref' AS ref FROM osm_power_generator WHERE geometry && !BBOX! AND construction = '' AND !ZOOM! >= 13 AND ST_GeometryType(geometry) = 'ST_Polygon'"
 
 [[providers.layers]]
 name = "power_transformer"
