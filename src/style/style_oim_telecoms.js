@@ -46,6 +46,7 @@ const layers = [
         14, 1
       ],
       'text-field': operator_text,
+      'text-font': ['Open Sans Regular'],
       'text-size': {
         "stops": [
           [11, 0],
@@ -72,6 +73,7 @@ const layers = [
     paint: text_paint,
     layout: {
       'text-field': operator_text,
+      'text-font': ['Open Sans Regular'],
       'text-size': {
         "stops": [
           [11, 0],
@@ -92,6 +94,7 @@ const layers = [
     paint: text_paint,
     layout: {
       'text-field': '{name}',
+      'text-font': ['Open Sans Regular'],
       'symbol-placement': 'line',
       'symbol-spacing': 400,
       'text-size': 10,

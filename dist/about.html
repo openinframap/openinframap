@@ -37,8 +37,6 @@
 	<li>The <a href="https://www.mapbox.com/mapbox-gl-js/api/">Mapbox GL JS</a> web interface</li>
       </ul>
 
-      <p>The background map data is kindly provided by <a href="https://www.maptiler.com/"><img width="150px" src="img/maptiler.png"></a>.</p>
-
       <h2>Where's the code?</h2>
       <p>You can find some bits of OIM on the
           <a href="https://github.com/openinframap/">openinframap Github organisation</a>.
@@ -69,7 +67,9 @@
       <p>All the data currently displayed on OpenInfraMap is sourced directly from OpenStreetMap.</p>
 
       <p>If you can consume vector data in Mapbox Vector Tiles format, you can fetch vector data directly
-	 from the OpenInfraMap tile server using the <a href="/map.json">TileJSON file</a>.</p>
+      from the OpenInfraMap tile server using the <a href="/map.json">TileJSON file</a>. The
+      <a href="https://plugins.qgis.org/plugins/vector_tiles_reader/">Vector Tiles Reader</a> plugin for QGIS can
+      read this, although it can be unreliable.</p>
 
       <p>If you need relatively small extracts of data, you can use
 	 <a href="https://overpass-turbo.eu/">Overpass Turbo</a> to generate these in GeoJSON and
