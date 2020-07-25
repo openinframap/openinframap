@@ -24,7 +24,7 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "https://tiles.russss.dev/services/osm"
+      "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=u7opxtdfvwPiFOPwMWeC"
     },
     "openinframap": {
       "type": "vector",
@@ -32,7 +32,7 @@
     }
   },
   "sprite": "https://openinframap.org/style/sprite",
-  "glyphs": "https://glfonts.lukasmartinelli.ch/fonts/{fontstack}/{range}.pbf",
+  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=u7opxtdfvwPiFOPwMWeC",
   "layers": [],
   "id": "openinframap"
 }
