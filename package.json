@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/openinframap/web#readme",
   "devDependencies": {
-    "@babel/core": "^7.7.2",
-    "@babel/preset-env": "^7.7.1",
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
     "@mapbox/spritezero": "^6.1.2",
     "babel-loader": "^8.0.6",
     "babel-preset-env": "^1.7.0",
@@ -27,23 +27,23 @@
     "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^1.0.1",
     "html-webpack-plugin": "^3.2.0",
+    "in-browser-language": "^1.0.3",
     "spritezero-webpack-plugin": "^0.1.1",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
+    "webpack": "^4.44.0",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.2.2",
-    "webpack-pwa-manifest": "^4.1.1",
-    "in-browser-language": "^1.0.3"
+    "webpack-pwa-manifest": "^4.1.1"
   },
   "dependencies": {
-    "mapbox-gl": "^1.10.1",
     "@russss/mapboxgl-layer-switcher": "^1.0.0",
-    "redom": "^3.24.2",
-    "title-case": "^2.1.1",
     "lodash.invert": "^4.3.0",
     "lodash.isequal": "^4.5.0",
-    "lodash.sortby": "^4.7.0"
+    "lodash.sortby": "^4.7.0",
+    "mapbox-gl": "^1.11.1",
+    "redom": "^3.27.1",
+    "title-case": "^2.1.1"
   }
 }
