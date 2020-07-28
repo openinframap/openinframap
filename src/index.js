@@ -1,14 +1,16 @@
 import './index.css';
+import '@russss/mapboxgl-layer-switcher/layerswitcher.css'
 import mapboxgl from 'mapbox-gl';
 
 import {mount} from 'redom';
 
+import LayerSwitcher from '@russss/mapboxgl-layer-switcher';
+import URLHash from '@russss/mapboxgl-layer-switcher/urlhash';
+
 import EditButton from './editbutton.js';
-import URLHash from './urlhash.js';
 import InfoBox from './infobox.js';
 import InfoPopup from './infopopup.js';
 import KeyControl from './key/key.js';
-import LayerSwitcher from './layerswitcher/layerswitcher.js';
 
 import map_style from './style/style.json';
 import style_base from './style/style_base.js';
@@ -71,16 +73,15 @@ function init() {
     //map_style['sources']['openinframap']['url'] = 'http://localhost:8081/capabilities/openinframap.json'
   }
 
-  var map = new mapboxgl.Map(Object.assign({
+  var map = new mapboxgl.Map(url_hash.init({
     container: 'map',
     style: map_style,
-    hash: false,
     minZoom: 2,
     maxZoom: 17.9,
     center: [12, 26],
-  }, url_hash.getPosition()));
+  }));
 
-  url_hash.onAdd(map);
+  url_hash.enable(map);
   map.addControl(new mapboxgl.NavigationControl(), 'top-right');
   map.addControl(
     new mapboxgl.GeolocateControl({

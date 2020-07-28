@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "mapbox-gl": "^1.10.1",
+    "@russss/mapboxgl-layer-switcher": "^1.0.0",
     "redom": "^3.24.2",
     "title-case": "^2.1.1",
     "lodash.invert": "^4.3.0",
