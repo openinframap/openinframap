@@ -8,7 +8,7 @@ DROP MATERIALIZED VIEW IF EXISTS power_substation_relation;
 DROP MATERIALIZED VIEW IF EXISTS power_plant_relation;
 
 -- Convert a power value into a numeric value in watts
-CREATE OR REPLACE FUNCTION convert_power(value TEXT) RETURNS NUMERIC IMMUTABLE AS $$
+CREATE OR REPLACE FUNCTION convert_power(value TEXT) RETURNS NUMERIC IMMUTABLE RETURNS NULL ON NULL INPUT AS $$
 DECLARE
   parts TEXT[];
   val NUMERIC;
@@ -27,7 +27,7 @@ END
 $$ LANGUAGE plpgsql;
 
 -- Select the highest voltage from a semicolon-delimited list
-CREATE OR REPLACE FUNCTION convert_voltage(value TEXT) RETURNS NUMERIC IMMUTABLE AS $$
+CREATE OR REPLACE FUNCTION convert_voltage(value TEXT) RETURNS NUMERIC IMMUTABLE RETURNS NULL ON NULL INPUT AS $$
 DECLARE
   parts TEXT[];
 BEGIN
@@ -158,9 +158,21 @@ CREATE OR REPLACE FUNCTION solar_output(geom GEOMETRY) RETURNS DOUBLE PRECISION 
 DECLARE
 BEGIN
 	IF ST_GeometryType(geom) = 'ST_Point' THEN
-		RETURN 1000; -- Assume point generators have a fixed output of 1 kW
+		RETURN 4000; -- Assume point generators have a fixed output of 4 kW
 	END IF;
 	RETURN area_sqm(geom) * 150; -- 150 W/m^2
+END
+$$ LANGUAGE plpgsql;
+
+-- Convert a number of modules (as text) into an output (in watts)
+CREATE OR REPLACE FUNCTION modules_output(modules TEXT) RETURNS DOUBLE PRECISION IMMUTABLE RETURNS NULL ON NULL INPUT AS $$
+DECLARE
+BEGIN
+	BEGIN
+		RETURN modules::INTEGER * 700;
+	EXCEPTION WHEN OTHERS THEN
+		RETURN NULL;
+	END;
 END
 $$ LANGUAGE plpgsql;
 
