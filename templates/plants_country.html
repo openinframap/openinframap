@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+{% block content -%}
+
+{% if plants|length == 0 %}
+  <p>There are currently no power plants mapped in {{country}} on OpenStreetMap.</p>
+{% else %}
+  <p>All {{plants|length}} power plants in {{country}}.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Output</th>
+        <th>Source</th>
+      </tr>
+    </thead>
+    {% for plant in plants %}
+      <tr>
+        <td>{{plant.osm_id}}</td>
+        <td>{{plant.name or ''}}</td>
+        <td>{{plant.output|power}}</td>
+        <td>{{plant.source}}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endif %}
+{% endblock %}
