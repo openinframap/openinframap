@@ -1,0 +1,51 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333;
+}
+
+a, a:visited {
+  color: #333;
+}
+
+header {
+  padding: 3px 8px;
+  background-color: #eee;
+}
+
+h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+h1 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#content {
+  margin: 0px 8px; 
+}
+
+footer {
+  margin-top: 20px;
+  padding: 8px 8px;
+  font-size: 0.8em;
+}
+
+footer, footer a, footer a:visited {
+  color: #666;
+}
+
+.plants-table {
+}
+
+.plants-table tr {
+  height: 40px;
+}
+

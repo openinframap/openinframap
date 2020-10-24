@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>OpenInfraMap Stats</title>
+  <title>{% block title %}{% endblock %}{% if self.title() %} - {% endif %}OpenInfraMap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="stylesheet" href="/static/main.css">
 </head>
 <body>
   <header>
-    <h1>OpenInfraMap Stats</h1>
+    <h1><a href="{{url_for('main')}}">OpenInfraMap Stats</a></h1>
   </header>
-  {% block content %}{% endblock %}
+  <div id="content">
+    {% block content %}{% endblock %}
+  </div>
   <footer>
     Data <a href="https://www.openstreetmap.org/copyright">&copy; OpenStreetMap contributors, ODbL</a>.
     International regions <a href="https://www.marineregions.org/disclaimer.php">&copy; MarineRegions.org, CC-BY</a>.

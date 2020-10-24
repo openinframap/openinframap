@@ -38,6 +38,21 @@ def format_power(val):
 templates.env.filters["power"] = format_power
 
 
+def osm_link(osm_id, geom_type):
+    url = 'https://www.openstreetmap.org/'
+    if osm_id < 0:
+        osm_id = -osm_id
+        url += 'relation'
+    elif geom_type == 'ST_Point':
+        url += 'node'
+    else:
+        url += 'way'
+    return url + '/' + str(osm_id)
+
+
+templates.env.globals["osm_link"] = osm_link
+
+
 @app.route("/")
 async def main(request):
     return templates.TemplateResponse("index.html", {"request": request})
@@ -73,7 +88,8 @@ async def plants_country(request):
     gid = res[0]
 
     plants = await database.fetch_all(
-        query="""SELECT osm_id, name, convert_power(output) AS output, source
+        query="""SELECT osm_id, name, convert_power(output) AS output,
+                        source, ST_GeometryType(geometry) AS geom_type
                   FROM power_plant
                   WHERE ST_Contains(
                         (SELECT ST_Transform(geom, 3857) FROM countries.country_eez WHERE gid = :gid),
