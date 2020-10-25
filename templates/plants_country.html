@@ -1,17 +1,27 @@
 {% extends "_base.html" %}
+{% set breadcrumbs = [(country, url_for('country', country=country)), ("Power Plants", None)] %}
 {% block title %}{{country}} Power Plants{% endblock %}
 {% block content -%}
+
+{% set english_name = false %}
+{% if country not in ('United Kingdom', 'United States', 'Canada', 'Australia', 'New Zealand', 'Ireland') %}
+  {% set english_name = true %}
+{% endif %}
 
 {% if plants|length == 0 %}
   <p>There are currently no power plants mapped in {{country}} on OpenStreetMap.</p>
 {% else %}
-  <p>All {{plants|length}} power plants in {{country}}.</p>
   <table class="plants-table">
+    <caption>All {{plants|length}} power plants in {{country}}</caption>
     <thead>
       <tr>
         <th>Name</th>
-        <th>Output</th>
-        <th>Source</th>
+        {% if english_name %}
+        <th>English Name</th>
+        {% endif %}
+        <th style="width: 100px">Output</th>
+        <th style="width: 150px">Source</th>
+        <th style="width: 100px">Wikidata</th>
       </tr>
     </thead>
     <tbody>
@@ -19,8 +29,16 @@
       <tr>
         <td><a href="{{osm_link(plant.osm_id, plant.geom_type)}}" target="_blank">
             {{plant.name or '[unnamed]'}}</a></td>
+        {% if english_name %}
+          <td>{{plant.name_en or  ''}}</td>
+        {% endif %}
         <td>{{plant.output|power}}</td>
         <td>{{plant.source}}</td>
+        <td>
+            {% if plant.wikidata %}
+              <a href="https://www.wikidata.org/wiki/{{plant.wikidata}}" target="_blank">{{plant.wikidata}}</a>
+            {% endif %}
+        </td>
       </tr>
     {% endfor %}
     </tbody>

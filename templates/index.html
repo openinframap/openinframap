@@ -1,4 +1,38 @@
 {% extends "_base.html" %}
 {% block content -%}
-  <a href="{{url_for('plants')}}">Power plants</a>
+  <p>Select an area to view stats:</p>
+  <form>
+    <input list="areas" placeholder="Select area" id="area_select">
+    <datalist id="areas">
+    {% for country in countries %}
+      <option><a href="{{url_for('plants_country', country=country.union)}}">{{country.union}}</a></option>
+    {% endfor %}
+    </datalist>
+  </form>
+
+  <p class="footnote">Areas used by this site are normally equivalent to countries, and include all objects within the country's
+  <a href="https://en.wikipedia.org/wiki/Exclusive_economic_zone" target="_blank">Exclusive Economic Zone</a>. If a country has
+      multiple disconnected regions, they are listed separately
+      (for example, Alaska and Hawaii are separate from the conterminous United States).</p>
+  <script>
+    var input = document.getElementById('area_select');
+    window.addEventListener('load', () => { input.value = '' });
+    input.addEventListener('change', function() {
+      var optionFound = false,
+        datalist = this.list;
+        for (var j = 0; j < datalist.options.length; j++) {
+          if (this.value == datalist.options[j].value) {
+              optionFound = true;
+              break;
+          }
+        }
+
+      if (optionFound) {
+        this.setCustomValidity("");
+        window.location.href = "/area/" + this.value;
+      } else {
+        this.setCustomValidity("Please select a valid value.");
+      }
+    });
+  </script>
 {% endblock %}

@@ -1,4 +1,5 @@
 from decimal import Decimal
+from functools import wraps
 from starlette.applications import Starlette
 from starlette.exceptions import HTTPException
 from starlette.templating import Jinja2Templates
@@ -26,9 +27,9 @@ app = Starlette(
 
 def format_power(val):
     if val is None:
-        return ''
+        return ""
     elif val >= 50e6:
-        return "{:.0f} MW".format(val / Decimal(1e6))
+        return "{:,.0f} MW".format(val / Decimal(1e6))
     elif val >= 1e6:
         return "{:.2f} MW".format(val / Decimal(1e6))
     else:
@@ -39,28 +40,39 @@ templates.env.filters["power"] = format_power
 
 
 def osm_link(osm_id, geom_type):
-    url = 'https://www.openstreetmap.org/'
+    url = "https://www.openstreetmap.org/"
     if osm_id < 0:
         osm_id = -osm_id
-        url += 'relation'
-    elif geom_type == 'ST_Point':
-        url += 'node'
+        url += "relation"
+    elif geom_type == "ST_Point":
+        url += "node"
     else:
-        url += 'way'
-    return url + '/' + str(osm_id)
+        url += "way"
+    return url + "/" + str(osm_id)
 
 
 templates.env.globals["osm_link"] = osm_link
 
 
+def country_required(func):
+    @wraps(func)
+    async def wrap_country(request):
+        country = request.path_params["country"]
+
+        res = await database.fetch_one(
+            query='SELECT gid, "union" FROM countries.country_eez WHERE "union" = :union',
+            values={"union": country},
+        )
+
+        if not res:
+            raise HTTPException(404)
+        return await func(request, res)
+
+    return wrap_country
+
+
 @app.route("/")
 async def main(request):
-    return templates.TemplateResponse("index.html", {"request": request})
-
-
-@app.route("/plants")
-async def plants(request):
-
     countries = await database.fetch_all(
         query="""SELECT "union" FROM countries.country_eez
                  WHERE "union" != \'Antarctica\'
@@ -69,26 +81,53 @@ async def plants(request):
     )
 
     return templates.TemplateResponse(
-        "plants.html", {"request": request, "countries": countries}
+        "index.html", {"request": request, "countries": countries}
     )
 
 
-@app.route("/plants/{country}")
-async def plants_country(request):
-    country = request.path_params["country"]
-
-    res = await database.fetch_one(
-        query='SELECT gid, "union" FROM countries.country_eez WHERE "union" = :union',
-        values={"union": country},
+@app.route("/area/{country}")
+@country_required
+async def country(request, country):
+    plant_stats = await database.fetch_one(
+        query="""SELECT SUM(convert_power(output)) AS output, COUNT(*)
+                    FROM power_plant
+                    WHERE ST_Contains(
+                        (SELECT ST_Transform(geom, 3857) FROM countries.country_eez where gid = :gid),
+                        geometry)
+                    """,
+        values={"gid": country["gid"]},
     )
 
-    if not res:
-        raise HTTPException(404)
+    plant_source_stats = await database.fetch_all(
+        query="""SELECT first_semi(source) AS source, sum(convert_power(output)) AS output, count(*)
+                    FROM power_plant
+                    WHERE ST_Contains(
+                            (SELECT ST_Transform(geom, 3857) FROM countries.country_eez WHERE gid = :gid),
+                            geometry)
+                    GROUP BY first_semi(source)
+                    ORDER BY SUM(convert_power(output)) DESC NULLS LAST""",
+        values={"gid": country["gid"]},
+    )
 
-    gid = res[0]
+    return templates.TemplateResponse(
+        "country.html",
+        {
+            "request": request,
+            "country": country['union'],
+            "plant_stats": plant_stats,
+            "plant_source_stats": plant_source_stats,
+        },
+    )
+
+
+@app.route("/area/{country}/plants")
+@country_required
+async def plants_country(request, country):
+    gid = country[0]
 
     plants = await database.fetch_all(
-        query="""SELECT osm_id, name, convert_power(output) AS output,
+        query="""SELECT osm_id, name, tags->'name:en' AS name_en, tags->'wikidata' AS wikidata,
+                        convert_power(output) AS output,
                         source, ST_GeometryType(geometry) AS geom_type
                   FROM power_plant
                   WHERE ST_Contains(
@@ -100,5 +139,5 @@ async def plants_country(request):
 
     return templates.TemplateResponse(
         "plants_country.html",
-        {"request": request, "plants": plants, "country": country},
+        {"request": request, "plants": plants, "country": country["union"]},
     )

@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+{% set breadcrumbs = [(country, None)] %}
+{% block title %}{{country}}{% endblock %}
+{% block content -%}
+  <p><strong>{{country}}</strong> has {{plant_stats.count}} power plants totalling {{plant_stats.output|power}} mapped on OpenStreetMap.</p>
+
+  <table>
+    <caption>Power plants in {{country}} by source</caption>
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th width="150px">Output</th>
+        <th width="100px">Count</th>
+      <tr>
+    </thead>
+    <tbody>
+    {% for row in plant_source_stats %}
+      <tr>
+        <td>{{row.source or ''}}</td>
+        <td>{{row.output|power}}</td>
+        <td>{{row.count}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <p><a href="{{url_for('plants_country', country=country)}}">See all plants</a>.</p>
+
+  <p class="footnote">If multiple sources are listed for a power plant, only the first source is used in this breakdown.</p>
+{% endblock %}

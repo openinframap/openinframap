@@ -2,6 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   border: 0;
+  font-size: 18px;
 }
 
 body {
@@ -15,21 +16,25 @@ a, a:visited {
 
 header {
   padding: 3px 8px;
+  border-bottom: 1px solid #ccc;
   background-color: #eee;
 }
 
-h1 {
+h1, h2 {
+  display: inline;
   margin: 0;
   font-size: 20px;
 }
 
-h1 a {
+h1 a, h2 a {
   text-decoration: none;
   color: inherit;
 }
 
 #content {
-  margin: 0px 8px; 
+  margin: 0px auto; 
+  max-width: 1000px;
+  min-height: 80vh;
 }
 
 footer {
@@ -42,10 +47,39 @@ footer, footer a, footer a:visited {
   color: #666;
 }
 
-.plants-table {
+input {
+  font-size: 1.2em;
 }
 
-.plants-table tr {
-  height: 40px;
+p.footnote {
+  font-size: 0.9em;
+  color: #444;
 }
 
+table {
+  font-size: 0.9em;
+  margin-top: 8px;
+  width: 100%;
+  min-width: 600px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+}
+
+caption {
+  font-weight: bold;
+  font-size: 1.1em;
+  padding-bottom: 3px;
+}
+
+thead {
+  background-color: #eee;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+th, td {
+  padding: 4px;
+}
