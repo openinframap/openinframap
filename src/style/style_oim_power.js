@@ -24,6 +24,7 @@ const plant_types = {
   nuclear: 'power_plant_nuclear',
   oil: 'power_plant_oilgas',
   gas: 'power_plant_oilgas',
+  diesel: 'power_plant_oilgas',
   solar: 'power_plant_solar',
   wind: 'power_plant_wind',
   biomass: 'power_plant_biomass',
