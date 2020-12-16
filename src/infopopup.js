@@ -1,6 +1,6 @@
 import './infopopup.css';
 
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from 'maplibre-gl';
 import titleCase from 'title-case';
 import browserLanguage from 'in-browser-language';
 import {el, text, mount, unmount, setChildren, setStyle} from 'redom';

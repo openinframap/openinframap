@@ -1,4 +1,4 @@
-@import '~mapbox-gl/dist/mapbox-gl.css';
+@import '~maplibre-gl/dist/mapbox-gl.css';
 
 html {
   width: 100%;

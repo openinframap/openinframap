@@ -1,6 +1,6 @@
 import './index.css';
 import '@russss/mapboxgl-layer-switcher/layerswitcher.css'
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from 'maplibre-gl';
 
 import {mount} from 'redom';
 
