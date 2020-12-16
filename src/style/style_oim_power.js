@@ -629,9 +629,18 @@ const layers = [
         'case',
         ['get', 'transition'],
         'power_tower_transition',
+        ['has', 'transformer'],
+        'power_tower_transformer',
         'power_tower',
       ],
-      'icon-size': ['interpolate', ['linear'], ['zoom'], 13, 0.4, 17, 1],
+      'icon-offset': [
+        'case',
+        ['has', 'transformer'],
+        ['literal', [12, 0]],
+        ['literal', [0, 0]]
+      ],
+      'icon-allow-overlap': true,
+      'icon-size': ['interpolate', ['linear'], ['zoom'], 13, 0.6, 17, 1],
       'text-field': '{ref}',
       'text-size': [
         'step',
@@ -652,16 +661,25 @@ const layers = [
     filter: ['==', ['get', 'type'], 'pole'],
     source: 'openinframap',
     'source-layer': 'power_tower',
-    minzoom: 14,
+    minzoom: 13,
     paint: text_paint,
     layout: {
       'icon-image': [
         'case',
         ['get', 'transition'],
         'power_pole_transition',
+        ['has', 'transformer'],
+        'power_pole_transformer',
         'power_pole',
       ],
-      'icon-size': 0.5,
+      'icon-offset': [
+        'case',
+        ['has', 'transformer'],
+        ['literal', [10, 0]],
+        ['literal', [0, 0]]
+      ],
+      'icon-allow-overlap': true,
+      'icon-size': ['interpolate', ['linear'], ['zoom'], 13, 0.2, 17, 0.8],
       'text-field': '{ref}',
       'text-size': [
         'step',
