@@ -629,13 +629,13 @@ const layers = [
         'case',
         ['get', 'transition'],
         'power_tower_transition',
-        ['has', 'transformer'],
+        ['any', ['has', 'transformer'], ['has', 'substation']],
         'power_tower_transformer',
         'power_tower',
       ],
       'icon-offset': [
         'case',
-        ['has', 'transformer'],
+        ['any', ['has', 'transformer'], ['has', 'substation']],
         ['literal', [12, 0]],
         ['literal', [0, 0]]
       ],
@@ -668,13 +668,13 @@ const layers = [
         'case',
         ['get', 'transition'],
         'power_pole_transition',
-        ['has', 'transformer'],
+        ['any', ['has', 'transformer'], ['has', 'substation']],
         'power_pole_transformer',
         'power_pole',
       ],
       'icon-offset': [
         'case',
-        ['has', 'transformer'],
+        ['any', ['has', 'transformer'], ['has', 'substation']],
         ['literal', [10, 0]],
         ['literal', [0, 0]]
       ],
