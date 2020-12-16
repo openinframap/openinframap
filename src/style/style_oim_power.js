@@ -224,7 +224,7 @@ const power_visible_p = [
     ['all', ['>', ['coalesce', ['get', 'voltage'], 0], 99], ['>', ['zoom'], 4]],
     ['all', ['>', ['coalesce', ['get', 'voltage'], 0], 49], ['>', ['zoom'], 5]],
     ['all', ['>', ['coalesce', ['get', 'voltage'], 0], 24], ['>', ['zoom'], 6]],
-    ['all', ['>', ['coalesce', ['get', 'voltage'], 0], 9], ['>', ['zoom'], 7]],
+    ['all', ['>', ['coalesce', ['get', 'voltage'], 0], 9], ['>', ['zoom'], 8]],
     ['>', ['zoom'], 10],
   ],
   [
@@ -311,13 +311,6 @@ const freq = [
   '',
 ];
 
-const circuits = [
-  'case',
-  ['all', ['has', 'circuits'], ['>', ['to-number', ['get', 'circuits']], 1]],
-  ['concat', ['get', 'circuits'], '×'],
-  '',
-];
-
 const line_voltage = [
   'case',
   [
@@ -347,7 +340,7 @@ const line_voltage = [
 
 const line_label = [
   'case',
-  ['all', ['has', 'voltage'], ['!=', ['get', 'name'], '']],
+  ['all', ['has', 'voltage'], ['has', 'name'], ['!=', ['get', 'name'], '']],
   [
     'concat',
     ['get', 'name'],
@@ -358,7 +351,7 @@ const line_label = [
     construction_label,
   ],
   ['has', 'voltage'],
-  ['concat', circuits, line_voltage, freq, construction_label],
+  ['concat', line_voltage, freq, construction_label],
   ['get', 'name'],
 ];
 
@@ -794,7 +787,7 @@ const layers = [
       'text-field': line_label,
       'symbol-placement': 'line',
       'symbol-spacing': 400,
-      'text-size': 10,
+      'text-size': ['interpolate', ['linear'], ['zoom'], 11, 10, 18, 13],
       'text-offset': [
         'case',
         ['has', 'voltage_3'],
