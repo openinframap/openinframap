@@ -115,7 +115,7 @@ sql = "SELECT gid, ST_AsBinary(geometry) AS geom, tunnel, location, first_semi(f
 [[providers.layers]]
 name = "power_tower"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'name' AS name, transition, tags -> 'ref' AS ref, tags -> 'operator' AS operator, tags -> 'switch' AS switch, (ST_GeometryType(geometry) = 'ST_Point') AS is_node, construction != '' AS construction, tags -> 'transformer' AS transformer FROM osm_power_tower WHERE geometry && !BBOX! AND !ZOOM! >= 13"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, type, tags -> 'name' AS name, transition, tags -> 'ref' AS ref, tags -> 'operator' AS operator, tags -> 'switch' AS switch, (ST_GeometryType(geometry) = 'ST_Point') AS is_node, construction != '' AS construction, tags -> 'transformer' AS transformer FROM osm_power_tower WHERE geometry && !BBOX! AND !ZOOM! >= 13"
 
 [[providers.layers]]
 name = "power_substation"
