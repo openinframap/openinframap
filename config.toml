@@ -157,19 +157,19 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'name' AS na
 name = "power_transformer"
 dont_simplify = true
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name FROM osm_power_switchgear WHERE type = 'transformer' AND geometry && !BBOX! AND !ZOOM! >= 14"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name, (ST_GeometryType(geometry) = 'ST_Point') AS is_node FROM osm_power_switchgear WHERE type = 'transformer' AND geometry && !BBOX! AND !ZOOM! >= 14"
 
 [[providers.layers]]
 name = "power_compensator"
 dont_simplify = true
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name FROM osm_power_switchgear WHERE type = 'compensator' AND geometry && !BBOX! AND !ZOOM! >= 14"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name, (ST_GeometryType(geometry) = 'ST_Point') AS is_node FROM osm_power_switchgear WHERE type = 'compensator' AND geometry && !BBOX! AND !ZOOM! >= 14"
 
 [[providers.layers]]
 name = "power_switch"
 dont_simplify = true
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name FROM osm_power_switchgear WHERE type = 'switch' AND geometry && !BBOX! AND !ZOOM! >= 14"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name, (ST_GeometryType(geometry) = 'ST_Point') AS is_node FROM osm_power_switchgear WHERE type = 'switch' AND geometry && !BBOX! AND !ZOOM! >= 14"
 
 [[providers.layers]]
 name = "telecoms_communication_line"
