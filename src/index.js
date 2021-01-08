@@ -81,8 +81,11 @@ function init() {
     center: [12, 26],
   }));
 
+  map.dragRotate.disable();
+  map.touchZoomRotate.disableRotation();
+
   url_hash.enable(map);
-  map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+  map.addControl(new mapboxgl.NavigationControl({showCompass: false}), 'top-right');
   map.addControl(
     new mapboxgl.GeolocateControl({
       positionOptions: {
