@@ -12,6 +12,7 @@ asyncpg = "^0.21.0"
 aiofiles = "^0.5.0"
 jinja2 = "^2.11.2"
 uvicorn = "^0.12.2"
+asgi-sitemaps = "^0.3.2"
 
 [tool.poetry.dev-dependencies]
 

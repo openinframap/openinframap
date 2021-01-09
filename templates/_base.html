@@ -8,8 +8,7 @@
 </head>
 <body>
   <header>
-    <h1><a href="https://openinframap.org">OpenInfraMap</a>
-      &rang; <a href="{{url_for('main')}}">Stats</a></h1>
+    <h1><a href="{{url_for('main')}}">OpenInfraMap</a>
     {% if breadcrumbs %}
       <h2>
       {% for name, url in breadcrumbs %}
@@ -29,7 +28,7 @@
   <footer>
     Data <a href="https://www.openstreetmap.org/copyright">&copy; OpenStreetMap contributors, ODbL</a>.
     International regions <a href="https://www.marineregions.org/disclaimer.php">&copy; MarineRegions.org, CC-BY</a>.
-    Analysis &copy; OpenInfraMap, CC-BY.
+    Analysis <a href="{{url_for('copyright')}}">&copy; OpenInfraMap, CC-BY</a>.
   </footer>
 </body>
 </html>

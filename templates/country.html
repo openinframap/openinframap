@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-{% set breadcrumbs = [(country, None)] %}
+{% set breadcrumbs = [('Stats', url_for('stats')), (country, None)] %}
 {% block title %}{{country}}{% endblock %}
 {% block content -%}
   <p><strong>{{country}}</strong> has {{plant_stats.count}} power plants totalling {{plant_stats.output|power}} mapped on OpenStreetMap.</p>

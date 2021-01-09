@@ -3,11 +3,14 @@ html, body {
   padding: 0;
   border: 0;
   font-size: 18px;
+  height: 100%;
 }
 
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
+  display: flex;
+  flex-direction: column;
 }
 
 a, a:visited {
@@ -18,6 +21,7 @@ header {
   padding: 3px 8px;
   border-bottom: 1px solid #ccc;
   background-color: #eee;
+  flex: 0 0 auto;
 }
 
 h1, h2 {
@@ -32,15 +36,17 @@ h1 a, h2 a {
 }
 
 #content {
-  margin: 0px auto; 
+  margin: 0px auto;
+  padding: 0px 10px;
   max-width: 1000px;
-  min-height: 80vh;
+  flex: 1 0 auto;
 }
 
 footer {
-  margin-top: 20px;
+  flex-shrink: 0;
   padding: 8px 8px;
-  font-size: 0.8em;
+  font-size: 0.7em;
+  background-color: #fafafa;
 }
 
 footer, footer a, footer a:visited {

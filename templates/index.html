@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% set breadcrumbs = [('Stats', None)] %}
 {% block content -%}
   <p>Select an area to view stats:</p>
   <form>
@@ -29,7 +30,7 @@
 
       if (optionFound) {
         this.setCustomValidity("");
-        window.location.href = "/area/" + this.value;
+        window.location.href = "/stats/area/" + this.value;
       } else {
         this.setCustomValidity("Please select a valid value.");
       }

@@ -1,10 +1,10 @@
 {% extends "_base.html" %}
-{% set breadcrumbs = [(country, url_for('country', country=country)), ("Power Plants", None)] %}
+{% set breadcrumbs = [('Stats', url_for('stats')), (country, url_for('country', country=country)), ("Power Plants", None)] %}
 {% block title %}{{country}} Power Plants{% endblock %}
 {% block content -%}
 
 {% set english_name = false %}
-{% if country not in ('United Kingdom', 'United States', 'Canada', 'Australia', 'New Zealand', 'Ireland') %}
+{% if country not in ('United Kingdom', 'United States', 'Canada', 'Australia', 'New Zealand', 'Ireland', 'Alaska', 'Hawaii') %}
   {% set english_name = true %}
 {% endif %}
 

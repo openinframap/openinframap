@@ -1,92 +1,63 @@
-from decimal import Decimal
-from functools import wraps
+from starlette.responses import PlainTextResponse
 from starlette.applications import Starlette
-from starlette.exceptions import HTTPException
 from starlette.templating import Jinja2Templates
-from starlette.config import Config
-from starlette.routing import Mount
+from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
-from databases import Database
 
-config = Config(".env")
+from template_functions import format_power, osm_link
+from config import database, config
+from util import cache_for, country_required
+from sitemap import sitemap
+from data import get_countries
+
 
 DEBUG = config("DEBUG", cast=bool, default=False)
-DATABASE_URL = config("DATABASE_URL")
-
-database = Database(DATABASE_URL)
-
 templates = Jinja2Templates(directory="templates")
+
+templates.env.filters["power"] = format_power
+templates.env.globals["osm_link"] = osm_link
+
 
 app = Starlette(
     debug=DEBUG,
     on_startup=[database.connect],
     on_shutdown=[database.disconnect],
-    routes=[Mount("/static", app=StaticFiles(directory="static"), name="static")],
+    routes=[
+        Mount("/static", app=StaticFiles(directory="static"), name="static"),
+        Route("/sitemap.xml", sitemap),
+    ],
 )
-
-
-def format_power(val):
-    if val is None:
-        return ""
-    elif val >= 50e6:
-        return "{:,.0f} MW".format(val / Decimal(1e6))
-    elif val >= 1e6:
-        return "{:.2f} MW".format(val / Decimal(1e6))
-    else:
-        return "{:.0f} kW".format(val / Decimal(1e3))
-
-
-templates.env.filters["power"] = format_power
-
-
-def osm_link(osm_id, geom_type):
-    url = "https://www.openstreetmap.org/"
-    if osm_id < 0:
-        osm_id = -osm_id
-        url += "relation"
-    elif geom_type == "ST_Point":
-        url += "node"
-    else:
-        url += "way"
-    return url + "/" + str(osm_id)
-
-
-templates.env.globals["osm_link"] = osm_link
-
-
-def country_required(func):
-    @wraps(func)
-    async def wrap_country(request):
-        country = request.path_params["country"]
-
-        res = await database.fetch_one(
-            query='SELECT gid, "union" FROM countries.country_eez WHERE "union" = :union',
-            values={"union": country},
-        )
-
-        if not res:
-            raise HTTPException(404)
-        return await func(request, res)
-
-    return wrap_country
 
 
 @app.route("/")
 async def main(request):
-    countries = await database.fetch_all(
-        query="""SELECT "union" FROM countries.country_eez
-                 WHERE "union" != \'Antarctica\'
-                    AND pol_type = \'Union EEZ and country\'
-                 ORDER BY "union" ASC"""
-    )
+    # Dummy response - this endpoint is served statically in production from the webpack build
+    return PlainTextResponse('')
 
+
+@app.route("/about")
+@cache_for(3600)
+async def about(request):
+    return templates.TemplateResponse("about.html", {"request": request})
+
+
+@app.route("/copyright")
+@cache_for(3600)
+async def copyright(request):
+    return templates.TemplateResponse("copyright.html", {"request": request})
+
+
+@app.route("/stats")
+@cache_for(86400)
+async def stats(request):
     return templates.TemplateResponse(
-        "index.html", {"request": request, "countries": countries}
+        "index.html", {"request": request, "countries": await get_countries()}
     )
 
 
-@app.route("/area/{country}")
+@app.route("/stats/area/{country}")
 @country_required
+@cache_for(3600)
 async def country(request, country):
     plant_stats = await database.fetch_one(
         query="""SELECT SUM(convert_power(output)) AS output, COUNT(*)
@@ -113,15 +84,16 @@ async def country(request, country):
         "country.html",
         {
             "request": request,
-            "country": country['union'],
+            "country": country["union"],
             "plant_stats": plant_stats,
             "plant_source_stats": plant_source_stats,
         },
     )
 
 
-@app.route("/area/{country}/plants")
+@app.route("/stats/area/{country}/plants")
 @country_required
+@cache_for(3600)
 async def plants_country(request, country):
     gid = country[0]
 

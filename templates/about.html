@@ -1,0 +1,79 @@
+{% extends "_base.html" %}
+{% block title %}About{% endblock %}
+{% set breadcrumbs = [('About', None)] %}
+{% block content -%}
+      <p class="lead"><a href="/">Open Infrastructure Map</a> is a view of the world's hidden infrastructure mapped in the
+      <a href="http://www.openstreetmap.org/">OpenStreetMap database</a>.</p>
+      <p>By and large, this data isn't exposed on the main OSM map, so I built
+        Open Infrastructure Map to visualise it.</p>
+
+      <h2>How do I contribute?</h2>
+      <p>If you want to edit the data and you're new to OpenStreetMap, check out
+      <a href="https://learnosm.org">learnOSM.</a></p>
+      <p>
+          If you already have some OSM experience and want to start tagging infrastructure things,
+          take a look at the tagging guidelines for
+          <a href="http://wiki.openstreetmap.org/wiki/Power">power</a> and <a href="http://wiki.openstreetmap.org/wiki/Telecoms">telecoms</a>.
+      </p>
+
+      <h2>How is OIM made?</h2>
+      <p>The following mess of tools and services make Open Infrastructure Map run:</p>
+      <ul>
+        <li><a href="https://www.postgresql.org/">Postgres</a>/<a href="http://postgis.net/">PostGIS</a> for data storage
+        <li><a href="https://imposm.org/">Imposm3</a> for filtering and importing the OSM data
+        <li><a href="http://tegola.io/">Tegola</a> for vector tile rendering and serving
+	<li>The <a href="https://github.com/MapLibre/maplibre-gl-js">MapLibre GL JS</a> web interface</li>
+      </ul>
+
+      <p>The background map data is kindly provided by <a href="https://www.maptiler.com/"><img width="150px" src="img/maptiler.png" alt="MapTiler"></a>.</p>
+
+      <h2>Where's the code?</h2>
+      <p>You can find some bits of OIM on the
+          <a href="https://github.com/openinframap/">openinframap Github organisation</a>.
+          More to come, soon.</p>
+
+      <h2>Who made this?</h2>
+      <p>I'm <a href="https://russ.garrett.co.uk">Russ</a>, and I like infrastructure.
+         Please don't contact me about copyright claims or similar, these should properly
+         be directed <a href="https://wiki.osmfoundation.org/wiki/Takedown_procedure">to
+	 OpenStreetMap</a>.</p>
+
+      <h2>Get in touch</h2>
+      <p>If you want to get in touch with the OSM infrastructure mapping community, join
+      <a href="irc://irc.oftc.net/osm-infrastructure">#osm-infrastructure on irc.oftc.net</a>.
+
+      Join this channel with IRCCloud:
+      <a href="https://www.irccloud.com/invite?channel=%23osm-infrastructure&amp;hostname=irc.oftc.net&amp;port=6697&amp;ssl=1" target="_blank"><img src="https://www.irccloud.com/invite-svg?channel=%23osm-infrastructure&amp;hostname=irc.oftc.net&amp;port=6697&amp;ssl=1"  height="18"></a>.</p>
+
+      <p>You can also follow <a href="https://twitter.com/openinframap">OpenInfraMap on Twitter</a>
+      for occasional status updates.</p>
+      <h2>Support OpenInfraMap</h2>
+	<p>OpenInfraMap is a personal side project which costs me around $1200/year to run. If you like
+	   OpenInfraMap, you can chip in to help with these costs on Liberapay: <script src="https://liberapay.com/russss/widgets/button.js"></script>
+           <noscript><a href="https://liberapay.com/russss/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+	</p>
+
+      <h2>How do I access the data?</h2>
+      <p>All the data currently displayed on OpenInfraMap is sourced directly from OpenStreetMap.</p>
+
+      <p>If you can consume vector data in Mapbox Vector Tiles format, you can fetch vector data directly
+	 from the OpenInfraMap tile server using the <a href="/map.json">TileJSON file</a>.</p>
+
+      <p>If you need relatively small extracts of data, you can use
+	 <a href="https://overpass-turbo.eu/">Overpass Turbo</a> to generate these in GeoJSON and
+	 similar formats.</p>
+
+      <p>For larger amounts of data, you will need to fetch and process the raw OSM data directly,
+	 which is relatively complex.</p>
+
+      <p>I can provide exports from the OpenInfraMap database, for which I charge a fee of
+	 £85 to cover my time. More complex work will normally be billed at £100/hour although I am
+         happy to negotiate this based on the task. Please contact
+	 <a href="mailto:russ@garrett.co.uk">russ@garrett.co.uk</a> if you are interested in this.</p>
+
+      <p>If you use this data, you will need to comply with the
+          <a href="https://www.openstreetmap.org/copyright">OpenStreetMap licensing terms</a>, which
+          require that you attribute OpenStreetMap. Attribution of "OpenInfraMap", and a link to this
+          website, would be appreciated but is not required.
+      </p>
+{% endblock %}
