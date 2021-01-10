@@ -1,6 +1,11 @@
 {% extends "_base.html" %}
 {% set breadcrumbs = [('Stats', url_for('stats')), (country, url_for('country', country=country)), ("Power Plants", None)] %}
-{% block title %}{{country}} Power Plants{% endblock %}
+{% if source == '' %}
+  {% set pretty_source = 'unspecified' %}
+{% elif source %}
+  {% set pretty_source = source|replace("_"," ") %}
+{% endif %}
+{% block title %}{{country}}{% if pretty_source %} {{pretty_source|title}}{% endif %} Power Plants{% endblock %}
 {% block description -%}
   List of power plants in {{country}} from OpenStreetMap
 {%- endblock %}
@@ -15,7 +20,7 @@
   <p>There are currently no power plants mapped in {{country}} on OpenStreetMap.</p>
 {% else %}
   <table class="plants-table">
-    <caption>All {{plants|length}} {% if source %}{{source}} {% endif %}power plants in {{country}}</caption>
+    <caption>All {{plants|length}} {% if pretty_source %}{{pretty_source}} {% endif %}power plants in {{country}}</caption>
     <thead>
       <tr>
         <th>Name</th>
