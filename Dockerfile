@@ -5,4 +5,5 @@ WORKDIR /app
 COPY . /app
 RUN poetry install
 
-ENTRYPOINT poetry run uvicorn main:app
+EXPOSE 80
+ENTRYPOINT poetry run uvicorn main:app --host 0.0.0.0 --port 80
