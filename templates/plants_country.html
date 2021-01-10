@@ -7,7 +7,7 @@
 {% endif %}
 {% block title %}{{country}}{% if pretty_source %} {{pretty_source|title}}{% endif %} Power Plants{% endblock %}
 {% block description -%}
-  List of power plants in {{country}} from OpenStreetMap
+  List of{% if pretty_source%} {{pretty_source}}{% endif %} power plants in {{country}} from OpenStreetMap
 {%- endblock %}
 {% block content -%}
 
