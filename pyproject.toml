@@ -5,7 +5,7 @@ description = ""
 authors = ["Russ Garrett <russ@garrett.co.uk>"]
 
 [tool.poetry.dependencies]
-python = ">3.5"
+python = ">=3.7"
 starlette = "^0.13.8"
 databases = "^0.4.0"
 asyncpg = "^0.21.0"
