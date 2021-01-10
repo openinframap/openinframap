@@ -37,6 +37,7 @@ h1 a, h2 a {
 
 #content {
   margin: 0px auto;
+  margin-bottom: 20px;
   padding: 0px 10px;
   max-width: 1000px;
   flex: 1 0 auto;
