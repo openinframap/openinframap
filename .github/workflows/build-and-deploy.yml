@@ -5,7 +5,6 @@ on:
 
 env:
   IMAGE_NAME: web-backend
-  SHA8: ${GITHUB_SHA::8}
 
 jobs:
   build:
@@ -27,9 +26,9 @@ jobs:
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
 
           echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$SHA8
+          echo VERSION=${{ github.sha }}
 
-          docker tag $IMAGE_NAME $IMAGE_ID:$SHA8
-          docker push $IMAGE_ID:$SHA8
+          docker tag $IMAGE_NAME $IMAGE_ID:${{ github.sha }}
+          docker push $IMAGE_ID:${{ github.sha }}
           docker tag $IMAGE_NAME $IMAGE_ID:latest
           docker push $IMAGE_ID:latest
