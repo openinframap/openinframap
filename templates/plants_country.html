@@ -51,5 +51,8 @@
     {% endfor %}
     </tbody>
   </table>
+  {% if pretty_source %}
+    <p><a href="{{url_for('plants_country', country=country)}}">View all power plants in {{country}}</a>.</p>
+  {% endif %}
 {% endif %}
 {% endblock %}
