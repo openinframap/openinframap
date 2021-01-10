@@ -5,7 +5,7 @@ Statistics on the global electricity network from OpenStreetMap
 {%- endblock %}
 {% block content -%}
   <p>Select an area to view stats:</p>
-  <form>
+  <form id="areas-form">
     <input list="areas" placeholder="Select area" id="area_select">
     <datalist id="areas">
     {% for country in countries %}
@@ -20,23 +20,28 @@ Statistics on the global electricity network from OpenStreetMap
       (for example, Alaska and Hawaii are separate from the conterminous United States).</p>
   <script>
     var input = document.getElementById('area_select');
-    window.addEventListener('load', () => { input.value = '' });
-    input.addEventListener('change', function() {
+    function update(e) {
+      e.preventDefault();
       var optionFound = false,
-        datalist = this.list;
-        for (var j = 0; j < datalist.options.length; j++) {
-          if (this.value == datalist.options[j].value) {
-              optionFound = true;
-              break;
-          }
+      datalist = input.list;
+      for (var j = 0; j < datalist.options.length; j++) {
+        if (input.value == datalist.options[j].value) {
+            optionFound = true;
+            break;
         }
+      }
 
       if (optionFound) {
-        this.setCustomValidity("");
-        window.location.href = "/stats/area/" + this.value;
+        input.setCustomValidity("");
+        window.location.href = "/stats/area/" + input.value;
       } else {
-        this.setCustomValidity("Please select a valid value.");
+        input.setCustomValidity("Please select a valid value.");
       }
-    });
+
+    }
+
+    window.addEventListener('load', () => { input.value = '' });
+    input.addEventListener('change', update);
+    document.getElementById('areas-form').addEventListener('submit', update);
   </script>
 {% endblock %}
