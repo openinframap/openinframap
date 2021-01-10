@@ -22,3 +22,16 @@ def osm_link(osm_id, geom_type):
     else:
         url += "way"
     return url + "/" + str(osm_id)
+
+
+THE_COUNTRY_NAMES = {"United States", "United Kingdom", "Netherlands", "Bahamas",
+                     "Canary Islands", "British Virgin Islands", "Azores", "Cayman Islands"}
+
+
+def country_name(name, cap=False):
+    if name in THE_COUNTRY_NAMES:
+        if cap:
+            return "The " + name
+        else:
+            return "the " + name
+    return name

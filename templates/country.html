@@ -2,13 +2,13 @@
 {% set breadcrumbs = [('Stats', url_for('stats')), (country, None)] %}
 {% block title %}{{country}}{% endblock %}
 {% block description -%}
-Statistics on the electricity network in {{country}} from OpenStreetMap.
+Statistics on the electricity network in {{country|country_name}} from OpenStreetMap.
 {%- endblock %}
 {% block content -%}
-  <p><strong>{{country}}</strong> has {{plant_stats.count}} power plants totalling {{plant_stats.output|power}} mapped on OpenStreetMap.</p>
+  <p><strong>{{country|country_name(true)}}</strong> has {{plant_stats.count}} power plants totalling {{plant_stats.output|power}} mapped on OpenStreetMap.</p>
 
   <table>
-    <caption>Power plants in {{country}} by source</caption>
+    <caption>Power plants in {{country|country_name}} by source</caption>
     <thead>
       <tr>
         <th>Source</th>

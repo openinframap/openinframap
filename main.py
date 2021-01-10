@@ -4,7 +4,7 @@ from starlette.templating import Jinja2Templates
 from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
 
-from template_functions import format_power, osm_link
+from template_functions import format_power, osm_link, country_name
 from config import database, config
 from util import cache_for, country_required
 from sitemap import sitemap
@@ -15,6 +15,7 @@ DEBUG = config("DEBUG", cast=bool, default=False)
 templates = Jinja2Templates(directory="templates")
 
 templates.env.filters["power"] = format_power
+templates.env.filters["country_name"] = country_name
 templates.env.globals["osm_link"] = osm_link
 
 
