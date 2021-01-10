@@ -113,3 +113,5 @@ async def plants_country(request, country):
         "plants_country.html",
         {"request": request, "plants": plants, "country": country["union"]},
     )
+
+import wikidata  # noqa
