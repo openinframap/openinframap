@@ -1,6 +1,9 @@
 {% extends "_base.html" %}
 {% set breadcrumbs = [('Stats', url_for('stats')), (country, url_for('country', country=country)), ("Power Plants", None)] %}
 {% block title %}{{country}} Power Plants{% endblock %}
+{% block description -%}
+  List of power plants in {{country}} from OpenStreetMap
+{%- endblock %}
 {% block content -%}
 
 {% set english_name = false %}

@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}{% endblock %}{% if self.title() %} - {% endif %}OpenInfraMap</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>{% block title %}{% endblock %}{% if self.title() %} - {% endif %}Open Infrastructure Map</title>
   <link rel="stylesheet" href="/static/main.css">
+{% if self.description() %}
+  <meta name="description" content="{% block description %}{% endblock %}">
+  <meta property="og:description" content="{{self.description()}}">
+{% endif %}
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@openinframap" />
+  <meta name="twitter:creator" content="@russss" />
+  <meta property="og:title" content="Open Infrastructure Map" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
   <header>
