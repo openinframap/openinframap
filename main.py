@@ -112,9 +112,14 @@ async def plants_country(request, country):
         values={"gid": gid},
     )
 
+    source = None
+    if 'source' in request.query_params:
+        source = request.query_params['source'].lower()
+        plants = [plant for plant in plants if source in plant['source'].lower().split(';')]
+
     return templates.TemplateResponse(
         "plants_country.html",
-        {"request": request, "plants": plants, "country": country["union"]},
+        {"request": request, "plants": plants, "country": country["union"], "source": source},
     )
 
 import wikidata  # noqa

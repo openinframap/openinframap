@@ -15,7 +15,7 @@
   <p>There are currently no power plants mapped in {{country}} on OpenStreetMap.</p>
 {% else %}
   <table class="plants-table">
-    <caption>All {{plants|length}} power plants in {{country}}</caption>
+    <caption>All {{plants|length}} {% if source %}{{source}} {% endif %}power plants in {{country}}</caption>
     <thead>
       <tr>
         <th>Name</th>
