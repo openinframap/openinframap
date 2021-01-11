@@ -10,6 +10,8 @@ CREATE MATERIALIZED VIEW power_substation_relation AS
         GROUP BY rel.osm_id, rel.tags -> 'name', rel.voltage, rel.tags -> 'frequency',
 			rel.tags -> 'substation', rel.tags -> 'operator', rel.tags, rel.construction;
 
+-- Unique index required for concurrent matview refresh
+CREATE UNIQUE INDEX power_substation_relation_idx ON power_substation_relation(osm_id);
 CREATE INDEX power_substation_relation_geom ON power_substation_relation USING GIST (geometry);
 
 ANALYZE power_substation_relation;
@@ -28,6 +30,8 @@ CREATE MATERIALIZED VIEW power_plant_relation AS
         WHERE mem.osm_id = rel.osm_id
         GROUP BY rel.osm_id, rel.tags -> 'name', rel.output, rel.source, rel.tags, rel.construction;
 
+-- Unique index required for concurrent matview refresh
+CREATE UNIQUE INDEX power_plant_relation_idx ON power_plant_relation(osm_id);
 CREATE INDEX power_plant_relation_geom ON power_plant_relation USING GIST (geometry);
 
 ANALYZE power_plant_relation;
