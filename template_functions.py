@@ -1,15 +1,16 @@
 from decimal import Decimal
+from jinja2 import Markup
 
 
 def format_power(val):
     if val is None:
         return ""
     elif val >= 50e6:
-        return "{:,.0f} MW".format(val / Decimal(1e6))
+        return Markup("{:,.0f}&nbsp;MW".format(val / Decimal(1e6)))
     elif val >= 1e6:
-        return "{:.2f} MW".format(val / Decimal(1e6))
+        return Markup("{:.2f}&nbsp;MW".format(val / Decimal(1e6)))
     else:
-        return "{:.0f} kW".format(val / Decimal(1e3))
+        return Markup("{:.0f}&nbsp;kW".format(val / Decimal(1e3)))
 
 
 def osm_link(osm_id, geom_type):

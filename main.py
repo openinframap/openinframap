@@ -102,6 +102,7 @@ async def plants_country(request, country):
 
     plants = await database.fetch_all(
         query="""SELECT osm_id, name, tags->'name:en' AS name_en, tags->'wikidata' AS wikidata,
+                        tags->'plant:method' AS method, tags->'operator' AS operator,
                         convert_power(output) AS output,
                         source, ST_GeometryType(geometry) AS geom_type
                   FROM power_plant

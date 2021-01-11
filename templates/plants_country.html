@@ -23,13 +23,17 @@
     <caption>All {{plants|length}} {% if pretty_source %}{{pretty_source}} {% endif %}power plants in {{country|country_name}}</caption>
     <thead>
       <tr>
-        <th>Name</th>
+        <th style="width: 300px">Name</th>
         {% if english_name %}
         <th>English Name</th>
         {% endif %}
-        <th style="width: 100px">Output</th>
-        <th style="width: 150px">Source</th>
-        <th style="width: 100px">Wikidata</th>
+        <th>Operator</th>
+        <th>Output</th>
+        {% if not pretty_source %}
+          <th>Source</th>
+        {% endif %}
+        <th>Method</th>
+        <th>Wikidata</th>
       </tr>
     </thead>
     <tbody>
@@ -40,8 +44,12 @@
         {% if english_name %}
           <td>{{plant.name_en or  ''}}</td>
         {% endif %}
+        <td>{{plant.operator or ''}}</td>
         <td>{{plant.output|power}}</td>
+        {% if not pretty_source %}
         <td>{{plant.source}}</td>
+        {% endif %}
+        <td>{{plant.method or ''}}</td>
         <td>
             {% if plant.wikidata %}
               <a href="https://www.wikidata.org/wiki/{{plant.wikidata}}" target="_blank">{{plant.wikidata}}</a>

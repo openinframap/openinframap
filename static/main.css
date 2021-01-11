@@ -39,7 +39,7 @@ h1 a, h2 a {
   margin: 0px auto;
   margin-bottom: 20px;
   padding: 0px 10px;
-  max-width: 1000px;
+  max-width: 1100px;
   flex: 1 0 auto;
 }
 
@@ -67,7 +67,6 @@ table {
   font-size: 0.9em;
   margin-top: 8px;
   width: 100%;
-  min-width: 600px;
   table-layout: fixed;
   border-collapse: collapse;
   border: 1px solid #eee;
