@@ -1,9 +1,12 @@
 {% extends "_base.html" %}
+{% import "_tables.html" as tables %}
 {% set breadcrumbs = [('Stats', None)] %}
 {% block description -%}
 Statistics on the global electricity network from OpenStreetMap
 {%- endblock %}
 {% block content -%}
+
+  {{ tables.power_lines_table(power_lines) }}
   <p>Select an area to view stats:</p>
   <form id="areas-form">
     <input list="areas" placeholder="Select area" id="area_select">

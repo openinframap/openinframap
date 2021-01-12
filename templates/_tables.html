@@ -1,0 +1,36 @@
+{% macro power_lines_table(power_lines) -%}
+<div class="table-wrapper">
+  <table>
+    <caption>Power Lines</caption>
+    <thead>
+      <tr>
+        <th>Voltage</th>
+        <th>Length</th>
+        <th>Percentage</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for voltages, length in power_lines.lines.items() %}
+      <tr>
+        <td>{{voltages[0]|voltage}} &ndash; {{voltages[1]|voltage}}</td>
+        <td>{{length|distance}}</td>
+        <td>{{(length / power_lines.total)|percent}}</td>
+      </tr>
+    {% endfor %}
+      <tr>
+        <td>No voltage tagged</td>
+        <td>{{power_lines.unspecified|distance}}</td>
+        <td>{{(power_lines.unspecified / power_lines.total)|percent}}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>Total</td>
+        <td>{{power_lines.total|distance}}</td>
+        <td>{{1|percent}}</td>
+      </tr>
+    </tfoot>
+  </table>
+  <p class="footnote">Updated {{power_lines.date}}</p>
+</div>
+{%- endmacro %}

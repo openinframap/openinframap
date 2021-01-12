@@ -1,32 +1,41 @@
 {% extends "_base.html" %}
+{% import "_tables.html" as tables %}
 {% set breadcrumbs = [('Stats', url_for('stats')), (country, None)] %}
 {% block title %}{{country}}{% endblock %}
 {% block description -%}
 Statistics on the electricity network in {{country|country_name}} from OpenStreetMap.
 {%- endblock %}
 {% block content -%}
-  <p><strong>{{country|country_name(true)}}</strong> has {{plant_stats.count}} power plants totalling {{plant_stats.output|power}} mapped on OpenStreetMap.</p>
+  <p><strong>{{country|country_name(true)}}</strong> has {{plant_stats.count}} power plants totalling {{plant_stats.output|power}} and {{power_lines.total|distance}} of power lines mapped on OpenStreetMap.</p>
 
-  <table>
-    <caption>Power plants in {{country|country_name}} by source</caption>
-    <thead>
-      <tr>
-        <th>Source</th>
-        <th>Output</th>
-        <th>Count</th>
-      <tr>
-    </thead>
-    <tbody>
-    {% for row in plant_source_stats %}
-      <tr>
-        <td><a href="{{url_for('plants_country', country=country)}}?source={{row.source or ''}}">{{row.source or '[unspecified]'}}</a></td>
-        <td>{{row.output|power}}</td>
-        <td>{{row.count}}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-  <p><a href="{{url_for('plants_country', country=country)}}">See all plants</a>.</p>
-
-  <p class="footnote">If multiple sources are listed for a power plant, only the first source is used in this breakdown.</p>
+  <div class="table-wrapper">
+    <table>
+      <caption>Power plants in {{country|country_name}} by source</caption>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Output</th>
+          <th>Count</th>
+        <tr>
+      </thead>
+      <tbody>
+      {% for row in plant_source_stats %}
+        <tr>
+          <td><a href="{{url_for('plants_country', country=country)}}?source={{row.source or ''}}">{{row.source or '[unspecified]'}}</a></td>
+          <td>{{row.output|power}}</td>
+          <td>{{row.count}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td><a href="{{url_for('plants_country', country=country)}}">All</a></td>
+          <td>{{plant_stats.output|power}}</td>
+          <td>{{plant_stats.count}}</td>
+        </tr>
+      </tfoot>
+    </table>
+    <p class="footnote">If multiple sources are listed for a power plant, only the first source is used in this breakdown.</p>
+  </div>
+  {{ tables.power_lines_table(power_lines) }}
 {% endblock %}

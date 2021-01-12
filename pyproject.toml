@@ -14,6 +14,7 @@ jinja2 = "^2.11.2"
 uvicorn = "^0.12.2"
 asgi-sitemaps = "^0.3.2"
 aiohttp = "^3.7.3"
+more-itertools = "^8.6.0"
 
 [tool.poetry.dev-dependencies]
 

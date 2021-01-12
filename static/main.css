@@ -63,13 +63,29 @@ p.footnote {
   color: #444;
 }
 
+.table-wrapper {
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table-wrapper p.footnote {
+  font-size: 0.7em;
+  margin-top: 5px;
+  color: #666;
+}
+
 table {
   font-size: 0.9em;
   margin-top: 8px;
-  width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
   border: 1px solid #eee;
+  min-width: 500px;
+}
+
+.table-full-width {
+  width: 100%;
 }
 
 caption {
@@ -84,6 +100,11 @@ thead {
 
 tbody tr:nth-child(even) {
   background-color: #fafafa;
+}
+
+tfoot tr {
+  background-color: #eee;
+  font-weight: bold;
 }
 
 th, td {

@@ -19,7 +19,7 @@
 {% if plants|length == 0 %}
   <p>There are currently no power plants mapped in {{country|country_name}} on OpenStreetMap.</p>
 {% else %}
-  <table class="plants-table">
+  <table class="plants-table table-full-width">
     <caption>All {{plants|length}} {% if pretty_source %}{{pretty_source}} {% endif %}power plants in {{country|country_name}}</caption>
     <thead>
       <tr>
@@ -28,12 +28,12 @@
         <th>English Name</th>
         {% endif %}
         <th>Operator</th>
-        <th>Output</th>
+        <th style="width: 100px">Output</th>
         {% if not pretty_source %}
           <th>Source</th>
         {% endif %}
         <th>Method</th>
-        <th>Wikidata</th>
+        <th style="width: 100px">Wikidata</th>
       </tr>
     </thead>
     <tbody>
