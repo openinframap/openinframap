@@ -82,7 +82,7 @@ async def country(request, country):
                     WHERE ST_Contains(
                         (SELECT ST_Transform(geom, 3857) FROM countries.country_eez where gid = :gid),
                         geometry)
-                    AND tags -> 'construction' IS NULL
+                    AND tags -> 'construction:power' IS NULL
                     """,
         values={"gid": country["gid"]},
     )
@@ -93,7 +93,7 @@ async def country(request, country):
                     WHERE ST_Contains(
                             (SELECT ST_Transform(geom, 3857) FROM countries.country_eez WHERE gid = :gid),
                             geometry)
-                    AND tags -> 'construction' IS NULL
+                    AND tags -> 'construction:power' IS NULL
                     GROUP BY first_semi(source)
                     ORDER BY SUM(convert_power(output)) DESC NULLS LAST""",
         values={"gid": country["gid"]},
@@ -128,7 +128,7 @@ async def plants_country(request, country):
                   WHERE ST_Contains(
                         (SELECT ST_Transform(geom, 3857) FROM countries.country_eez WHERE gid = :gid),
                         geometry)
-                  AND tags -> 'construction' IS NULL
+                  AND tags -> 'construction:power' IS NULL
                   ORDER BY convert_power(output) DESC NULLS LAST, name ASC NULLS LAST """,
         values={"gid": gid},
     )
