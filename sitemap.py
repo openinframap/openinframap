@@ -1,6 +1,7 @@
 import asgi_sitemaps
 from starlette.datastructures import URL
 from starlette.requests import Request
+from urllib.parse import quote
 
 from data import get_countries
 
@@ -21,7 +22,7 @@ class CountryPageSitemap(asgi_sitemaps.Sitemap):
 
     def location(self, item):
         request = Request(scope=self.scope)
-        url = request.url_for("country", country=item)
+        url = request.url_for("country", country=quote(item))
         return URL(url).path
 
 
