@@ -39,7 +39,7 @@ async def stats_power_line(country=None):
             vals["high"] = high
 
         res = await database.fetch_one(query, vals)
-        lines[(low, high)] = res[0]
+        lines[(low, high)] = res[0] or 0
 
     unspecified = await database.fetch_one(
         "SELECT sum(length) FROM stats.power_line WHERE time = :time AND voltage IS NULL"
@@ -55,7 +55,7 @@ async def stats_power_line(country=None):
     data = {
         "date": stats_date.date(),
         "lines": lines,
-        "total": total[0],
-        "unspecified": unspecified[0],
+        "total": total[0] or 0.01,
+        "unspecified": unspecified[0] or 0,
     }
     return data
