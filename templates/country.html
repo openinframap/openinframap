@@ -6,7 +6,12 @@
 Statistics on the electricity network in {{country|country_name}} from OpenStreetMap.
 {%- endblock %}
 {% block content -%}
-  <p><strong>{{country|country_name(true)}}</strong> has {{plant_stats.count}} power plants totalling {{plant_stats.output|power}} and {{power_lines.total|distance}} of power lines mapped on OpenStreetMap.</p>
+  <p><strong>{{country|country_name(true)}}</strong> has
+  {{plant_stats.count}} power plant{%if plant_stats.count != 1 %}s{% endif %}
+  {% if plant_stats.output %}
+    totalling {{plant_stats.output|power}}
+  {% endif %}
+  and {{power_lines.total|distance}} of power lines mapped on OpenStreetMap.</p>
 
   <div class="table-wrapper">
     <table>
@@ -37,5 +42,7 @@ Statistics on the electricity network in {{country|country_name}} from OpenStree
     </table>
     <p class="footnote">If multiple sources are listed for a power plant, only the first source is used in this breakdown.</p>
   </div>
-  {{ tables.power_lines_table(power_lines) }}
+  {% if power_lines.total > 1 %}
+    {{ tables.power_lines_table(power_lines) }}
+  {% endif %}
 {% endblock %}
