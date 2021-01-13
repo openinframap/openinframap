@@ -476,7 +476,7 @@ const layers = [
     id: 'power_plant',
     type: 'fill',
     source: 'openinframap',
-    minzoom: 11,
+    minzoom: 5,
     'source-layer': 'power_plant',
     paint: {
       'fill-opacity': ['case', construction_p, 0.05, 0.2]
@@ -488,7 +488,7 @@ const layers = [
     type: 'line',
     filter: ["!", construction_p],
     source: 'openinframap',
-    minzoom: 9,
+    minzoom: 8,
     'source-layer': 'power_plant',
     paint: {
       'line-color': 'rgb(80,80,80)',
@@ -505,7 +505,7 @@ const layers = [
     type: 'line',
     filter: construction_p,
     source: 'openinframap',
-    minzoom: 9,
+    minzoom: 8,
     'source-layer': 'power_plant',
     paint: {
       'line-color': 'rgb(163,139,16)',
