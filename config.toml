@@ -21,7 +21,7 @@ max_zoom = 17
 provider_layer = "postgis.power_substation_point"
 
 [[maps.layers]]
-min_zoom = 11
+min_zoom = 5
 max_zoom = 17
 provider_layer = "postgis.power_plant"
 
@@ -131,7 +131,7 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, (ST_Geo
 name = "power_plant"
 geometry_type = "Polygon"
 dont_simplify = true
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, tags -> 'operator' AS operator, convert_power(output)/1e6 AS output, first_semi(source) AS source, tags -> 'wikidata' AS wikidata, tags -> 'wikipedia' AS wikipedia, osm_url(tags) AS url, tags -> 'plant:storage' AS storage, tags -> 'repd:id' AS repd_id, tags -> 'construction:power' IS NOT NULL AS construction FROM power_plant WHERE geometry && !BBOX! AND !ZOOM! >= 11 ORDER BY convert_power(output) ASC NULLS FIRST"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, name, tags -> 'operator' AS operator, convert_power(output)/1e6 AS output, first_semi(source) AS source, tags -> 'wikidata' AS wikidata, tags -> 'wikipedia' AS wikipedia, osm_url(tags) AS url, tags -> 'plant:storage' AS storage, tags -> 'repd:id' AS repd_id, tags -> 'construction:power' IS NOT NULL AS construction FROM power_plant WHERE geometry && !BBOX! AND (!ZOOM! >= 11 OR ST_Area(geometry) > 2e7) AND !ZOOM! >= 5 ORDER BY convert_power(output) ASC NULLS FIRST"
 
 [[providers.layers]]
 name = "power_plant_point"
