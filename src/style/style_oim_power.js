@@ -263,6 +263,16 @@ const power_ref_visible_p = [
   ],
 ];
 
+const construction_p = ['get', 'construction'];
+
+const construction_label = [
+  'case',
+  construction_p,
+  ' (under construction) ',
+  '',
+];
+
+
 const plant_label_visible_p = [
   'any',
   ['>', ['coalesce', ['get', 'output'], 0], 1000],
@@ -273,13 +283,16 @@ const plant_label_visible_p = [
   ['>', ['zoom'], 10],
 ];
 
-const plant_label = [
-  'case',
-  ['all', ['!', ['has', 'name']], ['has', 'output']],
-  ['concat', ['get', 'output'], ' MW'],
-  ['has', 'output'],
-  ['concat', ['get', 'name'], ' \n', ['get', 'output'], ' MW'],
-  ['get', 'name'],
+const plant_label = ['step', ['zoom'],
+    ['concat', ['get', 'name']],
+    9,
+    ['case',
+      ['all', ['!', ['has', 'name']], ['has', 'output']],
+      ['concat', ['get', 'output'], ' MW', construction_label],
+      ['has', 'output'],
+      ['concat', ['get', 'name'], ' \n', ['get', 'output'], ' MW', '\n', construction_label],
+      ['get', 'name']
+    ],
 ];
 
 function plant_image() {
@@ -291,16 +304,8 @@ function plant_image() {
   return expr;
 }
 
-const construction_p = ['get', 'construction'];
-
 const construction_opacity = ['case', construction_p, 0.3, 1];
-
-const construction_label = [
-  'case',
-  construction_p,
-  ' (under construction) ',
-  '',
-];
+const plant_construction_opacity = ['case', construction_p, 0.3, 1];
 
 const freq = [
   'case',
@@ -474,9 +479,43 @@ const layers = [
     minzoom: 11,
     'source-layer': 'power_plant',
     paint: {
-      'fill-opacity': 0.3,
-      'fill-outline-color': 'rgba(0, 0, 0, 1)',
+      'fill-opacity': ['case', construction_p, 0.05, 0.2]
     },
+  },
+  {
+    zorder: 161,
+    id: 'power_plant_outline',
+    type: 'line',
+    filter: ["!", construction_p],
+    source: 'openinframap',
+    minzoom: 9,
+    'source-layer': 'power_plant',
+    paint: {
+      'line-color': 'rgb(80,80,80)',
+      'line-opacity': 0.4,
+      'line-width': 1,
+    },
+    layout: {
+      'line-join': 'round',
+    }
+  },
+  {
+    zorder: 161,
+    id: 'power_plant_outline_construction',
+    type: 'line',
+    filter: construction_p,
+    source: 'openinframap',
+    minzoom: 9,
+    'source-layer': 'power_plant',
+    paint: {
+      'line-color': 'rgb(163,139,16)',
+      'line-opacity': 0.4,
+      'line-width': 1,
+      'line-dasharray': [2, 2],
+    },
+    layout: {
+      'line-join': 'round',
+    }
   },
   {
     zorder: 161,
@@ -891,7 +930,9 @@ const layers = [
     },
     paint: Object.assign({}, text_paint, {
       // Control visibility using the opacity property...
-      'icon-opacity': ['step', ['zoom'], 1, 11, 0],
+      'icon-opacity': ['step', ['zoom'], 
+        ['case', construction_p, 0.5, 1], 11, 
+      0],
       'text-opacity': ['step', ['zoom'], 0, 7, 1],
     }),
   },
