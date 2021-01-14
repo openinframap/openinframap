@@ -12,7 +12,7 @@
     <tbody>
     {% for voltages, length in power_lines.lines.items() %}
       <tr>
-        <td>{{voltages[0]|voltage}} &ndash; {{voltages[1]|voltage}}</td>
+        <td>{{voltages[0]|voltage}} &ndash; {% if voltages[1] %}{{(voltages[1] - 1000)|voltage}}{% endif %}</td>
         <td>{{length|distance}}</td>
         <td>{{(length / power_lines.total)|percent}}</td>
       </tr>
