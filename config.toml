@@ -141,7 +141,7 @@ sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, round(S
 [[providers.layers]]
 name = "power_generator"
 geometry_type = "Point"
-sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name, tags -> 'operator' AS operator, convert_power(tags -> 'generator:output:electricity')/1e3 AS output, source, type, tags -> 'ref' AS ref, (ST_GeometryType(geometry) = 'ST_Point') AS is_node, tags -> 'construction:power' IS NOT NULL AS construction FROM osm_power_generator WHERE geometry && !BBOX! AND !ZOOM! >= 9"
+sql = "SELECT osm_id AS gid, ST_AsBinary(ST_Centroid(geometry)) AS geom, tags -> 'name' AS name, tags -> 'operator' AS operator, convert_power(tags -> 'generator:output:electricity')/1e6 AS output, source, type, tags -> 'ref' AS ref, (ST_GeometryType(geometry) = 'ST_Point') AS is_node, tags -> 'construction:power' IS NOT NULL AS construction FROM osm_power_generator WHERE geometry && !BBOX! AND !ZOOM! >= 9"
 
 [[providers.layers]]
 name = "power_heatmap_solar"
