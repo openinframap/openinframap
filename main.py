@@ -151,4 +151,36 @@ async def plants_country(request, country):
     )
 
 
+@app.route("/stats/area/{country}/plants/construction")
+@country_required
+@cache_for(3600)
+async def plants_construction_country(request, country):
+    gid = country[0]
+
+    plants = await database.fetch_all(
+        query="""SELECT osm_id, name, tags->'name:en' AS name_en, tags->'wikidata' AS wikidata,
+                        tags->'plant:method' AS method, tags->'operator' AS operator,
+                        tags->'start_date' AS start_date,
+                        convert_power(output) AS output,
+                        source, ST_GeometryType(geometry) AS geom_type
+                  FROM power_plant
+                  WHERE ST_Contains(
+                        (SELECT ST_Transform(geom, 3857) FROM countries.country_eez WHERE gid = :gid),
+                        geometry)
+                  AND tags -> 'construction:power' IS NOT NULL
+                  ORDER BY convert_power(output) DESC NULLS LAST, name ASC NULLS LAST """,
+        values={"gid": gid},
+    )
+
+    return templates.TemplateResponse(
+        "plants_country.html",
+        {
+            "construction": True,
+            "request": request,
+            "plants": plants,
+            "country": country["union"],
+        },
+    )
+
+
 import wikidata  # noqa

@@ -5,9 +5,9 @@
 {% elif source %}
   {% set pretty_source = source|replace("_"," ") %}
 {% endif %}
-{% block title %}{{country}}{% if pretty_source %} {{pretty_source|title}}{% endif %} Power Plants{% endblock %}
+{% block title %}{{country}}{% if pretty_source %} {{pretty_source|title}}{% endif %} Power Plants{% if construction%} under construction{% endif %}{% endblock %}
 {% block description -%}
-  List of{% if pretty_source%} {{pretty_source}}{% endif %} power plants in {{country|country_name}} from OpenStreetMap
+  List of{% if pretty_source%} {{pretty_source}}{% endif %} power plants{% if construction %} under construction{% endif %} in {{country|country_name}} from OpenStreetMap
 {%- endblock %}
 {% block content -%}
 
@@ -17,10 +17,16 @@
 {% endif %}
 
 {% if plants|length == 0 %}
-  <p>There are currently no power plants mapped in {{country|country_name}} on OpenStreetMap.</p>
+  <p>There are currently no power plants
+      {% if construction %}under construction{% endif %}
+      mapped in {{country|country_name}} on OpenStreetMap.
+  </p>
 {% else %}
   <table class="plants-table table-full-width">
-    <caption>All {{plants|length}} {% if pretty_source %}{{pretty_source}} {% endif %}power plants in {{country|country_name}}</caption>
+    <caption>All {{plants|length}} {% if pretty_source %}{{pretty_source}} {% endif %}
+      power plants
+      {% if construction %}under construction{% endif %}
+        in {{country|country_name}}</caption>
     <thead>
       <tr>
         <th style="width: 300px">Name</th>
@@ -33,6 +39,9 @@
           <th>Source</th>
         {% endif %}
         <th>Method</th>
+        {% if construction %}
+        <th>Completion Date</th>
+        {% endif %}
         <th style="width: 100px">Wikidata</th>
       </tr>
     </thead>
@@ -50,6 +59,9 @@
         <td>{{plant.source}}</td>
         {% endif %}
         <td>{{plant.method or ''}}</td>
+        {% if construction %}
+          <td>{{plant.start_date or ''}}</td>
+        {% endif %}
         <td>
             {% if plant.wikidata %}
               <a href="https://www.wikidata.org/wiki/{{plant.wikidata}}" target="_blank">{{plant.wikidata}}</a>

@@ -42,6 +42,7 @@ Statistics on the electricity network in {{country|country_name}} from OpenStree
     </table>
     <p class="footnote">If multiple sources are listed for a power plant, only the first source is used in this breakdown.</p>
   </div>
+  <p><a href="{{url_for('plants_construction_country', country=country)}}">Show plants under construction</a></p>
   {% if power_lines.total > 1 %}
     {{ tables.power_lines_table(power_lines) }}
   {% endif %}
