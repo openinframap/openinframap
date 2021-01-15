@@ -4,31 +4,34 @@
   <meta charset="utf-8">
   <title>{% block title %}{% endblock %}{% if self.title() %} - {% endif %}Open Infrastructure Map</title>
   <link rel="stylesheet" href="/static/main.css">
-{% if self.description() %}
+{%- if self.description() %}
   <meta name="description" content="{% block description %}{% endblock %}">
   <meta property="og:description" content="{{self.description()}}">
-{% endif %}
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@openinframap" />
-  <meta name="twitter:creator" content="@russss" />
-  <meta property="og:title" content="Open Infrastructure Map" />
+{%- endif %}
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@openinframap">
+  <meta name="twitter:creator" content="@russss">
+  <meta property="og:title" content="Open Infrastructure Map">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+{%- if canonical %}
+  <link rel="canonical" href="{{canonical}}">
+{%- endif %}
 </head>
 <body>
   <header>
     <h1><a href="{{url_for('main')}}">OpenInfraMap</a>
-    {% if breadcrumbs %}
+    {%- if breadcrumbs -%}
       <h2>
-      {% for name, url in breadcrumbs %}
-        &rang;
-        {% if url %}
+      {%- for name, url in breadcrumbs -%}
+        &nbsp;&rang;&nbsp;
+        {%- if url -%}
           <a href="{{url}}">{{name}}</a>
-        {% else %}
+        {%- else -%}
           {{name}}
-        {% endif %}
-      {% endfor %}
+        {%- endif -%}
+      {%- endfor -%}
       </h2>
-    {% endif %}
+    {%- endif %}
   </header>
   <div id="content">
     {% block content %}{% endblock %}

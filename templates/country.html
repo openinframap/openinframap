@@ -7,10 +7,10 @@ Statistics on the electricity network in {{country|country_name}} from OpenStree
 {%- endblock %}
 {% block content -%}
   <p><strong>{{country|country_name(true)}}</strong> has
-  {{plant_stats.count}} power plant{%if plant_stats.count != 1 %}s{% endif %}
-  {% if plant_stats.output %}
+  {{plant_stats.count}} power plant{%if plant_stats.count != 1 %}s{% endif -%}
+  {%- if plant_stats.output %}
     totalling {{plant_stats.output|power}}
-  {% endif %}
+  {%- endif %}
   and {{power_lines.total|distance}} of power lines mapped on OpenStreetMap.</p>
 
   <div class="table-wrapper">

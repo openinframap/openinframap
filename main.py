@@ -108,7 +108,8 @@ async def country(request, country):
             "country": country["union"],
             "plant_stats": plant_stats,
             "plant_source_stats": plant_source_stats,
-            "power_lines": power_lines
+            "power_lines": power_lines,
+            "canonical": request.url_for("country", country=country['union'])
         },
     )
 
@@ -147,6 +148,8 @@ async def plants_country(request, country):
             "plants": plants,
             "country": country["union"],
             "source": source,
+            # Canonical URL for all plants without the source filter, to avoid confusing Google.
+            "canonical": request.url_for("plants_country", country=country['union'])
         },
     )
 
