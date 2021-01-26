@@ -48,7 +48,7 @@
     <tbody>
     {% for plant in plants -%}
       <tr>
-        <td><a href="{{osm_link(plant.osm_id, plant.geom_type)}}" target="_blank">
+        <td><a href="{{url_for('plant_detail', country=country, id=plant.osm_id)}}">
             {{plant.name or '[unnamed]'}}</a></td>
         {% if english_name %}
           <td>{{plant.name_en or  ''}}</td>

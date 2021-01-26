@@ -15,6 +15,7 @@ uvicorn = "^0.12.2"
 asgi-sitemaps = "^0.3.2"
 aiohttp = "^3.7.3"
 more-itertools = "^8.6.0"
+async_lru = "^1.0.2"
 
 [tool.poetry.dev-dependencies]
 

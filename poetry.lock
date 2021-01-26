@@ -34,6 +34,14 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "async-lru"
+version = "1.0.2"
+description = "Simple lru_cache for asyncio"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "async-timeout"
 version = "3.0.1"
 description = "Timeout context manager for asyncio programs"
@@ -226,7 +234,7 @@ typing-extensions = {version = ">=3.7.4", markers = "python_version < \"3.8\""}
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7"
-content-hash = "52b37ef1c427e664912cf682f39d840231d20859fb56520f5280582e0fdcc1ba"
+content-hash = "15e6f83ebab817e36c18579575a4f07f71718895a52c12439f1845d68d11833c"
 
 [metadata.files]
 aiofiles = [
@@ -275,6 +283,9 @@ aiohttp = [
 asgi-sitemaps = [
     {file = "asgi-sitemaps-0.3.2.tar.gz", hash = "sha256:ede30466cddb8d242f0e1169f9824ab810d56ac9b4beaf56ada2a90779439caf"},
     {file = "asgi_sitemaps-0.3.2-py3-none-any.whl", hash = "sha256:b20aa963f1553a1ff5b1757b4fb130fafcf11ec70f985668f95c62c63c1fb432"},
+]
+async-lru = [
+    {file = "async_lru-1.0.2.tar.gz", hash = "sha256:baa898027619f5cc31b7966f96f00e4fc0df43ba206a8940a5d1af5336a477cb"},
 ]
 async-timeout = [
     {file = "async-timeout-3.0.1.tar.gz", hash = "sha256:0c3c816a028d47f659d6ff5c745cb2acf1f966da1fe5c19c77a70282b25f4c5f"},

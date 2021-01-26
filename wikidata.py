@@ -1,46 +1,20 @@
-""" Endpoints to proxy WikiData requests """
-import aiohttp
-import re
+""" Endpoints to proxy WikiData requests for info popups on the map """
 from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse
+from data import get_wikidata, get_commons_thumbnail
 from util import cache_for
 from main import app
-
-
-async def get_wikidata(wikidata_id):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(
-            f"https://www.wikidata.org/entity/{wikidata_id}.json"
-        ) as resp:
-            if resp.status != 200:
-                raise HTTPException(503)
-            data = await resp.json()
-            return data["entities"][wikidata_id]
-
-
-async def get_commons_thumbnail(filename, width=300):
-    url = (
-        "https://commons.wikimedia.org/w/api.php?"
-        f"action=query&titles=Image:{filename}&prop=imageinfo"
-        f"&iiprop=url&iiurlwidth={width}&format=json"
-    )
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
-            if resp.status != 200:
-                raise HTTPException(503)
-            data = await resp.json()
-            return list(data["query"]["pages"].values())[0]["imageinfo"][0]["thumburl"]
 
 
 @app.route("/wikidata/{wikidata_id}")
 @cache_for(86400)
 async def wikidata(request):
     wikidata_id = request.path_params['wikidata_id'].upper()
-    if not re.match(r"^Q[0-9]+$", wikidata_id):
-        raise HTTPException(404)
 
     response = {}
     data = await get_wikidata(wikidata_id)
+    if data is None:
+        raise HTTPException(404, "Wikidata item not found")
 
     response["sitelinks"] = data["sitelinks"]
     if (
@@ -48,9 +22,11 @@ async def wikidata(request):
         and data["claims"]["P18"][0]["mainsnak"]["datatype"] == "commonsMedia"
     ):
         response["image"] = data["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"]
-        response["thumbnail"] = await get_commons_thumbnail(
+        image_data = await get_commons_thumbnail(
             data["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"]
         )
+
+        response["thumbnail"] = image_data["imageinfo"][0]["thumburl"]
 
     return JSONResponse(
         response,

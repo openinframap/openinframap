@@ -3,6 +3,7 @@ from starlette.applications import Starlette
 from starlette.templating import Jinja2Templates
 from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
+from starlette.exceptions import HTTPException
 
 from template_functions import (
     format_power,
@@ -15,7 +16,14 @@ from template_functions import (
 from config import database, config
 from util import cache_for, country_required
 from sitemap import sitemap
-from data import get_countries, stats_power_line
+from data import (
+    get_countries,
+    stats_power_line,
+    get_plant,
+    get_plant_generator_summary,
+    get_wikidata,
+    get_commons_thumbnail,
+)
 
 
 DEBUG = config("DEBUG", cast=bool, default=False)
@@ -109,7 +117,7 @@ async def country(request, country):
             "plant_stats": plant_stats,
             "plant_source_stats": plant_source_stats,
             "power_lines": power_lines,
-            "canonical": request.url_for("country", country=country['union'])
+            "canonical": request.url_for("country", country=country["union"]),
         },
     )
 
@@ -149,7 +157,7 @@ async def plants_country(request, country):
             "country": country["union"],
             "source": source,
             # Canonical URL for all plants without the source filter, to avoid confusing Google.
-            "canonical": request.url_for("plants_country", country=country['union'])
+            "canonical": request.url_for("plants_country", country=country["union"]),
         },
     )
 
@@ -182,6 +190,51 @@ async def plants_construction_country(request, country):
             "request": request,
             "plants": plants,
             "country": country["union"],
+        },
+    )
+
+
+@app.route("/stats/area/{country}/plants/{id}")
+@country_required
+@cache_for(3600)
+async def plant_detail(request, country):
+    try:
+        plant_id = int(request.path_params["id"])
+    except ValueError:
+        raise HTTPException(404, "Invalid plant ID")
+
+    plant = await get_plant(plant_id, country["gid"])
+    if plant is None:
+        raise HTTPException(404, "Nonexistent power plant")
+
+    generator_summary = await get_plant_generator_summary(plant_id)
+
+    if "wikidata" in plant["tags"]:
+        wd = await get_wikidata(plant["tags"]["wikidata"])
+    else:
+        wd = None
+
+    image_data = None
+    if (
+        wd
+        and "P18" in wd["claims"]
+        and wd["claims"]["P18"][0]["mainsnak"]["datatype"] == "commonsMedia"
+    ):
+        image_data = await get_commons_thumbnail(
+            wd["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"],
+            400
+        )
+
+    return templates.TemplateResponse(
+        "plant_detail.html",
+        {
+            "construction": True,
+            "plant": plant,
+            "request": request,
+            "generator_summary": generator_summary,
+            "country": country["union"],
+            "wikidata": wd,
+            "image_data": image_data,
         },
     )
 

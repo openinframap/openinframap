@@ -35,6 +35,10 @@ h1 a, h2 a {
   color: inherit;
 }
 
+h3 {
+  clear: both;
+}
+
 #content {
   margin: 0px auto;
   margin-bottom: 20px;
@@ -109,4 +113,23 @@ tfoot tr {
 
 th, td {
   padding: 4px;
+}
+
+figure {
+  margin: 5px;
+  background-color: #eee;
+  border: 1px #999 solid;
+}
+
+figcaption {
+  font-size: 0.7em;
+  padding: 2px 5px;
+}
+
+figcaption a, figcaption a:visited {
+  color: #666;
+}
+
+figure.plant_image {
+  float:right;
 }
