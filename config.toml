@@ -151,7 +151,7 @@ sql = "SELECT ST_AsBinary(ST_SnapToGrid(ST_Centroid(geometry), ZRes(!ZOOM!), ZRe
 [[providers.layers]]
 name = "power_generator_area"
 geometry_type = "Polygon"
-sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'name' AS name, tags -> 'operator' AS operator, convert_power(tags -> 'generator:output:electricity')/1e3 AS output, round(solar_output(geometry)/1e3) AS estimated_output, source, type, tags -> 'ref' AS ref FROM osm_power_generator WHERE geometry && !BBOX! AND construction = '' AND !ZOOM! >= 13 AND ST_GeometryType(geometry) IN ('ST_Polygon', 'ST_MultiPolygon)"
+sql = "SELECT osm_id AS gid, ST_AsBinary(geometry) AS geom, tags -> 'name' AS name, tags -> 'operator' AS operator, convert_power(tags -> 'generator:output:electricity')/1e3 AS output, round(solar_output(geometry)/1e3) AS estimated_output, source, type, tags -> 'ref' AS ref FROM osm_power_generator WHERE geometry && !BBOX! AND construction = '' AND !ZOOM! >= 13 AND ST_GeometryType(geometry) IN ('ST_Polygon', 'ST_MultiPolygon')"
 
 [[providers.layers]]
 name = "power_transformer"
