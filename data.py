@@ -55,6 +55,7 @@ async def get_plant_generator_summary(plant_id):
                     sum(convert_power(tags->'generator:output:electricity')) AS total_output, count(*)
                  FROM osm_power_plant_relation_member
                  WHERE osm_id = :plant_id
+                     AND tags->'power' = 'generator'
                  GROUP BY source, convert_power(tags->'generator:output:electricity')
                 """,
             {"plant_id": plant_id},
