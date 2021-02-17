@@ -172,6 +172,7 @@ class KeyControl {
       ['Transformer', this.sprite('power_transformer')],
       ['Switch', this.sprite('power_switch')],
       ['Compensator', this.sprite('power_compensator')],
+      ['Converter', this.sprite('converter')],
     ];
     let table = list('table', Tr);
     table.update(rows);
