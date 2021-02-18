@@ -899,7 +899,6 @@ const layers = [
     source: 'openinframap',
     'source-layer': 'power_substation_point',
     minzoom: 5.5,
-    maxzoom: 12,
     layout: {
       'icon-image': 'converter',
       'icon-size': ['interpolate', ['linear'], ['zoom'],
