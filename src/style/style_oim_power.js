@@ -204,7 +204,10 @@ const substation_point_visible_p = [
 
 const converter_p = ['all',
   ['==', ['get', 'substation'], 'converter'],
-  ['>', voltage, 100]
+  ['any',
+    ['>', voltage, 100],
+    ['>', ['zoom'], 6]
+  ]
 ]
 
 const substation_label_visible_p = [
