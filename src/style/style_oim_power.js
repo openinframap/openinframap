@@ -142,7 +142,7 @@ const substation_visible_p = [
   'all',
   [
     'any',
-    ['>', ['coalesce', ['get', 'voltage'], 0], 399],
+    ['>', ['coalesce', ['get', 'voltage'], 0], 200],
     [
       'all',
       ['>', ['coalesce', ['get', 'voltage'], 0], 200],
@@ -165,7 +165,17 @@ const substation_radius = [
   ['linear'],
   ['zoom'],
   5,
-  1,
+  [
+    'interpolate',
+    ['linear'],
+    ['coalesce', ['get', 'voltage'], 0],
+    0,
+    0,
+    200,
+    1,
+    750,
+    3,
+  ],
   12,
   [
     'interpolate',
@@ -180,6 +190,8 @@ const substation_radius = [
   ],
 ];
 
+const voltage = ['coalesce', ['get', 'voltage'], 0];
+
 // Determine the minimum zoom a point is visible at (before it can be seen as an
 // area), based on the area of the substation.
 const substation_point_visible_p = [
@@ -190,24 +202,29 @@ const substation_point_visible_p = [
   ['<', ['zoom'], 13],
 ];
 
+const converter_p = ['all',
+  ['==', ['get', 'substation'], 'converter'],
+  ['>', voltage, 100]
+]
+
 const substation_label_visible_p = [
   'all',
   [
     'any',
-    ['>', ['coalesce', ['get', 'voltage'], 0], 399],
+    ['>', voltage, 399],
     [
       'all',
-      ['>', ['coalesce', ['get', 'voltage'], 0], 200],
+      ['>', voltage, 200],
       ['>', ['zoom'], 8],
     ],
     [
       'all',
-      ['>', ['coalesce', ['get', 'voltage'], 0], 100],
+      ['>', voltage, 100],
       ['>', ['zoom'], 10],
     ],
     [
       'all',
-      ['>', ['coalesce', ['get', 'voltage'], 0], 50],
+      ['>', voltage, 50],
       ['>', ['zoom'], 12],
     ],
     ['>', ['zoom'], 13],
@@ -220,11 +237,11 @@ const power_visible_p = [
   'all',
   [
     'any',
-    ['>', ['coalesce', ['get', 'voltage'], 0], 199],
-    ['all', ['>', ['coalesce', ['get', 'voltage'], 0], 99], ['>', ['zoom'], 4]],
-    ['all', ['>', ['coalesce', ['get', 'voltage'], 0], 49], ['>', ['zoom'], 5]],
-    ['all', ['>', ['coalesce', ['get', 'voltage'], 0], 24], ['>', ['zoom'], 6]],
-    ['all', ['>', ['coalesce', ['get', 'voltage'], 0], 9], ['>', ['zoom'], 8]],
+    ['>', voltage, 199],
+    ['all', ['>', voltage, 99], ['>', ['zoom'], 4]],
+    ['all', ['>', voltage, 49], ['>', ['zoom'], 5]],
+    ['all', ['>', voltage, 24], ['>', ['zoom'], 6]],
+    ['all', ['>', voltage, 9], ['>', ['zoom'], 8]],
     ['>', ['zoom'], 10],
   ],
   [
@@ -241,17 +258,17 @@ const power_ref_visible_p = [
     'any',
     [
       'all',
-      ['>', ['coalesce', ['get', 'voltage'], 0], 330],
+      ['>', voltage, 330],
       ['>', ['zoom'], 7],
     ],
     [
       'all',
-      ['>', ['coalesce', ['get', 'voltage'], 0], 200],
+      ['>', voltage, 200],
       ['>', ['zoom'], 8],
     ],
     [
       'all',
-      ['>', ['coalesce', ['get', 'voltage'], 0], 100],
+      ['>', voltage, 100],
       ['>', ['zoom'], 9],
     ],
     ['>', ['zoom'], 10],
@@ -305,7 +322,11 @@ function plant_image() {
 }
 
 const construction_opacity = ['case', construction_p, 0.3, 1];
-const plant_construction_opacity = ['case', construction_p, 0.3, 1];
+const power_line_opacity = ['interpolate', ['linear'], ['zoom'],
+  4, ['case', construction_p, 0.3, 0.6],
+  8, ['case', construction_p, 0.3, 1]
+];
+const plant_construction_opacity = construction_opacity;
 
 const freq = [
   'case',
@@ -424,7 +445,7 @@ const layers = [
       'line-width': voltage_line_thickness,
       'line-dasharray': [3, 2],
       'line-offset': voltage_offset(1),
-      'line-opacity': construction_opacity,
+      'line-opacity': power_line_opacity,
     },
     layout: {
       'line-join': 'round',
@@ -444,7 +465,7 @@ const layers = [
       'line-width': voltage_line_thickness,
       'line-dasharray': [3, 2],
       'line-offset': voltage_offset(2),
-      'line-opacity': construction_opacity,
+      'line-opacity': power_line_opacity,
     },
     layout: {
       'line-join': 'round',
@@ -464,7 +485,7 @@ const layers = [
       'line-width': voltage_line_thickness,
       'line-dasharray': [3, 2],
       'line-offset': voltage_offset(3),
-      'line-opacity': construction_opacity,
+      'line-opacity': power_line_opacity,
     },
     layout: {
       'line-join': 'round',
@@ -556,7 +577,7 @@ const layers = [
       'line-color': voltage_color('voltage'),
       'line-width': voltage_line_thickness,
       'line-offset': voltage_offset(1),
-      'line-opacity': construction_opacity,
+      'line-opacity': power_line_opacity,
     },
     layout: {
       'line-join': 'round',
@@ -580,7 +601,7 @@ const layers = [
       'line-color': voltage_color('voltage_2'),
       'line-width': voltage_line_thickness,
       'line-offset': voltage_offset(2),
-      'line-opacity': construction_opacity,
+      'line-opacity': power_line_opacity,
     },
     layout: {
       'line-join': 'round',
@@ -604,7 +625,7 @@ const layers = [
       'line-color': voltage_color('voltage_3'),
       'line-width': voltage_line_thickness,
       'line-offset': voltage_offset(3),
-      'line-opacity': construction_opacity,
+      'line-opacity': power_line_opacity,
     },
     layout: {
       'line-join': 'round',
@@ -766,7 +787,7 @@ const layers = [
     zorder: 268,
     id: 'power_substation_point',
     type: 'circle',
-    filter: ['all', substation_visible_p, substation_point_visible_p, ['!=', ['get', 'substation'], 'converter']],
+    filter: ['all', substation_visible_p, substation_point_visible_p, ["!", converter_p]],
     source: 'openinframap',
     'source-layer': 'power_substation_point',
     minzoom: 5,
@@ -774,22 +795,20 @@ const layers = [
     paint: {
       'circle-radius': substation_radius,
       'circle-color': voltage_color('voltage'),
-      'circle-stroke-color': '#333',
+      'circle-stroke-color': '#555',
       'circle-stroke-width': [
         'interpolate',
         ['linear'],
         ['zoom'],
         5,
-        0,
-        6,
         0.1,
         8,
         0.5,
         15,
-        1,
+        2,
       ],
-      'circle-opacity': construction_opacity,
-      'circle-stroke-opacity': construction_opacity,
+      'circle-opacity': power_line_opacity,
+      'circle-stroke-opacity': power_line_opacity,
     },
   },
   {
@@ -895,15 +914,15 @@ const layers = [
     zorder: 562,
     id: 'power_converter_point',
     type: 'symbol',
-    filter: ['all', ['==', ['get', 'substation'], 'converter'], substation_point_visible_p],
+    filter: ['all', converter_p, substation_point_visible_p],
     source: 'openinframap',
     'source-layer': 'power_substation_point',
     minzoom: 5.5,
     layout: {
       'icon-image': 'converter',
       'icon-size': ['interpolate', ['linear'], ['zoom'],
-        5, 0.6,
-        8, 1
+        5, 0.4,
+        9, 1
       ],
       'text-field': substation_label,
       'text-anchor': 'top',

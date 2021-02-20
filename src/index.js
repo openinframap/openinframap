@@ -59,7 +59,7 @@ function init() {
     Water: 'water_',
     Labels: 'place_',
   };
-  const layers_enabled = ['Power', 'Telecoms', 'Labels'];
+  const layers_enabled = ['Power', 'Labels'];
   const layer_switcher = new LayerSwitcher(layers, layers_enabled);
   var url_hash = new URLHash(layer_switcher);
   layer_switcher.urlhash = url_hash;
