@@ -24,7 +24,7 @@ CREATE OR REPLACE VIEW substation AS
                   FROM power_substation_relation;
 
 CREATE MATERIALIZED VIEW power_plant_relation AS
-    SELECT rel.osm_id, ST_Buffer(ST_ConcaveHull(ST_Collect(mem.geometry), 0.99), 100) AS geometry, 
+    SELECT rel.osm_id, ST_Buffer(ST_ConcaveHull(ST_Collect(mem.geometry), 0.99), 10) AS geometry, 
         (rel.tags -> 'name') AS name, rel.output, rel.source, rel.tags, rel.construction
         FROM osm_power_plant_relation as rel, osm_power_plant_relation_member as mem
         WHERE mem.osm_id = rel.osm_id
@@ -73,7 +73,7 @@ BEGIN
 			osm_power_line_gen_500.tags
 			FROM osm_power_line_gen_500
 			WHERE osm_power_line_gen_500.geometry && search_geom;
-	ELSIF zoom < 8 THEN
+	ELSIF zoom < 6 THEN
 		RETURN QUERY SELECT osm_id, osm_power_line_gen_100.geometry, 
 			osm_power_line_gen_100.type, osm_power_line_gen_100.location,
 			osm_power_line_gen_100.line, osm_power_line_gen_100.voltage,
