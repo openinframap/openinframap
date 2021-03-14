@@ -9,6 +9,6 @@
   "maxzoom": 17,
   "tiles": ["https://openinframap.org/heatmap/{z}/{x}/{y}.pbf"],
   "vector_layers": [
-	{"id": "power_heatmap_solar", "description": "Solar power heatmap", "fields": {}},
+	{"id": "power_heatmap_solar", "description": "Solar power heatmap", "fields": {}}
   ]
 }
