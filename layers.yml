@@ -1,0 +1,307 @@
+field_sets:
+  geom:
+    - name: geom
+      sql: ST_AsMVTGeom(ST_SimplifyPreserveTopology(geometry, !PIXEL_WIDTH! / 4), !BBOX!)
+  geom_centroid:
+    - name: geom
+      sql: ST_AsMVTGeom(ST_Centroid(geometry), !BBOX!)
+  frequency:
+    - name: frequency
+      sql: first_semi(tags -> 'frequency')
+  area:
+    - name: area
+      sql: round(ST_Area(geometry))
+  voltages:
+    - name: voltage
+      sql: convert_voltage(voltage) / 1000
+    - name: voltage_2
+      sql: convert_voltage(nth_semi(voltage, 2)) / 1000
+    - name: voltage_3
+      sql: convert_voltage(nth_semi(voltage, 3)) / 1000
+  wiki:
+    - name: wikidata
+      sql: tags -> 'wikidata'
+    - name: wikipedia
+      sql: tags -> 'wikipedia'
+  name:
+    - name: name
+      sql: tags -> 'name'
+    - name: name_en
+      sql: tags -> 'name:en'
+    - name: operator
+      sql: tags -> 'operator'
+    - name: ref
+      sql: tags -> 'ref'
+  construction:
+    - name: construction
+      sql: (tags -> 'construction:power') IS NOT NULL
+  is_node:
+    - name: is_node
+      sql: (ST_GeometryType(geometry) = 'ST_Point')
+  url:
+    - name: url
+      sql: osm_url(tags)
+  source:
+    - name: source
+      sql: first_semi(source)
+  output:
+    - name: output
+      sql: convert_power(output) / 1e6
+  generator_output:
+    - name: output
+      sql: convert_power(tags -> 'generator:output:electricity')/1e6
+
+layers:
+  - name: power_line
+    geometry_type: LineString
+    field_sets: [geom, name, frequency, wiki, construction]
+    id_field: gid
+    fields:
+      - name: tunnel
+      - name: location
+      - name: line
+      - name: ref_len
+        sql: char_length(tags -> 'ref')
+      - name: voltage
+        sql: voltages[1]
+      - name: voltage_2
+        sql: voltages[2]
+      - name: voltage_3
+        sql: voltages[3]
+      - name: circuits
+      - name: url
+        sql: osm_url(tags)
+    from: power_lines(!ZOOM!, !BBOX!)
+    where: >
+      ST_Length(geometry) > !PIXEL_WIDTH! / 4 AND
+      (convert_voltage(voltage) > 200000 OR
+        !ZOOM! >= 4 AND convert_voltage(voltage) > 100000 OR
+        !ZOOM! >= 6 AND convert_voltage(voltage) > 30000 OR
+        !ZOOM! >= 7)
+    order_by: convert_voltage(voltage) ASC NULLS FIRST
+
+  - name: power_tower
+    geometry_type: Point
+    min_zoom: 13
+    field_sets: [geom, name, is_node, construction, url]
+    id_field: osm_id
+    fields:
+      - name: transition
+      - name: type
+      - name: switch
+        sql: tags -> 'switch'
+      - name: transformer
+        sql: tags -> 'transformer'
+      - name: substation
+        sql: tags -> 'substation'
+    from: osm_power_tower
+    where: geometry && !BBOX! AND !ZOOM! >= 13
+
+  - name: power_substation
+    geometry_type: Polygon
+    min_zoom: 13
+    field_sets: [geom, name, frequency, voltages, construction, wiki, url]
+    fields:
+      - name: substation
+    id_field: osm_id
+    from: substation
+    where: geometry && !BBOX! AND !ZOOM! >= 13
+    order_by: convert_voltage(voltage) ASC NULLS FIRST
+
+  - name: power_substation_point
+    geometry_type: Point
+    min_zoom: 5
+    field_sets: [geom_centroid, area, name, frequency, voltages, construction, wiki, url]
+    fields:
+      - name: substation
+    id_field: osm_id
+    from: substation
+    where: >
+      geometry && !BBOX! AND (
+        (!ZOOM! >= 5 AND convert_voltage(voltage) > 200000) OR
+        (!ZOOM! >= 9 AND convert_voltage(voltage) > 50000) OR
+        (!ZOOM! >= 10)
+      )
+    order_by: convert_voltage(voltage) ASC NULLS FIRST
+
+  - name: power_plant
+    geometry_type: Polygon
+    min_zoom: 5
+    field_sets: [geom, name, wiki, source, output, construction, url]
+    id_field: osm_id
+    fields:
+      - name: storage
+        sql: tags -> 'plant:storage'
+      - name: repd_id
+        sql: tags -> 'repd:id'
+    from: power_plant
+    where: >
+      geometry && !BBOX! AND
+      (!ZOOM! >= 11 OR ST_Area(geometry) > (!PIXEL_WIDTH! ^ 2 * 4)) AND
+      !ZOOM! >= 5
+    order_by: convert_power(output) ASC NULLS FIRST
+
+  - name: power_plant_point
+    geometry_type: Point
+    min_zoom: 5
+    field_sets: [geom_centroid, name, wiki, source, output, construction, url]
+    id_field: osm_id
+    fields:
+      - name: storage
+        sql: tags -> 'plant:storage'
+      - name: repd_id
+        sql: tags -> 'repd:id'
+    from: power_plant
+    where: >
+      geometry && !BBOX! AND
+      (!ZOOM! >= 5 AND (convert_power(output) / 1e6) > 1000 OR
+       !ZOOM! >= 6 AND (convert_power(output) / 1e6) > 500 OR
+       !ZOOM! >= 7 AND (convert_power(output) / 1e6) > 250 OR
+       !ZOOM! >= 8) AND
+       NOT ST_IsEmpty(geometry)
+    order_by: convert_power(output) ASC NULLS FIRST
+
+  - name: power_generator
+    geometry_type: Point
+    min_zoom: 9
+    field_sets: [geom_centroid, name, is_node, wiki, source, construction, url, generator_output]
+    id_field: osm_id
+    from: osm_power_generator
+    where: geometry && !BBOX! AND !ZOOM! >= 9
+
+  - name: power_generator_area
+    geometry_type: Polygon
+    min_zoom: 13
+    field_sets: [geom, name, wiki, source, construction, url, generator_output]
+    id_field: osm_id
+    from: osm_power_generator
+    where: geometry && !BBOX! AND construction = '' AND !ZOOM! >= 13 AND ST_GeometryType(geometry) IN ('ST_Polygon', 'ST_MultiPolygon')
+
+  - name: power_transformer
+    geometry_type: Point
+    min_zoom: 14
+    field_sets: [geom_centroid, name, is_node]
+    id_field: osm_id
+    from: osm_power_switchgear
+    where: type = 'transformer' AND geometry && !BBOX! AND !ZOOM! >= 14
+
+  - name: power_compensator
+    geometry_type: Point
+    min_zoom: 14
+    field_sets: [geom_centroid, name, is_node]
+    id_field: osm_id
+    from: osm_power_switchgear
+    where: type = 'compensator' AND geometry && !BBOX! AND !ZOOM! >= 14
+
+  - name: power_switch
+    geometry_type: Point
+    min_zoom: 14
+    field_sets: [geom_centroid, name, is_node]
+    id_field: osm_id
+    from: osm_power_switchgear
+    where: type = 'switch' AND geometry && !BBOX! AND !ZOOM! >= 14
+
+  - name: power_heatmap_solar
+    map: solar_heatmap
+    geometry_type: Point
+    min_zoom: 2
+    id_field: gid
+    fields:
+      - name: gid
+        sql: max(osm_id)
+      - name: geom
+        sql: ST_AsMVTGeom(ST_SnapToGrid(ST_Centroid(geometry), !PIXEL_WIDTH! / 2, !PIXEL_WIDTH! / 2), !BBOX!)
+      - name: output
+        sql: >
+          round(sum(coalesce(
+                      convert_power(tags -> 'generator:output:electricity'),
+                      modules_output(tags -> 'generator:solar:modules'),
+                      solar_output(geometry),
+                      0)
+                    )::NUMERIC / 1e3,
+                2)
+    from: osm_power_generator
+    where: >
+      source = 'solar' AND
+      construction = '' AND
+      geometry && !BBOX!
+      GROUP BY geom
+
+  - name: telecoms_communication_line
+    geometry_type: LineString
+    id_field: osm_id
+    min_zoom: 2
+    field_sets: [geom, name]
+    fields:
+      - name: location
+        sql: tags -> 'location'
+    from: osm_telecom_cable
+    where: >
+      tags -> 'construction:power' IS NULL AND
+      geometry && !BBOX!
+      AND 1 < !ZOOM!
+      AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
+
+  - name: telecoms_data_center
+    geometry_type: Polygon
+    min_zoom: 10
+    id_field: osm_id
+    field_sets: [geom, name, wiki]
+    from: osm_telecom_building
+    where: geometry && !BBOX! AND !ZOOM! >= 10
+
+  - name: telecoms_mast
+    geometry_type: Point
+    min_zoom: 10
+    id_field: osm_id
+    field_sets: [geom_centroid, name, wiki, is_node]
+    from: osm_mast
+    where: >
+      (tags -> 'mast:type' IN ('communication', 'communications', 'broadcast')
+       OR tags -> 'tower:type' IN ('communication', 'radio', 'antenna'))
+      AND geometry && !BBOX!
+      AND !ZOOM! >= 10
+
+  - name: petroleum_pipeline
+    geometry_type: LineString
+    min_zoom: 2
+    id_field: osm_id
+    field_sets: [geom, name, wiki]
+    fields:
+      - name: location
+        sql: tags -> 'location'
+      - name: substance
+      - name: type
+    from: osm_pipeline
+    where: >
+      COALESCE(substance, type) IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng')
+      AND construction = ''
+      AND geometry && !BBOX!
+      AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
+
+  - name: petroleum_well
+    geometry_type: Point
+    min_zoom: 10
+    id_field: osm_id
+    field_sets: [geom, name]
+    from: osm_petroleum_well
+    where: geometry && !BBOX! AND !ZOOM! >= 10
+
+  - name: petroleum_site
+    geometry_type: Polygon
+    min_zoom: 8
+    id_field: osm_id
+    field_sets: [geom, name]
+    from: osm_petroleum_site
+    where: geometry && !BBOX! AND !ZOOM! >= 8
+
+  - name: water_pipeline
+    geometry_type: LineString
+    min_zoom: 3
+    id_field: osm_id
+    field_sets: [geom, name]
+    from: osm_pipeline
+    where: >
+      COALESCE(substance, type) = 'water' AND
+      geometry && !BBOX! AND !ZOOM! >= 3 AND
+      ST_Length(geometry) > !PIXEL_WIDTH! / 4
