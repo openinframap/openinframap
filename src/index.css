@@ -1,4 +1,4 @@
-@import '~maplibre-gl/dist/mapbox-gl.css';
+@import '~maplibre-gl/dist/maplibre-gl.css';
 
 html {
   width: 100%;
@@ -81,4 +81,9 @@ a {
   font-size: 10px;
   line-height: 14px;
   border-radius: 4px 0px 0px 0px;
+}
+
+canvas:focus {
+  /* Remove unnecessary focus border */
+  outline:none;
 }

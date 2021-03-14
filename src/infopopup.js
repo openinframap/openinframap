@@ -77,11 +77,16 @@ class InfoPopup {
     }
 
     if (key.startsWith('voltage')) {
-      value += ' kV';
+      value = `${parseFloat(value).toFixed(0)} kV`;
     }
 
     if (key == 'output') {
-      value += ' MW';
+      let val = parseFloat(value);
+      if (val < 1) {
+        value = `${(val * 1000).toFixed(2)} kW`;
+      } else {
+        value = `${val.toFixed(2)} MW`;
+      }
     }
 
     if (key == 'frequency' && value == '0') {

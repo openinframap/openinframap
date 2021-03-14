@@ -50,7 +50,7 @@ const hvdc_p = [
 
 // Stepwise function to assign colour by voltage:
 function voltage_color(field) {
-  let voltage_func = ['step', ['coalesce', ['get', field], 0]];
+  let voltage_func = ['step', ['to-number', ['coalesce', ['get', field], 0]]];
   for (let row of voltage_scale) {
     if (row[0] == null) {
       voltage_func.push(row[1]);
@@ -137,24 +137,27 @@ const label_offset = {
   stops: [[8, [0, 3]], [13, [0, 1]]],
 };
 
+const voltage = ['to-number', ['coalesce', ['get', 'voltage'], 0]];
+const output = ['to-number', ['coalesce', ['get', 'output'], 0]];
+
 // Determine substation visibility
 const substation_visible_p = [
   'all',
   [
     'any',
-    ['>', ['coalesce', ['get', 'voltage'], 0], 200],
+    ['>', voltage, 200],
     [
       'all',
-      ['>', ['coalesce', ['get', 'voltage'], 0], 200],
+      ['>', voltage, 200],
       ['>', ['zoom'], 6],
     ],
     [
       'all',
-      ['>', ['coalesce', ['get', 'voltage'], 0], 100],
+      ['>', voltage, 100],
       ['>', ['zoom'], 7],
     ],
-    ['all', ['>', ['coalesce', ['get', 'voltage'], 0], 25], ['>', ['zoom'], 9]],
-    ['all', ['>', ['coalesce', ['get', 'voltage'], 0], 9], ['>', ['zoom'], 10]],
+    ['all', ['>', voltage, 25], ['>', ['zoom'], 9]],
+    ['all', ['>', voltage, 9], ['>', ['zoom'], 10]],
     ['>', ['zoom'], 11],
   ],
   ['!=', ['get', 'substation'], 'transition'],
@@ -168,7 +171,7 @@ const substation_radius = [
   [
     'interpolate',
     ['linear'],
-    ['coalesce', ['get', 'voltage'], 0],
+    voltage,
     0,
     0,
     200,
@@ -180,17 +183,21 @@ const substation_radius = [
   [
     'interpolate',
     ['linear'],
-    ['coalesce', ['get', 'voltage'], 0],
-    0,
+    voltage,
+    10,
+    1,
+    30,
     3,
+    100,
+    5,
     300,
     7,
     600,
     9,
   ],
+  15, 3
 ];
 
-const voltage = ['coalesce', ['get', 'voltage'], 0];
 
 // Determine the minimum zoom a point is visible at (before it can be seen as an
 // area), based on the area of the substation.
@@ -232,6 +239,7 @@ const substation_label_visible_p = [
     ],
     ['>', ['zoom'], 13],
   ],
+  ['any', ['==', ['to-number', ['get', 'area']], 0], ['<', ['zoom'], 17]],
   ['!=', ['get', 'substation'], 'transition'],
 ];
 
@@ -241,10 +249,10 @@ const power_visible_p = [
   [
     'any',
     ['>', voltage, 199],
-    ['all', ['>', voltage, 99], ['>', ['zoom'], 4]],
-    ['all', ['>', voltage, 49], ['>', ['zoom'], 5]],
-    ['all', ['>', voltage, 24], ['>', ['zoom'], 6]],
-    ['all', ['>', voltage, 9], ['>', ['zoom'], 8]],
+    ['all', ['>', voltage, 99], ['>=', ['zoom'], 4]],
+    ['all', ['>', voltage, 49], ['>=', ['zoom'], 5]],
+    ['all', ['>', voltage, 24], ['>=', ['zoom'], 6]],
+    ['all', ['>', voltage, 9], ['>=', ['zoom'], 9]],
     ['>', ['zoom'], 10],
   ],
   [
@@ -295,12 +303,19 @@ const construction_label = [
 
 const plant_label_visible_p = [
   'any',
-  ['>', ['coalesce', ['get', 'output'], 0], 1000],
-  ['all', ['>', ['coalesce', ['get', 'output'], 0], 750], ['>', ['zoom'], 5]],
-  ['all', ['>', ['coalesce', ['get', 'output'], 0], 250], ['>', ['zoom'], 6]],
-  ['all', ['>', ['coalesce', ['get', 'output'], 0], 100], ['>', ['zoom'], 7]],
-  ['all', ['>', ['coalesce', ['get', 'output'], 0], 10], ['>', ['zoom'], 9]],
-  ['>', ['zoom'], 10],
+  ['>', output, 1000],
+  ['all', ['>', output, 750], ['>', ['zoom'], 5]],
+  ['all', ['>', output, 250], ['>', ['zoom'], 6]],
+  ['all', ['>', output, 100], ['>', ['zoom'], 7]],
+  ['all', ['>', output, 10], ['>', ['zoom'], 9]],
+  ['all', ['>', output, 1], ['>', ['zoom'], 11]],
+  ['>', ['zoom'], 12],
+];
+
+const pretty_output = ['case',
+  ['>', output, 1],
+  ['concat', output, ' MW'],
+  ['concat', ['round', ['*', output, 1000]], ' kW']
 ];
 
 const plant_label = ['step', ['zoom'],
@@ -308,9 +323,9 @@ const plant_label = ['step', ['zoom'],
     9,
     ['case',
       ['all', ['!', ['has', 'name']], ['has', 'output']],
-      ['concat', ['get', 'output'], ' MW', construction_label],
+      ['concat', pretty_output, construction_label],
       ['has', 'output'],
-      ['concat', ['get', 'name'], ' \n', ['get', 'output'], ' MW', '\n', construction_label],
+      ['concat', ['get', 'name'], ' \n', pretty_output, '\n', construction_label],
       ['get', 'name']
     ],
 ];
@@ -391,7 +406,7 @@ const substation_label_detail = [
     'concat',
     ['get', 'name'],
     ' ',
-    ['get', 'voltage'],
+    voltage,
     ' kV',
     freq,
     construction_label,
@@ -400,7 +415,7 @@ const substation_label_detail = [
   [
     'concat',
     'Substation ',
-    ['get', 'voltage'],
+    voltage,
     ' kV',
     freq,
     construction_label,
@@ -864,6 +879,7 @@ const layers = [
     zorder: 562,
     id: 'power_substation_ref_label',
     type: 'symbol',
+    filter: substation_label_visible_p,
     source: 'openinframap',
     'source-layer': 'power_substation_point',
     minzoom: 14.5,
@@ -885,9 +901,8 @@ const layers = [
     filter: substation_label_visible_p,
     'source-layer': 'power_substation_point',
     minzoom: 8,
-    maxzoom: 24,
     layout: {
-      'symbol-sort-key': ['-', 10000, ['get', 'voltage']],
+      'symbol-sort-key': ['-', 10000, voltage],
       'symbol-z-order': 'source',
       'text-field': substation_label,
       'text-anchor': 'top',
@@ -902,7 +917,7 @@ const layers = [
         [
           'interpolate',
           ['linear'],
-          ['coalesce', ['get', 'voltage'], 0],
+          voltage,
           0,
           10,
           400,
@@ -940,7 +955,7 @@ const layers = [
         [
           'interpolate',
           ['linear'],
-          ['coalesce', ['get', 'output'], 0],
+          output,
           0,
           10,
           2000,
@@ -963,7 +978,7 @@ const layers = [
     minzoom: 6,
     maxzoom: 24,
     layout: {
-      'symbol-sort-key': ['-', 10000, ['get', 'output']],
+      'symbol-sort-key': ['-', 10000, output],
       'symbol-z-order': 'source',
       'icon-allow-overlap': true,
       'icon-image': plant_image(),
@@ -981,7 +996,7 @@ const layers = [
         [
           'interpolate',
           ['linear'],
-          ['coalesce', ['get', 'output'], 0],
+          output,
           0,
           10,
           2000,

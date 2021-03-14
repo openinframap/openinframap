@@ -1,12 +1,13 @@
 
 const generator_weight = ['interpolate', 
   ['linear'], 
-  ['get', 'output'], 
+  ['to-number', ['get', 'output']], 
   0, 0, 
-  70, 0.25,
-  250, 0.5,
-  1000, 0.7,
-  7000, 1
+  70, 0.125,
+  250, 0.25,
+  1000, 0.35,
+  7000, 0.5,
+  14000, 1
 ];
 
 const layers = [
@@ -14,13 +15,13 @@ const layers = [
     zorder: 162,
     id: 'heatmap_solar',
     type: 'heatmap',
-    source: 'openinframap',
+    source: 'solar_heatmap',
     'source-layer': 'power_heatmap_solar',
     minzoom: 1,
     maxzoom: 13,
     paint: {
       'heatmap-weight': generator_weight,
-      'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 2, 2, 5, 1],
+      'heatmap-intensity': 0.8,
       'heatmap-color': [
         'interpolate',
         ['linear'],

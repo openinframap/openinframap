@@ -9,6 +9,10 @@
     "openinframap": {
       "type": "vector",
       "url": "https://openinframap.org/map.json"
+    },
+    "solar_heatmap": {
+      "type": "vector",
+      "url": "https://openinframap.org/heatmap.json"
     }
   },
   "sprite": "https://openinframap.org/style/sprite",
