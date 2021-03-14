@@ -12,7 +12,7 @@ map_layers = defaultdict(list)
 
 conf = {
     "webserver": {"port": ":8081"},
-    #    "cache": {"type": "file", "path": "/tmp/tegola"},
+    "cache": {"type": "file", "basepath": "/tmp/tegola"},
     "providers": [
         {
             "name": provider_name,
@@ -89,9 +89,6 @@ for layer in config["layers"]:
 
     conf["providers"][0]["layers"].append(layer_config)
 
-
-# with open('config.toml', 'w') as f:
-#    toml.dump(conf, f)
 
 for name, layers in map_layers.items():
     conf["maps"].append({"name": name, "layers": layers, "center": [0.0,0.0,2.0]})
