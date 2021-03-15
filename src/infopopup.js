@@ -136,17 +136,19 @@ class InfoPopup {
 
     let links_container = el('div');
 
-    mount(
-      links_container,
-      el('a', el('div.ext_link.osm_link'), {
-        href: this.osmLink(
-          feature.properties['gid'],
-          feature.properties['is_node'],
-        ),
-        target: '_blank',
-        title: 'OpenStreetMap',
-      }),
-    );
+    if (feature.id) {
+      mount(
+        links_container,
+        el('a', el('div.ext_link.osm_link'), {
+          href: this.osmLink(
+            feature.id,
+            feature.properties['is_node'],
+          ),
+          target: '_blank',
+          title: 'OpenStreetMap',
+        }),
+      );
+    }
 
     let wikidata_div = null;
     if (feature.properties['wikidata']) {
