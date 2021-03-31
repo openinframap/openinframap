@@ -1,13 +1,21 @@
 from pathlib import Path
 import subprocess
 import os
+import sys
 
-pathlist = Path("/home/osm/imposm-expire").glob("**/*.tiles")
+if len(sys.argv) != 2:
+    print("Usage:", sys.argv[0], "<imposm expire dir>")
+    sys.exit(1)
+
+
+expire_dir = sys.argv[1]
+
+pathlist = Path(expire_dir).glob("**/*.tiles")
 for path in pathlist:
-    print(path)
+    print("Handling expire for", path)
     subprocess.run(
         [
-            "/home/osm/go/bin/tegola",
+            "tegola",
             "cache",
             "purge",
             "tile-list",
@@ -21,3 +29,10 @@ for path in pathlist:
         ]
     )
     os.remove(path)
+
+
+# Clean expire dir by removing empty directories
+for path in Path(expire_dir).iterdir():
+    if path.is_dir() and not any(path.iterdir()):
+        print("Removing directory", path)
+        path.rmdir()
