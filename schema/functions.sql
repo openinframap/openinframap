@@ -200,4 +200,18 @@ create or replace function osm_url (tags HSTORE)
     returns null on null input AS $$
 SELECT COALESCE(tags -> 'website', tags -> 'contact:website', tags -> 'url');
 $$ LANGUAGE sql;
-    
+
+
+-- Generate the outline of a distributed power plant
+-- ST_ConcaveHull can fail on some geometries. This function tries it, but falls back to a simple buffer otherwise.
+create or replace function simplify_boundary (geometry geometry)
+    returns geometry
+    immutable
+    returns null on null input as $$
+begin
+	return st_buffer(st_concavehull(geometry, 0.95), 10);
+EXCEPTION
+	WHEN SQLSTATE 'XX000' THEN
+		RETURN st_buffer(geometry, 10);
+end
+$$ language plpgsql;
