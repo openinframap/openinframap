@@ -202,7 +202,8 @@ layers:
     where: type = 'switch' AND geometry && !BBOX! AND !ZOOM! >= 14
 
   - name: power_heatmap_solar
-    map: solar_heatmap
+    map: 
+      - solar_heatmap
     geometry_type: Point
     min_zoom: 2
     id_field: gid

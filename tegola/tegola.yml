@@ -1,0 +1,17 @@
+webserver:
+  port: 8081
+
+cache: 
+  type: file
+  basepath: /tmp/tegola
+
+providers:
+  - name: postgis
+    type: mvt_postgis
+    host: 10.43.18.68
+    port: 5432
+    database: osm
+    user: osm
+    password: osm
+    srid: 3857
+    max_connections: 20

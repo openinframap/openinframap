@@ -23,7 +23,7 @@ for path in pathlist:
             "tile-list",
             path,
             "--config",
-            "/home/osm/styles/config.toml",
+            "/home/osm/styles/tegola/config.toml",
             "--max-zoom",
             "17",
             "--min-zoom",
