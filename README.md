@@ -4,8 +4,8 @@ The mapping file controls how the OSM subset is imported with
 [imposm3](https://imposm.org/docs/imposm3/latest/). It's generated from the files in [mapping](mapping)
 by calling `python3 ./mapping/main.py > ./mapping.json`.
 
-The `layers.yml` file is used to generate the Tegola config using
-`python3 ./tegola/generate_tegola_config.py ./tegola/layers.yml > ./config.toml`.
+The `tegola.yml` and `layers.yml` files are used to generate the Tegola config using
+`python3 ./tegola/generate_tegola_config.py ./tegola/tegola.yml ./tegola/layers.yml > ./tegola/config.toml`.
 
 ## Services
 
@@ -15,7 +15,7 @@ Imposm runs as a service with the `-expiretiles-dir` option:
 
 The low-zoom layers are seeded daily with:
 
-	/usr/local/bin/tegola cache seed --bounds="-180,-85.0511,180,85.0511" --min-zoom 2 --max-zoom 6 --overwrite --config /home/osm/styles/config.toml
+	/usr/local/bin/tegola cache seed --bounds="-180,-85.0511,180,85.0511" --min-zoom 2 --max-zoom 6 --overwrite --config /home/osm/styles/tegola/config.toml
 
 Invalidated tiles are removed every minute:
 
