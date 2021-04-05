@@ -1,0 +1,6 @@
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+* * * * * /opt/imposm3/clean-expire.sh +13 > /proc/1/fd/1 2>&1
+
+*/10 * * * * . /opt/imposm3/.cronenv && psql -d $DB_URL -f /opt/imposm3/schema/refresh_matviews.sql
+

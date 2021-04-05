@@ -11,6 +11,22 @@ The [web backend](web-backend) serves the [stats pages](https://openinframap.org
 
 ## OSM Import & Mapping
 
+## Docker
+
+Imposm3 could run as docker container for both importing and updating.  
+See dedicated Readme in imposm3 directory.
+
+It expects an up & running postgresql server with a postgis enabled database
+
+Docker images includes all it needs to run services described below.
+
+Create a 10001 GID group that will own every directory mounted in docker for data persistance.
+```
+groupadd --gid 10001 -r osm_docker
+```
+
+## Local run
+
 The mapping file controls how the OSM subset is imported with
 [imposm3](https://imposm.org/docs/imposm3/latest/). It's generated from the files in [mapping](mapping)
 by calling `python3 ./mapping/main.py > ./mapping.json`.
@@ -27,7 +43,7 @@ which generates the Tegola config, from the `tegola.yml` and `layers.yml` files:
 
 `python3 ./tegola/generate_tegola_config.py ./tegola/tegola.yml ./tegola/layers.yml > ./tegola/config.toml`
 
-## Services
+### Services
 
 Imposm runs as a service with the `-expiretiles-dir` option:
 
