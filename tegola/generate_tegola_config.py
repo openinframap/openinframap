@@ -23,10 +23,14 @@ with open(sys.argv[2], "r") as f:
 
 
 def build_field(name, val):
+    nl_char = '\n'
+    if ':' in name:
+        name = "\""+name+"\""
+     
     if val is None:
         return name
     else:
-        return f"{val} AS {name}"
+        return f"{val.strip().replace(nl_char,'')} AS {name}"
 
 
 def get_field_sets(names):
@@ -37,6 +41,7 @@ def get_field_sets(names):
 
 
 def build_sql(data):
+    nl_char = '\n'
     sql = "SELECT "
 
     if "id_field" in data and data["id_field"] not in [
@@ -50,9 +55,9 @@ def build_sql(data):
     )
     sql += f" FROM {data['from']}"
     if "where" in data:
-        sql += f" WHERE {data['where'].strip()}"
+        sql += f" WHERE {data['where'].strip().replace(nl_char,'')}"
     if "order_by" in data:
-        sql += f" ORDER BY {data['order_by'].strip()}"
+        sql += f" ORDER BY {data['order_by'].strip().replace(nl_char,'')}"
     return sql
 
 
