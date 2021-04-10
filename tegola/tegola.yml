@@ -8,5 +8,5 @@ cache:
 providers:
   - name: postgis
     type: mvt_postgis
-    uri: postgres://osm:osm@10.43.18.68:5432/osm?pool_max_conns=20
+    uri: "${DB_URI}"
     srid: 3857

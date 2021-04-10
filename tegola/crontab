@@ -1,0 +1,2 @@
+0 4 * * * /opt/tegola_config/seed.sh
+2,12,22,32,42,52 * * * * python3 /opt/tegola_config/expire.py /data/files/imposm3/expired > /proc/1/fd/1 2>&1
