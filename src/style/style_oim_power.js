@@ -78,11 +78,11 @@ function voltage_offset(index) {
   const spacing = 7;
 
   let offset = (index - 1) * spacing;
-  return [
-    'interpolate',
+  return ['interpolate',
     ['linear'],
     ['zoom'],
-    multi_voltage_min_zoom,
+    multi_voltage_min_zoom - 0.001, 0,
+    multi_voltage_min_zoom, 
     [
       'case',
       ['has', 'voltage_3'],
