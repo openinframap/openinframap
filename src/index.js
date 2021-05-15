@@ -8,6 +8,7 @@ import LayerSwitcher from '@russss/mapboxgl-layer-switcher';
 import URLHash from '@russss/mapboxgl-layer-switcher/urlhash';
 
 import EditButton from './editbutton.js';
+import MapTilerAttribution from './maptiler-attribution.js';
 import InfoBox from './infobox.js';
 import InfoPopup from './infopopup.js';
 import KeyControl from './key/key.js';
@@ -70,8 +71,8 @@ function init() {
 
   if (DEV) {
     map_style['sprite'] = 'http://localhost:8080/style/sprite';
-    map_style['sources']['openinframap']['url'] = 'http://localhost:8081/capabilities/openinframap.json'
-    map_style['sources']['solar_heatmap']['url'] = 'http://localhost:8081/capabilities/solar_heatmap.json'
+    // map_style['sources']['openinframap']['url'] = 'http://localhost:8081/capabilities/openinframap.json'
+    // map_style['sources']['solar_heatmap']['url'] = 'http://localhost:8081/capabilities/solar_heatmap.json'
   }
 
   var map = new mapboxgl.Map(url_hash.init({
@@ -95,7 +96,10 @@ function init() {
       trackUserLocation: true,
     }),
   );
+
+  map.addControl(new MapTilerAttribution(), 'bottom-right');
   map.addControl(new mapboxgl.ScaleControl({position: 'bottom-left'}));
+
   map.addControl(new KeyControl(), 'top-right');
   map.addControl(layer_switcher, 'top-right');
   map.addControl(new EditButton(), 'bottom-right');
