@@ -95,7 +95,7 @@ layers:
       - name: substation
         sql: tags -> 'substation'
     from: osm_power_tower
-    where: geometry && !BBOX! AND !ZOOM! >= 13
+    where: geometry && !BBOX!
 
   - name: power_substation
     geometry_type: Polygon
@@ -105,7 +105,7 @@ layers:
       - name: substation
     id_field: osm_id
     from: substation
-    where: geometry && !BBOX! AND !ZOOM! >= 13
+    where: geometry && !BBOX!
     order_by: convert_voltage(voltage) ASC NULLS FIRST
 
   - name: power_substation_point
@@ -137,8 +137,7 @@ layers:
     from: power_plant
     where: >
       geometry && !BBOX! AND
-      (!ZOOM! >= 11 OR ST_Area(geometry) > (!PIXEL_WIDTH! ^ 2 * 4)) AND
-      !ZOOM! >= 5
+      (!ZOOM! >= 11 OR ST_Area(geometry) > (!PIXEL_WIDTH! ^ 2 * 4))
     order_by: convert_power(output) ASC NULLS FIRST
 
   - name: power_plant_point
@@ -167,7 +166,7 @@ layers:
     field_sets: [geom_centroid, name, is_node, wiki, source, construction, url, generator_output]
     id_field: osm_id
     from: osm_power_generator
-    where: geometry && !BBOX! AND !ZOOM! >= 9
+    where: geometry && !BBOX!
 
   - name: power_generator_area
     geometry_type: Polygon
@@ -175,7 +174,7 @@ layers:
     field_sets: [geom, name, wiki, source, construction, url, generator_output]
     id_field: osm_id
     from: osm_power_generator
-    where: geometry && !BBOX! AND construction = '' AND !ZOOM! >= 13 AND ST_GeometryType(geometry) IN ('ST_Polygon', 'ST_MultiPolygon')
+    where: geometry && !BBOX! AND construction = '' AND ST_GeometryType(geometry) IN ('ST_Polygon', 'ST_MultiPolygon')
 
   - name: power_transformer
     geometry_type: Point
@@ -183,7 +182,7 @@ layers:
     field_sets: [geom_centroid, name, is_node]
     id_field: osm_id
     from: osm_power_switchgear
-    where: type = 'transformer' AND geometry && !BBOX! AND !ZOOM! >= 14
+    where: type = 'transformer' AND geometry && !BBOX!
 
   - name: power_compensator
     geometry_type: Point
@@ -191,7 +190,7 @@ layers:
     field_sets: [geom_centroid, name, is_node]
     id_field: osm_id
     from: osm_power_switchgear
-    where: type = 'compensator' AND geometry && !BBOX! AND !ZOOM! >= 14
+    where: type = 'compensator' AND geometry && !BBOX!
 
   - name: power_switch
     geometry_type: Point
@@ -199,7 +198,7 @@ layers:
     field_sets: [geom_centroid, name, is_node]
     id_field: osm_id
     from: osm_power_switchgear
-    where: type = 'switch' AND geometry && !BBOX! AND !ZOOM! >= 14
+    where: type = 'switch' AND geometry && !BBOX!
 
   - name: power_heatmap_solar
     map: 
@@ -240,7 +239,6 @@ layers:
     where: >
       tags -> 'construction:power' IS NULL AND
       geometry && !BBOX!
-      AND 1 < !ZOOM!
       AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
 
   - name: telecoms_data_center
@@ -249,7 +247,7 @@ layers:
     id_field: osm_id
     field_sets: [geom, name, wiki]
     from: osm_telecom_building
-    where: geometry && !BBOX! AND !ZOOM! >= 10
+    where: geometry && !BBOX!
 
   - name: telecoms_mast
     geometry_type: Point
@@ -261,7 +259,6 @@ layers:
       (tags -> 'mast:type' IN ('communication', 'communications', 'broadcast')
        OR tags -> 'tower:type' IN ('communication', 'radio', 'antenna'))
       AND geometry && !BBOX!
-      AND !ZOOM! >= 10
 
   - name: petroleum_pipeline
     geometry_type: LineString
@@ -286,7 +283,7 @@ layers:
     id_field: osm_id
     field_sets: [geom, name]
     from: osm_petroleum_well
-    where: geometry && !BBOX! AND !ZOOM! >= 10
+    where: geometry && !BBOX!
 
   - name: petroleum_site
     geometry_type: Polygon
@@ -294,7 +291,7 @@ layers:
     id_field: osm_id
     field_sets: [geom, name]
     from: osm_petroleum_site
-    where: geometry && !BBOX! AND !ZOOM! >= 8
+    where: geometry && !BBOX!
 
   - name: water_pipeline
     geometry_type: LineString
@@ -304,5 +301,5 @@ layers:
     from: osm_pipeline
     where: >
       COALESCE(substance, type) = 'water' AND
-      geometry && !BBOX! AND !ZOOM! >= 3 AND
+      geometry && !BBOX! AND
       ST_Length(geometry) > !PIXEL_WIDTH! / 4
