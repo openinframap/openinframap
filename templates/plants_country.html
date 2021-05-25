@@ -25,6 +25,7 @@
   <table class="plants-table table-full-width">
     <caption>All {{plants|length}} {% if pretty_source %}{{pretty_source}} {% endif %}
       power plants
+      {% if min_output %}with output greater than {{min_output|power}}{% endif %}
       {% if construction %}under construction{% endif %}
         in {{country|country_name}}</caption>
     <thead>

@@ -149,6 +149,16 @@ async def plants_country(request, country):
             plant for plant in plants if source in plant["source"].lower().split(";")
         ]
 
+    min_output = None
+    if "min_output" in request.query_params:
+        try:
+            min_output = int(request.query_params["min_output"])
+            plants = [
+                plant for plant in plants if plant["output"] and plant["output"] >= min_output
+            ]
+        except ValueError:
+            pass
+
     return templates.TemplateResponse(
         "plants_country.html",
         {
@@ -156,6 +166,7 @@ async def plants_country(request, country):
             "plants": plants,
             "country": country["union"],
             "source": source,
+            "min_output": min_output,
             # Canonical URL for all plants without the source filter, to avoid confusing Google.
             "canonical": request.url_for("plants_country", country=country["union"]),
         },
