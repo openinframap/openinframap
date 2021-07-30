@@ -2,9 +2,13 @@ field_sets:
   geom:
     - name: geom
       sql: ST_AsMVTGeom(ST_SimplifyPreserveTopology(geometry, !PIXEL_WIDTH! / 4), !BBOX!)
+    - name: is_node
+      sql: (ST_GeometryType(geometry) = 'ST_Point')
   geom_centroid:
     - name: geom
       sql: ST_AsMVTGeom(ST_Centroid(geometry), !BBOX!)
+    - name: is_node
+      sql: (ST_GeometryType(geometry) = 'ST_Point')
   frequency:
     - name: frequency
       sql: first_semi(tags -> 'frequency')
@@ -35,9 +39,6 @@ field_sets:
   construction:
     - name: construction
       sql: (tags -> 'construction:power') IS NOT NULL
-  is_node:
-    - name: is_node
-      sql: (ST_GeometryType(geometry) = 'ST_Point')
   url:
     - name: url
       sql: osm_url(tags)
@@ -83,7 +84,7 @@ layers:
   - name: power_tower
     geometry_type: Point
     min_zoom: 13
-    field_sets: [geom, name, is_node, construction, url]
+    field_sets: [geom, name, construction, url]
     id_field: osm_id
     fields:
       - name: transition
@@ -163,7 +164,7 @@ layers:
   - name: power_generator
     geometry_type: Point
     min_zoom: 9
-    field_sets: [geom_centroid, name, is_node, wiki, source, construction, url, generator_output]
+    field_sets: [geom_centroid, name, wiki, source, construction, url, generator_output]
     id_field: osm_id
     from: osm_power_generator
     where: geometry && !BBOX!
@@ -179,7 +180,7 @@ layers:
   - name: power_transformer
     geometry_type: Point
     min_zoom: 14
-    field_sets: [geom_centroid, name, is_node]
+    field_sets: [geom_centroid, name]
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'transformer' AND geometry && !BBOX!
@@ -187,7 +188,7 @@ layers:
   - name: power_compensator
     geometry_type: Point
     min_zoom: 14
-    field_sets: [geom_centroid, name, is_node]
+    field_sets: [geom_centroid, name]
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'compensator' AND geometry && !BBOX!
@@ -195,7 +196,7 @@ layers:
   - name: power_switch
     geometry_type: Point
     min_zoom: 14
-    field_sets: [geom_centroid, name, is_node]
+    field_sets: [geom_centroid, name]
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'switch' AND geometry && !BBOX!
@@ -253,7 +254,7 @@ layers:
     geometry_type: Point
     min_zoom: 10
     id_field: osm_id
-    field_sets: [geom_centroid, name, wiki, is_node]
+    field_sets: [geom_centroid, name, wiki]
     from: osm_mast
     where: >
       (tags -> 'mast:type' IN ('communication', 'communications', 'broadcast')
