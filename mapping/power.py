@@ -139,7 +139,7 @@ table(
         str_col("generator:source", "source"),
         str_col("generator:method", "method"),
         str_col("generator:type", "type"),
-        str_col("generator:output", "output"),
-        str_col("construction_power", "construction"),
+        str_col("generator:output", "output"), # TODO: should be generator:output:electricity
+        str_col("construction_power", "construction"), # TODO: should be construction:power
     ],
 )
