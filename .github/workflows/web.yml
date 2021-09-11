@@ -5,6 +5,7 @@ on:
     branches: main
     paths:
       - 'web/**'
+      - '.github/actions/web.yml'
 
 jobs:
   login:
