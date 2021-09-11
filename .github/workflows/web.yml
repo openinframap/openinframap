@@ -1,8 +1,10 @@
-name: Build
+name: Build web container
 
 on:
   push:
     branches: master
+    paths:
+      - 'web/**'
 
 jobs:
   login:
@@ -30,7 +32,8 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          file: Dockerfile.prod
+          context: ./web
+          file: ./web/Dockerfile.prod
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
