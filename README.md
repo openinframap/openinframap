@@ -1,8 +1,9 @@
+# Open Infrastructure Map
 This is the main repository for [OpenInfraMap](https://openinframap.org).
 
 *Note: the web frontend and backend were previously in separate repositories. They were merged into this repository (previously called `styles`) in September 2021, in order to make development easier and make it clearer where to file issues.*
 
-## Web frontend
+## Web frontend
 
 The [web frontend](web) contains the Javascript app, built by Webpack and served as static files.
 
