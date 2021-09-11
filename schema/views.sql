@@ -1,5 +1,5 @@
 CREATE MATERIALIZED VIEW power_substation_relation AS
-    SELECT rel.osm_id, ST_ConvexHull(ST_Union(mem.geometry)) AS geometry, rel.tags -> 'name' AS name,
+    SELECT rel.osm_id, ST_ConvexHull(ST_Union(mem.geometry))::geometry(Geometry,3857) AS geometry, rel.tags -> 'name' AS name,
         combine_voltage(rel.voltage, voltage_agg(mem.tags -> 'voltage')) AS voltage,
         rel.tags -> 'frequency' AS frequency,
         combine_field(rel.tags -> 'substation', field_agg(mem.tags -> 'substation')) AS substation,
@@ -19,7 +19,7 @@ ANALYZE power_substation_relation;
 CREATE OR REPLACE VIEW substation AS
     SELECT osm_id, geometry, tags -> 'name' AS name, voltage, substation, tags, construction
                   FROM osm_power_substation
-    UNION
+    UNION ALL
     SELECT osm_id, geometry, name, voltage, substation, tags, construction
                   FROM power_substation_relation;
 
