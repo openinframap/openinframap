@@ -1,4 +1,4 @@
-New OpenInfraMap web backend, serving info and stats pages.
+OpenInfraMap web backend, serving info and stats pages.
 
 ## Development
 
