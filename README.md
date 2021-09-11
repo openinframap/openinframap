@@ -1,4 +1,16 @@
-This is the style and mapping configuration for [OpenInfraMap](https://openinframap.org).
+This is the main repository for [OpenInfraMap](https://openinframap.org).
+
+*Note: the web frontend and backend were previously in separate repositories. They were merged into this repository (previously called `styles`) in September 2021, in order to make development easier and make it clearer where to file issues.*
+
+## Web frontend
+
+The [web frontend](web) contains the Javascript app, built by Webpack and served as static files.
+
+## Web backend
+
+The [web backend](web-backend) serves the [stats pages](https://openinframap.org/stats), as well as some additional non-JS web endpoints. It's an async python web app built using starlette.
+
+## Mapping
 
 The mapping file controls how the OSM subset is imported with
 [imposm3](https://imposm.org/docs/imposm3/latest/). It's generated from the files in [mapping](mapping)
