@@ -21,4 +21,4 @@ jobs:
         with:
           file: Dockerfile.prod
           push: true
-          tags: openinframap/web:latest
+          tags: ghcr.io/openinframap/web:latest
