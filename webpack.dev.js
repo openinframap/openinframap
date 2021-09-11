@@ -1,15 +1,16 @@
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
+const webpack = require("webpack");
+const { merge } = require("webpack-merge");
+const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
-  devtool: 'inline-source-map',
+  mode: 'development',
+  devtool: "inline-source-map",
   devServer: {
-    contentBase: './dist'
+    static: "./dist"
   },
   plugins: [
     new webpack.DefinePlugin({
-        DEV: JSON.stringify(true)
+      DEV: JSON.stringify(true)
     })
   ]
 });

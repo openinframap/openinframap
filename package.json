@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.common.js",
   "scripts": {
-    "start": "webpack-dev-server --open --config webpack.dev.js --mode development --host 0.0.0.0",
+    "start": "webpack-dev-server --open --config webpack.dev.js --mode development --host localhost",
     "build": "webpack --config webpack.prod.js --mode production"
   },
   "repository": {
@@ -18,22 +18,20 @@
   },
   "homepage": "https://github.com/openinframap/web#readme",
   "devDependencies": {
-    "@babel/core": "^7.13.10",
-    "@babel/preset-env": "^7.13.10",
-    "@mapbox/spritezero": "^6.1.2",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "@mapbox/spritezero": "^8.0.0",
     "babel-loader": "^8.2.2",
-    "babel-preset-env": "^1.7.0",
-    "clean-webpack-plugin": "^0.1.19",
-    "copy-webpack-plugin": "^6.4.1",
-    "css-loader": "^1.0.1",
-    "html-webpack-plugin": "^3.2.0",
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.2",
     "in-browser-language": "^1.0.3",
     "spritezero-webpack-plugin": "^0.1.1",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.2",
-    "webpack-merge": "^4.2.2"
+    "style-loader": "^3.2.1",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.2.0",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "@russss/mapboxgl-layer-switcher": "^1.0.0",
