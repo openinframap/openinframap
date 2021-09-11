@@ -1,0 +1,22 @@
+{
+  "version": 8,
+  "name": "OpenInfraMap",
+  "sources": {
+    "openmaptiles": {
+      "type": "vector",
+      "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=u7opxtdfvwPiFOPwMWeC"
+    },
+    "openinframap": {
+      "type": "vector",
+      "url": "https://openinframap.org/map.json"
+    },
+    "solar_heatmap": {
+      "type": "vector",
+      "url": "https://openinframap.org/heatmap.json"
+    }
+  },
+  "sprite": "https://openinframap.org/style/sprite",
+  "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=u7opxtdfvwPiFOPwMWeC",
+  "layers": [],
+  "id": "openinframap"
+}

@@ -1,0 +1,14 @@
+{
+  "tilejson": "2.2.0",
+  "name": "OpenInfraMap Heatmap",
+  "attribution": "<a href=\"https://www.openstreetmap.org/copyright\">© OpenStreetMap contributors</a>, <a href=\"https://openinframap.org/copyright\">OpenInfraMap</a>",
+  "bounds": [-180, -85.0511, 180, 85.0511],
+  "center": [0, 0, 0],
+  "format": "pbf",
+  "minzoom": 2,
+  "maxzoom": 17,
+  "tiles": ["https://openinframap.org/heatmap/{z}/{x}/{y}.pbf"],
+  "vector_layers": [
+	{"id": "power_heatmap_solar", "description": "Solar power heatmap", "fields": {}}
+  ]
+}

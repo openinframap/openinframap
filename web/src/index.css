@@ -1,0 +1,101 @@
+@import '~maplibre-gl/dist/maplibre-gl.css';
+
+html {
+  width: 100%;
+  height: 100%;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333;
+}
+
+body,
+#container,
+#map {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+}
+
+#container {
+  display: block !important;
+}
+
+header {
+  z-index: 2;
+  padding: 4px;
+  border-radius: 0px 0px 4px 0px;
+  border-right: 1px #eee solid;
+  border-bottom: 1px #eee solid;
+  background-color: rgba(255, 255, 255, 0.5);
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  display: block;
+  font-size: 13px;
+}
+
+header, .mapboxgl-ctrl.mapboxgl-ctrl-attrib {
+  backdrop-filter: blur(3px) saturate(80%);
+}
+
+h1 {
+  display: inline;
+  margin: 0px;
+  font-size: 18px;
+}
+
+a {
+  color: #333;
+}
+
+.infobox {
+  display: block;
+  position: absolute;
+  bottom: 40px;
+  min-width: 60px;
+  max-width: 300px;
+  left: 5%;
+  background-color: white;
+  padding: 5px;
+  border: 1px solid #999;
+  border-radius: 4px;
+}
+
+.infobox-header {
+  font-weight: bold;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #bbb;
+  margin-bottom: 4px;
+}
+
+.infobox-header a {
+  cursor: pointer;
+  float: right;
+  margin-top: -3px;
+}
+
+.infobox-content {
+  clear: both;
+}
+
+.mapboxgl-ctrl-attrib {
+  font-size: 10px;
+  line-height: 14px;
+  border-radius: 4px 0px 0px 0px;
+}
+
+canvas:focus {
+  /* Remove unnecessary focus border */
+  outline:none;
+}
+
+#maptiler-attribution {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(3px) saturate(80%);
+  border-radius: 4px;
+}
+
+#maptiler-attribution img {
+  display: block;
+  width: 100px;
+  padding: 2px;
+}
