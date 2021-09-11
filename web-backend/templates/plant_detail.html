@@ -1,0 +1,66 @@
+{% extends "_base.html" %}
+{% if plant['name'] %}
+  {% set name = plant['name'] %}
+{% else %}
+  {% set name = 'Unnamed power plant ' + plant['osm_id']|string %}
+{% endif %}
+{% set breadcrumbs = [
+  ('Stats', url_for('stats')),
+  (country, url_for('country', country=country)),
+  ("Power Plants", url_for('plants_country', country=country)),
+  (name, None)
+]%}
+{% block title %}{{name}}{% endblock %}
+{% block description -%}
+{%- endblock %}
+{% block content -%}
+  <p><strong>{{name}}</strong> is a {{plant['source'].split(';')|join(' and ')}}
+  power plant in {{country|country_name()}}
+{%- if plant['output']%} with a total output of {{plant['output']|power}}{% endif %}.
+  </p>
+  {% if image_data %}
+    {% set imginfo = image_data.imageinfo[0] %}
+    <figure class="plant_image">
+      <img src="{{imginfo.thumburl}}"
+           srcset="{{imginfo.responsiveUrls['1.5']}} 1.5x,
+                   {{imginfo.responsiveUrls['2']}} 2x"
+            alt="Picture of {{name}}">
+      <figcaption><a href="{{imginfo.descriptionurl}}">Wikimedia Commons</a></figcaption>
+    </figure>
+  {% endif %}
+  <ul>
+    <li><a href="{{osm_link(plant.osm_id, plant.geom_type)}}">OpenStreetMap</a></li>
+    {% if plant.tags.url or plant.tags.website %}
+      <li><a href="{{plant.tags.url or plant.tags.website}}">Website</a></li>
+    {% endif %}
+    {% if wikidata and wikidata.sitelinks.enwiki %}
+      <li><a href="{{wikidata.sitelinks.enwiki.url}}">Wikipedia ({{wikidata.sitelinks.enwiki.title}})</a></li>
+    {% endif %}
+    {% if plant.tags.wikidata %}
+      <li><a href="https://www.wikidata.org/wiki/{{plant.tags.wikidata}}">Wikidata</a></li>
+    {% endif %}
+  </ul>
+  <h3>Generators</h3>
+  {% if generator_summary %}
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Output</th>
+          <th>Count</th>
+          <th>Total output</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for gen in generator_summary %}
+      <tr>
+        <td>{{gen['source'] or "[unspecified]"}}</td>
+        <td>{{gen['output']|power}}</td>
+        <td>{{gen['count']}}</td>
+        <td>{{gen['total_output']|power}}</td>
+      </tr>
+    {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endblock %}

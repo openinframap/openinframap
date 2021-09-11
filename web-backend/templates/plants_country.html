@@ -1,0 +1,82 @@
+{% extends "_base.html" %}
+{% set breadcrumbs = [('Stats', url_for('stats')), (country, url_for('country', country=country)), ("Power Plants", None)] %}
+{% if source == '' %}
+  {% set pretty_source = 'unspecified' %}
+{% elif source %}
+  {% set pretty_source = source|replace("_"," ") %}
+{% endif %}
+{% block title %}{{country}}{% if pretty_source %} {{pretty_source|title}}{% endif %} Power Plants{% if construction%} under construction{% endif %}{% endblock %}
+{% block description -%}
+  List of{% if pretty_source%} {{pretty_source}}{% endif %} power plants{% if construction %} under construction{% endif %} in {{country|country_name}} from OpenStreetMap
+{%- endblock %}
+{% block content -%}
+
+{%- set english_name = false %}
+{%- if country not in ('United Kingdom', 'United States', 'Canada', 'Australia', 'New Zealand', 'Ireland', 'Alaska', 'Hawaii') %}
+  {%- set english_name = true %}
+{% endif -%}
+
+{% if plants|length == 0 %}
+  <p>There are currently no power plants
+      {% if construction %}under construction{% endif %}
+      mapped in {{country|country_name}} on OpenStreetMap.
+  </p>
+{% else %}
+  <table class="plants-table table-full-width">
+    <caption>All {{plants|length}} {% if pretty_source %}{{pretty_source}} {% endif %}
+      power plants
+      {% if min_output %}with output greater than {{min_output|power}}{% endif %}
+      {% if construction %}under construction{% endif %}
+        in {{country|country_name}}</caption>
+    <thead>
+      <tr>
+        <th style="width: 300px">Name</th>
+        {%- if english_name %}
+        <th>English Name</th>
+        {% endif -%}
+        <th>Operator</th>
+        <th style="width: 100px">Output</th>
+        {%- if not pretty_source %}
+          <th>Source</th>
+        {% endif -%}
+        <th>Method</th>
+        {%- if construction %}
+        <th>Completion Date</th>
+        {% endif -%}
+        <th style="width: 100px">Wikidata</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for plant in plants -%}
+      <tr>
+        <td><a href="{{url_for('plant_detail', country=country, id=plant.osm_id)}}">
+            {{plant.name or '[unnamed]'}}</a></td>
+        {% if english_name %}
+          <td>{{plant.name_en or  ''}}</td>
+        {% endif -%}
+        <td>{{plant.operator or ''}}</td>
+        <td>{{plant.output|power}}</td>
+        {%- if not pretty_source %}
+        <td>{{plant.source}}</td>
+        {% endif -%}
+        <td>{{plant.method or ''}}</td>
+        {%- if construction %}
+          <td>{{plant.start_date or ''}}</td>
+        {% endif -%}
+        <td>
+            {%- if plant.wikidata -%}
+              <a href="https://www.wikidata.org/wiki/{{plant.wikidata}}" target="_blank">{{plant.wikidata}}</a>
+            {%- endif -%}
+        </td>
+      </tr>
+    {% endfor -%}
+    </tbody>
+  </table>
+  {% if pretty_source %}
+    <p><a href="{{url_for('plants_country', country=country)}}">View all power plants in {{country|country_name}}</a>.</p>
+  {% endif %}
+  {% if construction %}
+    <p class="footnote">Under-construction power plants are indicated based on the <code>construction:power</code> tag in OSM.</p>
+  {% endif %}
+{% endif %}
+{% endblock %}

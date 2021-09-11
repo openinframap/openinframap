@@ -1,0 +1,49 @@
+{% extends "_base.html" %}
+{% import "_tables.html" as tables %}
+{% set breadcrumbs = [('Stats', url_for('stats')), (country, None)] %}
+{% block title %}{{country}}{% endblock %}
+{% block description -%}
+Statistics on the electricity network in {{country|country_name}} from OpenStreetMap.
+{%- endblock %}
+{% block content -%}
+  <p><strong>{{country|country_name(true)}}</strong> has
+  {{plant_stats.count}} power plant{%if plant_stats.count != 1 %}s{% endif -%}
+  {%- if plant_stats.output %}
+    totalling {{plant_stats.output|power}}
+  {%- endif %}
+  and {{power_lines.total|distance}} of power lines mapped on OpenStreetMap.</p>
+
+  <div class="table-wrapper">
+    <table>
+      <caption>Power plants in {{country|country_name}} by source</caption>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Output</th>
+          <th>Count</th>
+        <tr>
+      </thead>
+      <tbody>
+      {% for row in plant_source_stats %}
+        <tr>
+          <td><a href="{{url_for('plants_country', country=country)}}?source={{row.source or ''}}">{{row.source or '[unspecified]'}}</a></td>
+          <td>{{row.output|power}}</td>
+          <td>{{row.count}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td><a href="{{url_for('plants_country', country=country)}}">All</a></td>
+          <td>{{plant_stats.output|power}}</td>
+          <td>{{plant_stats.count}}</td>
+        </tr>
+      </tfoot>
+    </table>
+    <p class="footnote">If multiple sources are listed for a power plant, only the first source is used in this breakdown.</p>
+  </div>
+  <p><a href="{{url_for('plants_construction_country', country=country)}}">Show plants under construction</a></p>
+  {% if power_lines.total > 1 %}
+    {{ tables.power_lines_table(power_lines) }}
+  {% endif %}
+{% endblock %}

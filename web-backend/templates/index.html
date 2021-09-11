@@ -1,0 +1,54 @@
+{% extends "_base.html" %}
+{% import "_tables.html" as tables %}
+{% set breadcrumbs = [('Stats', None)] %}
+{% block title %}Statistics{% endblock %}
+{% block description -%}
+Statistics on the global electricity network from OpenStreetMap
+{%- endblock %}
+{% block content -%}
+  <p>Here you can view statistics on the global electricity network, using data from <a href="https://openstreetmap.org">OpenStreetMap</a>.
+      Please note that, in many countries, this is not a complete depiction of the electricity network,
+      and these statistics should be used with caution. This service is primarily intended to assist OpenStreetMap
+      contributors in improving the accuracy of the map, and to allow data consumers to assess the completeness of the data.</p>
+  {{ tables.power_lines_table(power_lines) }}
+  <p>Select an area to view stats:</p>
+  <form id="areas-form">
+    <input list="areas" placeholder="Select area" id="area_select">
+    <datalist id="areas">
+    {% for country in countries %}
+      <option><a href="{{url_for('plants_country', country=country.union)}}">{{country.union}}</a></option>
+    {% endfor %}
+    </datalist>
+  </form>
+
+  <p class="footnote">Areas used by this site are normally equivalent to countries, and include all objects within the country's
+  <a href="https://en.wikipedia.org/wiki/Exclusive_economic_zone" target="_blank">Exclusive Economic Zone</a>. If a country has
+      multiple disconnected regions, they are listed separately
+      (for example, Alaska and Hawaii are separate from the conterminous United States).</p>
+  <script>
+    var input = document.getElementById('area_select');
+    function update(e) {
+      e.preventDefault();
+      var optionFound = false,
+      datalist = input.list;
+      for (var j = 0; j < datalist.options.length; j++) {
+        if (input.value == datalist.options[j].value) {
+            optionFound = true;
+            break;
+        }
+      }
+
+      if (optionFound) {
+        input.setCustomValidity("");
+        window.location.href = "/stats/area/" + input.value;
+      } else {
+        input.setCustomValidity("Please select a valid value.");
+      }
+
+    }
+
+    window.addEventListener('load', () => { input.value = '' });
+    input.addEventListener('change', update);
+    document.getElementById('areas-form').addEventListener('submit', update);
+  </script>
+{% endblock %}
