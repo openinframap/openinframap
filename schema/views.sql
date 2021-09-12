@@ -47,7 +47,7 @@ CREATE OR REPLACE VIEW power_plant AS
 
 /* Dispatch power line query to the appropriate generalised table based on zoom. */
 CREATE OR REPLACE FUNCTION power_lines(zoom INT, search_geom geometry) RETURNS
-	TABLE (gid bigint,
+	TABLE (osm_id bigint,
 		geometry geometry(LineString, 3857),
 		type character varying,
 		location character varying,
@@ -64,7 +64,7 @@ AS $$
 DECLARE
 BEGIN
 	IF zoom < 5 THEN
-		RETURN QUERY SELECT osm_id, osm_power_line_gen_500.geometry, 
+		RETURN QUERY SELECT osm_power_line_gen_500.osm_id, osm_power_line_gen_500.geometry, 
 			osm_power_line_gen_500.type, osm_power_line_gen_500.location,
 			osm_power_line_gen_500.line, osm_power_line_gen_500.voltage,
 			osm_power_line_gen_500.circuits, osm_power_line_gen_500.frequency,
@@ -74,7 +74,7 @@ BEGIN
 			FROM osm_power_line_gen_500
 			WHERE osm_power_line_gen_500.geometry && search_geom;
 	ELSIF zoom < 6 THEN
-		RETURN QUERY SELECT osm_id, osm_power_line_gen_100.geometry, 
+		RETURN QUERY SELECT osm_power_line_gen_100.osm_id, osm_power_line_gen_100.geometry, 
 			osm_power_line_gen_100.type, osm_power_line_gen_100.location,
 			osm_power_line_gen_100.line, osm_power_line_gen_100.voltage,
 			osm_power_line_gen_100.circuits, osm_power_line_gen_100.frequency,
@@ -84,7 +84,7 @@ BEGIN
 			FROM osm_power_line_gen_100
 			WHERE osm_power_line_gen_100.geometry && search_geom;
 	ELSE
-		RETURN QUERY SELECT osm_id, osm_power_line.geometry, 
+		RETURN QUERY SELECT osm_power_line.osm_id, osm_power_line.geometry, 
 			osm_power_line.type, osm_power_line.location, osm_power_line.line,
 			osm_power_line.voltage, osm_power_line.circuits, osm_power_line.frequency,
 			osm_power_line.construction, osm_power_line.tunnel,
