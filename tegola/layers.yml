@@ -32,6 +32,14 @@ field_sets:
       sql: tags -> 'name'
     - name: name_en
       sql: tags -> 'name:en'
+    - name: name_es
+      sql: tags -> 'name:es'
+    - name: name_fr
+      sql: tags -> 'name:fr'
+    - name: name_zh
+      sql: tags -> 'name:zh'
+    - name: name_pt
+      sql: tags -> 'name:pt'
     - name: operator
       sql: tags -> 'operator'
     - name: ref
@@ -208,7 +216,7 @@ layers:
     min_zoom: 2
     id_field: gid
     fields:
-      - name: gid
+      - name: mvt_id_field
         sql: max(osm_id)
       - name: geom
         sql: ST_AsMVTGeom(ST_SnapToGrid(ST_Centroid(geometry), !PIXEL_WIDTH! / 2, !PIXEL_WIDTH! / 2), !BBOX!)
