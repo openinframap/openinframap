@@ -57,7 +57,7 @@ CREATE OR REPLACE FUNCTION power_lines(zoom INT, search_geom geometry) RETURNS
 		frequency character varying,
 		construction character varying,
 		tunnel boolean,
-		voltages INTEGER[],
+		voltages REAL[],
 		tags hstore)
 	LANGUAGE plpgsql
 AS $$

@@ -58,12 +58,12 @@ $$ LANGUAGE plpgsql;
 
 -- Return an array of voltage values (in kV) for a power line
 CREATE OR REPLACE FUNCTION line_voltages(voltage TEXT, circuits INTEGER)
-RETURNS INTEGER[] IMMUTABLE
+RETURNS REAL[] IMMUTABLE
 AS $$
 DECLARE
     parts TEXT[];
-    voltage_int INTEGER;
-    retval INTEGER[];
+    voltage_int REAL;
+    retval REAL[];
 BEGIN
     parts = string_to_array(voltage, ';');
     IF array_length(parts::anyarray, 1) > 1 THEN
