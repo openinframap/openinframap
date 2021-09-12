@@ -3,6 +3,7 @@ import './infopopup.css';
 import mapboxgl from 'maplibre-gl';
 import titleCase from 'title-case';
 import browserLanguage from 'in-browser-language';
+import {local_name_tags} from './l10n.js';
 import {el, text, mount, unmount, setChildren, setStyle} from 'redom';
 
 const hidden_keys = [
@@ -117,6 +118,30 @@ class InfoPopup {
     return el('tr', el('th', key), el('td', value));
   }
 
+  nameTags(feature) {
+    let title_text = '';
+
+    for (const tag of local_name_tags) {
+      if (feature.properties[tag]) {
+        title_text = feature.properties[tag];
+        break;
+      }
+    }
+
+    if (!title_text) {
+      title_text = feature.layer['id'];
+    }
+
+    let container = el('div.nameContainer', el('h3', title_text));
+
+    // If we're showing a translated name, also show the name tag
+    if (feature.properties.name && title_text != feature.properties.name) {
+      mount(container, el('h4', feature.properties.name));
+    }
+
+    return container;
+  }
+
   popupHtml(feature) {
     let attrs_table = el('table', {class: 'item_info'});
     setChildren(
@@ -127,13 +152,6 @@ class InfoPopup {
           this.renderKey(key, feature.properties[key], feature.properties),
         ),
     );
-
-    let title_text = '';
-    if (feature.properties['name']) {
-      title_text = feature.properties['name'];
-    } else {
-      title_text = feature.layer['id'];
-    }
 
     let links_container = el('div');
 
@@ -168,7 +186,7 @@ class InfoPopup {
 
     let content = el(
       'div',
-      el('h3', title_text),
+      this.nameTags(feature),
       links_container,
       wikidata_div,
       attrs_table,

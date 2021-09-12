@@ -1,5 +1,5 @@
 import {text_paint, underground_p} from './style_oim_common.js';
-// OpenInfraMap layers
+import {local_name_tags} from '../l10n.js';
 
 const voltage_scale = [
   [null, '#7A7A85'],
@@ -318,15 +318,17 @@ const pretty_output = ['case',
   ['concat', ['round', ['*', output, 1000]], ' kW']
 ];
 
+const local_name = ['coalesce'].concat(local_name_tags.map(tag => ['get', tag]))
+
 const plant_label = ['step', ['zoom'],
-    ['concat', ['get', 'name']],
+    ['concat', local_name],
     9,
     ['case',
       ['all', ['!', ['has', 'name']], ['has', 'output']],
       ['concat', pretty_output, construction_label],
       ['has', 'output'],
-      ['concat', ['get', 'name'], ' \n', pretty_output, '\n', construction_label],
-      ['get', 'name']
+      ['concat', local_name, ' \n', pretty_output, '\n', construction_label],
+      local_name
     ],
 ];
 
@@ -384,10 +386,10 @@ const line_voltage = [
 
 const line_label = [
   'case',
-  ['all', ['has', 'voltage'], ['has', 'name'], ['!=', ['get', 'name'], '']],
+  ['all', ['has', 'voltage'], ['has', 'name'], ['!=', local_name, '']],
   [
     'concat',
-    ['get', 'name'],
+    local_name,
     ' (',
     line_voltage,
     freq,
@@ -396,22 +398,22 @@ const line_label = [
   ],
   ['has', 'voltage'],
   ['concat', line_voltage, freq, construction_label],
-  ['get', 'name'],
+  local_name,
 ];
 
 const substation_label_detail = [
   'case',
-  ['all', ['!=', ['get', 'name'], ''], ['has', 'voltage']],
+  ['all', ['!=', local_name, ''], ['has', 'voltage']],
   [
     'concat',
-    ['get', 'name'],
+    local_name,
     ' ',
     voltage,
     ' kV',
     freq,
     construction_label,
   ],
-  ['all', ['==', ['get', 'name'], ''], ['has', 'voltage']],
+  ['all', ['==', local_name, ''], ['has', 'voltage']],
   [
     'concat',
     'Substation ',
@@ -420,13 +422,13 @@ const substation_label_detail = [
     freq,
     construction_label,
   ],
-  ['get', 'name'],
+  local_name,
 ];
 
 const substation_label = [
   'step',
   ['zoom'],
-  ['get', 'name'],
+  local_name,
   12,
   substation_label_detail,
 ];

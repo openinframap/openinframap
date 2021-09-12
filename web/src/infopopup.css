@@ -6,9 +6,27 @@ table.item_info th {
   max-width: 350px !important; 
 }
 
+.mapboxgl-popup .nameContainer {
+  margin-bottom: 5px;
+}
+
 .mapboxgl-popup h3 {
   margin-top: 0px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
+}
+
+.mapboxgl-popup h4::before {
+  content: "("
+}
+
+.mapboxgl-popup h4::after {
+  content: ")"
+}
+
+.mapboxgl-popup h4 {
+  font-weight: normal;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .wikidata_image {
