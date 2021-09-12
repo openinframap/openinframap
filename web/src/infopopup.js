@@ -6,6 +6,7 @@ import browserLanguage from 'in-browser-language';
 import {el, text, mount, unmount, setChildren, setStyle} from 'redom';
 
 const hidden_keys = [
+  'osm_id',
   'name',
   'wikidata',
   'wikipedia',
@@ -69,7 +70,7 @@ class InfoPopup {
   }
 
   renderKey(key, value, other_props) {
-    if (hidden_keys.includes(key)) {
+    if (hidden_keys.includes(key) || key.startsWith('name_')) {
       return null;
     }
     if (!value) {
@@ -136,12 +137,12 @@ class InfoPopup {
 
     let links_container = el('div');
 
-    if (feature.id) {
+    if (feature.properties['osm_id']) {
       mount(
         links_container,
         el('a', el('div.ext_link.osm_link'), {
           href: this.osmLink(
-            feature.id,
+            feature.properties['osm_id'],
             feature.properties['is_node'],
           ),
           target: '_blank',
