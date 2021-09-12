@@ -34,12 +34,22 @@ field_sets:
       sql: tags -> 'name:en'
     - name: name_es
       sql: tags -> 'name:es'
+    - name: name_de
+      sql: tags -> 'name:de'
     - name: name_fr
       sql: tags -> 'name:fr'
+    - name: name_hi
+      sql: tags -> 'name:hi'
+    - name: name_ur
+      sql: tags -> 'name:ur'
     - name: name_zh
       sql: tags -> 'name:zh'
+    - name: name_ru
+      sql: tags -> 'name:ru'
     - name: name_pt
       sql: tags -> 'name:pt'
+    - name: name_ja
+      sql: tags -> 'name:ja'
     - name: operator
       sql: tags -> 'operator'
     - name: ref
