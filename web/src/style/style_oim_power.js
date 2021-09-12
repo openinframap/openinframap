@@ -357,6 +357,14 @@ const freq = [
   '',
 ];
 
+function round(field, places) {
+  const pow = Math.pow(10, places);
+  return ["/",
+    ["round", ["*", field, pow]],
+    pow
+  ];
+}
+
 const line_voltage = [
   'case',
   [
@@ -366,11 +374,11 @@ const line_voltage = [
   ],
   [
     'concat',
-    ['get', 'voltage'],
+    round(['get', 'voltage'], 3),
     '/',
-    ['get', 'voltage_2'],
+    round(['get', 'voltage_2'], 3),
     '/',
-    ['get', 'voltage_3'],
+    round(['get', 'voltage_3'], 3),
     ' kV',
   ],
   [
@@ -378,9 +386,9 @@ const line_voltage = [
     ['has', 'voltage_2'],
     ['!=', ['get', 'voltage_2'], ['get', 'voltage']],
   ],
-  ['concat', ['get', 'voltage'], '/', ['get', 'voltage_2'], ' kV'],
+  ['concat', round(['get', 'voltage'], 3), '/', round(['get', 'voltage_2'], 3), ' kV'],
   ['has', 'voltage'],
-  ['concat', ['get', 'voltage'], ' kV'],
+  ['concat', round(['get', 'voltage'], 3), ' kV'],
   '',
 ];
 
