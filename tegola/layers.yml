@@ -64,7 +64,7 @@ layers:
   - name: power_line
     geometry_type: LineString
     field_sets: [geom, name, frequency, wiki, construction]
-    id_field: gid
+    id_field: osm_id
     fields:
       - name: tunnel
       - name: location
@@ -214,7 +214,7 @@ layers:
       - solar_heatmap
     geometry_type: Point
     min_zoom: 2
-    id_field: gid
+    id_field: mvt_id_field
     fields:
       - name: mvt_id_field
         sql: max(osm_id)
