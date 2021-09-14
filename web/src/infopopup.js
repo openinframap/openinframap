@@ -79,7 +79,7 @@ class InfoPopup {
     }
 
     if (key.startsWith('voltage')) {
-      value = `${parseFloat(value).toFixed(0)} kV`;
+      value = `${Number(parseFloat(value).toFixed(2))} kV`;
     }
 
     if (key == 'output') {
