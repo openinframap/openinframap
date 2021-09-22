@@ -123,6 +123,10 @@ async def get_wikidata(wikidata_id):
             if resp.status != 200:
                 raise HTTPException(503, "Error while fetching wikidata")
             data = await resp.json()
+
+            # ID may have changed if it redirects to another. Fetch the first
+            # (hopefully only) ID in the list.
+            wikidata_id = list(data["entities"].keys())[0]
             return data["entities"][wikidata_id]
 
 
