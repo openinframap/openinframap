@@ -22,7 +22,7 @@
   power plant in {{country|country_name()}}
 {%- if plant['output']%} with a total output of {{plant['output']|power}}{% endif %}.
   </p>
-  {% if image_data %}
+  {% if image_data and image_data.imageinfo[0].responsiveUrls%}
     {% set imginfo = image_data.imageinfo[0] %}
     <figure class="plant_image">
       <img src="{{imginfo.thumburl}}"
