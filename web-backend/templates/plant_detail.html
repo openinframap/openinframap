@@ -14,7 +14,11 @@
 {% block description -%}
 {%- endblock %}
 {% block content -%}
-  <p><strong>{{name}}</strong> is a {{plant['source'].split(';')|join(' and ')}}
+  <p><strong>{{name}}</strong>
+  {% if plant['name_en'] %}
+  ({{plant['name_en']}})
+  {% endif %}
+  is a {{plant['source'].split(';')|join(' and ')}}
   power plant in {{country|country_name()}}
 {%- if plant['output']%} with a total output of {{plant['output']|power}}{% endif %}.
   </p>

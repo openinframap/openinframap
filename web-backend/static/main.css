@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   border: 0;
@@ -7,13 +8,14 @@ html, body {
 }
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
   display: flex;
   flex-direction: column;
 }
 
-a, a:visited {
+a,
+a:visited {
   color: #333;
 }
 
@@ -24,13 +26,15 @@ header {
   flex: 0 0 auto;
 }
 
-h1, h2 {
+h1,
+h2 {
   display: inline;
   margin: 0;
   font-size: 20px;
 }
 
-h1 a, h2 a {
+h1 a,
+h2 a {
   text-decoration: none;
   color: inherit;
 }
@@ -54,7 +58,9 @@ footer {
   background-color: #fafafa;
 }
 
-footer, footer a, footer a:visited {
+footer,
+footer a,
+footer a:visited {
   color: #666;
 }
 
@@ -96,6 +102,7 @@ caption {
   font-weight: bold;
   font-size: 1.1em;
   padding-bottom: 3px;
+  width: 100%;
 }
 
 thead {
@@ -111,7 +118,8 @@ tfoot tr {
   font-weight: bold;
 }
 
-th, td {
+th,
+td {
   padding: 4px;
 }
 
@@ -126,10 +134,67 @@ figcaption {
   padding: 2px 5px;
 }
 
-figcaption a, figcaption a:visited {
+figcaption a,
+figcaption a:visited {
   color: #666;
 }
 
 figure.plant_image {
-  float:right;
+  float: right;
+}
+
+/* Responsive tables on small screens */
+
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  table.responsive,
+  table.responsive thead,
+  table.responsive tbody,
+  table.responsive th,
+  table.responsive td,
+  table.responsive tr,
+  table.responsive caption {
+    display: block;
+    clear: both;
+  }
+
+  table.responsive tr {
+    padding-bottom: 1em;
+  }
+
+  table.responsive td.row-name {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  table.responsive td.row-subhead {
+    text-align: center;
+  }
+
+  table.responsive thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  table.responsive td {
+    clear: both;
+  }
+
+  table.responsive td:empty {
+    display: none;
+  }
+
+  table.responsive td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    padding-right: 10px;
+  }
+
+  figure {
+    float: none !important;
+    display: inline-block;
+    margin: auto;
+  }
 }

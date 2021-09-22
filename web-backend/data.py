@@ -21,7 +21,7 @@ async def get_countries():
 
 async def get_plant(plant_id, country_gid):
     res = await database.fetch_one(
-        """SELECT osm_id, ST_GeometryType(geometry) AS geom_type, name, source,
+        """SELECT osm_id, ST_GeometryType(geometry) AS geom_type, name, tags->'name:en' AS name_en, source,
                     convert_power(tags->'plant:output:electricity') AS output,
                     hstore_to_json(tags) AS tags
                 FROM power_plant, countries.country_eez

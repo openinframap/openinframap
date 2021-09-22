@@ -22,7 +22,7 @@
       mapped in {{country|country_name}} on OpenStreetMap.
   </p>
 {% else %}
-  <table class="plants-table table-full-width">
+  <table class="plants-table table-full-width responsive">
     <caption>All {{plants|length}} {% if pretty_source %}{{pretty_source}} {% endif %}
       power plants
       {% if min_output %}with output greater than {{min_output|power}}{% endif %}
@@ -49,21 +49,21 @@
     <tbody>
     {% for plant in plants -%}
       <tr>
-        <td><a href="{{url_for('plant_detail', country=country, id=plant.osm_id)}}">
+        <td class="row-name"><a href="{{url_for('plant_detail', country=country, id=plant.osm_id)}}">
             {{plant.name or '[unnamed]'}}</a></td>
         {% if english_name %}
-          <td>{{plant.name_en or  ''}}</td>
+          <td class="row-subhead">{{plant.name_en or  ''}}</td>
         {% endif -%}
-        <td>{{plant.operator or ''}}</td>
-        <td>{{plant.output|power}}</td>
+        <td data-label="Operator">{{plant.operator or ''}}</td>
+        <td data-label="Power">{{plant.output|power}}</td>
         {%- if not pretty_source %}
-        <td>{{plant.source}}</td>
+        <td data-label="Source">{{plant.source}}</td>
         {% endif -%}
-        <td>{{plant.method or ''}}</td>
+        <td data-label="Method">{{plant.method or ''}}</td>
         {%- if construction %}
-          <td>{{plant.start_date or ''}}</td>
+          <td data-label="Start date">{{plant.start_date or ''}}</td>
         {% endif -%}
-        <td>
+        <td data-label="Wikidata">
             {%- if plant.wikidata -%}
               <a href="https://www.wikidata.org/wiki/{{plant.wikidata}}" target="_blank">{{plant.wikidata}}</a>
             {%- endif -%}
