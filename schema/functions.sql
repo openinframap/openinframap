@@ -113,8 +113,7 @@ END
 $$ LANGUAGE plpgsql;
 
 -- Aggregate to combine voltages into one delimited voltage field
-DROP AGGREGATE IF EXISTS voltage_agg(TEXT);
-CREATE AGGREGATE voltage_agg (TEXT)
+CREATE OR REPLACE AGGREGATE voltage_agg (TEXT)
 (
     sfunc = combine_voltage,
     stype = TEXT,
@@ -138,8 +137,7 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
-DROP AGGREGATE IF EXISTS field_agg(TEXT);
-CREATE AGGREGATE field_agg (TEXT)
+CREATE OR REPLACE AGGREGATE field_agg (TEXT)
 (
     sfunc = combine_field,
     stype = TEXT,
