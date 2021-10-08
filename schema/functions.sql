@@ -8,7 +8,11 @@ DROP MATERIALIZED VIEW IF EXISTS power_substation_relation;
 DROP MATERIALIZED VIEW IF EXISTS power_plant_relation;
 
 -- Convert a power value into a numeric value in watts
-CREATE OR REPLACE FUNCTION convert_power(value TEXT) RETURNS NUMERIC IMMUTABLE RETURNS NULL ON NULL INPUT AS $$
+CREATE OR REPLACE FUNCTION convert_power(value TEXT) RETURNS NUMERIC
+PARALLEL SAFE
+IMMUTABLE
+RETURNS NULL ON NULL INPUT
+AS $$
 DECLARE
   parts TEXT[];
   val NUMERIC;
@@ -27,7 +31,11 @@ END
 $$ LANGUAGE plpgsql;
 
 -- Select the highest voltage from a semicolon-delimited list
-CREATE OR REPLACE FUNCTION convert_voltage(value TEXT) RETURNS NUMERIC IMMUTABLE RETURNS NULL ON NULL INPUT AS $$
+CREATE OR REPLACE FUNCTION convert_voltage(value TEXT) RETURNS NUMERIC
+PARALLEL SAFE
+IMMUTABLE
+RETURNS NULL ON NULL INPUT
+AS $$
 DECLARE
   parts TEXT[];
 BEGIN
@@ -37,7 +45,10 @@ END
 $$ LANGUAGE plpgsql;
 
 -- Get the nth element of a semicolon-delimited list
-CREATE OR REPLACE FUNCTION nth_semi(input TEXT, index INTEGER) RETURNS TEXT IMMUTABLE AS $$
+CREATE OR REPLACE FUNCTION nth_semi(input TEXT, index INTEGER) RETURNS TEXT
+PARALLEL SAFE
+IMMUTABLE
+AS $$
 DECLARE
     parts TEXT[];
 BEGIN
@@ -47,7 +58,10 @@ END
 $$ LANGUAGE plpgsql;
 
 -- Get the first element of a semicolon-delimited list
-CREATE OR REPLACE FUNCTION first_semi(input TEXT) RETURNS TEXT IMMUTABLE AS $$
+CREATE OR REPLACE FUNCTION first_semi(input TEXT) RETURNS TEXT
+PARALLEL SAFE
+IMMUTABLE
+AS $$
 DECLARE
     parts TEXT[];
 BEGIN
@@ -57,8 +71,9 @@ END
 $$ LANGUAGE plpgsql;
 
 -- Return an array of voltage values (in kV) for a power line
-CREATE OR REPLACE FUNCTION line_voltages(voltage TEXT, circuits INTEGER)
-RETURNS REAL[] IMMUTABLE
+CREATE OR REPLACE FUNCTION line_voltages(voltage TEXT, circuits INTEGER) RETURNS REAL[]
+PARALLEL SAFE
+IMMUTABLE
 AS $$
 DECLARE
     parts TEXT[];
@@ -84,7 +99,10 @@ END
 $$ LANGUAGE plpgsql;
 
 -- Combine two voltage fields into one
-CREATE OR REPLACE FUNCTION combine_voltage(a TEXT, b TEXT) RETURNS TEXT IMMUTABLE AS $$
+CREATE OR REPLACE FUNCTION combine_voltage(a TEXT, b TEXT) RETURNS TEXT
+PARALLEL SAFE
+IMMUTABLE
+AS $$
 DECLARE
     parts INT[];
 BEGIN
@@ -100,11 +118,15 @@ CREATE AGGREGATE voltage_agg (TEXT)
 (
     sfunc = combine_voltage,
     stype = TEXT,
-    initcond = ''
+    initcond = '',
+    parallel = SAFE
 );
 
 -- Combine two fields with a semicolon
-CREATE OR REPLACE FUNCTION combine_field(a TEXT, b TEXT) RETURNS TEXT IMMUTABLE AS $$
+CREATE OR REPLACE FUNCTION combine_field(a TEXT, b TEXT) RETURNS TEXT
+IMMUTABLE
+PARALLEL SAFE
+AS $$
 DECLARE
 BEGIN
     IF a = '' OR a IS NULL THEN
@@ -121,7 +143,8 @@ CREATE AGGREGATE field_agg (TEXT)
 (
     sfunc = combine_field,
     stype = TEXT,
-    initcond = ''
+    initcond = '',
+    parallel = SAFE
 );
 
 CREATE OR REPLACE FUNCTION plant_label(name TEXT, output TEXT, source TEXT) RETURNS TEXT IMMUTABLE AS $$
@@ -142,7 +165,10 @@ END
 $$ LANGUAGE plpgsql;
 
 -- Get the area of a geometry in square meters.
-CREATE OR REPLACE FUNCTION area_sqm(geom GEOMETRY) RETURNS DOUBLE PRECISION IMMUTABLE AS $$
+CREATE OR REPLACE FUNCTION area_sqm(geom GEOMETRY) RETURNS DOUBLE PRECISION
+IMMUTABLE
+PARALLEL SAFE
+AS $$
 DECLARE
 BEGIN
 	IF ST_GeometryType(geom) != 'ST_Polygon' THEN
@@ -154,7 +180,10 @@ $$ LANGUAGE plpgsql;
 
 
 -- Estimate the output of a generator:type=solar (in watts) from its geometry.
-CREATE OR REPLACE FUNCTION solar_output(geom GEOMETRY) RETURNS DOUBLE PRECISION IMMUTABLE AS $$
+CREATE OR REPLACE FUNCTION solar_output(geom GEOMETRY) RETURNS DOUBLE PRECISION
+PARALLEL SAFE
+IMMUTABLE
+AS $$
 DECLARE
 BEGIN
 	IF ST_GeometryType(geom) = 'ST_Point' THEN
@@ -165,7 +194,11 @@ END
 $$ LANGUAGE plpgsql;
 
 -- Convert a number of modules (as text) into an output (in watts)
-CREATE OR REPLACE FUNCTION modules_output(modules TEXT) RETURNS DOUBLE PRECISION IMMUTABLE RETURNS NULL ON NULL INPUT AS $$
+CREATE OR REPLACE FUNCTION modules_output(modules TEXT) RETURNS DOUBLE PRECISION
+PARALLEL UNSAFE -- uses EXCEPTION which is unsafe
+IMMUTABLE
+RETURNS NULL ON NULL INPUT
+AS $$
 DECLARE
 BEGIN
 	BEGIN
@@ -180,6 +213,7 @@ $$ LANGUAGE plpgsql;
 
 create or replace function ZRes (z integer)
     returns float
+    PARALLEL SAFE
     returns null on null input
     language sql immutable as
 $func$
@@ -188,6 +222,7 @@ $func$;
 
 create or replace function ZRes (z float)
     returns float
+    PARALLEL SAFE
     returns null on null input
     language sql immutable as
 $func$
@@ -196,6 +231,7 @@ $func$;
 
 create or replace function osm_url (tags HSTORE)
     returns text
+    PARALLEL SAFE
     immutable
     returns null on null input AS $$
 SELECT COALESCE(tags -> 'website', tags -> 'contact:website', tags -> 'url');
@@ -205,6 +241,7 @@ $$ LANGUAGE sql;
 -- Generate the outline of a distributed power plant
 -- ST_ConcaveHull can fail on some geometries. This function tries it, but falls back to a simple buffer otherwise.
 create or replace function simplify_boundary (geometry geometry)
+    PARALLEL UNSAFE -- uses EXCEPTION
     returns geometry
     immutable
     returns null on null input as $$
