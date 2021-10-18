@@ -31,16 +31,27 @@ END
 $$ LANGUAGE plpgsql;
 
 -- Select the highest voltage from a semicolon-delimited list
+-- NOTE: the EXCEPTION clause here shouldn't be needed, and it's 
+-- annoying because it makes this PARALLEL UNSAFE. However it was
+-- causing issues on imposm import with the (apparent) value
+-- '138000.69000.69000'. Oddly this worked on the console, but
+-- not through imposm.
 CREATE OR REPLACE FUNCTION convert_voltage(value TEXT) RETURNS NUMERIC
-PARALLEL SAFE
 IMMUTABLE
+PARALLEL UNSAFE -- uses EXCEPTION
 RETURNS NULL ON NULL INPUT
 AS $$
 DECLARE
   parts TEXT[];
+  res NUMERIC;
 BEGIN
-  parts := regexp_matches(value, '([0-9][0-9\.,]+)[;]?.*', '');
-  RETURN replace(parts[1], ',', '.');
+  parts := regexp_matches(value, '([0-9][0-9,]+)[;]?.*', '');
+  BEGIN
+		res := replace(parts[1], ',', '.')::NUMERIC;
+	EXCEPTION WHEN OTHERS THEN
+		res := NULL;
+	END;
+  RETURN res;
 END
 $$ LANGUAGE plpgsql;
 
