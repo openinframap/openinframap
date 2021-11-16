@@ -5,7 +5,7 @@ on:
     branches: main
     paths:
       - 'web/**'
-      - '.github/actions/web.yml'
+      - '.github/workflows/web.yml'
 
 jobs:
   login:

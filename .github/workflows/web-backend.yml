@@ -5,7 +5,7 @@ on:
     branches: main
     paths:
       - 'web-backend/**'
-      - '.github/actions/web-backend.yml'
+      - '.github/workflows/web-backend.yml'
 
 jobs:
   build:
