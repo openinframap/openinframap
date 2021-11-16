@@ -13,6 +13,46 @@
       "key": "power",
       "object_types": ["node", "way", "relation", "area"]
     },
+		{
+			"key": "plant:source",
+      "object_types": ["relation", "area"]
+		},
+		{
+			"key": "plant:output:electricity",
+      "object_types": ["relation", "area"]
+		},
+		{
+			"key": "plant:method",
+      "object_types": ["relation", "area"]
+		},
+		{
+			"key": "plant:storage",
+      "object_types": ["relation", "area"]
+		},
+		{
+			"key": "generator:source",
+      "object_types": ["node", "area"]
+		},
+		{
+			"key": "generator:output:electricity",
+      "object_types": ["node", "area"]
+		},
+		{
+			"key": "generator:method",
+      "object_types": ["node", "area"]
+		},
+		{
+			"key": "voltage",
+      "object_types": ["node", "way", "relation", "area"]
+		},
+		{
+			"key": "frequency",
+      "object_types": ["node", "way", "relation", "area"]
+		},
+		{
+			"key": "circuits",
+      "object_types": ["way"]
+		},
     {
       "key": "communication",
       "value": "line",
