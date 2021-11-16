@@ -60,6 +60,12 @@ async def about(request):
     return templates.TemplateResponse("about.html", {"request": request})
 
 
+@app.route("/about/exports")
+@cache_for(3600)
+async def exports(request):
+    return templates.TemplateResponse("exports.html", {"request": request})
+
+
 @app.route("/copyright")
 @cache_for(3600)
 async def copyright(request):
@@ -154,7 +160,9 @@ async def plants_country(request, country):
         try:
             min_output = int(request.query_params["min_output"])
             plants = [
-                plant for plant in plants if plant["output"] and plant["output"] >= min_output
+                plant
+                for plant in plants
+                if plant["output"] and plant["output"] >= min_output
             ]
         except ValueError:
             pass
@@ -232,8 +240,7 @@ async def plant_detail(request, country):
         and wd["claims"]["P18"][0]["mainsnak"]["datatype"] == "commonsMedia"
     ):
         image_data = await get_commons_thumbnail(
-            wd["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"],
-            400
+            wd["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"], 400
         )
 
     return templates.TemplateResponse(
