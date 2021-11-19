@@ -1,6 +1,6 @@
 import './infopopup.css';
 
-import mapboxgl from 'maplibre-gl';
+import maplibregl from 'maplibre-gl';
 import titleCase from 'title-case';
 import browserLanguage from 'in-browser-language';
 import {local_name_tags} from './l10n.js';
@@ -199,7 +199,7 @@ class InfoPopup {
       this.popup_obj.remove();
     }
 
-    this.popup_obj = new mapboxgl.Popup()
+    this.popup_obj = new maplibregl.Popup()
       .setLngLat(e.lngLat)
       .setDOMContent(this.popupHtml(e.features[0]))
       .addTo(this._map);

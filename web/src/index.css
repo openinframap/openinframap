@@ -33,7 +33,7 @@ header {
   font-size: 13px;
 }
 
-header, .mapboxgl-ctrl.mapboxgl-ctrl-attrib {
+header, .maplibregl-ctrl.maplibregl-ctrl-attrib {
   backdrop-filter: blur(3px) saturate(80%);
 }
 
@@ -77,7 +77,7 @@ a {
   clear: both;
 }
 
-.mapboxgl-ctrl-attrib {
+.maplibregl-ctrl-attrib {
   font-size: 10px;
   line-height: 14px;
   border-radius: 4px 0px 0px 0px;

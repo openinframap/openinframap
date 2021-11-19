@@ -2,28 +2,28 @@ table.item_info th {
 	text-align: left;
 }
 
-.mapboxgl-popup {
+.maplibregl-popup {
   max-width: 350px !important; 
 }
 
-.mapboxgl-popup .nameContainer {
+.maplibregl-popup .nameContainer {
   margin-bottom: 5px;
 }
 
-.mapboxgl-popup h3 {
+.maplibregl-popup h3 {
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
-.mapboxgl-popup h4::before {
+.maplibregl-popup h4::before {
   content: "("
 }
 
-.mapboxgl-popup h4::after {
+.maplibregl-popup h4::after {
   content: ")"
 }
 
-.mapboxgl-popup h4 {
+.maplibregl-popup h4 {
   font-weight: normal;
   margin-top: 0px;
   margin-bottom: 0px;

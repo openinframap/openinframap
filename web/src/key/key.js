@@ -37,10 +37,10 @@ class KeyControl {
     this._map = map;
 
     this._control = el('button', {
-      class: 'mapboxgl-ctrl-icon oim-key-control',
+      class: 'maplibregl-ctrl-icon oim-key-control',
     });
 
-    this._container = el('div', {class: 'mapboxgl-ctrl oim-key-panel'});
+    this._container = el('div', {class: 'maplibregl-ctrl oim-key-panel'});
 
     this.populate();
 
@@ -52,7 +52,7 @@ class KeyControl {
     setTimeout(e => this.resize(), 100);
     this._map.on('resize', e => this.resize());
     return el('div', this._control, this._container, {
-      class: 'mapboxgl-ctrl mapboxgl-ctrl-group',
+      class: 'maplibregl-ctrl maplibregl-ctrl-group',
     });
   }
 

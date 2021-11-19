@@ -1,6 +1,6 @@
 import './index.css';
 import '@russss/mapboxgl-layer-switcher/layerswitcher.css'
-import mapboxgl from 'maplibre-gl';
+import maplibregl from 'maplibre-gl';
 
 import {mount} from 'redom';
 
@@ -23,7 +23,7 @@ import style_oim_petroleum from './style/style_oim_petroleum.js';
 import style_oim_water from './style/style_oim_water.js';
 
 function init() {
-  if (!mapboxgl.supported({failIfMajorPerformanceCaveat: true})) {
+  if (!maplibregl.supported({failIfMajorPerformanceCaveat: true})) {
     const infobox = new InfoBox('Warning');
     infobox.update(
       'Your browser may have performance or functionality issues with OpenInfraMap.<br/>' +
@@ -33,7 +33,7 @@ function init() {
     mount(document.body, infobox);
   }
 
-  mapboxgl.setRTLTextPlugin(
+  maplibregl.setRTLTextPlugin(
     'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
     null,
     true, // Lazy load the plugin
@@ -75,7 +75,7 @@ function init() {
     // map_style['sources']['solar_heatmap']['url'] = 'http://localhost:8081/capabilities/solar_heatmap.json'
   }
 
-  var map = new mapboxgl.Map(url_hash.init({
+  var map = new maplibregl.Map(url_hash.init({
     container: 'map',
     style: map_style,
     minZoom: 2,
@@ -87,9 +87,9 @@ function init() {
   map.touchZoomRotate.disableRotation();
 
   url_hash.enable(map);
-  map.addControl(new mapboxgl.NavigationControl({showCompass: false}), 'top-right');
+  map.addControl(new maplibregl.NavigationControl({showCompass: false}), 'top-right');
   map.addControl(
-    new mapboxgl.GeolocateControl({
+    new maplibregl.GeolocateControl({
       positionOptions: {
         enableHighAccuracy: true,
       },
@@ -98,7 +98,7 @@ function init() {
   );
 
   map.addControl(new MapTilerAttribution(), 'bottom-right');
-  map.addControl(new mapboxgl.ScaleControl({position: 'bottom-left'}));
+  map.addControl(new maplibregl.ScaleControl({position: 'bottom-left'}));
 
   map.addControl(new KeyControl(), 'top-right');
   map.addControl(layer_switcher, 'top-right');

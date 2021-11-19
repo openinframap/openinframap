@@ -16,7 +16,7 @@ class MapTilerAttribution {
     );
 
     this._control = el("div#maptiler-attribution", img, {
-      class: "mapboxgl-ctrl"
+      class: "maplibregl-ctrl"
     });
 
     return this._control;

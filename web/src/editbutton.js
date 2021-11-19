@@ -11,7 +11,7 @@ class EditButton {
     };
 
     this._control = el('div', button, {
-      class: 'mapboxgl-ctrl',
+      class: 'maplibregl-ctrl',
     });
 
     map.on('zoomend', () => {
