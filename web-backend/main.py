@@ -1,4 +1,4 @@
-from starlette.responses import PlainTextResponse
+from starlette.responses import PlainTextResponse, RedirectResponse
 from starlette.applications import Starlette
 from starlette.templating import Jinja2Templates
 from starlette.routing import Mount, Route
@@ -213,6 +213,29 @@ async def plants_construction_country(request, country):
     )
 
 
+@app.route("/stats/object/plant/{id}")
+@cache_for(86400)
+async def stats_object(request):
+    try:
+        id = int(request.path_params["id"])
+    except ValueError:
+        raise HTTPException(400)
+
+    res = await database.fetch_one(
+        """SELECT country_eez."union" FROM power_plant, countries.country_eez WHERE
+                ST_Contains(ST_Transform(country_eez.geom, 3857), geometry)
+                AND power_plant.osm_id = :id""",
+        values={"id": id},
+    )
+
+    if not res:
+        raise HTTPException(404)
+
+    return RedirectResponse(
+        request.url_for("plant_detail", country=res["union"], id=id)
+    )
+
+
 @app.route("/stats/area/{country}/plants/{id}")
 @country_required
 @cache_for(3600)
@@ -243,6 +266,12 @@ async def plant_detail(request, country):
             wd["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"], 400
         )
 
+    ref_tags = []
+    for k, v in plant["tags"].items():
+        if k.startswith("ref:") or k in ["repd:id"]:
+            for split_val in v.split(";"):
+                ref_tags.append((k, split_val))
+
     return templates.TemplateResponse(
         "plant_detail.html",
         {
@@ -253,6 +282,7 @@ async def plant_detail(request, country):
             "country": country["union"],
             "wikidata": wd,
             "image_data": image_data,
+            "ref_tags": ref_tags,
         },
     )
 

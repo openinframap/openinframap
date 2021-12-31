@@ -19,8 +19,9 @@
   ({{plant['name_en']}})
   {% endif %}
   is a {{plant['source'].split(';')|join(' and ')}}
-  power plant in {{country|country_name()}}
-{%- if plant['output']%} with a total output of {{plant['output']|power}}{% endif %}.
+  power plant
+{%- if plant.tags.operator %} operated by <strong>{{plant.tags.operator}}</strong>{% endif %}
+{%- if plant['output']%} with a total output of <strong>{{plant['output']|power}}</strong>{% endif %}.
   </p>
   {% if image_data and image_data.imageinfo[0].responsiveUrls%}
     {% set imginfo = image_data.imageinfo[0] %}
@@ -44,8 +45,9 @@
       <li><a href="https://www.wikidata.org/wiki/{{plant.tags.wikidata}}">Wikidata</a></li>
     {% endif %}
   </ul>
-  <h3>Generators</h3>
+
   {% if generator_summary %}
+    <h3>Generators</h3>
     <table>
       <thead>
         <tr>
@@ -66,5 +68,25 @@
     {% endfor %}
       </tbody>
     </table>
+  {% endif %}
+
+  {% if ref_tags %}
+  <h3>External Identifiers</h3>
+  <table>
+    {% for tag, value in ref_tags %}
+    <tr>
+      <td><a href="https://wiki.openstreetmap.org/wiki/Key:{{tag}}">{{tag}}</a></td>
+      <td>
+        {% if tag == "ref:US:EIA" %}
+          <a href="https://data.catalyst.coop/pudl/plants_entity_eia/{{value}}">{{value}}</a>
+        {% elif tag == "repd:id" %}
+          <a href="https://repd.russss.dev/repd/repd/{{value}}">{{value}}</a>
+        {% else %}
+          {{value}}
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
   {% endif %}
 {% endblock %}

@@ -3,8 +3,8 @@ import './infopopup.css';
 import maplibregl from 'maplibre-gl';
 import titleCase from 'title-case';
 import browserLanguage from 'in-browser-language';
-import {local_name_tags} from './l10n.js';
-import {el, text, mount, unmount, setChildren, setStyle} from 'redom';
+import { local_name_tags } from './l10n.js';
+import { el, text, mount, unmount, setChildren, setStyle } from 'redom';
 
 const hidden_keys = [
   'osm_id',
@@ -111,7 +111,7 @@ class InfoPopup {
           target: '_blank',
         }), text(', ')),
       );
-    } else { 
+    } else {
       key = titleCase(key);
     }
 
@@ -143,7 +143,7 @@ class InfoPopup {
   }
 
   popupHtml(feature) {
-    let attrs_table = el('table', {class: 'item_info'});
+    let attrs_table = el('table', { class: 'item_info' });
     setChildren(
       attrs_table,
       Object.keys(feature.properties)
@@ -191,6 +191,10 @@ class InfoPopup {
       wikidata_div,
       attrs_table,
     );
+
+    if (feature.layer.id.startsWith("power_plant")) {
+      mount(content, el("a", "More info", { href: "/stats/object/plant/" + feature.properties['osm_id'], target: "_blank" }))
+    }
     return content;
   }
 
@@ -220,9 +224,8 @@ class InfoPopup {
                 src: data['thumbnail'],
               }),
               {
-                href: `https://commons.wikimedia.org/wiki/File:${
-                  data['image']
-                }`,
+                href: `https://commons.wikimedia.org/wiki/File:${data['image']
+                  }`,
                 target: '_blank',
               },
             ),
@@ -283,4 +286,4 @@ class InfoPopup {
   }
 }
 
-export {InfoPopup as default};
+export { InfoPopup as default };

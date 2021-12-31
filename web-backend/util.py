@@ -1,5 +1,6 @@
 from functools import wraps
 from starlette.exceptions import HTTPException
+from urllib.parse import unquote_plus
 
 from config import database
 
@@ -7,7 +8,7 @@ from config import database
 def country_required(func):
     @wraps(func)
     async def wrap_country(request):
-        country = request.path_params["country"]
+        country = unquote_plus(request.path_params["country"])
 
         res = await database.fetch_one(
             query='SELECT gid, "union" FROM countries.country_eez WHERE "union" = :union',
@@ -26,8 +27,9 @@ def cache_for(lifetime):
         @wraps(func)
         async def wrap_cache(*args, **kwargs):
             response = await func(*args, **kwargs)
-            response.headers['Cache-Control'] = f"public, max-age={lifetime}"
+            response.headers["Cache-Control"] = f"public, max-age={lifetime}"
             return response
 
         return wrap_cache
+
     return cache_for_inner
