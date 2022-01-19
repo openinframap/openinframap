@@ -8,7 +8,7 @@ const layers = [
     id: 'telecoms_line',
     type: 'line',
     source: 'openinframap',
-    minzoom: 3,
+    minzoom: 2,
     'source-layer': 'telecoms_communication_line',
     paint: {
       'line-color': '#61637A',
