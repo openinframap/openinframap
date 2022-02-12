@@ -185,7 +185,9 @@ layers:
     field_sets: [geom_centroid, name, wiki, source, construction, url, generator_output]
     id_field: osm_id
     from: osm_power_generator
-    where: geometry && !BBOX!
+    where: >
+      tags -> 'generator:type' != 'solar_thermal_collector' AND
+      geometry && !BBOX!
 
   - name: power_generator_area
     geometry_type: Polygon
@@ -193,7 +195,11 @@ layers:
     field_sets: [geom, name, wiki, source, construction, url, generator_output]
     id_field: osm_id
     from: osm_power_generator
-    where: geometry && !BBOX! AND construction = '' AND ST_GeometryType(geometry) IN ('ST_Polygon', 'ST_MultiPolygon')
+    where: >
+      tags -> 'generator:type' != 'solar_thermal_collector' AND
+      construction = '' AND
+      ST_GeometryType(geometry) IN ('ST_Polygon', 'ST_MultiPolygon') AND
+      geometry && !BBOX!
 
   - name: power_transformer
     geometry_type: Point
@@ -242,6 +248,7 @@ layers:
     from: osm_power_generator
     where: >
       source = 'solar' AND
+      tags -> 'generator:type' != 'solar_thermal_collector' AND
       construction = '' AND
       geometry && !BBOX!
       GROUP BY geom
