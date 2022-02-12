@@ -298,7 +298,7 @@ layers:
       - name: type
     from: osm_pipeline
     where: >
-      COALESCE(substance, type) IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng')
+      COALESCE(substance, type) IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng', 'lpg')
       AND construction = ''
       AND geometry && !BBOX!
       AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
