@@ -186,7 +186,7 @@ layers:
     id_field: osm_id
     from: osm_power_generator
     where: >
-      tags -> 'generator:type' != 'solar_thermal_collector' AND
+      coalesce(tags -> 'generator:type', '') != 'solar_thermal_collector' AND
       geometry && !BBOX!
 
   - name: power_generator_area
@@ -196,7 +196,7 @@ layers:
     id_field: osm_id
     from: osm_power_generator
     where: >
-      tags -> 'generator:type' != 'solar_thermal_collector' AND
+      coalesce(tags -> 'generator:type', '') != 'solar_thermal_collector' AND
       construction = '' AND
       ST_GeometryType(geometry) IN ('ST_Polygon', 'ST_MultiPolygon') AND
       geometry && !BBOX!
@@ -248,7 +248,7 @@ layers:
     from: osm_power_generator
     where: >
       source = 'solar' AND
-      tags -> 'generator:type' != 'solar_thermal_collector' AND
+      coalesce(tags -> 'generator:type', '') != 'solar_thermal_collector' AND
       construction = '' AND
       geometry && !BBOX!
       GROUP BY geom
