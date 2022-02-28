@@ -1,5 +1,5 @@
-import {text_paint, underground_p} from './style_oim_common.js';
-import {local_name_tags} from '../l10n.js';
+import { text_paint, underground_p } from './style_oim_common.js';
+import { local_name_tags } from '../l10n.js';
 
 const voltage_scale = [
   [null, '#7A7A85'],
@@ -82,7 +82,7 @@ function voltage_offset(index) {
     ['linear'],
     ['zoom'],
     multi_voltage_min_zoom - 0.001, 0,
-    multi_voltage_min_zoom, 
+    multi_voltage_min_zoom,
     [
       'case',
       ['has', 'voltage_3'],
@@ -160,7 +160,10 @@ const substation_visible_p = [
     ['all', ['>', voltage, 9], ['>', ['zoom'], 10]],
     ['>', ['zoom'], 11],
   ],
-  ['!=', ['get', 'substation'], 'transition'],
+  ['any',
+    ['!=', ['get', 'substation'], 'transition'],
+    ['>', ['zoom'], 12]
+  ]
 ];
 
 const substation_radius = [
@@ -318,18 +321,18 @@ const pretty_output = ['case',
   ['concat', ['round', ['*', output, 1000]], ' kW']
 ];
 
-const local_name = ['coalesce'].concat(local_name_tags.map(tag => ['get', tag]))
+const local_name = ['coalesce'].concat(local_name_tags.map(tag => ['get', tag]));
 
 const plant_label = ['step', ['zoom'],
-    ['concat', local_name],
-    9,
-    ['case',
-      ['all', ['!', ['has', 'name']], ['has', 'output']],
-      ['concat', pretty_output, construction_label],
-      ['has', 'output'],
-      ['concat', local_name, ' \n', pretty_output, '\n', construction_label],
-      local_name
-    ],
+  ['concat', local_name],
+  9,
+  ['case',
+    ['all', ['!', ['has', 'name']], ['has', 'output']],
+    ['concat', pretty_output, construction_label],
+    ['has', 'output'],
+    ['concat', local_name, ' \n', pretty_output, '\n', construction_label],
+    local_name
+  ],
 ];
 
 function plant_image() {
@@ -1017,12 +1020,12 @@ const layers = [
     },
     paint: Object.assign({}, text_paint, {
       // Control visibility using the opacity property...
-      'icon-opacity': ['step', ['zoom'], 
-        ['case', construction_p, 0.5, 1], 11, 
-      0],
+      'icon-opacity': ['step', ['zoom'],
+        ['case', construction_p, 0.5, 1], 11,
+        0],
       'text-opacity': ['step', ['zoom'], 0, 7, 1],
     }),
   },
 ];
 
-export {layers as default, voltage_scale, special_voltages, plant_types};
+export { layers as default, voltage_scale, special_voltages, plant_types };
