@@ -32,6 +32,7 @@ table(
             "natural_gas",
             "wellsite",
             "well_cluster",
+            "refinery"
         ]
     },
     "polygon",
