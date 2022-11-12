@@ -1,4 +1,4 @@
-import {text_paint, operator_text, underground_p} from './style_oim_common.js';
+import { text_paint, operator_text, underground_p, font } from './style_oim_common.js';
 
 const layers = [
   {
@@ -45,6 +45,7 @@ const layers = [
     paint: text_paint,
     layout: {
       'text-field': '{name}',
+      'text-font': font,
       'symbol-placement': 'line',
       'symbol-spacing': 400,
       'text-size': 10,

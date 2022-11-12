@@ -1,14 +1,13 @@
 import './index.css';
-import '@russss/mapboxgl-layer-switcher/layerswitcher.css'
+import '@russss/mapboxgl-layer-switcher/layerswitcher.css';
 import maplibregl from 'maplibre-gl';
 
-import {mount} from 'redom';
+import { mount } from 'redom';
 
 import LayerSwitcher from '@russss/mapboxgl-layer-switcher';
 import URLHash from '@russss/mapboxgl-layer-switcher/urlhash';
 
 import EditButton from './editbutton.js';
-import MapTilerAttribution from './maptiler-attribution.js';
 import InfoBox from './infobox.js';
 import InfoPopup from './infopopup.js';
 import KeyControl from './key/key.js';
@@ -23,12 +22,12 @@ import style_oim_petroleum from './style/style_oim_petroleum.js';
 import style_oim_water from './style/style_oim_water.js';
 
 function init() {
-  if (!maplibregl.supported({failIfMajorPerformanceCaveat: true})) {
+  if (!maplibregl.supported({ failIfMajorPerformanceCaveat: true })) {
     const infobox = new InfoBox('Warning');
     infobox.update(
       'Your browser may have performance or functionality issues with OpenInfraMap.<br/>' +
-        '<a href="http://webglreport.com">WebGL</a> with hardware acceleration is required for this site ' +
-        'to perform well.',
+      '<a href="http://webglreport.com">WebGL</a> with hardware acceleration is required for this site ' +
+      'to perform well.',
     );
     mount(document.body, infobox);
   }
@@ -87,7 +86,7 @@ function init() {
   map.touchZoomRotate.disableRotation();
 
   url_hash.enable(map);
-  map.addControl(new maplibregl.NavigationControl({showCompass: false}), 'top-right');
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
   map.addControl(
     new maplibregl.GeolocateControl({
       positionOptions: {
@@ -97,8 +96,7 @@ function init() {
     }),
   );
 
-  map.addControl(new MapTilerAttribution(), 'bottom-right');
-  map.addControl(new maplibregl.ScaleControl({position: 'bottom-left'}));
+  map.addControl(new maplibregl.ScaleControl({ position: 'bottom-left' }));
 
   map.addControl(new KeyControl(), 'top-right');
   map.addControl(layer_switcher, 'top-right');

@@ -13,10 +13,10 @@ const layers = [
     layout: {
       'text-anchor': 'center',
       'text-field': '{name:latin}\n{name:nonlatin}',
-      'text-font': ['Metropolis Regular', 'Noto Sans Regular'],
+      'text-font': ['Noto Sans Regular'],
       'text-justify': 'center',
       'text-offset': [0.5, 0],
-      'text-size': {base: 1, stops: [[12, 9], [17, 17]]},
+      'text-size': { base: 1, stops: [[12, 9], [17, 17]] },
       visibility: 'visible',
     },
     paint: {
@@ -37,10 +37,10 @@ const layers = [
     layout: {
       'text-anchor': 'center',
       'text-field': '{name:latin}\n{name:nonlatin}',
-      'text-font': ['Metropolis Regular', 'Noto Sans Regular'],
+      'text-font': ['Noto Sans Regular'],
       'text-justify': 'center',
       'text-offset': [0.5, 0.2],
-      'text-size': {base: 1, stops: [[12, 9], [17, 18]]},
+      'text-size': { base: 1, stops: [[12, 9], [17, 18]] },
       visibility: 'visible',
     },
     paint: {
@@ -61,10 +61,10 @@ const layers = [
     layout: {
       'text-anchor': 'center',
       'text-field': '{name:latin}\n{name:nonlatin}',
-      'text-font': ['Metropolis Regular', 'Noto Sans Regular'],
+      'text-font': ['Noto Sans Regular'],
       'text-justify': 'center',
       'text-offset': [0.5, 0.2],
-      'text-size': {base: 1, stops: [[10, 9], [15, 18]]},
+      'text-size': { base: 1, stops: [[10, 9], [15, 18]] },
       visibility: 'visible',
     },
     paint: {
@@ -89,7 +89,7 @@ const layers = [
     layout: {
       'text-anchor': 'center',
       'text-field': '{name:latin}\n{name:nonlatin}',
-      'text-font': ['Metropolis Regular', 'Noto Sans Regular'],
+      'text-font': ['Noto Sans Regular'],
       'text-justify': 'center',
       'text-offset': [0.5, 0.2],
       'text-size': 12,
@@ -117,7 +117,7 @@ const layers = [
     layout: {
       'text-anchor': 'center',
       'text-field': '{name:latin}\n{name:nonlatin}',
-      'text-font': ['Metropolis Regular', 'Noto Sans Regular'],
+      'text-font': ['Noto Sans Regular'],
       'text-justify': 'center',
       'text-offset': [0.5, 0.2],
       'text-size': 14,
@@ -145,7 +145,7 @@ const layers = [
     layout: {
       'text-anchor': 'center',
       'text-field': '{name:latin}\n{name:nonlatin}',
-      'text-font': ['Metropolis Regular', 'Noto Sans Regular'],
+      'text-font': ['Noto Sans Regular'],
       'text-justify': 'center',
       'text-offset': [0.5, 0.2],
       'text-size': 14,
@@ -168,7 +168,7 @@ const layers = [
     filter: ['all', ['==', '$type', 'Point'], ['==', 'class', 'state']],
     layout: {
       'text-field': '{name:latin}\n{name:nonlatin}',
-      'text-font': ['Metropolis Regular', 'Noto Sans Regular'],
+      'text-font': ['Noto Sans Regular'],
       'text-size': 15,
       visibility: 'visible',
     },
@@ -193,8 +193,8 @@ const layers = [
     ],
     layout: {
       'text-field': ['case', ['has', 'name:en'], ['get', 'name:en'], ['get', 'name:latin']],
-      'text-font': ['Metropolis Light Italic', 'Noto Sans Italic'],
-      'text-size': {base: 1, stops: [[0, 9], [6, 13]]},
+      'text-font': ['Metropolis Light Italic', 'Noto Sans Regular Italic'],
+      'text-size': { base: 1, stops: [[0, 9], [6, 13]] },
       visibility: 'visible',
     },
     paint: {
@@ -218,8 +218,8 @@ const layers = [
     ],
     layout: {
       'text-field': ['case', ['has', 'name:en'], ['get', 'name:en'], ['get', 'name:latin']],
-      'text-font': ['Metropolis Regular', 'Noto Sans Regular'],
-      'text-size': {base: 1, stops: [[0, 10], [6, 12]]},
+      'text-font': ['Noto Sans Regular'],
+      'text-size': { base: 1, stops: [[0, 10], [6, 12]] },
       visibility: 'visible',
     },
     paint: {
@@ -244,8 +244,8 @@ const layers = [
     layout: {
       'text-anchor': 'center',
       'text-field': ['case', ['has', 'name:en'], ['get', 'name:en'], ['get', 'name:latin']],
-      'text-font': ['Metropolis Regular', 'Noto Sans Regular'],
-      'text-size': {base: 1.4, stops: [[0, 10], [3, 12], [4, 14]]},
+      'text-font': ['Noto Sans Regular'],
+      'text-size': { base: 1.4, stops: [[0, 10], [3, 12], [4, 14]] },
       visibility: 'visible',
     },
     paint: {

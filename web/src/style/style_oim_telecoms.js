@@ -1,5 +1,5 @@
-import {text_paint, operator_text} from './style_oim_common.js';
-import {local_name_tags} from '../l10n.js';
+import { text_paint, operator_text, font } from './style_oim_common.js';
+import { local_name_tags } from '../l10n.js';
 const local_name = ['coalesce'].concat(local_name_tags.map(tag => ['get', tag]));
 
 const layers = [
@@ -48,6 +48,7 @@ const layers = [
         14, 1
       ],
       'text-field': operator_text,
+      'text-font': font,
       'text-size': {
         "stops": [
           [11, 0],
@@ -74,6 +75,7 @@ const layers = [
     paint: text_paint,
     layout: {
       'text-field': operator_text,
+      'text-font': font,
       'text-size': {
         "stops": [
           [11, 0],
@@ -94,6 +96,7 @@ const layers = [
     paint: text_paint,
     layout: {
       'text-field': local_name,
+      'text-font': font,
       'symbol-placement': 'line',
       'symbol-spacing': 400,
       'text-size': 10,

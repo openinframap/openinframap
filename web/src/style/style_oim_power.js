@@ -1,4 +1,4 @@
-import { text_paint, underground_p } from './style_oim_common.js';
+import { text_paint, underground_p, font } from './style_oim_common.js';
 import { local_name_tags } from '../l10n.js';
 
 const voltage_scale = [
@@ -726,6 +726,7 @@ const layers = [
       'icon-allow-overlap': true,
       'icon-size': ['interpolate', ['linear'], ['zoom'], 13, 0.6, 17, 1],
       'text-field': '{ref}',
+      'text-font': font,
       'text-size': [
         'step',
         // Set visibility by using size
@@ -765,6 +766,7 @@ const layers = [
       'icon-allow-overlap': true,
       'icon-size': ['interpolate', ['linear'], ['zoom'], 13, 0.2, 17, 0.8],
       'text-field': '{ref}',
+      'text-font': font,
       'text-size': [
         'step',
         // Set visibility by using size
@@ -791,6 +793,7 @@ const layers = [
       'icon-anchor': 'bottom',
       'icon-size': ['interpolate', ['linear'], ['zoom'], 11, 0.5, 14, 1],
       'text-field': '{name}',
+      'text-font': font,
       'text-size': ['step', ['zoom'], 0, 12, 9],
       'text-offset': [0, 1],
       'text-anchor': 'top',
@@ -858,6 +861,7 @@ const layers = [
     layout: {
       'icon-image': 'power_line_ref',
       'text-field': '{ref}',
+      'text-font': font,
       'symbol-placement': 'line-center',
       'text-size': 10,
       'text-max-angle': 10,
@@ -874,6 +878,7 @@ const layers = [
     paint: text_paint,
     layout: {
       'text-field': line_label,
+      'text-font': font,
       'symbol-placement': 'line',
       'symbol-spacing': 400,
       'text-size': ['interpolate', ['linear'], ['zoom'], 11, 10, 18, 13],
@@ -899,6 +904,7 @@ const layers = [
     layout: {
       'symbol-z-order': 'source',
       'text-field': '{ref}',
+      'text-font': font,
       'text-anchor': 'bottom',
       'text-offset': [0, -0.5],
       'text-size': ['interpolate', ['linear'], ['zoom'], 14, 9, 18, 12],
@@ -918,6 +924,7 @@ const layers = [
       'symbol-sort-key': ['-', 10000, voltage],
       'symbol-z-order': 'source',
       'text-field': substation_label,
+      'text-font': font,
       'text-anchor': 'top',
       'text-offset': [0, 0.5],
       'text-size': [
@@ -956,6 +963,7 @@ const layers = [
         9, 1
       ],
       'text-field': substation_label,
+      'text-font': font,
       'text-anchor': 'top',
       'text-offset': [0, 1.2],
       'text-size': [
@@ -997,6 +1005,7 @@ const layers = [
       'icon-image': plant_image(),
       'icon-size': ['interpolate', ['linear'], ['zoom'], 6, 0.6, 10, 0.8],
       'text-field': plant_label,
+      'text-font': font,
       'text-anchor': 'top',
       'text-offset': [0, 1],
       'text-size': [

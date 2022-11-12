@@ -5,12 +5,12 @@ const text_paint = {
 }
 
 const operator_text = ["step", ["zoom"],
-        ['get', 'name'],
-        14, ["case", ['has', 'operator'],
-              ["concat", ['get', 'name'], ' (', ['get', 'operator'], ')'],
-              ['get', 'name']
-        ]
-      ];
+  ['get', 'name'],
+  14, ["case", ['has', 'operator'],
+    ["concat", ['get', 'name'], ' (', ['get', 'operator'], ')'],
+    ['get', 'name']
+  ]
+];
 
 const underground_p = ["any",
   ['==', ['get', 'location'], 'underground'],
@@ -22,4 +22,6 @@ const underground_p = ["any",
   ]
 ];
 
-export {text_paint, operator_text, underground_p};
+const font = ['Noto Sans Regular'];
+
+export { text_paint, operator_text, underground_p, font };

@@ -1,4 +1,4 @@
-import {text_paint, operator_text, underground_p} from './style_oim_common.js';
+import { text_paint, font } from './style_oim_common.js';
 
 const substance = ["coalesce", ["get", "substance"], ["get", "type"], ""];
 
@@ -11,12 +11,12 @@ const pipeline_colour = ["match",
   colour_oil
 ]
 
-const substance_operator = ["concat", 
+const substance_operator = ["concat",
   ["get", "operator"],
-  ["case", ["all", 
-            ["!=", substance, ""], 
-            ["!=", ["get", "operator"], ""]
-           ],
+  ["case", ["all",
+    ["!=", substance, ""],
+    ["!=", ["get", "operator"], ""]
+  ],
     ["concat", " (", substance, ")"],
     substance
   ]
@@ -81,7 +81,7 @@ const layers = [
       'circle-color': colour_oil,
       'circle-stroke-color': '#666666',
       'circle-stroke-width': 1,
-      'circle-radius': ['interpolate', 
+      'circle-radius': ['interpolate',
         ['linear'], ['zoom'],
         10, 1,
         12, 2,
@@ -99,6 +99,7 @@ const layers = [
     paint: text_paint,
     layout: {
       'text-field': substance_operator,
+      'text-font': font,
       'symbol-placement': 'line',
       'symbol-spacing': 400,
       'text-size': 10,
@@ -115,6 +116,7 @@ const layers = [
     minzoom: 12,
     layout: {
       'text-field': '{name}',
+      'text-font': font,
       'text-anchor': 'top',
       'text-offset': [0, 1],
       'text-size': 11,
@@ -130,6 +132,7 @@ const layers = [
     minzoom: 13,
     layout: {
       'text-field': 'Well {name}',
+      'text-font': font,
       'text-anchor': 'top',
       'text-offset': [0, 0.5],
       'text-size': 10,
@@ -138,4 +141,4 @@ const layers = [
   },
 ];
 
-export {layers as default, colour_gas, colour_oil};
+export { layers as default, colour_gas, colour_oil };
