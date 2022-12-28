@@ -249,15 +249,15 @@ $$ LANGUAGE sql;
 
 -- Generate the outline of a distributed power plant
 -- ST_ConcaveHull can fail on some geometries. This function tries it, but falls back to a simple buffer otherwise.
-create or replace function simplify_boundary (geometry geometry)
-    PARALLEL UNSAFE -- uses EXCEPTION
-    returns geometry
-    immutable
-    returns null on null input as $$
+CREATE OR REPLACE FUNCTION simplify_boundary(g1 geometry)
+    RETURNS geometry
+    LANGUAGE plpgsql
+    IMMUTABLE STRICT
+    PARALLEL UNSAFE AS $$
 begin
-	return st_buffer(st_concavehull(geometry, 0.95), 10);
+    return st_buffer(st_concavehull(g1, 0.95), 10);
 EXCEPTION
-	WHEN SQLSTATE 'XX000' THEN
-		RETURN st_buffer(geometry, 10);
+    WHEN SQLSTATE 'XX000' THEN
+        RETURN st_buffer(g1, 10);
 end
-$$ language plpgsql;
+$$;
