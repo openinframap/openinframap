@@ -1,5 +1,5 @@
 from decimal import Decimal
-from jinja2 import Markup
+from jinja2.utils import markupsafe
 
 
 def format_power(val):
@@ -11,7 +11,7 @@ def format_power(val):
         res = "{:.2f}&nbsp;MW".format(val / Decimal(1e6))
     else:
         res = "{:.0f}&nbsp;kW".format(val / Decimal(1e3))
-    return Markup(res)
+    return markupsafe.Markup(res)
 
 
 def format_length(val):
@@ -21,7 +21,7 @@ def format_length(val):
         res = "{:,.0f}&nbsp;km".format(val / Decimal(1e3))
     else:
         res = "{:,.0f}&nbsp;m".format(val)
-    return Markup(res)
+    return markupsafe.Markup(res)
 
 
 def format_voltage(val):
@@ -31,7 +31,7 @@ def format_voltage(val):
         res = "{:,.0f}&nbsp;kV".format(val / Decimal(1e3))
     else:
         res = "{:,.0f}&nbsp;V".format(val)
-    return Markup(res)
+    return markupsafe.Markup(res)
 
 
 def format_percent(val):
@@ -39,7 +39,7 @@ def format_percent(val):
         res = ""
     else:
         res = "{:,.1f}%".format(val * 100)
-    return Markup(res)
+    return markupsafe.Markup(res)
 
 
 def osm_link(osm_id, geom_type):

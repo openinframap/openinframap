@@ -120,7 +120,7 @@ async def country(request, country):
         {
             "request": request,
             "country": country["union"],
-            "plant_stats": plant_stats,
+            "plant_stats": plant_stats._mapping,
             "plant_source_stats": plant_source_stats,
             "power_lines": power_lines,
             "canonical": request.url_for("country", country=country["union"]),

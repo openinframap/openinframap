@@ -28,7 +28,7 @@ Statistics on the electricity network in {{country|country_name}} from OpenStree
         <tr>
           <td><a href="{{url_for('plants_country', country=country)}}?source={{row.source or ''}}">{{row.source or '[unspecified]'}}</a></td>
           <td>{{row.output|power}}</td>
-          <td>{{row.count}}</td>
+          <td>{{row._mapping.count}}</td>
         </tr>
       {% endfor %}
       </tbody>
