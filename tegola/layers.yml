@@ -326,6 +326,9 @@ layers:
     field_sets: [geom, name]
     from: osm_pipeline
     where: >
-      COALESCE(substance, type) = 'water' AND
+      COALESCE(substance, type) IN (
+        'water', 'hot_water', 'rainwater', 'wastewater', 'sewage',
+        'waterwaste', 'steam'
+        ) AND
       geometry && !BBOX! AND
       ST_Length(geometry) > !PIXEL_WIDTH! / 4
