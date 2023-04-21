@@ -44,6 +44,13 @@ CREATE OR REPLACE VIEW power_plant AS
               FROM power_plant_relation;
 
 
+CREATE OR REPLACE VIEW power_plant_relation_by_geom_type AS
+    SELECT rel.osm_id, ST_Collect(mem.geometry) AS geometry,
+        (rel.tags -> 'name') AS name, rel.output, rel.source, rel.tags, rel.construction
+	FROM osm_power_plant_relation AS rel, osm_power_plant_relation_member AS mem
+	WHERE mem.osm_id = rel.osm_id
+	GROUP BY rel.osm_id, ST_GeometryType(mem.geometry), rel.tags -> 'name', rel.output, rel.source, rel.tags, rel.construction;
+
 
 /* Dispatch power line query to the appropriate generalised table based on zoom. */
 CREATE OR REPLACE FUNCTION power_lines(zoom INT, search_geom geometry) RETURNS
