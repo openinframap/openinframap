@@ -298,10 +298,19 @@ layers:
       - name: type
       - name: usage
         sql: tags -> 'usage'
+      - name: diameter
+        sql: tags -> 'diameter'
+      - name: start_date
+        sql: tags -> 'start_date'
     from: osm_pipeline
     where: >
-      COALESCE(substance, type) IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng', 'lpg')
-      AND construction = ''
+      COALESCE(substance, type) IN (
+        'natural_gas', 'gas', 'oil', 'fuel', 'cng', 'lpg', 'ngl', 'lng',
+        'y-grade', 'hydrocarbons', 'hydrogen', 'carbon_dioxide', 'carbon_monoxide',
+        'ethylene', 'propylene', 'chemicals', 'chemical', 'ammonia',
+        'methane', 'ethane', 'nitrogen', 'isobutane', 'butane',
+        'propane', 'condensate', 'butadiene'
+      ) AND construction = ''
       AND geometry && !BBOX!
       AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
 
@@ -325,7 +334,7 @@ layers:
     geometry_type: LineString
     min_zoom: 3
     id_field: osm_id
-    field_sets: [geom, name]
+    field_sets: [geom, name, wiki]
     fields:
       - name: location
         sql: tags -> 'location'
@@ -333,6 +342,10 @@ layers:
       - name: type
       - name: usage
         sql: tags -> 'usage'
+      - name: diameter
+        sql: tags -> 'diameter'
+      - name: start_date
+        sql: tags -> 'start_date'
     from: osm_pipeline
     where: >
       COALESCE(substance, type) IN (
