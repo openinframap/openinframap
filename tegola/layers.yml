@@ -309,7 +309,7 @@ layers:
         'y-grade', 'hydrocarbons', 'hydrogen', 'carbon_dioxide', 'carbon_monoxide',
         'ethylene', 'propylene', 'chemicals', 'chemical', 'ammonia',
         'methane', 'ethane', 'nitrogen', 'isobutane', 'butane',
-        'propane', 'condensate', 'butadiene'
+        'propane', 'condensate', 'butadiene', 'naphtha'
       ) AND construction = ''
       AND ((tags->'usage' IS NOT NULL AND tags->'usage' = 'transmission')
             OR !ZOOM! > 8

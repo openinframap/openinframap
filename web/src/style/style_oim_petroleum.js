@@ -3,7 +3,7 @@ import { text_paint, font } from './style_oim_common.js';
 const colour_gas = '#BFBC6B';
 const colour_oil = '#6B6B6B';
 const colour_fuel = '#CC9F83';
-const colour_petroleum_other = '#78CC9E';
+const colour_intermediate = '#78CC9E';
 const colour_hydrogen = '#CC78AB';
 const colour_co2 = '#7885CC';
 const colour_unknown = '#BABABA';
@@ -15,7 +15,7 @@ const pipeline_colour = ["match",
   ['gas', 'natural_gas', 'cng', 'lpg', 'lng'], colour_gas,
   'oil', colour_oil,
   'fuel', colour_fuel,
-  ['ngl', 'y-grade', 'hydrocarbons', 'condensate'], colour_petroleum_other,
+  ['ngl', 'y-grade', 'hydrocarbons', 'condensate', 'naphtha'], colour_intermediate,
   'hydrogen', colour_hydrogen,
   'carbon_dioxide', colour_co2,
   colour_unknown
@@ -163,7 +163,7 @@ export {
   colour_gas,
   colour_oil,
   colour_fuel,
-  colour_petroleum_other,
+  colour_intermediate,
   colour_hydrogen,
   colour_co2,
   colour_unknown

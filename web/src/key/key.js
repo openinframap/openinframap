@@ -12,7 +12,7 @@ import {
   colour_oil,
   colour_gas,
   colour_fuel,
-  colour_petroleum_other,
+  colour_intermediate,
   colour_hydrogen,
   colour_co2,
   colour_unknown
@@ -207,8 +207,8 @@ class KeyControl {
     let rows = [
       ['Oil', svgLine(colour_oil, line_thickness)],
       ['Gas', svgLine(colour_gas, line_thickness)],
+      ['Petroleum Intermediate', svgLine(colour_intermediate, line_thickness)],
       ['Fuel', svgLine(colour_fuel, line_thickness)],
-      ['Other hydrocarbon', svgLine(colour_petroleum_other, line_thickness)],
       ['Hydrogen', svgLine(colour_hydrogen, line_thickness)],
       ['CO<sub>2</sub>', svgLine(colour_co2, line_thickness)],
       ['Other', svgLine(colour_unknown, line_thickness)],
