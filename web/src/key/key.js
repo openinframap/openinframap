@@ -11,6 +11,11 @@ import {
   default as petroleum_layers,
   colour_oil,
   colour_gas,
+  colour_fuel,
+  colour_petroleum_other,
+  colour_hydrogen,
+  colour_co2,
+  colour_unknown
 } from '../style/style_oim_petroleum.js';
 import {
   colour_freshwater,
@@ -29,7 +34,7 @@ class Td {
   }
   update(data) {
     if (typeof data != 'object') {
-      this.el.textContent = data;
+      this.el.innerHTML = data;
     } else if (data === null) {
       return;
     } else {
@@ -200,8 +205,13 @@ class KeyControl {
 
   petroleumTable() {
     let rows = [
-      ['Oil Pipeline', svgLine(colour_oil, line_thickness)],
-      ['Gas Pipeline', svgLine(colour_gas, line_thickness)],
+      ['Oil', svgLine(colour_oil, line_thickness)],
+      ['Gas', svgLine(colour_gas, line_thickness)],
+      ['Fuel', svgLine(colour_fuel, line_thickness)],
+      ['Other hydrocarbon', svgLine(colour_petroleum_other, line_thickness)],
+      ['Hydrogen', svgLine(colour_hydrogen, line_thickness)],
+      ['CO<sub>2</sub>', svgLine(colour_co2, line_thickness)],
+      ['Other', svgLine(colour_unknown, line_thickness)],
       [
         'Petroleum Facility',
         svgRectFromLayer(petroleum_layers, 'petroleum_site'),

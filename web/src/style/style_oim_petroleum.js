@@ -1,21 +1,34 @@
 import { text_paint, font } from './style_oim_common.js';
 
-const substance = ["coalesce", ["get", "substance"], ["get", "type"], ""];
-
 const colour_gas = '#BFBC6B';
-const colour_oil = '#CC9F83';
+const colour_oil = '#6B6B6B';
+const colour_fuel = '#CC9F83';
+const colour_petroleum_other = '#78CC9E';
+const colour_hydrogen = '#CC78AB';
+const colour_co2 = '#7885CC';
+const colour_unknown = '#BABABA';
+
+const substance = ["coalesce", ["get", "substance"], ["get", "type"], ""];
 
 const pipeline_colour = ["match",
   substance,
-  ['gas', 'natural_gas', 'cng'], colour_gas,
-  colour_oil
+  ['gas', 'natural_gas', 'cng', 'lpg', 'lng'], colour_gas,
+  'oil', colour_oil,
+  'fuel', colour_fuel,
+  ['ngl', 'y-grade', 'hydrocarbons', 'condensate'], colour_petroleum_other,
+  'hydrogen', colour_hydrogen,
+  'carbon_dioxide', colour_co2,
+  colour_unknown
 ]
 
-const substance_operator = ["concat",
-  ["get", "operator"],
+const pipeline_label = ["concat",
+  ["case", ["has", "name"], ["get", "name"], ["get", "operator"]],
   ["case", ["all",
     ["!=", substance, ""],
-    ["!=", ["get", "operator"], ""]
+    ['any',
+      ["has", "operator"],
+      ['has', 'name']
+    ]
   ],
     ["concat", " (", substance, ")"],
     substance
@@ -34,7 +47,9 @@ const layers = [
       'line-color': '#666666',
       'line-width': ['interpolate', ['linear'], ['zoom'],
         8, 1.5,
-        13, 5
+        16, ['match', ['get', 'usage'],
+          'transmission', 4,
+          1.5]
       ],
     },
     layout: {
@@ -53,8 +68,10 @@ const layers = [
       'line-color': pipeline_colour,
       'line-width': ['interpolate', ['linear'], ['zoom'],
         3, 1,
-        13, 3.5
-      ],
+        16, ['match', ['get', 'usage'],
+          'transmission', 2,
+          1]
+      ]
     },
   },
   {
@@ -98,7 +115,7 @@ const layers = [
     minzoom: 12,
     paint: text_paint,
     layout: {
-      'text-field': substance_operator,
+      'text-field': pipeline_label,
       'text-font': font,
       'symbol-placement': 'line',
       'symbol-spacing': 400,
@@ -141,4 +158,13 @@ const layers = [
   },
 ];
 
-export { layers as default, colour_gas, colour_oil };
+export {
+  layers as default,
+  colour_gas,
+  colour_oil,
+  colour_fuel,
+  colour_petroleum_other,
+  colour_hydrogen,
+  colour_co2,
+  colour_unknown
+};
