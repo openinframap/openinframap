@@ -311,6 +311,9 @@ layers:
         'methane', 'ethane', 'nitrogen', 'isobutane', 'butane',
         'propane', 'condensate', 'butadiene'
       ) AND construction = ''
+      AND ((tags->'usage' IS NOT NULL AND tags->'usage' = 'transmission')
+            OR !ZOOM! > 8
+      )
       AND geometry && !BBOX!
       AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
 
