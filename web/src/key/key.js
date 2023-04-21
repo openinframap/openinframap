@@ -1,4 +1,4 @@
-import {el, text, mount, list, setStyle} from 'redom';
+import { el, text, mount, list, setStyle } from 'redom';
 import {
   default as power_layers,
   voltage_scale,
@@ -12,8 +12,16 @@ import {
   colour_oil,
   colour_gas,
 } from '../style/style_oim_petroleum.js';
-import {svgLine, svgLineFromLayer, svgRectFromLayer} from './svg.js';
+import {
+  colour_freshwater,
+  colour_wastewater,
+  colour_hotwater,
+  colour_steam
+} from '../style/style_oim_water.js';
+import { svgLine, svgLineFromLayer, svgRectFromLayer } from './svg.js';
 import './key.css';
+
+const line_thickness = 6;
 
 class Td {
   constructor() {
@@ -40,7 +48,7 @@ class KeyControl {
       class: 'maplibregl-ctrl-icon oim-key-control',
     });
 
-    this._container = el('div', {class: 'maplibregl-ctrl oim-key-panel'});
+    this._container = el('div', { class: 'maplibregl-ctrl oim-key-panel' });
 
     this.populate();
 
@@ -65,8 +73,8 @@ class KeyControl {
     } else {
       cont_style = this._container.getBoundingClientRect();
     }
-    let height = parseInt(map_style.height) - cont_style.top - 80 + 'px';
-    setStyle(this._pane, {'max-height': height});
+    let height = parseInt(map_style.height) - cont_style.top - 100 + 'px';
+    setStyle(this._pane, { 'max-height': height });
   }
 
   header() {
@@ -119,9 +127,9 @@ class KeyControl {
       rows.push([key, value]);
     }
 
-    rows = rows.map(row => [row[0], svgLine(row[1], 4)]);
+    rows = rows.map(row => [row[0], svgLine(row[1], line_thickness)]);
 
-    rows.push(['Underground', svgLine('#7A7A85', 2, '3 2')]);
+    rows.push(['Underground', svgLine('#7A7A85', line_thickness, '3 2')]);
     rows.push(['Line Reference', this.sprite('power_line_ref')]);
 
     let table = list('table', Tr);
@@ -155,7 +163,7 @@ class KeyControl {
 
   generatorTable() {
     let rows = [
-      ['Wind Turbine', this.sprite('power_wind')],
+      ['Wind Turbine', this.sprite('power_wind', 14)],
       ['Solar Panel', svgRectFromLayer(power_layers, 'power_solar_panel')],
     ];
     let table = list('table', Tr);
@@ -165,10 +173,10 @@ class KeyControl {
 
   towerTable() {
     let rows = [
-      ['Tower/Pylon', this.sprite('power_tower')],
-      ['Transition Tower', this.sprite('power_tower_transition')],
+      ['Tower/Pylon', this.sprite('power_tower', 10)],
+      ['Transition Tower', this.sprite('power_tower_transition', 10)],
       ['Pole', this.sprite('power_pole', 8)],
-      ['Transition Pole', this.sprite('power_pole_transition')],
+      ['Transition Pole', this.sprite('power_pole_transition', 8)],
       ['Transformer', this.sprite('power_transformer')],
       ['Switch', this.sprite('power_switch')],
       ['Compensator', this.sprite('power_compensator')],
@@ -192,8 +200,8 @@ class KeyControl {
 
   petroleumTable() {
     let rows = [
-      ['Oil Pipeline', svgLine(colour_oil, 2)],
-      ['Gas Pipeline', svgLine(colour_gas, 2)],
+      ['Oil Pipeline', svgLine(colour_oil, line_thickness)],
+      ['Gas Pipeline', svgLine(colour_gas, line_thickness)],
       [
         'Petroleum Facility',
         svgRectFromLayer(petroleum_layers, 'petroleum_site'),
@@ -206,7 +214,10 @@ class KeyControl {
 
   waterTable() {
     let rows = [
-      ['Water Pipeline', svgLineFromLayer(water_layers, 'water_pipeline')],
+      ['Fresh Water', svgLine(colour_freshwater, line_thickness)],
+      ['Hot Water', svgLine(colour_hotwater, line_thickness)],
+      ['Steam', svgLine(colour_steam, line_thickness)],
+      ['Wastewater', svgLine(colour_wastewater, line_thickness)],
     ];
     let table = list('table', Tr);
     table.update(rows);
@@ -214,4 +225,4 @@ class KeyControl {
   }
 }
 
-export {KeyControl as default};
+export { KeyControl as default };

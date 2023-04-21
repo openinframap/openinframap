@@ -1,5 +1,10 @@
 import { text_paint, operator_text, underground_p, font } from './style_oim_common.js';
 
+const colour_freshwater = '#7B7CBA';
+const colour_wastewater = '#BAA87B';
+const colour_hotwater = '#AD4C4C';
+const colour_steam = '#7BBAAC';
+
 const substance_label = ['match', ['get', 'substance'],
   "water", 'Water',
   "rainwater", "Rainwater",
@@ -12,13 +17,13 @@ const substance_label = ['match', ['get', 'substance'],
 ];
 
 const substance_colour = ["match", ["get", "substance"],
-  "water", '#7B7CBA',
-  "rainwater", "#7B7CBA",
-  "hot_water", "#AD4C4C",
-  "wastewater", "#BAA87B",
-  "sewage", "#BAA87B",
-  "waterwaste", "#BAA87B",
-  "steam", "#7BBAAC",
+  "water", colour_freshwater,
+  "rainwater", colour_freshwater,
+  "hot_water", colour_hotwater,
+  "wastewater", colour_wastewater,
+  "sewage", colour_wastewater,
+  "waterwaste", colour_wastewater,
+  "steam", colour_steam,
   '#7B7CBA'
 ];
 
@@ -80,4 +85,4 @@ const layers = [
   },
 ];
 
-export default layers;
+export { layers as default, colour_freshwater, colour_wastewater, colour_hotwater, colour_steam };

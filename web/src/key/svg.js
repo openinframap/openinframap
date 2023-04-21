@@ -1,4 +1,4 @@
-import {svg, setStyle} from 'redom';
+import { svg, setStyle } from 'redom';
 
 function getLayer(layers, id) {
   for (let l of layers) {
@@ -26,7 +26,7 @@ export function svgLine(colour, thickness, dash = '') {
     'stroke-dasharray': dash,
   });
 
-  return svg('svg', line, {height: height, width: width});
+  return svg('svg', line, { height: height, width: width });
 }
 
 export function svgLineFromLayer(layers, name, thickness = 2) {
@@ -54,7 +54,7 @@ export function svgRect(colour, stroke = 'black', opacity = 1) {
     opacity: opacity,
   });
 
-  return svg('svg', rect, {height: height, width: width});
+  return svg('svg', rect, { height: height, width: width });
 }
 
 export function svgRectFromLayer(layers, name) {
