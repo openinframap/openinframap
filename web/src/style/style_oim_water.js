@@ -1,5 +1,27 @@
 import { text_paint, operator_text, underground_p, font } from './style_oim_common.js';
 
+const substance_label = ['match', ['get', 'substance'],
+  "water", 'Water',
+  "rainwater", "Rainwater",
+  "hot_water", "Hot Water",
+  "wastewater", "Wastewater",
+  "sewage", "Sewage",
+  "waterwaste", "Waterwaste",
+  "steam", "Steam",
+  ["get", "substance"]
+];
+
+const substance_colour = ["match", ["get", "substance"],
+  "water", '#7B7CBA',
+  "rainwater", "#7B7CBA",
+  "hot_water", "#AD4C4C",
+  "wastewater", "#BAA87B",
+  "sewage", "#BAA87B",
+  "waterwaste", "#BAA87B",
+  "steam", "#7BBAAC",
+  '#7B7CBA'
+];
+
 const layers = [
   {
     zorder: 20,
@@ -9,10 +31,10 @@ const layers = [
     minzoom: 7,
     'source-layer': 'water_pipeline',
     paint: {
-      'line-color': '#bbbbbb',
+      'line-color': '#777777',
       'line-width': ['interpolate', ['linear'], ['zoom'],
         8, 1.5,
-        13, 4
+        16, 7
       ],
     },
     layout: {
@@ -28,10 +50,10 @@ const layers = [
     minzoom: 3,
     'source-layer': 'water_pipeline',
     paint: {
-      'line-color': '#7B7CBA',
+      'line-color': substance_colour,
       'line-width': ['interpolate', ['linear'], ['zoom'],
         3, 0.3,
-        13, 2
+        16, 4
       ],
     },
   },
@@ -44,7 +66,10 @@ const layers = [
     minzoom: 11,
     paint: text_paint,
     layout: {
-      'text-field': '{name}',
+      'text-field': ["case",
+        ["has", "name"], ['concat', ['get', 'name'], ' (', substance_label, ')',],
+        substance_label
+      ],
       'text-font': font,
       'symbol-placement': 'line',
       'symbol-spacing': 400,
