@@ -296,6 +296,8 @@ layers:
         sql: tags -> 'location'
       - name: substance
       - name: type
+      - name: usage
+        sql: tags -> 'usage'
     from: osm_pipeline
     where: >
       COALESCE(substance, type) IN ('natural_gas', 'gas', 'oil', 'fuel', 'cng', 'lpg')
@@ -329,6 +331,8 @@ layers:
         sql: tags -> 'location'
       - name: substance
       - name: type
+      - name: usage
+        sql: tags -> 'usage'
     from: osm_pipeline
     where: >
       COALESCE(substance, type) IN (
