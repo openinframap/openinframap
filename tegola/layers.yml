@@ -69,6 +69,9 @@ field_sets:
   generator_output:
     - name: output
       sql: convert_power(tags -> 'generator:output:electricity')/1e6
+  start_date:
+    - name: start_date
+      sql: tags->'start_date'
 
 layers:
   - name: power_line
@@ -119,7 +122,7 @@ layers:
   - name: power_substation
     geometry_type: Polygon
     min_zoom: 13
-    field_sets: [geom, name, frequency, voltages, construction, wiki, url]
+    field_sets: [geom, name, frequency, voltages, construction, wiki, url, start_date]
     fields:
       - name: substation
     id_field: osm_id
@@ -130,7 +133,7 @@ layers:
   - name: power_substation_point
     geometry_type: Point
     min_zoom: 5
-    field_sets: [geom_centroid, area, name, frequency, voltages, construction, wiki, url]
+    field_sets: [geom_centroid, area, name, frequency, voltages, construction, wiki, url, start_date]
     fields:
       - name: substation
     id_field: osm_id
@@ -146,7 +149,7 @@ layers:
   - name: power_plant
     geometry_type: Polygon
     min_zoom: 5
-    field_sets: [geom, name, wiki, source, output, construction, url]
+    field_sets: [geom, name, wiki, source, output, construction, url, start_date]
     id_field: osm_id
     fields:
       - name: storage
@@ -162,7 +165,7 @@ layers:
   - name: power_plant_point
     geometry_type: Point
     min_zoom: 5
-    field_sets: [geom_centroid, name, wiki, source, output, construction, url]
+    field_sets: [geom_centroid, name, wiki, source, output, construction, url, start_date]
     id_field: osm_id
     fields:
       - name: storage
@@ -182,7 +185,7 @@ layers:
   - name: power_generator
     geometry_type: Point
     min_zoom: 9
-    field_sets: [geom_centroid, name, wiki, source, construction, url, generator_output]
+    field_sets: [geom_centroid, name, wiki, source, construction, url, generator_output, start_date]
     id_field: osm_id
     from: osm_power_generator
     where: >
@@ -192,7 +195,7 @@ layers:
   - name: power_generator_area
     geometry_type: Polygon
     min_zoom: 13
-    field_sets: [geom, name, wiki, source, construction, url, generator_output]
+    field_sets: [geom, name, wiki, source, construction, url, generator_output, start_date]
     id_field: osm_id
     from: osm_power_generator
     where: >
@@ -204,7 +207,7 @@ layers:
   - name: power_transformer
     geometry_type: Point
     min_zoom: 14
-    field_sets: [geom_centroid, name]
+    field_sets: [geom_centroid, name, start_date]
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'transformer' AND geometry && !BBOX!
@@ -212,7 +215,7 @@ layers:
   - name: power_compensator
     geometry_type: Point
     min_zoom: 14
-    field_sets: [geom_centroid, name]
+    field_sets: [geom_centroid, name, start_date]
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'compensator' AND geometry && !BBOX!
@@ -257,7 +260,7 @@ layers:
     geometry_type: LineString
     id_field: osm_id
     min_zoom: 2
-    field_sets: [geom, name]
+    field_sets: [geom, name, start_date]
     fields:
       - name: location
         sql: tags -> 'location'
@@ -271,7 +274,7 @@ layers:
     geometry_type: Polygon
     min_zoom: 10
     id_field: osm_id
-    field_sets: [geom, name, wiki]
+    field_sets: [geom, name, wiki, start_date]
     from: osm_telecom_building
     where: geometry && !BBOX!
 
@@ -279,7 +282,7 @@ layers:
     geometry_type: Point
     min_zoom: 10
     id_field: osm_id
-    field_sets: [geom_centroid, name, wiki]
+    field_sets: [geom_centroid, name, wiki, start_date]
     from: osm_mast
     where: >
       (tags -> 'mast:type' IN ('communication', 'communications', 'broadcast')
@@ -290,7 +293,7 @@ layers:
     geometry_type: LineString
     min_zoom: 2
     id_field: osm_id
-    field_sets: [geom, name, wiki]
+    field_sets: [geom, name, wiki, start_date]
     fields:
       - name: location
         sql: tags -> 'location'
@@ -300,8 +303,6 @@ layers:
         sql: tags -> 'usage'
       - name: diameter
         sql: tags -> 'diameter'
-      - name: start_date
-        sql: tags -> 'start_date'
     from: osm_pipeline
     where: >
       COALESCE(substance, type) IN (
@@ -321,7 +322,7 @@ layers:
     geometry_type: Point
     min_zoom: 10
     id_field: osm_id
-    field_sets: [geom, name]
+    field_sets: [geom, name, start_date]
     from: osm_petroleum_well
     where: geometry && !BBOX!
 
@@ -329,7 +330,7 @@ layers:
     geometry_type: Polygon
     min_zoom: 8
     id_field: osm_id
-    field_sets: [geom, name]
+    field_sets: [geom, name, start_date]
     from: osm_petroleum_site
     where: geometry && !BBOX!
 
@@ -337,7 +338,7 @@ layers:
     geometry_type: LineString
     min_zoom: 3
     id_field: osm_id
-    field_sets: [geom, name, wiki]
+    field_sets: [geom, name, wiki, start_date]
     fields:
       - name: location
         sql: tags -> 'location'
