@@ -80,7 +80,7 @@ def main(expire_dir, tegola_config, dry_run):
 
         log.info("Received IN_MOVED_TO for tile file %s", filename)
         # Still look for every file in the path in case we've missed any inotify events.
-        expire_path(expire_dir)
+        expire_path(expire_dir, tegola_config, dry_run)
 
         # Cleanup empty dirs on every 10th event
         if event_count % 10 == 0:
