@@ -1,4 +1,4 @@
-name: Build tile server container
+name: Build tile server containers
 
 on:
   push:
@@ -10,8 +10,6 @@ on:
 
 jobs:
   build:
-    env:
-      IMAGE: ghcr.io/openinframap/tileserver
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,7 +20,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push
+      - name: Build and push tileserver image
         id: docker_build
         uses: docker/build-push-action@v4
         with:
@@ -30,5 +28,15 @@ jobs:
           file: ./tegola/Dockerfile
           push: true
           tags: |
-            ${{ env.IMAGE }}:${{ github.sha }}-${{ github.run_number }}
-            ${{ env.IMAGE }}:latest
+            ghcr.io/openinframap/tileserver:${{ github.sha }}-${{ github.run_number }}
+            ghcr.io/openinframap/tileserver:latest
+      - name: Build and push tileserver-expiry image
+        id: docker_build
+        uses: docker/build-push-action@v4
+        with:
+          context: ./tegola
+          file: ./tegola/Dockerfile.expiry
+          push: true
+          tags: |
+            ghcr.io/openinframap/tileserver-expiry:${{ github.sha }}-${{ github.run_number }}
+            ghcr.io/openinframap/tileserver-expiry:latest
