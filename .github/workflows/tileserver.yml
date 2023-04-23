@@ -31,7 +31,7 @@ jobs:
             ghcr.io/openinframap/tileserver:${{ github.sha }}-${{ github.run_number }}
             ghcr.io/openinframap/tileserver:latest
       - name: Build and push tileserver-expiry image
-        id: docker_build
+        id: docker_build_expiry
         uses: docker/build-push-action@v4
         with:
           context: ./tegola
