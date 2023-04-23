@@ -210,11 +210,11 @@ layers:
     field_sets: [geom_centroid, name, start_date, frequency]
     fields:
       - name: voltage_primary
-        sql: tags -> 'voltage:primary'
+        sql: convert_voltage(tags -> 'voltage:primary') / 1000
       - name: voltage_secondary
-        sql: tags -> 'voltage:secondary'
+        sql: convert_voltage(tags -> 'voltage:secondary') / 1000
       - name: voltage_tertiary
-        sql: tags -> 'voltage:tertiary'
+        sql: convert_voltage(tags -> 'voltage:tertiary') / 1000
       - name: rating
         sql: tags -> 'rating'
       - name: location
@@ -235,7 +235,7 @@ layers:
       - name: type
         sql: tags -> 'compensator'
       - name: voltage
-        sql: tags -> 'voltage'
+        sql: convert_voltage(tags -> 'voltage') / 1000
       - name: rating
         sql: tags -> 'rating'
     id_field: osm_id
