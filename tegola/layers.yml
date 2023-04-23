@@ -207,7 +207,22 @@ layers:
   - name: power_transformer
     geometry_type: Point
     min_zoom: 14
-    field_sets: [geom_centroid, name, start_date]
+    field_sets: [geom_centroid, name, start_date, frequency]
+    fields:
+      - name: voltage_primary
+        sql: tags -> 'voltage:primary'
+      - name: voltage_secondary
+        sql: tags -> 'voltage:secondary'
+      - name: voltage_tertiary
+        sql: tags -> 'voltage:tertiary'
+      - name: rating
+        sql: tags -> 'rating'
+      - name: location
+        sql: tags -> 'location'
+      - name: windings
+        sql: tags -> 'windings'
+      - name: configuration
+        sql: tags -> 'windings:configuration'
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'transformer' AND geometry && !BBOX!
@@ -216,6 +231,13 @@ layers:
     geometry_type: Point
     min_zoom: 14
     field_sets: [geom_centroid, name, start_date]
+    fields:
+      - name: type
+        sql: tags -> 'compensator'
+      - name: voltage
+        sql: tags -> 'voltage'
+      - name: rating
+        sql: tags -> 'rating'
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'compensator' AND geometry && !BBOX!
@@ -224,6 +246,13 @@ layers:
     geometry_type: Point
     min_zoom: 14
     field_sets: [geom_centroid, name]
+    fields:
+      - name: type
+        sql: tags -> 'switch'
+      - name: gas_insulated
+        sql: tags -> 'gas_insulated'
+      - name: cables
+        sql: tags -> 'cables'
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'switch' AND geometry && !BBOX!
