@@ -3,38 +3,78 @@
 from pathlib import Path
 import subprocess
 import os
-import sys
+import click
+from inotify.adapters import InotifyTree
+import logging
+import time
 
-if len(sys.argv) != 2:
-    print("Usage:", sys.argv[0], "<imposm expire dir>")
-    sys.exit(1)
-
-
-expire_dir = sys.argv[1]
-
-pathlist = Path(expire_dir).glob("**/*.tiles")
-for path in pathlist:
-    print("Handling expire for", path)
-    subprocess.run(
-        [
-            "tegola",
-            "cache",
-            "purge",
-            "tile-list",
-            path,
-            "--config",
-            "/home/osm/styles/tegola/config.toml",
-            "--max-zoom",
-            "17",
-            "--min-zoom",
-            "7",
-        ]
-    )
-    os.remove(path)
+log = logging.getLogger(__name__)
 
 
-# Clean expire dir by removing empty directories
-for path in Path(expire_dir).iterdir():
-    if path.is_dir() and not any(path.iterdir()):
-        print("Removing directory", path)
-        path.rmdir()
+def expire(tile_list: Path, tegola_config: str, dry_run: bool):
+    log.info("Handling expire for %s", tile_list)
+    cmd = [
+        "tegola",
+        "cache",
+        "purge",
+        "tile-list",
+        tile_list,
+        "--config",
+        tegola_config,
+        "--max-zoom",
+        "17",
+        "--min-zoom",
+        "7",
+    ]
+    if dry_run:
+        log.info("Would run: %s", " ".join(cmd))
+        return
+
+    subprocess.run(cmd)
+    os.remove(tile_list)
+
+
+def clean_empty_dirs(expire_dir: Path, dry_run: bool):
+    log.info("Cleaning empty directories in %s", expire_dir)
+    if dry_run:
+        return
+    for path in expire_dir.iterdir():
+        if path.is_dir() and not any(path.iterdir()):
+            print("Removing directory", path)
+            path.rmdir()
+
+
+@click.command()
+@click.argument("expire_dir")
+@click.option("--tegola-config", default="/etc/tegola/config.toml")
+@click.option("--dry-run", is_flag=True)
+def main(expire_dir, tegola_config, dry_run):
+    log.info("Starting...")
+    expire_dir = Path(expire_dir)
+
+    path_list = expire_dir.glob("**/*.tiles")
+    for tile_list in path_list:
+        expire(tile_list, tegola_config, dry_run)
+
+    clean_empty_dirs(expire_dir, dry_run)
+
+    log.info("Watching for new changes...")
+    inotify = InotifyTree(str(expire_dir))
+    event_count = 0
+    for _, type_names, path, filename in inotify.event_gen(yield_nones=False):
+        if not ("IN_CLOSE_WRITE" in type_names and filename.endswith(".tiles")):
+            continue
+
+        log.debug("Received IN_CLOSE_WRITE for tile file %s, path %s", filename, path)
+
+        expire(Path(path) / filename, tegola_config, dry_run)
+
+        # Cleanup empty dirs on every 10th event
+        if event_count % 10 == 0:
+            clean_empty_dirs(expire_dir, dry_run)
+        event_count += 1
+
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.DEBUG)
+    main()

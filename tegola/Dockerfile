@@ -1,3 +1,4 @@
+# Generate the Tegola config and bake it into a container.
 FROM python:3.9-slim AS build
 WORKDIR /app
 COPY . .
