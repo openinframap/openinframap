@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'tegola/**'
-      - '.github/workflows/tegola.yml'
+      - '.github/workflows/tileserver.yml'
 
 jobs:
   build:
