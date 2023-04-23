@@ -6,7 +6,6 @@ import os
 import click
 from inotify.adapters import InotifyTree
 import logging
-import time
 
 log = logging.getLogger(__name__)
 
@@ -62,10 +61,11 @@ def main(expire_dir, tegola_config, dry_run):
     inotify = InotifyTree(str(expire_dir))
     event_count = 0
     for _, type_names, path, filename in inotify.event_gen(yield_nones=False):
-        if not ("IN_CLOSE_WRITE" in type_names and filename.endswith(".tiles")):
+        log.info("filename: %s, path: %s, type_names: %s", filename, path, type_names)
+        if not ("IN_MOVED_TO" in type_names and filename.endswith(".tiles")):
             continue
 
-        log.debug("Received IN_CLOSE_WRITE for tile file %s, path %s", filename, path)
+        log.debug("Received IN_MOVED_TO for tile file %s, path %s", filename, path)
 
         expire(Path(path) / filename, tegola_config, dry_run)
 
@@ -76,5 +76,5 @@ def main(expire_dir, tegola_config, dry_run):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     main()
