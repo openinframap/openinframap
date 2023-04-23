@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 def expire(tile_list: Path, tegola_config: str, dry_run: bool):
     log.info("Handling expire for %s", tile_list)
     cmd = [
-        "tegola",
+        "/opt/tegola",
         "cache",
         "purge",
         "tile-list",
