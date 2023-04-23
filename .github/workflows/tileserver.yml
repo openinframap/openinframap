@@ -31,4 +31,4 @@ jobs:
           push: true
           tags: |
             ${{ env.IMAGE }}:${{ github.sha }}-${{ github.run_number }}
-            latest
+            ${{ env.IMAGE }}:latest
