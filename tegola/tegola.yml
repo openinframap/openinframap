@@ -8,10 +8,5 @@ cache:
 providers:
   - name: postgis
     type: mvt_postgis
-    host: 10.43.18.68
-    port: 5432
-    database: osm
-    user: osm
-    password: osm
+    uri: postgres://osm:osm@postgis/osm?pool_max_conns=20
     srid: 3857
-    max_connections: 20
