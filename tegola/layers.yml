@@ -76,7 +76,7 @@ field_sets:
 layers:
   - name: power_line
     geometry_type: LineString
-    field_sets: [geom, name, frequency, wiki, construction]
+    field_sets: [geom, name, frequency, wiki, construction, start_date]
     id_field: osm_id
     fields:
       - name: tunnel
@@ -105,7 +105,7 @@ layers:
   - name: power_tower
     geometry_type: Point
     min_zoom: 13
-    field_sets: [geom, name, construction, url]
+    field_sets: [geom, name, construction, url, start_date]
     id_field: osm_id
     fields:
       - name: transition
@@ -257,7 +257,7 @@ layers:
   - name: power_switch
     geometry_type: Point
     min_zoom: 14
-    field_sets: [geom_centroid, name]
+    field_sets: [geom_centroid, name, start_date]
     fields:
       - name: type
         sql: tags -> 'switch'
