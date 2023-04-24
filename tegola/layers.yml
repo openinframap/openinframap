@@ -152,6 +152,8 @@ layers:
     field_sets: [geom, name, wiki, source, output, construction, url, start_date]
     id_field: osm_id
     fields:
+      - name: method
+        sql: tags -> 'plant:method'
       - name: storage
         sql: tags -> 'plant:storage'
       - name: repd_id
@@ -168,6 +170,8 @@ layers:
     field_sets: [geom_centroid, name, wiki, source, output, construction, url, start_date]
     id_field: osm_id
     fields:
+      - name: method
+        sql: tags -> 'plant:method'
       - name: storage
         sql: tags -> 'plant:storage'
       - name: repd_id
