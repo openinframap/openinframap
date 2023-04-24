@@ -116,6 +116,14 @@ layers:
         sql: tags -> 'transformer'
       - name: substation
         sql: tags -> 'substation'
+      - name: design
+        sql: tags-> 'design'
+      - name: line_attachment
+        sql: tags-> 'line_attachment'
+      - name: line_management
+        sql: tags-> 'line_management'
+      - name: line_arrangement
+        sql: tags-> 'line_arrangement'
     from: osm_power_tower
     where: geometry && !BBOX!
 
