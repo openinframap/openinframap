@@ -66,9 +66,16 @@ field_sets:
   output:
     - name: output
       sql: convert_power(output) / 1e6
-  generator_output:
-    - name: output
+  generator:
+    - name: electrical_output
       sql: convert_power(tags -> 'generator:output:electricity')/1e6
+    - name: method
+      sql: tags -> 'generator:method'
+    - name: type
+      sql: tags -> 'generator:type'
+    - name: plant_role
+      sql: tags -> 'generator:plant'
+
   start_date:
     - name: start_date
       sql: tags->'start_date'
@@ -197,7 +204,7 @@ layers:
   - name: power_generator
     geometry_type: Point
     min_zoom: 9
-    field_sets: [geom_centroid, name, wiki, source, construction, url, generator_output, start_date]
+    field_sets: [geom_centroid, name, wiki, source, construction, url, generator, start_date, frequency]
     id_field: osm_id
     from: osm_power_generator
     where: >
@@ -207,7 +214,7 @@ layers:
   - name: power_generator_area
     geometry_type: Polygon
     min_zoom: 13
-    field_sets: [geom, name, wiki, source, construction, url, generator_output, start_date]
+    field_sets: [geom, name, wiki, source, construction, url, generator, start_date, frequency]
     id_field: osm_id
     from: osm_power_generator
     where: >
