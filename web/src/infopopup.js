@@ -4,6 +4,7 @@ import maplibregl from 'maplibre-gl';
 import titleCase from 'title-case';
 import browserLanguage from 'in-browser-language';
 import { local_name_tags } from './l10n.js';
+import friendlyNames from './friendlynames.js';
 import { el, text, mount, unmount, setChildren, setStyle } from 'redom';
 
 const hidden_keys = [
@@ -129,7 +130,12 @@ class InfoPopup {
     }
 
     if (!title_text) {
-      title_text = feature.layer['id'];
+      const layer_id = feature.layer['id'];
+      if (layer_id in friendlyNames) {
+        title_text = friendlyNames[layer_id];
+      } else {
+        title_text = feature.layer['id'];
+      }
     }
 
     let container = el('div.nameContainer', el('h3', title_text));
