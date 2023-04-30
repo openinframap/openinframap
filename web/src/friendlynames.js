@@ -26,6 +26,8 @@ export default {
     'telecoms_mast': 'Telecoms mast',
     'telecoms_data_center': 'Telecoms building',
     'petroleum_pipeline': 'Pipeline',
+    'petroleum_pipeline_case': 'Pipeline',
+    'petroleum_pipeline_label': 'Pipeline',
     'petroleum_well': 'Well',
     'water_pipeline': 'Water pipeline'
 }
