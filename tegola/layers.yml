@@ -361,7 +361,7 @@ layers:
         'propane', 'condensate', 'butadiene', 'naphtha'
       ) AND construction = ''
       AND ((tags->'usage' IS NOT NULL AND tags->'usage' = 'transmission')
-            OR !ZOOM! > 8
+            OR !ZOOM! > 7
       )
       AND geometry && !BBOX!
       AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
