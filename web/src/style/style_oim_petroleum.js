@@ -62,7 +62,7 @@ const layers = [
     id: 'petroleum_pipeline',
     type: 'line',
     source: 'openinframap',
-    minzoom: 3,
+    minzoom: 2,
     'source-layer': 'petroleum_pipeline',
     paint: {
       'line-color': pipeline_colour,
