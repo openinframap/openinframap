@@ -143,14 +143,17 @@ class KeyControl {
   }
 
   sprite(name, size = 25) {
-    let spriteDiv = el('img.oim-plant-sprite', {
-      src: `/style/sprites/${name}.svg`,
-      height: size,
+    // Is this needed?
+    import(`../icons/${name}.svg`).then((svgUrl) => {
+      let spriteDiv = el("img.oim-plant-sprite", {
+        src: svgUrl.default,
+        height: size,
+      });
+      setStyle(spriteDiv, {
+        "max-width": size + "px",
+      });
+      return spriteDiv;
     });
-    setStyle(spriteDiv, {
-      'max-width': size + 'px',
-    });
-    return spriteDiv;
   }
 
   plantTable() {

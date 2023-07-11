@@ -1,9 +1,9 @@
-@import '~maplibre-gl/dist/maplibre-gl.css';
+@import "maplibre-gl/dist/maplibre-gl.css";
 
 html {
   width: 100%;
   height: 100%;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
 }
 
@@ -33,7 +33,8 @@ header {
   font-size: 13px;
 }
 
-header, .maplibregl-ctrl.maplibregl-ctrl-attrib {
+header,
+.maplibregl-ctrl.maplibregl-ctrl-attrib {
   backdrop-filter: blur(3px) saturate(80%);
 }
 
@@ -85,7 +86,7 @@ a {
 
 canvas:focus {
   /* Remove unnecessary focus border */
-  outline:none;
+  outline: none;
 }
 
 #maptiler-attribution {

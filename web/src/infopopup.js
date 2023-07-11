@@ -1,7 +1,7 @@
 import './infopopup.css';
 
 import maplibregl from 'maplibre-gl';
-import titleCase from 'title-case';
+import { titleCase } from 'title-case';
 import browserLanguage from 'in-browser-language';
 import { local_name_tags } from './l10n.js';
 import friendlyNames from './friendlynames.js';
