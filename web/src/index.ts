@@ -1,9 +1,10 @@
 import "./index.css";
-import "@russss/mapboxgl-layer-switcher/layerswitcher.css";
-import maplibregl from "maplibre-gl";
+import maplibregl, { IControl } from "maplibre-gl";
 
-import LayerSwitcher from "@russss/mapboxgl-layer-switcher";
-import URLHash from "@russss/mapboxgl-layer-switcher/urlhash";
+// @ts-ignore
+import LayerSwitcher from "@russss/maplibregl-layer-switcher";
+// @ts-ignore
+import URLHash from "@russss/maplibregl-layer-switcher/urlhash";
 
 import EditButton from "./editbutton.js";
 import InfoPopup from "./infopopup.js";
@@ -32,18 +33,19 @@ function init() {
 
   maplibregl.setRTLTextPlugin(
     "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js",
-    (err) => {},
+    () => {},
     true // Lazy load the plugin
   );
 
   var oim_layers = style_oim_power.concat(
+    // @ts-ignore
     style_oim_power_heatmap,
     style_oim_petroleum,
     style_oim_telecoms,
     style_oim_water
   );
 
-  oim_layers.sort((a: { [x: string]: number }, b: { [x: string]: number }) => {
+  oim_layers.sort((a, b) => {
     if (a["zorder"] < b["zorder"]) return -1;
     if (a["zorder"] > b["zorder"]) return 1;
     return 0;
@@ -62,6 +64,7 @@ function init() {
   var url_hash = new URLHash(layer_switcher);
   layer_switcher.urlhash = url_hash;
 
+  // @ts-ignore
   map_style.layers = style_base.concat(oim_layers, style_labels);
 
   layer_switcher.setInitialVisibility(map_style);
@@ -103,9 +106,9 @@ function init() {
 
   map.addControl(new maplibregl.ScaleControl({}), "bottom-left");
 
-  map.addControl(new KeyControl(), "top-right");
+  map.addControl(new KeyControl() as unknown as IControl, "top-right");
   map.addControl(layer_switcher, "top-right");
-  map.addControl(new EditButton(), "bottom-right");
+  map.addControl(new EditButton() as unknown as IControl, "bottom-right");
   new InfoPopup(
     oim_layers.map((layer: { [x: string]: any }) => layer["id"]),
     9

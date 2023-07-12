@@ -24,7 +24,7 @@
     "vite": "^4.4.3"
   },
   "dependencies": {
-    "@russss/mapboxgl-layer-switcher": "^1.0.0",
+    "@russss/maplibregl-layer-switcher": "^1.1.0",
     "lodash.invert": "^4.3.0",
     "lodash.isequal": "^4.5.0",
     "lodash.sortby": "^4.7.0",
