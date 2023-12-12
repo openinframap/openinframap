@@ -131,6 +131,8 @@ layers:
         sql: tags-> 'line_management'
       - name: line_arrangement
         sql: tags-> 'line_arrangement'
+      - name: design_ref
+        sql: tags -> 'design:ref'
     from: osm_power_tower
     where: geometry && !BBOX!
 
