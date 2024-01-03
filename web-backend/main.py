@@ -63,7 +63,7 @@ async def about(request):
 @app.route("/about/exports")
 @cache_for(3600)
 async def exports(request):
-    return templates.TemplateResponse("exports.html", {"request": request})
+    return RedirectResponse("https://www.infrageomatics.com/products")
 
 
 @app.route("/copyright")
