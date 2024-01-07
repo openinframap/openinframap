@@ -2,10 +2,11 @@
   "name": "openinframap-web",
   "version": "1.0.0",
   "description": "",
-  "main": "webpack.common.js",
+  "type": "module",
   "scripts": {
-    "start": "webpack-dev-server --open --config webpack.dev.js --mode development --host localhost",
-    "build": "webpack --config webpack.prod.js --mode production"
+    "start": "vite",
+    "dev": "vite",
+    "build": "tsc && vite build"
   },
   "repository": {
     "type": "git",
@@ -18,28 +19,18 @@
   },
   "homepage": "https://github.com/openinframap/web#readme",
   "devDependencies": {
-    "@babel/core": "^7.15.5",
-    "@babel/preset-env": "^7.15.6",
-    "@mapbox/spritezero": "^8.0.0",
-    "babel-loader": "^8.2.2",
-    "copy-webpack-plugin": "^9.0.1",
-    "css-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.3.2",
     "in-browser-language": "^1.0.3",
-    "spritezero-webpack-plugin": "^0.1.1",
-    "style-loader": "^3.2.1",
-    "webpack": "^5.52.1",
-    "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.2.0",
-    "webpack-merge": "^5.8.0"
+    "typescript": "^5.0.2",
+    "vite": "^5.0.11",
+    "vite-plugin-render-svg": "^1.1.1"
   },
   "dependencies": {
-    "@russss/mapboxgl-layer-switcher": "^1.0.0",
+    "@russss/maplibregl-layer-switcher": "^1.1.0",
     "lodash.invert": "^4.3.0",
     "lodash.isequal": "^4.5.0",
     "lodash.sortby": "^4.7.0",
-    "maplibre-gl": "^2.4.0",
-    "redom": "^3.27.1",
-    "title-case": "^2.1.1"
+    "maplibre-gl": "^3.2.0",
+    "redom": "^3.29.1",
+    "title-case": "^3.0.3"
   }
 }

@@ -17,7 +17,6 @@
       "url": "https://openinframap.org/heatmap.json"
     }
   },
-  "sprite": "https://openinframap.org/style/sprite",
   "glyphs": "/fonts/{fontstack}/{range}.pbf",
   "layers": [],
   "id": "openinframap"

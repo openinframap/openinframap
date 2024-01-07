@@ -1,22 +1,24 @@
 import { el } from "redom";
 
 class MapTilerAttribution {
-  onAdd(map) {
+  _map: any;
+  _control!: HTMLElement;
+  onAdd(map: maplibregl.Map) {
     this._map = map;
 
     var img = el(
       "a",
       el("img", {
-        src: "img/maptiler.png"
+        src: "img/maptiler.png",
       }),
       {
         href: "https://www.maptiler.com",
-        target: "_blank"
+        target: "_blank",
       }
     );
 
     this._control = el("div#maptiler-attribution", img, {
-      class: "maplibregl-ctrl"
+      class: "maplibregl-ctrl",
     });
 
     return this._control;
