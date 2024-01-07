@@ -31,12 +31,6 @@ function init() {
   //   mount(document.body, infobox);
   // }
 
-  maplibregl.setRTLTextPlugin(
-    "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js",
-    () => {},
-    true // Lazy load the plugin
-  );
-
   var oim_layers = style_oim_power.concat(
     // @ts-ignore
     style_oim_power_heatmap,
@@ -82,6 +76,7 @@ function init() {
       minZoom: 2,
       maxZoom: 17.9,
       center: [12, 26],
+      localIdeographFontFamily: "'Apple LiSung', 'Noto Sans', 'Noto Sans CJK SC', sans-serif"
     })
   );
 
