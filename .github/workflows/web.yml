@@ -7,9 +7,26 @@ on:
     paths:
       - 'web/**'
       - '.github/workflows/web.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'web/**'
+      - '.github/workflows/web.yml'
 
 jobs:
-  login:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2
+        - name: Install dependencies
+          run: npm ci
+        - name: Run tests
+          run: npm run test
+
+  build:
+    needs: test
+    if: github.ref == 'refs/heads/main'
     env:
       IMAGE: ghcr.io/openinframap/web
     runs-on: ubuntu-latest
