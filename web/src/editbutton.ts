@@ -1,62 +1,67 @@
-import { el, setStyle } from "redom";
+import { IControl } from 'maplibre-gl'
+import { el, setStyle } from 'redom'
 
-class EditButton {
-  _map: any;
-  _control!: HTMLDivElement;
+class EditButton implements IControl {
+  _map: any
+  _control!: HTMLDivElement
   onAdd(map: maplibregl.Map) {
-    this._map = map;
+    this._map = map
 
-    var button = el("button", "Edit in JOSM");
+    const button = el('button', 'Edit in JOSM')
     button.onclick = (ev) => {
-      this._click();
-      ev.preventDefault();
-    };
+      this._click()
+      ev.preventDefault()
+    }
 
-    this._control = el("div", button, {
-      class: "maplibregl-ctrl",
-    });
+    this._control = el('div', button, {
+      class: 'maplibregl-ctrl'
+    })
 
-    map.on("zoomend", () => {
-      this.updateVisibility();
-    });
+    map.on('zoomend', () => {
+      this.updateVisibility()
+    })
 
-    this.updateVisibility();
-    return this._control;
+    this.updateVisibility()
+    return this._control
+  }
+
+  onRemove(): void {
+    this._map = undefined
+    this._control.remove()
   }
 
   updateVisibility() {
     if (this._map.getZoom() > 14) {
-      setStyle(this._control, { display: "block" });
+      setStyle(this._control, { display: 'block' })
     } else {
-      setStyle(this._control, { display: "none" });
+      setStyle(this._control, { display: 'none' })
     }
   }
 
   _getJosmURL() {
-    var url = "http://127.0.0.1:8111/load_and_zoom";
-    var bounds = this._map.getBounds();
+    const url = 'http://127.0.0.1:8111/load_and_zoom'
+    const bounds = this._map.getBounds()
     return (
       url +
-      "?left=" +
+      '?left=' +
       bounds.getWest() +
-      "&right=" +
+      '&right=' +
       bounds.getEast() +
-      "&top=" +
+      '&top=' +
       bounds.getNorth() +
-      "&bottom=" +
+      '&bottom=' +
       bounds.getSouth()
-    );
+    )
   }
 
   _click() {
-    var url = this._getJosmURL();
+    const url = this._getJosmURL()
     fetch(url).catch((error) => {
       alert(
-        "Unable to edit in JOSM - make sure it's running and has remote control enabled.\nError: " +
-          error
-      );
-    });
+        "Unable to edit in JOSM - make sure it's running and has remote control enabled.\nError: " + error
+      )
+    })
   }
 }
 
-export { EditButton as default };
+export { EditButton as default }

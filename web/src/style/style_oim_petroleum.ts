@@ -1,41 +1,47 @@
-import { text_paint, font } from './style_oim_common.js';
+import { ColorSpecification, ExpressionSpecification } from 'maplibre-gl'
+import { text_paint, font } from './common.js'
+import { LayerSpecificationWithZIndex } from './types.ts'
 
-const colour_gas = '#BFBC6B';
-const colour_oil = '#6B6B6B';
-const colour_fuel = '#CC9F83';
-const colour_intermediate = '#78CC9E';
-const colour_hydrogen = '#CC78AB';
-const colour_co2 = '#7885CC';
-const colour_unknown = '#BABABA';
+const colour_gas: ColorSpecification = '#BFBC6B'
+const colour_oil: ColorSpecification = '#6B6B6B'
+const colour_fuel: ColorSpecification = '#CC9F83'
+const colour_intermediate: ColorSpecification = '#78CC9E'
+const colour_hydrogen: ColorSpecification = '#CC78AB'
+const colour_co2: ColorSpecification = '#7885CC'
+const colour_unknown: ColorSpecification = '#BABABA'
 
-const substance = ["coalesce", ["get", "substance"], ["get", "type"], ""];
+const substance: ExpressionSpecification = ['coalesce', ['get', 'substance'], ['get', 'type'], '']
 
-const pipeline_colour = ["match",
+const pipeline_colour: ExpressionSpecification = [
+  'match',
   substance,
-  ['gas', 'natural_gas', 'cng', 'lpg', 'lng'], colour_gas,
-  'oil', colour_oil,
-  'fuel', colour_fuel,
-  ['ngl', 'y-grade', 'hydrocarbons', 'condensate', 'naphtha'], colour_intermediate,
-  'hydrogen', colour_hydrogen,
-  'carbon_dioxide', colour_co2,
+  ['gas', 'natural_gas', 'cng', 'lpg', 'lng'],
+  colour_gas,
+  'oil',
+  colour_oil,
+  'fuel',
+  colour_fuel,
+  ['ngl', 'y-grade', 'hydrocarbons', 'condensate', 'naphtha'],
+  colour_intermediate,
+  'hydrogen',
+  colour_hydrogen,
+  'carbon_dioxide',
+  colour_co2,
   colour_unknown
 ]
 
-const pipeline_label = ["concat",
-  ["case", ["has", "name"], ["get", "name"], ["get", "operator"]],
-  ["case", ["all",
-    ["!=", substance, ""],
-    ['any',
-      ["has", "operator"],
-      ['has', 'name']
-    ]
-  ],
-    ["concat", " (", substance, ")"],
+const pipeline_label: ExpressionSpecification = [
+  'concat',
+  ['case', ['has', 'name'], ['get', 'name'], ['get', 'operator']],
+  [
+    'case',
+    ['all', ['!=', substance, ''], ['any', ['has', 'operator'], ['has', 'name']]],
+    ['concat', ' (', substance, ')'],
     substance
   ]
 ]
 
-const layers = [
+const layers: LayerSpecificationWithZIndex[] = [
   {
     zorder: 0,
     id: 'petroleum_pipeline_case',
@@ -45,17 +51,20 @@ const layers = [
     'source-layer': 'petroleum_pipeline',
     paint: {
       'line-color': '#666666',
-      'line-width': ['interpolate', ['linear'], ['zoom'],
-        8, 1.5,
-        16, ['match', ['get', 'usage'],
-          'transmission', 4,
-          1.5]
-      ],
+      'line-width': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        8,
+        1.5,
+        16,
+        ['match', ['get', 'usage'], 'transmission', 4, 1.5]
+      ]
     },
     layout: {
       'line-cap': 'round',
-      'line-join': 'round',
-    },
+      'line-join': 'round'
+    }
   },
   {
     zorder: 1,
@@ -66,13 +75,16 @@ const layers = [
     'source-layer': 'petroleum_pipeline',
     paint: {
       'line-color': pipeline_colour,
-      'line-width': ['interpolate', ['linear'], ['zoom'],
-        3, 1,
-        16, ['match', ['get', 'usage'],
-          'transmission', 2,
-          1]
+      'line-width': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        3,
+        1,
+        16,
+        ['match', ['get', 'usage'], 'transmission', 2, 1]
       ]
-    },
+    }
   },
   {
     zorder: 100,
@@ -84,8 +96,8 @@ const layers = [
     paint: {
       'fill-opacity': 0.3,
       'fill-color': colour_oil,
-      'fill-outline-color': 'rgba(0, 0, 0, 1)',
-    },
+      'fill-outline-color': 'rgba(0, 0, 0, 1)'
+    }
   },
   {
     zorder: 101,
@@ -98,13 +110,8 @@ const layers = [
       'circle-color': colour_oil,
       'circle-stroke-color': '#666666',
       'circle-stroke-width': 1,
-      'circle-radius': ['interpolate',
-        ['linear'], ['zoom'],
-        10, 1,
-        12, 2,
-        14, 5
-      ],
-    },
+      'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 1, 12, 2, 14, 5]
+    }
   },
   {
     zorder: 500,
@@ -136,9 +143,9 @@ const layers = [
       'text-font': font,
       'text-anchor': 'top',
       'text-offset': [0, 1],
-      'text-size': 11,
+      'text-size': 11
     },
-    paint: text_paint,
+    paint: text_paint
   },
   {
     zorder: 502,
@@ -152,11 +159,11 @@ const layers = [
       'text-font': font,
       'text-anchor': 'top',
       'text-offset': [0, 0.5],
-      'text-size': 10,
+      'text-size': 10
     },
-    paint: text_paint,
-  },
-];
+    paint: text_paint
+  }
+]
 
 export {
   layers as default,
@@ -167,4 +174,4 @@ export {
   colour_hydrogen,
   colour_co2,
   colour_unknown
-};
+}

@@ -1,7 +1,9 @@
-const text_color = 'hsl(0, 0%, 20%)';
-const text_halo_color = 'rgb(242,243,240)';
+import { LayerSpecificationWithZIndex } from './types.ts'
 
-const layers = [
+const text_color = 'hsl(0, 0%, 20%)'
+const text_halo_color = 'rgb(242,243,240)'
+
+const layers: LayerSpecificationWithZIndex[] = [
   {
     id: 'place_suburb',
     type: 'symbol',
@@ -16,15 +18,14 @@ const layers = [
       'text-font': ['Noto Sans Regular'],
       'text-justify': 'center',
       'text-offset': [0.5, 0],
-      'text-size': { base: 1, stops: [[12, 9], [17, 17]] },
-      visibility: 'visible',
+      'text-size': ['interpolate', ['linear'], ['zoom'], 12, 9, 17, 17]
     },
     paint: {
       'text-color': text_color,
       'text-halo-blur': 1,
       'text-halo-color': text_halo_color,
-      'text-halo-width': 2,
-    },
+      'text-halo-width': 2
+    }
   },
   {
     id: 'place_village',
@@ -40,15 +41,14 @@ const layers = [
       'text-font': ['Noto Sans Regular'],
       'text-justify': 'center',
       'text-offset': [0.5, 0.2],
-      'text-size': { base: 1, stops: [[12, 9], [17, 18]] },
-      visibility: 'visible',
+      'text-size': ['interpolate', ['linear'], ['zoom'], 12, 9, 17, 18]
     },
     paint: {
       'text-color': text_color,
       'text-halo-blur': 1,
       'text-halo-color': text_halo_color,
-      'text-halo-width': 2,
-    },
+      'text-halo-width': 2
+    }
   },
   {
     id: 'place_town',
@@ -64,15 +64,14 @@ const layers = [
       'text-font': ['Noto Sans Regular'],
       'text-justify': 'center',
       'text-offset': [0.5, 0.2],
-      'text-size': { base: 1, stops: [[10, 9], [15, 18]] },
-      visibility: 'visible',
+      'text-size': ['interpolate', ['linear'], ['zoom'], 10, 9, 15, 18]
     },
     paint: {
       'text-color': text_color,
       'text-halo-blur': 1,
       'text-halo-color': text_halo_color,
-      'text-halo-width': 2,
-    },
+      'text-halo-width': 2
+    }
   },
   {
     id: 'place_city',
@@ -84,7 +83,7 @@ const layers = [
     filter: [
       'all',
       ['==', '$type', 'Point'],
-      ['all', ['!=', 'capital', 2], ['==', 'class', 'city'], ['>', 'rank', 3]],
+      ['all', ['!=', 'capital', 2], ['==', 'class', 'city'], ['>', 'rank', 3]]
     ],
     layout: {
       'text-anchor': 'center',
@@ -93,14 +92,14 @@ const layers = [
       'text-justify': 'center',
       'text-offset': [0.5, 0.2],
       'text-size': 12,
-      visibility: 'visible',
+      visibility: 'visible'
     },
     paint: {
       'text-color': text_color,
       'text-halo-blur': 1,
       'text-halo-color': text_halo_color,
-      'text-halo-width': 2,
-    },
+      'text-halo-width': 2
+    }
   },
   {
     id: 'place_capital',
@@ -109,11 +108,7 @@ const layers = [
     'source-layer': 'place',
     minzoom: 5.5,
     maxzoom: 12,
-    filter: [
-      'all',
-      ['==', '$type', 'Point'],
-      ['all', ['==', 'capital', 2], ['==', 'class', 'city']],
-    ],
+    filter: ['all', ['==', '$type', 'Point'], ['all', ['==', 'capital', 2], ['==', 'class', 'city']]],
     layout: {
       'text-anchor': 'center',
       'text-field': '{name:latin}\n{name:nonlatin}',
@@ -121,14 +116,14 @@ const layers = [
       'text-justify': 'center',
       'text-offset': [0.5, 0.2],
       'text-size': 14,
-      visibility: 'visible',
+      visibility: 'visible'
     },
     paint: {
       'text-color': text_color,
       'text-halo-blur': 1,
       'text-halo-color': text_halo_color,
-      'text-halo-width': 2,
-    },
+      'text-halo-width': 2
+    }
   },
   {
     id: 'place_city_large',
@@ -140,7 +135,7 @@ const layers = [
     filter: [
       'all',
       ['==', '$type', 'Point'],
-      ['all', ['!=', 'capital', 2], ['<=', 'rank', 3], ['==', 'class', 'city']],
+      ['all', ['!=', 'capital', 2], ['<=', 'rank', 3], ['==', 'class', 'city']]
     ],
     layout: {
       'text-anchor': 'center',
@@ -149,14 +144,14 @@ const layers = [
       'text-justify': 'center',
       'text-offset': [0.5, 0.2],
       'text-size': 14,
-      visibility: 'visible',
+      visibility: 'visible'
     },
     paint: {
       'text-color': text_color,
       'text-halo-blur': 1,
       'text-halo-color': text_halo_color,
-      'text-halo-width': 2,
-    },
+      'text-halo-width': 2
+    }
   },
   {
     id: 'place_state',
@@ -170,14 +165,14 @@ const layers = [
       'text-field': '{name:latin}\n{name:nonlatin}',
       'text-font': ['Noto Sans Regular'],
       'text-size': 15,
-      visibility: 'visible',
+      visibility: 'visible'
     },
     paint: {
       'text-color': text_color,
       'text-halo-blur': 1,
       'text-halo-color': text_halo_color,
-      'text-halo-width': 2,
-    },
+      'text-halo-width': 2
+    }
   },
   {
     id: 'place_country_other',
@@ -185,23 +180,17 @@ const layers = [
     source: 'openmaptiles',
     'source-layer': 'place',
     maxzoom: 8,
-    filter: [
-      'all',
-      ['==', '$type', 'Point'],
-      ['==', 'class', 'country'],
-      ['!has', 'iso_a2'],
-    ],
+    filter: ['all', ['==', '$type', 'Point'], ['==', 'class', 'country'], ['!has', 'iso_a2']],
     layout: {
       'text-field': ['case', ['has', 'name:en'], ['get', 'name:en'], ['get', 'name:latin']],
       'text-font': ['Metropolis Light Italic', 'Noto Sans Regular Italic'],
-      'text-size': { base: 1, stops: [[0, 9], [6, 13]] },
-      visibility: 'visible',
+      'text-size': ['interpolate', ['linear'], ['zoom'], 0, 9, 6, 15]
     },
     paint: {
       'text-color': text_color,
       'text-halo-color': text_halo_color,
-      'text-halo-width': 2,
-    },
+      'text-halo-width': 2
+    }
   },
   {
     id: 'place_country_minor',
@@ -214,19 +203,18 @@ const layers = [
       ['==', '$type', 'Point'],
       ['==', 'class', 'country'],
       ['>=', 'rank', 2],
-      ['has', 'iso_a2'],
+      ['has', 'iso_a2']
     ],
     layout: {
       'text-field': ['case', ['has', 'name:en'], ['get', 'name:en'], ['get', 'name:latin']],
       'text-font': ['Noto Sans Regular'],
-      'text-size': { base: 1, stops: [[0, 10], [6, 12]] },
-      visibility: 'visible',
+      'text-size': ['interpolate', ['linear'], ['zoom'], 0, 10, 6, 12]
     },
     paint: {
       'text-color': text_color,
       'text-halo-color': text_halo_color,
-      'text-halo-width': 2,
-    },
+      'text-halo-width': 2
+    }
   },
   {
     id: 'place_country_major',
@@ -239,21 +227,20 @@ const layers = [
       ['==', '$type', 'Point'],
       ['<=', 'rank', 1],
       ['==', 'class', 'country'],
-      ['has', 'iso_a2'],
+      ['has', 'iso_a2']
     ],
     layout: {
       'text-anchor': 'center',
       'text-field': ['case', ['has', 'name:en'], ['get', 'name:en'], ['get', 'name:latin']],
       'text-font': ['Noto Sans Regular'],
-      'text-size': { base: 1.4, stops: [[0, 10], [3, 12], [4, 14]] },
-      visibility: 'visible',
+      'text-size': ['interpolate', ['linear'], ['zoom'], 0, 10, 3, 12, 4, 14]
     },
     paint: {
       'text-color': text_color,
       'text-halo-color': text_halo_color,
-      'text-halo-width': 2.4,
-    },
-  },
-];
+      'text-halo-width': 2.4
+    }
+  }
+]
 
-export default layers;
+export default layers

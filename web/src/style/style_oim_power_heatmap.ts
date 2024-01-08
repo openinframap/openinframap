@@ -1,16 +1,25 @@
+import { ExpressionSpecification } from 'maplibre-gl'
+import { LayerSpecificationWithZIndex } from './types.ts'
 
-const generator_weight = ['interpolate', 
-  ['linear'], 
-  ['to-number', ['get', 'output']], 
-  0, 0, 
-  70, 0.125,
-  250, 0.25,
-  1000, 0.35,
-  7000, 0.5,
-  14000, 1
-];
+const generator_weight: ExpressionSpecification = [
+  'interpolate',
+  ['linear'],
+  ['to-number', ['get', 'output']],
+  0,
+  0,
+  70,
+  0.125,
+  250,
+  0.25,
+  1000,
+  0.35,
+  7000,
+  0.5,
+  14000,
+  1
+]
 
-const layers = [
+const layers: LayerSpecificationWithZIndex[] = [
   {
     zorder: 162,
     id: 'heatmap_solar',
@@ -43,21 +52,15 @@ const layers = [
         0.9,
         'rgb(189,0,38)',
         1,
-        'rgb(128,0,38)',
+        'rgb(128,0,38)'
       ],
       // Adjust the heatmap radius by zoom level
-      'heatmap-radius': ['interpolate', 
-        ['linear'], ['zoom'], 
-        2, 2, 
-        6, 6,
-        10, 12,
-        12, 20
-    ],
+      'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 2, 2, 6, 6, 10, 12, 12, 20]
     },
     layout: {
-      'visibility': 'none'
-    },
-  },
-];
+      visibility: 'none'
+    }
+  }
+]
 
-export {layers as default};
+export { layers as default }
