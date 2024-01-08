@@ -3,7 +3,7 @@ This is the main repository for [OpenInfraMap](https://openinframap.org).
 
 ## Web frontend
 
-The [web frontend](web) contains the Javascript app, built by Webpack and served as static files.
+The [web frontend](web) contains the web app, written in TypeScript using Maplibre GL JS, and served as static files.
 
 ## Web backend
 
