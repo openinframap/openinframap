@@ -2,28 +2,20 @@ table.item_info th {
 	text-align: left;
 }
 
-.maplibregl-popup {
-  max-width: 350px !important; 
-}
-
-.maplibregl-popup .nameContainer {
-  margin-bottom: 5px;
-}
-
-.maplibregl-popup h3 {
+.oim-info h3 {
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
-.maplibregl-popup h4::before {
+.oim-info h4::before {
   content: "("
 }
 
-.maplibregl-popup h4::after {
+.oim-info h4::after {
   content: ")"
 }
 
-.maplibregl-popup h4 {
+.oim-info h4 {
   font-weight: normal;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -38,6 +30,10 @@ div.ext_link {
   height: 30px;
   width: 30px;
   background-size: 30px 30px;
+}
+
+span.voltages {
+  font-size: 1.05em;
 }
 
 div.wikidata_link {

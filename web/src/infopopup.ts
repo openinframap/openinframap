@@ -18,7 +18,8 @@ const hidden_keys = [
   'is_node',
   'area',
   'gid',
-  'ref_len'
+  'ref_len',
+  'frequency'
 ]
 
 class InfoPopup {
@@ -77,10 +78,7 @@ class InfoPopup {
   }
 
   renderKey(key: string, value: any) {
-    if (hidden_keys.includes(key) || key.startsWith('name_')) {
-      return null
-    }
-    if (!value) {
+    if (hidden_keys.includes(key) || key.startsWith('name_') || key.startsWith('voltage') || !value) {
       return null
     }
 
@@ -143,6 +141,27 @@ class InfoPopup {
     return container
   }
 
+  voltageField(feature: MapGeoJSONFeature): RedomElement {
+    const voltages = new Set(
+      Object.keys(feature.properties)
+        .filter((key) => key.startsWith('voltage'))
+        .map((key) => parseFloat(feature.properties[key]))
+    )
+
+    let text = [...voltages]
+      .sort()
+      .reverse()
+      .map((val) => val.toString())
+      .join('/')
+    text += ' kV'
+
+    if (feature.properties['frequency']) {
+      text += ` ${feature.properties['frequency'].replace(';', '/')} Hz`
+    }
+
+    return el('span.voltages', text)
+  }
+
   popupHtml(feature: MapGeoJSONFeature) {
     const attrs_table = el('table', { class: 'item_info' })
     const renderedProperties = Object.keys(feature.properties)
@@ -151,7 +170,27 @@ class InfoPopup {
       .filter((x) => x !== null) as HTMLTableRowElement[]
     setChildren(attrs_table, renderedProperties)
 
+    console.log(feature.properties)
+
+    const content = el('div', this.nameTags(feature))
+
+    if (feature.properties['voltage']) {
+      mount(content, this.voltageField(feature))
+    }
+
     const links_container = el('div')
+    const wikidata_div = el('div')
+    if (feature.properties['wikidata']) {
+      this.fetch_wikidata(feature.properties['wikidata'], wikidata_div, links_container)
+    } else {
+      const wp_link = this.wp_link(feature.properties['wikipedia'])
+      if (wp_link) {
+        mount(links_container, wp_link)
+      }
+    }
+
+    mount(content, wikidata_div)
+    mount(content, attrs_table)
 
     if (feature.properties['osm_id']) {
       mount(
@@ -163,18 +202,7 @@ class InfoPopup {
         })
       )
     }
-
-    const wikidata_div = el('div')
-    if (feature.properties['wikidata']) {
-      this.fetch_wikidata(feature.properties['wikidata'], wikidata_div, links_container)
-    } else {
-      const wp_link = this.wp_link(feature.properties['wikipedia'])
-      if (wp_link) {
-        mount(links_container, wp_link)
-      }
-    }
-
-    const content = el('div', this.nameTags(feature), links_container, wikidata_div, attrs_table)
+    mount(content, links_container)
 
     if (feature.layer.id.startsWith('power_plant')) {
       mount(
@@ -200,7 +228,9 @@ class InfoPopup {
     this.popup_obj = new maplibregl.Popup()
       .setLngLat(e.lngLat)
       .setDOMContent(this.popupHtml(e.features[0]))
+      .setMaxWidth('350px')
       .addTo(this._map)
+    this.popup_obj.addClassName('oim-info')
   }
 
   fetch_wikidata(id: string, container: RedomElement, links_container: RedomElement) {
