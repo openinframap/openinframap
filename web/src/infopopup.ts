@@ -149,7 +149,7 @@ class InfoPopup {
     )
 
     let text = [...voltages]
-      .sort()
+      .sort((a, b) => a - b)
       .reverse()
       .map((val) => val.toString())
       .join('/')
