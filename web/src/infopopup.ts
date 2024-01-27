@@ -170,8 +170,6 @@ class InfoPopup {
       .filter((x) => x !== null) as HTMLTableRowElement[]
     setChildren(attrs_table, renderedProperties)
 
-    console.log(feature.properties)
-
     const content = el('div', this.nameTags(feature))
 
     if (feature.properties['voltage']) {
