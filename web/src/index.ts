@@ -68,6 +68,11 @@ function init() {
     // map_style['sources']['solar_heatmap']['url'] = 'http://localhost:8081/capabilities/solar_heatmap.json'
   }
 
+  maplibregl.setRTLTextPlugin(
+    'https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.min.js',
+    true // Lazy load the plugin
+  )
+
   const map = new maplibregl.Map(
     url_hash.init({
       container: 'map',
@@ -79,7 +84,9 @@ function init() {
     })
   )
 
-  loadIcons(map)
+  map.on('load', () => {
+    loadIcons(map)
+  })
 
   map.dragRotate.disable()
   map.touchZoomRotate.disableRotation()

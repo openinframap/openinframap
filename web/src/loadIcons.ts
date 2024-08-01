@@ -6,10 +6,7 @@ export default async function loadIcons(map: maplibregl.Map) {
   const icons = manifest[ratio.toString()]
 
   for (const name in icons) {
-    map.loadImage(icons[name], function (error, image) {
-      if (error) throw error
-      if (!image) throw new Error('Image not found')
-      map.addImage(name, image, { pixelRatio: ratio })
-    })
+    const image = await map.loadImage(icons[name])
+    map.addImage(name, image.data, { pixelRatio: ratio })
   }
 }

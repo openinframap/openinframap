@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/openinframap/web#readme",
   "devDependencies": {
-    "@russss/maplibregl-layer-switcher": "^1.2.3",
+    "@russss/maplibregl-layer-switcher": "^1.2.4",
     "@typescript-eslint/eslint-plugin": "^6.18.0",
     "@typescript-eslint/parser": "^6.18.0",
     "eslint-config-prettier": "^9.1.0",
@@ -28,15 +28,15 @@
     "in-browser-language": "^1.0.3",
     "prettier": "^3.1.1",
     "typescript": "^5.0.2",
-    "vite": "^5.0.12",
+    "vite": "^5.3.5",
     "vite-plugin-render-svg": "^1.1.1"
   },
   "dependencies": {
     "lodash.invert": "^4.3.0",
     "lodash.isequal": "^4.5.0",
     "lodash.sortby": "^4.7.0",
-    "maplibre-gl": "^3.6.2",
-    "redom": "^3.29.1",
+    "maplibre-gl": "^4.5.0",
+    "redom": "^4.1.0",
     "title-case": "^3.0.3"
   }
 }
