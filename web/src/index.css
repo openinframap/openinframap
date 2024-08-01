@@ -22,10 +22,10 @@ body,
 header {
   z-index: 2;
   padding: 4px;
-  border-radius: 0px 0px 4px 0px;
+  border-radius: 0px 0px 15px 0px;
   border-right: 1px #eee solid;
   border-bottom: 1px #eee solid;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   top: 0px;
   left: 0px;
   position: absolute;
@@ -37,6 +37,23 @@ header {
   backdrop-filter: blur(3px) saturate(80%);
 }
 
+nav ul {
+  font-size: 1.1em;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li + li::before {
+  content: '|';
+  color: #666;
+  margin-right: 5px;
+}
+
 h1 {
   display: inline;
   margin: 0px;
@@ -45,6 +62,10 @@ h1 {
 
 a {
   color: #333;
+}
+
+a:hover {
+  color: #000;
 }
 
 .infobox {
@@ -75,6 +96,10 @@ a {
 
 .infobox-content {
   clear: both;
+}
+
+.maplibregl-popup-content {
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
 }
 
 canvas:focus {
