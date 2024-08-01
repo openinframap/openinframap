@@ -8,7 +8,7 @@ class EditButton implements IControl {
     this._map = map
 
     const button = el('button', 'Edit in JOSM')
-    button.onclick = (ev) => {
+    button.onclick = (ev: MouseEvent) => {
       this._click()
       ev.preventDefault()
     }
