@@ -25,13 +25,16 @@ table(
             "oil",
             "fracking",
             "oil_storage",
+            "petroleum_terminal",
             "hydrocarbons",
             "oil sands",
             "oil_sands",
             "gas",
+            "gas_storage",
             "natural_gas",
             "wellsite",
             "well_cluster",
+            "refinery"
         ]
     },
     "polygon",
