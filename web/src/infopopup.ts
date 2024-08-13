@@ -78,19 +78,19 @@ class InfoPopup {
     })
   }
 
-  friendlyRender(label: string){
+  friendlyRender(label: string) {
     if (label in friendlyNames) {
       return friendlyNames[label]
     } else {
-      return label;
+      return label
     }
   }
 
-  friendlyIcon(feature: string){
+  friendlyIcon(feature: string) {
     if (feature in friendlyIcons) {
       return friendlyIcons[feature]
     } else {
-      return null;
+      return null
     }
   }
 
@@ -140,13 +140,13 @@ class InfoPopup {
     }
 
     if (!title_text) {
-      title_text = this.friendlyRender(feature.layer['id']);
+      title_text = this.friendlyRender(feature.layer['id'])
     }
 
-    let feature_title = el('h3', title_text);
-    let feature_iconpath = this.friendlyIcon(feature.layer['id']);
-    if (feature_iconpath != null){
-      feature_title = el('h3', el('img', {src: feature_iconpath, height: 35}), title_text);
+    let feature_title = el('h3', title_text)
+    const feature_iconpath = this.friendlyIcon(feature.layer['id'])
+    if (feature_iconpath != null) {
+      feature_title = el('h3', el('img', {src: feature_iconpath, height: 35}), title_text)
     }
 
     const container = el('div.nameContainer', el('h3', feature_title))
