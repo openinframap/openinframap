@@ -6,6 +6,7 @@ import { titleCase } from 'title-case'
 import browserLanguage from 'in-browser-language'
 import { local_name_tags } from './l10n.ts'
 import friendlyNames from './friendlynames.ts'
+import friendlyIcons from './friendlyicons.ts'
 import { el, mount, setChildren, RedomElement } from 'redom'
 
 const hidden_keys = [
@@ -77,6 +78,22 @@ class InfoPopup {
     })
   }
 
+  friendlyRender(label: string){
+    if (label in friendlyNames) {
+      return friendlyNames[label]
+    } else {
+      return label;
+    }
+  }
+
+  friendlyIcon(feature: string){
+    if (feature in friendlyIcons) {
+      return friendlyIcons[feature]
+    } else {
+      return null;
+    }
+  }
+
   renderKey(key: string, value: any) {
     if (hidden_keys.includes(key) || key.startsWith('name_') || key.startsWith('voltage') || !value) {
       return null
@@ -106,7 +123,7 @@ class InfoPopup {
       })
       key = 'Website'
     } else {
-      key = titleCase(key)
+      key = titleCase(this.friendlyRender(key))
     }
 
     return el('tr', el('th', key), el('td', value))
@@ -123,15 +140,16 @@ class InfoPopup {
     }
 
     if (!title_text) {
-      const layer_id = feature.layer['id']
-      if (layer_id in friendlyNames) {
-        title_text = friendlyNames[layer_id]
-      } else {
-        title_text = feature.layer['id']
-      }
+      title_text = this.friendlyRender(feature.layer['id']);
     }
 
-    const container = el('div.nameContainer', el('h3', title_text))
+    let feature_title = el('h3', title_text);
+    let feature_iconpath = this.friendlyIcon(feature.layer['id']);
+    if (feature_iconpath != null){
+      feature_title = el('h3', el('img', {src: feature_iconpath, height: 35}), title_text);
+    }
+
+    const container = el('div.nameContainer', el('h3', feature_title))
 
     // If we're showing a translated name, also show the name tag
     if (feature.properties.name && title_text != feature.properties.name) {
