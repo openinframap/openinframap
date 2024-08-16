@@ -13,7 +13,7 @@ class StaticSitemap(asgi_sitemaps.Sitemap):
     def location(self, item):
         request = Request(scope=self.scope)
         url = request.url_for(item)
-        return URL(url).path
+        return url.path
 
 
 class CountryPageSitemap(asgi_sitemaps.Sitemap):
@@ -23,7 +23,7 @@ class CountryPageSitemap(asgi_sitemaps.Sitemap):
     def location(self, item):
         request = Request(scope=self.scope)
         url = request.url_for("country", country=quote(item))
-        return URL(url).path
+        return url.path
 
 
 sitemap = asgi_sitemaps.SitemapApp(
