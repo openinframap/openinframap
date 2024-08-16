@@ -1,5 +1,6 @@
 import './index.css'
 import maplibregl from 'maplibre-gl'
+import { mount } from 'redom'
 
 import LayerSwitcher from '@russss/maplibregl-layer-switcher'
 import URLHash from '@russss/maplibregl-layer-switcher/urlhash'
@@ -7,6 +8,7 @@ import URLHash from '@russss/maplibregl-layer-switcher/urlhash'
 import EditButton from './editbutton.js'
 import InfoPopup from './infopopup.js'
 import KeyControl from './key/key.js'
+import WarningBox from './warning-box/warning-box.js'
 
 import map_style from './style/style.js'
 import style_base from './style/style_base.js'
@@ -19,16 +21,36 @@ import style_oim_water from './style/style_oim_water.js'
 import loadIcons from './loadIcons.js'
 import { LayerSpecificationWithZIndex } from './style/types.js'
 
+function isWebglSupported() {
+  if (window.WebGLRenderingContext) {
+    const canvas = document.createElement('canvas')
+    try {
+      const context =
+        canvas.getContext('webgl2', { failIfMajorPerformanceCaveat: true }) ||
+        canvas.getContext('webgl', { failIfMajorPerformanceCaveat: true })
+      if (context && typeof context.getParameter == 'function') {
+        return true
+      }
+    } catch (e) {
+      // WebGL is supported, but disabled
+    }
+    return false
+  }
+  // WebGL not supported
+  return false
+}
+
 function init() {
-  // if (!maplibregl.supported({ failIfMajorPerformanceCaveat: true })) {
-  //   const infobox = new InfoBox("Warning");
-  //   infobox.update(
-  //     "Your browser may have performance or functionality issues with OpenInfraMap.<br/>" +
-  //       '<a href="http://webglreport.com">WebGL</a> with hardware acceleration is required for this site ' +
-  //       "to perform well."
-  //   );
-  //   mount(document.body, infobox);
-  // }
+  if (!isWebglSupported()) {
+    const infobox = new WarningBox('Warning')
+    infobox.update(
+      '<p>Your browser may have performance or functionality issues with Open Infrastructure Map.</p>' +
+        '<p><a href="http://webglreport.com">WebGL</a> with hardware acceleration is required for this site ' +
+        'to perform well.</p>' +
+        '<p>If your browser supports WebGL, you may need to disable browser fingerprinting protection for this site.</p>'
+    )
+    mount(document.body, infobox)
+  }
 
   const oim_layers: LayerSpecificationWithZIndex[] = [
     ...style_oim_power,

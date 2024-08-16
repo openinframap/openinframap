@@ -1,0 +1,40 @@
+.infobox-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.infobox {
+  min-width: 60px;
+  max-width: 400px;
+  background-color: white;
+  padding: 5px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+.infobox-header {
+  font-weight: bold;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #bbb;
+  margin-bottom: 4px;
+}
+
+.infobox-header a {
+  cursor: pointer;
+  float: right;
+  margin-top: -3px;
+}
+
+.infobox-content {
+  clear: both;
+  padding: 0px 5px;
+}
