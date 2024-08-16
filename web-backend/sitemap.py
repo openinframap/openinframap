@@ -1,5 +1,4 @@
 import asgi_sitemaps
-from starlette.datastructures import URL
 from starlette.requests import Request
 from urllib.parse import quote
 
