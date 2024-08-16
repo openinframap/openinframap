@@ -1,4 +1,5 @@
 // Map layer names to a descriptive string to show in the infobox
+// These are matched by longest prefix
 const friendlyNames: { [key: string]: string } = {
   power_transformer: 'Transformer',
   power_tower: 'Power tower',
@@ -6,18 +7,11 @@ const friendlyNames: { [key: string]: string } = {
   power_generator: 'Generator',
   power_wind_turbine: 'Wind turbine',
   power_substation: 'Substation',
-  power_substation_point: 'Substation',
   power_switch: 'Switch',
   power_compensator: 'Compensator',
   power_cable: 'Cable',
-  power_line_1: 'Power line',
-  power_line_2: 'Power line',
-  power_line_3: 'Power line',
-  power_line_4: 'Power line',
-  power_line_underground_1: 'Underground power line',
-  power_line_underground_2: 'Underground power line',
-  power_line_underground_3: 'Underground power line',
-  power_line_underground_4: 'Underground power line',
+  power_line: 'Power line',
+  power_line_underground: 'Underground power line',
   power_line_case: 'Underground power line',
   power_line_label: 'Power line',
   power_solar_panel: 'Solar panel',
@@ -26,8 +20,6 @@ const friendlyNames: { [key: string]: string } = {
   telecoms_mast: 'Telecoms mast',
   telecoms_data_center: 'Telecoms building',
   petroleum_pipeline: 'Pipeline',
-  petroleum_pipeline_case: 'Pipeline',
-  petroleum_pipeline_label: 'Pipeline',
   petroleum_well: 'Well',
   water_pipeline: 'Water pipeline'
 }

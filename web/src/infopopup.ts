@@ -79,11 +79,15 @@ class InfoPopup {
   }
 
   friendlyRender(label: string) {
-    if (label in friendlyNames) {
-      return friendlyNames[label]
-    } else {
-      return label
+    let friendlyName = label
+    let prefixLen = 0
+    for (const name in friendlyNames) {
+      if (label.startsWith(name) && name.length > prefixLen) {
+        friendlyName = friendlyNames[name]
+        prefixLen = name.length
+      }
     }
+    return friendlyName
   }
 
   friendlyIcon(feature: string) {
@@ -149,7 +153,7 @@ class InfoPopup {
       feature_title = el('h3', el('img', { src: feature_iconpath, height: 35 }), title_text)
     }
 
-    const container = el('div.nameContainer', el('h3', feature_title))
+    const container = el('div.nameContainer', feature_title)
 
     // If we're showing a translated name, also show the name tag
     if (feature.properties.name && title_text != feature.properties.name) {
