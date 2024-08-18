@@ -224,6 +224,7 @@ async def stats_object(request):
     res = await database.fetch_one(
         """SELECT country_eez."union" FROM power_plant, countries.country_eez WHERE
                 ST_Contains(ST_Transform(country_eez.geom, 3857), geometry)
+                AND country_eez."union" != 'Antarctica'
                 AND power_plant.osm_id = :id""",
         values={"id": id},
     )
