@@ -26,6 +26,10 @@ header {
   flex: 0 0 auto;
 }
 
+p {
+  margin: 0;
+}
+
 h1,
 h2 {
   display: inline;
@@ -44,18 +48,30 @@ h3 {
 }
 
 #content {
-  margin: 0px auto;
+  margin: 1rem auto;
   margin-bottom: 20px;
   padding: 0px 10px;
   max-width: 1100px;
   flex: 1 0 auto;
 }
 
+#content > * + * {
+  margin-block-start: 1rem;
+}
+
 footer {
   flex-shrink: 0;
   padding: 8px 8px;
-  font-size: 0.7em;
+  font-size: 0.8rem;
   background-color: #fafafa;
+}
+
+footer > * + * {
+  margin-block-start: 0.5rem;
+}
+
+footer .copyright {
+  font-size: 0.7rem;
 }
 
 footer,
