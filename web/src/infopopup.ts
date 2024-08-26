@@ -23,6 +23,47 @@ const hidden_keys = [
   'frequency'
 ]
 
+function formatVoltage(value: number | number[]): string {
+  if (!Array.isArray(value)) {
+    value = [value]
+  }
+
+  const formatter = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 })
+
+  let text = [...value]
+    .sort((a, b) => a - b)
+    .reverse()
+    .map((val) => formatter.format(val))
+    .join('/')
+  text += ' kV'
+  return text
+}
+
+function formatFrequency(value: number | number[]): string {
+  if (!Array.isArray(value)) {
+    value = [value]
+  }
+
+  const formatter = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 })
+
+  let text = [...value]
+    .sort((a, b) => a - b)
+    .reverse()
+    .map((val) => formatter.format(val))
+    .join('/')
+  text += ' Hz'
+  return text
+}
+
+function formatPower(value: number): string {
+  const formatter = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 })
+  if (value < 1) {
+    return `${formatter.format(value * 1000)} kW`
+  } else {
+    return `${formatter.format(value)} MW`
+  }
+}
+
 class InfoPopup {
   layers: string[]
   min_zoom: any
@@ -104,16 +145,11 @@ class InfoPopup {
     }
 
     if (key.startsWith('voltage')) {
-      value = `${Number(parseFloat(value).toFixed(2))} kV`
+      value = formatVoltage(value)
     }
 
     if (key == 'output') {
-      const val = parseFloat(value)
-      if (val < 1) {
-        value = `${(val * 1000).toFixed(2)} kW`
-      } else {
-        value = `${val.toFixed(2)} MW`
-      }
+      value = formatPower(parseFloat(value))
     }
 
     if (key == 'frequency' && value == '0') {
@@ -170,15 +206,11 @@ class InfoPopup {
         .map((key) => parseFloat(feature.properties[key]))
     )
 
-    let text = [...voltages]
-      .sort((a, b) => a - b)
-      .reverse()
-      .map((val) => val.toString())
-      .join('/')
-    text += ' kV'
+    let text = formatVoltage(Array.from(voltages))
 
     if (feature.properties['frequency']) {
-      text += ` ${feature.properties['frequency'].replace(';', '/')} Hz`
+      const frequencies = feature.properties.frequency.split(';').map((x: string) => parseFloat(x))
+      text += ` ${formatFrequency(frequencies)}`
     }
 
     return el('span.voltages', text)
