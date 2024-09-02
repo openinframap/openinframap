@@ -9,6 +9,7 @@ const friendlyNames: { [key: string]: string } = {
   power_substation: 'Substation',
   power_switch: 'Switch',
   power_compensator: 'Compensator',
+  power_converter: 'DC converter substation',
   power_cable: 'Cable',
   power_line: 'Power line',
   power_line_underground: 'Underground power line',
