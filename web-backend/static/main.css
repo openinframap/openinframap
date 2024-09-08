@@ -44,7 +44,7 @@ h2 a {
 }
 
 h3 {
-  clear: both;
+  margin-block-end: 0;
 }
 
 #content {
