@@ -101,12 +101,17 @@ layers:
       - name: url
         sql: osm_url(tags)
     from: power_lines(!ZOOM!, !BBOX!)
+    # Note: this layer is a major contributor to tile size so these limits
+    # should be chosen carefully.
+    # The generalised tables used by the power_lines function limit the
+    # voltage to 100kV below zoom level 6. All voltages are available to this query
+    # below that.
     where: >
       ST_Length(geometry) > !PIXEL_WIDTH! / 4 AND
-      (convert_voltage(voltage) > 200000 OR
+      (convert_voltage(voltage) > 199000 OR
         !ZOOM! >= 4 AND convert_voltage(voltage) > 100000 OR
-        !ZOOM! >= 6 AND convert_voltage(voltage) > 30000 OR
-        !ZOOM! >= 7)
+        !ZOOM! >= 6 AND convert_voltage(voltage) > 24000 OR
+        !ZOOM! >= 8)
     order_by: convert_voltage(voltage) ASC NULLS FIRST
 
   - name: power_tower
