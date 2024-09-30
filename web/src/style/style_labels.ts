@@ -197,6 +197,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     type: 'symbol',
     source: 'openmaptiles',
     'source-layer': 'place',
+    minzoom: 3,
     maxzoom: 8,
     filter: [
       'all',
@@ -221,6 +222,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     type: 'symbol',
     source: 'openmaptiles',
     'source-layer': 'place',
+    minzoom: 3,
     maxzoom: 5,
     filter: [
       'all',

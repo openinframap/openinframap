@@ -17,6 +17,7 @@ body,
 
 #container {
   display: block !important;
+  background-color: #223;
 }
 
 header {
