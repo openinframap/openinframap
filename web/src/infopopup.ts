@@ -78,24 +78,23 @@ class InfoPopup {
   add(map: maplibregl.Map) {
     this._map = map
 
-    for (const layer of this.layers) {
-      map.on('click', layer, (e) => {
-        if (this._map.getZoom() > this.min_zoom) {
-          this.popup(e)
-        }
-      })
+    map.on('click', this.layers, (e) => {
+      if (this._map.getZoom() > this.min_zoom) {
+        this.popup(e)
+      }
+    })
 
-      map.on('mouseenter', layer, () => {
-        if (this._map.getZoom() > this.min_zoom) {
-          map.getCanvas().style.cursor = 'pointer'
-        }
-      })
-      map.on('mouseleave', layer, () => {
-        if (this._map.getZoom() > this.min_zoom) {
-          map.getCanvas().style.cursor = ''
-        }
-      })
-    }
+    map.on('mouseenter', this.layers, () => {
+      if (this._map.getZoom() > this.min_zoom) {
+        map.getCanvas().style.cursor = 'pointer'
+      }
+    })
+
+    map.on('mouseleave', this.layers, () => {
+      if (this._map.getZoom() > this.min_zoom) {
+        map.getCanvas().style.cursor = ''
+      }
+    })
   }
 
   osmLink(id: number, is_node: boolean) {
