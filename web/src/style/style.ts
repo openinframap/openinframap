@@ -30,11 +30,11 @@ const style: StyleSpecification = {
     },
     openinframap: {
       type: 'vector',
-      url: 'https://openinframap.org/map.json'
+      url: '/map.json'
     },
     solar_heatmap: {
       type: 'vector',
-      url: 'https://openinframap.org/heatmap.json'
+      url: '/heatmap.json'
     }
   },
   glyphs: '/fonts/{fontstack}/{range}.pbf',

@@ -5,7 +5,6 @@
   "bounds": [-180, -85.0511, 180, 85.0511],
   "center": [0, 0, 0],
   "format": "pbf",
-  "minzoom": 2,
   "maxzoom": 17,
   "tiles": ["https://openinframap.org/tiles/{z}/{x}/{y}.pbf"],
   "vector_layers": [
