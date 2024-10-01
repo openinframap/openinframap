@@ -95,6 +95,12 @@ class InfoPopup {
         map.getCanvas().style.cursor = ''
       }
     })
+
+    map.on('zoom', () => {
+      if (this._map.getZoom() <= this.min_zoom) {
+        this._map.getCanvas().style.cursor = ''
+      }
+    })
   }
 
   osmLink(id: number, is_node: boolean) {
@@ -271,6 +277,7 @@ class InfoPopup {
     if (this.popup_obj && this.popup_obj.isOpen()) {
       this.popup_obj.remove()
     }
+    this._map.getCanvas().style.cursor = ''
 
     if (e.features === undefined || e.features.length == 0) {
       return

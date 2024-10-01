@@ -131,7 +131,7 @@ function init() {
   map.addControl(new EditButton(), 'bottom-right')
   new InfoPopup(
     oim_layers.map((layer: { [x: string]: any }) => layer['id']),
-    9
+    6
   ).add(map)
 }
 
