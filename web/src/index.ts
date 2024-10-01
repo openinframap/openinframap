@@ -100,7 +100,7 @@ function init() {
       container: 'map',
       style: map_style,
       minZoom: 2,
-      maxZoom: 17.9,
+      maxZoom: 20,
       center: [12, 26],
       localIdeographFontFamily: "'Apple LiSung', 'Noto Sans', 'Noto Sans CJK SC', sans-serif"
     })
