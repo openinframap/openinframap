@@ -80,7 +80,7 @@ for layer in config["layers"]:
     for map_name in layer_maps:
         map_layers[map_name].append(
             {
-                "min_zoom": layer.get("min_zoom", 2),
+                "min_zoom": layer.get("min_zoom", 0),
                 "max_zoom": layer.get("max_zoom", 17),
                 "provider_layer": provider_name + "." + layer["name"],
             }
