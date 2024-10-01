@@ -99,10 +99,8 @@ function init() {
     url_hash.init({
       container: 'map',
       style: map_style,
-      // Note: tiles at zoom levels lower than 2 are still required due to how maplibre's globe
-      // rendering works.
-      minZoom: 2,
       maxZoom: 20,
+      zoom: 2,
       center: [12, 26],
       localIdeographFontFamily: "'Apple LiSung', 'Noto Sans', 'Noto Sans CJK SC', sans-serif"
     })
