@@ -287,7 +287,6 @@ layers:
     map: 
       - solar_heatmap
     geometry_type: Point
-    min_zoom: 2
     id_field: mvt_id_field
     fields:
       - name: mvt_id_field
