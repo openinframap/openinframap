@@ -14,6 +14,7 @@ table(
     {
         "power": ["line", "minor_line", "cable", "minor_cable"],
         "construction:power": ["line", "minor_line", "cable", "minor_cable"],
+        "disused:power": ["line", "minor_line", "cable", "minor_cable"],
     },
     "linestring",
     columns=[
@@ -24,7 +25,24 @@ table(
         str_col("frequency"),
         int_col("circuits"),
         str_col("construction:power", "construction"),
+        str_col("disused:power", "disused"),
         bool_col("tunnel"),
+    ],
+)
+
+relation_tables(
+    "power_circuit_relation",
+    {
+        "route": ["power"],
+        "power": ["circuit"],
+        "construction:power": ["circuit"],
+    },
+    relation_types=["route", "power"],
+    relation_columns=[
+        str_col("name"),
+        str_col("voltage"),
+        str_col("frequency"),
+        str_col("construction:power", "construction"),
     ],
 )
 
@@ -49,20 +67,22 @@ table(
     {
         "power": ["tower", "pole", "portal"],
         "construction:power": ["tower", "pole", "portal"],
+        "disused:power": ["tower", "pole", "portal"],
     },
     ["points", "linestrings"],
     columns=[
         type_col,
         bool_col("location:transition", "transition"),
         str_col("construction:power", "construction"),
+        str_col("disused:power", "disused"),
     ],
 )
 
 table(
     "power_substation",
     {
-        "power": ["substation", "sub_station"],
-        "construction:power": ["substation", "sub_station"],
+        "power": ["substation"],
+        "construction:power": ["substation"],
     },
     ["points", "polygons"],
     columns=[
@@ -78,8 +98,8 @@ table(
 relation_tables(
     "power_substation_relation",
     {
-        "power": ["substation", "sub_station"],
-        "construction:power": ["substation", "sub_station"],
+        "power": ["substation"],
+        "construction:power": ["substation"],
     },
     relation_types=["site"],
     relation_columns=[
@@ -116,7 +136,7 @@ table(
     columns=[
         str_col("plant:output:electricity", "output"),
         str_col("plant:source", "source"),
-        str_col("construction_power", "construction"),
+        str_col("construction:power", "construction"),
     ],
 )
 
@@ -127,7 +147,7 @@ relation_tables(
     relation_columns=[
         str_col("plant:output:electricity", "output"),
         str_col("plant:source", "source"),
-        str_col("construction_power", "construction"),
+        str_col("construction:power", "construction"),
     ],
 )
 
@@ -139,7 +159,7 @@ table(
         str_col("generator:source", "source"),
         str_col("generator:method", "method"),
         str_col("generator:type", "type"),
-        str_col("generator:output", "output"), # TODO: should be generator:output:electricity
-        str_col("construction_power", "construction"), # TODO: should be construction:power
+        str_col("generator:output:electricity", "output"),
+        str_col("construction:power", "construction"),
     ],
 )

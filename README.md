@@ -12,8 +12,10 @@ The [web backend](web-backend) serves the [stats pages](https://openinframap.org
 ## OSM Import & Mapping
 
 The mapping file controls how the OSM subset is imported with
-[imposm3](https://imposm.org/docs/imposm3/latest/). It's generated from the files in [mapping](mapping)
+[imposm3](https://imposm.org/docs/imposm3/latest/). It's generated from the files in [imposm](imposm)
 by calling `python3 ./mapping/main.py > ./mapping.json`.
+
+The production server uses the docker container built in this directory.
 
 Changes to the mapping require a re-import of the OpenStreetMap database, which takes
 a while and is currently done very irregularly.
@@ -35,7 +37,7 @@ Imposm runs as a service with the `-expiretiles-dir` option:
 
 The low-zoom layers are seeded daily with:
 
-	/usr/local/bin/tegola cache seed --bounds="-180,-85.0511,180,85.0511" --min-zoom 2 --max-zoom 6 --overwrite --config /home/osm/styles/tegola/config.toml
+	/usr/local/bin/tegola cache seed --bounds="-180,-85.0511,180,85.0511" --max-zoom 6 --overwrite --config /home/osm/styles/tegola/config.toml
 
 Invalidated tiles are removed every minute:
 

@@ -1,4 +1,4 @@
-from funcs import table, type_col
+from funcs import table, type_col, str_col
 
 
 table(
@@ -31,7 +31,33 @@ table(
 
 table(
     "mast",
-    {"man_made": ["mast", "tower", "communications_tower"]},
-    "point",
+    {
+        "man_made": ["mast", "tower", "communications_tower"],
+        "tower:type": ["communication"],
+    },
+    ["points", "polygons"],
     columns=[type_col],
+)
+
+table(
+    "telecom_antenna",
+    {
+        "man_made": ["antenna"],
+    },
+    ["points", "polygons"],
+    columns=[type_col],
+)
+
+table(
+    "utility_pole",
+    {"man_made": ["utility_pole"]},
+    "point",
+    columns=[str_col("utility")],
+)
+
+table(
+    "street_cabinet",
+    {"man_made": ["street_cabinet"]},
+    ["points", "polygons"],
+    columns=[str_col("utility")],
 )

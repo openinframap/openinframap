@@ -1,3 +1,9 @@
+from typing import Any, Optional
+
+
+Mapping = dict[str, list[str]]
+
+
 def col_generator(typ):
     def col_inner(column, name=None):
         if name is None:
@@ -17,8 +23,15 @@ tables = {}
 generalized_tables = {}
 
 
-def table(name, mappings, geom_type, columns=None, tags_from_member=False, **kwargs):
-    assert type(mappings) == dict
+def table(
+    name,
+    mappings: Mapping,
+    geom_type,
+    columns: Optional[list] = None,
+    tags_from_member: bool = False,
+    **kwargs,
+) -> None:
+    assert isinstance(mappings, dict)
     fields = [{"name": "osm_id", "type": "id"}]
 
     if geom_type != "relation":
@@ -26,15 +39,15 @@ def table(name, mappings, geom_type, columns=None, tags_from_member=False, **kwa
 
     fields += columns or []
 
-    tags_field = {"name": "tags", "type": "hstore_tags"}
+    tags_field: dict[str, Any] = {"name": "tags", "type": "hstore_tags"}
     if tags_from_member:
         tags_field["from_member"] = True
 
     fields.append(tags_field)
 
-    data = {"fields": fields}
+    data: dict[str, Any] = {"fields": fields}
 
-    if type(geom_type) == list:
+    if isinstance(geom_type, list):
         data["type_mappings"] = {}
         for typ in geom_type:
             data["type_mappings"][typ] = mappings
@@ -47,7 +60,9 @@ def table(name, mappings, geom_type, columns=None, tags_from_member=False, **kwa
     tables[name] = data
 
 
-def relation_tables(name, mappings, relation_types, relation_columns=None):
+def relation_tables(
+    name: str, mappings: Mapping, relation_types, relation_columns=None
+) -> None:
     table(name, mappings, "relation", relation_columns, relation_types=relation_types)
     table(
         f"{name}_member",
@@ -62,11 +77,8 @@ def relation_tables(name, mappings, relation_types, relation_columns=None):
     )
 
 
-def generalized_table(name, source, tolerance, sql_filter=None):
-    gt = {
-        "source": source,
-        "tolerance": tolerance
-    }
+def generalized_table(name: str, source: str, tolerance, sql_filter=None) -> None:
+    gt = {"source": source, "tolerance": tolerance}
     if sql_filter:
-        gt['sql_filter'] = sql_filter
+        gt["sql_filter"] = sql_filter
     generalized_tables[name] = gt

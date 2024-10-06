@@ -4,6 +4,7 @@ from funcs import tables, generalized_tables
 import power  # noqa
 import telecoms  # noqa
 import petroleum  # noqa
+import water  # noqa
 
 
 data = {
@@ -24,7 +25,6 @@ data = {
             "addr:*",
             "natural",
             "surface",
-            "waterway",
             "oneway",
             "service",
             "wall",
@@ -44,12 +44,10 @@ data = {
             "shop",
             "lit",
             "import",
-            "note",
             "leaf_type",
             "crossing",
             "lacounty:*",
             "osak:*",
-            "water",
             "yh:*",
             "tourism",
             "entrance",
@@ -63,7 +61,7 @@ data = {
         ],
     },
     "tables": tables,
-    "generalized_tables": generalized_tables
+    "generalized_tables": generalized_tables,
 }
 
 print(json.dumps(data, indent=3))

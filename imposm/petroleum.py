@@ -25,22 +25,26 @@ table(
             "oil",
             "fracking",
             "oil_storage",
+            "petroleum_terminal",
             "hydrocarbons",
             "oil sands",
             "oil_sands",
             "gas",
+            "gas_storage",
             "natural_gas",
             "wellsite",
             "well_cluster",
-        ]
+            "refinery",
+        ],
+        "pipeline": ["substation"],
     },
     "polygon",
-    columns=[type_col],
+    columns=[type_col, str_col("name")],
 )
 
 table(
     "pipeline_feature",
-    {"pipeline": ["valve", "substation", "flare"]},
+    {"pipeline": ["valve", "flare"]},
     "point",
     columns=[type_col],
 )
@@ -50,4 +54,10 @@ table(
     {"man_made": ["petroleum_well", "oil_well"]},
     "point",
     columns=[type_col],
+)
+
+table(
+    "offshore_platform",
+    {"man_made": ["offshore_platform"]},
+    ["points", "polygons"],
 )
