@@ -553,7 +553,7 @@ layers:
     map:
       - water
     geometry_type: Polygon
-    min_zoom: 10
+    min_zoom: 4
     id_field: osm_id
     field_sets: [geom, name, wiki, start_date]
     fields:
