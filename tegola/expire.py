@@ -2,6 +2,7 @@
 Watches for expiry files output by Imposm and tells Tegola to purge the affected tiles.
 Expiry files are output by the `-expiretiles-dir` Imposm option.
 """
+
 from pathlib import Path
 import subprocess
 import os
@@ -20,7 +21,7 @@ def expire(tile_list: Path, tegola_config: str, dry_run: bool):
         "cache",
         "purge",
         "tile-list",
-        tile_list,
+        str(tile_list),
         "--config",
         tegola_config,
         "--max-zoom",
