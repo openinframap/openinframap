@@ -576,6 +576,8 @@ layers:
     min_zoom: 10
     id_field: osm_id
     field_sets: [geom, name, wiki, start_date]
+    fields:
+      - name: substance
     from: osm_pumping_station
     where: ST_GeometryType(geometry) IN ('ST_Polygon', 'ST_MultiPolygon') AND geometry && !BBOX!
 
@@ -586,6 +588,8 @@ layers:
     min_zoom: 6
     id_field: osm_id
     field_sets: [geom_centroid, name, wiki, start_date]
+    fields:
+      - name: substance
     from: osm_pumping_station
     where: geometry && !BBOX!
   
