@@ -24,9 +24,7 @@ header {
   z-index: 2;
   padding: 4px;
   border-radius: 0px 0px 15px 0px;
-  border-right: 1px #eee solid;
-  border-bottom: 1px #eee solid;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(240, 240, 240, 0.8);
   top: 0px;
   left: 0px;
   position: absolute;
