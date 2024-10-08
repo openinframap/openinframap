@@ -549,6 +549,18 @@ layers:
     from: osm_wastewater_plant
     where: geometry && !BBOX!
 
+  - name: water_reservoir
+    map:
+      - water
+    geometry_type: Polygon
+    min_zoom: 10
+    id_field: osm_id
+    field_sets: [geom, name, wiki, start_date]
+    fields:
+      - name: type
+    from: osm_water_reservoir
+    where: ST_GeometryType(geometry) IN ('ST_Polygon', 'ST_MultiPolygon') AND geometry && !BBOX!
+
   - name: water_tower
     map:
       - water
