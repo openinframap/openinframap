@@ -82,6 +82,9 @@ field_sets:
 
 layers:
   - name: power_line
+    map:
+      - openinframap
+      - power
     geometry_type: LineString
     field_sets: [geom, name, frequency, wiki, construction, start_date]
     id_field: osm_id
@@ -115,6 +118,9 @@ layers:
     order_by: convert_voltage(voltage) ASC NULLS FIRST
 
   - name: power_tower
+    map:
+      - openinframap
+      - power
     geometry_type: Point
     min_zoom: 13
     field_sets: [geom, name, construction, url, start_date]
@@ -142,6 +148,9 @@ layers:
     where: geometry && !BBOX!
 
   - name: power_substation
+    map:
+      - openinframap
+      - power
     geometry_type: Polygon
     min_zoom: 13
     field_sets: [geom, name, frequency, voltages, construction, wiki, url, start_date]
@@ -153,6 +162,9 @@ layers:
     order_by: convert_voltage(voltage) ASC NULLS FIRST
 
   - name: power_substation_point
+    map:
+      - openinframap
+      - power
     geometry_type: Point
     min_zoom: 5
     field_sets: [geom_centroid, area, name, frequency, voltages, construction, wiki, url, start_date]
@@ -169,6 +181,9 @@ layers:
     order_by: convert_voltage(voltage) ASC NULLS FIRST
 
   - name: power_plant
+    map:
+      - openinframap
+      - power
     geometry_type: Polygon
     min_zoom: 5
     field_sets: [geom, name, wiki, source, output, construction, url, start_date]
@@ -187,6 +202,9 @@ layers:
     order_by: convert_power(output) ASC NULLS FIRST
 
   - name: power_plant_point
+    map:
+      - openinframap
+      - power
     geometry_type: Point
     min_zoom: 5
     field_sets: [geom_centroid, name, wiki, source, output, construction, url, start_date]
@@ -209,6 +227,9 @@ layers:
     order_by: convert_power(output) ASC NULLS FIRST
 
   - name: power_generator
+    map:
+      - openinframap
+      - power
     geometry_type: Point
     min_zoom: 9
     field_sets: [geom_centroid, name, wiki, source, construction, url, generator, start_date, frequency]
@@ -219,6 +240,9 @@ layers:
       geometry && !BBOX!
 
   - name: power_generator_area
+    map:
+      - openinframap
+      - power
     geometry_type: Polygon
     min_zoom: 13
     field_sets: [geom, name, wiki, source, construction, url, generator, start_date, frequency]
@@ -231,6 +255,9 @@ layers:
       geometry && !BBOX!
 
   - name: power_transformer
+    map:
+      - openinframap
+      - power
     geometry_type: Point
     min_zoom: 14
     field_sets: [geom_centroid, name, start_date, frequency]
@@ -254,6 +281,9 @@ layers:
     where: type = 'transformer' AND geometry && !BBOX!
 
   - name: power_compensator
+    map:
+      - openinframap
+      - power
     geometry_type: Point
     min_zoom: 14
     field_sets: [geom_centroid, name, start_date]
@@ -269,6 +299,9 @@ layers:
     where: type = 'compensator' AND geometry && !BBOX!
 
   - name: power_switch
+    map:
+      - openinframap
+      - power
     geometry_type: Point
     min_zoom: 14
     field_sets: [geom_centroid, name, start_date]
@@ -311,6 +344,9 @@ layers:
       GROUP BY geom
 
   - name: telecoms_communication_line
+    map:
+      - openinframap
+      - telecoms
     geometry_type: LineString
     id_field: osm_id
     min_zoom: 2
@@ -325,14 +361,34 @@ layers:
       AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
 
   - name: telecoms_data_center
+    map:
+      - openinframap
+      - telecoms
     geometry_type: Polygon
     min_zoom: 10
     id_field: osm_id
     field_sets: [geom, name, wiki, start_date]
+    fields:
+      - name: type
+    from: osm_telecom_building
+    where: geometry && !BBOX!
+
+  - name: telecoms_data_center_point
+    map:
+      - telecoms
+    geometry_type: Point
+    min_zoom: 5
+    id_field: osm_id
+    field_sets: [geom_centroid, name, wiki, start_date]
+    fields:
+      - name: type
     from: osm_telecom_building
     where: geometry && !BBOX!
 
   - name: telecoms_mast
+    map:
+      - openinframap
+      - telecoms
     geometry_type: Point
     min_zoom: 10
     id_field: osm_id
@@ -343,7 +399,30 @@ layers:
        OR tags -> 'tower:type' IN ('communication', 'radio', 'antenna'))
       AND geometry && !BBOX!
 
+  - name: telecoms_antenna
+    map:
+      - telecoms
+    geometry_type: Point
+    min_zoom: 10
+    id_field: osm_id
+    field_sets: [geom_centroid, name, wiki, start_date]
+    from: osm_telecom_antenna
+    where: ST_GeometryType(geometry) = 'ST_Point' AND geometry && !BBOX!
+
+  - name: telecoms_cabinet
+    map:
+      - telecoms
+    geometry_type: Point
+    min_zoom: 10
+    id_field: osm_id
+    field_sets: [geom_centroid, name, wiki, start_date]
+    from: osm_street_cabinet
+    where: first_semi(utility) = 'telecom' AND geometry && !BBOX!
+
   - name: petroleum_pipeline
+    map:
+      - openinframap
+      - petroleum
     geometry_type: LineString
     min_zoom: 2
     id_field: osm_id
@@ -373,6 +452,9 @@ layers:
       AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
 
   - name: petroleum_well
+    map:
+      - openinframap
+      - petroleum
     geometry_type: Point
     min_zoom: 10
     id_field: osm_id
@@ -381,6 +463,9 @@ layers:
     where: geometry && !BBOX!
 
   - name: petroleum_site
+    map:
+      - openinframap
+      - petroleum
     geometry_type: Polygon
     min_zoom: 8
     id_field: osm_id
@@ -389,6 +474,9 @@ layers:
     where: geometry && !BBOX!
 
   - name: water_pipeline
+    map:
+      - openinframap
+      - water
     geometry_type: LineString
     min_zoom: 3
     id_field: osm_id
@@ -410,3 +498,103 @@ layers:
         'water', 'hot_water', 'rainwater', 'wastewater', 'sewage',
         'waterwaste', 'steam'
         ) AND geometry && !BBOX! AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
+
+  - name: pressurised_waterway
+    map:
+      - water
+    geometry_type: LineString
+    min_zoom: 3
+    id_field: osm_id
+    field_sets: [geom, name, wiki, start_date]
+    from: osm_pressurised_waterway
+    where: geometry && !BBOX! AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
+
+  - name: water_treatment_plant_polygon
+    map:
+      - water
+    geometry_type: Polygon
+    min_zoom: 10
+    id_field: osm_id
+    field_sets: [geom, name, wiki, start_date]
+    from: osm_water_treatment_plant
+    where: ST_GeometryType(geometry) IN ('ST_Polygon', 'ST_MultiPolygon') AND geometry && !BBOX!
+
+  - name: water_treatment_plant_point
+    map:
+      - water
+    geometry_type: Point
+    min_zoom: 5
+    id_field: osm_id
+    field_sets: [geom_centroid, name, wiki, start_date]
+    from: osm_water_treatment_plant
+    where: geometry && !BBOX!
+
+  - name: wastewater_plant_polygon
+    map:
+      - water
+    geometry_type: Polygon
+    min_zoom: 10
+    id_field: osm_id
+    field_sets: [geom, name, wiki, start_date]
+    from: osm_wastewater_plant
+    where: ST_GeometryType(geometry) IN ('ST_Polygon', 'ST_MultiPolygon') AND geometry && !BBOX!
+
+  - name: wastewater_plant_point
+    map:
+      - water
+    geometry_type: Point
+    min_zoom: 5
+    id_field: osm_id
+    field_sets: [geom_centroid, name, wiki, start_date]
+    from: osm_wastewater_plant
+    where: geometry && !BBOX!
+
+  - name: water_tower
+    map:
+      - water
+    geometry_type: Point
+    min_zoom: 8
+    id_field: osm_id
+    field_sets: [geom_centroid, name, wiki, start_date]
+    from: osm_water_tower
+    where: geometry && !BBOX!
+
+  - name: water_well
+    map:
+      - water
+    geometry_type: Point
+    min_zoom: 8
+    id_field: osm_id
+    field_sets: [geom, name, wiki, start_date]
+    from: osm_water_well
+    where: geometry && !BBOX!
+
+  - name: pumping_station_polygon
+    map:
+      - water
+    geometry_type: Polygon
+    min_zoom: 10
+    id_field: osm_id
+    field_sets: [geom, name, wiki, start_date]
+    from: osm_pumping_station
+    where: ST_GeometryType(geometry) IN ('ST_Polygon', 'ST_MultiPolygon') AND geometry && !BBOX!
+
+  - name: pumping_station_point
+    map:
+      - water
+    geometry_type: Point
+    min_zoom: 6
+    id_field: osm_id
+    field_sets: [geom_centroid, name, wiki, start_date]
+    from: osm_pumping_station
+    where: geometry && !BBOX!
+  
+  - name: water_cabinet
+    map:
+      - water
+    geometry_type: Point
+    min_zoom: 10
+    id_field: osm_id
+    field_sets: [geom_centroid, name, wiki, start_date]
+    from: osm_street_cabinet
+    where: first_semi(utility) IN ('water', 'sewerage') AND geometry && !BBOX!
