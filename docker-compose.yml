@@ -1,0 +1,42 @@
+volumes:
+  postgres_data:
+  imposm_cache:
+  imposm_expiry:
+  imposm_diff:
+
+services:
+  db:
+    image: postgis/postgis:17-3.4-alpine
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./schema/dev-init.sql:/docker-entrypoint-initdb.d/90-dev-init.sql
+      - ./schema/functions.sql:/docker-entrypoint-initdb.d/91-functions.sql
+
+  imposm:
+    build: imposm
+    volumes:
+      - imposm_cache:/imposm-cache
+      - imposm_expiry:/imposm-expiry
+      - imposm_diff:/imposm-diff
+    command:
+      - run
+      - -expiretiles-dir
+      - /imposm-expiry
+      - -cachedir
+      - /imposm-cache
+      - -diffdir
+      - /imposm-diff
+      - -mapping
+      - /mapping.json
+      - -connection
+      - "postgis://osm:osm@db/osm"
+  
+  tegola:
+    build: tegola
+    environment:
+      DB_URI: "postgres://osm:osm@db:5432/osm"
+    ports:
+      - "8080:80"

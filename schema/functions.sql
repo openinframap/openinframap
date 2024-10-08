@@ -1,3 +1,6 @@
+\c osm osm
+
+CREATE EXTENSION IF NOT EXISTS postgis;
 CREATE EXTENSION IF NOT EXISTS intarray;
 CREATE EXTENSION IF NOT EXISTS hstore;
 
@@ -119,7 +122,7 @@ DECLARE
 BEGIN
     parts = string_to_array(a, ';')::INT[];
     parts = array_cat(parts, string_to_array(b, ';')::INT[]);
-    RETURN array_to_string(uniq(sort_desc(parts)), ';');
+    RETURN array_to_string(public.uniq(public.sort_desc(parts)), ';');
 END
 $$ LANGUAGE plpgsql;
 
@@ -249,13 +252,13 @@ $$ LANGUAGE sql;
 
 -- Generate the outline of a distributed power plant
 -- ST_ConcaveHull can fail on some geometries. This function tries it, but falls back to a simple buffer otherwise.
-CREATE OR REPLACE FUNCTION simplify_boundary(g1 geometry)
-    RETURNS geometry
+CREATE OR REPLACE FUNCTION simplify_boundary(g1 public.geometry)
+    RETURNS public.geometry
     LANGUAGE plpgsql
     IMMUTABLE STRICT
     PARALLEL UNSAFE AS $$
 begin
-    return st_buffer(st_concavehull(g1, 0.95), 10);
+    return ST_Buffer(ST_ConcaveHull(g1, 0.95), 10);
 EXCEPTION
     WHEN SQLSTATE 'XX000' THEN
         RETURN st_buffer(g1, 10);

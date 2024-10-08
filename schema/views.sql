@@ -24,7 +24,7 @@ CREATE OR REPLACE VIEW substation AS
                   FROM power_substation_relation;
 
 CREATE MATERIALIZED VIEW power_plant_relation AS
-    SELECT rel.osm_id, simplify_boundary(ST_Collect(mem.geometry)) AS geometry, 
+    SELECT rel.osm_id, ST_Buffer(ST_ConcaveHull(ST_Collect(mem.geometry), 0.95), 10) AS geometry, 
         (rel.tags -> 'name') AS name, rel.output, rel.source, rel.tags, rel.construction
         FROM osm_power_plant_relation as rel, osm_power_plant_relation_member as mem
         WHERE mem.osm_id = rel.osm_id
