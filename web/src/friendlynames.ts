@@ -22,7 +22,10 @@ const friendlyNames: { [key: string]: string } = {
   telecoms_data_center: 'Telecoms building',
   petroleum_pipeline: 'Pipeline',
   petroleum_well: 'Well',
-  water_pipeline: 'Water pipeline'
+  water_pipeline: 'Water pipeline',
+  water_sewage_treatment_plant: 'Sewage treatment plant',
+  water_treatment_plant: 'Water treatment plant',
+  water_pumping_station: 'Pumping station'
 }
 
 export default friendlyNames

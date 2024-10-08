@@ -1,5 +1,8 @@
 import { StyleSpecification } from 'maplibre-gl'
 
+const oim_attribution =
+  '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>, <a href="https://openinframap.org/copyright">OpenInfraMap</a>'
+
 const style: StyleSpecification = {
   version: 8,
   name: 'OpenInfraMap',
@@ -28,13 +31,35 @@ const style: StyleSpecification = {
       maxzoom: 14,
       attribution: '<a href="https://openmaptiles.org/">© OpenMapTiles</a>'
     },
-    openinframap: {
+    power: {
       type: 'vector',
-      url: '/map.json'
+      tiles: ['https://openinframap.org/map/power/{z}/{x}/{y}.pbf'],
+      maxzoom: 17,
+      attribution: oim_attribution
+    },
+    petroleum: {
+      type: 'vector',
+      tiles: ['https://openinframap.org/map/petroleum/{z}/{x}/{y}.pbf'],
+      maxzoom: 17,
+      attribution: oim_attribution
+    },
+    telecoms: {
+      type: 'vector',
+      tiles: ['https://openinframap.org/map/telecoms/{z}/{x}/{y}.pbf'],
+      maxzoom: 17,
+      attribution: oim_attribution
+    },
+    water: {
+      type: 'vector',
+      tiles: ['https://openinframap.org/map/water/{z}/{x}/{y}.pbf'],
+      maxzoom: 17,
+      attribution: oim_attribution
     },
     solar_heatmap: {
       type: 'vector',
-      url: '/heatmap.json'
+      tiles: ['https://openinframap.org/map/solar_heatmap/{z}/{x}/{y}.pbf'],
+      maxzoom: 17,
+      attribution: oim_attribution
     }
   },
   glyphs: '/fonts/{fontstack}/{range}.pbf',

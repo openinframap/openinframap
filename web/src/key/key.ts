@@ -126,7 +126,7 @@ class KeyControl implements IControl {
     pane.appendChild(el('h3', 'Petroleum'))
     mount(pane, this.petroleumTable())
     pane.appendChild(el('h3', 'Water'))
-    mount(pane, this.waterTable())
+    mount(pane, await this.waterTable())
     this._pane = pane
 
     mount(this._container, pane)
@@ -233,12 +233,15 @@ class KeyControl implements IControl {
     return table
   }
 
-  waterTable() {
+  async waterTable() {
     const rows = [
       ['Fresh Water', svgLine(colour_freshwater, line_thickness)],
       ['Hot Water', svgLine(colour_hotwater, line_thickness)],
       ['Steam', svgLine(colour_steam, line_thickness)],
-      ['Wastewater', svgLine(colour_wastewater, line_thickness)]
+      ['Wastewater', svgLine(colour_wastewater, line_thickness)],
+      ['Water Treatment Plant', await this.sprite('water_treatment_plant')],
+      ['Sewage Treatment Plant', await this.sprite('sewage_treatment_plant')],
+      ['Pumping Station', await this.sprite('water_pumping_station')]
     ]
     const table = list('table', Tr)
     table.update(rows)

@@ -7,7 +7,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     zorder: 40,
     id: 'telecoms_line',
     type: 'line',
-    source: 'openinframap',
+    source: 'telecoms',
     minzoom: 2,
     'source-layer': 'telecoms_communication_line',
     paint: {
@@ -20,7 +20,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     zorder: 140,
     id: 'telecoms_data_center',
     type: 'fill',
-    source: 'openinframap',
+    source: 'telecoms',
     minzoom: 10,
     'source-layer': 'telecoms_data_center',
     paint: {
@@ -33,7 +33,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     zorder: 141,
     id: 'telecoms_mast',
     type: 'symbol',
-    source: 'openinframap',
+    source: 'telecoms',
     minzoom: 10,
     'source-layer': 'telecoms_mast',
     paint: text_paint,
@@ -50,9 +50,10 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
+    zorder: 563,
     id: 'telecoms_data_center_symbol',
     type: 'symbol',
-    source: 'openinframap',
+    source: 'telecoms',
     minzoom: 11,
     'source-layer': 'telecoms_data_center',
     paint: text_paint,
@@ -65,9 +66,10 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
+    zorder: 564,
     id: 'telecoms_line_label',
     type: 'symbol',
-    source: 'openinframap',
+    source: 'telecoms',
     minzoom: 9,
     'source-layer': 'telecoms_communication_line',
     paint: text_paint,

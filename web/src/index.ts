@@ -61,7 +61,9 @@ function init() {
   ]
 
   oim_layers.sort((a, b) => {
-    if (!a.zorder || !b.zorder) return 0
+    if (!a.zorder || !b.zorder) {
+      throw new Error('zorder is required for all layers')
+    }
     if (a.zorder < b.zorder) return -1
     if (a.zorder > b.zorder) return 1
     return 0

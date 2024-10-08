@@ -43,10 +43,10 @@ const pipeline_label: ExpressionSpecification = [
 
 const layers: LayerSpecificationWithZIndex[] = [
   {
-    zorder: 0,
+    zorder: 1,
     id: 'petroleum_pipeline_case',
     type: 'line',
-    source: 'openinframap',
+    source: 'petroleum',
     minzoom: 7,
     'source-layer': 'petroleum_pipeline',
     paint: {
@@ -67,10 +67,10 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    zorder: 1,
+    zorder: 2,
     id: 'petroleum_pipeline',
     type: 'line',
-    source: 'openinframap',
+    source: 'petroleum',
     minzoom: 2,
     'source-layer': 'petroleum_pipeline',
     paint: {
@@ -90,7 +90,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     zorder: 100,
     id: 'petroleum_site',
     type: 'fill',
-    source: 'openinframap',
+    source: 'petroleum',
     minzoom: 8,
     'source-layer': 'petroleum_site',
     paint: {
@@ -103,7 +103,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     zorder: 101,
     id: 'petroleum_well',
     type: 'circle',
-    source: 'openinframap',
+    source: 'petroleum',
     minzoom: 10,
     'source-layer': 'petroleum_well',
     paint: {
@@ -117,7 +117,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     zorder: 500,
     id: 'petroleum_pipeline_label',
     type: 'symbol',
-    source: 'openinframap',
+    source: 'petroleum',
     'source-layer': 'petroleum_pipeline',
     minzoom: 12,
     paint: text_paint,
@@ -135,7 +135,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     zorder: 501,
     id: 'petroleum_site_label',
     type: 'symbol',
-    source: 'openinframap',
+    source: 'petroleum',
     'source-layer': 'petroleum_site',
     minzoom: 12,
     layout: {
@@ -151,7 +151,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     zorder: 502,
     id: 'petroleum_well_label',
     type: 'symbol',
-    source: 'openinframap',
+    source: 'petroleum',
     'source-layer': 'petroleum_well',
     minzoom: 13,
     layout: {
