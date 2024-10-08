@@ -723,10 +723,10 @@ const layers: LayerSpecificationWithZIndex[] = [
     zorder: 561,
     id: 'power_line_label',
     type: 'symbol',
-    filter: ['all', power_visible_p],
+    filter: power_visible_p,
     source: 'openinframap',
     'source-layer': 'power_line',
-    minzoom: 11,
+    minzoom: 10,
     paint: text_paint,
     layout: {
       'text-field': line_label,
@@ -742,7 +742,27 @@ const layers: LayerSpecificationWithZIndex[] = [
         ['literal', [0, 1.25]],
         ['literal', [0, 1]]
       ],
-      'text-max-angle': 10
+      'text-max-angle': 15
+    }
+  },
+  {
+    zorder: 561,
+    id: 'power_line_label_low_zoom',
+    type: 'symbol',
+    filter: ['all', power_visible_p, ['any', ['>', ['get', 'voltage'], 350], hvdc_p]],
+    source: 'openinframap',
+    'source-layer': 'power_line',
+    minzoom: 5,
+    maxzoom: 10,
+    paint: text_paint,
+    layout: {
+      'text-field': local_name,
+      'text-font': font,
+      'symbol-placement': 'line',
+      'symbol-spacing': 400,
+      'text-size': ['interpolate', ['linear'], ['zoom'], 5, 9, 10, 13],
+      'text-max-angle': 30,
+      'text-padding': 15
     }
   },
   {
