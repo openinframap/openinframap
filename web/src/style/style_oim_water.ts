@@ -47,6 +47,14 @@ const substance_colour: ExpressionSpecification = [
   '#7B7CBA'
 ]
 
+const reservoir_colour: ExpressionSpecification = [
+  'match',
+  ['get', 'type'],
+  'reservoir_covered',
+  '#8e8e9a',
+  '#3a85d9'
+]
+
 const layers: LayerSpecificationWithZIndex[] = [
   {
     zorder: 19,
@@ -85,6 +93,20 @@ const layers: LayerSpecificationWithZIndex[] = [
       'fill-color': '#7B7CBA',
       'fill-opacity': 0.3,
       'fill-outline-color': 'rgba(0, 0, 0, 1)'
+    }
+  },
+  {
+    zorder: 20,
+    id: 'water_reservoir',
+    type: 'fill',
+    source: 'water',
+    minzoom: 4,
+    'source-layer': 'water_reservoir',
+    paint: {
+      'fill-color': reservoir_colour,
+      'fill-opacity': 1,
+      'fill-outline-color': 'rgba(0, 0, 0, 1)',
+      'fill-antialias': true
     }
   },
   {
@@ -128,6 +150,22 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
+    zorder: 518,
+    id: 'water_reservoir_label',
+    type: 'symbol',
+    source: 'water',
+    'source-layer': 'water_reservoir_point',
+    minzoom: 11,
+    paint: text_paint,
+    layout: {
+      'text-field': ['get', 'name'],
+      'text-font': font,
+      'text-size': ['interpolate', ['linear'], ['zoom'], 11, 9, 18, 17],
+      'text-anchor': 'top',
+      'text-offset': [0, 1]
+    }
+  },
+  {
     zorder: 519,
     id: 'water_pipeline_label',
     type: 'symbol',
@@ -158,8 +196,16 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'pumping_station_point',
     minzoom: 9,
     layout: {
-      'icon-image': 'water_pumping_station',
-      'icon-size': 0.15,
+      'icon-image': [
+        'match',
+        ['get', 'substance'],
+        'water',
+        'water_pumping_station',
+        'sewage',
+        'sewage_pumping_station',
+        'pumping_station'
+      ],
+      'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.08, 12.5, 0.25],
       'text-field': ['step', ['zoom'], '', 10, ['get', 'name']],
       'text-font': font,
       'text-size': ['interpolate', ['linear'], ['zoom'], 11, 10, 18, 16],
@@ -171,7 +217,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: {
       ...text_paint,
       // Control visibility using the opacity property...
-      'icon-opacity': ['step', ['zoom'], 1, 12, ['case', ['get', 'is_node'], 1, 0]]
+      'icon-opacity': ['step', ['zoom'], 1, 13, ['case', ['get', 'is_node'], 1, 0]]
     }
   },
   {

@@ -240,8 +240,10 @@ class KeyControl implements IControl {
       ['Steam', svgLine(colour_steam, line_thickness)],
       ['Wastewater', svgLine(colour_wastewater, line_thickness)],
       ['Water Treatment Plant', await this.sprite('water_treatment_plant')],
+      ['Water Pumping Station', await this.sprite('water_pumping_station')],
       ['Sewage Treatment Plant', await this.sprite('sewage_treatment_plant')],
-      ['Pumping Station', await this.sprite('water_pumping_station')]
+      ['Sewage Pumping Station', await this.sprite('sewage_pumping_station')],
+      ['Pumping Station', await this.sprite('pumping_station')]
     ]
     const table = list('table', Tr)
     table.update(rows)
