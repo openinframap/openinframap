@@ -70,6 +70,18 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
+    zorder: 20,
+    id: 'water_treatment_plant_outline',
+    type: 'line',
+    source: 'water',
+    minzoom: 11,
+    'source-layer': 'water_treatment_plant_polygon',
+    paint: {
+      'line-color': 'rgba(0,0,30,1)',
+      'line-width': ['interpolate', ['linear'], ['zoom'], 11, 0, 18, 3]
+    }
+  },
+  {
     zorder: 19,
     id: 'water_sewage_treatment_plant',
     type: 'fill',
@@ -80,6 +92,18 @@ const layers: LayerSpecificationWithZIndex[] = [
       'fill-color': '#c19653',
       'fill-opacity': 0.3,
       'fill-outline-color': 'rgba(0, 0, 0, 1)'
+    }
+  },
+  {
+    zorder: 20,
+    id: 'water_sewage_treatment_plant_outline',
+    type: 'line',
+    source: 'water',
+    minzoom: 11,
+    'source-layer': 'wastewater_plant_polygon',
+    paint: {
+      'line-color': 'rgba(0,0,30,1)',
+      'line-width': ['interpolate', ['linear'], ['zoom'], 11, 0, 18, 3]
     }
   },
   {
@@ -97,6 +121,18 @@ const layers: LayerSpecificationWithZIndex[] = [
   },
   {
     zorder: 20,
+    id: 'water_pumping_station_outline',
+    type: 'line',
+    source: 'water',
+    minzoom: 10,
+    'source-layer': 'pumping_station_polygon',
+    paint: {
+      'line-color': 'rgba(0,0,30,1)',
+      'line-width': ['interpolate', ['linear'], ['zoom'], 10, 0, 18, 3]
+    }
+  },
+  {
+    zorder: 20,
     id: 'water_reservoir',
     type: 'fill',
     source: 'water',
@@ -104,9 +140,35 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'water_reservoir',
     paint: {
       'fill-color': reservoir_colour,
-      'fill-opacity': 1,
-      'fill-outline-color': 'rgba(0, 0, 0, 1)',
       'fill-antialias': true
+    }
+  },
+  {
+    zorder: 21,
+    id: 'water_reservoir_covered_outline',
+    filter: ['==', ['get', 'type'], 'reservoir_covered'],
+    type: 'line',
+    source: 'water',
+    minzoom: 11,
+    'source-layer': 'water_reservoir',
+    paint: {
+      'line-color': 'rgba(200,200,200,1)',
+      'line-width': ['interpolate', ['linear'], ['zoom'], 11, 2, 18, 20],
+      'line-offset': ['interpolate', ['linear'], ['zoom'], 11, 1, 18, 10],
+      'line-blur': 1
+    }
+  },
+  {
+    zorder: 21,
+    id: 'water_reservoir_outline',
+    filter: ['!=', ['get', 'type'], 'reservoir_covered'],
+    type: 'line',
+    source: 'water',
+    minzoom: 10,
+    'source-layer': 'water_reservoir',
+    paint: {
+      'line-color': 'rgba(80,80,100,1)',
+      'line-width': ['interpolate', ['linear'], ['zoom'], 10, 0, 18, 4]
     }
   },
   {
@@ -118,7 +180,15 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'water_pipeline',
     paint: {
       'line-color': '#777777',
-      'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1.5, 16, 7]
+      'line-width': [
+        'interpolate',
+        ['exponential', 1.2],
+        ['zoom'],
+        3,
+        1,
+        18,
+        ['case', ['==', ['get', 'usage'], 'transmission'], 18, 6]
+      ]
     },
     layout: {
       'line-cap': 'round',
@@ -134,7 +204,15 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'water_pipeline',
     paint: {
       'line-color': substance_colour,
-      'line-width': ['interpolate', ['linear'], ['zoom'], 3, 0.3, 16, 4]
+      'line-width': [
+        'interpolate',
+        ['exponential', 1.2],
+        ['zoom'],
+        3,
+        1,
+        18,
+        ['case', ['==', ['get', 'usage'], 'transmission'], 10, 3]
+      ]
     }
   },
   {
@@ -147,6 +225,20 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: {
       'line-color': substance_colour,
       'line-width': ['interpolate', ['linear'], ['zoom'], 3, 0.3, 16, 4]
+    }
+  },
+  {
+    zorder: 30,
+    id: 'water_well',
+    type: 'circle',
+    source: 'water',
+    minzoom: 8,
+    'source-layer': 'water_well',
+    paint: {
+      'circle-color': '#7B7CBA',
+      'circle-radius': ['interpolate', ['exponential', 1.2], ['zoom'], 8, 1, 19, 14],
+      'circle-stroke-color': 'rgba(0, 0, 0, 1)',
+      'circle-stroke-width': 1
     }
   },
   {

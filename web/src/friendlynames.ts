@@ -25,7 +25,9 @@ const friendlyNames: { [key: string]: string } = {
   water_pipeline: 'Water pipeline',
   water_sewage_treatment_plant: 'Sewage treatment plant',
   water_treatment_plant: 'Water treatment plant',
-  water_pumping_station: 'Pumping station'
+  water_pumping_station: 'Pumping station',
+  water_well: 'Water well',
+  water_reservoir: 'Water reservoir'
 }
 
 export default friendlyNames
