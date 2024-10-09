@@ -10,3 +10,5 @@ GRANT SELECT ON ALL TABLES IN SCHEMA countries TO tegola;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO web_backend;
 GRANT ALL ON SCHEMA countries TO web_backend;
 GRANT SELECT ON ALL TABLES IN SCHEMA countries TO web_backend;
+GRANT ALL ON SCHEMA stats TO web_backend;
+GRANT SELECT ON ALL TABLES IN SCHEMA stats TO web_backend;

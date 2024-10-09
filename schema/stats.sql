@@ -1,3 +1,5 @@
+-- Stats schema used by the web backend:
+
 CREATE SCHEMA stats;
 
 CREATE TABLE stats.power_line (
@@ -28,7 +30,7 @@ CREATE TABLE stats.power_generator (
 
 
 -----------------------------
-
+-- Queries used to update the stats schema:
 
 INSERT INTO stats.power_line (time, country, voltage, length)
 	SELECT now() AS time, country_eez_sub."union" AS country, convert_voltage(voltage)::INTEGER AS voltage,
