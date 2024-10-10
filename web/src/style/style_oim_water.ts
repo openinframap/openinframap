@@ -299,7 +299,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     ],
     iconScale: 0.25,
     iconMinScale: 0.08,
-    iconMaxZoom: 12.5
+    iconMaxZoom: 14.5
   }),
   oimSymbol({
     zorder: 521,
