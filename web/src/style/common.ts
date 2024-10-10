@@ -17,7 +17,14 @@ export const operator_text: ExpressionSpecification = [
   ['zoom'],
   ['get', 'name'],
   14,
-  ['case', ['has', 'operator'], ['concat', ['get', 'name'], ' (', ['get', 'operator'], ')'], ['get', 'name']]
+  [
+    'case',
+    ['all', ['has', 'operator'], ['has', 'name']],
+    ['concat', ['get', 'name'], '\n(', ['get', 'operator'], ')'],
+    ['has', 'operator'],
+    ['get', 'operator'],
+    ['get', 'name']
+  ]
 ]
 
 export const underground_p: ExpressionSpecification = [
@@ -43,11 +50,11 @@ export type OIMSymbolOptions = {
   minZoom: number
   textField: ExpressionSpecification
   textSize?: number
+  textMinZoom: number
+  textOffset?: number
   iconImage: string
   iconScale?: number
-  textMinZoom: number
   iconMaxZoom?: number
-  textOffset?: number
 }
 
 /**

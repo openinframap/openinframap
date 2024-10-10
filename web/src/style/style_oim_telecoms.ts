@@ -49,7 +49,8 @@ const layers: LayerSpecificationWithZIndex[] = [
     textField: operator_text,
     iconImage: 'comms_tower',
     iconMaxZoom: 21,
-    textMinZoom: 12
+    textMinZoom: 12,
+    textOffset: 1.5
   }),
   oimSymbol({
     zorder: 562,
@@ -61,7 +62,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     textField: operator_text,
     iconImage: 'telecom_exchange',
     iconScale: 0.2,
-    textMinZoom: 11,
+    textMinZoom: 11.5,
     iconMaxZoom: 13.5
   }),
   oimSymbol({
