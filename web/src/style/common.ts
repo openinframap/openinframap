@@ -1,4 +1,8 @@
-import { ExpressionSpecification, FilterSpecification } from 'maplibre-gl'
+import {
+  DataDrivenPropertyValueSpecification,
+  ExpressionSpecification,
+  FilterSpecification
+} from 'maplibre-gl'
 import { LayerSpecificationWithZIndex } from './types.ts'
 import { local_name_tags } from '../l10n.ts'
 
@@ -52,8 +56,9 @@ export type OIMSymbolOptions = {
   textSize?: number
   textMinZoom: number
   textOffset?: number
-  iconImage: string
-  iconScale?: number
+  iconImage: ExpressionSpecification | string
+  iconScale?: number // Icon scale at max icon zoom
+  iconMinScale?: number // Icon scale at initial icon zoom
   iconMaxZoom?: number
 }
 
@@ -92,7 +97,7 @@ export function oimSymbol(options: OIMSymbolOptions): LayerSpecificationWithZInd
         ['linear'],
         ['zoom'],
         options.minZoom,
-        iconScale * 0.8,
+        options.iconMinScale || iconScale * 0.8,
         iconMaxZoom,
         iconScale
       ],

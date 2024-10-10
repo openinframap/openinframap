@@ -1,5 +1,5 @@
 import { LayerSpecificationWithZIndex } from './types.ts'
-import { text_paint, font } from './common.js'
+import { text_paint, font, oimSymbol } from './common.js'
 import { ExpressionSpecification } from 'maplibre-gl'
 
 const colour_freshwater = '#7B7CBA'
@@ -280,86 +280,55 @@ const layers: LayerSpecificationWithZIndex[] = [
       'text-max-angle': 10
     }
   },
-  {
+  oimSymbol({
     zorder: 520,
     id: 'water_pumping_station_symbol',
-    type: 'symbol',
     source: 'water',
-    'source-layer': 'pumping_station_point',
-    minzoom: 9,
-    layout: {
-      'icon-image': [
-        'match',
-        ['get', 'substance'],
-        'water',
-        'water_pumping_station',
-        'sewage',
-        'sewage_pumping_station',
-        'pumping_station'
-      ],
-      'icon-size': ['interpolate', ['linear'], ['zoom'], 9, 0.08, 12.5, 0.25],
-      'text-field': ['step', ['zoom'], '', 10, ['get', 'name']],
-      'text-font': font,
-      'text-size': ['interpolate', ['linear'], ['zoom'], 11, 10, 18, 16],
-      'text-anchor': 'top',
-      'text-offset': [0, 1],
-      'icon-allow-overlap': true,
-      'text-optional': true
-    },
-    paint: {
-      ...text_paint,
-      // Control visibility using the opacity property...
-      'icon-opacity': ['step', ['zoom'], 1, 13, ['case', ['get', 'is_node'], 1, 0]]
-    }
-  },
-  {
+    sourceLayer: 'pumping_station_point',
+    minZoom: 9,
+    textField: ['get', 'name'],
+    textMinZoom: 10,
+    iconImage: [
+      'match',
+      ['get', 'substance'],
+      'water',
+      'water_pumping_station',
+      'sewage',
+      'sewage_pumping_station',
+      'pumping_station'
+    ],
+    iconScale: 0.25,
+    iconMinScale: 0.08,
+    iconMaxZoom: 12.5
+  }),
+  oimSymbol({
     zorder: 521,
     id: 'water_treatment_plant_symbol',
-    type: 'symbol',
     source: 'water',
-    'source-layer': 'water_treatment_plant_point',
-    minzoom: 8,
-    layout: {
-      'icon-image': 'water_treatment_plant',
-      'icon-size': ['interpolate', ['linear'], ['zoom'], 8, 0.1, 10, 0.2],
-      'text-field': ['step', ['zoom'], '', 10, ['get', 'name']],
-      'text-font': font,
-      'text-size': ['interpolate', ['linear'], ['zoom'], 11, 10, 18, 16],
-      'text-anchor': 'top',
-      'text-offset': [0, 1],
-      'icon-allow-overlap': true,
-      'text-optional': true
-    },
-    paint: {
-      ...text_paint,
-      // Control visibility using the opacity property...
-      'icon-opacity': ['step', ['zoom'], 1, 12, 0]
-    }
-  },
-  {
+    sourceLayer: 'water_treatment_plant_point',
+    minZoom: 6,
+    textField: ['get', 'name'],
+    textMinZoom: 10,
+    iconImage: 'water_treatment_plant',
+    iconScale: 0.4,
+    iconMinScale: 0.08,
+    iconMaxZoom: 14.5,
+    textOffset: 1.9
+  }),
+  oimSymbol({
     zorder: 522,
     id: 'water_sewage_treatment_plant_symbol',
-    type: 'symbol',
     source: 'water',
-    'source-layer': 'wastewater_plant_point',
-    minzoom: 8,
-    layout: {
-      'icon-image': 'sewage_treatment_plant',
-      'icon-size': ['interpolate', ['linear'], ['zoom'], 8, 0.1, 10, 0.2],
-      'text-field': ['step', ['zoom'], '', 10, ['get', 'name']],
-      'text-font': font,
-      'text-size': ['interpolate', ['linear'], ['zoom'], 11, 10, 18, 16],
-      'text-anchor': 'top',
-      'text-offset': [0, 1],
-      'icon-allow-overlap': true,
-      'text-optional': true
-    },
-    paint: {
-      ...text_paint,
-      // Control visibility using the opacity property...
-      'icon-opacity': ['step', ['zoom'], 1, 12, 0]
-    }
-  }
+    sourceLayer: 'wastewater_plant_point',
+    minZoom: 6,
+    textField: ['step', ['zoom'], '', 10, ['get', 'name']],
+    textMinZoom: 10,
+    iconImage: 'sewage_treatment_plant',
+    iconScale: 0.4,
+    iconMinScale: 0.08,
+    iconMaxZoom: 14.5,
+    textOffset: 1.9
+  })
 ]
 
 export { layers as default, colour_freshwater, colour_wastewater, colour_hotwater, colour_steam }
