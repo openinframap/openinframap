@@ -20,6 +20,8 @@ const friendlyNames: { [key: string]: string } = {
   telecoms_communication_line: 'Telecoms line',
   telecoms_mast: 'Telecoms mast',
   telecoms_data_center: 'Telecoms building',
+  telecoms_exchange: 'Telephone exchange',
+  telecoms_cabinet: 'Telecoms cabinet',
   petroleum_pipeline: 'Pipeline',
   petroleum_well: 'Well',
   water_pipeline: 'Water pipeline',

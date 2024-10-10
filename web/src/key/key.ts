@@ -210,7 +210,9 @@ class KeyControl implements IControl {
     const rows = [
       ['Cable', svgLineFromLayer(comms_layers, 'telecoms_line')],
       ['Tower/Mast', await this.sprite('comms_tower')],
-      ['Datacenter/Exchange', svgRectFromLayer(comms_layers, 'telecoms_data_center')]
+      ['Datacenter', await this.sprite('telecom_datacenter')],
+      ['Exchange', await this.sprite('telecom_exchange')],
+      ['Cabinet', await this.sprite('cabinet')]
     ]
     const table = list('table', Tr)
     table.update(rows)
