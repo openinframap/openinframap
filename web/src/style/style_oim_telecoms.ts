@@ -77,7 +77,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     iconScale: 0.3,
     textMinZoom: 8,
     iconMaxZoom: 13.5,
-    textOffset: 1.7
+    textOffset: 1.9
   }),
   {
     zorder: 564,
