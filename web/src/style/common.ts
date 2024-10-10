@@ -1,8 +1,4 @@
-import {
-  DataDrivenPropertyValueSpecification,
-  ExpressionSpecification,
-  FilterSpecification
-} from 'maplibre-gl'
+import { ExpressionSpecification, FilterSpecification } from 'maplibre-gl'
 import { LayerSpecificationWithZIndex } from './types.ts'
 import { local_name_tags } from '../l10n.ts'
 
