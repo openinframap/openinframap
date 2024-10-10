@@ -253,7 +253,7 @@ function plant_image(): ExpressionSpecification {
   return expr as ExpressionSpecification
 }
 
-const power_line_opacity: ExpressionSpecification = [
+const power_opacity: ExpressionSpecification = [
   'interpolate',
   ['linear'],
   ['zoom'],
@@ -348,7 +348,7 @@ const layers: LayerSpecificationWithZIndex[] = [
       'line-width': voltage_line_thickness,
       'line-dasharray': [3, 2],
       'line-offset': voltage_offset(1),
-      'line-opacity': power_line_opacity
+      'line-opacity': power_opacity
     },
     layout: {
       'line-join': 'round',
@@ -368,7 +368,7 @@ const layers: LayerSpecificationWithZIndex[] = [
       'line-width': voltage_line_thickness,
       'line-dasharray': [3, 2],
       'line-offset': voltage_offset(2),
-      'line-opacity': power_line_opacity
+      'line-opacity': power_opacity
     },
     layout: {
       'line-join': 'round',
@@ -388,7 +388,7 @@ const layers: LayerSpecificationWithZIndex[] = [
       'line-width': voltage_line_thickness,
       'line-dasharray': [3, 2],
       'line-offset': voltage_offset(3),
-      'line-opacity': power_line_opacity
+      'line-opacity': power_opacity
     },
     layout: {
       'line-join': 'round',
@@ -480,7 +480,7 @@ const layers: LayerSpecificationWithZIndex[] = [
       'line-color': voltage_color('voltage'),
       'line-width': voltage_line_thickness,
       'line-offset': voltage_offset(1),
-      'line-opacity': power_line_opacity
+      'line-opacity': power_opacity
     },
     layout: {
       'line-join': 'round',
@@ -499,7 +499,7 @@ const layers: LayerSpecificationWithZIndex[] = [
       'line-color': voltage_color('voltage_2'),
       'line-width': voltage_line_thickness,
       'line-offset': voltage_offset(2),
-      'line-opacity': power_line_opacity
+      'line-opacity': power_opacity
     },
     layout: {
       'line-join': 'round',
@@ -518,7 +518,7 @@ const layers: LayerSpecificationWithZIndex[] = [
       'line-color': voltage_color('voltage_3'),
       'line-width': voltage_line_thickness,
       'line-offset': voltage_offset(3),
-      'line-opacity': power_line_opacity
+      'line-opacity': power_opacity
     },
     layout: {
       'line-join': 'round',
@@ -693,8 +693,8 @@ const layers: LayerSpecificationWithZIndex[] = [
       'circle-color': voltage_color('voltage'),
       'circle-stroke-color': '#555',
       'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 5, 0.1, 8, 0.5, 15, 2],
-      'circle-opacity': power_line_opacity,
-      'circle-stroke-opacity': power_line_opacity
+      'circle-opacity': power_opacity,
+      'circle-stroke-opacity': power_opacity
     }
   },
   {
@@ -838,7 +838,11 @@ const layers: LayerSpecificationWithZIndex[] = [
       ],
       'text-optional': true
     },
-    paint: { ...text_paint, 'text-opacity': ['step', ['zoom'], 0, 7, 1] }
+    paint: {
+      ...text_paint,
+      'text-opacity': ['step', ['zoom'], 0, 7, 1],
+      'icon-opacity': power_opacity
+    }
   },
   {
     zorder: 563,
