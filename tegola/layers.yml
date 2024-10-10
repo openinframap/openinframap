@@ -91,6 +91,7 @@ layers:
     fields:
       - name: tunnel
       - name: location
+      - name: type
       - name: line
       - name: ref_len
         sql: char_length(tags -> 'ref')
