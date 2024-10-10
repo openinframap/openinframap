@@ -1,9 +1,10 @@
 import { ExpressionSpecification, FilterSpecification } from 'maplibre-gl'
 import { LayerSpecificationWithZIndex } from './types.ts'
 import { local_name_tags } from '../l10n.ts'
+import { step, interpolate, literal, get, has, all, any, concat } from './stylehelpers.ts'
 
 export const local_name: ExpressionSpecification = (['coalesce'] as any).concat(
-  local_name_tags.map((tag) => ['get', tag])
+  local_name_tags.map((tag) => get(tag))
 ) as ExpressionSpecification
 
 export const text_paint = {
@@ -12,32 +13,30 @@ export const text_paint = {
   'text-halo-color': 'rgba(230, 230, 230, 1)'
 }
 
-export const operator_text: ExpressionSpecification = [
-  'step',
-  ['zoom'],
-  ['get', 'name'],
-  14,
+export const operator_text: ExpressionSpecification = step(['zoom'], get('name'), [
   [
-    'case',
-    ['all', ['has', 'operator'], ['has', 'name']],
-    ['concat', ['get', 'name'], '\n(', ['get', 'operator'], ')'],
-    ['has', 'operator'],
-    ['get', 'operator'],
-    ['get', 'name']
+    14,
+    [
+      'case',
+      all(has('operator'), has('name')),
+      concat(get('name'), '\n(', get('operator'), ')'),
+      has('operator'),
+      get('operator'),
+      get('name')
+    ]
   ]
-]
+])
 
-export const underground_p: ExpressionSpecification = [
-  'any',
-  ['==', ['get', 'location'], 'underground'],
-  ['==', ['get', 'location'], 'underwater'],
-  ['==', ['get', 'tunnel'], true],
-  [
-    'all', // Power cables are underground by default
-    ['==', ['get', 'type'], 'cable'],
-    ['==', ['get', 'location'], '']
-  ]
-]
+export const underground_p: ExpressionSpecification = any(
+  ['==', get('location'), 'underground'],
+  ['==', get('location'), 'underwater'],
+  ['==', get('tunnel'), true],
+  all(
+    // Power cables are underground by default
+    ['==', get('type'), 'cable'],
+    ['==', get('location'), '']
+  )
+)
 
 export const font = ['Noto Sans Regular']
 
@@ -84,34 +83,41 @@ export function oimSymbol(options: OIMSymbolOptions): LayerSpecificationWithZInd
       // We can't use a step function on the 'text-field' property, because only one zoom-based
       // function can be used per expression, and we might need to use a zoom-based expression
       // to define text.
-      'text-opacity': ['step', ['zoom'], 0, options.textMinZoom, 1]
+      'text-opacity': step(['zoom'], 0, [[options.textMinZoom, 1]])
     },
     layout: {
-      'icon-image': ['step', ['zoom'], options.iconImage, iconMaxZoom, ''],
-      'icon-size': [
-        'interpolate',
-        ['linear'],
+      // Show the icon image up until iconMaxZoom, unless the feature is a node, in which case we continue
+      // to show the icon.
+      'icon-image': step(['zoom'], options.iconImage, [
+        [iconMaxZoom, ['case', get('is_node'), options.iconImage, '']]
+      ]),
+      'icon-size': interpolate(
         ['zoom'],
-        options.minZoom,
-        options.iconMinScale || iconScale * 0.8,
-        iconMaxZoom,
-        iconScale
-      ],
+        [
+          [options.minZoom, options.iconMinScale || iconScale * 0.8],
+          [iconMaxZoom, iconScale]
+        ]
+      ),
       'text-field': options.textField,
       'text-font': font,
-      'text-size': ['interpolate', ['linear'], ['zoom'], options.textMinZoom, textSize * 0.7, 18, textSize],
-      'text-anchor': 'top',
-      'text-offset': [
-        'interpolate',
-        ['linear'],
+      'text-size': interpolate(
         ['zoom'],
-        options.textMinZoom,
-        ['literal', [0, textOffset * 0.8]],
-        iconMaxZoom,
-        ['literal', [0, textOffset]],
-        iconMaxZoom + 2,
-        ['literal', [0, 0]]
-      ],
+        [
+          [options.textMinZoom, textSize * 0.7],
+          [18, textSize]
+        ]
+      ),
+      'text-anchor': 'top',
+      // Increase the textOffset as iconSize increases. Beyond iconMaxZoom, ease the textOffset to 0,
+      // unless the feature is a node, in which case we'll still be showing the icon.
+      'text-offset': interpolate(
+        ['zoom'],
+        [
+          [options.textMinZoom, literal([0, textOffset * 0.8])],
+          [iconMaxZoom, literal([0, textOffset])],
+          [iconMaxZoom + 2, ['case', get('is_node'), literal([0, textOffset]), literal([0, 0])]]
+        ]
+      ),
       'text-optional': true,
       'icon-allow-overlap': true
     }
