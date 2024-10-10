@@ -523,7 +523,7 @@ layers:
     map:
       - water
     geometry_type: Point
-    min_zoom: 5
+    min_zoom: 6
     id_field: osm_id
     field_sets: [geom_centroid, name, wiki, start_date]
     from: osm_water_treatment_plant
@@ -543,7 +543,7 @@ layers:
     map:
       - water
     geometry_type: Point
-    min_zoom: 5
+    min_zoom: 6
     id_field: osm_id
     field_sets: [geom_centroid, name, wiki, start_date]
     from: osm_wastewater_plant
