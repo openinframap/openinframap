@@ -1,6 +1,7 @@
 import { LayerSpecificationWithZIndex } from './types.ts'
 import { text_paint, operator_text, font, oimSymbol } from './common.js'
 import { local_name } from './common.ts'
+import { interpolate, rgb, zoom } from './stylehelpers.ts'
 
 const layers: LayerSpecificationWithZIndex[] = [
   {
@@ -12,7 +13,10 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'telecoms_communication_line',
     paint: {
       'line-color': '#61637A',
-      'line-width': ['interpolate', ['linear'], ['zoom'], 3, 0.3, 11, 2],
+      'line-width': interpolate(zoom, [
+        [3, 0.3],
+        [11, 2]
+      ]),
       'line-dasharray': [3, 2]
     }
   },
@@ -26,7 +30,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: {
       'fill-opacity': 0.3,
       'fill-color': '#7D59AB',
-      'fill-outline-color': 'rgba(0, 0, 0, 1)'
+      'fill-outline-color': rgb(0, 0, 0)
     }
   },
   oimSymbol({

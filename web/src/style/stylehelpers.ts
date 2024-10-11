@@ -133,3 +133,16 @@ export function round(field: ExpressionSpecification, places: number): Expressio
   const pow = Math.pow(10, places)
   return ['/', ['round', ['*', field, pow]], pow]
 }
+
+export function rgb(
+  r: number | ExpressionSpecification,
+  g: number | ExpressionSpecification,
+  b: number | ExpressionSpecification,
+  a: number | ExpressionSpecification | undefined = 1
+): ExpressionSpecification {
+  if (a !== 1) {
+    return ['rgb', r, g, b]
+  } else {
+    return ['rgba', r, g, b, a]
+  }
+}

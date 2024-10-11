@@ -14,7 +14,8 @@ import {
   round,
   literal,
   if_,
-  not
+  not,
+  rgb
 } from './stylehelpers.ts'
 import { LayerSpecificationWithZIndex } from './types.ts'
 import { DataDrivenPropertyValueSpecification, ExpressionSpecification } from 'maplibre-gl'
@@ -147,10 +148,10 @@ const area: ExpressionSpecification = ['to-number', coalesce(get('area'), 0)]
 const substation_visible_p: ExpressionSpecification = all(
   any(
     ['>', voltage, 200],
-    ['all', ['>', voltage, 200], ['>', zoom, 6]],
-    ['all', ['>', voltage, 100], ['>', zoom, 7]],
-    ['all', ['>', voltage, 25], ['>', zoom, 9]],
-    ['all', ['>', voltage, 9], ['>', zoom, 10]],
+    all(['>', voltage, 200], ['>', zoom, 6]),
+    all(['>', voltage, 100], ['>', zoom, 7]),
+    all(['>', voltage, 25], ['>', zoom, 9]),
+    all(['>', voltage, 9], ['>', zoom, 10]),
     ['>', zoom, 11]
   ),
   any(['!=', get('substation'), 'transition'], ['>', zoom, 12])
@@ -232,23 +233,21 @@ const construction_p: ExpressionSpecification = ['get', 'construction']
 
 const construction_label: ExpressionSpecification = ['case', construction_p, ' (under construction) ', '']
 
-const plant_label_visible_p: ExpressionSpecification = [
-  'any',
+const plant_label_visible_p: ExpressionSpecification = any(
   ['>', output, 1000],
-  ['all', ['>', output, 750], ['>', zoom, 5]],
-  ['all', ['>', output, 250], ['>', zoom, 6]],
-  ['all', ['>', output, 100], ['>', zoom, 7]],
-  ['all', ['>', output, 10], ['>', zoom, 9]],
-  ['all', ['>', output, 1], ['>', zoom, 11]],
+  all(['>', output, 750], ['>', zoom, 5]),
+  all(['>', output, 250], ['>', zoom, 6]),
+  all(['>', output, 100], ['>', zoom, 7]),
+  all(['>', output, 10], ['>', zoom, 9]),
+  all(['>', output, 1], ['>', zoom, 11]),
   ['>', zoom, 12]
-]
+)
 
-const pretty_output: ExpressionSpecification = [
-  'case',
+const pretty_output: ExpressionSpecification = if_(
   ['>', output, 1],
   concat(output, ' MW'),
   concat(['round', ['*', output, 1000]], ' kW')
-]
+)
 
 const plant_label: ExpressionSpecification = step(zoom, local_name, [
   [
@@ -264,7 +263,7 @@ const plant_label: ExpressionSpecification = step(zoom, local_name, [
 ])
 
 function plant_image(): ExpressionSpecification {
-  const expr = ['match', ['get', 'source']]
+  const expr = ['match', get('source')]
   for (const [key, value] of Object.entries(plant_types)) {
     expr.push(key, value)
   }
@@ -436,7 +435,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 8,
     'source-layer': 'power_plant',
     paint: {
-      'line-color': 'rgb(80,80,80)',
+      'line-color': rgb(80, 80, 80),
       'line-opacity': 0.4,
       'line-width': 1
     },
@@ -453,7 +452,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 8,
     'source-layer': 'power_plant',
     paint: {
-      'line-color': 'rgb(163,139,16)',
+      'line-color': rgb(163, 139, 16),
       'line-opacity': 0.4,
       'line-width': 1,
       'line-dasharray': [2, 2]
@@ -473,7 +472,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: {
       'fill-opacity': 0.3,
       'fill-color': voltage_color('voltage'),
-      'fill-outline-color': 'rgba(0, 0, 0, 1)'
+      'fill-outline-color': rgb(0, 0, 0)
     }
   },
   {
@@ -482,11 +481,11 @@ const layers: LayerSpecificationWithZIndex[] = [
     type: 'fill',
     source: 'power',
     'source-layer': 'power_generator_area',
-    filter: ['==', ['get', 'source'], 'solar'],
+    filter: ['==', get('source'), 'solar'],
     minzoom: 13,
     paint: {
       'fill-color': '#726BA9',
-      'fill-outline-color': 'rgba(50, 50, 50, 1)'
+      'fill-outline-color': rgb(50, 50, 50)
     }
   },
   {
@@ -495,7 +494,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     type: 'line',
     source: 'power',
     'source-layer': 'power_line',
-    filter: ['all', ['!', underground_p], power_visible_p],
+    filter: all(not(underground_p), power_visible_p),
     minzoom: 0,
     paint: {
       'line-color': voltage_color('voltage'),
@@ -514,7 +513,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     type: 'line',
     source: 'power',
     'source-layer': 'power_line',
-    filter: ['all', ['!', underground_p], power_visible_p, has('voltage_2')],
+    filter: all(not(underground_p), power_visible_p, has('voltage_2')),
     minzoom: multi_voltage_min_zoom,
     paint: {
       'line-color': voltage_color('voltage_2'),
@@ -533,7 +532,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     type: 'line',
     source: 'power',
     'source-layer': 'power_line',
-    filter: ['all', ['!', underground_p], power_visible_p, has('voltage_3')],
+    filter: all(not(underground_p), power_visible_p, has('voltage_3')),
     minzoom: multi_voltage_min_zoom,
     paint: {
       'line-color': voltage_color('voltage_3'),
@@ -601,17 +600,12 @@ const layers: LayerSpecificationWithZIndex[] = [
       ),
       'icon-offset': if_(any(has('transformer'), has('substation')), literal([12, 0]), literal([0, 0])),
       'icon-allow-overlap': true,
-      'icon-size': ['interpolate', ['linear'], zoom, 13, 0.6, 17, 1],
-      'text-field': '{ref}',
+      'icon-size': interpolate(zoom, [
+        [13, 0.6],
+        [17, 1]
+      ]),
+      'text-field': step(zoom, '', [[14, get('ref')]]),
       'text-font': font,
-      'text-size': [
-        'step',
-        // Set visibility by using size
-        zoom,
-        0,
-        14,
-        10
-      ],
       'text-offset': [0, 1.5],
       'text-max-angle': 10
     }
@@ -635,7 +629,10 @@ const layers: LayerSpecificationWithZIndex[] = [
       ),
       'icon-offset': if_(any(has('transformer'), has('substation')), literal([10, 0]), literal([0, 0])),
       'icon-allow-overlap': true,
-      'icon-size': ['interpolate', ['linear'], zoom, 13, 0.2, 17, 0.8],
+      'icon-size': interpolate(zoom, [
+        [13, 0.2],
+        [17, 0.8]
+      ]),
       'text-field': '{ref}',
       'text-font': font,
       'text-size': step(zoom, 10, [[0, 14]]),
@@ -649,16 +646,19 @@ const layers: LayerSpecificationWithZIndex[] = [
     type: 'symbol',
     source: 'power',
     'source-layer': 'power_generator',
-    filter: ['==', ['get', 'source'], 'wind'],
+    filter: ['==', get('source'), 'wind'],
     minzoom: 11,
     paint: text_paint,
     layout: {
       'icon-image': 'power_wind',
       'icon-anchor': 'bottom',
-      'icon-size': ['interpolate', ['linear'], zoom, 11, 0.5, 14, 1],
+      'icon-size': interpolate(zoom, [
+        [11, 0.5],
+        [14, 1]
+      ]),
       'text-field': '{name}',
       'text-font': font,
-      'text-size': ['step', zoom, 0, 12, 9],
+      'text-size': step(zoom, 0, [[12, 9]]),
       'text-offset': [0, 1],
       'text-anchor': 'top'
     }
@@ -669,11 +669,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     type: 'circle',
     source: 'power',
     'source-layer': 'power_generator',
-    //['all',
-    filter: ['==', ['get', 'source'], 'wind'],
-    //      has('output'),
-    //      ['>', ['get', 'output'], 1]
-    //    ],
+    filter: ['==', get('source'), 'wind'],
     minzoom: 9,
     maxzoom: 11,
     paint: {
@@ -694,7 +690,11 @@ const layers: LayerSpecificationWithZIndex[] = [
       'circle-radius': substation_radius,
       'circle-color': voltage_color('voltage'),
       'circle-stroke-color': '#555',
-      'circle-stroke-width': ['interpolate', ['linear'], zoom, 5, 0.1, 8, 0.5, 15, 2],
+      'circle-stroke-width': interpolate(zoom, [
+        [5, 0.1],
+        [8, 0.5],
+        [15, 2]
+      ]),
       'circle-opacity': power_opacity,
       'circle-stroke-opacity': power_opacity
     }
@@ -703,12 +703,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     zorder: 560,
     id: 'power_line_ref',
     type: 'symbol',
-    filter: [
-      'all',
-      power_ref_visible_p,
-      ['!=', ['coalesce', ['get', 'ref'], ''], ''],
-      ['<', ['length', ['get', 'ref']], 5]
-    ],
+    filter: all(power_ref_visible_p, ['!=', coalesce(get('ref'), ''), ''], ['<', ['length', get('ref')], 5]),
     source: 'power',
     'source-layer': 'power_line',
     minzoom: 7,
@@ -735,7 +730,10 @@ const layers: LayerSpecificationWithZIndex[] = [
       'text-font': font,
       'symbol-placement': 'line',
       'symbol-spacing': 400,
-      'text-size': ['interpolate', ['linear'], zoom, 11, 10, 18, 13],
+      'text-size': interpolate(zoom, [
+        [11, 10],
+        [18, 13]
+      ]),
       'text-offset': case_(
         [
           [has('voltage_3'), literal([0, 1.5])],
@@ -761,7 +759,10 @@ const layers: LayerSpecificationWithZIndex[] = [
       'text-font': font,
       'symbol-placement': 'line',
       'symbol-spacing': 400,
-      'text-size': ['interpolate', ['linear'], zoom, 5, 9, 10, 13],
+      'text-size': interpolate(zoom, [
+        [5, 9],
+        [10, 13]
+      ]),
       'text-max-angle': 30,
       'text-padding': 15
     }
@@ -780,7 +781,10 @@ const layers: LayerSpecificationWithZIndex[] = [
       'text-font': font,
       'text-anchor': 'bottom',
       'text-offset': [0, -0.5],
-      'text-size': ['interpolate', ['linear'], zoom, 14, 9, 18, 12],
+      'text-size': interpolate(zoom, [
+        [14, 9],
+        [18, 12]
+      ]),
       'text-max-width': 8
     },
     paint: text_paint
@@ -818,13 +822,16 @@ const layers: LayerSpecificationWithZIndex[] = [
     zorder: 562,
     id: 'power_converter_point',
     type: 'symbol',
-    filter: ['all', converter_p, substation_point_visible_p],
+    filter: all(converter_p, substation_point_visible_p),
     source: 'power',
     'source-layer': 'power_substation_point',
     minzoom: 5.5,
     layout: {
       'icon-image': 'converter',
-      'icon-size': ['interpolate', ['linear'], zoom, 5, 0.4, 9, 1],
+      'icon-size': interpolate(zoom, [
+        [5, 0.4],
+        [9, 1]
+      ]),
       'text-field': substation_label,
       'text-font': font,
       'text-anchor': 'top',
@@ -884,7 +891,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: {
       ...text_paint,
       // Control visibility using the opacity property...
-      'icon-opacity': ['step', zoom, ['case', construction_p, 0.5, 1], 11, 0],
+      'icon-opacity': ['step', zoom, if_(construction_p, 0.5, 1), 11, 0],
       'text-opacity': ['step', zoom, 0, 7, 1]
     }
   }

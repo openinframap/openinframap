@@ -1,6 +1,7 @@
 import { ColorSpecification, ExpressionSpecification } from 'maplibre-gl'
 import { text_paint, font } from './common.js'
 import { LayerSpecificationWithZIndex } from './types.ts'
+import { interpolate, match, coalesce, get, has, concat, if_, zoom, any, all } from './stylehelpers.ts'
 
 const colour_gas: ColorSpecification = '#BFBC6B'
 const colour_oil: ColorSpecification = '#6B6B6B'
@@ -10,36 +11,25 @@ const colour_hydrogen: ColorSpecification = '#CC78AB'
 const colour_co2: ColorSpecification = '#7885CC'
 const colour_unknown: ColorSpecification = '#BABABA'
 
-const substance: ExpressionSpecification = ['coalesce', ['get', 'substance'], ['get', 'type'], '']
+const substance: ExpressionSpecification = coalesce(get('substance'), get('type'), '')
 
-const pipeline_colour: ExpressionSpecification = [
-  'match',
+const pipeline_colour: ExpressionSpecification = match(
   substance,
-  ['gas', 'natural_gas', 'cng', 'lpg', 'lng'],
-  colour_gas,
-  'oil',
-  colour_oil,
-  'fuel',
-  colour_fuel,
-  ['ngl', 'y-grade', 'hydrocarbons', 'condensate', 'naphtha'],
-  colour_intermediate,
-  'hydrogen',
-  colour_hydrogen,
-  'carbon_dioxide',
-  colour_co2,
-  colour_unknown
-]
-
-const pipeline_label: ExpressionSpecification = [
-  'concat',
-  ['case', ['has', 'name'], ['get', 'name'], ['get', 'operator']],
   [
-    'case',
-    ['all', ['!=', substance, ''], ['any', ['has', 'operator'], ['has', 'name']]],
-    ['concat', ' (', substance, ')'],
-    substance
-  ]
-]
+    [['gas', 'natural_gas', 'cng', 'lpg', 'lng'], colour_gas],
+    ['oil', colour_oil],
+    ['fuel', colour_fuel],
+    [['ngl', 'y-grade', 'hydrocarbons', 'condensate', 'naphtha'], colour_intermediate],
+    ['hydrogen', colour_hydrogen],
+    ['carbon_dioxide', colour_co2]
+  ],
+  colour_unknown
+)
+
+const pipeline_label: ExpressionSpecification = concat(
+  if_(has('name'), get('name'), get('operator')),
+  if_(all(['!=', substance, ''], any(has('operator'), has('name'))), concat(' (', substance, ')'), substance)
+)
 
 const layers: LayerSpecificationWithZIndex[] = [
   {
@@ -51,15 +41,10 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'petroleum_pipeline',
     paint: {
       'line-color': '#666666',
-      'line-width': [
-        'interpolate',
-        ['linear'],
-        ['zoom'],
-        8,
-        1.5,
-        16,
-        ['match', ['get', 'usage'], 'transmission', 4, 1.5]
-      ]
+      'line-width': interpolate(zoom, [
+        [8, 1.5],
+        [16, ['match', get('usage'), 'transmission', 4, 1.5]]
+      ])
     },
     layout: {
       'line-cap': 'round',
@@ -75,15 +60,10 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'petroleum_pipeline',
     paint: {
       'line-color': pipeline_colour,
-      'line-width': [
-        'interpolate',
-        ['linear'],
-        ['zoom'],
-        3,
-        1,
-        16,
-        ['match', ['get', 'usage'], 'transmission', 2, 1]
-      ]
+      'line-width': interpolate(zoom, [
+        [3, 1],
+        [16, ['match', get('usage'), 'transmission', 2, 1]]
+      ])
     }
   },
   {
@@ -110,7 +90,11 @@ const layers: LayerSpecificationWithZIndex[] = [
       'circle-color': colour_oil,
       'circle-stroke-color': '#666666',
       'circle-stroke-width': 1,
-      'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 1, 12, 2, 14, 5]
+      'circle-radius': interpolate(zoom, [
+        [10, 1],
+        [12, 2],
+        [14, 5]
+      ])
     }
   },
   {
