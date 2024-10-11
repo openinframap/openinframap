@@ -136,7 +136,7 @@ class KeyControl implements IControl {
     let rows = []
     for (const row of voltage_scale) {
       let label = row[0]?.toString()
-      if (label === null) {
+      if (!label) {
         label = '< 10 kV'
       } else {
         label = `≥ ${label} kV`
