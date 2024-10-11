@@ -290,6 +290,13 @@ const freq: ExpressionSpecification = case_(
   ''
 )
 
+// Render voltage to text in V or kV
+const voltage_label: ExpressionSpecification = if_(
+  ['<', voltage, 1],
+  concat(round(['*', get('voltage'), 1000], 3), ' V'),
+  concat(round(get('voltage'), 3), ' kV')
+)
+
 const line_voltage: ExpressionSpecification = case_(
   [
     [
@@ -307,7 +314,7 @@ const line_voltage: ExpressionSpecification = case_(
       all(has('voltage_2'), ['!=', get('voltage_2'), get('voltage')]),
       concat(round(get('voltage'), 3), '/', round(get('voltage_2'), 3), ' kV')
     ],
-    [has('voltage'), concat(round(get('voltage'), 3), ' kV')]
+    [has('voltage'), voltage_label]
   ],
   ''
 )
@@ -600,7 +607,11 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: text_paint,
     layout: {
       'icon-image': 'power_compensator',
-      'icon-allow-overlap': true
+      'icon-allow-overlap': true,
+      'icon-size': interpolate(zoom, [
+        [14, 0.3],
+        [21, 2]
+      ])
     }
   },
   {
