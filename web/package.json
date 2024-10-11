@@ -7,7 +7,7 @@
     "start": "vite",
     "dev": "vite",
     "build": "tsc && vite build",
-    "test": "eslint . && tsc --noEmit"
+    "test": "eslint ."
   },
   "repository": {
     "type": "git",
