@@ -139,8 +139,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 4,
     'source-layer': 'water_reservoir',
     paint: {
-      'fill-color': reservoir_colour,
-      'fill-antialias': true
+      'fill-color': reservoir_colour
     }
   },
   {
