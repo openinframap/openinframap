@@ -9,6 +9,7 @@ import EditButton from './editbutton.js'
 import InfoPopup from './infopopup.js'
 import KeyControl from './key/key.js'
 import WarningBox from './warning-box/warning-box.js'
+import OpenInfraMapGeocoder from './geocoder.js'
 
 import map_style from './style/style.js'
 import style_base from './style/style_base.js'
@@ -131,6 +132,7 @@ function init() {
   map.addControl(new KeyControl(), 'top-right')
   map.addControl(layer_switcher, 'top-right')
   map.addControl(new EditButton(), 'bottom-right')
+  map.addControl(new OpenInfraMapGeocoder(), 'top-left')
   new InfoPopup(
     oim_layers.map((layer: { [x: string]: any }) => layer['id']),
     6

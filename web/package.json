@@ -32,6 +32,7 @@
     "vite-plugin-render-svg": "^1.1.1"
   },
   "dependencies": {
+    "@opencage/geosearch-core": "^0.1.10",
     "lodash.invert": "^4.3.0",
     "lodash.isequal": "^4.5.0",
     "lodash.sortby": "^4.7.0",

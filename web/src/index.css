@@ -1,5 +1,11 @@
 @import 'maplibre-gl/dist/maplibre-gl.css';
 
+:root {
+  --aa-search-input-height: 33px !important;
+  --aa-input-icon-size: 20px !important;
+  --aa-primary-color-rgb: 100, 100, 100 !important;
+}
+
 html {
   width: 100%;
   height: 100%;
@@ -22,17 +28,15 @@ body,
 
 header {
   z-index: 2;
-  padding: 4px;
+  padding: 0.25rem 0 0.5rem 0.5rem;
   border-radius: 0px 0px 15px 0px;
-  background-color: rgba(240, 240, 240, 0.8);
+  background-color: rgba(250, 250, 250, 0.8);
   top: 0px;
   left: 0px;
+  width: 15rem;
   position: absolute;
   display: block;
   font-size: 13px;
-}
-
-header {
   backdrop-filter: blur(3px) saturate(80%);
 }
 
@@ -57,6 +61,23 @@ h1 {
   display: inline;
   margin: 0px;
   font-size: 18px;
+}
+
+.maplibregl-ctrl-top-left {
+  /* Move control container down to avoid header */
+  top: 60px;
+}
+
+.maplibregl-ctrl-top-left .maplibregl-ctrl {
+  margin: 0.5rem 0 0 0.5rem;
+}
+
+.maplibregl-ctrl-top-right .maplibregl-ctrl {
+  margin: 0.5rem 0.5rem 0 0;
+}
+
+#geo-search {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 2px;
 }
 
 a {
