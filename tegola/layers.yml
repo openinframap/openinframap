@@ -67,7 +67,7 @@ field_sets:
     - name: output
       sql: convert_power(output) / 1e6
   generator:
-    - name: electrical_output
+    - name: output
       sql: convert_power(tags -> 'generator:output:electricity')/1e6
     - name: method
       sql: tags -> 'generator:method'
