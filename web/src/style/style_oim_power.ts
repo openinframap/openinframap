@@ -1,4 +1,4 @@
-import { text_paint, underground_p, font, local_name } from './common.js'
+import { text_paint, underground_p, font, local_name, oimSymbol } from './common.js'
 import {
   all,
   has,
@@ -156,16 +156,15 @@ const substation_visible_p: ExpressionSpecification = all(
     ['>', voltage, 200],
     all(['>', voltage, 200], ['>', zoom, 6]),
     all(['>', voltage, 100], ['>', zoom, 7]),
-    all(['>', voltage, 25], ['>', zoom, 9]),
-    all(['>', voltage, 9], ['>', zoom, 10]),
-    ['>', zoom, 11]
+    all(['>', voltage, 9], ['>', zoom, 9]),
+    ['>', zoom, 10]
   ),
   any(['!=', get('substation'), 'transition'], ['>', zoom, 12])
 )
 
 const substation_radius: ExpressionSpecification = interpolate(zoom, [
   [
-    5,
+    5.5,
     interpolate(voltage, [
       [0, 0],
       [200, 1],
@@ -178,11 +177,10 @@ const substation_radius: ExpressionSpecification = interpolate(zoom, [
       [10, 1],
       [30, 3],
       [100, 4],
-      [300, 6],
       [500, 8]
     ])
   ],
-  [20, 5]
+  [20, 8]
 ])
 
 // Determine the minimum zoom a point is visible at (before it can be seen as an
@@ -702,30 +700,32 @@ const layers: LayerSpecificationWithZIndex[] = [
       'text-max-angle': 10
     }
   },
-  {
+  oimSymbol({
+    zorder: 265,
+    id: 'power_generator_symbol',
+    minZoom: 11,
+    source: 'power',
+    sourceLayer: 'power_generator',
+    filter: all(match(get('source'), [[['wind', 'solar'], false]], true), has('output')),
+    textField: get('name'),
+    iconImage: 'power_generator',
+    textMinZoom: 13,
+    iconScale: 0.3,
+    iconMinScale: 0.1
+  }),
+  oimSymbol({
     zorder: 266,
     id: 'power_wind_turbine',
-    type: 'symbol',
+    minZoom: 11,
     source: 'power',
-    'source-layer': 'power_generator',
+    sourceLayer: 'power_generator',
     filter: ['==', get('source'), 'wind'],
-    minzoom: 11,
-    paint: text_paint,
-    layout: {
-      'icon-image': 'power_wind',
-      'icon-anchor': 'bottom',
-      'icon-size': interpolate(zoom, [
-        [11, 0.5],
-        [21, 3]
-      ]),
-      'icon-allow-overlap': true,
-      'text-field': step(zoom, '', [[12, get('name')]]),
-      'text-font': font,
-      'text-offset': [0, 1],
-      'text-anchor': 'top',
-      'text-optional': true
-    }
-  },
+    textField: get('name'),
+    iconImage: 'power_wind',
+    textMinZoom: 12,
+    iconScale: 2,
+    iconMinScale: 0.5
+  }),
   {
     zorder: 267,
     id: 'power_wind_turbine_point',
@@ -736,7 +736,10 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 9,
     maxzoom: 11,
     paint: {
-      'circle-radius': 1.5,
+      'circle-radius': interpolate(zoom, [
+        [9, 0.5],
+        [11, 2]
+      ]),
       'circle-color': '#444444'
     }
   },
@@ -752,11 +755,11 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: {
       'circle-radius': substation_radius,
       'circle-color': voltage_color('voltage'),
-      'circle-stroke-color': '#333',
+      'circle-stroke-color': ['interpolate-hcl', ['linear'], zoom, 8, '#eee', 12, '#333'],
       'circle-stroke-width': interpolate(zoom, [
-        [5, 0.1],
+        [5, 0],
         [8, 0.5],
-        [15, 2]
+        [20, 2]
       ]),
       'circle-opacity': power_opacity,
       'circle-stroke-opacity': power_opacity
