@@ -731,14 +731,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 13,
     paint: text_paint,
     layout: {
-      'icon-image': case_(
-        [
-          [get('transition'), 'power_tower_transition'],
-          [any(has('transformer'), has('substation')), 'power_tower_transformer']
-        ],
-        'power_tower'
-      ),
-      'icon-offset': if_(any(has('transformer'), has('substation')), literal([12, 0]), literal([0, 0])),
+      'icon-image': case_([[get('transition'), 'power_tower_transition']], 'power_tower'),
       'icon-allow-overlap': true,
       'icon-size': interpolate(
         zoom,
@@ -769,27 +762,68 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 13,
     paint: text_paint,
     layout: {
-      'icon-image': case_(
-        [
-          [get('transition'), 'power_pole_transition'],
-          [any(has('transformer'), has('substation')), 'power_pole_transformer']
-        ],
-        'power_pole'
-      ),
-      'icon-offset': if_(any(has('transformer'), has('substation')), literal([10, 0]), literal([0, 0])),
+      'icon-image': case_([[get('transition'), 'power_pole_transition']], 'power_pole'),
       'icon-allow-overlap': true,
       'icon-size': interpolate(zoom, [
         [13, 0.2],
         [17, 0.8]
       ]),
-      'text-field': '{ref}',
+      'text-field': step(zoom, '', [[15, get('name')]]),
       'text-font': font,
       'text-size': interpolate(zoom, [
         [13, 8],
         [21, 14]
       ]),
-      'text-offset': [0, 1],
-      'text-max-angle': 10
+      'text-offset': interpolate(zoom, [
+        [15, literal([0, 2.5])],
+        [21, literal([0, 4])]
+      ]),
+      'text-max-angle': 10,
+      'text-optional': true
+    }
+  },
+  {
+    zorder: 266,
+    id: 'power_pole_transformer',
+    type: 'symbol',
+    filter: any(has('transformer'), has('substation')),
+    source: 'power',
+    'source-layer': 'power_tower',
+    minzoom: 13,
+    layout: {
+      'icon-image': 'power_transformer',
+      'icon-offset': [45, 0],
+      'icon-size': interpolate(zoom, [
+        [13, 0.1],
+        [21, 0.5]
+      ]),
+      'icon-allow-overlap': true
+    }
+  },
+  {
+    zorder: 266,
+    id: 'power_pole_switch',
+    type: 'symbol',
+    filter: has('switch'),
+    source: 'power',
+    'source-layer': 'power_tower',
+    minzoom: 13,
+    layout: {
+      'icon-image': match(
+        get('switch'),
+        [
+          ['disconnector', 'power_switch_disconnector'],
+          ['circuit_breaker', 'power_switch_circuit_breaker']
+        ],
+        'power_switch'
+      ),
+      'icon-rotate': 270,
+      'icon-offset': [0, -20],
+      'icon-size': interpolate(zoom, [
+        [13, 0.2],
+        [21, 1]
+      ]),
+      'icon-allow-overlap': true
     }
   },
   oimSymbol({
