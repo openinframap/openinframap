@@ -680,6 +680,7 @@ const layers: LayerSpecificationWithZIndex[] = [
         'power_switch'
       ),
       'icon-rotate': ['-', ['get', 'angle'], 90],
+      'icon-offset': [0, -4],
       'icon-size': interpolate(
         zoom,
         [
