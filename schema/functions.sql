@@ -277,13 +277,16 @@ CREATE OR REPLACE FUNCTION power_line_angle(point GEOMETRY)
 DECLARE
     angle DOUBLE PRECISION;
 BEGIN
+    -- Interpolate two points onto the line at 20% and 80% of the length, and calculate the angle between them.
     SELECT ST_Azimuth(ST_LineInterpolatePoints(line.geometry, 0.2, false),
                       ST_LineInterpolatePoints(line.geometry, 0.8, false)
                      ) / (2 * PI()) * 360 INTO angle
     FROM (
+        -- Fetch all lines within a 1m radius of the point. Clip them to a 5m buffer.
         SELECT ST_Intersection(l.geometry, ST_Buffer(point, 5)) AS geometry
         FROM osm_power_line l
         WHERE ST_Intersects(ST_Buffer(point, 1), l.geometry)
+        ORDER BY line = 'busbar' ASC -- Prefer non-busbar lines
     ) AS line
     WHERE ST_GeometryType(line.geometry) = 'ST_LineString' LIMIT 1;
     RETURN angle;
