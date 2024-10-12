@@ -320,10 +320,16 @@ const line_voltage: ExpressionSpecification = case_(
 )
 
 const transformer_label: ExpressionSpecification = concat(
-  round(['to-number', get('voltage_primary')], 3),
-  if_(['has', 'voltage_secondary'], concat('/', round(['to-number', get('voltage_secondary')], 3)), ''),
-  if_(['has', 'voltage_tertiary'], concat('/', round(['to-number', get('voltage_tertiary')], 3)), ''),
-  ' kV',
+  if_(
+    has('voltage_primary'),
+    concat(
+      round(['to-number', get('voltage_primary')], 3),
+      if_(has('voltage_secondary'), concat('/', round(['to-number', get('voltage_secondary')], 3)), ''),
+      if_(has('voltage_tertiary'), concat('/', round(['to-number', get('voltage_tertiary')], 3)), ''),
+      ' kV'
+    ),
+    ''
+  ),
   if_(has('rating'), concat('\n', get('rating')), '')
 )
 
