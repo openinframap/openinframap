@@ -622,12 +622,26 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 14,
     paint: text_paint,
     layout: {
-      'icon-image': 'power_compensator',
+      'icon-image': match(
+        get('type'),
+        [
+          ['series_reactor', 'power_reactor'],
+          ['shunt_reactor', 'power_reactor_shunt'],
+          ['series_capacitor', 'power_capacitor'],
+          ['shunt_capacitor', 'power_capacitor_shunt'],
+          ['filter', 'power_filter']
+        ],
+        'power_compensator'
+      ),
       'icon-allow-overlap': true,
-      'icon-size': interpolate(zoom, [
-        [14, 0.3],
-        [21, 2]
-      ])
+      'icon-size': interpolate(
+        zoom,
+        [
+          [14, 0.05],
+          [21, 1]
+        ],
+        1.2
+      )
     }
   },
   {
@@ -639,11 +653,23 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 14,
     paint: text_paint,
     layout: {
-      'icon-image': 'power_switch',
-      'icon-size': interpolate(zoom, [
-        [14, 0.3],
-        [21, 2.5]
-      ]),
+      'icon-image': match(
+        get('type'),
+        [
+          ['disconnector', 'power_switch_disconnector'],
+          ['circuit_breaker', 'power_switch_circuit_breaker']
+        ],
+        'power_switch'
+      ),
+      'icon-rotate': ['-', ['get', 'angle'], 90],
+      'icon-size': interpolate(
+        zoom,
+        [
+          [14, 0.2],
+          [21, 1]
+        ],
+        1.2
+      ),
       'icon-allow-overlap': true
     }
   },

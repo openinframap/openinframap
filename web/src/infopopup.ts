@@ -20,7 +20,8 @@ const hidden_keys = [
   'area',
   'gid',
   'ref_len',
-  'frequency'
+  'frequency',
+  'angle'
 ]
 
 function formatVoltage(value: number | number[]): string {
