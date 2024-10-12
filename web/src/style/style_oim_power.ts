@@ -625,12 +625,16 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 14,
     paint: text_paint,
     layout: {
-      'icon-image': 'power_transformer',
+      'icon-image': if_(has('voltage_tertiary'), 'power_transformer_3_winding', 'power_transformer'),
       'icon-allow-overlap': true,
-      'icon-size': interpolate(zoom, [
-        [14, 0.3],
-        [21, 2]
-      ])
+      'icon-size': interpolate(
+        zoom,
+        [
+          [14, 0.1],
+          [21, 1]
+        ],
+        1.2
+      )
     }
   },
   {
