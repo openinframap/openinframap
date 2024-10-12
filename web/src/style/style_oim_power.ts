@@ -450,7 +450,7 @@ const layers: LayerSpecificationWithZIndex[] = [
       'line-opacity': 0.8,
       'line-width': interpolate(zoom, [
         [13, 0.5],
-        [20, 2]
+        [20, 4]
       ])
     },
     layout: {
@@ -470,7 +470,7 @@ const layers: LayerSpecificationWithZIndex[] = [
       'line-opacity': 0.8,
       'line-width': interpolate(zoom, [
         [13, 0.5],
-        [20, 2]
+        [20, 4]
       ]),
       'line-dasharray': [2, 2]
     }
@@ -488,7 +488,7 @@ const layers: LayerSpecificationWithZIndex[] = [
       'line-opacity': 0.8,
       'line-width': interpolate(zoom, [
         [13, 1],
-        [20, 3]
+        [20, 4]
       ]),
       'line-dasharray': [2, 2]
     },
@@ -519,10 +519,10 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 13,
     paint: {
       'line-color': rgb(30, 30, 30),
-      'line-opacity': 0.9,
+      'line-opacity': 0.8,
       'line-width': interpolate(zoom, [
         [13, 0.5],
-        [20, 2]
+        [20, 4]
       ])
     }
   },
