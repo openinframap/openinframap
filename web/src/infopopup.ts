@@ -223,7 +223,6 @@ class InfoPopup {
   }
 
   popupHtml(feature: MapGeoJSONFeature) {
-    console.log(feature.properties)
     const attrs_table = el('table', { class: 'item_info' })
     const renderedProperties = Object.keys(feature.properties)
       .sort()
@@ -233,7 +232,7 @@ class InfoPopup {
 
     const content = el('div', this.nameTags(feature))
 
-    if (feature.properties['voltage']) {
+    if (feature.properties['voltage'] || feature.properties['voltage_primary']) {
       mount(content, this.voltageField(feature))
     }
 
