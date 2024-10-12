@@ -223,6 +223,7 @@ class InfoPopup {
   }
 
   popupHtml(feature: MapGeoJSONFeature) {
+    console.log(feature.properties)
     const attrs_table = el('table', { class: 'item_info' })
     const renderedProperties = Object.keys(feature.properties)
       .sort()

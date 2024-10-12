@@ -319,6 +319,14 @@ const line_voltage: ExpressionSpecification = case_(
   ''
 )
 
+const transformer_label: ExpressionSpecification = concat(
+  round(['to-number', get('voltage_primary')], 3),
+  if_(['has', 'voltage_secondary'], concat('/', round(['to-number', get('voltage_secondary')], 3)), ''),
+  if_(['has', 'voltage_tertiary'], concat('/', round(['to-number', get('voltage_tertiary')], 3)), ''),
+  ' kV',
+  if_(has('rating'), concat('\n', get('rating')), '')
+)
+
 const line_label: ExpressionSpecification = case_(
   [
     [
@@ -616,27 +624,18 @@ const layers: LayerSpecificationWithZIndex[] = [
       'line-cap': 'round'
     }
   },
-  {
+  oimSymbol({
     zorder: 261,
     id: 'power_transformer',
-    type: 'symbol',
+    minZoom: 14,
     source: 'power',
-    'source-layer': 'power_transformer',
-    minzoom: 14,
-    paint: text_paint,
-    layout: {
-      'icon-image': if_(has('voltage_tertiary'), 'power_transformer_3_winding', 'power_transformer'),
-      'icon-allow-overlap': true,
-      'icon-size': interpolate(
-        zoom,
-        [
-          [14, 0.1],
-          [21, 1]
-        ],
-        1.2
-      )
-    }
-  },
+    sourceLayer: 'power_transformer',
+    iconImage: if_(has('voltage_tertiary'), 'power_transformer_3_winding', 'power_transformer'),
+    iconMinScale: 0.1,
+    textMinZoom: 17,
+    textField: transformer_label,
+    textOffset: 3
+  }),
   {
     zorder: 262,
     id: 'power_compensator',
