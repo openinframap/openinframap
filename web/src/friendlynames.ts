@@ -5,6 +5,7 @@ const friendlyNames: { [key: string]: string } = {
   power_tower: 'Power tower',
   power_pole: 'Power pole',
   power_generator: 'Generator',
+  power_generator_solar: 'Solar generator',
   power_wind_turbine: 'Wind turbine',
   power_substation: 'Substation',
   power_switch: 'Switch',

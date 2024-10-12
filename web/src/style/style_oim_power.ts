@@ -253,18 +253,20 @@ const pretty_output: ExpressionSpecification = if_(
   concat(['round', ['*', output, 1000]], ' kW')
 )
 
-const plant_label: ExpressionSpecification = step(zoom, local_name, [
-  [
-    9,
-    case_(
-      [
-        [all(['!', has('name')], has('output')), concat(pretty_output, construction_label)],
-        [has('output'), concat(local_name, ' \n', pretty_output, '\n', construction_label)]
-      ],
-      local_name
-    )
-  ]
-])
+function name_output_label(detail_zoom: number) {
+  return step(zoom, local_name, [
+    [
+      detail_zoom,
+      case_(
+        [
+          [all(['!', has('name')], has('output')), concat(pretty_output, construction_label)],
+          [has('output'), concat(local_name, ' \n', pretty_output, '\n', construction_label)]
+        ],
+        local_name
+      )
+    ]
+  ])
+}
 
 function plant_image(): ExpressionSpecification {
   const expr = ['match', get('source')]
@@ -764,13 +766,26 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   oimSymbol({
+    zorder: 264,
+    id: 'power_generator_solar',
+    minZoom: 15,
+    source: 'power',
+    sourceLayer: 'power_generator',
+    filter: all(['==', get('source'), 'solar'], get('is_node')),
+    textField: name_output_label(16),
+    iconImage: 'power_generator_solar',
+    textMinZoom: 15,
+    iconScale: 0.5,
+    iconMinScale: 0.05
+  }),
+  oimSymbol({
     zorder: 265,
     id: 'power_generator_symbol',
     minZoom: 11,
     source: 'power',
     sourceLayer: 'power_generator',
     filter: all(match(get('source'), [[['wind', 'solar'], false]], true), has('output')),
-    textField: get('name'),
+    textField: name_output_label(14),
     iconImage: 'power_generator',
     textMinZoom: 13,
     iconScale: 0.3,
@@ -783,7 +798,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     source: 'power',
     sourceLayer: 'power_generator',
     filter: ['==', get('source'), 'wind'],
-    textField: get('name'),
+    textField: name_output_label(14),
     iconImage: 'power_wind',
     textMinZoom: 12,
     iconScale: 2,
@@ -1001,7 +1016,7 @@ const layers: LayerSpecificationWithZIndex[] = [
         [6, 0.6],
         [10, 0.8]
       ]),
-      'text-field': plant_label,
+      'text-field': name_output_label(9),
       'text-font': font,
       'text-anchor': 'top',
       'text-offset': [0, 1],
