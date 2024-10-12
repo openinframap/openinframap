@@ -743,7 +743,7 @@ const layers: LayerSpecificationWithZIndex[] = [
         zoom,
         [
           [13, 0.6],
-          [21, 2.5]
+          [21, 1.5]
         ],
         1.2
       ),
@@ -774,7 +774,9 @@ const layers: LayerSpecificationWithZIndex[] = [
         [13, 0.2],
         [17, 0.8]
       ]),
-      'text-field': step(zoom, '', [[15, get('name')]]),
+      'text-field': step(zoom, '', [
+        [15, concat(if_(has('name'), concat(get('name'), '\n'), ''), get('ref'))]
+      ]),
       'text-font': font,
       'text-size': interpolate(zoom, [
         [13, 8],
@@ -813,7 +815,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     filter: has('switch'),
     source: 'power',
     'source-layer': 'power_tower',
-    minzoom: 13,
+    minzoom: 14,
     layout: {
       'icon-image': match(
         get('switch'),
@@ -824,7 +826,7 @@ const layers: LayerSpecificationWithZIndex[] = [
         'power_switch'
       ),
       'icon-rotate': 270,
-      'icon-offset': [0, -20],
+      'icon-offset': match(get('type'), [['tower', literal([0, -30])]], literal([0, -20])),
       'icon-size': interpolate(zoom, [
         [13, 0.2],
         [21, 1]
