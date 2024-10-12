@@ -630,7 +630,11 @@ const layers: LayerSpecificationWithZIndex[] = [
     minZoom: 14,
     source: 'power',
     sourceLayer: 'power_transformer',
-    iconImage: if_(has('voltage_tertiary'), 'power_transformer_3_winding', 'power_transformer'),
+    iconImage: if_(
+      any(has('voltage_tertiary'), ['==', ['to-number', get('windings')], 3]),
+      'power_transformer_3_winding',
+      'power_transformer'
+    ),
     iconMinScale: 0.1,
     textMinZoom: 17,
     textField: transformer_label,
