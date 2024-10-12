@@ -264,3 +264,27 @@ EXCEPTION
         RETURN st_buffer(g1, 10);
 end
 $$;
+
+-- Given a point on a power line (say the location of a switch),
+-- return the angle of the line at that point.
+-- Returns null if a line cannot be found.
+CREATE OR REPLACE FUNCTION power_line_angle(point GEOMETRY)
+    RETURNS DOUBLE PRECISION
+    LANGUAGE plpgsql
+    IMMUTABLE STRICT
+    PARALLEL SAFE
+    AS $$
+DECLARE
+    angle DOUBLE PRECISION;
+BEGIN
+    SELECT ST_Azimuth(ST_LineInterpolatePoints(line.geometry, 0.2, false),
+                      ST_LineInterpolatePoints(line.geometry, 0.8, false)
+                     ) / (2 * PI()) * 360 INTO angle
+    FROM (
+        SELECT ST_Intersection(l.geometry, ST_Buffer(point, 5)) AS geometry
+        FROM osm_power_line l
+        WHERE ST_Intersects(ST_Buffer(point, 1), l.geometry)
+    ) AS line
+    WHERE ST_GeometryType(line.geometry) = 'ST_LineString' LIMIT 1;
+    RETURN angle;
+END $$;

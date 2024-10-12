@@ -297,6 +297,8 @@ layers:
         sql: convert_voltage(tags -> 'voltage') / 1000
       - name: rating
         sql: tags -> 'rating'
+      - name: angle
+        sql: round(power_line_angle(geometry))::integer % 180
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'compensator' AND geometry && !BBOX!
@@ -315,6 +317,8 @@ layers:
         sql: tags -> 'gas_insulated'
       - name: cables
         sql: tags -> 'cables'
+      - name: angle
+        sql: round(power_line_angle(geometry))::integer % 180
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'switch' AND geometry && !BBOX!
