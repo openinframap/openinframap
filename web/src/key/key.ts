@@ -186,6 +186,7 @@ class KeyControl implements IControl {
     const rows = [
       ['Wind turbine', await this.sprite('power_wind', 14)],
       ['Solar panel', svgRectFromLayer(power_layers, 'power_solar_panel')],
+      ['Solar panel (node)', await this.sprite('power_generator_solar')],
       ['Other generator', await this.sprite('power_generator')]
     ]
     const table = list('table', Tr)
@@ -215,7 +216,8 @@ class KeyControl implements IControl {
       ['Shunt reactor', await this.sprite('power_reactor_shunt')],
       ['Series capacitor', await this.sprite('power_capacitor')],
       ['Shunt capacitor', await this.sprite('power_capacitor_shunt')],
-      ['Other compensator', await this.sprite('power_compensator')],
+      ['Filter', await this.sprite('power_filter')],
+      ['Other compensator', await this.sprite('power_compensator_frame')],
       ['Converter', await this.sprite('converter')]
     ]
     const table = list('table', Tr)

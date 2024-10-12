@@ -651,8 +651,28 @@ const layers: LayerSpecificationWithZIndex[] = [
           ['shunt_capacitor', 'power_capacitor_shunt'],
           ['filter', 'power_filter']
         ],
-        'power_compensator'
+        'power_compensator_frame'
       ),
+      'text-field': step(zoom, '', [
+        [
+          16,
+          match(
+            get('type'),
+            [
+              ['static_var', 'SVC'],
+              ['statcom', 'STC'],
+              ['voltage_regulator', 'VR'],
+              ['synchronous_condenser', 'SC']
+            ],
+            ''
+          )
+        ]
+      ]),
+      'text-font': font,
+      'text-size': interpolate(zoom, [
+        [16, 8],
+        [21, 35]
+      ]),
       'icon-allow-overlap': true,
       'icon-size': interpolate(
         zoom,
