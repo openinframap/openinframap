@@ -513,7 +513,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     zorder: 162,
     id: 'power_substation_outline',
     type: 'line',
-    filter: substation_visible_p,
+    filter: all(substation_visible_p, not(underground_p)),
     source: 'power',
     'source-layer': 'power_substation',
     minzoom: 13,
@@ -524,6 +524,24 @@ const layers: LayerSpecificationWithZIndex[] = [
         [13, 0.5],
         [20, 4]
       ])
+    }
+  },
+  {
+    zorder: 162,
+    id: 'power_substation_outline_underground',
+    type: 'line',
+    filter: underground_p,
+    source: 'power',
+    minzoom: 8,
+    'source-layer': 'power_substation',
+    paint: {
+      'line-color': rgb(30, 30, 30),
+      'line-opacity': 0.8,
+      'line-width': interpolate(zoom, [
+        [13, 0.5],
+        [20, 4]
+      ]),
+      'line-dasharray': [2, 2]
     }
   },
   {

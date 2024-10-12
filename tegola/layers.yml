@@ -157,6 +157,8 @@ layers:
     field_sets: [geom, name, frequency, voltages, construction, wiki, url, start_date]
     fields:
       - name: substation
+      - name: location
+        sql: tags -> 'location'
     id_field: osm_id
     from: substation
     where: geometry && !BBOX!
