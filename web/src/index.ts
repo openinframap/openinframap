@@ -5,7 +5,7 @@ import { mount } from 'redom'
 import LayerSwitcher from '@russss/maplibregl-layer-switcher'
 import URLHash from '@russss/maplibregl-layer-switcher/urlhash'
 
-import EditButton from './editbutton.js'
+import EditButton from './edit-control.js'
 import InfoPopup from './infopopup.js'
 import KeyControl from './key/key.js'
 import WarningBox from './warning-box/warning-box.js'

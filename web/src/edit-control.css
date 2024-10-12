@@ -1,0 +1,60 @@
+.oim-edit-control,
+.oim-editor-menu {
+  background-color: white;
+}
+
+.oim-edit-control button,
+.oim-editor-menu button {
+  font-size: inherit;
+}
+
+.oim-edit-control {
+  font-size: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  transition:
+    opacity 0.25s,
+    visibility 0.25s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.oim-edit-control.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.oim-editor-menu {
+  font-size: 0.9rem;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 0;
+  list-style-type: none;
+  margin-bottom: 3px !important;
+  transition:
+    opacity 0.1s,
+    visibility 0.1s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.oim-editor-menu.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.oim-editor-menu button {
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0.25rem 0.5rem;
+  border: 0;
+  width: 100%;
+  text-align: left;
+}
+
+.oim-edit-control button {
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0.25rem 0.5rem;
+  border: 0;
+}
