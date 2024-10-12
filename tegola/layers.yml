@@ -101,6 +101,8 @@ layers:
         sql: voltages[2]
       - name: voltage_3
         sql: voltages[3]
+      - name: voltage_4
+        sql: voltages[4]
       - name: circuits
       - name: url
         sql: osm_url(tags)
