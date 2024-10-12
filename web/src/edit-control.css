@@ -24,6 +24,10 @@
   visibility: visible;
 }
 
+.oim-edit-control button + button {
+  border-left: 1.5px solid rgba(0, 0, 0, 0.1);
+}
+
 .oim-editor-menu {
   font-size: 0.9rem;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
