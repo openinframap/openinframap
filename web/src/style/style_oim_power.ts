@@ -441,7 +441,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     zorder: 161,
     id: 'power_plant_outline',
     type: 'line',
-    filter: ['!', construction_p],
+    filter: all(['!', construction_p], ['!', underground_p]),
     source: 'power',
     minzoom: 8,
     'source-layer': 'power_plant',
@@ -455,6 +455,24 @@ const layers: LayerSpecificationWithZIndex[] = [
     },
     layout: {
       'line-join': 'round'
+    }
+  },
+  {
+    zorder: 161,
+    id: 'power_plant_outline_underground',
+    type: 'line',
+    filter: all(underground_p, not(construction_p)),
+    source: 'power',
+    minzoom: 8,
+    'source-layer': 'power_plant',
+    paint: {
+      'line-color': rgb(30, 30, 30),
+      'line-opacity': 0.8,
+      'line-width': interpolate(zoom, [
+        [13, 0.5],
+        [20, 2]
+      ]),
+      'line-dasharray': [2, 2]
     }
   },
   {

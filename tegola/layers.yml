@@ -196,6 +196,8 @@ layers:
         sql: tags -> 'plant:storage'
       - name: repd_id
         sql: tags -> 'repd:id'
+      - name: location
+        sql: tags -> 'location'
     from: power_plant
     where: >
       geometry && !BBOX! AND
