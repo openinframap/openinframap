@@ -102,6 +102,12 @@ class InfoPopup {
         this._map.getCanvas().style.cursor = ''
       }
     })
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.popup_obj) {
+        this.popup_obj.remove()
+      }
+    })
   }
 
   osmLink(id: number, is_node: boolean) {
