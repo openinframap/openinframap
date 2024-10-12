@@ -119,8 +119,10 @@ class KeyControl implements IControl {
     mount(pane, await this.plantTable())
     pane.appendChild(el('h3', 'Power Generators'))
     mount(pane, await this.generatorTable())
-    pane.appendChild(el('h3', 'Other Power'))
+    pane.appendChild(el('h3', 'Power Line Supports'))
     mount(pane, await this.towerTable())
+    pane.appendChild(el('h3', 'Switchgear'))
+    mount(pane, await this.switchgearTable())
     pane.appendChild(el('h3', 'Telecoms'))
     mount(pane, await this.telecomTable())
     pane.appendChild(el('h3', 'Petroleum'))
@@ -152,7 +154,7 @@ class KeyControl implements IControl {
     rows = rows.map((row) => [row[0], svgLine(row[1], line_thickness)])
 
     rows.push(['Underground', svgLine('#7A7A85', line_thickness, '3 2')])
-    rows.push(['Line Reference', await this.sprite('power_line_ref')])
+    rows.push(['Line reference', await this.sprite('power_line_ref')])
 
     const table = list('table', Tr)
     table.update(rows)
@@ -182,8 +184,9 @@ class KeyControl implements IControl {
 
   async generatorTable() {
     const rows = [
-      ['Wind Turbine', await this.sprite('power_wind', 14)],
-      ['Solar Panel', svgRectFromLayer(power_layers, 'power_solar_panel')]
+      ['Wind turbine', await this.sprite('power_wind', 14)],
+      ['Solar panel', svgRectFromLayer(power_layers, 'power_solar_panel')],
+      ['Other generator', await this.sprite('power_generator')]
     ]
     const table = list('table', Tr)
     table.update(rows)
@@ -193,12 +196,26 @@ class KeyControl implements IControl {
   async towerTable() {
     const rows = [
       ['Tower/Pylon', await this.sprite('power_tower', 10)],
-      ['Transition Tower', await this.sprite('power_tower_transition', 10)],
+      ['Transition tower', await this.sprite('power_tower_transition', 10)],
       ['Pole', await this.sprite('power_pole', 8)],
-      ['Transition Pole', await this.sprite('power_pole_transition', 8)],
+      ['Transition pole', await this.sprite('power_pole_transition', 8)]
+    ]
+    const table = list('table', Tr)
+    table.update(rows)
+    return table
+  }
+
+  async switchgearTable() {
+    const rows = [
       ['Transformer', await this.sprite('power_transformer')],
-      ['Switch', await this.sprite('power_switch')],
-      ['Compensator', await this.sprite('power_compensator')],
+      ['Disconnector', await this.sprite('power_switch_disconnector')],
+      ['Circuit breaker', await this.sprite('power_switch_circuit_breaker')],
+      ['Other switch', await this.sprite('power_switch')],
+      ['Series reactor', await this.sprite('power_reactor')],
+      ['Shunt reactor', await this.sprite('power_reactor_shunt')],
+      ['Series capacitor', await this.sprite('power_capacitor')],
+      ['Shunt capacitor', await this.sprite('power_capacitor_shunt')],
+      ['Other compensator', await this.sprite('power_compensator')],
       ['Converter', await this.sprite('converter')]
     ]
     const table = list('table', Tr)
@@ -223,12 +240,12 @@ class KeyControl implements IControl {
     const rows = [
       ['Oil', svgLine(colour_oil, line_thickness)],
       ['Gas', svgLine(colour_gas, line_thickness)],
-      ['Petroleum Intermediate', svgLine(colour_intermediate, line_thickness)],
+      ['Petroleum intermediate', svgLine(colour_intermediate, line_thickness)],
       ['Fuel', svgLine(colour_fuel, line_thickness)],
       ['Hydrogen', svgLine(colour_hydrogen, line_thickness)],
       ['CO<sub>2</sub>', svgLine(colour_co2, line_thickness)],
       ['Other', svgLine(colour_unknown, line_thickness)],
-      ['Petroleum Facility', svgRectFromLayer(petroleum_layers, 'petroleum_site')]
+      ['Petroleum facility', svgRectFromLayer(petroleum_layers, 'petroleum_site')]
     ]
     const table = list('table', Tr)
     table.update(rows)
@@ -237,15 +254,15 @@ class KeyControl implements IControl {
 
   async waterTable() {
     const rows = [
-      ['Fresh Water', svgLine(colour_freshwater, line_thickness)],
-      ['Hot Water', svgLine(colour_hotwater, line_thickness)],
+      ['Fresh water', svgLine(colour_freshwater, line_thickness)],
+      ['Hot water', svgLine(colour_hotwater, line_thickness)],
       ['Steam', svgLine(colour_steam, line_thickness)],
       ['Wastewater', svgLine(colour_wastewater, line_thickness)],
-      ['Water Treatment Plant', await this.sprite('water_treatment_plant')],
-      ['Water Pumping Station', await this.sprite('water_pumping_station')],
-      ['Sewage Treatment Plant', await this.sprite('sewage_treatment_plant')],
-      ['Sewage Pumping Station', await this.sprite('sewage_pumping_station')],
-      ['Pumping Station', await this.sprite('pumping_station')]
+      ['Water treatment plant', await this.sprite('water_treatment_plant')],
+      ['Water pumping station', await this.sprite('water_pumping_station')],
+      ['Sewage treatment plant', await this.sprite('sewage_treatment_plant')],
+      ['Sewage pumping station', await this.sprite('sewage_pumping_station')],
+      ['Other pumping station', await this.sprite('pumping_station')]
     ]
     const table = list('table', Tr)
     table.update(rows)
