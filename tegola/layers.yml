@@ -106,6 +106,8 @@ layers:
       - name: circuits
       - name: url
         sql: osm_url(tags)
+      - name: material
+        sql: tags -> 'material'
     from: power_lines(!ZOOM!, !BBOX!)
     # Note: this layer is a major contributor to tile size so these limits
     # should be chosen carefully.
@@ -147,6 +149,8 @@ layers:
         sql: tags-> 'line_arrangement'
       - name: design_ref
         sql: tags -> 'design:ref'
+      - name: material
+        sql: tags -> 'material'
     from: osm_power_tower
     where: geometry && !BBOX!
 
@@ -404,6 +408,9 @@ layers:
     min_zoom: 10
     id_field: osm_id
     field_sets: [geom_centroid, name, wiki, start_date]
+    fields:
+      - name: material
+        sql: tags -> 'material'
     from: osm_mast
     where: >
       (tags -> 'mast:type' IN ('communication', 'communications', 'broadcast')
@@ -447,6 +454,8 @@ layers:
         sql: tags -> 'usage'
       - name: diameter
         sql: tags -> 'diameter'
+      - name: material
+        sql: tags -> 'material'
     from: osm_pipeline
     where: >
       COALESCE(substance, type) IN (
