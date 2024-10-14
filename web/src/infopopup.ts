@@ -71,10 +71,13 @@ class InfoPopup {
   min_zoom: any
   popup_obj: Popup | null
   _map!: maplibregl.Map
+  friendlyNames: { [key: string]: string }
+
   constructor(layers: string[], min_zoom: number) {
     this.layers = layers
     this.min_zoom = min_zoom
     this.popup_obj = null
+    this.friendlyNames = friendlyNames()
   }
 
   add(map: maplibregl.Map) {
@@ -135,9 +138,9 @@ class InfoPopup {
   friendlyRender(label: string) {
     let friendlyName = label
     let prefixLen = 0
-    for (const name in friendlyNames) {
+    for (const name in this.friendlyNames) {
       if (label.startsWith(name) && name.length > prefixLen) {
-        friendlyName = friendlyNames[name]
+        friendlyName = this.friendlyNames[name]
         prefixLen = name.length
       }
     }
