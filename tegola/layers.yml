@@ -609,7 +609,7 @@ layers:
     geometry_type: Point
     min_zoom: 8
     id_field: osm_id
-    field_sets: [geom, name, wiki, start_date]
+    field_sets: [geom_centroid, name, wiki, start_date]
     from: osm_water_well
     where: geometry && !BBOX!
 
