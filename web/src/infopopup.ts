@@ -290,10 +290,15 @@ class InfoPopup {
     if (e.features === undefined || e.features.length == 0) {
       return
     }
+    const feature = e.features[0]
+
+    if (import.meta.env.DEV) {
+      console.info('Clicked feature on layer', feature.layer.id, 'at', e.lngLat, '\n', feature.properties)
+    }
 
     this.popup_obj = new maplibregl.Popup()
       .setLngLat(e.lngLat)
-      .setDOMContent(this.popupHtml(e.features[0]))
+      .setDOMContent(this.popupHtml(feature))
       .setMaxWidth('350px')
       .addTo(this._map)
     this.popup_obj.addClassName('oim-info')
