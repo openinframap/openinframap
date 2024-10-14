@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "useDefineForClassFields": true,
     "module": "es2022",
-    "lib": ["ES2020", "DOM"],
+    "lib": ["ES2022", "DOM"],
     "allowJs": false,
 
     /* Bundler mode */

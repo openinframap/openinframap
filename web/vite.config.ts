@@ -4,6 +4,7 @@ import i18nextLoader from 'vite-plugin-i18next-loader'
 
 export default defineConfig({
   build: {
+    target: 'es2022',
     outDir: './dist',
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
