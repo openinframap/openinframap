@@ -28,7 +28,12 @@
             "line-underground": "Υπόγεια γραμμή ρεύματος",
             "cable": "Καλώδιο",
             "line-label": "Γραμμή ρεύματος",
-            "solar-panel": "Ηλιακό πάνελ"
+            "solar-panel": "Ηλιακό πάνελ",
+            "hvdc": "HVDC",
+            "solar-panel-node": "Ηλιακό πάνελ (κόμβος)",
+            "tower-pylon": "Πυλώνας",
+            "line-reference": "Αναφορά γραμμής",
+            "other-generator": "Άλλη γεννήτρια"
         }
     }
 }
