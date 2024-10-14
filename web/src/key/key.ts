@@ -108,13 +108,13 @@ class KeyControl implements IControl {
     mount(this._container, this.header())
 
     const pane = el('.oim-key-pane')
-    pane.appendChild(el('h3', t('key.power_lines', 'Power Lines')))
+    pane.appendChild(el('h3', t('key.power-lines', 'Power Lines')))
     mount(pane, await this.voltageTable())
-    pane.appendChild(el('h3', t('key.power_plants', 'Power Plants')))
+    pane.appendChild(el('h3', t('key.power-plants', 'Power Plants')))
     mount(pane, await this.plantTable())
-    pane.appendChild(el('h3', t('key.power_generators', 'Power Generators')))
+    pane.appendChild(el('h3', t('key.power-generators', 'Power Generators')))
     mount(pane, await this.generatorTable())
-    pane.appendChild(el('h3', t('key.power_line_supports', 'Power Line Supports')))
+    pane.appendChild(el('h3', t('key.power-line-supports', 'Power Line Supports')))
     mount(pane, await this.towerTable())
     pane.appendChild(el('h3', t('key.switchgear', 'Switchgear')))
     mount(pane, await this.switchgearTable())
@@ -148,7 +148,7 @@ class KeyControl implements IControl {
     rows = rows.map((row) => [row[0], svgLine(row[1], line_thickness)])
 
     rows.push([t('underground', 'Underground'), svgLine('#7A7A85', line_thickness, '3 2')])
-    rows.push([t('names.power.line_reference', 'Line reference'), await this.sprite('power_line_ref')])
+    rows.push([t('names.power.line-reference', 'Line reference'), await this.sprite('power_line_ref')])
 
     const table = list('table', Tr)
     table.update(rows)
@@ -172,7 +172,7 @@ class KeyControl implements IControl {
     plant_entries[t('power.source.geothermal')] = 'power_plant_geothermal'
     plant_entries[t('power.source.hydro')] = 'power_plant_hydro'
     plant_entries[t('power.source.nuclear')] = 'power_plant_nuclear'
-    plant_entries[t('power.source.oil_gas')] = 'power_plant_oilgas'
+    plant_entries[t('power.source.oil-gas')] = 'power_plant_oilgas'
     plant_entries[t('power.source.solar')] = 'power_plant_solar'
     plant_entries[t('power.source.wind')] = 'power_plant_wind'
     plant_entries[t('power.source.biomass')] = 'power_plant_biomass'
@@ -190,10 +190,10 @@ class KeyControl implements IControl {
 
   async generatorTable() {
     const rows = [
-      [t('names.power.wind_turbine'), await this.sprite('power_wind', 14)],
-      [t('names.power.solar_panel'), svgRectFromLayer(power_layers(), 'power_solar_panel')],
-      [t('names.power.solar_panel_node', 'Solar panel (node)'), await this.sprite('power_generator_solar')],
-      [t('names.power.other_generator', 'Other generator'), await this.sprite('power_generator')]
+      [t('names.power.wind-turbine'), await this.sprite('power_wind', 14)],
+      [t('names.power.solar-panel'), svgRectFromLayer(power_layers(), 'power_solar_panel')],
+      [t('names.power.solar-panel-node', 'Solar panel (node)'), await this.sprite('power_generator_solar')],
+      [t('names.power.other-generator', 'Other generator'), await this.sprite('power_generator')]
     ]
     const table = list('table', Tr)
     table.update(rows)
@@ -202,13 +202,13 @@ class KeyControl implements IControl {
 
   async towerTable() {
     const rows = [
-      [t('names.power.tower_pylon', 'Tower/Pylon'), await this.sprite('power_tower', 10)],
+      [t('names.power.tower-pylon', 'Tower/Pylon'), await this.sprite('power_tower', 10)],
       [
-        t('names.power.tower_transition', 'Transition tower'),
+        t('names.power.tower-transition', 'Transition tower'),
         await this.sprite('power_tower_transition', 10)
       ],
       [t('names.power.pole'), await this.sprite('power_pole', 8)],
-      [t('names.power.pole_transition', 'Transition pole'), await this.sprite('power_pole_transition', 8)]
+      [t('names.power.pole-transition', 'Transition pole'), await this.sprite('power_pole_transition', 8)]
     ]
     const table = list('table', Tr)
     table.update(rows)
@@ -219,18 +219,18 @@ class KeyControl implements IControl {
     const rows = [
       [t('names.power.transformer'), await this.sprite('power_transformer')],
       [
-        t('names.power.transformer_3', 'Transformer (3 windings)'),
+        t('names.power.transformer-3', 'Transformer (3 windings)'),
         await this.sprite('power_transformer_3_winding')
       ],
-      [t('names.power.switch_disconnector', 'Disconnector'), await this.sprite('power_switch_disconnector')],
-      [t('names.power.switch_breaker', 'Circuit breaker'), await this.sprite('power_switch_circuit_breaker')],
-      [t('names.power.switch_other', 'Other switch'), await this.sprite('power_switch')],
-      [t('names.power.reactor_series', 'Series reactor'), await this.sprite('power_reactor')],
-      [t('names.power.reactor_shunt', 'Shunt reactor'), await this.sprite('power_reactor_shunt')],
-      [t('names.power.capacitor_series', 'Series capacitor'), await this.sprite('power_capacitor')],
-      [t('names.power.capacitor_shunt', 'Shunt capacitor'), await this.sprite('power_capacitor_shunt')],
+      [t('names.power.switch-disconnector', 'Disconnector'), await this.sprite('power_switch_disconnector')],
+      [t('names.power.switch-breaker', 'Circuit breaker'), await this.sprite('power_switch_circuit_breaker')],
+      [t('names.power.switch-other', 'Other switch'), await this.sprite('power_switch')],
+      [t('names.power.reactor-series', 'Series reactor'), await this.sprite('power_reactor')],
+      [t('names.power.reactor-shunt', 'Shunt reactor'), await this.sprite('power_reactor_shunt')],
+      [t('names.power.capacitor-series', 'Series capacitor'), await this.sprite('power_capacitor')],
+      [t('names.power.capacitor-shunt', 'Shunt capacitor'), await this.sprite('power_capacitor_shunt')],
       [t('names.power.filter', 'Filter'), await this.sprite('power_filter')],
-      [t('names.power.compensator_other', 'Other compensator'), await this.sprite('power_compensator_frame')],
+      [t('names.power.compensator-other', 'Other compensator'), await this.sprite('power_compensator_frame')],
       [t('names.power.converter', 'DC converter'), await this.sprite('converter')]
     ]
     const table = list('table', Tr)
@@ -241,7 +241,7 @@ class KeyControl implements IControl {
   async telecomTable() {
     const rows = [
       [t('names.cable', 'Cable'), svgLineFromLayer(comms_layers, 'telecoms_line')],
-      [t('names.telecom.tower_mast', 'Tower/Mast'), await this.sprite('comms_tower')],
+      [t('names.telecom.tower-mast', 'Tower/Mast'), await this.sprite('comms_tower')],
       [t('names.telecom.datacenter', 'Datacenter'), await this.sprite('telecom_datacenter')],
       [t('names.telecom.exchange', 'Exchange'), await this.sprite('telecom_exchange')],
       [t('names.cabinet', 'Cabinet'), await this.sprite('cabinet')]
@@ -256,7 +256,7 @@ class KeyControl implements IControl {
       [t('names.substance.oil', 'Oil'), svgLine(colour_oil, line_thickness)],
       [t('names.substance.gas', 'Gas'), svgLine(colour_gas, line_thickness)],
       [
-        t('names.substance.petroleum_intermediate', 'Petroleum intermediate'),
+        t('names.substance.petroleum-intermediate', 'Petroleum intermediate'),
         svgLine(colour_intermediate, line_thickness)
       ],
       [t('names.substance.fuel', 'Fuel'), svgLine(colour_fuel, line_thickness)],
@@ -275,24 +275,24 @@ class KeyControl implements IControl {
 
   async waterTable() {
     const rows = [
-      [t('names.substance.fresh_water', 'Fresh water'), svgLine(colour_freshwater, line_thickness)],
-      [t('names.substance.hot_water', 'Hot water'), svgLine(colour_hotwater, line_thickness)],
+      [t('names.substance.fresh-water', 'Fresh water'), svgLine(colour_freshwater, line_thickness)],
+      [t('names.substance.hot-water', 'Hot water'), svgLine(colour_hotwater, line_thickness)],
       [t('names.substance.steam', 'Steam'), svgLine(colour_steam, line_thickness)],
       [t('names.substance.wastewater', 'Wastewater'), svgLine(colour_wastewater, line_thickness)],
-      [t('names.water.treatment_plant', 'Water treatment plant'), await this.sprite('water_treatment_plant')],
+      [t('names.water.treatment-plant', 'Water treatment plant'), await this.sprite('water_treatment_plant')],
       [
-        t('names.water.water_pumping_station', 'Water pumping station'),
+        t('names.water.water-pumping-station', 'Water pumping station'),
         await this.sprite('water_pumping_station')
       ],
       [
-        t('names.water.sewage_treatment_plant', 'Sewage treatment plant'),
+        t('names.water.sewage-treatment-plant', 'Sewage treatment plant'),
         await this.sprite('sewage_treatment_plant')
       ],
       [
-        t('names.water.sewage_pumping_station', 'Sewage pumping station'),
+        t('names.water.sewage-pumping-station', 'Sewage pumping station'),
         await this.sprite('sewage_pumping_station')
       ],
-      [t('names.other_pumping_station', 'Other pumping station'), await this.sprite('pumping_station')]
+      [t('names.other-pumping-station', 'Other pumping station'), await this.sprite('pumping_station')]
     ]
     const table = list('table', Tr)
     table.update(rows)
