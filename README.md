@@ -1,5 +1,9 @@
 # Open Infrastructure Map
-This is the main repository for [OpenInfraMap](https://openinframap.org).
+This is the main repository for [OpenInfraMap](https://openinframap.org), a map showing infrastructure
+from [OpenStreetMap](https://www.openstreetmap.org).
+
+## Translations
+[![Translation status](https://hosted.weblate.org/widget/open-infrastructure-map/multi-auto.svg)](https://hosted.weblate.org/engage/open-infrastructure-map/)
 
 ## Web frontend
 
