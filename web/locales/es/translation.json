@@ -1,1 +1,24 @@
-{}
+{
+    "nav": {
+        "about": "acerca de",
+        "stats": "estadísticas"
+    },
+    "edit": {
+        "remote": "Editar con control remoto (JOSM, etc)",
+        "browser": "Editar en el navegador (iD)",
+        "edit": "Editar"
+    },
+    "names": {
+        "power": {
+            "transformer": "Trasnformador",
+            "generator": "Generador",
+            "generator-solar": "Generador solar",
+            "wind-turbine": "Turbina eólica",
+            "substation": "Subestación",
+            "switch": "Interruptor",
+            "cable": "Cable",
+            "compensator": "Compensador",
+            "converter": "Subestación convertidora de Corriente Continua"
+        }
+    }
+}
