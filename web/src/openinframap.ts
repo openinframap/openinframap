@@ -18,8 +18,9 @@ import style_oim_power_heatmap from './style/style_oim_power_heatmap.js'
 import style_oim_telecoms from './style/style_oim_telecoms.js'
 import style_oim_petroleum from './style/style_oim_petroleum.js'
 import style_oim_water from './style/style_oim_water.js'
-import loadIcons from './loadIcons.js'
 import { LayerSpecificationWithZIndex } from './style/types.js'
+
+import { manifest } from 'virtual:render-svg'
 
 export default class OpenInfraMap {
   map?: maplibregl.Map
@@ -107,8 +108,15 @@ export default class OpenInfraMap {
       })
     )
 
-    map.on('load', () => {
-      loadIcons(map)
+    const icon_ratio = Math.min(Math.round(window.devicePixelRatio), 2)
+    const icons = manifest[icon_ratio.toString()]
+    const loadedIcons = new Set<string>()
+
+    map.on('styleimagemissing', async (e) => {
+      const image = await map.loadImage(icons[e.id])
+      if (loadedIcons.has(e.id)) return
+      loadedIcons.add(e.id)
+      map.addImage(e.id, image.data, { pixelRatio: icon_ratio })
     })
 
     map.dragRotate.disable()
