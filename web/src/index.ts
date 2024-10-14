@@ -11,6 +11,14 @@ await i18next.use(LanguageDetector).init({
   debug: import.meta.env.DEV
 })
 
+// Translate HTML elements.
+document.querySelectorAll('[data-i18n]').forEach((element) => {
+  const key = element.getAttribute('data-i18n')
+  if (key) {
+    ;(element as HTMLElement).innerText = i18next.t(key)
+  }
+})
+
 import OpenInfraMap from './openinframap'
 
 export const openinframap = new OpenInfraMap()

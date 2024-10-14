@@ -1,4 +1,9 @@
 {
+  "nav": {
+    "about": "about",
+    "stats": "stats",
+    "exports": "exports"
+  },
   "edit": {
     "edit": "Edit",
     "remote": "Edit with remote control (JOSM, etc)",
