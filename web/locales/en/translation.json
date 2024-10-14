@@ -1,0 +1,148 @@
+{
+  "edit": {
+    "edit": "Edit",
+    "remote": "Edit with remote control (JOSM, etc)",
+    "browser": "Edit in browser (iD)",
+    "error": "Unable to load remote editor - make sure it's running and has remote control enabled.\nError: "
+  },
+  "names": {
+    "power": {
+      "transformer": "Transformer",
+      "tower": "Power tower",
+      "pole": "Power pole",
+      "generator": "Generator",
+      "generator_solar": "Solar generator",
+      "wind_turbine": "Wind turbine",
+      "substation": "Substation",
+      "switch": "Switch",
+      "compensator": "Compensator",
+      "converter": "DC converter substation",
+      "cable": "Cable",
+      "line": "Power line",
+      "line_underground": "Underground power line",
+      "line_case": "Underground power line",
+      "line_label": "Power line",
+      "solar_panel": "Solar panel",
+      "plant": "Power plant",
+      "hvdc": "HVDC",
+      "line_reference": "Line reference",
+      "solar_panel_node": "Solar panel (node)",
+      "other_generator": "Other generator",
+      "tower_pylon": "Tower/Pylon",
+      "tower_transition": "Transition tower",
+      "pole_transition": "Transition pole",
+      "transformer_3": "Transformer (3 windings)",
+      "switch_disconnector": "Disconnector",
+      "switch_breaker": "Circuit breaker",
+      "switch_other": "Other switch",
+      "reactor_series": "Series reactor",
+      "reactor_shunt": "Shunt reactor",
+      "capacitor_series": "Series capacitor",
+      "capacitor_shunt": "Shunt capacitor",
+      "filter": "Filter",
+      "compensator_other": "Other compensator"
+    },
+    "telecoms": {
+      "communication_line": "Telecoms line",
+      "mast": "Telecoms mast",
+      "data_center": "Telecoms building",
+      "exchange": "Telephone exchange",
+      "cabinet": "Telecoms cabinet"
+    },
+    "petroleum": {
+      "pipeline": "Pipeline",
+      "well": "Well",
+      "facility": "Petroleum facility"
+    },
+    "water": {
+      "pipeline": "Water pipeline",
+      "sewage_treatment_plant": "Sewage treatment plant",
+      "treatment_plant": "Water treatment plant",
+      "pumping_station": "Pumping station",
+      "well": "Water well",
+      "reservoir": "Water reservoir",
+      "water_pumping_station": "Water pumping station",
+      "sewage_pumping_station": "Sewage pumping station"
+    },
+    "cable": "Cable",
+    "telecom": {
+      "tower_mast": "Tower/Mast",
+      "datacenter": "Datacenter",
+      "exchange": "Exchange"
+    },
+    "cabinet": "Cabinet",
+    "substance": {
+      "oil": "Oil",
+      "gas": "Gas",
+      "petroleum_intermediate": "Petroleum intermediate",
+      "fuel": "Fuel",
+      "hydrogen": "Hydrogen",
+      "co2": "CO<sub>2</sub>",
+      "fresh_water": "Fresh water",
+      "hot_water": "Hot water",
+      "steam": "Steam",
+      "wastewater": "Wastewater"
+    },
+    "other_pumping_station": "Other pumping station"
+  },
+  "units": {
+    "kV": "kV",
+    "Hz": "Hz",
+    "MW": "MW",
+    "DC": "DC",
+    "below_10kv": "< 10 kV",
+    "ge_kv": "≥ {{voltage}} kV",
+    "kW": "kW",
+    "V": "V"
+  },
+  "info": {
+    "website": "Website",
+    "view_openstreetmap": "View on OpenStreetMap"
+  },
+  "more_info": "More info",
+  "wikipedia": "Wikipedia",
+  "wikimedia_commons": "Wikimedia Commons",
+  "wikidata": "Wikidata",
+  "key": {
+    "name": "Key",
+    "power_lines": "Power Lines",
+    "power_plants": "Power Plants",
+    "power_generators": "Power Generators",
+    "power_line_supports": "Power Line Supports",
+    "switchgear": "Switchgear",
+    "telecoms": "Telecoms",
+    "petroleum": "Petroleum",
+    "water": "Water",
+    "traction": "Traction (< 50 Hz)"
+  },
+  "underground": "Underground",
+  "power": {
+    "source": {
+      "coal": "Coal",
+      "geothermal": "Geothermal",
+      "hydro": "Hydroelectric",
+      "nuclear": "Nuclear",
+      "oil_gas": "Oil/Gas",
+      "solar": "Solar",
+      "wind": "Wind",
+      "biomass": "Biomass",
+      "waste": "Waste",
+      "battery": "Battery"
+    }
+  },
+  "other": "Other",
+  "warning": "Warning",
+  "warnings": {
+    "webgl": "<p>Your browser may have performance or functionality issues with Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> with hardware acceleration is required for this site to perform well.</p><p>If your browser supports WebGL, you may need to disable browser fingerprinting protection for this site.</p>"
+  },
+  "layers": {
+    "power": "Power",
+    "heatmap": "Solar Generation",
+    "telecoms": "Telecoms",
+    "petroleum": "Oil & Gas",
+    "water": "Water",
+    "labels": "Labels",
+    "title": "Layers"
+  },
+  "construction": "under construction"
+}

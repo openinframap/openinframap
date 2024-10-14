@@ -1,3 +1,4 @@
+import { t } from 'i18next'
 import { IControl } from 'maplibre-gl'
 import { el } from 'redom'
 import './edit-control.css'
@@ -10,7 +11,7 @@ class EditControl implements IControl {
   onAdd(map: maplibregl.Map) {
     this._map = map
 
-    const edit_button = el('button', 'Edit')
+    const edit_button = el('button', t('edit.edit', 'Edit'))
     edit_button.onclick = (ev: MouseEvent) => {
       this.doEdit()
       ev.preventDefault()
@@ -20,9 +21,11 @@ class EditControl implements IControl {
       'ul',
       el(
         'li',
-        el('button', 'Edit with remote control (JOSM, etc)', { onclick: () => this.doEdit('remote') })
+        el('button', t('edit.remote', 'Edit with remote control (JOSM, etc)'), {
+          onclick: () => this.doEdit('remote')
+        })
       ),
-      el('li', el('button', 'Edit in browser (iD)', { onclick: () => this.doEdit('id') })),
+      el('li', el('button', t('edit.browser', 'Edit in browser (iD)'), { onclick: () => this.doEdit('id') })),
       {
         class: 'maplibregl-ctrl oim-editor-menu'
       }
@@ -60,8 +63,10 @@ class EditControl implements IControl {
       const url = this._getRemoteURL()
       fetch(url).catch((error) => {
         alert(
-          "Unable to load remote editor - make sure it's running and has remote control enabled.\nError: " +
-            error
+          t(
+            'edit.error',
+            "Unable to load remote editor - make sure it's running and has remote control enabled.\nError: "
+          ) + error
         )
       })
     }

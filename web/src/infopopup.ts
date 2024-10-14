@@ -1,5 +1,6 @@
 import './infopopup.css'
 
+import { t } from 'i18next'
 import maplibregl, { MapGeoJSONFeature, MapMouseEvent, Popup } from 'maplibre-gl'
 import { titleCase } from 'title-case'
 // @ts-expect-error No types
@@ -36,7 +37,7 @@ function formatVoltage(value: number | number[]): string {
     .reverse()
     .map((val) => formatter.format(val))
     .join('/')
-  text += ' kV'
+  text += ' ' + t('units.kV', 'kV')
   return text
 }
 
@@ -52,16 +53,16 @@ function formatFrequency(value: number | number[]): string {
     .reverse()
     .map((val) => formatter.format(val))
     .join('/')
-  text += ' Hz'
+  text += ' ' + t('units.Hz', 'Hz')
   return text
 }
 
 function formatPower(value: number): string {
   const formatter = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 })
   if (value < 1) {
-    return `${formatter.format(value * 1000)} kW`
+    return formatter.format(value * 1000) + ' ' + t('units.kV', 'kV')
   } else {
-    return `${formatter.format(value)} MW`
+    return formatter.format(value) + ' ' + t('units.MW', 'MW')
   }
 }
 
@@ -165,15 +166,15 @@ class InfoPopup {
     }
 
     if (key == 'frequency' && value == '0') {
-      value = 'DC'
+      value = t('units.DC', 'DC')
     }
 
     if (key == 'url') {
-      value = el('a', 'Website', {
+      value = el('a', t('info.website', 'Website'), {
         href: value,
         target: '_blank'
       })
-      key = 'Website'
+      key = t('info.website', 'Website')
     } else {
       key = titleCase(this.friendlyRender(key))
     }
@@ -262,7 +263,7 @@ class InfoPopup {
         el('a', el('div.ext_link.osm_link'), {
           href: this.osmLink(feature.properties['osm_id'], feature.properties['is_node']),
           target: '_blank',
-          title: 'OpenStreetMap'
+          title: t('info.view_openstreetmap', 'View on OpenStreetMap')
         })
       )
     }
@@ -271,7 +272,7 @@ class InfoPopup {
     if (feature.layer.id.startsWith('power_plant')) {
       mount(
         content,
-        el('a', 'More info', {
+        el('a', t('more_info', 'More info'), {
           href: '/stats/object/plant/' + feature.properties['osm_id'],
           target: '_blank'
         })
@@ -329,7 +330,7 @@ class InfoPopup {
               el('a', el('div.ext_link.wikipedia_link'), {
                 href: data['sitelinks'][`${lang}wiki`]['url'],
                 target: '_blank',
-                title: 'Wikipedia'
+                title: t('wikipedia', 'Wikipedia')
               })
             )
             break
@@ -342,7 +343,7 @@ class InfoPopup {
             el('a', el('div.ext_link.commons_link'), {
               href: data['sitelinks']['commonswiki']['url'],
               target: '_blank',
-              title: 'Wikimedia Commons'
+              title: t('wikimedia_commons', 'Wikimedia Commons')
             })
           )
         }
@@ -352,7 +353,7 @@ class InfoPopup {
           el('a', el('div.ext_link.wikidata_link'), {
             href: `https://wikidata.org/wiki/${id}`,
             target: '_blank',
-            title: 'Wikidata'
+            title: t('wikidata', 'Wikidata')
           })
         )
       })
@@ -368,7 +369,7 @@ class InfoPopup {
       return el('a', el('div.ext_link.wikipedia_link'), {
         href: url,
         target: '_blank',
-        title: 'Wikipedia'
+        title: t('wikipedia', 'Wikipedia')
       })
     }
   }

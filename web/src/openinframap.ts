@@ -1,8 +1,8 @@
 import maplibregl from 'maplibre-gl'
+import { t } from 'i18next'
 import { mount } from 'redom'
 
-import LayerSwitcher from '@russss/maplibregl-layer-switcher'
-import URLHash from '@russss/maplibregl-layer-switcher/urlhash'
+import { LayerSwitcher, URLHash, Layer } from '@russss/maplibregl-layer-switcher'
 
 import EditButton from './edit-control.js'
 import InfoPopup from './infopopup.js'
@@ -46,12 +46,15 @@ export default class OpenInfraMap {
 
   constructor() {
     if (!this.isWebglSupported()) {
-      const infobox = new WarningBox('Warning')
+      const infobox = new WarningBox(t('warning', 'Warning'))
       infobox.update(
-        '<p>Your browser may have performance or functionality issues with Open Infrastructure Map.</p>' +
-          '<p><a href="http://webglreport.com">WebGL</a> with hardware acceleration is required for this site ' +
-          'to perform well.</p>' +
-          '<p>If your browser supports WebGL, you may need to disable browser fingerprinting protection for this site.</p>'
+        t(
+          'warnings.webgl',
+          '<p>Your browser may have performance or functionality issues with Open Infrastructure Map.</p>' +
+            '<p><a href="http://webglreport.com">WebGL</a> with hardware acceleration is required for this site ' +
+            'to perform well.</p>' +
+            '<p>If your browser supports WebGL, you may need to disable browser fingerprinting protection for this site.</p>'
+        )
       )
       mount(document.body, infobox)
     }
@@ -64,7 +67,7 @@ export default class OpenInfraMap {
 
   init() {
     const oim_layers: LayerSpecificationWithZIndex[] = [
-      ...style_oim_power,
+      ...style_oim_power(),
       ...style_oim_power_heatmap,
       ...style_oim_petroleum,
       ...style_oim_telecoms,
@@ -80,18 +83,18 @@ export default class OpenInfraMap {
       return 0
     })
 
-    const layers = {
-      Power: 'power_',
-      'Solar Generation': 'heatmap_',
-      Telecoms: 'telecoms_',
-      'Oil & Gas': 'petroleum_',
-      Water: 'water_',
-      Labels: 'place_'
-    }
-    const layers_enabled = ['Power', 'Labels']
-    const layer_switcher = new LayerSwitcher(layers, layers_enabled)
+    const layer_switcher = new LayerSwitcher(
+      [
+        new Layer('P', t('layers.power', 'Power'), 'power_', true),
+        new Layer('S', t('layers.heatmap', 'Solar Generation'), 'heatmap_', false),
+        new Layer('T', t('layers.telecoms', 'Telecoms'), 'telecoms_', false),
+        new Layer('O', t('layers.petroleum', 'Oil & Gas'), 'petroleum_', false),
+        new Layer('W', t('layers.water', 'Water'), 'water_', false),
+        new Layer('L', t('layers.labels', 'Labels'), 'place_', true)
+      ],
+      t('layers.title', 'Layers')
+    )
     const url_hash = new URLHash(layer_switcher)
-    layer_switcher.urlhash = url_hash
 
     map_style.layers = style_base.concat(oim_layers, style_labels)
 
