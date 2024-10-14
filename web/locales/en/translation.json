@@ -11,6 +11,7 @@
     "error": "Unable to load remote editor - make sure it's running and has remote control enabled.\nError: "
   },
   "names": {
+    "pipeline": "Pipeline",
     "power": {
       "transformer": "Transformer",
       "tower": "Power tower",
@@ -25,7 +26,6 @@
       "cable": "Cable",
       "line": "Power line",
       "line-underground": "Underground power line",
-      "line-case": "Underground power line",
       "line-label": "Power line",
       "solar-panel": "Solar panel",
       "plant": "Power plant",
@@ -55,7 +55,6 @@
       "cabinet": "Telecoms cabinet"
     },
     "petroleum": {
-      "pipeline": "Pipeline",
       "well": "Well",
       "facility": "Petroleum facility"
     },
