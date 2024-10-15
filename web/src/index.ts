@@ -7,7 +7,12 @@ await i18next.use(LanguageDetector).init({
   fallbackLng: 'en',
   supportedLngs: ['en', 'de', 'fr', 'el'],
   resources: resources,
-  debug: import.meta.env.DEV
+  debug: import.meta.env.DEV,
+  detection: {
+    // Don't save language locally. This may need to change if we add a language switcher.
+    order: ['querystring', 'navigator'],
+    caches: []
+  }
 })
 
 document.documentElement.lang = i18next.language
