@@ -96,7 +96,7 @@ export default class OpenInfraMap {
     )
     const url_hash = new URLHash(layer_switcher)
 
-    map_style.layers = style_base.concat(oim_layers, style_labels)
+    map_style.layers = style_base.concat(oim_layers, style_labels())
 
     layer_switcher.setInitialVisibility(map_style)
 
@@ -120,6 +120,10 @@ export default class OpenInfraMap {
       if (loadedIcons.has(e.id)) return
       loadedIcons.add(e.id)
       map.addImage(e.id, image.data, { pixelRatio: icon_ratio })
+    })
+
+    map.on('click', 'place_capital', (e) => {
+      console.log(e.features)
     })
 
     map.dragRotate.disable()
