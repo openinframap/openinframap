@@ -1,1 +1,24 @@
-{}
+{
+    "edit": {
+        "remote": "Rediger med ekstern (JOSM, etc)",
+        "error": "Klarte ikke laste ekstern editor - sørg for at den kjører og at \"remote control\" er skrudd på\nFeil: ",
+        "edit": "Rediger",
+        "browser": "Rediger i nettleseren (iD)"
+    },
+    "names": {
+        "power": {
+            "generator": "Generator",
+            "wind-turbine": "Vindturbin",
+            "switch": "Bryter",
+            "compensator": "Kompensator",
+            "cable": "Kabel",
+            "line": "Kraftlinje",
+            "line-label": "Kraftlinje",
+            "solar-panel": "Solcellepanel",
+            "transformer": "Transformator"
+        }
+    },
+    "nav": {
+        "about": "Om"
+    }
+}
