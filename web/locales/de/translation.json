@@ -1,1 +1,157 @@
-{}
+{
+    "names": {
+        "power": {
+            "line-underground": "Erdkabel",
+            "transformer": "Transformator",
+            "tower": "Hochspannungsmast",
+            "pole": "Strommast",
+            "generator": "Generator",
+            "generator-solar": "Solaranlage",
+            "wind-turbine": "Windkraftanlage",
+            "substation": "Schaltanlage",
+            "switch": "Hochspannungsschalter",
+            "compensator": "Blindleistungskompensator",
+            "converter": "Stromrichterstation",
+            "cable": "Erdkabel",
+            "line": "Freileitung",
+            "line-label": "Freileitung",
+            "solar-panel": "Solarmodul",
+            "plant": "Kraftwerk",
+            "hvdc": "HGÜ",
+            "line-reference": "Leitungsbezeichnung",
+            "solar-panel-node": "Solarmodul (Knoten)",
+            "other-generator": "Anderer Generator",
+            "tower-pylon": "Hochspannungsmast",
+            "tower-transition": "Hochspannungsmast mit Erdübergang",
+            "pole-transition": "Strommast mit Erdübergang",
+            "transformer-3": "Transformator (3 Wicklungen)",
+            "switch-disconnector": "Trennschalter",
+            "switch-breaker": "Leistungsschalter",
+            "switch-other": "Anderer Schalter",
+            "compensator-other": "Anderer Kompensator"
+        },
+        "water": {
+            "reservoir": "Wasserhochbehälter",
+            "pipeline": "Wasser-Pipeline",
+            "sewage-treatment-plant": "Abwasser-Kläranlage",
+            "treatment-plant": "Kläranlage",
+            "pumping-station": "Pumpwerk",
+            "well": "Brunnen",
+            "water-pumping-station": "Frischwasser-Pumpwerk",
+            "sewage-pumping-station": "Abwasser-Pumpwerk"
+        },
+        "substance": {
+            "fuel": "Benzin",
+            "hydrogen": "Wasserstoff",
+            "co2": "CO<sub>2</sub>",
+            "fresh-water": "Frischwasser",
+            "hot-water": "Heißwasser",
+            "steam": "Dampf",
+            "oil": "Öl",
+            "gas": "Gas",
+            "petroleum-intermediate": "Erdöl-Zwischenprodukte",
+            "wastewater": "Abwasser"
+        },
+        "telecoms": {
+            "communication-line": "Telefonleitung",
+            "mast": "Telefonmast",
+            "data-center": "Rechenzentrum",
+            "exchange": "Vermittlungsstelle",
+            "cabinet": "Straßenschrank"
+        },
+        "pipeline": "Pipeline",
+        "petroleum": {
+            "well": "Bohrloch",
+            "facility": "Erdöl-Betrieb"
+        },
+        "cable": "Erdkabel",
+        "telecom": {
+            "tower-mast": "Mast",
+            "datacenter": "Rechenzentrum",
+            "exchange": "Vermittlungsstelle"
+        },
+        "cabinet": "Straßenschrank",
+        "other-pumping-station": "Anderes Pumpwerk"
+    },
+    "key": {
+        "name": "Legende",
+        "power-lines": "Leitungen",
+        "power-plants": "Kraftwerke",
+        "power-generators": "Stromerzeuger",
+        "power-line-supports": "Strommasten",
+        "switchgear": "Schaltanlagen",
+        "telecoms": "Telekommunikation",
+        "petroleum": "Brennstoffe",
+        "water": "Wasser",
+        "traction": "Traktion (< 50 Hz)"
+    },
+    "power": {
+        "source": {
+            "nuclear": "Atomkraft",
+            "oil-gas": "Öl/Gas",
+            "solar": "Sonne",
+            "wind": "Wind",
+            "coal": "Kohle",
+            "geothermal": "Geothermie",
+            "hydro": "Wasserkraft",
+            "biomass": "Biomasse",
+            "waste": "Abfall",
+            "battery": "Batterie"
+        }
+    },
+    "edit": {
+        "edit": "Bearbeiten",
+        "remote": "Ferngesteuert bearbeiten (JOSM, usw)",
+        "browser": "Im Browser bearbeiten (iD)",
+        "error": "Ferngesteuerter Editor konnte nicht geladen werden - bitte prüfe, ob er gestartet und die Fernsteuerung aktiviert ist.\nFehler: "
+    },
+    "info": {
+        "name": "Name",
+        "operator": "Betreiber",
+        "output": "Leistung",
+        "source": "Quelle",
+        "start-date": "Startdatum",
+        "generation-method": "Erzeugungsmethode",
+        "substation-type": "Schaltanlage",
+        "reference": "Referenz",
+        "circuits": "Stromkreise",
+        "type": "Typ",
+        "website": "Webseite",
+        "view-openstreetmap": "Auf OpenStreetMap ansehen"
+    },
+    "nav": {
+        "about": "Über",
+        "stats": "Statistiken",
+        "exports": "Exporte"
+    },
+    "units": {
+        "kV": "kV",
+        "Hz": "Hz",
+        "MW": "MW",
+        "DC": "DC",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V"
+    },
+    "more_info": "Mehr Informationen",
+    "wikipedia": "Wikipedia",
+    "wikimedia-commons": "Wikimedia Commons",
+    "wikidata": "Wikidata",
+    "underground": "Unterirdisch",
+    "other": "Andere",
+    "warning": "Warnung",
+    "warnings": {
+        "webgl": "<p>Dein Browser hat möglicherweise eine eingeschränkte Leistung oder fehlende Funktionen von Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> mit Hardware-Beschelunigung wird für die volle Funktionalität benötigt.</p><p>Wenn dein Browser WebGL unterstützt, musst du möglicherweise den Fingerprinting-Schutz des Browsers für diese Seite deaktivieren.</p>"
+    },
+    "layers": {
+        "power": "Energie",
+        "heatmap": "Solare Erzeugung",
+        "telecoms": "Telekommunikation",
+        "petroleum": "Öl & Gas",
+        "water": "Wasser",
+        "labels": "Bezeichnungen",
+        "title": "Ebenen"
+    },
+    "construction": "in Arbeit"
+}
