@@ -14,7 +14,11 @@
             "tower-pylon": "Tour/Pylône",
             "wind-turbine": "Eolienne",
             "cable": "Câble",
-            "other-generator": "Autre générateur"
+            "other-generator": "Autre générateur",
+            "pole": "Poteau électrique",
+            "compensator": "Compensateur",
+            "reactor-series": "Inductance série",
+            "reactor-shunt": "Inductance shunt"
         },
         "substance": {
             "co2": "CO<sub>2</sub>",
