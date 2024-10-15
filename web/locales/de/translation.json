@@ -36,8 +36,8 @@
         "water": {
             "reservoir": "Wasserhochbehälter",
             "pipeline": "Wasser-Pipeline",
-            "sewage-treatment-plant": "Abwasser-Kläranlage",
-            "treatment-plant": "Kläranlage",
+            "sewage-treatment-plant": "Kläranlage",
+            "treatment-plant": "Wasserwerk",
             "pumping-station": "Pumpwerk",
             "well": "Brunnen",
             "water-pumping-station": "Frischwasser-Pumpwerk",
@@ -58,7 +58,7 @@
         },
         "telecoms": {
             "communication-line": "Telefonleitung",
-            "mast": "Telefonmast",
+            "mast": "Sendemast",
             "data-center": "Rechenzentrum",
             "exchange": "Vermittlungsstelle",
             "cabinet": "Straßenschrank"
@@ -70,7 +70,7 @@
         },
         "cable": "Erdkabel",
         "telecom": {
-            "tower-mast": "Mast",
+            "tower-mast": "Sendemast",
             "datacenter": "Rechenzentrum",
             "exchange": "Vermittlungsstelle"
         },
