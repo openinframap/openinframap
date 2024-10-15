@@ -33,7 +33,130 @@
             "solar-panel-node": "Ηλιακό πάνελ (κόμβος)",
             "tower-pylon": "Πυλώνας",
             "line-reference": "Αναφορά γραμμής",
-            "other-generator": "Άλλη γεννήτρια"
+            "other-generator": "Άλλη γεννήτρια",
+            "pole-transition": "Κολώνα διακλάδωσης",
+            "transformer-3": "Μετασχηματιστής (3 περιελίξεις)",
+            "switch-disconnector": "Αποζεύκτης",
+            "switch-breaker": "Ασφαλειοδιακόπτης",
+            "reactor-series": "Αντιδραστήρας σειράς",
+            "capacitor-series": "Πυκνωτής σειράς",
+            "capacitor-shunt": "Πυκνωτής διακλάδωσης",
+            "tower-transition": "Πυλώνας διακλάδωσης",
+            "switch-other": "Άλλος διακόπτης",
+            "reactor-shunt": "Αντιδραστήρας διακλάδωσης",
+            "filter": "Φίλτρο",
+            "compensator-other": "Άλλος αντισταθμιστής"
+        },
+        "telecoms": {
+            "communication-line": "Γραμμή τηλεπικοινωνιών",
+            "mast": "Ιστός τηλεπικοινωνιών",
+            "data-center": "Κτήριο τηλεπικοινωνιών",
+            "exchange": "Τηλεφωνικό κέντρο",
+            "cabinet": "Καφάο"
+        },
+        "water": {
+            "pipeline": "Αγωγός νερού",
+            "sewage-treatment-plant": "Μονάδα επεξεργασίας λυμάτων",
+            "pumping-station": "Αντλιοστάσιο",
+            "well": "Πηγάδι νερού",
+            "reservoir": "Ταμιευτήρας νερού",
+            "water-pumping-station": "Αντλιοστάσιο νερού",
+            "sewage-pumping-station": "Αντλιοστάσιο λυμάτων",
+            "treatment-plant": "Μονάδα επεξεργασίας νερού"
+        },
+        "telecom": {
+            "tower-mast": "Πύργος/Ιστός",
+            "datacenter": "Κέντρο δεδομένων",
+            "exchange": "Τηλεφωνικό κέντρο"
+        },
+        "substance": {
+            "oil": "Πετρέλαιο",
+            "petroleum-intermediate": "Ενδιάμεσο προϊόν πετρελαίου",
+            "co2": "CO<sub>2</sub>",
+            "wastewater": "Λύματα",
+            "hydrogen": "Υδρογόνο",
+            "fresh-water": "Φρέσκο νερό",
+            "steam": "Ατμός",
+            "hot-water": "Καυτό νερό",
+            "gas": "Αέριο",
+            "fuel": "Καύσιμο"
+        },
+        "petroleum": {
+            "well": "Πηγάδι",
+            "facility": "Υποδομή πετρελαίου"
+        },
+        "cabinet": "Καφάο",
+        "other-pumping-station": "Άλλο αντλιοστάσιο",
+        "cable": "Καλώδιο"
+    },
+    "units": {
+        "kW": "kW",
+        "ge_kv": "≥ {{voltage}} kV",
+        "V": "V",
+        "below_10kv": "< 10 kV",
+        "kV": "kV",
+        "MW": "MW",
+        "Hz": "Hz",
+        "DC": "DC"
+    },
+    "layers": {
+        "telecoms": "Τηλεπικοινωνίες",
+        "water": "Νερό",
+        "power": "Ρεύμα",
+        "title": "Επίπεδα",
+        "heatmap": "Ηλιακή Παραγωγή",
+        "petroleum": "Πετρέλαιο & Αέριο",
+        "labels": "Ετικέτες"
+    },
+    "info": {
+        "operator": "Διαχειριστής",
+        "output": "Ισχύς",
+        "substation-type": "Είδος υποσταθμού",
+        "reference": "Αναφορά",
+        "website": "Ιστότοπος",
+        "view-openstreetmap": "Δείτε στο OpenStreetMap",
+        "name": "Όνομα",
+        "source": "Πηγή",
+        "start-date": "Ημερομηνία έναρξης",
+        "generation-method": "Μέθοδος παραγωγής",
+        "circuits": "Κυκλώματα",
+        "type": "Είδος"
+    },
+    "wikidata": "Wikidata",
+    "key": {
+        "name": "Κλειδί",
+        "power-lines": "Γραμμές Ρεύματος",
+        "switchgear": "Εξοπλισμός μεταγωγής υποσταθμού",
+        "petroleum": "Πετρέλαιο",
+        "traction": "Κίνησης (< 50 Hz)",
+        "power-plants": "Εργοστάσια Παραγωγής Ρεύματος",
+        "power-generators": "Γεννήτριες Ρεύματος",
+        "power-line-supports": "Στηρίγματα Γραμμών Ρεύματος",
+        "telecoms": "Τηλεπικοινωνίες",
+        "water": "Νερό"
+    },
+    "underground": "Υπόγεια",
+    "power": {
+        "source": {
+            "coal": "Άνθρακας",
+            "geothermal": "Γεωθερμική",
+            "hydro": "Υδροηλεκτρική",
+            "nuclear": "Πυρηνική",
+            "oil-gas": "Πετρέλαιο/Αέριο",
+            "solar": "Ηλιακή",
+            "wind": "Αέρας",
+            "biomass": "Βιομάζα",
+            "waste": "Απορρίμματα",
+            "battery": "Μπαταρία"
         }
-    }
+    },
+    "other": "Άλλο",
+    "warning": "Προειδοποίηση",
+    "more_info": "Περισσότερες πληροφορίες",
+    "wikipedia": "Wikipedia",
+    "wikimedia-commons": "Wikimedia Commons",
+    "warnings": {
+        "webgl": "<p>Ο περιηγητής σας ίσως να έχει προβλήματα απόδοσης ή λειτουργίας με το Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> με επιτάχυνση υλικού απαιτείται για να αποδόσει καλά αυτός ο ιστότοπος.</p><p>Αν ο περιηγητής σας υποστηρίζει WebGL, ίσως να χρειαστεί να απενεργοποιήσετε την προστασία fingerprinting περιηγητή γι' αυτό τον ιστότοπο.</p>"
+    },
+    "construction": "υπό κατασκευή"
 }
