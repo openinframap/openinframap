@@ -112,7 +112,7 @@
         "circuits": "Kretser",
         "type": "Type",
         "substance": "Substans",
-        "substation-type": "Transformatorstasjontype"
+        "substation-type": "Stasjonstype"
     },
     "units": {
         "kV": "kV",
