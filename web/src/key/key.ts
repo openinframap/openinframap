@@ -240,7 +240,7 @@ class KeyControl implements IControl {
 
   async telecomTable() {
     const rows = [
-      [t('names.cable', 'Cable'), svgLineFromLayer(comms_layers, 'telecoms_line')],
+      [t('names.cable', 'Cable'), svgLineFromLayer(comms_layers(), 'telecoms_line')],
       [t('names.telecom.tower-mast', 'Tower/Mast'), await this.sprite('comms_tower')],
       [t('names.telecom.datacenter', 'Datacenter'), await this.sprite('telecom_datacenter')],
       [t('names.telecom.exchange', 'Exchange'), await this.sprite('telecom_exchange')],
@@ -265,7 +265,7 @@ class KeyControl implements IControl {
       [t('other', 'Other'), svgLine(colour_unknown, line_thickness)],
       [
         t('names.petroleum.facility', 'Petroleum facility'),
-        svgRectFromLayer(petroleum_layers, 'petroleum_site')
+        svgRectFromLayer(petroleum_layers(), 'petroleum_site')
       ]
     ]
     const table = list('table', Tr)

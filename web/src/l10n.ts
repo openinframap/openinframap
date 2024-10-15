@@ -7,9 +7,11 @@ import browserLanguage from 'in-browser-language'
 const layer_supported_languages: string[] = ['en', 'es', 'de', 'fr', 'hi', 'ur', 'zh', 'ru', 'pt', 'ja']
 
 /* List of name tags to check, in order */
-const local_name_tags: string[] = (browserLanguage.list() as string[])
-  .filter((code: string) => layer_supported_languages.includes(code))
-  .map((code: string) => `name_${code}`)
-  .concat(['name'])
+function local_name_tags(): string[] {
+  return (browserLanguage.list() as string[])
+    .filter((code: string) => layer_supported_languages.includes(code))
+    .map((code: string) => `name_${code}`)
+    .concat(['name'])
+}
 
 export { layer_supported_languages, local_name_tags }

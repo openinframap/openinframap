@@ -1,5 +1,5 @@
 import { t } from 'i18next'
-import { text_paint, underground_p, font, local_name, oimSymbol } from './common.js'
+import { text_paint, underground_p, font, get_local_name, oimSymbol } from './common.js'
 import {
   all,
   has,
@@ -270,6 +270,8 @@ export default function layers(): LayerSpecificationWithZIndex[] {
     concat(output, ' ' + t('units.MW', 'MW')),
     concat(['round', ['*', output, 1000]], ' ' + t('units.kW', 'kW'))
   )
+
+  const local_name = get_local_name()
 
   function name_output_label(detail_zoom: number) {
     return step(zoom, local_name, [

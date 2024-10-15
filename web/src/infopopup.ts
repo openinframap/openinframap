@@ -29,16 +29,19 @@ const hidden_keys = [
 function fieldName(key: string) {
   return (
     {
-      name: t('info.name', 'Name'),
-      operator: t('info.operator', 'Operator'),
-      output: t('info.output', 'Output'),
-      source: t('info.source', 'Source'),
-      start_date: t('info.start-date', 'Start date'),
-      method: t('info.generation-method', 'Generation method'),
-      substation: t('info.substation-type', 'Substation type'),
-      ref: t('info.reference', 'Reference'),
-      circuits: t('info.circuits', 'Circuits'),
-      type: t('info.type', 'Type'),
+      name: t('info.name'),
+      operator: t('info.operator'),
+      output: t('info.output'),
+      source: t('info.source'),
+      start_date: t('info.start-date'),
+      method: t('info.generation-method'),
+      substation: t('info.substation-type'),
+      ref: t('info.reference'),
+      circuits: t('info.circuits'),
+      type: t('info.type'),
+      substance: t('info.substance'),
+      location: t('info.location'),
+      usage: t('info.usage'),
       repd_id: 'REPD ID'
     }[key] || titleCase(key)
   )
@@ -207,7 +210,7 @@ class InfoPopup {
   nameTags(feature: MapGeoJSONFeature) {
     let title_text = ''
 
-    for (const tag of local_name_tags) {
+    for (const tag of local_name_tags()) {
       if (feature.properties[tag]) {
         title_text = feature.properties[tag]
         break

@@ -80,7 +80,8 @@
       "fresh-water": "Fresh water",
       "hot-water": "Hot water",
       "steam": "Steam",
-      "wastewater": "Wastewater"
+      "wastewater": "Wastewater",
+      "rainwater": "Rainwater"
     },
     "other-pumping-station": "Other pumping station"
   },
@@ -96,7 +97,10 @@
     "circuits": "Circuits",
     "type": "Type",
     "website": "Website",
-    "view-openstreetmap": "View on OpenStreetMap"
+    "view-openstreetmap": "View on OpenStreetMap",
+    "substance": "Substance",
+    "usage": "Usage",
+    "location": "Location"
   },
   "nav": {
     "about": "about",

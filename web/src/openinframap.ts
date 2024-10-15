@@ -69,9 +69,9 @@ export default class OpenInfraMap {
     const oim_layers: LayerSpecificationWithZIndex[] = [
       ...style_oim_power(),
       ...style_oim_power_heatmap,
-      ...style_oim_petroleum,
-      ...style_oim_telecoms,
-      ...style_oim_water
+      ...style_oim_petroleum(),
+      ...style_oim_telecoms(),
+      ...style_oim_water()
     ]
 
     oim_layers.sort((a, b) => {

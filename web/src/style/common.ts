@@ -3,9 +3,9 @@ import { LayerSpecificationWithZIndex } from './types.ts'
 import { local_name_tags } from '../l10n.ts'
 import { step, interpolate, literal, get, has, all, any, concat } from './stylehelpers.ts'
 
-export const local_name: ExpressionSpecification = (['coalesce'] as any).concat(
-  local_name_tags.map((tag) => get(tag))
-) as ExpressionSpecification
+export function get_local_name(): ExpressionSpecification {
+  return (['coalesce'] as any).concat(local_name_tags().map((tag) => get(tag))) as ExpressionSpecification
+}
 
 export const text_paint = {
   'text-halo-width': 4,
