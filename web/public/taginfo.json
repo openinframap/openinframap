@@ -14,6 +14,10 @@
       "object_types": ["node", "way", "relation", "area"]
     },
     {
+      "key": "construction:power",
+      "object_types": ["node", "way", "relation", "area"]
+    },
+    {
       "key": "plant:source",
       "object_types": ["relation", "area"]
     },
@@ -66,32 +70,47 @@
     {
       "key": "building",
       "value": "data_center",
-      "object_types": ["area"]
+      "object_types": ["node", "area"]
     },
     {
       "key": "building",
       "value": "data_centre",
-      "object_types": ["area"]
+      "object_types": ["node", "area"]
     },
     {
       "key": "building",
       "value": "telephone_exchange",
-      "object_types": ["area"]
+      "object_types": ["node", "area"]
     },
     {
       "key": "telecom",
       "value": "data_center",
-      "object_types": ["area"]
+      "object_types": ["node", "area"]
     },
     {
       "key": "telecom",
       "value": "data_centre",
-      "object_types": ["area"]
+      "object_types": ["node", "area"]
     },
     {
       "key": "telecom",
-      "value": "telephone_exchange",
-      "object_types": ["area"]
+      "value": "central_office",
+      "object_types": ["node", "area"]
+    },
+    {
+      "key": "telecom",
+      "value": "exchange",
+      "object_types": ["node", "area"]
+    },
+    {
+      "key": "telecom",
+      "value": "connection_point",
+      "object_types": ["node", "area"]
+    },
+    {
+      "key": "telecom",
+      "value": "distribution_point",
+      "object_types": ["node", "area"]
     },
     {
       "key": "office",
@@ -100,22 +119,22 @@
     },
     {
       "key": "man_made",
-      "value": "telephone_office",
-      "object_types": ["area"]
-    },
-    {
-      "key": "man_made",
       "value": "mast",
-      "object_types": ["node"]
+      "object_types": ["node", "area"]
     },
     {
       "key": "man_made",
       "value": "tower",
-      "object_types": ["node"]
+      "object_types": ["node", "area"]
     },
     {
       "key": "man_made",
       "value": "communications_tower",
+      "object_types": ["node", "area"]
+    },
+    {
+      "key": "man_made",
+      "value": "utility_pole",
       "object_types": ["node"]
     },
     {
@@ -161,6 +180,46 @@
       "key": "man_made",
       "value": "oil_well",
       "object_types": ["node"]
+    },
+    {
+      "key": "man_made",
+      "value": "water_works",
+      "object_types": ["area"]
+    },
+    {
+      "key": "man_made",
+      "value": "desalination_plant",
+      "object_types": ["area"]
+    },
+    {
+      "key": "man_made",
+      "value": "wastewater_plant",
+      "object_types": ["area"]
+    },
+    {
+      "key": "man_made",
+      "value": "pumping_station",
+      "object_types": ["area"]
+    },
+    {
+      "key": "man_made",
+      "value": "water_tower",
+      "object_types": ["node", "area"]
+    },
+    {
+      "key": "man_made",
+      "value": "water_well",
+      "object_types": ["node", "area"]
+    },
+    {
+      "key": "man_made",
+      "value": "reservoir_covered",
+      "object_types": ["area"]
+    },
+    {
+      "key": "water",
+      "value": "reservoir",
+      "object_types": ["area"]
     }
   ]
 }
