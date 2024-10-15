@@ -1,1 +1,16 @@
-{}
+{
+    "names": {
+        "power": {
+            "transformer": "Transformateur",
+            "tower": "Pylône électrique"
+        }
+    },
+    "edit": {
+        "edit": "Editer",
+        "remote": "Editer avec un tiers (JOSM, etc.)",
+        "browser": "Editer en ligne (iD)"
+    },
+    "nav": {
+        "about": "à propos"
+    }
+}
