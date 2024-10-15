@@ -1,8 +1,10 @@
 # Open Infrastructure Map
-This is the main repository for [OpenInfraMap](https://openinframap.org), a map showing infrastructure
-from [OpenStreetMap](https://www.openstreetmap.org).
+This is the main repository for [Open Infrastructure Map](https://openinframap.org), a map showing the world's
+infrastructure from [OpenStreetMap](https://www.openstreetmap.org).
 
 ## Translations
+We're aiming to make OpenInfraMap multilingual - if you can help translate, please
+[contribute on Weblate](https://hosted.weblate.org/engage/open-infrastructure-map/).
 [![Translation status](https://hosted.weblate.org/widget/open-infrastructure-map/multi-auto.svg)](https://hosted.weblate.org/engage/open-infrastructure-map/)
 
 ## Web frontend
@@ -11,15 +13,14 @@ The [web frontend](web) contains the web app, written in TypeScript using Maplib
 
 ## Web backend
 
-The [web backend](web-backend) serves the [stats pages](https://openinframap.org/stats), as well as some additional non-JS web endpoints. It's an async python web app built using starlette.
+The [web backend](web-backend) serves the [stats pages](https://openinframap.org/stats), as well as
+some additional non-JS web endpoints. It's an async python web app built using starlette.
 
-## OSM Import & Mapping
+## Database
 
-The mapping file controls how the OSM subset is imported with
-[imposm3](https://imposm.org/docs/imposm3/latest/). It's generated from the files in [imposm](imposm)
-by calling `python3 ./mapping/main.py > ./mapping.json`.
-
-The production server uses the docker container built in this directory.
+The database runs [Postgres](https://www.postgresql.org/) with [PostGIS](https://postgis.net/) and
+is populated from the OpenStreetMap replication feed by [Imposm 3](https://imposm.org/docs/imposm3/latest/).
+[More info](./imposm)
 
 Changes to the mapping require a re-import of the OpenStreetMap database, which takes
 a while and is currently done very irregularly.
