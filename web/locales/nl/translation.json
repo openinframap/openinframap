@@ -17,7 +17,15 @@
             "plant": "Energiecentrale",
             "other-generator": "Andere generator",
             "switch-disconnector": "Scheidingsschakelaar",
-            "switch-other": "Andere schakelaar"
+            "switch-other": "Andere schakelaar",
+            "compensator-other": "Andere compensator"
+        },
+        "telecoms": {
+            "communication-line": "Telecomlijn",
+            "data-center": "Telecomgebouw",
+            "exchange": "Telefooncentrale",
+            "cabinet": "Telecomkast",
+            "mast": "Telecommast"
         }
     },
     "edit": {
