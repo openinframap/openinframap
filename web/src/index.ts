@@ -10,6 +10,8 @@ await i18next.use(LanguageDetector).init({
   debug: import.meta.env.DEV
 })
 
+document.documentElement.lang = i18next.language
+
 // Translate HTML elements.
 document.querySelectorAll('[data-i18n]').forEach((element) => {
   const key = element.getAttribute('data-i18n')
