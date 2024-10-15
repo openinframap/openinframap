@@ -64,8 +64,7 @@
     "cable": "Cable",
     "telecom": {
       "tower-mast": "Tower/Mast",
-      "datacenter": "Datacenter",
-      "exchange": "Exchange"
+      "datacenter": "Datacenter"
     },
     "cabinet": "Cabinet",
     "substance": {
