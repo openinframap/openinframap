@@ -2,8 +2,58 @@
     "names": {
         "power": {
             "transformer": "Transformateur",
-            "tower": "Pylône électrique"
-        }
+            "tower": "Pylône électrique",
+            "generator-solar": "Panneau solaire",
+            "line-reference": "Référence de la ligne",
+            "substation": "Sous-station",
+            "generator": "générateur",
+            "solar-panel": "Panneau solaire",
+            "line": "Ligne électrique",
+            "line-underground": "Ligne électrique souterraine",
+            "solar-panel-node": "Panneau solaire (noeud)",
+            "tower-pylon": "Tour/Pylône",
+            "wind-turbine": "Eolienne",
+            "cable": "Câble",
+            "other-generator": "Autre générateur"
+        },
+        "substance": {
+            "co2": "CO<sub>2</sub>",
+            "hydrogen": "Hydrogène",
+            "steam": "Vapeur",
+            "wastewater": "Eaux usées",
+            "rainwater": "Eaux pluviales",
+            "gas": "Gaz",
+            "fresh-water": "Eau froide",
+            "hot-water": "Eau chaude"
+        },
+        "telecoms": {
+            "mast": "Poteau télécommunication",
+            "cabinet": "Armoire télécommunication",
+            "data-center": "Data Center (bâtiment)",
+            "communication-line": "Ligne télécommunication"
+        },
+        "petroleum": {
+            "well": "Forage",
+            "facility": "Plateforme pétrolière"
+        },
+        "water": {
+            "pipeline": "Conduite d'eau",
+            "well": "Puit",
+            "reservoir": "Réservoir d'eau",
+            "sewage-treatment-plant": "Station d'épuration",
+            "treatment-plant": "Station de traitement de l'eau",
+            "sewage-pumping-station": "Poste de refoulement",
+            "water-pumping-station": "Station de pompage de l'eau",
+            "pumping-station": "Station de pompage"
+        },
+        "cable": "Câble",
+        "telecom": {
+            "datacenter": "Datacenter",
+            "tower-mast": "Tour/Mât"
+        },
+        "cabinet": "Armoire",
+        "pipeline": "Pipeline",
+        "other-pumping-station": "Autre station de pompage"
     },
     "edit": {
         "edit": "Editer",
@@ -11,6 +61,68 @@
         "browser": "Editer en ligne (iD)"
     },
     "nav": {
-        "about": "à propos"
-    }
+        "about": "à propos",
+        "exports": "exports",
+        "stats": "statistiques"
+    },
+    "info": {
+        "view-openstreetmap": "Voir sur OpenStreetMap",
+        "website": "Site web",
+        "source": "Source",
+        "start-date": "Date de début",
+        "usage": "Utilisation",
+        "location": "Localisation",
+        "output": "Puissance",
+        "name": "Nom",
+        "operator": "Opérateur",
+        "type": "Type",
+        "substation-type": "Type de sous-station",
+        "reference": "Référence"
+    },
+    "other": "Autre",
+    "units": {
+        "V": "V",
+        "kV": "kV",
+        "Hz": "Hz",
+        "MW": "MW",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "DC": "DC",
+        "kW": "kW"
+    },
+    "key": {
+        "name": "Clé",
+        "telecoms": "Télécommunications",
+        "petroleum": "Pétrolier",
+        "power-lines": "Lignes électriques",
+        "power-line-supports": "Supports de lignes électriques",
+        "water": "Eau"
+    },
+    "wikidata": "Wikidata",
+    "power": {
+        "source": {
+            "coal": "Charbon",
+            "wind": "Eolien",
+            "biomass": "Biomasse",
+            "geothermal": "Géothermie",
+            "hydro": "Hydro-électricité",
+            "waste": "",
+            "nuclear": "Nucléaire",
+            "solar": "Solaire"
+        }
+    },
+    "underground": "Souterrain",
+    "wikimedia-commons": "Wikimedia Commons",
+    "warning": "Avertissement",
+    "layers": {
+        "title": "Couches",
+        "telecoms": "Télécommunications",
+        "power": "Electricité",
+        "water": "Eau",
+        "heatmap": "Energie solaire",
+        "labels": "Etiquettes"
+    },
+    "more_info": "Plus d'infos",
+    "wikipedia": "Wikipedia",
+    "construction": "en construction"
 }
