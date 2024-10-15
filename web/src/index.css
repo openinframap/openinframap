@@ -4,6 +4,8 @@
   --aa-search-input-height: 33px !important;
   --aa-input-icon-size: 20px !important;
   --aa-primary-color-rgb: 100, 100, 100 !important;
+  --aa-input-background-color-rgb: 250, 250, 250 !important;
+  --aa-input-background-color-alpha: 0.8 !important;
 }
 
 html {
@@ -83,6 +85,11 @@ h1 {
 
 #geo-search {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 2px;
+  border-radius: 4px;
+}
+
+.aa-Autocomplete:has(:focus) {
+  background-color: rgba(250, 250, 250, 1);
 }
 
 a {
