@@ -58,7 +58,6 @@
         },
         "telecoms": {
             "communication-line": "Telefonleitung",
-            "mast": "Sendemast",
             "data-center": "Rechenzentrum",
             "exchange": "Vermittlungsstelle",
             "cabinet": "Straßenschrank"

@@ -30,7 +30,6 @@
             "hot-water": "Eau chaude"
         },
         "telecoms": {
-            "mast": "Poteau télécommunication",
             "cabinet": "Armoire télécommunication",
             "data-center": "Data Center (bâtiment)",
             "communication-line": "Ligne télécommunication"

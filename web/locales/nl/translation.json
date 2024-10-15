@@ -24,8 +24,7 @@
             "communication-line": "Telecomlijn",
             "data-center": "Telecomgebouw",
             "exchange": "Telefooncentrale",
-            "cabinet": "Telecomkast",
-            "mast": "Telecommast"
+            "cabinet": "Telecomkast"
         },
         "water": {
             "sewage-treatment-plant": "Rioolwaterzuiveringsinstallatie",

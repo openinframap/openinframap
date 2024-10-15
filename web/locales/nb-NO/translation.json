@@ -44,7 +44,6 @@
             "facility": "Petroleumsanlegg"
         },
         "telecoms": {
-            "mast": "Telekommast",
             "communication-line": "Telekomlinje",
             "cabinet": "Telekomskap",
             "data-center": "Telekombygning",
