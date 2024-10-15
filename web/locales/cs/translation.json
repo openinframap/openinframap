@@ -1,6 +1,8 @@
 {
     "edit": {
-        "edit": "Upravit"
+        "edit": "Upravit",
+        "browser": "Upravit v prohlížeči (iD)",
+        "remote": "Upravit vzdáleným ovládáním (JOSM apod.)"
     },
     "nav": {
         "about": "o projektu"
