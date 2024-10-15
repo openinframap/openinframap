@@ -64,8 +64,7 @@
         },
         "telecom": {
             "tower-mast": "Πύργος/Ιστός",
-            "datacenter": "Κέντρο δεδομένων",
-            "exchange": "Τηλεφωνικό κέντρο"
+            "datacenter": "Κέντρο δεδομένων"
         },
         "substance": {
             "oil": "Πετρέλαιο",

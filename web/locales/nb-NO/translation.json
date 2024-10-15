@@ -63,8 +63,7 @@
         "cable": "Kabel",
         "telecom": {
             "tower-mast": "Tårn/Mast",
-            "datacenter": "Datasenter",
-            "exchange": "Sentral"
+            "datacenter": "Datasenter"
         },
         "cabinet": "Skap",
         "substance": {

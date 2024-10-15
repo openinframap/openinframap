@@ -71,8 +71,7 @@
         "cable": "Erdkabel",
         "telecom": {
             "tower-mast": "Sendemast",
-            "datacenter": "Rechenzentrum",
-            "exchange": "Vermittlungsstelle"
+            "datacenter": "Rechenzentrum"
         },
         "cabinet": "Straßenschrank",
         "other-pumping-station": "Anderes Pumpwerk"
