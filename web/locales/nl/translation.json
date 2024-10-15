@@ -26,11 +26,112 @@
             "exchange": "Telefooncentrale",
             "cabinet": "Telecomkast",
             "mast": "Telecommast"
-        }
+        },
+        "water": {
+            "sewage-treatment-plant": "Rioolwaterzuiveringsinstallatie",
+            "pumping-station": "Pompstation",
+            "water-pumping-station": "Waterpompstation",
+            "treatment-plant": "Waterzuiveringsinstallatie",
+            "sewage-pumping-station": "Rioolwaterpompstation"
+        },
+        "telecom": {
+            "datacenter": "Datacenter"
+        },
+        "cabinet": "Kast",
+        "substance": {
+            "oil": "Olie",
+            "gas": "Gas",
+            "co2": "CO<sub>2</sub>",
+            "hot-water": "Heet water",
+            "hydrogen": "Waterstof",
+            "fuel": "Brandstof",
+            "steam": "Stoom",
+            "wastewater": "Rioolwater",
+            "rainwater": "Regenwater"
+        },
+        "pipeline": "Pijpleiding",
+        "cable": "Kabel",
+        "other-pumping-station": "Ander pompstation"
     },
     "edit": {
         "browser": "Bewerken in de browser (iD)",
         "remote": "Bewerken met afstandsbediening (JOSM, etc)",
-        "error": "Niet in staat het bewerkingsprogramma op afstand te laden - zorg dat deze is opgestart en dat afstandsbediening is ingeschakeld.\nFout: "
-    }
+        "error": "Niet in staat het bewerkingsprogramma op afstand te laden - zorg dat deze is opgestart en dat afstandsbediening is ingeschakeld.\nFout: ",
+        "edit": "Bewerken"
+    },
+    "nav": {
+        "about": "over",
+        "stats": "statistieken"
+    },
+    "units": {
+        "kW": "kW",
+        "V": "V",
+        "kV": "kV",
+        "Hz": "Hz",
+        "MW": "MW",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV"
+    },
+    "more_info": "Meer informatie",
+    "layers": {
+        "water": "Water",
+        "petroleum": "Olie & Gas",
+        "labels": "Labels",
+        "title": "Lagen"
+    },
+    "power": {
+        "source": {
+            "wind": "Wind",
+            "coal": "Steenkool",
+            "nuclear": "Nucleair",
+            "oil-gas": "Olie/Gas",
+            "biomass": "Biomassa",
+            "hydro": "Hydro-elektrisch",
+            "geothermal": "Geothermisch",
+            "gas": "Gas",
+            "solar": "Zon"
+        },
+        "substation-type": {
+            "traction": "Tractie"
+        }
+    },
+    "warning": "Waarschuwing",
+    "info": {
+        "source": "Bron",
+        "start-date": "Startdatum",
+        "circuits": "Netwerk",
+        "type": "Type",
+        "view-openstreetmap": "Bekijk op OpenStreetMap",
+        "substance": "Substantie",
+        "usage": "Gebruik",
+        "name": "Naam",
+        "operator": "Uitbatende organisatie",
+        "generation-method": "Generatiemethode",
+        "reference": "Referentie",
+        "website": "Website",
+        "location": "Locatie"
+    },
+    "wikipedia": "Wikipedia",
+    "key": {
+        "name": "Legenda",
+        "power-lines": "Elektriciteitslijnen",
+        "power-plants": "Energiecentrales",
+        "power-generators": "Elektriciteitsgeneratoren",
+        "traction": "Tractie (< 50 Hz)",
+        "petroleum": "Petroleum",
+        "water": "Water"
+    },
+    "location": {
+        "indoor": "Binnen",
+        "underwater": "Onderwater",
+        "outdoor": "Buiten",
+        "roof": "Dak",
+        "underground": "Ondergronds",
+        "overhead": "Boven het hoofd",
+        "surface": "Oppervlak"
+    },
+    "other": "Andere",
+    "wikidata": "Wikidata",
+    "wikimedia-commons": "Wikimedia Commons",
+    "construction": "in aanbouw"
 }
