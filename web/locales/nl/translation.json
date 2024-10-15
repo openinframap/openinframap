@@ -1,1 +1,28 @@
-{}
+{
+    "names": {
+        "power": {
+            "tower": "Hoogspanningsmast",
+            "generator": "Generator",
+            "wind-turbine": "Windturbine",
+            "switch": "Schakelaar",
+            "cable": "Elektriciteitskabel",
+            "solar-panel": "Zonnepaneel",
+            "line-reference": "Lijn-referentie",
+            "solar-panel-node": "Zonnepaneel (knooppunt)",
+            "switch-breaker": "Vermogensschakelaar",
+            "compensator": "Compensator",
+            "transformer": "Transformator",
+            "pole": "Elektriciteitspaal",
+            "line": "Elektriciteitslijn",
+            "plant": "Energiecentrale",
+            "other-generator": "Andere generator",
+            "switch-disconnector": "Scheidingsschakelaar",
+            "switch-other": "Andere schakelaar"
+        }
+    },
+    "edit": {
+        "browser": "Bewerken in de browser (iD)",
+        "remote": "Bewerken met afstandsbediening (JOSM, etc)",
+        "error": "Niet in staat het bewerkingsprogramma op afstand te laden - zorg dat deze is opgestart en dat afstandsbediening is ingeschakeld.\nFout: "
+    }
+}
