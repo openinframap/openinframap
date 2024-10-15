@@ -156,7 +156,6 @@
     "warning": "Advarsel",
     "construction": "under bygging",
     "wikidata": "Wikidata",
-    "underground": "Underjordisk",
     "other": "Annet",
     "warnings": {
         "webgl": "<p>Nettleseren din kan ha ytelses- eller funksjonalitetsproblemer med Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> med maskinvareakselerasjon er nødvendig for at dette nettstedet skal fungere godt.</p><p>Hvis nettleseren din støtter WebGL, kan det hende du må deaktivere beskyttelse mot nettleserfingeravtrykk for dette nettstedet.</p>"
