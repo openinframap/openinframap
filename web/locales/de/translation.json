@@ -99,7 +99,13 @@
             "hydro": "Wasserkraft",
             "biomass": "Biomasse",
             "waste": "Abfall",
-            "battery": "Batterie"
+            "battery": "Batterie",
+            "gas": "Gas"
+        },
+        "substation-type": {
+            "converter": "Gleichrichter",
+            "transmission": "Übertragung",
+            "distribution": "Verteilung"
         }
     },
     "edit": {
@@ -158,5 +164,13 @@
         "labels": "Bezeichnungen",
         "title": "Ebenen"
     },
-    "construction": "in Arbeit"
+    "construction": "in Arbeit",
+    "location": {
+        "outdoor": "Draußen",
+        "underground": "Unterirdisch",
+        "underwater": "Unterwasser",
+        "indoor": "Drinnen",
+        "surface": "Oberfläche",
+        "roof": "Dach"
+    }
 }
