@@ -349,16 +349,18 @@ class InfoPopup {
           )
         }
 
-        const lang = i18next.language.split('-')[0]
-        if (data['sitelinks'][`${lang}wiki`]) {
-          mount(
-            links_container,
-            el('a', el('div.ext_link.wikipedia_link'), {
-              href: data['sitelinks'][`${lang}wiki`]['url'],
-              target: '_blank',
-              title: t('wikipedia', 'Wikipedia')
-            })
-          )
+        for (const lang of [i18next.language.split('-')[0], 'en']) {
+          if (data['sitelinks'][`${lang}wiki`]) {
+            mount(
+              links_container,
+              el('a', el('div.ext_link.wikipedia_link'), {
+                href: data['sitelinks'][`${lang}wiki`]['url'],
+                target: '_blank',
+                title: t('wikipedia', 'Wikipedia')
+              })
+            )
+            break
+          }
         }
 
         if (data['sitelinks']['commonswiki']) {
