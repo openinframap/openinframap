@@ -28,7 +28,12 @@
             "switch-disconnector": "Trennschalter",
             "switch-breaker": "Leistungsschalter",
             "switch-other": "Anderer Schalter",
-            "compensator-other": "Anderer Kompensator"
+            "compensator-other": "Anderer Kompensator",
+            "reactor-series": "Reihendrosselspule",
+            "reactor-shunt": "Kompensationsdrosselspule",
+            "capacitor-series": "Reihenkondensator",
+            "capacitor-shunt": "Parallelkondensator",
+            "filter": "Filter"
         },
         "water": {
             "reservoir": "Wasserhochbehälter",
@@ -50,7 +55,8 @@
             "oil": "Öl",
             "gas": "Gas",
             "petroleum-intermediate": "Erdöl-Zwischenprodukte",
-            "wastewater": "Abwasser"
+            "wastewater": "Abwasser",
+            "rainwater": "Regenwasser"
         },
         "telecoms": {
             "communication-line": "Telefonleitung",
@@ -112,12 +118,15 @@
         "source": "Quelle",
         "start-date": "Startdatum",
         "generation-method": "Erzeugungsmethode",
-        "substation-type": "Schaltanlage",
+        "substation-type": "Art der Schaltanlage",
         "reference": "Referenz",
         "circuits": "Stromkreise",
         "type": "Typ",
         "website": "Webseite",
-        "view-openstreetmap": "Auf OpenStreetMap ansehen"
+        "view-openstreetmap": "Auf OpenStreetMap ansehen",
+        "substance": "Stoff",
+        "usage": "Verwendung",
+        "location": "Lage"
     },
     "nav": {
         "about": "Über",
