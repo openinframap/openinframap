@@ -45,6 +45,26 @@ function fieldName(key: string) {
   )
 }
 
+function fieldValue(key: string, value: any): any {
+  if (typeof value !== 'string') {
+    return value
+  }
+
+  if (key === 'location') {
+    return t('location.' + value, value)
+  }
+
+  if (key === 'substation') {
+    return t('power.substation-type.' + value, value)
+  }
+
+  if (key === 'source') {
+    return t('power.source.' + value, value)
+  }
+
+  return titleCase(value)
+}
+
 function formatVoltage(value: number | number[]): string {
   if (!Array.isArray(value)) {
     value = [value]
@@ -175,7 +195,7 @@ class InfoPopup {
     }
   }
 
-  renderKey(key: string, value: any) {
+  renderKey(key: string, value: any): HTMLTableRowElement | null {
     if (hidden_keys.includes(key) || key.startsWith('name_') || key.startsWith('voltage') || !value) {
       return null
     }
@@ -189,20 +209,21 @@ class InfoPopup {
     }
 
     if (key == 'frequency' && value == '0') {
-      value = t('units.DC', 'DC')
+      value = t('units.DC')
     }
 
+    let prettyKey = key
     if (key == 'url') {
-      value = el('a', t('info.website', 'Website'), {
+      value = el('a', t('info.website'), {
         href: value,
         target: '_blank'
       })
-      key = t('info.website', 'Website')
+      prettyKey = t('info.website')
     } else {
-      key = fieldName(key)
+      prettyKey = fieldName(key)
     }
 
-    return el('tr', el('th', key), el('td', value))
+    return el('tr', el('th', prettyKey), el('td', fieldValue(key, value)))
   }
 
   nameTags(feature: MapGeoJSONFeature) {

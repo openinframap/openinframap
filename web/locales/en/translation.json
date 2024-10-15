@@ -131,7 +131,15 @@
     "water": "Water",
     "traction": "Traction (< 50 Hz)"
   },
-  "underground": "Underground",
+  "location": {
+    "underground": "Underground",
+    "underwater": "Underwater",
+    "overhead": "Overhead",
+    "roof": "Roof",
+    "surface": "Surface",
+    "outdoor": "Outdoor",
+    "indoor": "Indoor"
+  },
   "power": {
     "source": {
       "coal": "Coal",
@@ -139,11 +147,18 @@
       "hydro": "Hydroelectric",
       "nuclear": "Nuclear",
       "oil-gas": "Oil/Gas",
+      "gas": "Gas",
       "solar": "Solar",
       "wind": "Wind",
       "biomass": "Biomass",
       "waste": "Waste",
       "battery": "Battery"
+    },
+    "substation-type": {
+      "transmission": "Transmission",
+      "distribution": "Distribution",
+      "traction": "Traction",
+      "converter": "DC Converter"
     }
   },
   "other": "Other",
