@@ -1,9 +1,4 @@
 {
-  "nav": {
-    "about": "about",
-    "stats": "stats",
-    "exports": "exports"
-  },
   "edit": {
     "edit": "Edit",
     "remote": "Edit with remote control (JOSM, etc)",
@@ -11,7 +6,6 @@
     "error": "Unable to load remote editor - make sure it's running and has remote control enabled.\nError: "
   },
   "names": {
-    "pipeline": "Pipeline",
     "power": {
       "transformer": "Transformer",
       "tower": "Power tower",
@@ -54,6 +48,7 @@
       "exchange": "Telephone exchange",
       "cabinet": "Telecoms cabinet"
     },
+    "pipeline": "Pipeline",
     "petroleum": {
       "well": "Well",
       "facility": "Petroleum facility"
@@ -89,6 +84,25 @@
     },
     "other-pumping-station": "Other pumping station"
   },
+  "info": {
+    "name": "Name",
+    "operator": "Operator",
+    "output": "Power",
+    "source": "Source",
+    "start-date": "Start date",
+    "generation-method": "Generation method",
+    "substation-type": "Substation type",
+    "reference": "Reference",
+    "circuits": "Circuits",
+    "type": "Type",
+    "website": "Website",
+    "view-openstreetmap": "View on OpenStreetMap"
+  },
+  "nav": {
+    "about": "about",
+    "stats": "stats",
+    "exports": "exports"
+  },
   "units": {
     "kV": "kV",
     "Hz": "Hz",
@@ -98,10 +112,6 @@
     "ge_kv": "≥ {{voltage}} kV",
     "kW": "kW",
     "V": "V"
-  },
-  "info": {
-    "website": "Website",
-    "view-openstreetmap": "View on OpenStreetMap"
   },
   "more_info": "More info",
   "wikipedia": "Wikipedia",

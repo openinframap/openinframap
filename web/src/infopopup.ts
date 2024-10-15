@@ -22,8 +22,27 @@ const hidden_keys = [
   'gid',
   'ref_len',
   'frequency',
+  'transition',
   'angle'
 ]
+
+function fieldName(key: string) {
+  return (
+    {
+      name: t('info.name', 'Name'),
+      operator: t('info.operator', 'Operator'),
+      output: t('info.output', 'Output'),
+      source: t('info.source', 'Source'),
+      start_date: t('info.start-date', 'Start date'),
+      method: t('info.generation-method', 'Generation method'),
+      substation: t('info.substation-type', 'Substation type'),
+      ref: t('info.reference', 'Reference'),
+      circuits: t('info.circuits', 'Circuits'),
+      type: t('info.type', 'Type'),
+      repd_id: 'REPD ID'
+    }[key] || titleCase(key)
+  )
+}
 
 function formatVoltage(value: number | number[]): string {
   if (!Array.isArray(value)) {
@@ -179,7 +198,7 @@ class InfoPopup {
       })
       key = t('info.website', 'Website')
     } else {
-      key = titleCase(this.friendlyRender(key))
+      key = fieldName(key)
     }
 
     return el('tr', el('th', key), el('td', value))
@@ -266,7 +285,7 @@ class InfoPopup {
         el('a', el('div.ext_link.osm_link'), {
           href: this.osmLink(feature.properties['osm_id'], feature.properties['is_node']),
           target: '_blank',
-          title: t('info.view_openstreetmap', 'View on OpenStreetMap')
+          title: t('info.view-openstreetmap', 'View on OpenStreetMap')
         })
       )
     }
@@ -351,7 +370,7 @@ class InfoPopup {
             el('a', el('div.ext_link.commons_link'), {
               href: data['sitelinks']['commonswiki']['url'],
               target: '_blank',
-              title: t('wikimedia_commons', 'Wikimedia Commons')
+              title: t('wikimedia-commons', 'Wikimedia Commons')
             })
           )
         }
