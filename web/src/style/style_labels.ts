@@ -231,7 +231,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       type: 'symbol',
       source: 'openmaptiles',
       'source-layer': 'place',
-      minzoom: 3,
+      minzoom: 2.5,
       maxzoom: 5,
       filter: [
         'all',
