@@ -4,8 +4,11 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import resources from 'virtual:i18next-loader'
 
 await i18next.use(LanguageDetector).init({
-  fallbackLng: 'en',
-  supportedLngs: ['en', 'de', 'fr', 'el'],
+  fallbackLng: {
+    no: ['nb-NO'],
+    default: ['en']
+  },
+  supportedLngs: ['en', 'de', 'fr', 'el', 'no', 'nb-NO'],
   resources: resources,
   debug: import.meta.env.DEV,
   detection: {
