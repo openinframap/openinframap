@@ -77,7 +77,8 @@
             "gas": "Gass",
             "co2": "CO<sub>2</sub>",
             "fresh-water": "Ferskvann",
-            "steam": "Damp"
+            "steam": "Damp",
+            "petroleum-intermediate": "Petroleum mellomprodukt"
         },
         "other-pumping-station": "Annen pumpestasjon",
         "pipeline": "Rørledning"
@@ -132,7 +133,11 @@
         "power-plants": "Kraftverk",
         "switchgear": "Koblingsutstyr",
         "name": "Nøkkel",
-        "petroleum": "Petroleum"
+        "petroleum": "Petroleum",
+        "power-lines": "Kraftlinjer",
+        "power-generators": "Strømgeneratorer",
+        "power-line-supports": "Master og stolper",
+        "traction": "Banestrøm (< 50 Hz)"
     },
     "power": {
         "source": {
