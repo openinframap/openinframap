@@ -1,10 +1,8 @@
 import './infopopup.css'
 
-import { t } from 'i18next'
+import i18next, { t } from 'i18next'
 import maplibregl, { MapGeoJSONFeature, MapMouseEvent, Popup } from 'maplibre-gl'
 import { titleCase } from 'title-case'
-// @ts-expect-error No types
-import browserLanguage from 'in-browser-language'
 import { local_name_tags } from './l10n.ts'
 import friendlyNames from './friendlynames.ts'
 import friendlyIcons from './friendlyicons.ts'
@@ -351,20 +349,16 @@ class InfoPopup {
           )
         }
 
-        const languages = browserLanguage.list()
-        languages.push('en')
-        for (const lang of languages) {
-          if (data['sitelinks'][`${lang}wiki`]) {
-            mount(
-              links_container,
-              el('a', el('div.ext_link.wikipedia_link'), {
-                href: data['sitelinks'][`${lang}wiki`]['url'],
-                target: '_blank',
-                title: t('wikipedia', 'Wikipedia')
-              })
-            )
-            break
-          }
+        const lang = i18next.language.split('-')[0]
+        if (data['sitelinks'][`${lang}wiki`]) {
+          mount(
+            links_container,
+            el('a', el('div.ext_link.wikipedia_link'), {
+              href: data['sitelinks'][`${lang}wiki`]['url'],
+              target: '_blank',
+              title: t('wikipedia', 'Wikipedia')
+            })
+          )
         }
 
         if (data['sitelinks']['commonswiki']) {

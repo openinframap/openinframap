@@ -1,5 +1,4 @@
-// @ts-expect-error No type hints
-import browserLanguage from 'in-browser-language'
+import i18next from 'i18next'
 
 /* List of supported languages in the OpenInfraMap layer.
  * This should be kept up to date with the list in tegola/layers.yml.
@@ -8,10 +7,11 @@ const layer_supported_languages: string[] = ['en', 'es', 'de', 'fr', 'hi', 'ur',
 
 /* List of name tags to check, in order */
 function local_name_tags(): string[] {
-  return (browserLanguage.list() as string[])
-    .filter((code: string) => layer_supported_languages.includes(code))
-    .map((code: string) => `name_${code}`)
-    .concat(['name'])
+  const lang = i18next.language.split('-')[0]
+  if (layer_supported_languages.includes(lang)) {
+    return [`name_${lang}`, 'name']
+  }
+  return ['name']
 }
 
 export { layer_supported_languages, local_name_tags }

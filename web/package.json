@@ -26,7 +26,6 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.2",
     "i18next-parser": "^9.0.2",
-    "in-browser-language": "^1.0.3",
     "prettier": "^3.1.1",
     "typescript": "^5.5.4",
     "vite": "^5.4.8",

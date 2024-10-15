@@ -5,7 +5,7 @@ import resources from 'virtual:i18next-loader'
 
 await i18next.use(LanguageDetector).init({
   fallbackLng: 'en',
-  supportedLngs: ['en', 'el'],
+  supportedLngs: ['en', 'de', 'fr', 'el'],
   resources: resources,
   debug: import.meta.env.DEV
 })
