@@ -297,16 +297,16 @@ class InfoPopup {
       .filter((x) => x !== null) as HTMLTableRowElement[]
     setChildren(attrs_table, renderedProperties)
 
-    const content = el('div', this.nameTags(feature))
+    const content = el('div.oim-info-content', this.nameTags(feature))
 
     if (feature.properties['voltage'] || feature.properties['voltage_primary']) {
       mount(content, this.voltageField(feature))
     }
 
-    const links_container = el('div')
-    const wikidata_div = el('div')
+    const links_container = el('div.infobox-external-links')
+    const image_container = el('div.infobox-image')
     if (feature.properties['wikidata']) {
-      this.fetch_wikidata(feature.properties['wikidata'], wikidata_div, links_container)
+      this.fetch_wikidata(feature.properties['wikidata'], image_container, links_container)
     } else {
       const wp_link = this.wp_link(feature.properties['wikipedia'])
       if (wp_link) {
@@ -314,7 +314,7 @@ class InfoPopup {
       }
     }
 
-    mount(content, wikidata_div)
+    mount(content, image_container)
     mount(content, attrs_table)
 
     if (feature.properties['osm_id']) {
@@ -327,12 +327,15 @@ class InfoPopup {
         })
       )
     }
-    mount(content, links_container)
+
+    const footer = el('div.oim-info-footer')
+    mount(content, footer)
+    mount(footer, links_container)
 
     if (feature.layer.id.startsWith('power_plant')) {
       mount(
-        content,
-        el('a', t('more_info', 'More info'), {
+        footer,
+        el('a.oim-info-button', t('more_info', 'More info'), {
           href: '/stats/object/plant/' + feature.properties['osm_id'],
           target: '_blank'
         })
@@ -359,9 +362,8 @@ class InfoPopup {
     this.popup_obj = new maplibregl.Popup()
       .setLngLat(e.lngLat)
       .setDOMContent(this.popupHtml(feature))
-      .setMaxWidth('350px')
       .addTo(this._map)
-    this.popup_obj.addClassName('oim-info')
+      .addClassName('oim-info')
   }
 
   fetch_wikidata(id: string, container: RedomElement, links_container: RedomElement) {
