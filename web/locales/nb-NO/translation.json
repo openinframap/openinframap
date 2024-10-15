@@ -13,7 +13,6 @@
             "compensator": "Kompensator",
             "cable": "Kabel",
             "line": "Kraftlinje",
-            "line-label": "Kraftlinje",
             "solar-panel": "Solcellepanel",
             "transformer": "Transformator"
         }

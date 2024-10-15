@@ -1,7 +1,6 @@
 {
     "names": {
         "power": {
-            "line-underground": "Erdkabel",
             "transformer": "Transformator",
             "tower": "Hochspannungsmast",
             "pole": "Strommast",
@@ -14,7 +13,6 @@
             "converter": "Stromrichterstation",
             "cable": "Erdkabel",
             "line": "Freileitung",
-            "line-label": "Freileitung",
             "solar-panel": "Solarmodul",
             "plant": "Kraftwerk",
             "hvdc": "HGÜ",
