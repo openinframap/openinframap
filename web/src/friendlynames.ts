@@ -22,7 +22,7 @@ export default function friendlyNames(): { [key: string]: string } {
     power_solar_panel: t('names.power.solar-panel', 'Solar panel'),
     power_plant: t('names.power.plant', 'Power plant'),
     telecoms_communication_line: t('names.telecoms.communication-line', 'Telecoms line'),
-    telecoms_mast: t('names.telecoms.mast', 'Telecoms mast'),
+    telecoms_mast: t('names.telecom.tower-mast', 'Telecoms mast'),
     telecoms_data_center: t('names.telecoms.data-center', 'Telecoms building'),
     telecoms_exchange: t('names.telecoms.exchange', 'Telephone exchange'),
     telecoms_cabinet: t('names.telecoms.cabinet', 'Telecoms cabinet'),
