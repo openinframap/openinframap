@@ -1,7 +1,7 @@
 import { StyleSpecification } from 'maplibre-gl'
 
 const oim_attribution =
-  '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>, <a href="https://openinframap.org/copyright">OpenInfraMap</a>'
+  '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="https://openinframap.org/copyright">Open Infrastructure Map</a>'
 
 const style: StyleSpecification = {
   version: 8,
@@ -29,7 +29,7 @@ const style: StyleSpecification = {
       type: 'vector',
       tiles: ['https://openinframap.org/20221105/{z}/{x}/{y}.mvt'],
       maxzoom: 14,
-      attribution: '<a href="https://openmaptiles.org/">© OpenMapTiles</a>'
+      attribution: '<a href="https://openmaptiles.org/">OpenMapTiles</a>'
     },
     power: {
       type: 'vector',

@@ -76,6 +76,11 @@ h1 {
   margin: 0.5rem 0.5rem 0 0;
 }
 
+.maplibregl-ctrl-attrib.maplibregl-compact {
+  background-color: rgba(250, 250, 250, 0.8);
+  backdrop-filter: blur(3px) saturate(80%);
+}
+
 #geo-search {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 2px;
 }
