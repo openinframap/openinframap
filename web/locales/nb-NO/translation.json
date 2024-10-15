@@ -24,11 +24,63 @@
             "transformer-3": "Transformator (3 viklinger)",
             "compensator-other": "Annen kompensator",
             "filter": "Filter",
-            "capacitor-series": "Seriekondensator"
+            "capacitor-series": "Seriekondensator",
+            "plant": "Kraftverk",
+            "line-reference": "Linjenummer",
+            "solar-panel-node": "Solcelle (node)",
+            "tower-pylon": "Mast",
+            "tower-transition": "Kabelendemast",
+            "pole-transition": "Kabelendestolpe",
+            "switch-disconnector": "Skillebryter",
+            "reactor-series": "Seriereaktor",
+            "switch-breaker": "Effektbryter",
+            "switch-other": "Annen bryter",
+            "reactor-shunt": "Shuntreaktor",
+            "hvdc": "HVDC",
+            "other-generator": "Annen generator"
         },
         "petroleum": {
-            "well": "Brønn"
-        }
+            "well": "Brønn",
+            "facility": "Petroleumsanlegg"
+        },
+        "telecoms": {
+            "mast": "Telekommast",
+            "communication-line": "Telekomlinje",
+            "cabinet": "Telekomskap",
+            "data-center": "Telekombygning",
+            "exchange": "Telefonsentral"
+        },
+        "water": {
+            "pumping-station": "Pumpestasjon",
+            "well": "Vannbrønn",
+            "reservoir": "Vannreservoar",
+            "water-pumping-station": "Vannpumpestasjon",
+            "sewage-pumping-station": "Kloakkpumpestasjon",
+            "pipeline": "Vannledning",
+            "sewage-treatment-plant": "Kloakkrenseanlegg",
+            "treatment-plant": "Vannrenseanlegg"
+        },
+        "cable": "Kabel",
+        "telecom": {
+            "tower-mast": "Tårn/Mast",
+            "datacenter": "Datasenter",
+            "exchange": "Sentral"
+        },
+        "cabinet": "Skap",
+        "substance": {
+            "oil": "Olje",
+            "fuel": "Drivstoff",
+            "hydrogen": "Hydrogen",
+            "wastewater": "Avløpsvann",
+            "rainwater": "Regnvann",
+            "hot-water": "Varmtvann",
+            "gas": "Gass",
+            "co2": "CO<sub>2</sub>",
+            "fresh-water": "Ferskvann",
+            "steam": "Damp"
+        },
+        "other-pumping-station": "Annen pumpestasjon",
+        "pipeline": "Rørledning"
     },
     "nav": {
         "about": "Om",
@@ -58,7 +110,8 @@
         "usage": "Bruk",
         "circuits": "Kretser",
         "type": "Type",
-        "substance": "Substans"
+        "substance": "Substans",
+        "substation-type": "Transformatorstasjontype"
     },
     "units": {
         "kV": "kV",
