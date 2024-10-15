@@ -83,9 +83,10 @@ h1 {
   backdrop-filter: blur(3px) saturate(80%);
 }
 
-#geo-search {
+.aa-Autocomplete {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 2px;
   border-radius: 4px;
+  backdrop-filter: blur(3px) saturate(80%);
 }
 
 .aa-Autocomplete:has(:focus) {
