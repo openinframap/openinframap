@@ -14,10 +14,93 @@
             "cable": "Kabel",
             "line": "Kraftlinje",
             "solar-panel": "Solcellepanel",
-            "transformer": "Transformator"
+            "transformer": "Transformator",
+            "tower": "Mast",
+            "pole": "Stolpe",
+            "generator-solar": "Solcellepanel",
+            "substation": "Transformatorstasjon",
+            "converter": "likeretterstasjon",
+            "capacitor-shunt": "Shuntkondensator",
+            "transformer-3": "Transformator (3 viklinger)",
+            "compensator-other": "Annen kompensator",
+            "filter": "Filter",
+            "capacitor-series": "Seriekondensator"
+        },
+        "petroleum": {
+            "well": "Brønn"
         }
     },
     "nav": {
-        "about": "Om"
+        "about": "Om",
+        "exports": "eksporter",
+        "stats": "statistikk"
+    },
+    "layers": {
+        "power": "Kraft",
+        "heatmap": "Solkraft",
+        "telecoms": "Telekom",
+        "petroleum": "Olje og gass",
+        "water": "Vann",
+        "labels": "Merkelapper",
+        "title": "Lag"
+    },
+    "info": {
+        "location": "Plassering",
+        "name": "Navn",
+        "operator": "Operatør",
+        "output": "Kraft",
+        "source": "Kilde",
+        "start-date": "Startdato",
+        "reference": "Referanse",
+        "view-openstreetmap": "Vis i OpenStreeMap",
+        "generation-method": "Genereringsmetode",
+        "website": "Nettside",
+        "usage": "Bruk",
+        "circuits": "Kretser",
+        "type": "Type",
+        "substance": "Substans"
+    },
+    "units": {
+        "kV": "kV",
+        "Hz": "Hz",
+        "below_10kv": "< 10 kV",
+        "kW": "kW",
+        "V": "V",
+        "MW": "MW",
+        "DC": "DC",
+        "ge_kv": "≥ {{voltage}} kV"
+    },
+    "more_info": "Mer informasjon",
+    "wikipedia": "Wikipedia",
+    "wikimedia-commons": "Wikimedia Commons",
+    "key": {
+        "telecoms": "Telekom",
+        "water": "Vann",
+        "power-plants": "Kraftverk",
+        "switchgear": "Koblingsutstyr",
+        "name": "Nøkkel",
+        "petroleum": "Petroleum"
+    },
+    "power": {
+        "source": {
+            "solar": "Sol",
+            "coal": "Kull",
+            "geothermal": "Geotermisk",
+            "hydro": "Vannkraft",
+            "biomass": "Biomasse",
+            "oil-gas": "Olje/Gass",
+            "nuclear": "Kjernekraft",
+            "battery": "Batteri",
+            "wind": "Vind",
+            "waste": "Avfall"
+        }
+    },
+    "warning": "Advarsel",
+    "construction": "under bygging",
+    "wikidata": "Wikidata",
+    "underground": "Underjordisk",
+    "other": "Annet",
+    "warnings": {
+        "webgl": "<p>Nettleseren din kan ha ytelses- eller funksjonalitetsproblemer med Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> med maskinvareakselerasjon er nødvendig for at dette nettstedet skal fungere godt.</p><p>Hvis nettleseren din støtter WebGL, kan det hende du må deaktivere beskyttelse mot nettleserfingeravtrykk for dette nettstedet.</p>"
     }
 }
