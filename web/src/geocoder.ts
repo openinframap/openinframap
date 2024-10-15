@@ -1,3 +1,4 @@
+import i18next from 'i18next'
 import { el } from 'redom'
 import { IControl, LngLat, LngLatBounds, Map } from 'maplibre-gl'
 import { OpenCageGeoSearchPlugin } from '@opencage/geosearch-core'
@@ -18,7 +19,8 @@ export default class OpenInfraMapGeocoder implements IControl {
           {
             // This key only works on openinframap.org (and local dev).
             // Thanks to OpenCage for sponsoring!
-            key: 'oc_gs_a595f2059dee41d6b7073647aec5c303'
+            key: 'oc_gs_a595f2059dee41d6b7073647aec5c303',
+            language: i18next.language
           },
           {
             onSelect: ({ item }) => {
