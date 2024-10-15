@@ -36,6 +36,8 @@
       "reactor-shunt": "Shunt reactor",
       "capacitor-series": "Series capacitor",
       "capacitor-shunt": "Shunt capacitor",
+      "statcom": "Static VAR compensator",
+      "synchronous-condenser": "Synchronous condenser",
       "filter": "Filter",
       "compensator-other": "Other compensator"
     },

@@ -62,6 +62,22 @@ function fieldValue(key: string, value: any): any {
     return t('power.source.' + value, value)
   }
 
+  if (key === 'type') {
+    return (
+      {
+        disconnector: t('names.power.switch-disconnector'),
+        circuit_breaker: t('names.power.switch-breaker'),
+        series_reactor: t('names.power.reactor-series'),
+        shunt_reactor: t('names.power.reactor-shunt'),
+        series_capacitor: t('names.power.capacitor-series'),
+        shunt_capacitor: t('names.power.capacitor-shunt'),
+        filter: t('names.power.filter'),
+        synchronous_condenser: t('names.power.synchronous-condenser'),
+        statcom: t('names.power.statcom')
+      }[value] || value
+    )
+  }
+
   return titleCase(value)
 }
 
