@@ -366,7 +366,7 @@ class InfoPopup {
       .addClassName('oim-info')
   }
 
-  fetch_wikidata(id: string, container: RedomElement, links_container: RedomElement) {
+  fetch_wikidata(id: string, imageContainer: RedomElement, linksContainer: RedomElement) {
     fetch(`https://openinframap.org/wikidata/${id}`)
       .then((response) => {
         return response.json()
@@ -374,7 +374,7 @@ class InfoPopup {
       .then((data) => {
         if (data['thumbnail']) {
           mount(
-            container,
+            imageContainer,
             el(
               'a',
               el('img.wikidata_image', {
@@ -391,7 +391,7 @@ class InfoPopup {
         for (const lang of [i18next.language.split('-')[0], 'en']) {
           if (data['sitelinks'][`${lang}wiki`]) {
             mount(
-              links_container,
+              linksContainer,
               el('a', el('div.ext_link.wikipedia_link'), {
                 href: data['sitelinks'][`${lang}wiki`]['url'],
                 target: '_blank',
@@ -404,7 +404,7 @@ class InfoPopup {
 
         if (data['sitelinks']['commonswiki']) {
           mount(
-            links_container,
+            linksContainer,
             el('a', el('div.ext_link.commons_link'), {
               href: data['sitelinks']['commonswiki']['url'],
               target: '_blank',
@@ -414,7 +414,7 @@ class InfoPopup {
         }
 
         mount(
-          links_container,
+          linksContainer,
           el('a', el('div.ext_link.wikidata_link'), {
             href: `https://wikidata.org/wiki/${id}`,
             target: '_blank',

@@ -13,15 +13,15 @@
 }
 
 .oim-info .nameContainer {
+  border-radius: 4px 4px 0 0;
   background-color: #d5ecec;
-  padding: 0.5em 1.3em 0.2em 0.5em;
+  padding: 0.5em 1.3em 0.5em 0.5em;
   margin: 0 -0.5em 0.5em -0.5em;
 }
 
 .oim-info h3 {
   font-size: 1.3em;
-  margin-top: 0px;
-  margin-bottom: 5px;
+  margin: 0;
 }
 
 .oim-info h3 img {
@@ -31,18 +31,10 @@
   margin-right: 0.3em;
 }
 
-.oim-info h4::before {
-  content: '(';
-}
-
-.oim-info h4::after {
-  content: ')';
-}
-
 .oim-info h4 {
   font-weight: normal;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  color: rgb(80, 80, 80);
+  margin: 0.1em 0 0 0;
 }
 
 table.item_info {
@@ -110,15 +102,17 @@ div.ext_link {
   display: block;
   height: 30px;
   width: 30px;
-  padding: 2px;
+  padding: 1px;
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 0.5em;
+  border: 1px transparent solid;
 }
 
 div.ext_link:hover {
   background-color: #eee;
+  border: 1px solid #ddd;
 }
 
 span.voltages {
