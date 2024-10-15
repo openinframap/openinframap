@@ -19,7 +19,7 @@
             "pole": "Stolpe",
             "generator-solar": "Solcellepanel",
             "substation": "Transformatorstasjon",
-            "converter": "likeretterstasjon",
+            "converter": "Likeretterstasjon",
             "capacitor-shunt": "Shuntkondensator",
             "transformer-3": "Transformator (3 viklinger)",
             "compensator-other": "Annen kompensator",
@@ -149,7 +149,14 @@
             "nuclear": "Kjernekraft",
             "battery": "Batteri",
             "wind": "Vind",
-            "waste": "Avfall"
+            "waste": "Avfall",
+            "gas": "Gass"
+        },
+        "substation-type": {
+            "traction": "Jernbanestrøm",
+            "distribution": "Distribusjon",
+            "transmission": "Transmisjon",
+            "converter": "omformer"
         }
     },
     "warning": "Advarsel",
@@ -158,5 +165,14 @@
     "other": "Annet",
     "warnings": {
         "webgl": "<p>Nettleseren din kan ha ytelses- eller funksjonalitetsproblemer med Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> med maskinvareakselerasjon er nødvendig for at dette nettstedet skal fungere godt.</p><p>Hvis nettleseren din støtter WebGL, kan det hende du må deaktivere beskyttelse mot nettleserfingeravtrykk for dette nettstedet.</p>"
+    },
+    "location": {
+        "surface": "På bakken",
+        "overhead": "Luftnett",
+        "roof": "Tak",
+        "underground": "Underjordisk",
+        "underwater": "Undervanns",
+        "indoor": "Innendørs",
+        "outdoor": "Utendørs"
     }
 }
