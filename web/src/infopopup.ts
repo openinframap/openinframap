@@ -40,6 +40,10 @@ function fieldName(key: string) {
       substance: t('info.substance'),
       location: t('info.location'),
       usage: t('info.usage'),
+      design: t('info.design'),
+      material: t('info.material'),
+      line_attachment: t('info.line-attachment'),
+      line_management: t('info.line-management'),
       repd_id: 'REPD ID'
     }[key] || titleCase(key)
   )

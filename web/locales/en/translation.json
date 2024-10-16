@@ -113,7 +113,11 @@
     "view-openstreetmap": "View on OpenStreetMap",
     "substance": "Substance",
     "usage": "Usage",
-    "location": "Location"
+    "location": "Location",
+    "design": "Design",
+    "material": "Material",
+    "line-attachment": "Line attachment",
+    "line-management": "Line management"
   },
   "nav": {
     "about": "about",
