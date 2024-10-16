@@ -51,6 +51,12 @@ table.item_info th {
 
 table.item_info th {
   text-align: left;
+  text-wrap: nowrap;
+}
+
+table.item_info td {
+  width: 100%;
+  overflow: hidden;
 }
 
 table.item_info tr:nth-child(odd) {

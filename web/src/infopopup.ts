@@ -59,6 +59,9 @@ function fieldValue(key: string, value: any): any {
   }
 
   if (key === 'source') {
+    if (value == 'oil') {
+      return t('names.substance.oil')
+    }
     return t('power.source.' + value, value)
   }
 
@@ -78,7 +81,68 @@ function fieldValue(key: string, value: any): any {
     )
   }
 
+  if (key === 'method') {
+    return (
+      {
+        fission: t('names.method.fission'),
+        fusion: t('names.method.fusion'),
+        wind_turbine: t('names.method.wind-turbine'),
+        'water-storage': t('names.method.water-storage'),
+        'water-pumped-storage': t('names.method.water-pumped-storage'),
+        'run-of-the-river': t('names.method.water-run-of-river'),
+        barrage: t('names.method.tidal-barrage'),
+        stream: t('names.method.tidal-stream'),
+        thermal: t('names.method.solar-thermal'),
+        photovoltaic: t('names.method.solar-photovoltaic'),
+        combustion: t('names.method.combustion'),
+        gasification: t('names.method.gasification'),
+        anaerobic_digestion: t('names.method.anaerobic-digestion')
+      }[value] || value
+    )
+  }
+
   return titleCase(value)
+}
+
+function truncateUrl(urlString: string, length: number): string {
+  // Trim trailing slash
+  urlString = urlString.replace(/\/$/, '')
+
+  if (urlString.length <= length) {
+    return urlString
+  }
+
+  const parsed = new URL(urlString)
+  // Remove www from host
+  parsed.host = parsed.host.replace(/^www\./, '')
+  if (parsed.toString().length <= length) {
+    return parsed.toString()
+  }
+
+  const TRUNCATE_SYMBOL_LENGTH = 2
+  const pathParts = parsed.pathname.split('/')
+
+  let remainingLength = length - parsed.host.length - TRUNCATE_SYMBOL_LENGTH
+  const pathPartsReturnValue = []
+  let index = pathParts.length
+
+  while (index--) {
+    const x = pathParts[index]
+
+    if (x.length === 0) {
+      continue
+    }
+
+    if (remainingLength < x.length + 1) {
+      pathPartsReturnValue.push('…')
+      break
+    }
+
+    pathPartsReturnValue.push(x)
+    remainingLength -= x.length + 1
+  }
+
+  return [parsed.host, ...pathPartsReturnValue.reverse()].join('/')
 }
 
 function formatVoltage(value: number | number[]): string {
@@ -86,7 +150,7 @@ function formatVoltage(value: number | number[]): string {
     value = [value]
   }
 
-  const formatter = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 })
+  const formatter = new Intl.NumberFormat(i18next.language, { maximumFractionDigits: 2 })
 
   let text = [...value]
     .sort((a, b) => a - b)
@@ -102,7 +166,7 @@ function formatFrequency(value: number | number[]): string {
     value = [value]
   }
 
-  const formatter = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 })
+  const formatter = new Intl.NumberFormat(i18next.language, { maximumFractionDigits: 2 })
 
   let text = [...value]
     .sort((a, b) => a - b)
@@ -114,7 +178,7 @@ function formatFrequency(value: number | number[]): string {
 }
 
 function formatPower(value: number): string {
-  const formatter = new Intl.NumberFormat(undefined, { maximumFractionDigits: 2 })
+  const formatter = new Intl.NumberFormat(i18next.language, { maximumFractionDigits: 2 })
   if (value < 1) {
     return formatter.format(value * 1000) + ' ' + t('units.kV', 'kV')
   } else {
@@ -216,30 +280,32 @@ class InfoPopup {
       return null
     }
 
+    let prettyValue = value
+
     if (key.startsWith('voltage')) {
-      value = formatVoltage(value)
+      prettyValue = formatVoltage(value)
     }
 
     if (key == 'output') {
-      value = formatPower(parseFloat(value))
+      prettyValue = formatPower(parseFloat(value))
     }
 
     if (key == 'frequency' && value == '0') {
-      value = t('units.DC')
+      prettyValue = t('units.DC')
     }
 
     let prettyKey = key
     if (key == 'url') {
-      value = el('a', t('info.website'), {
+      prettyKey = t('info.website')
+      prettyValue = el('a', truncateUrl(value, 30), {
         href: value,
         target: '_blank'
       })
-      prettyKey = t('info.website')
     } else {
       prettyKey = fieldName(key)
     }
 
-    return el('tr', el('th', prettyKey), el('td', fieldValue(key, value)))
+    return el('tr', el('th', prettyKey), el('td', fieldValue(key, prettyValue)))
   }
 
   nameTags(feature: MapGeoJSONFeature) {

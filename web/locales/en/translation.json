@@ -81,6 +81,21 @@
       "wastewater": "Wastewater",
       "rainwater": "Rainwater"
     },
+    "method": {
+      "fission": "Fission",
+      "fusion": "Fusion",
+      "wind-turbine": "Wind turbine",
+      "water-storage": "Water storage",
+      "water-pumped-storage": "Pumped storage",
+      "water-run-of-river": "Run-of-river",
+      "tidal-barrage": "Barrage",
+      "tidal-stream": "Stream",
+      "solar-thermal": "Thermal",
+      "solar-photovoltaic": "Photovoltaic",
+      "combustion": "Combustion",
+      "gasification": "Gasification",
+      "anaerobic-digestion": "Anaerobic digestion"
+    },
     "other-pumping-station": "Other pumping station"
   },
   "info": {
