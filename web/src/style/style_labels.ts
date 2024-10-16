@@ -1,6 +1,6 @@
 import i18next from 'i18next'
 import { LayerSpecificationWithZIndex } from './types.ts'
-import { coalesce, concat, get } from './stylehelpers.ts'
+import { coalesce, concat, get, interpolate, zoom } from './stylehelpers.ts'
 import { ExpressionSpecification } from 'maplibre-gl'
 
 const text_color = 'hsl(0, 0%, 20%)'
@@ -100,7 +100,10 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         'text-font': ['Noto Sans Regular'],
         'text-justify': 'center',
         'text-offset': [0.5, 0.2],
-        'text-size': 12,
+        'text-size': interpolate(zoom, [
+          [7.5, 8],
+          [12, 18]
+        ]),
         visibility: 'visible'
       },
       paint: {
@@ -124,7 +127,10 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         'text-font': ['Noto Sans Regular'],
         'text-justify': 'center',
         'text-offset': [0.5, 0.2],
-        'text-size': 14,
+        'text-size': interpolate(zoom, [
+          [5.5, 9],
+          [12, 18]
+        ]),
         visibility: 'visible'
       },
       paint: {
@@ -173,7 +179,10 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       layout: {
         'text-field': omtLabel(),
         'text-font': ['Noto Sans Regular'],
-        'text-size': 15,
+        'text-size': interpolate(zoom, [
+          [5, 9],
+          [12, 14]
+        ]),
         visibility: 'visible'
       },
       paint: {
@@ -207,7 +216,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       source: 'openmaptiles',
       'source-layer': 'place',
       minzoom: 3,
-      maxzoom: 8,
+      maxzoom: 7,
       filter: [
         'all',
         ['==', '$type', 'Point'],
@@ -244,7 +253,11 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         'text-anchor': 'center',
         'text-field': omtLabel(),
         'text-font': ['Noto Sans Regular'],
-        'text-size': ['interpolate', ['linear'], ['zoom'], 0, 10, 3, 12, 4, 14]
+        'text-size': interpolate(zoom, [
+          [2.5, 10],
+          [3, 12],
+          [5, 16]
+        ])
       },
       paint: {
         'text-color': text_color,
