@@ -2,9 +2,102 @@
     "edit": {
         "edit": "Upravit",
         "browser": "Upravit v prohlížeči (iD)",
-        "remote": "Upravit vzdáleným ovládáním (JOSM apod.)"
+        "remote": "Upravit vzdáleným ovládáním (JOSM apod.)",
+        "error": "Nepodařilo se načíst vzdálený editor – ujistěte se, že běží a že má povolené vzdálené ovládání.\nChyba: "
     },
     "nav": {
-        "about": "o projektu"
+        "about": "o projektu",
+        "exports": "exporty",
+        "stats": "statistiky"
+    },
+    "names": {
+        "power": {
+            "transformer": "Transformátor",
+            "pole": "Sloup elektrického vedení",
+            "generator-solar": "Solární elektrárna",
+            "wind-turbine": "Větrná elektrárna",
+            "generator": "Generátor",
+            "substation": "Rozvodna",
+            "line": "Elektrické vedení",
+            "solar-panel": "Solární panel",
+            "plant": "Elektrárna",
+            "hvdc": "HVDC",
+            "solar-panel-node": "Solární panel (uzel)",
+            "other-generator": "Jiný generátor",
+            "tower-pylon": "Stožár/sloup",
+            "tower": "Elektrický stožár"
+        }
+    },
+    "info": {
+        "generation-method": "Způsob výroby",
+        "start-date": "Datum vzniku",
+        "source": "Zdroj",
+        "name": "Název",
+        "output": "Výkon",
+        "substation-type": "Typ rozvodny",
+        "reference": "Reference",
+        "circuits": "Obvody",
+        "view-openstreetmap": "Zobazit na OpenStreetMap",
+        "substance": "Látka",
+        "website": "Webové stránky",
+        "operator": "Provozovatel",
+        "type": "Typ",
+        "usage": "Využití",
+        "location": "Umístění"
+    },
+    "layers": {
+        "telecoms": "Telekomunikace",
+        "petroleum": "Ropa a plyn",
+        "water": "Voda",
+        "heatmap": "Solární výroba",
+        "labels": "Štítky",
+        "title": "Vrstvy",
+        "power": "Energie"
+    },
+    "key": {
+        "telecoms": "Telekomunikace",
+        "name": "Klíč",
+        "water": "Voda",
+        "traction": "Trakce (< 50 Hz)",
+        "power-lines": "Elektrické vedení",
+        "power-plants": "Elektrárny",
+        "power-line-supports": "Části elektrického vedení",
+        "power-generators": "Generátory"
+    },
+    "units": {
+        "V": "V",
+        "MW": "MW",
+        "kW": "kW",
+        "kV": "kV",
+        "Hz": "Hz",
+        "DC": "DC",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV"
+    },
+    "more_info": "Další informace",
+    "location": {
+        "indoor": "Uvnitř",
+        "roof": "Střecha",
+        "surface": "Povrch",
+        "underground": "Pod zemí",
+        "underwater": "Pod vodou",
+        "outdoor": "Venku"
+    },
+    "wikidata": "Wikidata",
+    "other": "Jiný",
+    "warning": "Varování",
+    "construction": "ve výstavbě",
+    "wikipedia": "Wikipedie",
+    "wikimedia-commons": "Wikimedia Commons",
+    "power": {
+        "source": {
+            "coal": "Uhlí",
+            "geothermal": "Geotermální",
+            "hydro": "Hydroelektrická",
+            "nuclear": "Jaderná"
+        }
+    },
+    "warnings": {
+        "webgl": "<p>Váš prohlížeč může mít výkonnostní nebo funkční problémy s Open Infrastructure Map.</p><p>Aby tento web fungoval správně, je vyžadován <a href=\"http://webglreport.com\">WebGL</a> s hardwarovou akcelerací.</p><p>Pokud váš prohlížeč podporuje WebGL, možná budete muset u tohoto webu v prohlížeči zakázat ochranu před sledováním.</p>"
     }
 }
