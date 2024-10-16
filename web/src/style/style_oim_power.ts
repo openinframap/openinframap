@@ -273,8 +273,9 @@ export default function layers(): LayerSpecificationWithZIndex[] {
 
   const local_name = get_local_name()
 
-  function name_output_label(detail_zoom: number) {
-    return step(zoom, local_name, [
+  function name_output_label(display_zoom: number, detail_zoom: number) {
+    return step(zoom, '', [
+      [display_zoom, local_name],
       [
         detail_zoom,
         case_(
@@ -847,7 +848,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       source: 'power',
       sourceLayer: 'power_generator',
       filter: all(['==', get('source'), 'solar'], get('is_node')),
-      textField: name_output_label(16),
+      textField: name_output_label(15, 16),
       iconImage: 'power_generator_solar',
       textMinZoom: 15,
       iconScale: 0.5,
@@ -860,7 +861,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       source: 'power',
       sourceLayer: 'power_generator',
       filter: all(match(get('source'), [[['wind', 'solar'], false]], true), has('output')),
-      textField: name_output_label(14),
+      textField: name_output_label(11, 14),
       iconImage: 'power_generator',
       textMinZoom: 13,
       iconScale: 0.3,
@@ -873,7 +874,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       source: 'power',
       sourceLayer: 'power_generator',
       filter: ['==', get('source'), 'wind'],
-      textField: name_output_label(14),
+      textField: name_output_label(11, 14),
       iconImage: 'power_wind',
       textMinZoom: 12,
       iconScale: 2,
@@ -1095,7 +1096,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
           [6, 0.6],
           [10, 0.8]
         ]),
-        'text-field': name_output_label(9),
+        'text-field': name_output_label(7, 9),
         'text-font': font,
         'text-anchor': 'top',
         'text-offset': [0, 1],
@@ -1114,8 +1115,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       paint: {
         ...text_paint,
         // Control visibility using the opacity property...
-        'icon-opacity': ['step', zoom, if_(construction_p, 0.5, 1), 11, 0],
-        'text-opacity': ['step', zoom, 0, 7, 1]
+        'icon-opacity': ['step', zoom, if_(construction_p, 0.5, 1), 11, 0]
       }
     }
   ]
