@@ -37,7 +37,9 @@
             "switch-other": "Annen bryter",
             "reactor-shunt": "Shuntreaktor",
             "hvdc": "HVDC",
-            "other-generator": "Annen generator"
+            "other-generator": "Annen generator",
+            "statcom": "Static VAR compensator",
+            "synchronous-condenser": "Roterende fasekompensator"
         },
         "petroleum": {
             "well": "Brønn",
@@ -52,7 +54,7 @@
         "water": {
             "pumping-station": "Pumpestasjon",
             "well": "Vannbrønn",
-            "reservoir": "Vannreservoar",
+            "reservoir": "Magasin",
             "water-pumping-station": "Vannpumpestasjon",
             "sewage-pumping-station": "Kloakkpumpestasjon",
             "pipeline": "Vannledning",
@@ -99,12 +101,12 @@
         "location": "Plassering",
         "name": "Navn",
         "operator": "Operatør",
-        "output": "Kraft",
+        "output": "Installert effekt",
         "source": "Kilde",
         "start-date": "Startdato",
         "reference": "Referanse",
         "view-openstreetmap": "Vis i OpenStreeMap",
-        "generation-method": "Genereringsmetode",
+        "generation-method": "Type",
         "website": "Nettside",
         "usage": "Bruk",
         "circuits": "Kretser",
@@ -142,7 +144,7 @@
             "solar": "Sol",
             "coal": "Kull",
             "geothermal": "Geotermisk",
-            "hydro": "Vannkraft",
+            "hydro": "Vann",
             "biomass": "Biomasse",
             "oil-gas": "Olje/Gass",
             "nuclear": "Kjernekraft",
