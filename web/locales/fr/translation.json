@@ -6,7 +6,7 @@
             "generator-solar": "Panneau solaire",
             "line-reference": "Référence de la ligne",
             "substation": "Sous-station",
-            "generator": "générateur",
+            "generator": "Générateur",
             "solar-panel": "Panneau solaire",
             "line": "Ligne électrique",
             "solar-panel-node": "Panneau solaire (noeud)",
@@ -17,7 +17,15 @@
             "pole": "Poteau électrique",
             "compensator": "Compensateur",
             "reactor-series": "Inductance série",
-            "reactor-shunt": "Inductance shunt"
+            "reactor-shunt": "Inductance shunt",
+            "switch-disconnector": "Sectionneur",
+            "switch-breaker": "Disjoncteur",
+            "capacitor-shunt": "Condensateur-shunt",
+            "plant": "Centrale électrique",
+            "filter": "Filtre",
+            "capacitor-series": "Condensateur en série",
+            "compensator-other": "Autre compensateur",
+            "synchronous-condenser": "Compensateur synchrone"
         },
         "substance": {
             "co2": "CO<sub>2</sub>",
@@ -27,7 +35,8 @@
             "rainwater": "Eaux pluviales",
             "gas": "Gaz",
             "fresh-water": "Eau froide",
-            "hot-water": "Eau chaude"
+            "hot-water": "Eau chaude",
+            "oil": "Huile"
         },
         "telecoms": {
             "cabinet": "Armoire télécommunication",
@@ -55,7 +64,18 @@
         },
         "cabinet": "Armoire",
         "pipeline": "Pipeline",
-        "other-pumping-station": "Autre station de pompage"
+        "other-pumping-station": "Autre station de pompage",
+        "method": {
+            "fission": "Fission",
+            "fusion": "Fusion",
+            "wind-turbine": "Éolienne",
+            "solar-thermal": "Thermique",
+            "solar-photovoltaic": "Photovoltaïque",
+            "combustion": "Combustion",
+            "gasification": "Gazéification",
+            "water-storage": "Stockage d'eau",
+            "anaerobic-digestion": "Digestion anaérobie"
+        }
     },
     "edit": {
         "edit": "Editer",
@@ -79,7 +99,10 @@
         "operator": "Opérateur",
         "type": "Type",
         "substation-type": "Type de sous-station",
-        "reference": "Référence"
+        "reference": "Référence",
+        "generation-method": "Méthode de génération",
+        "circuits": "Circuits",
+        "substance": "Substance"
     },
     "other": "Autre",
     "units": {
@@ -98,7 +121,9 @@
         "petroleum": "Pétrolier",
         "power-lines": "Lignes électriques",
         "power-line-supports": "Supports de lignes électriques",
-        "water": "Eau"
+        "water": "Eau",
+        "switchgear": "Appareillage de connexion",
+        "traction": "Traction (< 50 Hz)"
     },
     "wikidata": "Wikidata",
     "power": {
@@ -108,9 +133,17 @@
             "biomass": "Biomasse",
             "geothermal": "Géothermie",
             "hydro": "Hydro-électricité",
-            "waste": "",
+            "waste": "Déchets",
             "nuclear": "Nucléaire",
-            "solar": "Solaire"
+            "solar": "Solaire",
+            "oil-gas": "Huile/Gaz",
+            "battery": "Batterie",
+            "gas": "Gaz"
+        },
+        "substation-type": {
+            "distribution": "Distribution",
+            "traction": "Traction",
+            "transmission": "Transmission"
         }
     },
     "wikimedia-commons": "Wikimedia Commons",
@@ -121,9 +154,14 @@
         "power": "Electricité",
         "water": "Eau",
         "heatmap": "Energie solaire",
-        "labels": "Etiquettes"
+        "labels": "Etiquettes",
+        "petroleum": "Huile & Gaz"
     },
     "more_info": "Plus d'infos",
     "wikipedia": "Wikipedia",
-    "construction": "en construction"
+    "construction": "en construction",
+    "location": {
+        "underground": "Souterrain",
+        "underwater": "Sous-marin"
+    }
 }
