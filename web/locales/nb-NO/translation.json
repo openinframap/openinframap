@@ -81,7 +81,22 @@
             "petroleum-intermediate": "Petroleum mellomprodukt"
         },
         "other-pumping-station": "Annen pumpestasjon",
-        "pipeline": "Rørledning"
+        "pipeline": "Rørledning",
+        "method": {
+            "fusion": "Fusjon",
+            "wind-turbine": "Vindturbin",
+            "water-pumped-storage": "Pumpelager",
+            "water-run-of-river": "Elveløp",
+            "tidal-barrage": "Tidevannssperring",
+            "tidal-stream": "Elv",
+            "solar-thermal": "Termisk",
+            "solar-photovoltaic": "Fotovoltaisk",
+            "gasification": "Gassifisering",
+            "fission": "Fisjon",
+            "water-storage": "Magasin",
+            "combustion": "Forbrenning",
+            "anaerobic-digestion": "Anaerob nedbryting"
+        }
     },
     "nav": {
         "about": "Om",
