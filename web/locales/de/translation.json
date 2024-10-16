@@ -31,7 +31,9 @@
             "reactor-shunt": "Kompensationsdrosselspule",
             "capacitor-series": "Reihenkondensator",
             "capacitor-shunt": "Parallelkondensator",
-            "filter": "Filter"
+            "filter": "Filter",
+            "statcom": "Statischer Blindleistungskompensator",
+            "synchronous-condenser": "Phasenschieber"
         },
         "water": {
             "reservoir": "Wasserhochbehälter",
@@ -73,7 +75,22 @@
             "datacenter": "Rechenzentrum"
         },
         "cabinet": "Straßenschrank",
-        "other-pumping-station": "Anderes Pumpwerk"
+        "other-pumping-station": "Anderes Pumpwerk",
+        "method": {
+            "fission": "Kernspaltung",
+            "fusion": "Kernfusion",
+            "water-storage": "Wasserspeicher",
+            "water-pumped-storage": "Speicherkraftwerk",
+            "water-run-of-river": "Flußkraftwerk",
+            "solar-thermal": "Sonnenkollektor",
+            "solar-photovoltaic": "Solaranlage",
+            "tidal-barrage": "Gezeitenkraftwerk",
+            "tidal-stream": "Meeresströmungskraftwerk",
+            "wind-turbine": "Windkraftanlage",
+            "combustion": "Verbrennung",
+            "anaerobic-digestion": "Anaerobe Vergärung",
+            "gasification": "Vergasung"
+        }
     },
     "key": {
         "name": "Legende",
@@ -104,7 +121,8 @@
         "substation-type": {
             "converter": "Gleichrichter",
             "transmission": "Übertragung",
-            "distribution": "Verteilung"
+            "distribution": "Verteilung",
+            "traction": "Bahnstrom"
         }
     },
     "edit": {
@@ -170,6 +188,7 @@
         "underwater": "Unterwasser",
         "indoor": "Drinnen",
         "surface": "Oberfläche",
-        "roof": "Dach"
+        "roof": "Dach",
+        "overhead": "über Kopf"
     }
 }
