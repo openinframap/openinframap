@@ -15,9 +15,6 @@ const layers: LayerSpecificationWithZIndex[] = [
     source: 'openmaptiles',
     'source-layer': 'park',
     filter: ['==', '$type', 'Polygon'],
-    layout: {
-      visibility: 'visible'
-    },
     paint: {
       'fill-color': 'rgb(230, 233, 229)'
     }
@@ -28,9 +25,6 @@ const layers: LayerSpecificationWithZIndex[] = [
     source: 'openmaptiles',
     'source-layer': 'water',
     filter: ['==', '$type', 'Polygon'],
-    layout: {
-      visibility: 'visible'
-    },
     paint: {
       'fill-color': 'hsl(207, 12%, 78%)',
       'fill-antialias': true
@@ -43,9 +37,6 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'landcover',
     maxzoom: 8,
     filter: ['all', ['==', '$type', 'Polygon'], ['==', 'subclass', 'ice_shelf']],
-    layout: {
-      visibility: 'visible'
-    },
     paint: {
       'fill-color': 'hsl(0, 0%, 98%)',
       'fill-opacity': 0.7
@@ -58,9 +49,6 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'landcover',
     maxzoom: 8,
     filter: ['all', ['==', '$type', 'Polygon'], ['==', 'subclass', 'glacier']],
-    layout: {
-      visibility: 'visible'
-    },
     paint: {
       'fill-color': 'hsl(0, 0%, 98%)',
       'fill-opacity': ['interpolate', ['linear'], ['zoom'], 0, 1, 8, 0.5]
@@ -73,9 +61,6 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'landuse',
     maxzoom: 16,
     filter: ['all', ['==', '$type', 'Polygon'], ['==', 'class', 'residential']],
-    layout: {
-      visibility: 'visible'
-    },
     paint: {
       'fill-color': 'rgb(234, 234, 230)',
       'fill-opacity': ['interpolate', ['exponential', 0.6], ['zoom'], 8, 0.8, 9, 0.6]
@@ -88,9 +73,6 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'landcover',
     minzoom: 10,
     filter: ['all', ['==', '$type', 'Polygon'], ['==', 'class', 'wood']],
-    layout: {
-      visibility: 'visible'
-    },
     paint: {
       'fill-color': 'rgb(220,226,220)',
       'fill-opacity': ['interpolate', ['linear'], ['zoom'], 8, 0, 12, 1]
@@ -102,9 +84,6 @@ const layers: LayerSpecificationWithZIndex[] = [
     source: 'openmaptiles',
     'source-layer': 'waterway',
     filter: ['==', '$type', 'LineString'],
-    layout: {
-      visibility: 'visible'
-    },
     paint: {
       'line-color': 'hsl(207, 20%, 78%)'
     }
@@ -134,8 +113,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     ],
     layout: {
       'line-cap': 'butt',
-      'line-join': 'miter',
-      visibility: 'visible'
+      'line-join': 'miter'
     },
     paint: {
       'line-color': 'rgb(213, 213, 213)',
@@ -155,8 +133,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     ],
     layout: {
       'line-cap': 'round',
-      'line-join': 'round',
-      visibility: 'visible'
+      'line-join': 'round'
     },
     paint: {
       'line-color': 'rgb(234,234,234)',
@@ -172,8 +149,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     filter: ['all', ['in', 'class', 'taxiway']],
     layout: {
       'line-cap': 'round',
-      'line-join': 'round',
-      visibility: 'visible'
+      'line-join': 'round'
     },
     paint: {
       'line-color': 'hsl(0, 0%, 88%)',
@@ -189,8 +165,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     filter: ['all', ['in', 'class', 'runway']],
     layout: {
       'line-cap': 'round',
-      'line-join': 'round',
-      visibility: 'visible'
+      'line-join': 'round'
     },
     paint: {
       'line-color': 'hsl(0, 0%, 88%)',
@@ -204,9 +179,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'aeroway',
     minzoom: 4,
     filter: ['all', ['==', '$type', 'Polygon'], ['in', 'class', 'runway', 'taxiway']],
-    layout: {
-      visibility: 'visible'
-    },
+
     paint: {
       'fill-opacity': ['interpolate', ['linear'], ['zoom'], 13, 0, 14, 1],
       'fill-color': 'rgba(255, 255, 255, 1)'
@@ -221,8 +194,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     filter: ['all', ['in', 'class', 'runway'], ['==', '$type', 'LineString']],
     layout: {
       'line-cap': 'round',
-      'line-join': 'round',
-      visibility: 'visible'
+      'line-join': 'round'
     },
     paint: {
       'line-color': 'rgba(255, 255, 255, 1)',
@@ -237,8 +209,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     filter: ['all', ['==', '$type', 'LineString'], ['==', 'class', 'path']],
     layout: {
       'line-cap': 'round',
-      'line-join': 'round',
-      visibility: 'visible'
+      'line-join': 'round'
     },
     paint: {
       'line-color': 'rgb(234, 234, 234)',
@@ -255,8 +226,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     filter: ['all', ['==', '$type', 'LineString'], ['in', 'class', 'minor', 'service', 'track']],
     layout: {
       'line-cap': 'round',
-      'line-join': 'round',
-      visibility: 'visible'
+      'line-join': 'round'
     },
     paint: {
       'line-color': 'hsl(0, 0%, 83%)',
@@ -272,8 +242,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     filter: ['all', ['==', '$type', 'LineString'], ['in', 'class', 'minor', 'service', 'track']],
     layout: {
       'line-cap': 'round',
-      'line-join': 'round',
-      visibility: 'visible'
+      'line-join': 'round'
     },
     paint: {
       'line-color': 'hsl(0, 0%, 92%)',
@@ -293,8 +262,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     ],
     layout: {
       'line-cap': 'butt',
-      'line-join': 'miter',
-      visibility: 'visible'
+      'line-join': 'miter'
     },
     paint: {
       'line-color': 'rgb(213, 213, 213)',
@@ -315,8 +283,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     ],
     layout: {
       'line-cap': 'round',
-      'line-join': 'round',
-      visibility: 'visible'
+      'line-join': 'round'
     },
     paint: {
       'line-color': '#fff',
@@ -336,8 +303,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     ],
     layout: {
       'line-cap': 'round',
-      'line-join': 'round',
-      visibility: 'visible'
+      'line-join': 'round'
     },
     paint: {
       'line-color': 'hsla(0, 0%, 85%, 0.69)',
@@ -357,8 +323,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     ],
     layout: {
       'line-cap': 'butt',
-      'line-join': 'miter',
-      visibility: 'visible'
+      'line-join': 'miter'
     },
     paint: {
       'line-color': 'rgb(213, 213, 213)',
@@ -379,8 +344,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     ],
     layout: {
       'line-cap': 'round',
-      'line-join': 'round',
-      visibility: 'visible'
+      'line-join': 'round'
     },
     paint: {
       'line-color': ['interpolate', ['linear'], ['zoom'], 6, 'hsla(0, 0%, 85%, 0.53)', 8, '#fff'],
@@ -396,8 +360,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     filter: ['all', ['==', '$type', 'LineString'], ['==', 'class', 'motorway']],
     layout: {
       'line-cap': 'round',
-      'line-join': 'round',
-      visibility: 'visible'
+      'line-join': 'round'
     },
     paint: {
       'line-color': 'hsla(0, 0%, 85%, 0.53)',
@@ -416,7 +379,6 @@ const layers: LayerSpecificationWithZIndex[] = [
       ['all', ['==', 'class', 'transit'], ['!in', 'brunnel', 'tunnel']]
     ],
     layout: {
-      visibility: 'visible',
       'line-join': 'round'
     },
     paint: {
@@ -436,7 +398,6 @@ const layers: LayerSpecificationWithZIndex[] = [
       ['all', ['==', 'class', 'transit'], ['!in', 'brunnel', 'tunnel']]
     ],
     layout: {
-      visibility: 'visible',
       'line-join': 'round'
     },
     paint: {
@@ -453,7 +414,6 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 16,
     filter: ['all', ['==', '$type', 'LineString'], ['all', ['==', 'class', 'rail'], ['has', 'service']]],
     layout: {
-      visibility: 'visible',
       'line-join': 'round'
     },
     paint: {
@@ -469,7 +429,6 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 16,
     filter: ['all', ['==', '$type', 'LineString'], ['==', 'class', 'rail'], ['has', 'service']],
     layout: {
-      visibility: 'visible',
       'line-join': 'round'
     },
     paint: {
@@ -486,7 +445,6 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 7,
     filter: ['all', ['==', '$type', 'LineString'], ['all', ['!has', 'service'], ['==', 'class', 'rail']]],
     layout: {
-      visibility: 'visible',
       'line-join': 'round'
     },
     paint: {
@@ -502,7 +460,6 @@ const layers: LayerSpecificationWithZIndex[] = [
     minzoom: 11,
     filter: ['all', ['==', '$type', 'LineString'], ['all', ['!has', 'service'], ['==', 'class', 'rail']]],
     layout: {
-      visibility: 'visible',
       'line-join': 'round'
     },
     paint: {
@@ -524,8 +481,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     ],
     layout: {
       'line-cap': 'butt',
-      'line-join': 'miter',
-      visibility: 'visible'
+      'line-join': 'miter'
     },
     paint: {
       'line-color': 'rgb(213, 213, 213)',
@@ -546,8 +502,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     ],
     layout: {
       'line-cap': 'round',
-      'line-join': 'round',
-      visibility: 'visible'
+      'line-join': 'round'
     },
     paint: {
       'line-color': ['interpolate', ['linear'], ['zoom'], 5.8, 'hsla(0, 0%, 85%, 0.53)', 6, '#fff'],
@@ -565,10 +520,10 @@ const layers: LayerSpecificationWithZIndex[] = [
       'line-join': 'round'
     },
     paint: {
-      'line-color': 'rgb(230, 204, 207)',
+      'line-color': ['interpolate-hcl', ['exponential', 1.1], ['zoom'], 2, '#99656B', 8, '#CC9BA1'],
       'line-width': ['interpolate', ['exponential', 1.1], ['zoom'], 3, 1, 22, 20],
       'line-blur': ['interpolate', ['linear'], ['zoom'], 0, 0.4, 22, 4],
-      'line-dasharray': [4, 4]
+      'line-dasharray': [3, 3]
     }
   }
 ]
