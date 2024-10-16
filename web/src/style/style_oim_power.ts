@@ -1075,7 +1075,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       paint: {
         ...text_paint,
         'text-opacity': ['step', zoom, 0, 7, 1],
-        'icon-opacity': power_opacity
+        'icon-opacity': if_(construction_p, 0.5, 1)
       }
     },
     {
