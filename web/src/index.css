@@ -30,12 +30,12 @@ body,
 
 header {
   z-index: 2;
-  padding: 0.25rem 0 0.5rem 0.5rem;
+  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
   border-radius: 0px 0px 15px 0px;
   background-color: rgba(250, 250, 250, 0.8);
   top: 0px;
   left: 0px;
-  width: 15rem;
+  min-width: 15rem;
   position: absolute;
   display: block;
   font-size: 13px;
