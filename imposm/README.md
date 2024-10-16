@@ -33,10 +33,11 @@ I suggest creating separate Postgres user accounts for imposm and for the tile s
 
 ## Additional data
 The [web backend](../web-backend) requires country EEZ boundaries to be imported into the `countries`
-schema in the same database as the OSM data. These are sourced from the marineregions.org
+schema in the same database as the OSM data, so that offshore wind farms can be attributed to the
+correct country. These are sourced from the marineregions.org
 [Marine and Land Zones](https://marineregions.org/sources.php#unioneezcountry) dataset.
 
-    shp2pgsql -s 4326 -d ./EEZ_Land_v3_202030.shp countries.country_eez > ./country_eez.sql
+    shp2pgsql -s 4326 -d ./EEZ_land_union_v4_202410.shp countries.country_eez > ./country_eez.sql
 
 We create a materialized view from this, using `ST_Subdivide` to improve indexing performance:
 
