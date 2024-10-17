@@ -2,7 +2,7 @@
     "nav": {
         "about": "acerca de",
         "stats": "estadísticas",
-        "exports": "Exportaciones"
+        "exports": "exportaciones"
     },
     "edit": {
         "remote": "Editar con control remoto (JOSM, etc.)",
