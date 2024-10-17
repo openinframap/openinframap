@@ -127,7 +127,9 @@
         "circuits": "Kretser",
         "type": "Type",
         "substance": "Substans",
-        "substation-type": "Stasjonstype"
+        "substation-type": "Stasjonstype",
+        "design": "Design",
+        "material": "Material"
     },
     "units": {
         "kV": "kV",
