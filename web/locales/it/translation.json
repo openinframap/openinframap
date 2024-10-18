@@ -1,1 +1,198 @@
-{}
+{
+    "edit": {
+        "edit": "Modifica",
+        "remote": "Modifica con controllo remoto (JOSM ecc…)",
+        "error": "Impossibile caricare l'editor remoto - verifica sia aperto e sia abilitato il controllo remoto.\nError: ",
+        "browser": "Modifica nel browser (iD)"
+    },
+    "names": {
+        "power": {
+            "tower": "Traliccio elettrico",
+            "pole": "Palo elettrico",
+            "generator": "Generatore",
+            "generator-solar": "Generatore solare",
+            "wind-turbine": "Turbina eolica",
+            "substation": "Sottostazione",
+            "compensator": "Compensatore",
+            "converter": "Sottostazione di conversione DC",
+            "cable": "Cavo elettrico",
+            "line": "Linea elettrica",
+            "solar-panel": "Pannello solare",
+            "plant": "Centrale elettrica",
+            "switch": "Organo di manovra",
+            "hvdc": "HVDC",
+            "line-reference": "Matricola linea",
+            "tower-pylon": "Torre/traliccio",
+            "tower-transition": "Traliccio di transizione",
+            "pole-transition": "Palo di transizione",
+            "switch-disconnector": "Sezionatore",
+            "switch-other": "Organo di manovra (generico)",
+            "capacitor-series": "Condensatore serie",
+            "capacitor-shunt": "Condensatore shunt",
+            "statcom": "Static VAR compensator",
+            "synchronous-condenser": "Compensatore sincrono",
+            "filter": "Filtro",
+            "compensator-other": "Compensatore (altro)",
+            "switch-breaker": "Interruttore",
+            "transformer": "Trasformatore",
+            "solar-panel-node": "Pannello solare (nodo)",
+            "other-generator": "Generatore (altro)",
+            "transformer-3": "Trasformatore a 3 avvolgimenti",
+            "reactor-series": "Reattanza serie",
+            "reactor-shunt": "Reattanza shunt"
+        },
+        "telecoms": {
+            "data-center": "Edificio telecomunicazioni",
+            "exchange": "Centrale telefonica",
+            "communication-line": "Linea telecomunicazioni",
+            "cabinet": "Armadio telecomunicazioni"
+        },
+        "pipeline": "Conduttura",
+        "petroleum": {
+            "facility": "Infrastrutture petrolifere",
+            "well": "Pozzo"
+        },
+        "water": {
+            "pipeline": "Acquedotto",
+            "sewage-treatment-plant": "Impianto di depurazione",
+            "treatment-plant": "Impianto trattamento acque",
+            "well": "Pozzo idrico",
+            "water-pumping-station": "Stazione pompaggio acque",
+            "pumping-station": "Stazione di pompaggio",
+            "reservoir": "Serbatoio idrico",
+            "sewage-pumping-station": "Stazione pompaggio reflui"
+        },
+        "telecom": {
+            "tower-mast": "Torre/palo",
+            "datacenter": "Datacenter"
+        },
+        "substance": {
+            "fuel": "Carburante",
+            "petroleum-intermediate": "Prodotti intermedi del petrolio",
+            "hot-water": "Acqua calda",
+            "steam": "Vapore",
+            "rainwater": "Acque piovane",
+            "oil": "Petrolio",
+            "gas": "Gas",
+            "hydrogen": "Idrogeno",
+            "wastewater": "Acque reflue",
+            "co2": "CO<sub>2</sub>",
+            "fresh-water": "Acqua dolce"
+        },
+        "method": {
+            "water-storage": "Accumulo",
+            "water-pumped-storage": "Pompaggio",
+            "anaerobic-digestion": "Digestione anaerobica",
+            "solar-thermal": "Termica",
+            "solar-photovoltaic": "Fotovoltaico",
+            "combustion": "Combustione",
+            "gasification": "Gasificazione",
+            "fission": "Fissione",
+            "fusion": "Fusione",
+            "wind-turbine": "Turbina eolica",
+            "water-run-of-river": "Acqua fluente",
+            "tidal-barrage": "Sbarramento",
+            "tidal-stream": "Corrente"
+        },
+        "other-pumping-station": "Stazione di pompaggio (altro)",
+        "cabinet": "Armadio",
+        "cable": "Cavo"
+    },
+    "info": {
+        "name": "Nome",
+        "operator": "Operatore",
+        "output": "Potenza",
+        "source": "Fonte",
+        "generation-method": "Metodo di generazione",
+        "substation-type": "Tipo di sottostazione",
+        "type": "Tipo",
+        "view-openstreetmap": "Apri su OpenStreetMap",
+        "reference": "Riferimento",
+        "circuits": "Circuiti",
+        "line-attachment": "Sospensione",
+        "line-management": "Gestione linea",
+        "website": "Sito web",
+        "start-date": "Data di inizio",
+        "design": "Design",
+        "usage": "Utilizzo",
+        "substance": "Sostanza",
+        "location": "Posizione",
+        "material": "Materiale"
+    },
+    "nav": {
+        "about": "informazioni",
+        "stats": "statistiche",
+        "exports": "esporta"
+    },
+    "units": {
+        "kV": "kV",
+        "V": "V",
+        "DC": "DC",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "MW": "MW",
+        "Hz": "Hz"
+    },
+    "more_info": "Più informazioni",
+    "wikipedia": "Wikipedia",
+    "wikimedia-commons": "Wikimedia Commons",
+    "wikidata": "Wikidata",
+    "key": {
+        "name": "Legenda",
+        "power-lines": "Linee elettriche",
+        "power-plants": "Centrali elettriche",
+        "power-generators": "Generatori",
+        "switchgear": "Apparecchiature di manovra",
+        "telecoms": "Telecomunicazioni",
+        "traction": "Trazione (< 50 Hz)",
+        "petroleum": "Petrolio",
+        "water": "Acqua",
+        "power-line-supports": "Supporti per linee elettriche"
+    },
+    "location": {
+        "underground": "Sotterranea",
+        "underwater": "Subacquea",
+        "overhead": "Aerea",
+        "surface": "Superficie",
+        "outdoor": "Esterno",
+        "indoor": "Interno",
+        "roof": "Tetto"
+    },
+    "power": {
+        "source": {
+            "nuclear": "Nucleare",
+            "oil-gas": "Gas/Petrolio",
+            "gas": "Gas",
+            "wind": "Eolico",
+            "battery": "Batterie",
+            "coal": "Carbone",
+            "solar": "Solare",
+            "geothermal": "Geotermico",
+            "hydro": "Idroelettrico",
+            "biomass": "Biomassa",
+            "waste": "Termovalorizzatore"
+        },
+        "substation-type": {
+            "distribution": "Distribuzione",
+            "converter": "Conversione DC",
+            "transmission": "Trasmissione",
+            "traction": "Trazione"
+        }
+    },
+    "warning": "Avvertenza",
+    "layers": {
+        "power": "Elettricità",
+        "heatmap": "Generazione solare",
+        "petroleum": "Petrolio e gas",
+        "water": "Acqua",
+        "telecoms": "Telecomunicazioni",
+        "labels": "Etichette",
+        "title": "Livelli"
+    },
+    "construction": "in costruzione",
+    "other": "Altro",
+    "warnings": {
+        "webgl": "<p>Il browser utilizzato potrebbe avere problemi di prestazioni o funzionalità con Open Infrastructure Map.</p><p> È richiesto <a href=\"http://webglreport.com\">WebGL</a> con accelerazione hardware.</p><p>Se il browseer supporta WebGL, potrebbe essere necessario disabilitare la protezione dal fingerprinting per questo sito.</p>"
+    }
+}
