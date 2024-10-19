@@ -2,6 +2,8 @@
 This is the main repository for [Open Infrastructure Map](https://openinframap.org), a map showing the world's
 infrastructure from [OpenStreetMap](https://www.openstreetmap.org).
 
+![Screenshot of OpenInfraMap](./docs/screenshots/main.png)
+
 ## Translations
 We're aiming to make OpenInfraMap multilingual - if you can help translate, please
 [contribute on Weblate](https://hosted.weblate.org/engage/open-infrastructure-map/).
