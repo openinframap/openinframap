@@ -8,7 +8,7 @@ await i18next.use(LanguageDetector).init({
     no: ['nb-NO'],
     default: ['en']
   },
-  supportedLngs: ['en', 'de', 'es', 'cs', 'nl', 'fr', 'el', 'no', 'nb-NO'],
+  supportedLngs: ['en', 'de', 'es', 'it', 'cs', 'nl', 'fr', 'el', 'no', 'nb-NO'],
   resources: resources,
   debug: import.meta.env.DEV,
   detection: {
