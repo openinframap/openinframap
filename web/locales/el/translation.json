@@ -25,7 +25,7 @@
             "plant": "Εργοστάσιο παραγωγής ρεύματος",
             "generator-solar": "Ηλιακή γεννήτρια",
             "converter": "Υποσταθμός μετατροπής DC",
-            "cable": "Καλώδιο",
+            "cable": "Καλώδιο ρεύματος",
             "solar-panel": "Ηλιακό πάνελ",
             "hvdc": "HVDC",
             "solar-panel-node": "Ηλιακό πάνελ (κόμβος)",
@@ -43,7 +43,9 @@
             "switch-other": "Άλλος διακόπτης",
             "reactor-shunt": "Αντιδραστήρας διακλάδωσης",
             "filter": "Φίλτρο",
-            "compensator-other": "Άλλος αντισταθμιστής"
+            "compensator-other": "Άλλος αντισταθμιστής",
+            "statcom": "Στατικός αντισταθμιστής VAR",
+            "synchronous-condenser": "Σύγχρονος συμπυκνωτής"
         },
         "telecoms": {
             "communication-line": "Γραμμή τηλεπικοινωνιών",
@@ -75,7 +77,8 @@
             "steam": "Ατμός",
             "hot-water": "Καυτό νερό",
             "gas": "Αέριο",
-            "fuel": "Καύσιμο"
+            "fuel": "Καύσιμο",
+            "rainwater": "Όμβρια ύδατα"
         },
         "petroleum": {
             "well": "Πηγάδι",
@@ -83,7 +86,22 @@
         },
         "cabinet": "Καφάο",
         "other-pumping-station": "Άλλο αντλιοστάσιο",
-        "cable": "Καλώδιο"
+        "cable": "Καλώδιο",
+        "method": {
+            "fission": "Διάσπαση",
+            "water-storage": "Ταμίευση νερού",
+            "water-run-of-river": "Ροή ποταμού",
+            "tidal-barrage": "Παλιρροιακό φράγμα",
+            "tidal-stream": "Ροή παλίρροιας",
+            "combustion": "Καύση",
+            "gasification": "Αεριοποίηση",
+            "anaerobic-digestion": "Αναερόβια χώνευση",
+            "fusion": "Σύντηξη",
+            "wind-turbine": "Ανεμογεννήτρια",
+            "water-pumped-storage": "Αντλησιοταμίευση",
+            "solar-photovoltaic": "Φωτοβολταϊκά",
+            "solar-thermal": "Θερμική"
+        }
     },
     "units": {
         "kW": "kW",
@@ -116,7 +134,14 @@
         "start-date": "Ημερομηνία έναρξης",
         "generation-method": "Μέθοδος παραγωγής",
         "circuits": "Κυκλώματα",
-        "type": "Είδος"
+        "type": "Είδος",
+        "substance": "Ουσία",
+        "usage": "Χρήση",
+        "location": "Τοποθεσία",
+        "line-management": "Τοπολογία γραμμής",
+        "design": "Μορφή",
+        "material": "Υλικό",
+        "line-attachment": "Σύνδεση γραμμής"
     },
     "wikidata": "Wikidata",
     "key": {
@@ -142,7 +167,14 @@
             "wind": "Αέρας",
             "biomass": "Βιομάζα",
             "waste": "Απορρίμματα",
-            "battery": "Μπαταρία"
+            "battery": "Μπαταρία",
+            "gas": "Αέριο"
+        },
+        "substation-type": {
+            "transmission": "Μετάδοση",
+            "distribution": "Διανομή",
+            "traction": "Κίνηση",
+            "converter": "Μετατροπέας DC"
         }
     },
     "other": "Άλλο",
@@ -153,5 +185,14 @@
     "warnings": {
         "webgl": "<p>Ο περιηγητής σας ίσως να έχει προβλήματα απόδοσης ή λειτουργίας με το Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> με επιτάχυνση υλικού απαιτείται για να αποδόσει καλά αυτός ο ιστότοπος.</p><p>Αν ο περιηγητής σας υποστηρίζει WebGL, ίσως να χρειαστεί να απενεργοποιήσετε την προστασία fingerprinting περιηγητή γι' αυτό τον ιστότοπο.</p>"
     },
-    "construction": "υπό κατασκευή"
+    "construction": "υπό κατασκευή",
+    "location": {
+        "outdoor": "Εξωτερικά",
+        "underground": "Υπόγεια",
+        "underwater": "Υποθαλάσσια",
+        "overhead": "Εναέρια",
+        "roof": "Στέγη",
+        "surface": "Επιφάνεια",
+        "indoor": "Εσωτερικά"
+    }
 }
