@@ -129,7 +129,9 @@
         "substance": "Substans",
         "substation-type": "Stasjonstype",
         "design": "Design",
-        "material": "Material"
+        "material": "Material",
+        "line-attachment": "Linjevedlegg",
+        "line-management": "Linjehåndtering"
     },
     "units": {
         "kV": "kV",
