@@ -146,7 +146,11 @@
         "view-openstreetmap": "Auf OpenStreetMap ansehen",
         "substance": "Stoff",
         "usage": "Verwendung",
-        "location": "Lage"
+        "location": "Lage",
+        "material": "Material",
+        "line-management": "Leitungstopologie",
+        "design": "Form",
+        "line-attachment": "Leitungsbefestigung"
     },
     "nav": {
         "about": "Über",
