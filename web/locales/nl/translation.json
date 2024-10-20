@@ -18,7 +18,11 @@
             "other-generator": "Andere generator",
             "switch-disconnector": "Scheidingsschakelaar",
             "switch-other": "Andere schakelaar",
-            "compensator-other": "Andere compensator"
+            "compensator-other": "Andere compensator",
+            "generator-solar": "Zonnegenerator",
+            "substation": "Onderstation",
+            "hvdc": "HVDC",
+            "tower-pylon": "Hoogspanningsmast"
         },
         "telecoms": {
             "communication-line": "Telecomlijn",
