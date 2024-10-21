@@ -51,7 +51,7 @@
             "communication-line": "Γραμμή τηλεπικοινωνιών",
             "data-center": "Κτήριο τηλεπικοινωνιών",
             "exchange": "Τηλεφωνικό κέντρο",
-            "cabinet": "Καφάο"
+            "cabinet": "Υπαίθριος κατανεμητής (Καφάο)"
         },
         "water": {
             "pipeline": "Αγωγός νερού",
@@ -147,9 +147,9 @@
     "key": {
         "name": "Κλειδί",
         "power-lines": "Γραμμές Ρεύματος",
-        "switchgear": "Εξοπλισμός μεταγωγής υποσταθμού",
+        "switchgear": "Εξοπλισμός Μεταγωγής Υποσταθμού",
         "petroleum": "Πετρέλαιο",
-        "traction": "Κίνησης (< 50 Hz)",
+        "traction": "Έλξη (< 50 Hz)",
         "power-plants": "Εργοστάσια Παραγωγής Ρεύματος",
         "power-generators": "Γεννήτριες Ρεύματος",
         "power-line-supports": "Στηρίγματα Γραμμών Ρεύματος",
@@ -171,10 +171,10 @@
             "gas": "Αέριο"
         },
         "substation-type": {
-            "transmission": "Μετάδοση",
-            "distribution": "Διανομή",
-            "traction": "Κίνηση",
-            "converter": "Μετατροπέας DC"
+            "transmission": "Μετάδοσης",
+            "distribution": "Διανομής",
+            "traction": "Έλξης",
+            "converter": "Μετατροπής DC"
         }
     },
     "other": "Άλλο",
