@@ -102,7 +102,8 @@
         "reference": "Référence",
         "generation-method": "Méthode de génération",
         "circuits": "Circuits",
-        "substance": "Substance"
+        "substance": "Substance",
+        "material": "Matériau"
     },
     "other": "Autre",
     "units": {
@@ -162,6 +163,10 @@
     "construction": "en construction",
     "location": {
         "underground": "Souterrain",
-        "underwater": "Sous-marin"
+        "underwater": "Sous-marin",
+        "roof": "Toit",
+        "indoor": "Intérieur",
+        "surface": "Surface",
+        "outdoor": "Extérieur"
     }
 }
