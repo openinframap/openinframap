@@ -34,6 +34,8 @@ field_sets:
       sql: tags -> 'name:en'
     - name: name_es
       sql: tags -> 'name:es'
+    - name: name_el
+      sql: tags -> 'name:el'
     - name: name_de
       sql: tags -> 'name:de'
     - name: name_fr
@@ -50,6 +52,12 @@ field_sets:
       sql: tags -> 'name:pt'
     - name: name_ja
       sql: tags -> 'name:ja'
+    - name: name_pl
+      sql: tags -> 'name:pl'
+    - name: name_it
+      sql: tags -> 'name:it'
+    - name: name_nl
+      sql: tags -> 'name:nl'
     - name: operator
       sql: tags -> 'operator'
     - name: ref
