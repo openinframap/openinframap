@@ -1,1 +1,122 @@
-{}
+{
+    "names": {
+        "water": {
+            "well": "Studnia"
+        },
+        "substance": {
+            "fuel": "Paliwo",
+            "hydrogen": "Wodór",
+            "co2": "CO<sub>2</sub>",
+            "rainwater": "Woda deszczowa",
+            "fresh-water": "Woda czysta",
+            "hot-water": "Woda gorąca",
+            "steam": "Para",
+            "wastewater": "Ścieki"
+        },
+        "power": {
+            "transformer": "Transformator",
+            "tower": "Stanowisko słupowe",
+            "switch": "Łącznik",
+            "line-reference": "Numer linii",
+            "solar-panel-node": "Panel słoneczny (węzeł)",
+            "tower-pylon": "Słup wysokiego napięcia",
+            "transformer-3": "Transformator trójuzwojeniowy",
+            "switch-disconnector": "Odłącznik",
+            "switch-breaker": "Rozłącznik",
+            "pole": "Słup",
+            "generator": "Generator",
+            "wind-turbine": "Turbina wiatrowa",
+            "substation": "Podstacja",
+            "line": "Linia elektryczna",
+            "solar-panel": "Panel słoneczny",
+            "other-generator": "Inny generator",
+            "tower-transition": "Słup kablowy WN",
+            "pole-transition": "Słup kablowy",
+            "switch-other": "Inny łącznik",
+            "cable": "Kabel elektryczny"
+        },
+        "telecoms": {
+            "communication-line": "Linia telekomunikacyjna",
+            "data-center": "Budynek telekomunikacyjny",
+            "cabinet": "Kabinet telekomunikacyjny",
+            "exchange": "Centrala telefoniczna"
+        },
+        "pipeline": "Rurociąg",
+        "cable": "Kabel",
+        "telecom": {
+            "tower-mast": "Wieża/Maszt",
+            "datacenter": "Centrum danych"
+        }
+    },
+    "info": {
+        "substation-type": "Rodzaj podstacji",
+        "reference": "Numer",
+        "type": "Rodzaj",
+        "website": "Strona www",
+        "view-openstreetmap": "Zobacz na OpenStreetMap",
+        "name": "Nazwa",
+        "output": "Moc",
+        "start-date": "Data uruchomienia",
+        "operator": "Operator",
+        "source": "Źródło",
+        "material": "Materiał",
+        "location": "Lokalizacja",
+        "generation-method": "Sposób generowania",
+        "substance": "Substancja",
+        "usage": "Zastosowanie",
+        "design": "Design"
+    },
+    "units": {
+        "kV": "kV",
+        "DC": "DC",
+        "below_10kv": "<10 kV",
+        "ge_kv": "≥{{voltage}} kV",
+        "V": "V",
+        "kW": "kW",
+        "MW": "MW",
+        "Hz": "Hz"
+    },
+    "wikidata": "Wikidata",
+    "key": {
+        "name": "Legenda",
+        "power-lines": "Linie Elektroenergetyczne",
+        "water": "Woda",
+        "traction": "Trakcyjne (<50 Hz)"
+    },
+    "power": {
+        "source": {
+            "coal": "Węgiel",
+            "oil-gas": "Olej/Gaz",
+            "gas": "Gaz",
+            "solar": "Słoneczny"
+        },
+        "substation-type": {
+            "transmission": "Przesyłowa",
+            "distribution": "Rozdzielcza",
+            "traction": "Trakcyjna"
+        }
+    },
+    "other": "Inny",
+    "warning": "Ostrzeżenie",
+    "edit": {
+        "edit": "Edytuj",
+        "remote": "Edytuj w edytorze zewnętrznym (JOSM, itp.)",
+        "browser": "Edytuj w przeglądarce (iD)"
+    },
+    "nav": {
+        "about": "o projekcie",
+        "stats": "statystyki"
+    },
+    "more_info": "Więcej informacji",
+    "location": {
+        "underground": "Podziemne",
+        "underwater": "Podwodne",
+        "overhead": "Powietrzne",
+        "roof": "Dach",
+        "surface": "Powierzchnia",
+        "outdoor": "Na zewnątrz",
+        "indoor": "Wewnątrz"
+    },
+    "wikipedia": "Wikipedia",
+    "wikimedia-commons": "Wikimedia Commons"
+}
