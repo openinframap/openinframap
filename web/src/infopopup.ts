@@ -184,7 +184,7 @@ function formatFrequency(value: number | number[]): string {
 function formatPower(value: number): string {
   const formatter = new Intl.NumberFormat(i18next.language, { maximumFractionDigits: 2 })
   if (value < 1) {
-    return formatter.format(value * 1000) + ' ' + t('units.kV', 'kV')
+    return formatter.format(value * 1000) + ' ' + t('units.kW', 'kW')
   } else {
     return formatter.format(value) + ' ' + t('units.MW', 'MW')
   }
