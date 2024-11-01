@@ -1,7 +1,14 @@
 {
     "names": {
         "water": {
-            "well": "Studnia"
+            "well": "Studnia",
+            "pipeline": "Rurociąg wodny",
+            "sewage-treatment-plant": "Oczyszczalnia ścieków",
+            "treatment-plant": "Stacja uzdatniania wody",
+            "pumping-station": "Przepompownia",
+            "reservoir": "Zbiornik wodny",
+            "water-pumping-station": "Przepompownia wody",
+            "sewage-pumping-station": "Przepompownia ścieków"
         },
         "substance": {
             "fuel": "Paliwo",
@@ -11,7 +18,9 @@
             "fresh-water": "Woda czysta",
             "hot-water": "Woda gorąca",
             "steam": "Para",
-            "wastewater": "Ścieki"
+            "wastewater": "Ścieki",
+            "oil": "Olej",
+            "gas": "Gaz"
         },
         "power": {
             "transformer": "Transformator",
@@ -33,7 +42,12 @@
             "tower-transition": "Słup kablowy WN",
             "pole-transition": "Słup kablowy",
             "switch-other": "Inny łącznik",
-            "cable": "Kabel elektryczny"
+            "cable": "Kabel elektryczny",
+            "generator-solar": "Generator solarny",
+            "compensator": "Kompensator",
+            "converter": "Przetwarzanie na DC",
+            "plant": "Elektrownia",
+            "hvdc": "HVDC"
         },
         "telecoms": {
             "communication-line": "Linia telekomunikacyjna",
@@ -46,6 +60,13 @@
         "telecom": {
             "tower-mast": "Wieża/Maszt",
             "datacenter": "Centrum danych"
+        },
+        "method": {
+            "wind-turbine": "Turbina powietrzna",
+            "water-storage": "Rezerwuar wody",
+            "solar-photovoltaic": "Fotowoltaika",
+            "combustion": "Spalanie",
+            "water-run-of-river": "Przepływ rzeki"
         }
     },
     "info": {
@@ -81,19 +102,33 @@
         "name": "Legenda",
         "power-lines": "Linie Elektroenergetyczne",
         "water": "Woda",
-        "traction": "Trakcyjne (<50 Hz)"
+        "traction": "Trakcyjne (<50 Hz)",
+        "power-plants": "Elektrownie",
+        "power-generators": "Generatory prądu",
+        "switchgear": "Rozdzielnia",
+        "telecoms": "Telekomunikacja",
+        "petroleum": "Ropa naftowa",
+        "power-line-supports": "Konstrukcje wsporcze linii napowietrznych"
     },
     "power": {
         "source": {
             "coal": "Węgiel",
             "oil-gas": "Olej/Gaz",
             "gas": "Gaz",
-            "solar": "Słoneczny"
+            "solar": "Słoneczny",
+            "geothermal": "Geotermika",
+            "hydro": "Elektrownia wodna",
+            "nuclear": "Elektrownia jądrowa",
+            "wind": "Elektrownia wiatrowa",
+            "biomass": "Biomasa",
+            "waste": "Odpadki",
+            "battery": "Bateria"
         },
         "substation-type": {
             "transmission": "Przesyłowa",
             "distribution": "Rozdzielcza",
-            "traction": "Trakcyjna"
+            "traction": "Trakcyjna",
+            "converter": "Prostownik DC"
         }
     },
     "other": "Inny",
@@ -118,5 +153,15 @@
         "indoor": "Wewnątrz"
     },
     "wikipedia": "Wikipedia",
-    "wikimedia-commons": "Wikimedia Commons"
+    "wikimedia-commons": "Wikimedia Commons",
+    "layers": {
+        "power": "Elektroenergetyka",
+        "heatmap": "Energia słoneczna",
+        "telecoms": "Telekomunikacja",
+        "petroleum": "Nafta i gaz",
+        "water": "Woda",
+        "labels": "Etykiety",
+        "title": "Warstwy"
+    },
+    "construction": "w budowie"
 }
