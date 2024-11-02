@@ -1,1 +1,11 @@
-{}
+{
+    "edit": {
+        "edit": "Muuda",
+        "remote": "Muuda rakenduses, mis toetab kaughaldust (JOSM, jne)",
+        "browser": "Muuda brauseris (iD)"
+    },
+    "nav": {
+        "about": "veebirakenduse teave",
+        "stats": "statistika"
+    }
+}
