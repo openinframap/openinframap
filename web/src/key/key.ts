@@ -52,7 +52,9 @@ class KeyControl implements IControl {
     this._map = map
 
     this._control = el('button', {
-      class: 'maplibregl-ctrl-icon oim-key-control'
+      class: 'maplibregl-ctrl-icon oim-key-control',
+      title: t('key.name'),
+      ariaLabel: t('key.name')
     })
 
     this._container = el('div', { class: 'maplibregl-ctrl oim-key-panel' })
