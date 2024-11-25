@@ -1,1 +1,21 @@
-{}
+{
+    "edit": {
+        "edit": "编辑",
+        "remote": "以远程控制编辑（JOSM等）",
+        "browser": "在浏览器中编辑（iD）",
+        "error": "无法加载远程编辑器——确保其在运行并已启用远程控制。\n错误： "
+    },
+    "names": {
+        "power": {
+            "generator": "发电机",
+            "substation": "变电所",
+            "switch": "开关",
+            "compensator": "补偿器",
+            "converter": "直流换流站"
+        }
+    },
+    "nav": {
+        "about": "关于",
+        "stats": "统计"
+    }
+}
