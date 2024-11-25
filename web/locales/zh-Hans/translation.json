@@ -11,11 +11,109 @@
             "substation": "变电所",
             "switch": "开关",
             "compensator": "补偿器",
-            "converter": "直流换流站"
+            "converter": "直流换流站",
+            "solar-panel": "太阳能板",
+            "plant": "发电厂",
+            "hvdc": "高压直流",
+            "line-reference": "线路编号",
+            "solar-panel-node": "太阳能板（点）",
+            "tower-pylon": "塔",
+            "switch-breaker": "断路器",
+            "switch-other": "其他开关",
+            "reactor-series": "串联电抗器",
+            "reactor-shunt": "并联电抗器",
+            "capacitor-series": "串联电容器",
+            "capacitor-shunt": "并联电容器",
+            "statcom": "静态无功补偿器",
+            "synchronous-condenser": "同步调相机",
+            "compensator-other": "其他补偿器",
+            "filter": "滤波器",
+            "other-generator": "其他发电机",
+            "line": "架空电线",
+            "cable": "电缆"
+        },
+        "pipeline": "管道",
+        "water": {
+            "sewage-treatment-plant": "污水处理厂",
+            "treatment-plant": "自来水厂",
+            "pumping-station": "泵站",
+            "well": "水井",
+            "sewage-pumping-station": "污水泵站",
+            "water-pumping-station": "水泵站",
+            "pipeline": "水管",
+            "reservoir": "水库"
+        },
+        "telecom": {
+            "datacenter": "数据中心",
+            "tower-mast": "塔"
+        },
+        "substance": {
+            "oil": "原油",
+            "fuel": "燃料",
+            "gas": "天然气",
+            "fresh-water": "淡水",
+            "hot-water": "热水",
+            "hydrogen": "氢",
+            "steam": "蒸汽",
+            "co2": "二氧化碳",
+            "wastewater": "污水",
+            "rainwater": "雨水"
+        },
+        "method": {
+            "fusion": "核聚变",
+            "wind-turbine": "风力涡轮机",
+            "water-pumped-storage": "抽水蓄能",
+            "water-storage": "蓄水式",
+            "water-run-of-river": "川流式",
+            "tidal-stream": "潮流",
+            "fission": "核裂变"
+        },
+        "other-pumping-station": "其他泵站",
+        "petroleum": {
+            "well": "油井",
+            "facility": "石油设施"
         }
     },
     "nav": {
         "about": "关于",
         "stats": "统计"
+    },
+    "info": {
+        "source": "能源"
+    },
+    "units": {
+        "DC": "直流",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V",
+        "MW": "MW",
+        "Hz": "Hz",
+        "kV": "kV"
+    },
+    "key": {
+        "water": "水"
+    },
+    "location": {
+        "underground": "地下",
+        "underwater": "水下",
+        "overhead": "天上",
+        "surface": "地面",
+        "outdoor": "室外"
+    },
+    "power": {
+        "source": {
+            "coal": "煤",
+            "hydro": "水力",
+            "waste": "垃圾",
+            "nuclear": "核能"
+        }
+    },
+    "other": "其他",
+    "warning": "警告",
+    "construction": "在建",
+    "layers": {
+        "labels": "地名",
+        "water": "水"
     }
 }
