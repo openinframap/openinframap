@@ -5,10 +5,28 @@ import resources from 'virtual:i18next-loader'
 
 await i18next.use(LanguageDetector).init({
   fallbackLng: {
-    no: ['nb-NO'],
+    no: ['nb-NO', 'en'],
+    zh: ['zh-Hans', 'zh-Hant', 'en'],
+    'zh-Hant': ['zh-Hans', 'en'],
+    'zh-Hans': ['zh-Hant', 'en'],
     default: ['en']
   },
-  supportedLngs: ['en', 'de', 'es', 'it', 'cs', 'nl', 'fr', 'el', 'no', 'nb-NO', 'pl'],
+  supportedLngs: [
+    'en',
+    'de',
+    'es',
+    'it',
+    'cs',
+    'nl',
+    'fr',
+    'el',
+    'no',
+    'nb-NO',
+    'pl',
+    'zh-Hant',
+    'zh',
+    'zh-Hans'
+  ],
   resources: resources,
   debug: import.meta.env.DEV,
   detection: {
