@@ -25,7 +25,23 @@
             "solar-panel-node": "Solární panel (uzel)",
             "other-generator": "Jiný generátor",
             "tower-pylon": "Stožár/sloup",
-            "tower": "Elektrický stožár"
+            "tower": "Elektrický stožár",
+            "switch": "Switch",
+            "compensator": "Kompenzátor",
+            "converter": "Stejnosměrná měničová rozvodna",
+            "tower-transition": "Přechodový stožár",
+            "pole-transition": "Přechodový sloup",
+            "cable": "Napájecí kabel",
+            "line-reference": "Reference linky",
+            "switch-disconnector": "Odpojovač",
+            "transformer-3": "Transformátor (3 vinutí)",
+            "switch-breaker": "Jistič",
+            "switch-other": "Jiný switch",
+            "reactor-series": "Sériový reaktor",
+            "reactor-shunt": "Kompenzační tlumivka",
+            "capacitor-series": "Sériový kapacitor",
+            "capacitor-shunt": "Kompenzační kapacitor",
+            "statcom": "Statický VAR kompenzátor"
         }
     },
     "info": {
