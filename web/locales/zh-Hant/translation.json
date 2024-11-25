@@ -1,1 +1,112 @@
-{}
+{
+    "edit": {
+        "edit": "編輯",
+        "remote": "以遠端控制編輯（JOSM等）",
+        "error": "無法載入遠端編輯器 - 確保它正在運行並且已啟用遠端控制。\n錯誤： ",
+        "browser": "在瀏覽器中編輯（iD）"
+    },
+    "names": {
+        "power": {
+            "transformer": "變電所",
+            "generator": "發電機組",
+            "generator-solar": "太陽能發電機",
+            "wind-turbine": "風力發電機",
+            "switch": "開關",
+            "compensator": "補償器",
+            "line": "架空電纜",
+            "solar-panel": "太陽能板",
+            "plant": "發電廠",
+            "hvdc": "高壓直流",
+            "line-reference": "線路編號",
+            "reactor-series": "串聯電抗器",
+            "reactor-shunt": "並聯電抗器",
+            "capacitor-shunt": "並聯電容器",
+            "capacitor-series": "串聯電容器",
+            "statcom": "靜態虛功補償器",
+            "synchronous-condenser": "同步調相機",
+            "tower": "電塔",
+            "pole": "電桿",
+            "substation": "變電所",
+            "converter": "直流轉換變電所",
+            "cable": "電纜",
+            "solar-panel-node": "太陽能板（點）",
+            "other-generator": "其他發電機",
+            "switch-disconnector": "隔離開關",
+            "switch-other": "其他開關",
+            "compensator-other": "其他補償器",
+            "switch-breaker": "斷路器"
+        },
+        "petroleum": {
+            "well": "油井",
+            "facility": "石油設施"
+        },
+        "water": {
+            "pumping-station": "泵站",
+            "water-pumping-station": "水泵站",
+            "sewage-treatment-plant": "污水處理廠",
+            "reservoir": "水庫",
+            "pipeline": "水管",
+            "treatment-plant": "淨水廠",
+            "well": "水井"
+        },
+        "cable": "線數",
+        "substance": {
+            "rainwater": "雨水",
+            "oil": "原油",
+            "gas": "天然氣",
+            "hydrogen": "氫",
+            "fuel": "燃料",
+            "co2": "二氧化碳",
+            "steam": "蒸汽",
+            "wastewater": "污水"
+        },
+        "method": {
+            "fission": "核分裂",
+            "fusion": "核融合",
+            "wind-turbine": "風力渦輪機",
+            "water-storage": "抽水蓄能",
+            "water-pumped-storage": "抽蓄",
+            "solar-photovoltaic": "光電"
+        },
+        "pipeline": "管道"
+    },
+    "info": {
+        "location": "位置",
+        "material": "材質"
+    },
+    "nav": {
+        "about": "關於",
+        "stats": "統計"
+    },
+    "power": {
+        "source": {
+            "nuclear": "核能",
+            "oil-gas": "油氣",
+            "waste": "垃圾",
+            "geothermal": "地熱",
+            "solar": "太陽能",
+            "hydro": "水力",
+            "coal": "煤",
+            "gas": "天然氣",
+            "wind": "風能"
+        },
+        "substation-type": {
+            "converter": "直流轉換"
+        }
+    },
+    "location": {
+        "indoor": "室內",
+        "roof": "屋頂",
+        "outdoor": "室外",
+        "underwater": "水下",
+        "surface": "地面"
+    },
+    "key": {
+        "power-generators": "發電機",
+        "power-plants": "發電廠",
+        "water": "水"
+    },
+    "wikidata": "維基數據",
+    "warning": "警告",
+    "other": "其他"
+}
