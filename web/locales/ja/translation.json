@@ -1,1 +1,133 @@
-{}
+{
+    "power": {
+        "source": {
+            "hydro": "水力",
+            "geothermal": "地熱",
+            "coal": "石炭",
+            "nuclear": "原子力",
+            "wind": "風力",
+            "solar": "太陽光",
+            "waste": "廃棄物",
+            "battery": "電池"
+        },
+        "substation-type": {
+            "transmission": "送電",
+            "traction": "鉄道",
+            "converter": "交直変流器",
+            "distribution": "配電"
+        }
+    },
+    "names": {
+        "power": {
+            "transformer": "変圧器",
+            "generator": "発電機",
+            "substation": "変電所",
+            "switch": "開閉器",
+            "tower": "送電塔",
+            "pole": "電柱",
+            "generator-solar": "太陽光発電装置",
+            "wind-turbine": "風力原動機",
+            "converter": "交直変換所",
+            "plant": "発電所",
+            "line": "架空電線",
+            "cable": "地中電線",
+            "hvdc": "高圧直流",
+            "compensator": "補償装置",
+            "other-generator": "その他の発電機",
+            "line-reference": "線路番号",
+            "switch-disconnector": "断路器",
+            "switch-breaker": "遮断器",
+            "transformer-3": "三相変圧器",
+            "statcom": "静止型無効電力補償装置",
+            "switch-other": "その他の開閉器",
+            "compensator-other": "その他の補償装置"
+        },
+        "telecoms": {
+            "exchange": "電話交換",
+            "communication-line": "通信線路"
+        },
+        "water": {
+            "treatment-plant": "浄水場",
+            "sewage-treatment-plant": "下水処理場",
+            "pipeline": "水道管",
+            "reservoir": "貯水池",
+            "well": "井戸水"
+        },
+        "petroleum": {
+            "well": "井戸"
+        },
+        "substance": {
+            "hydrogen": "水素",
+            "fuel": "燃料",
+            "oil": "原油",
+            "co2": "二酸化炭素",
+            "fresh-water": "淡水",
+            "rainwater": "雨水",
+            "wastewater": "廃水",
+            "steam": "蒸気"
+        },
+        "method": {
+            "fission": "核分裂",
+            "wind-turbine": "風力原動機",
+            "water-run-of-river": "流れ込み式",
+            "water-storage": "貯水池式",
+            "water-pumped-storage": "揚水式",
+            "combustion": "燃焼",
+            "solar-thermal": "太陽熱",
+            "solar-photovoltaic": "太陽光",
+            "tidal-stream": "蒸気",
+            "anaerobic-digestion": "嫌気性消化",
+            "fusion": "核融合"
+        }
+    },
+    "edit": {
+        "edit": "編集"
+    },
+    "info": {
+        "name": "名前",
+        "generation-method": "発電方法",
+        "operator": "運営者",
+        "substation-type": "変電所種類",
+        "usage": "用途",
+        "type": "種類",
+        "circuits": "回路",
+        "location": "位置",
+        "material": "材質"
+    },
+    "nav": {
+        "stats": "統計"
+    },
+    "units": {
+        "kV": "kV",
+        "Hz": "Hz",
+        "MW": "MW",
+        "DC": "直流",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V"
+    },
+    "more_info": "詳細情報",
+    "key": {
+        "power-plants": "発電所",
+        "power-lines": "電線路",
+        "telecoms": "通信",
+        "switchgear": "開閉装置",
+        "power-generators": "発電機",
+        "water": "水"
+    },
+    "location": {
+        "outdoor": "屋外",
+        "indoor": "屋内"
+    },
+    "warning": "警告",
+    "other": "その他",
+    "layers": {
+        "telecoms": "通信",
+        "heatmap": "太陽光発電",
+        "power": "電力",
+        "labels": "地名",
+        "water": "水"
+    },
+    "construction": "工事中"
+}
