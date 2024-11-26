@@ -105,7 +105,7 @@
         "generation-method": "發電方式",
         "substation-type": "變電所類型",
         "start-date": "啟用日期",
-        "reference": "參考",
+        "reference": "編號",
         "source": "能源",
         "output": "裝置容量",
         "type": "類型",
