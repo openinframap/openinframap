@@ -54,7 +54,8 @@
             "well": "井戸水"
         },
         "petroleum": {
-            "well": "井戸"
+            "well": "井戸",
+            "facility": "石油施設"
         },
         "substance": {
             "hydrogen": "水素",
@@ -92,7 +93,9 @@
         "type": "種類",
         "circuits": "回路",
         "location": "位置",
-        "material": "材質"
+        "material": "材質",
+        "reference": "番号",
+        "substance": "物質"
     },
     "nav": {
         "stats": "統計"
@@ -114,11 +117,17 @@
         "telecoms": "通信",
         "switchgear": "開閉装置",
         "power-generators": "発電機",
-        "water": "水"
+        "water": "水",
+        "name": "記号",
+        "petroleum": "石油"
     },
     "location": {
         "outdoor": "屋外",
-        "indoor": "屋内"
+        "indoor": "屋内",
+        "underwater": "水中",
+        "underground": "地中",
+        "roof": "屋根",
+        "surface": "地面"
     },
     "warning": "警告",
     "other": "その他",
