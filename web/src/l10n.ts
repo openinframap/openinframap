@@ -3,7 +3,21 @@ import i18next from 'i18next'
 /* List of supported languages in the OpenInfraMap layer.
  * This should be kept up to date with the list in tegola/layers.yml.
  */
-const layer_supported_languages: string[] = ['en', 'es', 'de', 'fr', 'hi', 'ur', 'zh', 'ru', 'pt', 'ja']
+const layer_supported_languages: string[] = [
+  'en',
+  'es',
+  'el',
+  'de',
+  'fr',
+  'hi',
+  'ur',
+  'zh',
+  'ru',
+  'pt',
+  'ja',
+  'it',
+  'nl'
+]
 
 /* List of name tags to check, in order */
 function local_name_tags(): string[] {
