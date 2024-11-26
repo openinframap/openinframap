@@ -30,7 +30,16 @@
             "filter": "滤波器",
             "other-generator": "其他发电机",
             "line": "架空电线",
-            "cable": "电缆"
+            "cable": "电缆",
+            "transformer": "变压器",
+            "tower": "电塔",
+            "pole": "电杆",
+            "generator-solar": "太阳能发电机",
+            "wind-turbine": "风力发电机",
+            "tower-transition": "转接塔",
+            "pole-transition": "转接杆",
+            "transformer-3": "三相变压器",
+            "switch-disconnector": "隔离开关"
         },
         "pipeline": "管道",
         "water": {
@@ -57,7 +66,8 @@
             "steam": "蒸汽",
             "co2": "二氧化碳",
             "wastewater": "污水",
-            "rainwater": "雨水"
+            "rainwater": "雨水",
+            "petroleum-intermediate": "石化中间产物"
         },
         "method": {
             "fusion": "核聚变",
@@ -66,20 +76,53 @@
             "water-storage": "蓄水式",
             "water-run-of-river": "川流式",
             "tidal-stream": "潮流",
-            "fission": "核裂变"
+            "fission": "核裂变",
+            "tidal-barrage": "堰坝",
+            "solar-thermal": "光热",
+            "solar-photovoltaic": "光电",
+            "combustion": "燃烧",
+            "gasification": "气化",
+            "anaerobic-digestion": "厌氧消化"
         },
         "other-pumping-station": "其他泵站",
         "petroleum": {
             "well": "油井",
             "facility": "石油设施"
-        }
+        },
+        "telecoms": {
+            "communication-line": "通信线路",
+            "data-center": "通信建筑",
+            "exchange": "电话交换机",
+            "cabinet": "通信柜"
+        },
+        "cable": "线数",
+        "cabinet": "柜"
     },
     "nav": {
         "about": "关于",
-        "stats": "统计"
+        "stats": "统计",
+        "exports": "导出"
     },
     "info": {
-        "source": "能源"
+        "source": "能源",
+        "name": "名称",
+        "operator": "运营者",
+        "output": "装机容量",
+        "start-date": "启用日期",
+        "generation-method": "发电方式",
+        "substation-type": "变电所类型",
+        "type": "类型",
+        "website": "网站",
+        "circuits": "回路",
+        "view-openstreetmap": "在开放街图中查看",
+        "reference": "编号",
+        "substance": "内容物",
+        "usage": "用途",
+        "location": "位置",
+        "design": "塔架设计",
+        "material": "材质",
+        "line-management": "线路管理",
+        "line-attachment": "线缆附着"
     },
     "units": {
         "DC": "直流",
@@ -92,21 +135,45 @@
         "kV": "kV"
     },
     "key": {
-        "water": "水"
+        "water": "水",
+        "name": "图例",
+        "power-lines": "电线",
+        "power-plants": "发电厂",
+        "power-generators": "发电机",
+        "telecoms": "通信",
+        "petroleum": "石化",
+        "power-line-supports": "电线支撑",
+        "switchgear": "开关设备",
+        "traction": "牵引（< 50 Hz）"
     },
     "location": {
         "underground": "地下",
         "underwater": "水下",
         "overhead": "天上",
         "surface": "地面",
-        "outdoor": "室外"
+        "outdoor": "室外",
+        "roof": "屋顶",
+        "indoor": "室内"
     },
     "power": {
         "source": {
             "coal": "煤",
             "hydro": "水力",
             "waste": "垃圾",
-            "nuclear": "核能"
+            "nuclear": "核能",
+            "geothermal": "地热",
+            "oil-gas": "油气",
+            "gas": "天然气",
+            "solar": "太阳能",
+            "wind": "风能",
+            "battery": "电池",
+            "biomass": "生物质能"
+        },
+        "substation-type": {
+            "transmission": "输电",
+            "distribution": "配电",
+            "traction": "牵引",
+            "converter": "直流换流器"
         }
     },
     "other": "其他",
@@ -114,6 +181,18 @@
     "construction": "在建",
     "layers": {
         "labels": "地名",
-        "water": "水"
+        "water": "水",
+        "power": "电力",
+        "heatmap": "太阳能发电",
+        "telecoms": "通信",
+        "petroleum": "油气",
+        "title": "图层"
+    },
+    "more_info": "更多资讯",
+    "wikipedia": "维基百科",
+    "wikimedia-commons": "维基共享资源",
+    "wikidata": "维基数据",
+    "warnings": {
+        "webgl": "<p>您的浏览器可能有Open Infrastructure Map的效能或功能问题。</p><p>需要有<a href=\"http://webglreport.com\">WebGL</a> 硬件加速功能，此网站才能正常运作。</p><p>若您的浏览器支持WebGL，您可能需要停用该网站的浏览器指纹识别保护。</p>"
     }
 }
