@@ -119,7 +119,8 @@
         "substance": "Substance",
         "material": "Matériau",
         "design": "Design",
-        "line-attachment": "Armement aérien"
+        "line-attachment": "Armement aérien",
+        "line-management": "Gestion de ligne"
     },
     "other": "Autre",
     "units": {
