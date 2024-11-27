@@ -25,7 +25,13 @@
             "filter": "Filtre",
             "capacitor-series": "Condensateur en série",
             "compensator-other": "Autre compensateur",
-            "synchronous-condenser": "Compensateur synchrone"
+            "synchronous-condenser": "Compensateur synchrone",
+            "converter": "Poste de conversion",
+            "transformer-3": "Transformateur (3 enroulements)",
+            "switch": "Appareil de connexion",
+            "hvdc": "CCHT",
+            "switch-other": "Autre interrupteur",
+            "statcom": "Compensateur statique d'énergie réactive"
         },
         "substance": {
             "co2": "CO<sub>2</sub>",
@@ -36,12 +42,15 @@
             "gas": "Gaz",
             "fresh-water": "Eau froide",
             "hot-water": "Eau chaude",
-            "oil": "Huile"
+            "oil": "Huile",
+            "petroleum-intermediate": "Produits intermédiaires du pétrole",
+            "fuel": "Carburant"
         },
         "telecoms": {
             "cabinet": "Armoire télécommunication",
             "data-center": "Data Center (bâtiment)",
-            "communication-line": "Ligne télécommunication"
+            "communication-line": "Ligne télécommunication",
+            "exchange": "Commutateur téléphonique"
         },
         "petroleum": {
             "well": "Forage",
@@ -74,13 +83,18 @@
             "combustion": "Combustion",
             "gasification": "Gazéification",
             "water-storage": "Stockage d'eau",
-            "anaerobic-digestion": "Digestion anaérobie"
+            "anaerobic-digestion": "Digestion anaérobie",
+            "water-pumped-storage": "Pompage-turbinage",
+            "tidal-barrage": "Marémotrice",
+            "water-run-of-river": "Au fil de l'eau",
+            "tidal-stream": "Hydrolienne"
         }
     },
     "edit": {
         "edit": "Editer",
         "remote": "Editer avec un tiers (JOSM, etc.)",
-        "browser": "Editer en ligne (iD)"
+        "browser": "Editer en ligne (iD)",
+        "error": "Impossible de charger l'éditeur distant - vérifiez qu'il est en cours d'éxécution et que \"remote control\" est activé. \nErreur: "
     },
     "nav": {
         "about": "à propos",
@@ -103,7 +117,9 @@
         "generation-method": "Méthode de génération",
         "circuits": "Circuits",
         "substance": "Substance",
-        "material": "Matériau"
+        "material": "Matériau",
+        "design": "Design",
+        "line-attachment": "Armement aérien"
     },
     "other": "Autre",
     "units": {
@@ -124,7 +140,9 @@
         "power-line-supports": "Supports de lignes électriques",
         "water": "Eau",
         "switchgear": "Appareillage de connexion",
-        "traction": "Traction (< 50 Hz)"
+        "traction": "Traction (< 50 Hz)",
+        "power-plants": "Centrales électriques",
+        "power-generators": "Générateur électrique"
     },
     "wikidata": "Wikidata",
     "power": {
@@ -144,7 +162,8 @@
         "substation-type": {
             "distribution": "Distribution",
             "traction": "Traction",
-            "transmission": "Transmission"
+            "transmission": "Transmission",
+            "converter": "Convertisseur DC"
         }
     },
     "wikimedia-commons": "Wikimedia Commons",
@@ -167,6 +186,10 @@
         "roof": "Toit",
         "indoor": "Intérieur",
         "surface": "Surface",
-        "outdoor": "Extérieur"
+        "outdoor": "Extérieur",
+        "overhead": "Aérien"
+    },
+    "warnings": {
+        "webgl": "<p>Votre navigateur peut rencontrer des problèmes de performance ou de fonctionnalité avec Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> avec accélération matérielle est nécessaire pour que ce site fonctionne correctement.</p><p>Si votre navigateur prend en charge WebGL, vous devrez peut-être désactiver la protection contre le fingerprinting du navigateur pour ce site.</p>"
     }
 }
