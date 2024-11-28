@@ -28,6 +28,9 @@ BEGIN
     val := val * 1e6;
   ELSIF parts[2] = 'GW' THEN
     val := val * 1e9;
+  ELSE
+    -- Consider no units to be invalid
+    val := NULL;
   END IF;
   RETURN val;
 END
