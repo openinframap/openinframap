@@ -346,25 +346,10 @@ layers:
     id_field: mvt_id_field
     fields:
       - name: mvt_id_field
-        sql: max(osm_id)
       - name: geom
-        sql: ST_AsMVTGeom(ST_SnapToGrid(ST_Centroid(geometry), !PIXEL_WIDTH! / 2, !PIXEL_WIDTH! / 2), !BBOX!)
+        sql: ST_AsMVTGeom(geometry, !BBOX!)
       - name: output
-        sql: >
-          round(sum(coalesce(
-                      convert_power(tags -> 'generator:output:electricity'),
-                      modules_output(tags -> 'generator:solar:modules'),
-                      solar_output(geometry),
-                      0)
-                    )::NUMERIC / 1e3,
-                2)
-    from: osm_power_generator
-    where: >
-      source = 'solar' AND
-      coalesce(tags -> 'generator:type', '') != 'solar_thermal_collector' AND
-      construction = '' AND
-      geometry && !BBOX!
-      GROUP BY geom
+    from: power_heatmap(!PIXEL_WIDTH!, !BBOX!)
 
   - name: telecoms_communication_line
     map:

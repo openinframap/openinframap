@@ -102,3 +102,44 @@ BEGIN
 	END IF;
 END
 $$;
+
+CREATE OR REPLACE FUNCTION power_heatmap(pixel_width NUMERIC, search_geom public.geometry) RETURNS
+	TABLE (mvt_id_field BIGINT,
+		geom public.geometry(Point, 3857),
+		output BIGINT)
+	LANGUAGE plpgsql
+	AS $$
+DECLARE
+BEGIN
+	RETURN QUERY SELECT max(osm_id) AS mvt_id_field,
+			ST_SnapToGrid(u.geom, pixel_width / 2, pixel_width / 2) AS geom,
+			round(sum(u.output)::NUMERIC / 1e3)::BIGINT AS output FROM (
+				SELECT osm_id,
+				ST_Centroid(geometry) AS geom,
+				coalesce(
+					convert_power(tags -> 'generator:output:electricity'),
+					modules_output(tags -> 'generator:solar:modules'),
+					solar_output(geometry),
+					0) AS output
+				FROM osm_power_generator
+				WHERE source = 'solar' AND
+					construction = ''
+					AND geometry && search_geom
+			UNION ALL
+				SELECT osm_id,
+				ST_Centroid(geometry) AS geom,
+				coalesce(
+					convert_power(tags -> 'plant:output:electricity'),
+					st_area(ST_Transform(geometry, 4326)::geography) * 40,
+					1000) AS output
+				FROM power_plant
+				WHERE source = 'solar' AND
+					construction = '' AND
+					NOT EXISTS (select 1 from osm_power_generator g
+							where ST_Intersects(g.geometry, power_plant.geometry)
+							and g.source = 'solar')
+					AND geometry && search_geom
+			) u
+	GROUP BY u.geom;
+END
+$$;
