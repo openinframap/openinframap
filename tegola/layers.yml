@@ -347,7 +347,7 @@ layers:
     fields:
       - name: mvt_id_field
       - name: geom
-        sql: ST_AsMVTGeom(geometry, !BBOX!)
+        sql: ST_AsMVTGeom(geom, !BBOX!)
       - name: output
     from: power_heatmap(!PIXEL_WIDTH!, !BBOX!)
 
