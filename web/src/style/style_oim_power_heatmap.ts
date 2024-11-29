@@ -1,5 +1,6 @@
 import { ExpressionSpecification } from 'maplibre-gl'
 import { LayerSpecificationWithZIndex } from './types.ts'
+//import { font, text_paint } from './common.ts'
 
 const generator_weight: ExpressionSpecification = [
   'interpolate',
@@ -8,14 +9,10 @@ const generator_weight: ExpressionSpecification = [
   0,
   0,
   70,
-  0.125,
-  250,
-  0.25,
-  1000,
-  0.35,
-  7000,
+  0.01,
+  50000,
   0.5,
-  14000,
+  500000,
   1
 ]
 
@@ -55,12 +52,29 @@ const layers: LayerSpecificationWithZIndex[] = [
         'rgb(128,0,38)'
       ],
       // Adjust the heatmap radius by zoom level
-      'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 2, 2, 6, 6, 10, 12, 12, 20]
+      'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 1, 0.5, 8, 15, 13, 70]
     },
     layout: {
       visibility: 'none'
     }
-  }
+  } /*,
+  {
+    zorder: 164,
+    id: 'heatmap_solar_point_debug_symbol',
+    type: 'symbol',
+    source: 'solar_heatmap',
+    'source-layer': 'power_heatmap_solar',
+    minzoom: 1,
+    maxzoom: 20,
+    paint: {
+      ...text_paint
+    },
+    layout: {
+      'text-field': ['get', 'output'],
+      'text-font': font,
+      'text-size': 10
+    }
+  }*/
 ]
 
 export { layers as default }
