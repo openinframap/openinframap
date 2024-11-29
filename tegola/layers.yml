@@ -357,7 +357,6 @@ layers:
       - telecoms
     geometry_type: LineString
     id_field: osm_id
-    min_zoom: 2
     field_sets: [geom, name, start_date]
     fields:
       - name: location
