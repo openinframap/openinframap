@@ -112,7 +112,7 @@ CREATE OR REPLACE FUNCTION power_heatmap(pixel_width NUMERIC, search_geom public
 DECLARE
 BEGIN
 	RETURN QUERY SELECT max(osm_id) AS mvt_id_field,
-			ST_SnapToGrid(u.geom, pixel_width / 2, pixel_width / 2) AS geom,
+			ST_SnapToGrid(u.geom, pixel_width * 2, pixel_width * 2) AS geom,
 			round(sum(u.output)::NUMERIC / 1e3)::BIGINT AS output FROM (
 				SELECT osm_id,
 				ST_Centroid(geometry) AS geom,
