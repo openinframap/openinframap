@@ -7,7 +7,7 @@
             "generator": "Pembangkit",
             "generator-solar": "Pembangkit tenaga surya",
             "wind-turbine": "Turbin angin",
-            "substation": "Gardu induk",
+            "substation": "Gardu listrik",
             "line": "Saluran listrik",
             "plant": "Pembangkit listrik",
             "capacitor-shunt": "Kapasitor pirau",
@@ -16,7 +16,24 @@
             "filter": "Filter",
             "compensator-other": "Kompensator lain",
             "tower": "Menara transmisi",
-            "pole": "Tiang listrik"
+            "pole": "Tiang listrik",
+            "switch": "Sakelar",
+            "hvdc": "Saluran searah/HVDC",
+            "line-reference": "Kode saluran",
+            "tower-transition": "Menara transisi",
+            "switch-breaker": "Pemutus sirkit",
+            "switch-disconnector": "Sakelar pemisah",
+            "switch-other": "Sakelar lain",
+            "reactor-series": "Reaktor deret",
+            "reactor-shunt": "Reaktor pirau",
+            "capacitor-series": "Kapasitor deret",
+            "converter": "Gardu konverter DC",
+            "compensator": "Kompensator",
+            "other-generator": "Generator lain",
+            "solar-panel-node": "Panel surya (titik)",
+            "tower-pylon": "Menara",
+            "pole-transition": "Tiang transisi",
+            "transformer-3": "Trafo (3 belitan)"
         },
         "petroleum": {
             "well": "Sumur",
@@ -66,7 +83,8 @@
             "solar-photovoltaic": "Fotovoltaik",
             "solar-thermal": "Panas",
             "wind-turbine": "Turbin angin",
-            "anaerobic-digestion": "Reaksi anaerob"
+            "anaerobic-digestion": "Reaksi anaerob",
+            "tidal-stream": "Arus pasang"
         },
         "telecom": {
             "datacenter": "Pusat data",
@@ -93,11 +111,13 @@
         "operator": "Operator",
         "substation-type": "Jenis gardu",
         "name": "Nama",
-        "reference": "Referensi",
+        "reference": "Kode",
         "start-date": "Mulai operasi",
         "circuits": "Sirkit",
         "website": "Situs web",
-        "type": "Jenis"
+        "type": "Jenis",
+        "line-attachment": "Sambungan kabel",
+        "line-management": "Penataan kabel"
     },
     "nav": {
         "about": "tentang",
@@ -110,7 +130,12 @@
         "telecoms": "Telekomunikasi",
         "water": "Air",
         "traction": "Traksi (< 50 Hz)",
-        "power-plants": "Pembangkit Listrik"
+        "power-plants": "Pembangkit Listrik",
+        "name": "Legenda",
+        "power-lines": "Jaringan Listrik",
+        "power-generators": "Generator",
+        "switchgear": "Switchyard",
+        "power-line-supports": "Struktur penopang kabel"
     },
     "location": {
         "overhead": "Atas Tanah",
@@ -148,7 +173,8 @@
         "telecoms": "Telekomunikasi",
         "petroleum": "Minyak & Gas",
         "water": "Air",
-        "title": "Label"
+        "title": "Label",
+        "labels": "Label"
     },
     "construction": "sedang dibangun",
     "units": {
