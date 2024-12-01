@@ -1,1 +1,172 @@
-{}
+{
+    "names": {
+        "power": {
+            "cable": "Kabel listrik",
+            "solar-panel": "Panel surya",
+            "transformer": "Trafo",
+            "generator": "Pembangkit",
+            "generator-solar": "Pembangkit tenaga surya",
+            "wind-turbine": "Turbin angin",
+            "substation": "Gardu induk",
+            "line": "Saluran listrik",
+            "plant": "Pembangkit listrik",
+            "capacitor-shunt": "Kapasitor pirau",
+            "synchronous-condenser": "Kondenser sinkronis",
+            "statcom": "Kompensator VAR statik",
+            "filter": "Filter",
+            "compensator-other": "Kompensator lain",
+            "tower": "Menara transmisi",
+            "pole": "Tiang listrik"
+        },
+        "petroleum": {
+            "well": "Sumur",
+            "facility": "Pengolahan minyak bumi"
+        },
+        "pipeline": "Jalur pipa",
+        "water": {
+            "pipeline": "Pipa air",
+            "sewage-treatment-plant": "Pengolahan limbah/IPAL",
+            "treatment-plant": "Pengolahan air/IPAM",
+            "pumping-station": "Rumah pompa",
+            "well": "Sumur air",
+            "reservoir": "Waduk",
+            "water-pumping-station": "Rumah pompa air",
+            "sewage-pumping-station": "Rumah pompa limbah"
+        },
+        "telecoms": {
+            "communication-line": "Kabel telekomunikasi",
+            "data-center": "Gedung telekomunikasi",
+            "cabinet": "Kotak telekomunikasi",
+            "exchange": "Sentral telepon"
+        },
+        "cable": "Kabel",
+        "cabinet": "Kotak",
+        "substance": {
+            "petroleum-intermediate": "Olahan minyak bumi",
+            "steam": "Uap air",
+            "rainwater": "Air hujan",
+            "wastewater": "Air limbah",
+            "gas": "Gas alam",
+            "oil": "Minyak bumi",
+            "fuel": "Bahan bakar",
+            "hydrogen": "Hidrogen",
+            "co2": "CO<sub>2</sub>",
+            "fresh-water": "Air bersih",
+            "hot-water": "Air panas"
+        },
+        "method": {
+            "fission": "Fisi",
+            "fusion": "Fusi",
+            "water-storage": "Penampungan air",
+            "water-pumped-storage": "Waduk pompa",
+            "water-run-of-river": "Arus sungai",
+            "tidal-barrage": "Bendungan",
+            "combustion": "Pembakaran",
+            "gasification": "Gasifikasi",
+            "solar-photovoltaic": "Fotovoltaik",
+            "solar-thermal": "Panas",
+            "wind-turbine": "Turbin angin",
+            "anaerobic-digestion": "Reaksi anaerob"
+        },
+        "telecom": {
+            "datacenter": "Pusat data",
+            "tower-mast": "Menara"
+        },
+        "other-pumping-station": "Rumah pompa lain"
+    },
+    "edit": {
+        "remote": "Pakai program (JOSM, dll)",
+        "browser": "Pakai peramban web (iD)",
+        "edit": "Sunting",
+        "error": "Program gagal dimuat - pastikan programnya jalan dan bisa diakses dari luar.\nGalat: "
+    },
+    "info": {
+        "output": "Daya",
+        "source": "Sumber",
+        "generation-method": "Metode pembangkitan",
+        "view-openstreetmap": "Lihat di OpenStreetMap",
+        "substance": "Isi",
+        "usage": "Fungsi",
+        "location": "Letak",
+        "design": "Bentuk",
+        "material": "Material",
+        "operator": "Operator",
+        "substation-type": "Jenis gardu",
+        "name": "Nama",
+        "reference": "Referensi",
+        "start-date": "Mulai operasi",
+        "circuits": "Sirkit",
+        "website": "Situs web",
+        "type": "Jenis"
+    },
+    "nav": {
+        "about": "tentang",
+        "exports": "ekspor",
+        "stats": "statistik"
+    },
+    "more_info": "Info lanjutan",
+    "key": {
+        "petroleum": "Minyak Bumi",
+        "telecoms": "Telekomunikasi",
+        "water": "Air",
+        "traction": "Traksi (< 50 Hz)",
+        "power-plants": "Pembangkit Listrik"
+    },
+    "location": {
+        "overhead": "Atas Tanah",
+        "surface": "Permukaan",
+        "outdoor": "Luar ruangan",
+        "indoor": "Dalam ruangan",
+        "underground": "Bawah Tanah",
+        "underwater": "Bawah Air",
+        "roof": "Atap"
+    },
+    "power": {
+        "source": {
+            "coal": "Batu bara",
+            "geothermal": "Panas bumi",
+            "hydro": "Air",
+            "nuclear": "Nuklir",
+            "oil-gas": "Minyak/Gas",
+            "wind": "Angin",
+            "battery": "Baterai",
+            "solar": "Surya",
+            "gas": "Gas",
+            "biomass": "Biomassa",
+            "waste": "Sampah"
+        },
+        "substation-type": {
+            "transmission": "Transmisi",
+            "distribution": "Distribusi",
+            "traction": "Traksi",
+            "converter": "Konverter DC"
+        }
+    },
+    "layers": {
+        "power": "Listrik",
+        "heatmap": "Tenaga Surya",
+        "telecoms": "Telekomunikasi",
+        "petroleum": "Minyak & Gas",
+        "water": "Air",
+        "title": "Label"
+    },
+    "construction": "sedang dibangun",
+    "units": {
+        "kV": "kV",
+        "Hz": "Hz",
+        "MW": "MW",
+        "DC": "DC",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V"
+    },
+    "wikidata": "Wikidata",
+    "wikipedia": "Wikipedia",
+    "wikimedia-commons": "Wikimedia Commons",
+    "warning": "Peringatan",
+    "other": "Lain-lain",
+    "warnings": {
+        "webgl": "<p>Peramban Anda kesulitan mengakses Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> dan akselerasi perangkat perlu diaktifkan agar situs ini lancar.</p><p>Kalau WebGL tersedia di peramban ini, Anda perlu menonaktifkan pengamanan privasi (fingerprinting) untuk situs ini.</p>"
+    }
+}
