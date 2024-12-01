@@ -26,7 +26,8 @@ await i18next.use(LanguageDetector).init({
     'zh-Hant',
     'zh',
     'zh-Hans',
-    'ja'
+    'ja',
+    'id'
   ],
   resources: resources,
   debug: import.meta.env.DEV,
