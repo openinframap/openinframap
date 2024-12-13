@@ -1104,16 +1104,16 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         'text-field': name_output_label(7, 9),
         'text-font': font,
         'text-anchor': 'top',
-        'text-offset': interpolate(zoom, [
-          [7, literal([0, 1])],
+        'text-radial-offset': interpolate(zoom, [
+          [7, 1.2],
           [
             13,
             interpolate(output, [
-              [0, literal([0, 1])],
-              [1000, literal([0, 1.5])]
+              [0, 1.2],
+              [1000, 1.6]
             ])
           ],
-          [14, literal([0, 0])]
+          [14, 0]
         ]),
         'text-size': interpolate(zoom, [
           [7, 10],
