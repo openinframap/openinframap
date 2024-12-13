@@ -1,7 +1,7 @@
 import { ExpressionSpecification, FilterSpecification } from 'maplibre-gl'
 import { LayerSpecificationWithZIndex } from './types.ts'
 import { local_name_tags } from '../l10n.ts'
-import { step, interpolate, literal, get, has, all, any, concat } from './stylehelpers.ts'
+import { step, interpolate, get, has, all, any, concat } from './stylehelpers.ts'
 
 export function get_local_name(): ExpressionSpecification {
   return (['coalesce'] as any).concat(local_name_tags().map((tag) => get(tag))) as ExpressionSpecification

@@ -35,7 +35,7 @@ export default class OpenInfraMap {
         if (context && typeof context.getParameter == 'function') {
           return true
         }
-      } catch (e) {
+      } catch {
         // WebGL is supported, but disabled
       }
       return false
