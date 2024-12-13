@@ -1105,8 +1105,14 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         'text-font': font,
         'text-anchor': 'top',
         'text-offset': interpolate(zoom, [
-          [6, literal([0, 1])],
-          [13, literal([0, 1.5])],
+          [7, literal([0, 1])],
+          [
+            13,
+            interpolate(output, [
+              [0, literal([0, 1])],
+              [1000, literal([0, 1.5])]
+            ])
+          ],
           [14, literal([0, 0])]
         ]),
         'text-size': interpolate(zoom, [
