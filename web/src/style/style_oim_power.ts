@@ -1103,7 +1103,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         ]),
         'text-field': name_output_label(7, 9),
         'text-font': font,
-        'text-anchor': 'top',
+        'text-variable-anchor': ['top', 'bottom'],
         'text-radial-offset': interpolate(zoom, [
           [7, 1.2],
           [
