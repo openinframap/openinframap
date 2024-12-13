@@ -1025,8 +1025,8 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         'symbol-z-order': 'source',
         'text-field': substation_label,
         'text-font': font,
-        'text-anchor': 'top',
-        'text-offset': [0, 0.5],
+        'text-variable-anchor': ['top', 'bottom'],
+        'text-radial-offset': 0.8,
         'text-size': interpolate(zoom, [
           [8, 10],
           [
@@ -1057,8 +1057,11 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         ]),
         'text-field': substation_label,
         'text-font': font,
-        'text-anchor': 'top',
-        'text-offset': [0, 1.2],
+        'text-variable-anchor': ['top', 'bottom'],
+        'text-radial-offset': interpolate(zoom, [
+          [5, 1.2],
+          [9, 1.6]
+        ]),
         'text-size': interpolate(zoom, [
           [7, 10],
           [
@@ -1105,11 +1108,11 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         'text-font': font,
         'text-variable-anchor': ['top', 'bottom'],
         'text-radial-offset': interpolate(zoom, [
-          [7, 1.2],
+          [7, 1],
           [
             13,
             interpolate(output, [
-              [0, 1.2],
+              [0, 1],
               [1000, 1.6]
             ])
           ],

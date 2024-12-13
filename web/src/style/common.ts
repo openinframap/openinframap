@@ -107,15 +107,15 @@ export function oimSymbol(options: OIMSymbolOptions): LayerSpecificationWithZInd
           [18, textSize]
         ]
       ),
-      'text-anchor': 'top',
+      'text-variable-anchor': ['top', 'bottom'],
       // Increase the textOffset as iconSize increases. Beyond iconMaxZoom, ease the textOffset to 0,
       // unless the feature is a node, in which case we'll still be showing the icon.
-      'text-offset': interpolate(
+      'text-radial-offset': interpolate(
         ['zoom'],
         [
-          [options.textMinZoom, literal([0, textOffset * 0.8])],
-          [iconMaxZoom, literal([0, textOffset])],
-          [iconMaxZoom + 2, ['case', get('is_node'), literal([0, textOffset]), literal([0, 0])]]
+          [options.textMinZoom, textOffset * 0.8],
+          [iconMaxZoom, textOffset],
+          [iconMaxZoom + 2, ['case', get('is_node'), textOffset, 0]]
         ]
       ),
       'text-optional': true,
