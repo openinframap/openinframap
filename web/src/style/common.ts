@@ -1,7 +1,7 @@
 import { ExpressionSpecification, FilterSpecification } from 'maplibre-gl'
 import { LayerSpecificationWithZIndex } from './types.ts'
 import { local_name_tags } from '../l10n.ts'
-import { step, interpolate, get, has, all, any, concat } from './stylehelpers.ts'
+import { step, interpolate, get, has, all, any, concat, case_ } from './stylehelpers.ts'
 
 export function get_local_name(): ExpressionSpecification {
   return (['coalesce'] as any).concat(local_name_tags().map((tag) => get(tag))) as ExpressionSpecification
@@ -16,14 +16,13 @@ export const text_paint = {
 export const operator_text: ExpressionSpecification = step(['zoom'], get('name'), [
   [
     14,
-    [
-      'case',
-      all(has('operator'), has('name')),
-      concat(get('name'), '\n(', get('operator'), ')'),
-      has('operator'),
-      get('operator'),
+    case_(
+      [
+        [all(has('operator'), has('name')), concat(get('name'), '\n(', get('operator'), ')')],
+        [has('operator'), get('operator')]
+      ],
       get('name')
-    ]
+    )
   ]
 ])
 
