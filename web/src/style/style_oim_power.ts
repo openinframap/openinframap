@@ -246,8 +246,7 @@ const plant_label_visible_p: ExpressionSpecification = any(
   all(['>', output, 250], ['>', zoom, 6]),
   all(['>', output, 100], ['>', zoom, 7]),
   all(['>', output, 10], ['>', zoom, 9]),
-  all(['>', output, 1], ['>', zoom, 11]),
-  ['>', zoom, 12]
+  ['>', zoom, 11]
 )
 
 function plant_image(): ExpressionSpecification {
@@ -1093,13 +1092,23 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         'icon-allow-overlap': true,
         'icon-image': plant_image(),
         'icon-size': interpolate(zoom, [
-          [6, 0.6],
-          [10, 0.8]
+          [6, 0.5],
+          [
+            13,
+            interpolate(output, [
+              [0, 0.6],
+              [1000, 1]
+            ])
+          ]
         ]),
         'text-field': name_output_label(7, 9),
         'text-font': font,
         'text-anchor': 'top',
-        'text-offset': [0, 1],
+        'text-offset': interpolate(zoom, [
+          [6, literal([0, 1])],
+          [13, literal([0, 1.5])],
+          [14, literal([0, 0])]
+        ]),
         'text-size': interpolate(zoom, [
           [7, 10],
           [
@@ -1115,7 +1124,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       paint: {
         ...text_paint,
         // Control visibility using the opacity property...
-        'icon-opacity': ['step', zoom, if_(construction_p, 0.5, 1), 11, 0]
+        'icon-opacity': ['step', zoom, if_(construction_p, 0.5, 1), 13, 0]
       }
     }
   ]
