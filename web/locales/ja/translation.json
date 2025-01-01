@@ -40,7 +40,8 @@
             "transformer-3": "三相変圧器",
             "statcom": "静止型無効電力補償装置",
             "switch-other": "その他の開閉器",
-            "compensator-other": "その他の補償装置"
+            "compensator-other": "その他の補償装置",
+            "solar-panel": "ソーラーパネル"
         },
         "telecoms": {
             "exchange": "電話交換",
@@ -65,7 +66,8 @@
             "fresh-water": "淡水",
             "rainwater": "雨水",
             "wastewater": "廃水",
-            "steam": "蒸気"
+            "steam": "蒸気",
+            "hot-water": "温水"
         },
         "method": {
             "fission": "核分裂",
@@ -79,6 +81,11 @@
             "tidal-stream": "蒸気",
             "anaerobic-digestion": "嫌気性消化",
             "fusion": "核融合"
+        },
+        "pipeline": "パイプライン",
+        "cable": "ケーブル",
+        "telecom": {
+            "datacenter": "データセンター"
         }
     },
     "edit": {
@@ -95,10 +102,13 @@
         "location": "位置",
         "material": "材質",
         "reference": "番号",
-        "substance": "物質"
+        "substance": "物質",
+        "start-date": "開始日",
+        "website": "ウェブサイト"
     },
     "nav": {
-        "stats": "統計"
+        "stats": "統計",
+        "about": "概要"
     },
     "units": {
         "kV": "kV",
@@ -138,5 +148,6 @@
         "labels": "地名",
         "water": "水"
     },
-    "construction": "工事中"
+    "construction": "工事中",
+    "wikipedia": "Wikipedia"
 }
