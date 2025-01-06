@@ -103,6 +103,14 @@ export default class OpenInfraMapGeocoder implements IControl {
         )
       ]
     })
+
+    // Focus on ctrl+f/cmd+f
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'f' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault()
+        this.container?.querySelector('input')?.focus()
+      }
+    })
     return this.container
   }
 
