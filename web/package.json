@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@opencage/geosearch-core": "^0.1.10",
+    "geo-coordinates-parser": "^1.7.4",
     "i18next": "^23.15.2",
     "i18next-browser-languagedetector": "^8.0.0",
     "lodash.invert": "^4.3.0",

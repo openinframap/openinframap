@@ -1,9 +1,70 @@
 import i18next from 'i18next'
 import { el } from 'redom'
-import { IControl, LngLat, LngLatBounds, Map } from 'maplibre-gl'
+import { IControl, LngLat, LngLatBounds, Map, Marker } from 'maplibre-gl'
+import { convert as convert_coords } from 'geo-coordinates-parser'
 import { OpenCageGeoSearchPlugin } from '@opencage/geosearch-core'
-import { autocomplete } from '@algolia/autocomplete-js'
+import { autocomplete, AutocompletePlugin } from '@algolia/autocomplete-js'
 import '@algolia/autocomplete-theme-classic'
+
+function latLonSearchPlugin(map: Map): AutocompletePlugin<any, any> {
+  return {
+    getSources() {
+      let marker: Marker | null = null
+      return [
+        {
+          sourceId: 'lat-lon',
+          getItems({ query }) {
+            if (marker) {
+              marker.remove()
+              marker = null
+            }
+            if (!query) {
+              return []
+            }
+
+            let coords
+            try {
+              coords = convert_coords(query)
+            } catch {
+              return []
+            }
+
+            return [
+              {
+                label: query,
+                value: {
+                  geometry: {
+                    lat: coords.decimalLatitude.toFixed(5),
+                    lng: coords.decimalLongitude.toFixed(5)
+                  }
+                }
+              }
+            ]
+          },
+          onSelect({ item }) {
+            marker = new Marker().setLngLat([item.value.geometry.lng, item.value.geometry.lat]).addTo(map)
+
+            map.flyTo({
+              center: [item.value.geometry.lng, item.value.geometry.lat],
+              zoom: 12
+            })
+          },
+          onReset() {
+            if (marker) {
+              marker.remove()
+              marker = null
+            }
+          },
+          templates: {
+            item({ item }) {
+              return `Coordinates: ${item.label}`
+            }
+          }
+        }
+      ]
+    }
+  }
+}
 
 export default class OpenInfraMapGeocoder implements IControl {
   map?: Map
@@ -15,6 +76,7 @@ export default class OpenInfraMapGeocoder implements IControl {
     autocomplete({
       container: this.container,
       plugins: [
+        latLonSearchPlugin(map),
         OpenCageGeoSearchPlugin(
           {
             // This key only works on openinframap.org (and local dev).
