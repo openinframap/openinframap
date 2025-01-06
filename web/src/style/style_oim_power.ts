@@ -234,10 +234,18 @@ const power_ref_visible_p: ExpressionSpecification = all(
   any(all(['!=', get('line'), 'busbar'], ['!=', get('line'), 'bay']), ['>', zoom, 12])
 )
 
-const construction_p: ExpressionSpecification = ['get', 'construction']
+const construction_p: ExpressionSpecification = get('construction')
 
-function construction_label(): ExpressionSpecification {
-  return ['case', construction_p, ' (' + t('construction', 'under construction') + ') ', '']
+const disused_p: ExpressionSpecification = coalesce(get('disused'), false)
+
+function lifecycle_label(): ExpressionSpecification {
+  return case_(
+    [
+      [construction_p, ' (' + t('construction', 'under construction') + ') '],
+      [disused_p, ' (' + t('disused', 'disused') + ') ']
+    ],
+    ''
+  )
 }
 
 const plant_label_visible_p: ExpressionSpecification = any(
@@ -279,8 +287,8 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         detail_zoom,
         case_(
           [
-            [all(['!', has('name')], has('output')), concat(pretty_output, construction_label())],
-            [has('output'), concat(local_name, ' \n', pretty_output, '\n', construction_label())]
+            [all(['!', has('name')], has('output')), concat(pretty_output, lifecycle_label())],
+            [has('output'), concat(local_name, ' \n', pretty_output, '\n', lifecycle_label())]
           ],
           local_name
         )
@@ -343,9 +351,9 @@ export default function layers(): LayerSpecificationWithZIndex[] {
     [
       [
         all(has('voltage'), has('name'), ['!=', local_name, '']),
-        concat(local_name, ' (', line_voltage, freq, ')', construction_label())
+        concat(local_name, ' (', line_voltage, freq, ')', lifecycle_label())
       ],
-      [has('voltage'), concat(line_voltage, freq, construction_label())]
+      [has('voltage'), concat(line_voltage, freq, lifecycle_label())]
     ],
     local_name
   )
@@ -354,11 +362,11 @@ export default function layers(): LayerSpecificationWithZIndex[] {
     [
       [
         all(['!=', local_name, ''], has('voltage')),
-        concat(local_name, ' ', voltage, ' ' + t('units.kV', 'kV'), freq, construction_label())
+        concat(local_name, ' ', voltage, ' ' + t('units.kV', 'kV'), freq, lifecycle_label())
       ],
       [
         all(['==', local_name, ''], has('voltage')),
-        concat('Substation ', voltage, ' ' + t('units.kV', 'kV'), freq, construction_label())
+        concat('Substation ', voltage, ' ' + t('units.kV', 'kV'), freq, lifecycle_label())
       ]
     ],
     local_name
@@ -392,7 +400,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       zorder: 61,
       id: 'power_line_underground_1',
       type: 'line',
-      filter: all(underground_p, power_visible_p),
+      filter: all(underground_p, power_visible_p, not(disused_p)),
       source: 'power',
       'source-layer': 'power_line',
       minzoom: 0,
@@ -412,7 +420,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       zorder: 61,
       id: 'power_line_underground_2',
       type: 'line',
-      filter: all(underground_p, power_visible_p, has('voltage_2')),
+      filter: all(underground_p, power_visible_p, has('voltage_2'), not(disused_p)),
       source: 'power',
       'source-layer': 'power_line',
       minzoom: multi_voltage_min_zoom,
@@ -432,7 +440,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       zorder: 61,
       id: 'power_line_underground_3',
       type: 'line',
-      filter: all(underground_p, power_visible_p, has('voltage_3')),
+      filter: all(underground_p, power_visible_p, has('voltage_3'), not(disused_p)),
       source: 'power',
       'source-layer': 'power_line',
       minzoom: multi_voltage_min_zoom,
@@ -580,12 +588,30 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       }
     },
     {
+      zorder: 259,
+      id: 'power_line_disused',
+      type: 'line',
+      source: 'power',
+      'source-layer': 'power_line',
+      filter: all(not(underground_p), power_visible_p, disused_p),
+      minzoom: 10,
+      paint: {
+        'line-color': '#999999',
+        'line-width': 2,
+        'line-opacity': power_opacity
+      },
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round'
+      }
+    },
+    {
       zorder: 260,
       id: 'power_line_1',
       type: 'line',
       source: 'power',
       'source-layer': 'power_line',
-      filter: all(not(underground_p), power_visible_p),
+      filter: all(not(underground_p), power_visible_p, not(disused_p)),
       minzoom: 0,
       paint: {
         'line-color': voltage_color('voltage'),
@@ -604,7 +630,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       type: 'line',
       source: 'power',
       'source-layer': 'power_line',
-      filter: all(not(underground_p), power_visible_p, has('voltage_2')),
+      filter: all(not(underground_p), power_visible_p, has('voltage_2'), not(disused_p)),
       minzoom: multi_voltage_min_zoom,
       paint: {
         'line-color': voltage_color('voltage_2'),
@@ -623,7 +649,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       type: 'line',
       source: 'power',
       'source-layer': 'power_line',
-      filter: all(not(underground_p), power_visible_p, has('voltage_3')),
+      filter: all(not(underground_p), power_visible_p, has('voltage_3'), not(disused_p)),
       minzoom: multi_voltage_min_zoom,
       paint: {
         'line-color': voltage_color('voltage_3'),
