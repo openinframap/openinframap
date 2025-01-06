@@ -62,9 +62,11 @@ field_sets:
       sql: tags -> 'operator'
     - name: ref
       sql: tags -> 'ref'
-  construction:
+  lifecycle:
     - name: construction
       sql: (tags -> 'construction:power') IS NOT NULL
+    - name: disused
+      sql: (tags -> 'disused:power') IS NOT NULL OR (tags -> 'disused') IS NOT NULL
   url:
     - name: url
       sql: osm_url(tags)
@@ -94,7 +96,7 @@ layers:
       - openinframap
       - power
     geometry_type: LineString
-    field_sets: [geom, name, frequency, wiki, construction, start_date]
+    field_sets: [geom, name, frequency, wiki, lifecycle, start_date]
     id_field: osm_id
     fields:
       - name: tunnel
@@ -136,7 +138,7 @@ layers:
       - power
     geometry_type: Point
     min_zoom: 13
-    field_sets: [geom, name, construction, url, start_date]
+    field_sets: [geom, name, lifecycle, url, start_date]
     id_field: osm_id
     fields:
       - name: transition
@@ -168,7 +170,7 @@ layers:
       - power
     geometry_type: Polygon
     min_zoom: 13
-    field_sets: [geom, name, frequency, voltages, construction, wiki, url, start_date]
+    field_sets: [geom, name, frequency, voltages, lifecycle, wiki, url, start_date]
     fields:
       - name: substation
       - name: location
@@ -184,7 +186,7 @@ layers:
       - power
     geometry_type: Point
     min_zoom: 5
-    field_sets: [geom_centroid, area, name, frequency, voltages, construction, wiki, url, start_date]
+    field_sets: [geom_centroid, area, name, frequency, voltages, lifecycle, wiki, url, start_date]
     fields:
       - name: substation
     id_field: osm_id
@@ -203,7 +205,7 @@ layers:
       - power
     geometry_type: Polygon
     min_zoom: 5
-    field_sets: [geom, name, wiki, source, output, construction, url, start_date]
+    field_sets: [geom, name, wiki, source, output, lifecycle, url, start_date]
     id_field: osm_id
     fields:
       - name: method
@@ -226,7 +228,7 @@ layers:
       - power
     geometry_type: Point
     min_zoom: 5
-    field_sets: [geom_centroid, name, wiki, source, output, construction, url, start_date]
+    field_sets: [geom_centroid, name, wiki, source, output, lifecycle, url, start_date]
     id_field: osm_id
     fields:
       - name: method
@@ -251,7 +253,7 @@ layers:
       - power
     geometry_type: Point
     min_zoom: 9
-    field_sets: [geom_centroid, name, wiki, source, construction, url, generator, start_date, frequency]
+    field_sets: [geom_centroid, name, wiki, source, lifecycle, url, generator, start_date, frequency]
     id_field: osm_id
     from: osm_power_generator
     where: >
@@ -264,7 +266,7 @@ layers:
       - power
     geometry_type: Polygon
     min_zoom: 13
-    field_sets: [geom, name, wiki, source, construction, url, generator, start_date, frequency]
+    field_sets: [geom, name, wiki, source, lifecycle, url, generator, start_date, frequency]
     id_field: osm_id
     from: osm_power_generator
     where: >
