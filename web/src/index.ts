@@ -7,6 +7,8 @@ await i18next.use(LanguageDetector).init({
   fallbackLng: {
     no: ['nb-NO', 'en'],
     zh: ['zh-Hans', 'zh-Hant', 'en'],
+    'en-US': ['en'],
+    'en-GB': ['en'],
     'zh-Hant': ['zh-Hans', 'en'],
     'zh-Hans': ['zh-Hant', 'en'],
     default: ['en']
