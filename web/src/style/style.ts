@@ -10,9 +10,9 @@ const style: StyleSpecification = {
     type: 'globe'
   },
   sky: {
-    'sky-color': '#3BEAED',
+    'sky-color': '#1A6566',
     'horizon-color': '#863BED',
-    'fog-color': '#C3E3F5',
+    'fog-color': '#4B575E',
     'sky-horizon-blend': 0.5,
     'horizon-fog-blend': 0.5,
     'fog-ground-blend': 0.5,
@@ -30,6 +30,13 @@ const style: StyleSpecification = {
       tiles: ['https://openinframap.org/20221105/{z}/{x}/{y}.mvt'],
       maxzoom: 14,
       attribution: '<a href="https://openmaptiles.org/">OpenMapTiles</a>'
+    },
+    blackmarble: {
+      type: 'raster',
+      tiles: ['https://openinframap.org/black-marble-2023/{z}/{x}/{y}.webp'],
+      maxzoom: 8,
+      attribution:
+        '<a href="https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/products/VNP46A4/">NASA Black Marble 2023</a>'
     },
     power: {
       type: 'vector',

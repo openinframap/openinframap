@@ -85,6 +85,7 @@ export default class OpenInfraMap {
 
     const layer_switcher = new LayerSwitcher(
       [
+        new Layer('N', t('layers.nighttime-lights', 'Nighttime Lights'), 'black_marble', false),
         new Layer('P', t('layers.power', 'Power'), 'power_', true),
         new Layer('S', t('layers.heatmap', 'Solar Generation'), 'heatmap_', false),
         new Layer('T', t('layers.telecoms', 'Telecoms'), 'telecoms_', false),

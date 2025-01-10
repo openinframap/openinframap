@@ -525,6 +525,18 @@ const layers: LayerSpecificationWithZIndex[] = [
       'line-blur': ['interpolate', ['linear'], ['zoom'], 0, 0.4, 22, 4],
       'line-dasharray': [3, 3]
     }
+  },
+  {
+    id: 'black_marble_background',
+    type: 'background',
+    paint: {
+      'background-color': 'rgb(3,1,19)'
+    }
+  },
+  {
+    id: 'black_marble',
+    type: 'raster',
+    source: 'blackmarble'
   }
 ]
 
