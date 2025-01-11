@@ -183,7 +183,8 @@
         "petroleum": "Öl & Gas",
         "water": "Wasser",
         "labels": "Bezeichnungen",
-        "title": "Ebenen"
+        "title": "Ebenen",
+        "nighttime-lights": "Nächtliche Lichter"
     },
     "construction": "im Bau",
     "location": {
