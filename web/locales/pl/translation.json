@@ -47,7 +47,15 @@
             "compensator": "Kompensator",
             "converter": "Przetwarzanie na DC",
             "plant": "Elektrownia",
-            "hvdc": "HVDC"
+            "hvdc": "HVDC",
+            "capacitor-series": "Kondensator szeregowy",
+            "capacitor-shunt": "Kondensator bocznikowy",
+            "compensator-other": "Inne kompensatory",
+            "statcom": "Statyczny kompensator warystorowy",
+            "synchronous-condenser": "Kompensator synchroniczny",
+            "filter": "Filtr",
+            "reactor-shunt": "Dławik bocznikowy",
+            "reactor-series": "Dławik szeregowy"
         },
         "telecoms": {
             "communication-line": "Linia telekomunikacyjna",
@@ -66,7 +74,9 @@
             "water-storage": "Rezerwuar wody",
             "solar-photovoltaic": "Fotowoltaika",
             "combustion": "Spalanie",
-            "water-run-of-river": "Przepływ rzeki"
+            "water-run-of-river": "Przepływ rzeki",
+            "fission": "Rozszczepienie",
+            "fusion": "Fuzja"
         }
     },
     "info": {
@@ -85,7 +95,10 @@
         "generation-method": "Sposób generowania",
         "substance": "Substancja",
         "usage": "Zastosowanie",
-        "design": "Design"
+        "design": "Design",
+        "circuits": "Obwody",
+        "line-attachment": "Sposób montażu linii",
+        "line-management": "Przebieg linii"
     },
     "units": {
         "kV": "kV",
@@ -115,7 +128,7 @@
             "coal": "Węgiel",
             "oil-gas": "Olej/Gaz",
             "gas": "Gaz",
-            "solar": "Słoneczny",
+            "solar": "Słoneczna",
             "geothermal": "Geotermika",
             "hydro": "Elektrownia wodna",
             "nuclear": "Elektrownia jądrowa",
@@ -136,17 +149,19 @@
     "edit": {
         "edit": "Edytuj",
         "remote": "Edytuj w edytorze zewnętrznym (JOSM, itp.)",
-        "browser": "Edytuj w przeglądarce (iD)"
+        "browser": "Edytuj w przeglądarce (iD)",
+        "error": "Załadowanie edytora zewnętrznego nie powiodło się – upewnij się, że jest uruchomiony i ma włączoną opcję zdalnego sterowania.\nBłąd: "
     },
     "nav": {
         "about": "o projekcie",
-        "stats": "statystyki"
+        "stats": "statystyki",
+        "exports": "eksport danych"
     },
     "more_info": "Więcej informacji",
     "location": {
         "underground": "Podziemne",
         "underwater": "Podwodne",
-        "overhead": "Powietrzne",
+        "overhead": "Napowietrzne",
         "roof": "Dach",
         "surface": "Powierzchnia",
         "outdoor": "Na zewnątrz",
@@ -161,7 +176,12 @@
         "petroleum": "Nafta i gaz",
         "water": "Woda",
         "labels": "Etykiety",
-        "title": "Warstwy"
+        "title": "Warstwy",
+        "nighttime-lights": "Światła nocne"
     },
-    "construction": "w budowie"
+    "construction": "w budowie",
+    "disused": "nieużywany",
+    "warnings": {
+        "webgl": "<p>Twoja przeglądarka może mieć problemy z wydajnością lub funkcjonalnością Open Infrastructure Map.</p><p>Aby strona działa dobrze, potrzebne jest <a href=\"http://webglreport.com\">WebGL</a> z przyspieszeniem sprzętowym.</p><p>Jeśli twoja przeglądarka wspiera WebGL, być może musisz wyłączyć cyfrowy odcisk palca (fingerprinting) przeglądarki.</p>"
+    }
 }
