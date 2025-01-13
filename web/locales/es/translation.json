@@ -178,7 +178,8 @@
         "petroleum": "Petróleo y gas",
         "labels": "Etiquetas",
         "title": "Capas",
-        "telecoms": "Telecomunicaciones"
+        "telecoms": "Telecomunicaciones",
+        "nighttime-lights": "Luces nocturnas"
     },
     "warning": "Aviso",
     "wikidata": "Wikidata",
@@ -194,5 +195,6 @@
     "construction": "en construcción",
     "warnings": {
         "webgl": "<p>Su navegador puede tener problemas de rendimiento o funcionalidad con Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> con aceleración de hardware es necesario para que este sitio funcione bien.</p><p>Si su navegador es compatible con WebGL, es posible que tenga que desactivar la protección de rastreo de huellas digitales (fingerprinting) del navegador para este sitio.</p>"
-    }
+    },
+    "disused": "en desuso"
 }
