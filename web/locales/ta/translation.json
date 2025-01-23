@@ -1,1 +1,200 @@
-{}
+{
+    "edit": {
+        "edit": "தொகு",
+        "browser": "உலாவியில் திருத்து (ஐடி)",
+        "error": "தொலை எடிட்டரை ஏற்ற முடியவில்லை - இது இயங்குகிறது மற்றும் ரிமோட் கண்ட்ரோல் இயக்கப்பட்டதா என்பதை உறுதிப்படுத்திக் கொள்ளுங்கள்.\n பிழை: ",
+        "remote": "ரிமோட் கண்ட்ரோல் (சோச்ம், முதலியன) உடன் திருத்தவும்"
+    },
+    "names": {
+        "power": {
+            "reactor-shunt": "சன்ட் உலை",
+            "capacitor-series": "தொடர் மின்தேக்கி",
+            "capacitor-shunt": "சன்ட் மின்தேக்கி",
+            "filter": "வடிப்பி",
+            "transformer": "மின்மாற்றி",
+            "pole": "ஆற்றல் கம்பம்",
+            "tower": "ஆற்றல் கோபுரம்",
+            "generator": "மின்னியற்றி",
+            "generator-solar": "சூரிய செனரேட்டர்",
+            "wind-turbine": "காற்று விசையாழி",
+            "substation": "துணை மின்நிலையம்",
+            "switch": "ஆளி, நிலைமாறி",
+            "compensator": "இழப்பீட்டி",
+            "converter": "டி.சி மாற்றி துணை மின்நிலையம்",
+            "cable": "மின் கேபிள்",
+            "line": "ஆற்றல் வரி",
+            "solar-panel": "சோலார் பேனல்",
+            "plant": "மின் நிலையம்",
+            "hvdc": "எச்.வி.டி.சி",
+            "line-reference": "வரி குறிப்பு",
+            "solar-panel-node": "சூரியக் குழு (முனை)",
+            "other-generator": "பிற செனரேட்டர்",
+            "tower-pylon": "கோபுரம்/பைலான்",
+            "tower-transition": "மாற்றம் கோபுரம்",
+            "pole-transition": "மாற்றம் கம்பம்",
+            "transformer-3": "மின்மாற்றி (3 முறுக்குகள்)",
+            "switch-disconnector": "துண்டிப்பு",
+            "switch-breaker": "(சுற்றமைப்புப்) பிரிகலன்",
+            "switch-other": "மற்ற சுவிட்ச்",
+            "reactor-series": "தொடர் உலை",
+            "statcom": "நிலையான வர் ஈடுசெய்யும்",
+            "synchronous-condenser": "ஒத்திசைவான மின்தேக்கி",
+            "compensator-other": "மற்ற ஈடுசெய்யும்"
+        },
+        "petroleum": {
+            "well": "நன்றாக",
+            "facility": "பெட்ரோலிய வசதி"
+        },
+        "water": {
+            "water-pumping-station": "நீர் உந்தி நிலையம்",
+            "pipeline": "நீர் குழாய்",
+            "sewage-treatment-plant": "கழிவுநீர் சுத்திகரிப்பு நிலையம்",
+            "treatment-plant": "நீர் சுத்திகரிப்பு ஆலை",
+            "pumping-station": "உந்தி நிலையம்",
+            "well": "நீர் கிணறு",
+            "reservoir": "நீர் நீர்த்தேக்கம்",
+            "sewage-pumping-station": "கழிவுநீர் உந்தி நிலையம்"
+        },
+        "method": {
+            "fission": "பிளவு",
+            "fusion": "இணைவு",
+            "wind-turbine": "காற்று விசையாழி",
+            "water-storage": "நீர் சேமிப்பு",
+            "water-run-of-river": "ரன்-ஆஃப்-ரிவர்",
+            "tidal-barrage": "சரமாரியாக",
+            "tidal-stream": "ச்ட்ரீம்",
+            "solar-thermal": "வெப்ப",
+            "anaerobic-digestion": "காற்றில்லா செரிமானம்",
+            "water-pumped-storage": "பம்ப் செய்யப்பட்ட சேமிப்பு",
+            "solar-photovoltaic": "ஒளிமின்னழுத்த",
+            "combustion": "எரிப்பு",
+            "gasification": "வாயுவாக்கம்"
+        },
+        "other-pumping-station": "பிற உந்தி நிலையம்",
+        "telecoms": {
+            "communication-line": "தொலைத் தொடர்பு வரி",
+            "data-center": "தொலைத் தொடர்பு கட்டிடம்",
+            "exchange": "தொலைபேசி பரிமாற்றம்",
+            "cabinet": "தொலைத் தொடர்பு அமைச்சரவை"
+        },
+        "pipeline": "குழாய்",
+        "cable": "வடம்",
+        "telecom": {
+            "tower-mast": "கோபுரம்/மாச்ட்",
+            "datacenter": "டேட்டாசென்டர்"
+        },
+        "cabinet": "அமைச்சரவை",
+        "substance": {
+            "oil": "எண்ணெய்",
+            "gas": "வளிமம்",
+            "petroleum-intermediate": "பெட்ரோலிய இடைநிலை",
+            "fuel": "எரிபொருள்",
+            "hydrogen": "நீரகம்",
+            "co2": "கோ <சப்> 2 </ சப்>",
+            "fresh-water": "புதிய நீர்",
+            "hot-water": "சூடான நீர்",
+            "steam": "நீராவி",
+            "wastewater": "கழிவு நீர்",
+            "rainwater": "மழைநீர்"
+        }
+    },
+    "info": {
+        "name": "பெயர்",
+        "operator": "ஆபரேட்டர்",
+        "output": "விசை",
+        "source": "மூலம்",
+        "start-date": "தொடக்க தேதி",
+        "reference": "குறிப்பு",
+        "circuits": "சுற்றுகள்",
+        "type": "வகை",
+        "website": "வலைத்தளம்",
+        "view-openstreetmap": "OpenStreetMap இல் காண்க",
+        "substance": "பொருள்",
+        "generation-method": "தலைமுறை முறை",
+        "substation-type": "துணை மின் வகை",
+        "usage": "பயன்பாடு",
+        "location": "இடம்",
+        "design": "வடிவமைப்பு",
+        "material": "பொருள்",
+        "line-attachment": "வரி இணைப்பு",
+        "line-management": "வரி மேலாண்மை"
+    },
+    "power": {
+        "source": {
+            "gas": "வளிமம்",
+            "solar": "சூரிய",
+            "coal": "நிலக்கரி",
+            "geothermal": "உலகம் வெப்பம்",
+            "hydro": "நீர் மின்",
+            "nuclear": "அணு",
+            "oil-gas": "எண்ணெய்/எரிவாயு",
+            "wind": "காற்று",
+            "biomass": "உயிரி",
+            "battery": "மின்கலம்",
+            "waste": "கழிவு"
+        },
+        "substation-type": {
+            "transmission": "பரவும் முறை",
+            "distribution": "பரவல்",
+            "traction": "இழுவை",
+            "converter": "டி.சி மாற்றி"
+        }
+    },
+    "layers": {
+        "nighttime-lights": "இரவு நேர விளக்குகள்",
+        "power": "விசை",
+        "heatmap": "சூரிய தலைமுறை",
+        "title": "அடுக்குகள்",
+        "telecoms": "தொலைத் தொடர்பு",
+        "petroleum": "எண்ணெய் & எரிவாயு",
+        "water": "நீர்",
+        "labels": "சிட்டைகள்"
+    },
+    "construction": "கட்டுமானத்தின் கீழ்",
+    "disused": "பயன்படுத்தப்பட்டது",
+    "nav": {
+        "about": "பற்றி",
+        "stats": "புள்ளிவிவரங்கள்",
+        "exports": "ஏற்றுமதி"
+    },
+    "units": {
+        "kV": "கே.வி.",
+        "Hz": "Hz",
+        "MW": "மெகாவாட்",
+        "DC": "நேர்மின்னழுத்தம்",
+        "below_10kv": "<10 கே.வி.",
+        "ge_kv": "≥ {{voltage}} kv",
+        "kW": "கிலோவாட்",
+        "V": "V"
+    },
+    "more_info": "மேலும் செய்தி",
+    "wikipedia": "விக்கிபீடியா",
+    "wikimedia-commons": "விக்கிமீடியா காமன்ச்",
+    "wikidata": "விக்கிடிட்",
+    "key": {
+        "name": "விசை",
+        "power-lines": "மின் இணைப்புகள்",
+        "power-plants": "மின் விளைவாக்கம் நிலையங்கள்",
+        "power-generators": "ஆற்றல் செனரேட்டர்கள்",
+        "power-line-supports": "மின் வரி ஆதரிக்கிறது",
+        "switchgear": "சுவிட்ச் கியர்",
+        "telecoms": "தொலைத் தொடர்பு",
+        "petroleum": "பாறையெண்ணை, பாறைநெய்",
+        "water": "நீர்",
+        "traction": "இழுவை (<50 எர்ட்ச்)"
+    },
+    "location": {
+        "underground": "நிலத்தடி",
+        "underwater": "நீருக்கடியில்",
+        "overhead": "மேற்செலவு",
+        "roof": "கூரை",
+        "surface": "மேற்பரப்பு",
+        "outdoor": "வெளிப்புறம்",
+        "indoor": "உட்புறம்"
+    },
+    "other": "மற்றொன்று",
+    "warning": "எச்சரிக்கை",
+    "warnings": {
+        "webgl": "<p> உங்கள் உலாவியில் திறந்த உள்கட்டமைப்பு வரைபடத்துடன் செயல்திறன் அல்லது செயல்பாட்டு சிக்கல்கள் இருக்கலாம். சிறப்பாக செயல்பட.</p>"
+    }
+}
