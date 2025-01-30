@@ -465,6 +465,39 @@ layers:
       AND geometry && !BBOX!
       AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
 
+  - name: other_pipeline
+    map:
+      - other_pipeline
+    geometry_type: LineString
+    min_zoom: 2
+    id_field: osm_id
+    field_sets: [geom, name, wiki, start_date]
+    fields:
+      - name: location
+        sql: tags -> 'location'
+      - name: substance
+      - name: type
+      - name: usage
+        sql: tags -> 'usage'
+      - name: diameter
+        sql: tags -> 'diameter'
+      - name: material
+        sql: tags -> 'material'
+    from: osm_pipeline
+    where: >
+      COALESCE(substance, type) NOT IN (
+        'natural_gas', 'gas', 'oil', 'fuel', 'cng', 'lpg', 'ngl', 'lng',
+        'y-grade', 'hydrocarbons', 'hydrogen', 'carbon_dioxide', 'carbon_monoxide',
+        'ethylene', 'propylene', 'chemicals', 'chemical', 'ammonia',
+        'methane', 'ethane', 'nitrogen', 'isobutane', 'butane',
+        'propane', 'condensate', 'butadiene', 'naphtha'
+      ) AND construction = ''
+      AND ((tags->'usage' IS NOT NULL AND tags->'usage' = 'transmission')
+            OR !ZOOM! > 7
+      )
+      AND geometry && !BBOX!
+      AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
+
   - name: petroleum_well
     map:
       - openinframap
