@@ -1,1 +1,82 @@
-{}
+{
+    "names": {
+        "water": {
+            "treatment-plant": "Vodna čistilna naprava",
+            "pipeline": "Vodovod",
+            "pumping-station": "Črpališče",
+            "well": "Vodnjak",
+            "reservoir": "Vodni rezervoar",
+            "sewage-treatment-plant": "Kanalizacijska čistilna naprava"
+        },
+        "power": {
+            "plant": "Elektrarna",
+            "transformer": "Transformator",
+            "generator": "Generator",
+            "switch-disconnector": "Odklopnik",
+            "switch-breaker": "Varovalka",
+            "switch-other": "Drugačno stikalo",
+            "wind-turbine": "Vetrnica"
+        },
+        "telecoms": {
+            "exchange": "Telefonska centrala",
+            "cabinet": "Telekomunikacijska omara"
+        },
+        "pipeline": "Cevovod",
+        "petroleum": {
+            "well": "Vrtina"
+        }
+    },
+    "power": {
+        "source": {
+            "coal": "Premog",
+            "geothermal": "Geotermalna",
+            "nuclear": "Jedrska",
+            "oil-gas": "Nafta/Plin",
+            "gas": "Plin",
+            "solar": "Sončna",
+            "wind": "Vetrna",
+            "biomass": "Biomasa"
+        }
+    },
+    "wikimedia-commons": "Wikimedia Commons",
+    "edit": {
+        "edit": "Uredi",
+        "browser": "Uredi v brskalniku (urejevalnik iD)"
+    },
+    "nav": {
+        "about": "O projektu",
+        "stats": "Statistika"
+    },
+    "units": {
+        "Hz": "Hz",
+        "MW": "MW",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V",
+        "kV": "kV"
+    },
+    "more_info": "Več informacij",
+    "wikipedia": "Wikipedija",
+    "wikidata": "Wikidata",
+    "key": {
+        "name": "Legenda"
+    },
+    "location": {
+        "outdoor": "Zunaj",
+        "indoor": "Znotraj",
+        "roof": "Streha"
+    },
+    "other": "Ostalo",
+    "warning": "Opozorilo",
+    "layers": {
+        "power": "Elektrika",
+        "heatmap": "Sončne elektrarne",
+        "telecoms": "Telekomunikacije",
+        "petroleum": "Nafta in plin",
+        "water": "Voda",
+        "labels": "Napisi",
+        "title": "Sloji"
+    },
+    "construction": "v gradnji"
+}
