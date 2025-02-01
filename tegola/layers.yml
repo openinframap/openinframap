@@ -452,13 +452,7 @@ layers:
         sql: tags -> 'material'
     from: osm_pipeline
     where: >
-      COALESCE(substance, type) IN (
-        'natural_gas', 'gas', 'oil', 'fuel', 'cng', 'lpg', 'ngl', 'lng',
-        'y-grade', 'hydrocarbons', 'hydrogen', 'carbon_dioxide', 'carbon_monoxide',
-        'ethylene', 'propylene', 'chemicals', 'chemical', 'ammonia',
-        'methane', 'ethane', 'nitrogen', 'isobutane', 'butane',
-        'propane', 'condensate', 'butadiene', 'naphtha'
-      ) AND construction = ''
+      pipeline_type(COALESCE(substance, type)) = 'petroleum' AND construction = ''
       AND ((tags->'usage' IS NOT NULL AND tags->'usage' = 'transmission')
             OR !ZOOM! > 7
       )
@@ -485,13 +479,7 @@ layers:
         sql: tags -> 'material'
     from: osm_pipeline
     where: >
-      COALESCE(substance, type) NOT IN (
-        'natural_gas', 'gas', 'oil', 'fuel', 'cng', 'lpg', 'ngl', 'lng',
-        'y-grade', 'hydrocarbons', 'hydrogen', 'carbon_dioxide', 'carbon_monoxide',
-        'ethylene', 'propylene', 'chemicals', 'chemical', 'ammonia',
-        'methane', 'ethane', 'nitrogen', 'isobutane', 'butane',
-        'propane', 'condensate', 'butadiene', 'naphtha'
-      ) AND construction = ''
+      pipeline_type(COALESCE(substance, type)) = 'other' AND construction = ''
       AND ((tags->'usage' IS NOT NULL AND tags->'usage' = 'transmission')
             OR !ZOOM! > 7
       )
@@ -541,10 +529,9 @@ layers:
         sql: tags -> 'start_date'
     from: osm_pipeline
     where: >
-      COALESCE(substance, type) IN (
-        'water', 'hot_water', 'rainwater', 'wastewater', 'sewage',
-        'waterwaste', 'steam'
-        ) AND geometry && !BBOX! AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
+      pipeline_type(COALESCE(substance, type)) = 'water'
+      AND geometry && !BBOX!
+      AND ST_Length(geometry) > !PIXEL_WIDTH! / 4
 
   - name: pressurised_waterway
     map:

@@ -294,3 +294,25 @@ BEGIN
     WHERE ST_GeometryType(line.geometry) = 'ST_LineString' LIMIT 1;
     RETURN angle;
 END $$;
+
+CREATE OR REPLACE FUNCTION pipeline_type(substance TEXT)
+    RETURNS TEXT
+    LANGUAGE sql
+    IMMUTABLE STRICT
+    PARALLEL SAFE
+    AS $$
+
+SELECT CASE
+    WHEN substance IN (
+        'natural_gas', 'gas', 'oil', 'fuel', 'cng', 'lpg', 'ngl', 'lng',
+        'y-grade', 'hydrocarbons', 'hydrogen', 'carbon_dioxide', 'carbon_monoxide',
+        'ethylene', 'propylene', 'chemicals', 'chemical', 'ammonia',
+        'methane', 'ethane', 'nitrogen', 'isobutane', 'butane',
+        'propane', 'condensate', 'butadiene', 'naphtha'
+      ) THEN 'petroleum'
+    WHEN substance IN ('water', 'hot_water', 'rainwater', 'wastewater', 'sewage',
+        'waterwaste', 'steam') THEN 'water'
+    ELSE 'other'
+END;
+
+$$;
