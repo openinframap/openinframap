@@ -305,10 +305,8 @@ CREATE OR REPLACE FUNCTION pipeline_type(substance TEXT)
 SELECT CASE
     WHEN substance IN (
         'natural_gas', 'gas', 'oil', 'fuel', 'cng', 'lpg', 'ngl', 'lng',
-        'y-grade', 'hydrocarbons', 'hydrogen', 'carbon_dioxide', 'carbon_monoxide',
-        'ethylene', 'propylene', 'chemicals', 'chemical', 'ammonia',
-        'methane', 'ethane', 'nitrogen', 'isobutane', 'butane',
-        'propane', 'condensate', 'butadiene', 'naphtha'
+        'y-grade', 'hydrocarbons', 'hydrogen', 'ethylene', 'ethene', 'propylene', 'propene',
+        'methane', 'ethane', 'isobutane', 'butane', 'propane', 'condensate', 'butadiene', 'naphtha'
       ) THEN 'petroleum'
     WHEN substance IN ('water', 'hot_water', 'rainwater', 'wastewater', 'sewage',
         'waterwaste', 'steam') THEN 'water'
