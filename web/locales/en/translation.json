@@ -74,6 +74,9 @@
       "petroleum-intermediate": "Petroleum intermediate",
       "fuel": "Fuel",
       "hydrogen": "Hydrogen",
+      "nitrogen": "Nitrogen",
+      "oxygen": "Oxygen",
+      "beer": "Beer",
       "co2": "CO<sub>2</sub>",
       "fresh-water": "Fresh water",
       "hot-water": "Hot water",
@@ -190,10 +193,11 @@
     "power": "Power",
     "heatmap": "Solar Generation",
     "telecoms": "Telecoms",
-    "petroleum": "Oil & Gas",
+    "petroleum": "Oil & Natural Gas",
     "water": "Water",
     "labels": "Labels",
-    "title": "Layers"
+    "title": "Layers",
+    "other_pipelines": "Other Pipelines"
   },
   "construction": "under construction",
   "disused": "disused"

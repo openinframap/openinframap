@@ -67,6 +67,12 @@ const style: StyleSpecification = {
       tiles: ['https://openinframap.org/map/solar_heatmap/{z}/{x}/{y}.pbf'],
       maxzoom: 17,
       attribution: oim_attribution
+    },
+    other_pipeline: {
+      type: 'vector',
+      tiles: ['https://openinframap.org/map/other_pipeline/{z}/{x}/{y}.pbf'],
+      maxzoom: 17,
+      attribution: oim_attribution
     }
   },
   glyphs: '/fonts/{fontstack}/{range}.pbf',

@@ -18,6 +18,7 @@ import style_oim_power_heatmap from './style/style_oim_power_heatmap.js'
 import style_oim_telecoms from './style/style_oim_telecoms.js'
 import style_oim_petroleum from './style/style_oim_petroleum.js'
 import style_oim_water from './style/style_oim_water.js'
+import style_oim_other_pipelines from './style/style_oim_other_pipelines.js'
 import { LayerSpecificationWithZIndex } from './style/types.js'
 
 import { manifest } from 'virtual:render-svg'
@@ -71,7 +72,8 @@ export default class OpenInfraMap {
       ...style_oim_power_heatmap,
       ...style_oim_petroleum(),
       ...style_oim_telecoms(),
-      ...style_oim_water()
+      ...style_oim_water(),
+      ...style_oim_other_pipelines()
     ]
 
     oim_layers.sort((a, b) => {
@@ -90,6 +92,7 @@ export default class OpenInfraMap {
         new Layer('S', t('layers.heatmap', 'Solar Generation'), 'heatmap_', false),
         new Layer('T', t('layers.telecoms', 'Telecoms'), 'telecoms_', false),
         new Layer('O', t('layers.petroleum', 'Oil & Gas'), 'petroleum_', false),
+        new Layer('I', t('layers.other_pipelines', 'Other Pipelines'), 'pipeline_', false),
         new Layer('W', t('layers.water', 'Water'), 'water_', false),
         new Layer('L', t('layers.labels', 'Labels'), 'place_', true)
       ],

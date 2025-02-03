@@ -1,18 +1,15 @@
 import { t } from 'i18next'
 import { ColorSpecification, ExpressionSpecification } from 'maplibre-gl'
-import { text_paint, font, get_local_name } from './common.js'
+import { text_paint, font, get_local_name, substance } from './common.js'
 import { LayerSpecificationWithZIndex } from './types.ts'
-import { interpolate, match, coalesce, get, has, concat, if_, zoom, any, all } from './stylehelpers.ts'
+import { interpolate, match, get, has, concat, if_, zoom, any, all } from './stylehelpers.ts'
 
 const colour_gas: ColorSpecification = '#BFBC6B'
 const colour_oil: ColorSpecification = '#6B6B6B'
 const colour_fuel: ColorSpecification = '#CC9F83'
 const colour_intermediate: ColorSpecification = '#78CC9E'
 const colour_hydrogen: ColorSpecification = '#CC78AB'
-const colour_co2: ColorSpecification = '#7885CC'
 const colour_unknown: ColorSpecification = '#BABABA'
-
-const substance: ExpressionSpecification = coalesce(get('substance'), get('type'), '')
 
 const pipeline_colour: ExpressionSpecification = match(
   substance,
@@ -21,8 +18,7 @@ const pipeline_colour: ExpressionSpecification = match(
     ['oil', colour_oil],
     ['fuel', colour_fuel],
     [['ngl', 'y-grade', 'hydrocarbons', 'condensate', 'naphtha'], colour_intermediate],
-    ['hydrogen', colour_hydrogen],
-    ['carbon_dioxide', colour_co2]
+    ['hydrogen', colour_hydrogen]
   ],
   colour_unknown
 )
@@ -182,6 +178,6 @@ export {
   colour_fuel,
   colour_intermediate,
   colour_hydrogen,
-  colour_co2,
-  colour_unknown
+  colour_unknown,
+  pipeline_label
 }

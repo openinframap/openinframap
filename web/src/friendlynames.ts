@@ -33,6 +33,8 @@ export default function friendlyNames(): { [key: string]: string } {
     water_treatment_plant: t('names.water.treatment-plant', 'Water treatment plant'),
     water_pumping_station: t('names.water.pumping-station', 'Pumping station'),
     water_well: t('names.water.well', 'Water well'),
-    water_reservoir: t('names.water.reservoir', 'Water reservoir')
+    water_reservoir: t('names.water.reservoir', 'Water reservoir'),
+    pipeline_inner: t('names.pipeline_other', 'Other Pipeline'),
+    pipeline_case: t('names.pipeline_other', 'Other Pipeline')
   }
 }

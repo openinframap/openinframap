@@ -9,10 +9,15 @@ import {
   colour_gas,
   colour_fuel,
   colour_intermediate,
-  colour_hydrogen,
-  colour_co2,
-  colour_unknown
+  colour_hydrogen
 } from '../style/style_oim_petroleum.js'
+import {
+  colour_beer,
+  colour_co2,
+  colour_nitrogen,
+  colour_other_pipeline_unknown,
+  colour_oxygen
+} from '../style/style_oim_other_pipelines.js'
 import {
   colour_freshwater,
   colour_wastewater,
@@ -126,6 +131,8 @@ class KeyControl implements IControl {
     mount(pane, this.petroleumTable())
     pane.appendChild(el('h3', t('key.water', 'Water')))
     mount(pane, await this.waterTable())
+    pane.appendChild(el('h3', t('key.other_pipelines', 'Other Pipelines')))
+    mount(pane, this.otherPipelineTable())
     this._pane = pane
 
     mount(this._container, pane)
@@ -263,12 +270,23 @@ class KeyControl implements IControl {
       ],
       [t('names.substance.fuel', 'Fuel'), svgLine(colour_fuel, line_thickness)],
       [t('names.substance.hydrogen', 'Hydrogen'), svgLine(colour_hydrogen, line_thickness)],
-      [t('names.substance.co2', 'CO<sub>2</sub>'), svgLine(colour_co2, line_thickness)],
-      [t('other', 'Other'), svgLine(colour_unknown, line_thickness)],
       [
         t('names.petroleum.facility', 'Petroleum facility'),
         svgRectFromLayer(petroleum_layers(), 'petroleum_site')
       ]
+    ]
+    const table = list('table', Tr)
+    table.update(rows)
+    return table
+  }
+
+  otherPipelineTable() {
+    const rows = [
+      [t('names.substance.oxygen', 'Oxygen'), svgLine(colour_oxygen, line_thickness)],
+      [t('names.substance.co2', 'CO<sub>2</sub>'), svgLine(colour_co2, line_thickness)],
+      [t('names.substance.nitrogen', 'Nitrogen'), svgLine(colour_nitrogen, line_thickness)],
+      [t('names.substance.beer', 'Beer'), svgLine(colour_beer, line_thickness)],
+      [t('other', 'Other'), svgLine(colour_other_pipeline_unknown, line_thickness)]
     ]
     const table = list('table', Tr)
     table.update(rows)
