@@ -297,6 +297,8 @@ layers:
         sql: tags -> 'windings'
       - name: configuration
         sql: tags -> 'windings:configuration'
+      - name: transformer_type
+        sql: tags -> 'transformer'
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'transformer' AND geometry && !BBOX!
