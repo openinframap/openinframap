@@ -45,7 +45,9 @@
             "filter": "Φίλτρο",
             "compensator-other": "Άλλος αντισταθμιστής",
             "statcom": "Στατικός αντισταθμιστής VAR",
-            "synchronous-condenser": "Σύγχρονος συμπυκνωτής"
+            "synchronous-condenser": "Σύγχρονος συμπυκνωτής",
+            "current-transformer": "Μετασχηματιστής ρεύματος",
+            "potential-transformer": "Μετασχηματιστής τάσης"
         },
         "telecoms": {
             "communication-line": "Γραμμή τηλεπικοινωνιών",
@@ -78,7 +80,10 @@
             "hot-water": "Καυτό νερό",
             "gas": "Αέριο",
             "fuel": "Καύσιμο",
-            "rainwater": "Όμβρια ύδατα"
+            "rainwater": "Όμβρια ύδατα",
+            "oxygen": "Οξυγόνο",
+            "nitrogen": "Άζωτο",
+            "beer": "Μπύρα"
         },
         "petroleum": {
             "well": "Πηγάδι",
@@ -119,9 +124,10 @@
         "power": "Ρεύμα",
         "title": "Επίπεδα",
         "heatmap": "Ηλιακή Παραγωγή",
-        "petroleum": "Πετρέλαιο & Αέριο",
+        "petroleum": "Πετρέλαιο & Φυσικό Αέριο",
         "labels": "Ετικέτες",
-        "nighttime-lights": "Νυχτερινά Φώτα"
+        "nighttime-lights": "Νυχτερινά Φώτα",
+        "other-pipelines": "Άλλοι Αγωγοί"
     },
     "info": {
         "operator": "Διαχειριστής",
@@ -142,7 +148,8 @@
         "line-management": "Τοπολογία γραμμής",
         "design": "Μορφή",
         "material": "Υλικό",
-        "line-attachment": "Σύνδεση γραμμής"
+        "line-attachment": "Σύνδεση γραμμής",
+        "transformer-type": "Είδος μετασχηματιστή"
     },
     "wikidata": "Wikidata",
     "key": {
