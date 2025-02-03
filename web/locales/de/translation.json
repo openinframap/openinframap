@@ -33,7 +33,9 @@
             "capacitor-shunt": "Parallelkondensator",
             "filter": "Filter",
             "statcom": "Statischer Blindleistungskompensator",
-            "synchronous-condenser": "Phasenschieber"
+            "synchronous-condenser": "Phasenschieber",
+            "potential-transformer": "Potentialtransformator",
+            "current-transformer": "Stromwandler"
         },
         "water": {
             "reservoir": "Wasserhochbehälter",
@@ -56,7 +58,10 @@
             "gas": "Gas",
             "petroleum-intermediate": "Erdöl-Zwischenprodukte",
             "wastewater": "Abwasser",
-            "rainwater": "Regenwasser"
+            "rainwater": "Regenwasser",
+            "beer": "Bier",
+            "nitrogen": "Stickstoff",
+            "oxygen": "Sauerstoff"
         },
         "telecoms": {
             "communication-line": "Telefonleitung",
@@ -150,7 +155,8 @@
         "material": "Material",
         "line-management": "Leitungstopologie",
         "design": "Form",
-        "line-attachment": "Leitungsbefestigung"
+        "line-attachment": "Leitungsbefestigung",
+        "transformer-type": "Transformer Typ"
     },
     "nav": {
         "about": "Über",
@@ -180,11 +186,12 @@
         "power": "Energie",
         "heatmap": "Solare Erzeugung",
         "telecoms": "Telekommunikation",
-        "petroleum": "Öl & Gas",
+        "petroleum": "Öl & Erdgas",
         "water": "Wasser",
         "labels": "Bezeichnungen",
         "title": "Ebenen",
-        "nighttime-lights": "Nächtliche Lichter"
+        "nighttime-lights": "Nächtliche Lichter",
+        "other-pipelines": "Andere Pipelines"
     },
     "construction": "im Bau",
     "location": {
