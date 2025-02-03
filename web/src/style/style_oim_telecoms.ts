@@ -1,7 +1,7 @@
 import { LayerSpecificationWithZIndex } from './types.ts'
-import { text_paint, operator_text, font, oimSymbol } from './common.js'
+import { text_paint, operator_text, font, oimSymbol, construction_p, disused_p } from './common.js'
 import { get_local_name } from './common.ts'
-import { interpolate, rgb, zoom } from './stylehelpers.ts'
+import { all, get, interpolate, match, not, rgb, zoom } from './stylehelpers.ts'
 
 export default function layers(): LayerSpecificationWithZIndex[] {
   return [
@@ -11,6 +11,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       type: 'line',
       source: 'telecoms',
       minzoom: 2,
+      filter: all(not(construction_p), not(disused_p)),
       'source-layer': 'telecoms_communication_line',
       paint: {
         'line-color': '#61637A',
@@ -26,6 +27,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       id: 'telecoms_data_center',
       type: 'fill',
       source: 'telecoms',
+      filter: all(not(construction_p), not(disused_p)),
       minzoom: 10,
       'source-layer': 'telecoms_data_center',
       paint: {
@@ -50,6 +52,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       id: 'telecoms_mast',
       source: 'telecoms',
       sourceLayer: 'telecoms_mast',
+      filter: all(not(construction_p), not(disused_p)),
       minZoom: 10,
       textField: operator_text,
       iconImage: 'comms_tower',
@@ -62,7 +65,15 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       id: 'telecoms_exchange_symbol',
       source: 'telecoms',
       sourceLayer: 'telecoms_data_center_point',
-      filter: ['in', 'type', 'exchange', 'telephone_office', 'telephone_exchange', 'central_office'],
+      filter: all(
+        match(
+          get('type'),
+          [[['exchange', 'telephone_office', 'telephone_exchange', 'central_office'], true]],
+          false
+        ),
+        not(construction_p),
+        not(disused_p)
+      ),
       minZoom: 6,
       textField: operator_text,
       iconImage: 'telecom_exchange',
@@ -75,7 +86,11 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       id: 'telecoms_data_center_symbol',
       source: 'telecoms',
       sourceLayer: 'telecoms_data_center_point',
-      filter: ['in', 'type', 'data_center', 'data_centre'],
+      filter: all(
+        match(get('type'), [[['data_center', 'data_centre'], true]], false),
+        not(construction_p),
+        not(disused_p)
+      ),
       minZoom: 5,
       textField: operator_text,
       iconImage: 'telecom_datacenter',
@@ -91,6 +106,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       source: 'telecoms',
       minzoom: 9,
       'source-layer': 'telecoms_communication_line',
+      filter: all(not(construction_p), not(disused_p)),
       paint: text_paint,
       layout: {
         'text-field': get_local_name(),

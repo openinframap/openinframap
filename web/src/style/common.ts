@@ -2,6 +2,7 @@ import { ExpressionSpecification, FilterSpecification } from 'maplibre-gl'
 import { LayerSpecificationWithZIndex } from './types.ts'
 import { local_name_tags } from '../l10n.ts'
 import { step, interpolate, get, has, all, any, concat, case_, coalesce } from './stylehelpers.ts'
+import { t } from 'i18next'
 
 export function get_local_name(): ExpressionSpecification {
   return (['coalesce'] as any).concat(local_name_tags().map((tag) => get(tag))) as ExpressionSpecification
@@ -123,3 +124,15 @@ export function oimSymbol(options: OIMSymbolOptions): LayerSpecificationWithZInd
   }
 }
 export const substance: ExpressionSpecification = coalesce(get('substance'), get('type'), '')
+export const construction_p: ExpressionSpecification = coalesce(get('construction'), false)
+export const disused_p: ExpressionSpecification = coalesce(get('disused'), false)
+
+export function lifecycle_label(): ExpressionSpecification {
+  return case_(
+    [
+      [construction_p, ' (' + t('construction', 'under construction') + ') '],
+      [disused_p, ' (' + t('disused', 'disused') + ') ']
+    ],
+    ''
+  )
+}

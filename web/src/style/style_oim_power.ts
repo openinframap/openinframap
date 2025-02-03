@@ -1,5 +1,14 @@
 import { t } from 'i18next'
-import { text_paint, underground_p, font, get_local_name, oimSymbol } from './common.js'
+import {
+  text_paint,
+  underground_p,
+  font,
+  get_local_name,
+  oimSymbol,
+  construction_p,
+  disused_p,
+  lifecycle_label
+} from './common.js'
 import {
   all,
   has,
@@ -233,20 +242,6 @@ const power_ref_visible_p: ExpressionSpecification = all(
   ),
   any(all(['!=', get('line'), 'busbar'], ['!=', get('line'), 'bay']), ['>', zoom, 12])
 )
-
-const construction_p: ExpressionSpecification = get('construction')
-
-const disused_p: ExpressionSpecification = coalesce(get('disused'), false)
-
-function lifecycle_label(): ExpressionSpecification {
-  return case_(
-    [
-      [construction_p, ' (' + t('construction', 'under construction') + ') '],
-      [disused_p, ' (' + t('disused', 'disused') + ') ']
-    ],
-    ''
-  )
-}
 
 const plant_label_visible_p: ExpressionSpecification = any(
   ['>', output, 1000],

@@ -401,7 +401,7 @@ layers:
     geometry_type: Point
     min_zoom: 10
     id_field: osm_id
-    field_sets: [geom_centroid, name, wiki, start_date]
+    field_sets: [geom_centroid, name, wiki, start_date, lifecycle]
     fields:
       - name: material
         sql: tags -> 'material'
@@ -417,7 +417,7 @@ layers:
     geometry_type: Point
     min_zoom: 10
     id_field: osm_id
-    field_sets: [geom_centroid, name, wiki, start_date]
+    field_sets: [geom_centroid, name, wiki, start_date, lifecycle]
     from: osm_telecom_antenna
     where: ST_GeometryType(geometry) = 'ST_Point' AND geometry && !BBOX!
 
@@ -427,7 +427,7 @@ layers:
     geometry_type: Point
     min_zoom: 10
     id_field: osm_id
-    field_sets: [geom_centroid, name, wiki, start_date]
+    field_sets: [geom_centroid, name, wiki, start_date, lifecycle]
     from: osm_street_cabinet
     where: first_semi(utility) = 'telecom' AND geometry && !BBOX!
 
