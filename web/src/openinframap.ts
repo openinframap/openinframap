@@ -92,7 +92,7 @@ export default class OpenInfraMap {
         new Layer('S', t('layers.heatmap', 'Solar Generation'), 'heatmap_', false),
         new Layer('T', t('layers.telecoms', 'Telecoms'), 'telecoms_', false),
         new Layer('O', t('layers.petroleum', 'Oil & Gas'), 'petroleum_', false),
-        new Layer('I', t('layers.other_pipelines', 'Other Pipelines'), 'pipeline_', false),
+        new Layer('I', t('layers.other-pipelines', 'Other Pipelines'), 'pipeline_', false),
         new Layer('W', t('layers.water', 'Water'), 'water_', false),
         new Layer('L', t('layers.labels', 'Labels'), 'place_', true)
       ],

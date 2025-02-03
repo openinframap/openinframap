@@ -53,7 +53,7 @@ export type OIMSymbolOptions = {
   textOffset?: number
   iconImage: ExpressionSpecification | string
   iconScale?: number // Icon scale at max icon zoom
-  iconMinScale?: number // Icon scale at initial icon zoom
+  iconMinScale?: ExpresisonSpecification | number // Icon scale at initial icon zoom
   iconMaxZoom?: number
 }
 
@@ -94,7 +94,7 @@ export function oimSymbol(options: OIMSymbolOptions): LayerSpecificationWithZInd
       'icon-size': interpolate(
         ['zoom'],
         [
-          [options.minZoom, options.iconMinScale || iconScale * 0.8],
+          [options.minZoom, options.iconMinScale || ['*', iconScale, 0.8]],
           [iconMaxZoom, iconScale]
         ]
       ),
@@ -123,6 +123,7 @@ export function oimSymbol(options: OIMSymbolOptions): LayerSpecificationWithZInd
     }
   }
 }
+
 export const substance: ExpressionSpecification = coalesce(get('substance'), get('type'), '')
 export const construction_p: ExpressionSpecification = coalesce(get('construction'), false)
 export const disused_p: ExpressionSpecification = coalesce(get('disused'), false)

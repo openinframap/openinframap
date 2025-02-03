@@ -39,7 +39,9 @@
       "statcom": "Static VAR compensator",
       "synchronous-condenser": "Synchronous condenser",
       "filter": "Filter",
-      "compensator-other": "Other compensator"
+      "compensator-other": "Other compensator",
+      "current-transformer": "Current transformer",
+      "potential-transformer": "Potential transformer"
     },
     "telecoms": {
       "communication-line": "Telecoms line",
@@ -120,7 +122,8 @@
     "design": "Design",
     "material": "Material",
     "line-attachment": "Line attachment",
-    "line-management": "Line management"
+    "line-management": "Line management",
+    "transformer-type": "Transformer type"
   },
   "nav": {
     "about": "about",
@@ -197,7 +200,7 @@
     "water": "Water",
     "labels": "Labels",
     "title": "Layers",
-    "other_pipelines": "Other Pipelines"
+    "other-pipelines": "Other Pipelines"
   },
   "construction": "under construction",
   "disused": "disused"

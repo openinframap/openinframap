@@ -131,7 +131,7 @@ class KeyControl implements IControl {
     mount(pane, this.petroleumTable())
     pane.appendChild(el('h3', t('key.water', 'Water')))
     mount(pane, await this.waterTable())
-    pane.appendChild(el('h3', t('key.other_pipelines', 'Other Pipelines')))
+    pane.appendChild(el('h3', t('layers.other-pipelines', 'Other Pipelines')))
     mount(pane, this.otherPipelineTable())
     this._pane = pane
 
@@ -231,6 +231,8 @@ class KeyControl implements IControl {
         t('names.power.transformer-3', 'Transformer (3 windings)'),
         await this.sprite('power_transformer_3_winding')
       ],
+      [t('names.power.current-transformer'), await this.sprite('power_transformer_current')],
+      [t('names.power.potential-transformer'), await this.sprite('power_transformer_potential')],
       [t('names.power.switch-disconnector', 'Disconnector'), await this.sprite('power_switch_disconnector')],
       [t('names.power.switch-breaker', 'Circuit breaker'), await this.sprite('power_switch_circuit_breaker')],
       [t('names.power.switch-other', 'Other switch'), await this.sprite('power_switch')],

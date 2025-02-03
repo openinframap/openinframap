@@ -44,6 +44,7 @@ function fieldName(key: string) {
       material: t('info.material'),
       line_attachment: t('info.line-attachment'),
       line_management: t('info.line-management'),
+      transformer_type: t('info.transformer-type'),
       repd_id: 'REPD ID'
     }[key] || titleCase(key)
   )

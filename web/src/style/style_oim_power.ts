@@ -663,12 +663,26 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       minZoom: 14,
       source: 'power',
       sourceLayer: 'power_transformer',
-      iconImage: if_(
-        any(has('voltage_tertiary'), ['==', ['to-number', get('windings')], 3]),
-        'power_transformer_3_winding',
+      iconImage: case_(
+        [
+          [
+            any(has('voltage_tertiary'), ['==', ['to-number', get('windings')], 3]),
+            'power_transformer_3_winding'
+          ],
+          [['==', get('transformer_type'), 'current'], 'power_transformer_current'],
+          [['==', get('transformer_type'), 'potential'], 'power_transformer_potential']
+        ],
         'power_transformer'
       ),
       iconMinScale: 0.1,
+      iconScale: match(
+        get('transformer_type'),
+        [
+          ['current', 0.6],
+          ['potential', 0.6]
+        ],
+        1
+      ),
       textMinZoom: 17,
       textField: transformer_label,
       textOffset: 3
