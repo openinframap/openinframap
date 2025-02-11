@@ -41,7 +41,9 @@
             "statcom": "静止型無効電力補償装置",
             "switch-other": "その他の開閉器",
             "compensator-other": "その他の補償装置",
-            "solar-panel": "ソーラーパネル"
+            "solar-panel": "ソーラーパネル",
+            "current-transformer": "計器用変流器",
+            "potential-transformer": "計器用変圧器"
         },
         "telecoms": {
             "exchange": "電話交換",
@@ -67,7 +69,9 @@
             "rainwater": "雨水",
             "wastewater": "廃水",
             "steam": "蒸気",
-            "hot-water": "温水"
+            "hot-water": "温水",
+            "nitrogen": "窒素",
+            "oxygen": "酸素"
         },
         "method": {
             "fission": "核分裂",
@@ -104,7 +108,8 @@
         "reference": "番号",
         "substance": "物質",
         "start-date": "開始日",
-        "website": "ウェブサイト"
+        "website": "ウェブサイト",
+        "transformer-type": "変成器種類"
     },
     "nav": {
         "stats": "統計",
@@ -146,8 +151,10 @@
         "heatmap": "太陽光発電",
         "power": "電力",
         "labels": "地名",
-        "water": "水"
+        "water": "水",
+        "nighttime-lights": "夜間照明"
     },
     "construction": "工事中",
-    "wikipedia": "Wikipedia"
+    "wikipedia": "Wikipedia",
+    "disused": "廃止"
 }
