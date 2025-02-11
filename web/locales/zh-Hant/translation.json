@@ -39,7 +39,9 @@
             "transformer-3": "三相變壓器",
             "tower-transition": "轉接塔",
             "pole-transition": "轉接桿",
-            "filter": "濾波器"
+            "filter": "濾波器",
+            "current-transformer": "電流互感器",
+            "potential-transformer": "電壓互感器"
         },
         "petroleum": {
             "well": "油井",
@@ -67,7 +69,10 @@
             "wastewater": "污水",
             "petroleum-intermediate": "石化中間產物",
             "fresh-water": "淡水",
-            "hot-water": "熱水"
+            "hot-water": "熱水",
+            "beer": "啤酒",
+            "oxygen": "氧",
+            "nitrogen": "氮"
         },
         "method": {
             "fission": "核分裂",
@@ -117,7 +122,8 @@
         "line-management": "線路管理",
         "design": "塔架設計",
         "name": "名稱",
-        "circuits": "迴路"
+        "circuits": "迴路",
+        "transformer-type": "變壓器類型"
     },
     "nav": {
         "about": "關於",
@@ -190,9 +196,12 @@
         "water": "水處理",
         "petroleum": "油氣",
         "telecoms": "電信",
-        "heatmap": "太陽能發電"
+        "heatmap": "太陽能發電",
+        "other-pipelines": "其他管線",
+        "nighttime-lights": "夜間照明"
     },
     "construction": "在建",
     "wikimedia-commons": "維基共享資源",
-    "more_info": "更多資訊"
+    "more_info": "更多資訊",
+    "disused": "廢棄"
 }
