@@ -20,7 +20,11 @@
             "steam": "Para",
             "wastewater": "Ścieki",
             "oil": "Olej",
-            "gas": "Gaz"
+            "gas": "Gaz",
+            "petroleum-intermediate": "Półprodukty naftowe",
+            "nitrogen": "Azot",
+            "oxygen": "Tlen",
+            "beer": "Piwo"
         },
         "power": {
             "transformer": "Transformator",
@@ -55,7 +59,9 @@
             "synchronous-condenser": "Kompensator synchroniczny",
             "filter": "Filtr",
             "reactor-shunt": "Dławik bocznikowy",
-            "reactor-series": "Dławik szeregowy"
+            "reactor-series": "Dławik szeregowy",
+            "current-transformer": "Przekładnik prądowy",
+            "potential-transformer": "Przekładnik napięciowy"
         },
         "telecoms": {
             "communication-line": "Linia telekomunikacyjna",
@@ -76,8 +82,15 @@
             "combustion": "Spalanie",
             "water-run-of-river": "Przepływ rzeki",
             "fission": "Rozszczepienie",
-            "fusion": "Fuzja"
-        }
+            "fusion": "Fuzja",
+            "gasification": "Zgazowanie",
+            "anaerobic-digestion": "Fermentacja metanowa"
+        },
+        "petroleum": {
+            "well": "Szyb naftowy"
+        },
+        "cabinet": "Skrzynka",
+        "other-pumping-station": "Inna stacja pomp"
     },
     "info": {
         "substation-type": "Rodzaj podstacji",
@@ -98,7 +111,8 @@
         "design": "Design",
         "circuits": "Obwody",
         "line-attachment": "Sposób montażu linii",
-        "line-management": "Przebieg linii"
+        "line-management": "Przebieg linii",
+        "transformer-type": "Rodzaj transformatora"
     },
     "units": {
         "kV": "kV",
@@ -173,11 +187,12 @@
         "power": "Elektroenergetyka",
         "heatmap": "Energia słoneczna",
         "telecoms": "Telekomunikacja",
-        "petroleum": "Nafta i gaz",
+        "petroleum": "Nafta i gaz ziemny",
         "water": "Woda",
         "labels": "Etykiety",
         "title": "Warstwy",
-        "nighttime-lights": "Światła nocne"
+        "nighttime-lights": "Światła nocne",
+        "other-pipelines": "Inne rury"
     },
     "construction": "w budowie",
     "disused": "nieużywany",
