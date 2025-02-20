@@ -169,7 +169,6 @@
     },
     "layers": {
         "power": "Listrik",
-        "heatmap": "Tenaga Surya",
         "telecoms": "Telekomunikasi",
         "petroleum": "Minyak & Gas",
         "water": "Air",

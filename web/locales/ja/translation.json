@@ -148,7 +148,6 @@
     "other": "その他",
     "layers": {
         "telecoms": "通信",
-        "heatmap": "太陽光発電",
         "power": "電力",
         "labels": "地名",
         "water": "水",

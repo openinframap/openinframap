@@ -185,7 +185,6 @@
     "wikimedia-commons": "Wikimedia Commons",
     "layers": {
         "power": "Elektroenergetyka",
-        "heatmap": "Energia słoneczna",
         "telecoms": "Telekomunikacja",
         "petroleum": "Nafta i gaz ziemny",
         "water": "Woda",

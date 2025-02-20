@@ -71,7 +71,6 @@
     "warning": "Opozorilo",
     "layers": {
         "power": "Elektrika",
-        "heatmap": "Sončne elektrarne",
         "telecoms": "Telekomunikacije",
         "petroleum": "Nafta in plin",
         "water": "Voda",

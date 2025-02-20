@@ -173,7 +173,6 @@
     "other": "Otros",
     "layers": {
         "power": "Electricidad",
-        "heatmap": "Generación solar",
         "water": "Agua",
         "petroleum": "Petróleo y gas",
         "labels": "Etiquetas",

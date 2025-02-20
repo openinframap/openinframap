@@ -183,7 +183,6 @@
     "warning": "Avvertenza",
     "layers": {
         "power": "Elettricità",
-        "heatmap": "Generazione solare",
         "petroleum": "Petrolio e gas",
         "water": "Acqua",
         "telecoms": "Telecomunicazioni",

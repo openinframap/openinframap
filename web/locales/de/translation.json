@@ -184,7 +184,6 @@
     },
     "layers": {
         "power": "Energie",
-        "heatmap": "Solare Erzeugung",
         "telecoms": "Telekommunikation",
         "petroleum": "Öl & Erdgas",
         "water": "Wasser",
