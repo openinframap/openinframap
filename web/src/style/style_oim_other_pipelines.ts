@@ -59,7 +59,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
     },
     {
       zorder: 500,
-      id: 'other_pipeline_label',
+      id: 'pipeline_label',
       type: 'symbol',
       source: 'other_pipeline',
       'source-layer': 'other_pipeline',
