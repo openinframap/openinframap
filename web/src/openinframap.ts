@@ -2,7 +2,7 @@ import maplibregl from 'maplibre-gl'
 import { t } from 'i18next'
 import { mount } from 'redom'
 
-import { LayerSwitcher, URLHash, Layer } from '@russss/maplibregl-layer-switcher'
+import { LayerSwitcher, URLHash, Layer, LayerGroup } from '@russss/maplibregl-layer-switcher'
 
 import EditButton from './edit-control.js'
 import InfoPopup from './infopopup.js'
@@ -19,9 +19,12 @@ import style_oim_telecoms from './style/style_oim_telecoms.js'
 import style_oim_petroleum from './style/style_oim_petroleum.js'
 import style_oim_water from './style/style_oim_water.js'
 import style_oim_other_pipelines from './style/style_oim_other_pipelines.js'
+import style_osmose from './style/style_osmose.js'
 import { LayerSpecificationWithZIndex } from './style/types.js'
 
 import { manifest } from 'virtual:render-svg'
+import { ValidationErrorPopup } from './validation-error-popup.js'
+import { ClickRouter } from './click-router.js'
 
 export default class OpenInfraMap {
   map?: maplibregl.Map
@@ -87,20 +90,29 @@ export default class OpenInfraMap {
 
     const layer_switcher = new LayerSwitcher(
       [
-        new Layer('N', t('layers.nighttime-lights', 'Nighttime Lights'), 'black_marble', false),
-        new Layer('P', t('layers.power', 'Power'), 'power_', true),
-        new Layer('S', t('layers.heatmap', 'Solar Generation'), 'heatmap_', false),
-        new Layer('T', t('layers.telecoms', 'Telecoms'), 'telecoms_', false),
-        new Layer('O', t('layers.petroleum', 'Oil & Gas'), 'petroleum_', false),
-        new Layer('I', t('layers.other-pipelines', 'Other Pipelines'), 'pipeline_', false),
-        new Layer('W', t('layers.water', 'Water'), 'water_', false),
-        new Layer('L', t('layers.labels', 'Labels'), 'place_', true)
+        new LayerGroup(t('layers.background'), [
+          new Layer('N', t('layers.nighttime-lights'), 'black_marble', false),
+          new Layer('L', t('layers.labels'), 'place_', true)
+        ]),
+        new LayerGroup(t('layers.heatmaps'), [
+          new Layer('S', t('layers.solar-generation'), 'heatmap_', false)
+        ]),
+        new LayerGroup(t('layers.infrastructure'), [
+          new Layer('P', t('layers.power'), 'power_', true),
+          new Layer('T', t('layers.telecoms'), 'telecoms_', false),
+          new Layer('O', t('layers.petroleum'), 'petroleum_', false),
+          new Layer('I', t('layers.other-pipelines'), 'pipeline_', false),
+          new Layer('W', t('layers.water'), 'water_', false)
+        ]),
+        new LayerGroup(t('layers.validation'), [
+          new Layer('E', t('layers.power'), 'osmose_errors_power', false)
+        ])
       ],
       t('layers.title', 'Layers')
     )
     const url_hash = new URLHash(layer_switcher)
 
-    map_style.layers = style_base.concat(oim_layers, style_labels())
+    map_style.layers = style_base.concat(oim_layers, ...style_osmose(), style_labels())
 
     layer_switcher.setInitialVisibility(map_style)
 
@@ -114,6 +126,8 @@ export default class OpenInfraMap {
         localIdeographFontFamily: "'Apple LiSung', 'Noto Sans', 'Noto Sans CJK SC', sans-serif"
       })
     )
+
+    const clickRouter = new ClickRouter(map, map_style.layers)
 
     const icon_ratio = Math.min(Math.round(window.devicePixelRatio), 2)
     const icons = manifest[icon_ratio.toString()]
@@ -153,8 +167,10 @@ export default class OpenInfraMap {
     new InfoPopup(
       oim_layers.map((layer: { [x: string]: any }) => layer['id']),
       6
-    ).add(map)
+    ).add(map, clickRouter)
+    new ValidationErrorPopup(map, clickRouter)
 
+    clickRouter.register()
     this.map = map
   }
 }

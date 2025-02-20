@@ -1,12 +1,13 @@
 import './infopopup.css'
 
 import i18next, { t } from 'i18next'
-import maplibregl, { MapGeoJSONFeature, MapMouseEvent, Popup } from 'maplibre-gl'
+import maplibregl, { LngLat, MapGeoJSONFeature, Popup } from 'maplibre-gl'
 import { titleCase } from 'title-case'
 import { local_name_tags } from './l10n.ts'
 import friendlyNames from './friendlynames.ts'
 import friendlyIcons from './friendlyicons.ts'
 import { el, mount, setChildren, RedomElement } from 'redom'
+import { ClickRouter } from './click-router.ts'
 
 const hidden_keys = [
   'osm_id',
@@ -205,32 +206,10 @@ class InfoPopup {
     this.friendlyNames = friendlyNames()
   }
 
-  add(map: maplibregl.Map) {
+  add(map: maplibregl.Map, clickRouter: ClickRouter) {
     this._map = map
 
-    map.on('click', this.layers, (e) => {
-      if (this._map.getZoom() > this.min_zoom) {
-        this.popup(e)
-      }
-    })
-
-    map.on('mouseenter', this.layers, () => {
-      if (this._map.getZoom() > this.min_zoom) {
-        map.getCanvas().style.cursor = 'pointer'
-      }
-    })
-
-    map.on('mouseleave', this.layers, () => {
-      if (this._map.getZoom() > this.min_zoom) {
-        map.getCanvas().style.cursor = ''
-      }
-    })
-
-    map.on('zoom', () => {
-      if (this._map.getZoom() <= this.min_zoom) {
-        this._map.getCanvas().style.cursor = ''
-      }
-    })
+    clickRouter.registerHandler(this.layers, (f, l) => this.popup(f, l))
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && this.popup_obj) {
@@ -415,23 +394,17 @@ class InfoPopup {
     return content
   }
 
-  popup(e: MapMouseEvent & { features?: MapGeoJSONFeature[] | undefined }) {
+  popup(feature: MapGeoJSONFeature, location: LngLat) {
     if (this.popup_obj && this.popup_obj.isOpen()) {
       this.popup_obj.remove()
     }
-    this._map.getCanvas().style.cursor = ''
-
-    if (e.features === undefined || e.features.length == 0) {
-      return
-    }
-    const feature = e.features[0]
 
     if (import.meta.env.DEV) {
-      console.info('Clicked feature on layer', feature.layer.id, 'at', e.lngLat, '\n', feature.properties)
+      console.info('Clicked feature on layer', feature.layer.id, 'at', location, '\n', feature.properties)
     }
 
     this.popup_obj = new maplibregl.Popup()
-      .setLngLat(e.lngLat)
+      .setLngLat(location)
       .setDOMContent(this.popupHtml(feature))
       .addTo(this._map)
       .addClassName('oim-info')
