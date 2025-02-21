@@ -11,7 +11,7 @@ dependencies = [
     "jinja2",
     "uvicorn",
     "asgi-sitemaps",
-    "aiohttp",
+    "httpx",
     "more-itertools",
     "async_lru",
 ]
@@ -25,4 +25,9 @@ select = ["E", "F"]
 ignore = []
 
 [dependency-groups]
-dev = ["mypy>=1.15.0", "ruff>=0.9.7"]
+dev = [
+    "mypy>=1.15.0",
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.3",
+    "ruff>=0.9.7",
+]

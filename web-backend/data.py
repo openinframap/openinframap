@@ -1,6 +1,7 @@
 import json
+import logging
 import re
-import aiohttp
+import httpx
 from async_lru import alru_cache
 from starlette.exceptions import HTTPException
 from config import database
@@ -8,6 +9,8 @@ from itertools import chain
 from more_itertools import windowed
 
 VOLTAGE_SCALE = [0, 10, 25, 52, 132, 220, 330, 550]
+
+logger = logging.getLogger(__name__)
 
 
 async def get_countries():
@@ -116,18 +119,19 @@ async def get_wikidata(wikidata_id):
     if not re.match(r"^Q[0-9]+$", wikidata_id):
         return None
 
-    async with aiohttp.ClientSession() as session:
-        async with session.get(
-            f"https://www.wikidata.org/entity/{wikidata_id}.json"
-        ) as resp:
-            if resp.status != 200:
-                raise HTTPException(503, "Error while fetching wikidata")
-            data = await resp.json()
+    async with httpx.AsyncClient() as client:
+        resp = await client.get(
+            f"https://www.wikidata.org/entity/{wikidata_id}.json", follow_redirects=True
+        )
+        if resp.status_code != 200:
+            logger.error("Error while fetching wikidata: %s", resp.text)
+            raise HTTPException(503, "Error while fetching wikidata")
+        data = resp.json()
 
-            # ID may have changed if it redirects to another. Fetch the first
-            # (hopefully only) ID in the list.
-            wikidata_id = list(data["entities"].keys())[0]
-            return data["entities"][wikidata_id]
+        # ID may have changed if it redirects to another. Fetch the first
+        # (hopefully only) ID in the list.
+        wikidata_id = list(data["entities"].keys())[0]
+        return data["entities"][wikidata_id]
 
 
 @alru_cache(maxsize=1000)
@@ -137,9 +141,9 @@ async def get_commons_thumbnail(filename, width=300):
         f"action=query&titles=Image:{filename}&prop=imageinfo"
         f"&iiprop=url&iiurlwidth={width}&format=json"
     )
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
-            if resp.status != 200:
-                raise HTTPException(503, "Error while fetching wikimedia commons image")
-            data = await resp.json()
-            return list(data["query"]["pages"].values())[0]
+    async with httpx.AsyncClient() as client:
+        resp = await client.get(url, follow_redirects=True)
+        if resp.status_code != 200:
+            raise HTTPException(503, "Error while fetching wikimedia commons image")
+        data = resp.json()
+        return list(data["query"]["pages"].values())[0]
