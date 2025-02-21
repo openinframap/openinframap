@@ -1,30 +1,20 @@
-[tool.poetry]
+[project]
 name = "oim-stats-server"
 version = "0.1.0"
 description = ""
-authors = ["Russ Garrett <russ@garrett.co.uk>"]
-package-mode = false
-
-[tool.poetry.dependencies]
-python = ">=3.10"
-starlette = "^0.41.0"
-databases = "^0.9.0"
-asyncpg = "^0.29.0"
-aiofiles = "^24.1.0"
-jinja2 = "^3.1.4"
-uvicorn = "^0.30.6"
-asgi-sitemaps = "^1.0.0"
-aiohttp = "^3.8.3"
-more-itertools = "^10.3.0"
-async_lru = "^2.0.4"
-
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.5.5"
-mypy = "^1.11.1"
-
-[build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires-python = ">=3.10"
+dependencies = [
+    "starlette",
+    "databases",
+    "asyncpg",
+    "aiofiles",
+    "jinja2",
+    "uvicorn",
+    "asgi-sitemaps",
+    "aiohttp",
+    "more-itertools",
+    "async_lru",
+]
 
 [tool.ruff]
 line-length = 110
@@ -33,3 +23,9 @@ target-version = "py312"
 [tool.ruff.lint]
 select = ["E", "F"]
 ignore = []
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "ruff>=0.9.7",
+]

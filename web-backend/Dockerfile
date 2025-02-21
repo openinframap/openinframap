@@ -1,9 +1,8 @@
-FROM python:3.12-slim
+FROM ghcr.io/astral-sh/uv:debian-slim
 
-RUN pip3 install poetry
 WORKDIR /app
 COPY . /app
-RUN poetry install
+RUN uv sync --no-dev
 
 EXPOSE 80
-ENTRYPOINT poetry run uvicorn main:app --host 0.0.0.0 --port 80 --proxy-headers --forwarded-allow-ips='*'
+ENTRYPOINT uv run uvicorn main:app --host 0.0.0.0 --port 80 --proxy-headers --forwarded-allow-ips='*'

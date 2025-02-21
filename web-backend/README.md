@@ -9,6 +9,6 @@ This app needs the `DATABASE_URL` defined with the details of the OpenInfraMap d
 You can define this in a `.env` file in this directory, which is useful for development.
 
 ## Development
+You'll need [uv](https://docs.astral.sh/uv/) installed.
 
-	poetry install
-	poetry run uvicorn main:app --reload
+	uv run uvicorn main:app --reload
