@@ -1,3 +1,10 @@
+-- Indexes for typeahead search
+CREATE INDEX CONCURRENTLY osm_power_substation_name ON osm_power_substation(substr(lower(tags->'name'), 1, 20) text_pattern_ops);
+CREATE INDEX CONCURRENTLY power_substation_relation_name ON power_substation_relation(substr(lower(name), 1, 20) text_pattern_ops);
+
+CREATE INDEX CONCURRENTLY osm_power_plant_name ON osm_power_plant(substr(lower(tags->'name'), 1, 20) text_pattern_ops);
+CREATE INDEX CONCURRENTLY power_plant_relation_name ON power_plant_relation(substr(lower(name), 1, 20) text_pattern_ops);
+
 CREATE MATERIALIZED VIEW power_substation_relation AS
     SELECT rel.osm_id, ST_ConvexHull(ST_Union(mem.geometry))::geometry(Geometry,3857) AS geometry, rel.tags -> 'name' AS name,
         combine_voltage(rel.voltage, voltage_agg(mem.tags -> 'voltage')) AS voltage,

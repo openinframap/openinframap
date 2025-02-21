@@ -2,7 +2,7 @@
 name = "oim-stats-server"
 version = "0.1.0"
 description = ""
-requires-python = ">=3.10"
+requires-python = ">=3.13,<3.14"
 dependencies = [
     "starlette",
     "databases",
@@ -18,14 +18,11 @@ dependencies = [
 
 [tool.ruff]
 line-length = 110
-target-version = "py312"
+target-version = "py313"
 
 [tool.ruff.lint]
 select = ["E", "F"]
 ignore = []
 
 [dependency-groups]
-dev = [
-    "mypy>=1.15.0",
-    "ruff>=0.9.7",
-]
+dev = ["mypy>=1.15.0", "ruff>=0.9.7"]

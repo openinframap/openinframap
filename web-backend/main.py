@@ -289,3 +289,4 @@ async def plant_detail(request, country):
 
 
 import wikidata  # noqa
+import search  # noqa
