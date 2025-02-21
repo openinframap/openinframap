@@ -27,6 +27,7 @@ jobs:
         run: |
           cd web-backend
           uv run ruff check
+          uv run mypy .
       
   build:
     needs: test
