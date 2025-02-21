@@ -26,7 +26,7 @@ jobs:
       - name: Run tests
         run: |
           cd web-backend
-          poetry run ruff check
+          uv run ruff check
       
   build:
     needs: test
