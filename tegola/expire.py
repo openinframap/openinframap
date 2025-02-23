@@ -7,9 +7,11 @@ from pathlib import Path
 import subprocess
 import os
 import click
+import time
 from inotify.adapters import InotifyTree
 import logging
 from datetime import datetime
+import psycopg
 
 log = logging.getLogger(__name__)
 
@@ -62,6 +64,21 @@ def clean_empty_dirs(expire_dir: Path, dry_run: bool):
                 path.rmdir()
 
 
+def refresh_matviews():
+    db_dsn = os.environ.get("DB_DSN")
+    if not db_dsn:
+        log.warning("DB_DSN not set, skipping materialized view refresh")
+        return
+
+    with psycopg.connect(db_dsn) as conn:
+        with conn.cursor() as cur:
+            cur.execute("REFRESH MATERIALIZED VIEW CONCURRENTLY power_plant_relation")
+            cur.execute(
+                "REFRESH MATERIALIZED VIEW CONCURRENTLY power_substation_relation"
+            )
+            conn.commit()
+
+
 @click.command()
 @click.argument("expire_dir")
 @click.option("--tegola-config", default="/etc/tegola/config.toml")
@@ -80,8 +97,17 @@ def main(expire_dir, tegola_config, dry_run):
             continue
 
         log.info("Received IN_MOVED_TO for tile file %s", filename)
+        start = time.monotonic_ns()
+        refresh_matviews()
+        log.info(
+            "Refreshed materialized views in %.2f ms",
+            (time.monotonic_ns() - start) / 1e6,
+        )
         # Still look for every file in the path in case we've missed any inotify events.
         expire_path(expire_dir, tegola_config, dry_run)
+        log.info(
+            "Finished handling expire in %.2f ms", (time.monotonic_ns() - start) / 1e6
+        )
 
         # Cleanup empty dirs on every 10th event
         if event_count % 10 == 0:
