@@ -35,7 +35,12 @@ def expire(tile_list: Path, tegola_config: str, dry_run: bool):
         log.info("Would run: %s", " ".join(cmd))
         return
 
-    subprocess.run(cmd)
+    result = subprocess.run(cmd, capture_output=True)
+    if result.returncode != 0:
+        log.error("Failed to expire tile list (%s): %s", tile_list, result.stderr)
+        return
+
+    log.info("Expired tile list %s", tile_list)
     os.remove(tile_list)
 
 
