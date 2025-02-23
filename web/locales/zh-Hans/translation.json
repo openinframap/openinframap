@@ -193,7 +193,13 @@
         "petroleum": "油气",
         "title": "图层",
         "other-pipelines": "其他管线",
-        "nighttime-lights": "夜间照明"
+        "nighttime-lights": "夜间照明",
+        "infrastructure": "基础设施",
+        "osmose-power": "Osmose (电力)",
+        "validation": "检验",
+        "solar-generation": "太阳能发电",
+        "background": "背景",
+        "heatmaps": "热图"
     },
     "more_info": "更多资讯",
     "wikipedia": "维基百科",
