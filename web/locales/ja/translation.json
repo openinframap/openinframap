@@ -151,7 +151,11 @@
         "power": "電力",
         "labels": "地名",
         "water": "水",
-        "nighttime-lights": "夜間照明"
+        "nighttime-lights": "夜間照明",
+        "solar-generation": "太陽光発電",
+        "validation": "検証",
+        "background": "背景",
+        "osmose-power": "Osmose (電力)"
     },
     "construction": "工事中",
     "wikipedia": "Wikipedia",
