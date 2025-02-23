@@ -197,7 +197,13 @@
         "petroleum": "油氣",
         "telecoms": "電信",
         "other-pipelines": "其他管線",
-        "nighttime-lights": "夜間照明"
+        "nighttime-lights": "夜間照明",
+        "background": "背景",
+        "infrastructure": "基礎設施",
+        "osmose-power": "Osmose (電力)",
+        "solar-generation": "太陽能發電",
+        "validation": "檢驗",
+        "heatmaps": "熱圖"
     },
     "construction": "在建",
     "wikimedia-commons": "維基共享資源",
