@@ -1,46 +1,18 @@
-.oim-info {
-  font-size: 0.9rem;
-  max-width: min(350px, 70vw) !important;
+.oim-popup-info .oim-popup-header {
+  background: var(--oim-popup-header-info-background);
 }
 
-.oim-info .maplibregl-popup-content {
-  background-color: #fdfdfd;
-  padding: 0 0.5em 0.5em 0.5em;
-}
-
-.oim-info-content > * + * {
-  margin-block-start: 0.5em;
-}
-
-.oim-info .nameContainer {
-  border-radius: 4px 4px 0 0;
-  background-color: #d5ecec;
-  padding: 0.5em 1.3em 0.5em 0.5em;
-  margin: 0 -0.5em 0.5em -0.5em;
-}
-
-.oim-info h3 {
-  font-size: 1.3em;
-  margin: 0;
-}
-
-.oim-info h3 img {
+.oim-popup-info h3 img {
   max-height: 16px;
   position: relative;
   top: 1px;
   margin-right: 0.3em;
 }
 
-.oim-info h4 {
-  font-weight: normal;
-  color: rgb(80, 80, 80);
-  margin: 0.1em 0 0 0;
-}
-
 table.item_info {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #ddd;
+  border: 1px solid var(--oim-light-grey);
   border-radius: 4px;
 }
 
@@ -65,25 +37,10 @@ table.item_info tr:nth-child(odd) {
 
 .wikidata_image {
   display: block;
-  border: 2px solid #ddd;
+  border: 1px solid var(--oim-grey);
   margin-left: auto;
   margin-right: auto;
   max-height: 25vh;
-}
-
-.oim-info-button {
-  display: block;
-  height: 1.4em;
-  margin: 0.2em;
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  background-color: #eee;
-  text-decoration: none;
-  border: 1px solid #ccc;
-}
-
-.oim-info-button:hover {
-  background-color: #ddd;
 }
 
 .oim-info-footer {
@@ -117,12 +74,8 @@ div.ext_link {
 }
 
 div.ext_link:hover {
-  background-color: #eee;
-  border: 1px solid #ddd;
-}
-
-span.voltages {
-  font-size: 1.05em;
+  background-color: var(--oim-light-grey);
+  border: 1px solid var(--oim-grey);
 }
 
 div.wikidata_link {

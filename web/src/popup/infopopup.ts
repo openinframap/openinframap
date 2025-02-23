@@ -3,11 +3,11 @@ import './infopopup.css'
 import i18next, { t } from 'i18next'
 import maplibregl, { LngLat, MapGeoJSONFeature, Popup } from 'maplibre-gl'
 import { titleCase } from 'title-case'
-import { local_name_tags } from './l10n.ts'
-import friendlyNames from './friendlynames.ts'
-import friendlyIcons from './friendlyicons.ts'
+import { local_name_tags } from '../l10n.ts'
+import friendlyNames from '../friendlynames.ts'
+import friendlyIcons from '../friendlyicons.ts'
 import { el, mount, setChildren, RedomElement } from 'redom'
-import { ClickRouter } from './click-router.ts'
+import { ClickRouter } from '../click-router.ts'
 
 const hidden_keys = [
   'osm_id',
@@ -312,7 +312,7 @@ class InfoPopup {
       feature_title = el('h3', el('img', { src: feature_iconpath, height: 35 }), title_text)
     }
 
-    const container = el('div.nameContainer', feature_title)
+    const container = el('div.oim-popup-header', feature_title)
 
     // If we're showing a translated name, also show the name tag
     if (feature.properties.name && title_text != feature.properties.name) {
@@ -347,7 +347,7 @@ class InfoPopup {
       .filter((x) => x !== null) as HTMLTableRowElement[]
     setChildren(attrs_table, renderedProperties)
 
-    const content = el('div.oim-info-content', this.nameTags(feature))
+    const content = el('div.oim-popup-content', this.nameTags(feature))
 
     if (feature.properties['voltage'] || feature.properties['voltage_primary']) {
       mount(content, this.voltageField(feature))
@@ -385,7 +385,7 @@ class InfoPopup {
     if (feature.layer.id.startsWith('power_plant')) {
       mount(
         footer,
-        el('a.oim-info-button', t('more_info', 'More info'), {
+        el('a.oim-button', t('more_info', 'More info'), {
           href: '/stats/object/plant/' + feature.properties['osm_id'],
           target: '_blank'
         })
@@ -407,7 +407,8 @@ class InfoPopup {
       .setLngLat(location)
       .setDOMContent(this.popupHtml(feature))
       .addTo(this._map)
-      .addClassName('oim-info')
+      .addClassName('oim-popup')
+      .addClassName('oim-popup-info')
   }
 
   fetch_wikidata(id: string, imageContainer: RedomElement, linksContainer: RedomElement) {

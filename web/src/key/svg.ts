@@ -10,7 +10,7 @@ function getLayer(layers: { [key: string]: any }[], id: string) {
 }
 
 export function svgLine(colour: string, thickness: number, dash = '') {
-  const height = 15
+  const height = 16
   const width = 30
 
   const line = svg('line', {

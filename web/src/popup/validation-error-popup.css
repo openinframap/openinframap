@@ -1,0 +1,46 @@
+.oim-popup-validation-error .oim-popup-header {
+  background: var(--oim-popup-header-validation-background);
+}
+
+ul.oim-elements {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+ul.oim-elements li {
+  font-family: var(--oim-font-family-monospace);
+  list-style-type: none;
+  padding: 2px 4px;
+  margin: 3px 0px;
+  border-radius: var(--oim-radius-small);
+}
+
+ul.oim-elements li.add::before {
+  content: '+';
+  font-weight: bold;
+  color: #00a000;
+  padding-inline-start: 0.3em;
+  padding-inline-end: 0.3em;
+}
+
+ul.oim-elements li.add {
+  background: #f3fff3;
+}
+
+ul.oim-elements span.key {
+  font-weight: bold;
+}
+
+ul.oim-elements span.key::after {
+  content: '=';
+  font-weight: normal;
+  padding-inline-start: 0.3em;
+  padding-inline-end: 0.3em;
+}
+
+.oim-validation-actions {
+  display: flex;
+  justify-content: end;
+  margin-top: 1em;
+}

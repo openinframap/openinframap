@@ -6,18 +6,48 @@
   --aa-primary-color-rgb: 100, 100, 100 !important;
   --aa-input-background-color-rgb: 250, 250, 250 !important;
   --aa-input-background-color-alpha: 0.8 !important;
+
+  --oim-font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --oim-font-family-monospace: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono',
+    'Oxygen Mono', 'Ubuntu Mono', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Consolas', 'Courier New',
+    monospace;
+
+  --oim-content-background: #fcfcfc;
+  --oim-text-color: #333;
+  --oim-text-color-light: #666;
+  --oim-text-color-dark: #000;
+
+  --oim-light-grey: #f3f3f3;
+  --oim-grey: #ddd;
+  --oim-dark-grey: #888;
+
+  --oim-radius-large: 6px;
+  --oim-radius-small: 3px;
+
+  --oim-popup-header-info-background: #e0f6f6;
+  --oim-popup-header-validation-background: #f9e2e4;
 }
 
-html {
+* {
+  box-sizing: border-box;
+  color: inherit;
+}
+
+html,
+#map {
   width: 100%;
   height: 100%;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #333;
+  font-family: var(--oim-font-family);
+  font-size: 15px;
+  color: var(--oim-text-color);
+}
+
+p {
+  text-wrap: pretty;
 }
 
 body,
-#container,
-#map {
+#container {
   width: 100%;
   height: 100%;
   margin: 0px;
@@ -55,14 +85,41 @@ nav ul li {
 
 nav ul li + li::before {
   content: '|';
-  color: #666;
+  color: var(--oim-text-color-light);
   margin-right: 5px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: bold;
 }
 
 h1 {
   display: inline;
   margin: 0px;
-  font-size: 18px;
+  font-size: 1.4rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+}
+
+code {
+  font-family: var(--oim-font-family-monospace);
+}
+
+th {
+  font-weight: bold;
+}
+
+.maplibregl-ctrl-group {
+  background-color: var(--oim-content-background);
 }
 
 .maplibregl-ctrl-top-left {
@@ -76,6 +133,10 @@ h1 {
 
 .maplibregl-ctrl-top-right .maplibregl-ctrl {
   margin: 0.5rem 0.5rem 0 0;
+}
+
+.maplibregl-ctrl-attrib {
+  font-size: 0.8em;
 }
 
 .maplibregl-ctrl-attrib.maplibregl-compact {
@@ -94,18 +155,60 @@ h1 {
 }
 
 a {
-  color: #333;
+  color: var(--oim-text-color);
 }
 
 a:hover {
-  color: #000;
-}
-
-.maplibregl-popup-content {
-  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
+  color: var(--oim-text-color-dark);
 }
 
 canvas:focus {
   /* Remove unnecessary focus border */
   outline: none;
+}
+
+.oim-button {
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-block;
+  font-size: inherit;
+  margin: 0.2em;
+  padding: 0.2em 0.4em;
+  border-radius: var(--oim-radius-large);
+  background-color: var(--oim-light-grey);
+  text-decoration: none;
+  border: 1px solid var(--oim-grey);
+}
+
+.oim-button:hover {
+  background-color: #ddd;
+}
+
+.layer-switcher-list {
+  min-width: 10vw !important;
+  background-color: var(--oim-content-background) !important;
+}
+
+.layer-switcher-list ul {
+  font-size: 1.1rem !important;
+}
+
+.layer-switcher-list label {
+  padding: 1px 2px;
+  border-radius: var(--oim-radius-small);
+}
+
+.layer-switcher-list label:hover {
+  background-color: var(--oim-light-grey);
+}
+
+.layer-switcher-list h3 {
+  background-color: var(--oim-light-grey);
+  margin: 0 -8px 0 -8px !important;
+  border-radius: var(--oim-radius-large) !important;
+  padding: 0.3em 8px 0.3em 8px;
+}
+
+.layer-switcher-list h4 {
+  border-bottom: 1px solid var(--oim-light-grey) !important;
 }

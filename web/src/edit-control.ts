@@ -1,10 +1,11 @@
 import { t } from 'i18next'
 import { IControl } from 'maplibre-gl'
 import { el } from 'redom'
+import { OSMRemoteControl } from './remote-control'
 import './edit-control.css'
 
 class EditControl implements IControl {
-  _map: any
+  _map?: maplibregl.Map
   _control!: HTMLDivElement
   _menu!: HTMLUListElement
 
@@ -49,6 +50,7 @@ class EditControl implements IControl {
   }
 
   doEdit(setEditor?: string) {
+    if (!this._map) return
     let editor = setEditor || localStorage.getItem('editor')
     if (!editor) {
       editor = 'id'
@@ -60,15 +62,23 @@ class EditControl implements IControl {
     if (editor === 'id') {
       window.open(this._getIdURL(), '_blank')
     } else {
-      const url = this._getRemoteURL()
-      fetch(url).catch((error) => {
-        alert(
-          t(
-            'edit.error',
-            "Unable to load remote editor - make sure it's running and has remote control enabled.\nError: "
-          ) + error
-        )
-      })
+      const remote = new OSMRemoteControl()
+      const bounds = this._map.getBounds()
+      remote
+        .loadAndZoom({
+          minLon: bounds.getWest(),
+          minLat: bounds.getSouth(),
+          maxLon: bounds.getEast(),
+          maxLat: bounds.getNorth()
+        })
+        .catch((error) => {
+          alert(
+            t(
+              'edit.error',
+              "Unable to load remote editor - make sure it's running and has remote control enabled.\nError: "
+            ) + error
+          )
+        })
     }
   }
 
@@ -78,6 +88,7 @@ class EditControl implements IControl {
   }
 
   updateVisibility() {
+    if (!this._map) return
     if (this._map.getZoom() > 14) {
       this._control.classList.add('active')
     } else {
@@ -85,23 +96,8 @@ class EditControl implements IControl {
     }
   }
 
-  _getRemoteURL() {
-    const url = 'http://127.0.0.1:8111/load_and_zoom'
-    const bounds = this._map.getBounds()
-    return (
-      url +
-      '?left=' +
-      bounds.getWest() +
-      '&right=' +
-      bounds.getEast() +
-      '&top=' +
-      bounds.getNorth() +
-      '&bottom=' +
-      bounds.getSouth()
-    )
-  }
-
   _getIdURL() {
+    if (!this._map) return ''
     const zoom = Math.round(this._map.getZoom())
     const center = this._map.getCenter()
     return `https://www.openstreetmap.org/edit?editor=id#map=${zoom}/${center.lat.toFixed(5)}/${center.lng.toFixed(5)}`

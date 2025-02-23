@@ -16,14 +16,28 @@ export default function layers(): LayerSpecificationWithZIndex[] {
           [17, 15]
         ]),
         'circle-color': '#ff0000',
-        'circle-opacity': interpolate(zoom, [
-          [11, 0],
-          [17, 0.6]
-        ]),
+        'circle-opacity': 0.2,
         'circle-stroke-color': '#dd0000',
         'circle-stroke-width': interpolate(zoom, [
           [11, 0.5],
-          [17, 3]
+          [17, 1]
+        ])
+      }
+    },
+    {
+      id: 'osmose_errors_power_symbol',
+      zorder: 701,
+      minzoom: 12.5,
+      source: 'osmose_errors_power',
+      'source-layer': 'issues',
+      type: 'symbol',
+      layout: {
+        'icon-image': 'validation_error',
+        'icon-anchor': 'bottom',
+        'icon-allow-overlap': true,
+        'icon-size': interpolate(zoom, [
+          [12, 0.2],
+          [17, 1]
         ])
       }
     }

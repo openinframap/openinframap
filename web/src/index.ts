@@ -1,4 +1,5 @@
 import './index.css'
+import './popup/popup.css'
 import i18next from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import resources from 'virtual:i18next-loader'

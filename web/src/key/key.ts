@@ -62,18 +62,19 @@ class KeyControl implements IControl {
       ariaLabel: t('key.name')
     })
 
-    this._container = el('div', { class: 'maplibregl-ctrl oim-key-panel' })
+    this._container = el('div', { class: 'oim-key-panel' })
 
     this.populate()
+    mount(document.body, this._container)
 
     this._control.onclick = () => {
-      this._container.style.display = 'block'
-      this._control.style.display = 'none'
+      const button_position = this._control.getBoundingClientRect()
+      this._container.style.top = button_position.top + 'px'
+      this._container.style.right = document.documentElement.clientWidth - button_position.right + 'px'
+      this._container.classList.add('visible')
     }
 
-    setTimeout(() => this.resize(), 100)
-    this._map.on('resize', () => this.resize())
-    return el('div', this._control, this._container, {
+    return el('div', this._control, {
       class: 'maplibregl-ctrl maplibregl-ctrl-group'
     })
   }
@@ -85,28 +86,11 @@ class KeyControl implements IControl {
     this._pane = undefined
   }
 
-  resize() {
-    if (!this._pane) {
-      return
-    }
-    // Set max-height of key depending on window style
-    const map_style = window.getComputedStyle(this._map!.getContainer())
-    let cont_style
-    if (this._control.style.display != 'none') {
-      cont_style = this._control.getBoundingClientRect()
-    } else {
-      cont_style = this._container.getBoundingClientRect()
-    }
-    const height = parseInt(map_style.height) - cont_style.top - 100 + 'px'
-    setStyle(this._pane, { 'max-height': height })
-  }
-
   header() {
-    const close_button = el('.oim-key-close', '×')
+    const close_button = el('button.oim-key-close', '×')
 
     close_button.onclick = () => {
-      this._container.style.display = 'none'
-      this._control.style.display = 'block'
+      this._container.classList.remove('visible')
     }
     return el('.oim-key-header', el('h2', t('key.name', 'Key')), close_button)
   }
@@ -114,7 +98,7 @@ class KeyControl implements IControl {
   async populate() {
     mount(this._container, this.header())
 
-    const pane = el('.oim-key-pane')
+    const pane = el('.oim-key-body')
     pane.appendChild(el('h3', t('key.power-lines', 'Power Lines')))
     mount(pane, await this.voltageTable())
     pane.appendChild(el('h3', t('key.power-plants', 'Power Plants')))
@@ -165,7 +149,7 @@ class KeyControl implements IControl {
   }
 
   async sprite(name: string, size = 25) {
-    const spriteDiv = el('img.oim-plant-sprite', {
+    const spriteDiv = el('img.oim-key-symbol', {
       src: manifest['svg'][name],
       height: size
     })

@@ -5,7 +5,7 @@ import { mount } from 'redom'
 import { LayerSwitcher, URLHash, Layer, LayerGroup } from '@russss/maplibregl-layer-switcher'
 
 import EditButton from './edit-control.js'
-import InfoPopup from './infopopup.js'
+import InfoPopup from './popup/infopopup.js'
 import KeyControl from './key/key.js'
 import WarningBox from './warning-box/warning-box.js'
 import OpenInfraMapGeocoder from './geocoder.js'
@@ -23,7 +23,7 @@ import style_osmose from './style/style_osmose.js'
 import { LayerSpecificationWithZIndex } from './style/types.js'
 
 import { manifest } from 'virtual:render-svg'
-import { ValidationErrorPopup } from './validation-error-popup.js'
+import { ValidationErrorPopup } from './popup/validation-error-popup.js'
 import { ClickRouter } from './click-router.js'
 
 export default class OpenInfraMap {
@@ -138,10 +138,6 @@ export default class OpenInfraMap {
       if (loadedIcons.has(e.id)) return
       loadedIcons.add(e.id)
       map.addImage(e.id, image.data, { pixelRatio: icon_ratio })
-    })
-
-    map.on('click', 'place_capital', (e) => {
-      console.log(e.features)
     })
 
     map.dragRotate.disable()

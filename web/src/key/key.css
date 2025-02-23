@@ -1,7 +1,8 @@
 .oim-key-control {
   min-height: 30px;
   min-width: 30px;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>') white;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>')
+    white;
   background-repeat: no-repeat;
   background-size: 20px 20px;
   background-position: center;
@@ -9,55 +10,27 @@
 
 .oim-key-panel {
   display: none;
+  position: absolute;
+  overflow: hidden;
+  border-radius: var(--oim-radius-large);
+  bottom: 30px;
+  background-color: var(--oim-content-background);
+  z-index: 1000;
   min-width: 220px;
   min-height: 300px;
-  margin: 0px 0px 8px 0px !important; 
+  margin: 0px 0px 8px 0px !important;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
-.oim-key-pane {
-  padding-left: 8px;
-  padding-right: 2px;
-  overflow-y: scroll;
-}
-
-.oim-key-pane h3 {
-  margin-top: 0;
-  margin-bottom: 3px;
-  border-bottom: 1px #eee solid;
-  clear: both;
-}
-
-.oim-key-pane table {
-  width: 100%;
-  padding: 0px;
-}
-.oim-key-pane table tr {
-  padding: 0px;
-}
-
-
-.oim-key-pane table td {
-  vertical-align: center;
-}
-
-.oim-key-pane table tr td:nth-child(2) {
-  width: 30px;
-  text-align: center;
-}
-
-
-.oim-plant-sprite {
-  margin-left: auto;
-  margin-right: auto;
-  vertical-align: middle;
+.oim-key-panel.visible {
+  display: block;
 }
 
 .oim-key-header {
-  height: 20px;
-  padding-bottom: 5px;
-  padding-top: 2px;
+  height: 2.2em;
+  padding-top: 0.3em;
   padding-left: 8px;
-  background-color: #eee;
+  background-color: var(--oim-light-grey);
 }
 
 .oim-key-header h2 {
@@ -66,9 +39,61 @@
 }
 
 .oim-key-close {
-  padding-right: 14px;
-  float: right;
+  background-color: var(--oim-light-grey);
+  width: 29px;
+  height: 29px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 0;
   font-weight: bold;
-  font-size: 1.6em;
+  font-size: 1.5em;
   cursor: pointer;
+}
+
+.oim-key-close:hover {
+  background-color: var(--oim-grey);
+}
+
+.oim-key-body {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: calc(100% - 2.2em);
+  padding: 0.5em 0.2em 0.5em 0.5em;
+  overflow-y: scroll;
+}
+
+.oim-key-body h3 {
+  margin-top: 0;
+  margin-bottom: 3px;
+  border-bottom: 1px var(--oim-light-grey) solid;
+  clear: both;
+}
+
+.oim-key-body table {
+  width: 100%;
+  padding: 0px;
+  margin-bottom: 0.5em;
+}
+
+.oim-key-body table tr {
+  padding: 0px;
+}
+
+.oim-key-body table td {
+  height: 26px;
+}
+
+.oim-key-body table tr td:nth-child(2) {
+  width: 30px;
+  padding: 0 0 0 1em;
+  text-align: center;
+}
+
+.oim-key-body svg,
+.oim-key-body img {
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;
 }
