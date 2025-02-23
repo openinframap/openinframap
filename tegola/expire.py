@@ -65,9 +65,9 @@ def clean_empty_dirs(expire_dir: Path, dry_run: bool):
 
 
 def refresh_matviews():
-    db_dsn = os.environ.get("DB_DSN")
+    db_dsn = os.environ.get("DB_URI")
     if not db_dsn:
-        log.warning("DB_DSN not set, skipping materialized view refresh")
+        log.warning("DB_URI not set, skipping materialized view refresh")
         return
 
     with psycopg.connect(db_dsn) as conn:
