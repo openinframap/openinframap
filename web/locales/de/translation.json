@@ -190,7 +190,13 @@
         "labels": "Bezeichnungen",
         "title": "Ebenen",
         "nighttime-lights": "Nächtliche Lichter",
-        "other-pipelines": "Andere Pipelines"
+        "other-pipelines": "Andere Pipelines",
+        "background": "Hintergrund",
+        "infrastructure": "Infrastruktur",
+        "validation": "Prüfung",
+        "solar-generation": "Sonnenerzeugung",
+        "osmose-power": "Osmose (Energie)",
+        "heatmaps": "Heatmaps"
     },
     "construction": "im Bau",
     "location": {
