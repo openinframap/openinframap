@@ -30,6 +30,8 @@ def expire(tile_list: Path, tegola_config: str, dry_run: bool):
         "17",
         "--min-zoom",
         "7",
+        "--log-level",
+        "WARN",
     ]
     if dry_run:
         log.info("Would run: %s", " ".join(cmd))
@@ -121,5 +123,7 @@ def main(expire_dir, tegola_config, dry_run):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(
+        level=logging.INFO, format="%(asctime)s [%(name)s:%(levelname)s] %(message)s"
+    )
     main()
