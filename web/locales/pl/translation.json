@@ -191,7 +191,12 @@
         "labels": "Etykiety",
         "title": "Warstwy",
         "nighttime-lights": "Światła nocne",
-        "other-pipelines": "Inne rury"
+        "other-pipelines": "Inne rury",
+        "infrastructure": "Infrastruktura",
+        "heatmaps": "Mapy ciepła",
+        "validation": "Walidacja danych",
+        "background": "Tło",
+        "osmose-power": "Osmose (Elektroenergetyka)"
     },
     "construction": "w budowie",
     "disused": "nieużywany",
