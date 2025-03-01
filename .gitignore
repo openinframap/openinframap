@@ -6,3 +6,4 @@ __pycache__
 .mypy_cache
 web/dist
 .DS_Store
+.vscode
