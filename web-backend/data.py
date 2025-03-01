@@ -1,6 +1,7 @@
 import json
 import logging
 import re
+from typing import Optional
 import httpx
 from async_lru import alru_cache
 from starlette.exceptions import HTTPException
@@ -114,7 +115,7 @@ async def stats_power_line(country=None):
 
 
 @alru_cache(maxsize=1000)
-async def get_wikidata(wikidata_id: str, client: httpx.AsyncClient) -> dict:
+async def get_wikidata(wikidata_id: str, client: httpx.AsyncClient) -> Optional[dict]:
     wikidata_id = wikidata_id.upper()
     if not re.match(r"^Q[0-9]+$", wikidata_id):
         return None
