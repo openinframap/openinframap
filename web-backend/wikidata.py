@@ -11,9 +11,10 @@ from main import app
 @cache_for(86400)
 async def wikidata(request):
     wikidata_id = request.path_params["wikidata_id"].upper()
+    http_client = request.state.http_client
 
     response = {}
-    data = await get_wikidata(wikidata_id)
+    data = await get_wikidata(wikidata_id, http_client)
     if data is None:
         raise HTTPException(404, "Wikidata item not found")
 
@@ -24,7 +25,7 @@ async def wikidata(request):
     ):
         response["image"] = data["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"]
         image_data = await get_commons_thumbnail(
-            data["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"]
+            data["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"], http_client
         )
 
         response["thumbnail"] = image_data["imageinfo"][0]["thumburl"]

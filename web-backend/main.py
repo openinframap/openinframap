@@ -1,3 +1,6 @@
+import contextlib
+from typing import AsyncIterator, TypedDict
+import httpx
 from starlette.responses import PlainTextResponse, RedirectResponse
 from starlette.applications import Starlette
 from starlette.templating import Jinja2Templates
@@ -37,10 +40,25 @@ templates.env.filters["country_name"] = country_name
 templates.env.globals["osm_link"] = osm_link
 
 
+class State(TypedDict):
+    http_client: httpx.AsyncClient
+
+
+@contextlib.asynccontextmanager
+async def lifespan(app: Starlette) -> AsyncIterator[State]:
+    await database.connect()
+    async with httpx.AsyncClient(
+        headers={
+            "User-Agent": "Open Infrastructure Map backend (https://openinframap.org)"
+        }
+    ) as client:
+        yield {"http_client": client}
+    await database.disconnect()
+
+
 app = Starlette(
     debug=DEBUG,
-    on_startup=[database.connect],
-    on_shutdown=[database.disconnect],
+    lifespan=lifespan,
     routes=[
         Mount("/static", app=StaticFiles(directory="static"), name="static"),
         Route("/sitemap.xml", sitemap),
@@ -246,6 +264,8 @@ async def plant_detail(request, country):
     except ValueError:
         raise HTTPException(404, "Invalid plant ID")
 
+    http_client = request.state.http_client
+
     plant = await get_plant(plant_id, country["gid"])
     if plant is None:
         raise HTTPException(404, "Nonexistent power plant")
@@ -253,7 +273,7 @@ async def plant_detail(request, country):
     generator_summary = await get_plant_generator_summary(plant_id)
 
     if "wikidata" in plant["tags"]:
-        wd = await get_wikidata(plant["tags"]["wikidata"])
+        wd = await get_wikidata(plant["tags"]["wikidata"], http_client)
     else:
         wd = None
 
@@ -264,7 +284,7 @@ async def plant_detail(request, country):
         and wd["claims"]["P18"][0]["mainsnak"]["datatype"] == "commonsMedia"
     ):
         image_data = await get_commons_thumbnail(
-            wd["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"], 400
+            wd["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"], http_client, 400
         )
 
     ref_tags = []
