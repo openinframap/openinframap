@@ -1,6 +1,6 @@
 """ Endpoints to proxy WikiData requests for info popups on the map """
 
-from typing import Optional
+from typing import Any, Optional
 import httpx
 from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse, Response
@@ -32,7 +32,7 @@ async def wikidata_json(
     if data is None:
         return None
 
-    response = {}
+    response: dict[str, Any] = {"part_of": []}
     response["labels"] = {
         label["language"]: label["value"] for label in data["labels"].values()
     }
@@ -56,12 +56,11 @@ async def wikidata_json(
         ]
 
     if "P361" in data["claims"]:
-        response["part_of"] = []
         for claim in data["claims"]["P361"]:
-            response["part_of"].append(
-                await wikidata_json(
-                    claim["mainsnak"]["datavalue"]["value"]["id"], http_client
-                )
+            part_info = await wikidata_json(
+                claim["mainsnak"]["datavalue"]["value"]["id"], http_client
             )
+            if part_info is not None:
+                response["part_of"].append(part_info)
 
     return response

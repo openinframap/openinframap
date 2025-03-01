@@ -138,7 +138,7 @@ async def get_wikidata(wikidata_id: str, client: httpx.AsyncClient) -> Optional[
 @alru_cache(maxsize=1000)
 async def get_commons_thumbnail(
     filename: str, client: httpx.AsyncClient, width: int = 300
-) -> list:
+) -> dict:
     url = (
         "https://commons.wikimedia.org/w/api.php?"
         f"action=query&titles=Image:{filename}&prop=imageinfo"
