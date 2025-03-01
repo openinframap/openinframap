@@ -458,6 +458,17 @@ class InfoPopup {
           )
         }
 
+        if (data['gem_id']) {
+          mount(
+            linksContainer,
+            el('a', el('div.ext_link.gem_link'), {
+              href: `https://www.gem.wiki/${data['gem_id']}`,
+              target: '_blank',
+              title: 'Global Energy Monitor'
+            })
+          )
+        }
+
         mount(
           linksContainer,
           el('a', el('div.ext_link.wikidata_link'), {
