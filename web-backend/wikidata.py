@@ -1,4 +1,5 @@
 """ Endpoints to proxy WikiData requests for info popups on the map """
+
 from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse
 from data import get_wikidata, get_commons_thumbnail
@@ -9,7 +10,7 @@ from main import app
 @app.route("/wikidata/{wikidata_id}")
 @cache_for(86400)
 async def wikidata(request):
-    wikidata_id = request.path_params['wikidata_id'].upper()
+    wikidata_id = request.path_params["wikidata_id"].upper()
 
     response = {}
     data = await get_wikidata(wikidata_id)
@@ -27,6 +28,11 @@ async def wikidata(request):
         )
 
         response["thumbnail"] = image_data["imageinfo"][0]["thumburl"]
+
+    if "P13333" in data["claims"]:
+        response["gem_id"] = data["claims"]["P13333"][0]["mainsnak"]["datavalue"][
+            "value"
+        ]
 
     return JSONResponse(
         response,

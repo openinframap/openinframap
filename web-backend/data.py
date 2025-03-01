@@ -121,7 +121,8 @@ async def get_wikidata(wikidata_id):
 
     async with httpx.AsyncClient() as client:
         resp = await client.get(
-            f"https://www.wikidata.org/entity/{wikidata_id}.json", follow_redirects=True
+            f"https://www.wikidata.org/wiki/Special:EntityData/{wikidata_id}.json",
+            follow_redirects=True,
         )
         if resp.status_code != 200:
             logger.error("Error while fetching wikidata: %s", resp.text)
