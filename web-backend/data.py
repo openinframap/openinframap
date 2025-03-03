@@ -138,7 +138,7 @@ async def get_wikidata(wikidata_id: str, client: httpx.AsyncClient) -> Optional[
 @alru_cache(maxsize=1000)
 async def get_commons_thumbnail(
     filename: str, client: httpx.AsyncClient, width: int = 300
-) -> dict:
+) -> Optional[dict]:
     url = (
         "https://commons.wikimedia.org/w/api.php?"
         f"action=query&titles=Image:{filename}&prop=imageinfo"
@@ -149,4 +149,8 @@ async def get_commons_thumbnail(
     if resp.status_code != 200:
         raise HTTPException(503, "Error while fetching wikimedia commons image")
     data = resp.json()
-    return list(data["query"]["pages"].values())[0]
+    images = [page for page in data["query"]["pages"].values() if "imageinfo" in page]
+    if images:
+        return images[0]
+    else:
+        return None

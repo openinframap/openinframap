@@ -47,8 +47,8 @@ async def wikidata_json(
         image_data = await get_commons_thumbnail(
             data["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"], http_client
         )
-
-        response["thumbnail"] = image_data["imageinfo"][0]["thumburl"]
+        if image_data is not None:
+            response["thumbnail"] = image_data["imageinfo"][0]["thumburl"]
 
     if "P13333" in data["claims"]:
         response["gem_id"] = data["claims"]["P13333"][0]["mainsnak"]["datavalue"][
