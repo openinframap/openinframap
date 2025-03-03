@@ -120,14 +120,17 @@ async def get_wikidata(wikidata_id: str, client: httpx.AsyncClient) -> Optional[
     if not re.match(r"^Q[0-9]+$", wikidata_id):
         return None
 
-    resp = await client.get(
+    response = await client.get(
         f"https://www.wikidata.org/wiki/Special:EntityData/{wikidata_id}.json",
         follow_redirects=True,
     )
-    if resp.status_code != 200:
-        logger.error("Error while fetching wikidata: %s", resp.text)
+
+    if response.status_code == 404:
+        return None
+    elif response.status_code != 200:
+        logger.error("Error while fetching wikidata: %s", response.text)
         raise HTTPException(503, "Error while fetching wikidata")
-    data = resp.json()
+    data = response.json()
 
     # ID may have changed if it redirects to another. Fetch the first
     # (hopefully only) ID in the list.
