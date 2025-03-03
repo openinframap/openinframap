@@ -17,7 +17,7 @@
 {% endif -%}
 
 {% if plants|length == 0 %}
-  <p>There are currently no power plants
+  <p>There are currently no {% if pretty_source %}{{pretty_source}}{% endif %} power plants
       {% if construction %}under construction{% endif %}
       mapped in {{country|country_name}} on OpenStreetMap.
   </p>
