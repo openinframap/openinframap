@@ -1,4 +1,5 @@
 from decimal import Decimal
+from typing import Optional
 from jinja2.utils import markupsafe
 
 
@@ -54,8 +55,25 @@ def osm_link(osm_id, geom_type):
     return url + "/" + str(osm_id)
 
 
-THE_COUNTRY_NAMES = {"United States", "United Kingdom", "Netherlands", "Bahamas",
-                     "Canary Islands", "British Virgin Islands", "Azores", "Cayman Islands"}
+def format_external_url(url: Optional[str]) -> Optional[str]:
+    """Add a http:// prefix to a URL if it doesn't have one."""
+    if url is None:
+        return None
+    if not url.startswith("http"):
+        return "http://" + url
+    return url
+
+
+THE_COUNTRY_NAMES = {
+    "United States",
+    "United Kingdom",
+    "Netherlands",
+    "Bahamas",
+    "Canary Islands",
+    "British Virgin Islands",
+    "Azores",
+    "Cayman Islands",
+}
 
 
 def country_name(name, cap=False):

@@ -36,7 +36,7 @@
   <ul>
     <li><a href="{{osm_link(plant.osm_id, plant.geom_type)}}">OpenStreetMap</a></li>
     {% if plant.tags.url or plant.tags.website %}
-      <li><a href="{{plant.tags.url or plant.tags.website}}">Website</a></li>
+      <li><a href="{{(plant.tags.url or plant.tags.website)|external_url}}">Website</a></li>
     {% endif %}
     {% if wikidata and wikidata.sitelinks.enwiki %}
       <li><a href="{{wikidata.sitelinks.enwiki.url}}">Wikipedia ({{wikidata.sitelinks.enwiki.title}})</a></li>

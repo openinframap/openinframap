@@ -15,6 +15,7 @@ from template_functions import (
     format_length,
     format_voltage,
     format_percent,
+    format_external_url,
 )
 from config import database, config
 from util import cache_for, country_required
@@ -38,6 +39,7 @@ templates.env.filters["voltage"] = format_voltage
 templates.env.filters["percent"] = format_percent
 templates.env.filters["country_name"] = country_name
 templates.env.globals["osm_link"] = osm_link
+templates.env.filters["external_url"] = format_external_url
 
 
 class State(TypedDict):
