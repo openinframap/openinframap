@@ -17,11 +17,13 @@ field_sets:
       sql: round(ST_Area(geometry))
   voltages:
     - name: voltage
-      sql: convert_voltage(voltage) / 1000
+      sql: convert_number(nth_semi(voltage, 1)) / 1000
     - name: voltage_2
-      sql: convert_voltage(nth_semi(voltage, 2)) / 1000
+      sql: convert_number(nth_semi(voltage, 2)) / 1000
     - name: voltage_3
-      sql: convert_voltage(nth_semi(voltage, 3)) / 1000
+      sql: convert_number(nth_semi(voltage, 3)) / 1000
+    - name: voltage_4
+      sql: convert_number(nth_semi(voltage, 4)) / 1000
   wiki:
     - name: wikidata
       sql: tags -> 'wikidata'
@@ -126,11 +128,11 @@ layers:
     # below that.
     where: >
       ST_Length(geometry) > !PIXEL_WIDTH! / 4 AND
-      (convert_voltage(voltage) > 199000 OR
-        !ZOOM! >= 4 AND convert_voltage(voltage) > 100000 OR
-        !ZOOM! >= 6 AND convert_voltage(voltage) > 24000 OR
+      (voltages[1] > 199 OR
+        !ZOOM! >= 4 AND voltages[1] > 100 OR
+        !ZOOM! >= 6 AND voltages[1] > 24 OR
         !ZOOM! >= 8)
-    order_by: convert_voltage(voltage) ASC NULLS FIRST
+    order_by: voltages[1] ASC NULLS FIRST
 
   - name: power_tower
     map:

@@ -51,13 +51,46 @@ DECLARE
   parts TEXT[];
   res NUMERIC;
 BEGIN
-  parts := regexp_matches(value, '([0-9][0-9,]+)[;]?.*', '');
+  parts := regexp_matches(value, '([0-9][0-9,]*)[;]?.*', '');
   BEGIN
 		res := replace(parts[1], ',', '.')::NUMERIC;
 	EXCEPTION WHEN OTHERS THEN
 		res := NULL;
 	END;
   RETURN res;
+END
+$$ LANGUAGE plpgsql;
+
+-- Convert a text numeric value into a number. Both the period (.) and the comma (,)
+-- are accepted as decimal separators.
+-- Trailing text is discarded. Leading text, or any other invalid value, results in a NULL.
+CREATE OR REPLACE FUNCTION convert_number(value TEXT) RETURNS NUMERIC
+IMMUTABLE
+PARALLEL SAFE
+RETURNS NULL ON NULL INPUT
+AS $$
+DECLARE
+  parts TEXT[];
+  res NUMERIC;
+BEGIN
+    parts := regexp_matches(value, '^([0-9][0-9,\.]*)', '');
+    res := replace(parts[1], ',', '.')::NUMERIC;
+    RETURN res;
+END
+$$ LANGUAGE plpgsql;
+
+-- Convert a text integer value into an integer
+-- Trailing text is discarded. Leading text, or any other invalid value, results in a NULL.
+CREATE OR REPLACE FUNCTION convert_integer(value TEXT) RETURNS INTEGER
+IMMUTABLE
+PARALLEL SAFE
+RETURNS NULL ON NULL INPUT
+AS $$
+DECLARE
+  parts TEXT[];
+BEGIN
+    parts := regexp_matches(value, '^([0-9]+)', '');
+    RETURN parts[1];
 END
 $$ LANGUAGE plpgsql;
 
@@ -82,8 +115,7 @@ AS $$
 DECLARE
     parts TEXT[];
 BEGIN
-    parts = string_to_array(input, ';');
-    RETURN parts[1];
+    RETURN nth_semi(input, 1);
 END
 $$ LANGUAGE plpgsql;
 
@@ -94,22 +126,36 @@ IMMUTABLE
 AS $$
 DECLARE
     parts TEXT[];
-    voltage_int REAL;
+    voltage_tmp INTEGER;
+    int_voltages INTEGER[];
+    array_size INTEGER;
     retval REAL[];
 BEGIN
     parts = string_to_array(voltage, ';');
     IF array_length(parts::anyarray, 1) > 1 THEN
-	FOR I IN array_lower(parts::anyarray, 1)..array_upper(parts::anyarray, 1) LOOP
-	  retval[I] = convert_voltage(parts[I]) / 1000;
-	END LOOP;
+        FOR I IN array_lower(parts::anyarray, 1)..array_upper(parts::anyarray, 1) LOOP
+            int_voltages[I] = convert_integer(parts[I]);
+        END LOOP;
     ELSIF circuits IS NOT NULL THEN
-	voltage_int = convert_voltage(voltage) / 1000;
-	FOR I IN 1..circuits LOOP
-	  retval[I] = voltage_int;
-	END LOOP;
+        voltage_tmp = convert_integer(voltage);
+        FOR I IN 1..circuits LOOP
+            int_voltages[I] = voltage_tmp;
+        END LOOP;
     ELSE
-	retval[1] = convert_voltage(voltage) / 1000;
+        int_voltages[1] = convert_integer(voltage);
     END IF;
+
+    -- Remove NULLs and sort the array
+    int_voltages = sort(array_remove(int_voltages, NULL));
+    array_size = array_upper(int_voltages, 1);
+    IF array_size = 0 OR array_size IS NULL THEN
+        RETURN NULL;
+    END IF;
+
+    -- Convert to kV and reverse the sorted array so highest voltage is first.
+    FOR I IN 1..array_size LOOP
+        retval[array_size - I + 1] = int_voltages[I]::NUMERIC / 1000;
+    END LOOP;
 
     return retval;
 END
