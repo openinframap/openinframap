@@ -41,7 +41,71 @@
             "reactor-shunt": "Kompenzační tlumivka",
             "capacitor-series": "Sériový kapacitor",
             "capacitor-shunt": "Kompenzační kapacitor",
-            "statcom": "Statický VAR kompenzátor"
+            "statcom": "Statický VAR kompenzátor",
+            "current-transformer": "Proudový transformátor",
+            "potential-transformer": "Napěťový transformátor",
+            "synchronous-condenser": "Synchronní kompenzátor",
+            "filter": "Filtr",
+            "compensator-other": "Jiný kompenzátor"
+        },
+        "pipeline": "Potrubí",
+        "water": {
+            "treatment-plant": "Úpravna vod",
+            "pumping-station": "Čerpací stanice",
+            "well": "Studna",
+            "sewage-pumping-station": "Čerpací stanice odpadních vod",
+            "water-pumping-station": "Vodní čerpací stanice",
+            "pipeline": "Vodní potrubí",
+            "sewage-treatment-plant": "Čistírna odpadních vod",
+            "reservoir": "Vodní nádrž"
+        },
+        "substance": {
+            "nitrogen": "Dusík",
+            "oxygen": "Kyslík",
+            "beer": "Pivo",
+            "fresh-water": "Pitná voda",
+            "hot-water": "Horká voda",
+            "gas": "Plyn",
+            "oil": "Olej",
+            "petroleum-intermediate": "Ropný meziprodukt",
+            "hydrogen": "Vodík",
+            "fuel": "Palivo",
+            "wastewater": "Odpadní voda",
+            "steam": "Pára",
+            "co2": "CO<sub>2</sub>",
+            "rainwater": "Dešťová voda"
+        },
+        "other-pumping-station": "Jiná čerpací stanice",
+        "cable": "Kabel",
+        "telecoms": {
+            "cabinet": "Telekomunikační rozvaděč",
+            "communication-line": "Telekomunikační linka",
+            "data-center": "Telekomunikační stavba",
+            "exchange": "Telefonní ústředna"
+        },
+        "petroleum": {
+            "well": "Vrt",
+            "facility": "Ropné zařízení"
+        },
+        "telecom": {
+            "datacenter": "Datacentrum",
+            "tower-mast": "Věž/stožár"
+        },
+        "cabinet": "Rozvaděč",
+        "method": {
+            "fission": "Štěpení",
+            "fusion": "Fúze",
+            "water-storage": "Úložiště vody",
+            "water-pumped-storage": "Přečerpávací úložiště",
+            "water-run-of-river": "Průtoková vodní",
+            "tidal-stream": "Proud",
+            "tidal-barrage": "Přehrada",
+            "solar-thermal": "Tepelná",
+            "solar-photovoltaic": "Fotovoltaická",
+            "combustion": "Spalování",
+            "gasification": "Zplyňování",
+            "anaerobic-digestion": "Anaerobní digestní proces",
+            "wind-turbine": "Větrná turbína"
         }
     },
     "info": {
@@ -59,15 +123,28 @@
         "operator": "Provozovatel",
         "type": "Typ",
         "usage": "Využití",
-        "location": "Umístění"
+        "location": "Umístění",
+        "transformer-type": "Typ transformátoru",
+        "design": "Vzhled",
+        "material": "Materiál",
+        "line-attachment": "Připojení vedení",
+        "line-management": "Správa vedení"
     },
     "layers": {
         "telecoms": "Telekomunikace",
-        "petroleum": "Ropa a plyn",
+        "petroleum": "Ropa a zemní plyn",
         "water": "Voda",
         "labels": "Štítky",
         "title": "Vrstvy",
-        "power": "Energie"
+        "power": "Energie",
+        "osmose-power": "Osmose (Energie)",
+        "other-pipelines": "Jiná potrubí",
+        "nighttime-lights": "Noční osvětlení",
+        "background": "Pozadí",
+        "heatmaps": "Teplotní mapy",
+        "solar-generation": "Solární výroba",
+        "infrastructure": "Infrastruktura",
+        "validation": "Validace"
     },
     "key": {
         "telecoms": "Telekomunikace",
@@ -77,7 +154,9 @@
         "power-lines": "Elektrické vedení",
         "power-plants": "Elektrárny",
         "power-line-supports": "Části elektrického vedení",
-        "power-generators": "Generátory"
+        "power-generators": "Generátory",
+        "switchgear": "Rozvodné zařízení",
+        "petroleum": "Ropa"
     },
     "units": {
         "V": "V",
@@ -96,7 +175,8 @@
         "surface": "Povrch",
         "underground": "Pod zemí",
         "underwater": "Pod vodou",
-        "outdoor": "Venku"
+        "outdoor": "Venku",
+        "overhead": "Nad zemí"
     },
     "wikidata": "Wikidata",
     "other": "Jiný",
@@ -109,10 +189,24 @@
             "coal": "Uhlí",
             "geothermal": "Geotermální",
             "hydro": "Hydroelektrická",
-            "nuclear": "Jaderná"
+            "nuclear": "Jaderná",
+            "wind": "Větrná",
+            "waste": "Odpadní",
+            "gas": "Plynová",
+            "solar": "Solární",
+            "battery": "Bateriová",
+            "biomass": "Biomasová",
+            "oil-gas": "Ropná/plynová"
+        },
+        "substation-type": {
+            "transmission": "Přenosová",
+            "distribution": "Distribuční",
+            "traction": "Trakční",
+            "converter": "DC usměrňovač"
         }
     },
     "warnings": {
         "webgl": "<p>Váš prohlížeč může mít výkonnostní nebo funkční problémy s Open Infrastructure Map.</p><p>Aby tento web fungoval správně, je vyžadován <a href=\"http://webglreport.com\">WebGL</a> s hardwarovou akcelerací.</p><p>Pokud váš prohlížeč podporuje WebGL, možná budete muset u tohoto webu v prohlížeči zakázat ochranu před sledováním.</p>"
-    }
+    },
+    "disused": "nepoužívané"
 }
