@@ -31,7 +31,8 @@
             "switch": "Appareil de connexion",
             "hvdc": "CCHT",
             "switch-other": "Autre interrupteur",
-            "statcom": "Compensateur statique d'énergie réactive"
+            "statcom": "Compensateur statique d'énergie réactive",
+            "tower-transition": "Tour/pylône de transition"
         },
         "substance": {
             "co2": "CO<sub>2</sub>",
@@ -44,7 +45,10 @@
             "hot-water": "Eau chaude",
             "oil": "Huile",
             "petroleum-intermediate": "Produits intermédiaires du pétrole",
-            "fuel": "Carburant"
+            "fuel": "Carburant",
+            "nitrogen": "Diazote",
+            "oxygen": "Dioxygène",
+            "beer": "Bière"
         },
         "telecoms": {
             "cabinet": "Armoire télécommunication",
@@ -94,7 +98,7 @@
         "edit": "Editer",
         "remote": "Editer avec un tiers (JOSM, etc.)",
         "browser": "Editer en ligne (iD)",
-        "error": "Impossible de charger l'éditeur distant - vérifiez qu'il est en cours d'éxécution et que \"remote control\" est activé. \nErreur: "
+        "error": "Impossible de charger l'éditeur distant - vérifiez qu'il est en cours d'exécution et que le contrôle à distance est activé.\nErreur : "
     },
     "nav": {
         "about": "à propos",
@@ -120,7 +124,8 @@
         "material": "Matériau",
         "design": "Design",
         "line-attachment": "Armement aérien",
-        "line-management": "Gestion de ligne"
+        "line-management": "Gestion de ligne",
+        "transformer-type": "Type de transformateur"
     },
     "other": "Autre",
     "units": {
@@ -175,7 +180,9 @@
         "power": "Electricité",
         "water": "Eau",
         "labels": "Etiquettes",
-        "petroleum": "Huile & Gaz"
+        "petroleum": "Pétrole & Gaz",
+        "infrastructure": "Infrastructure",
+        "background": "Arrière-plan"
     },
     "more_info": "Plus d'infos",
     "wikipedia": "Wikipedia",
@@ -191,5 +198,6 @@
     },
     "warnings": {
         "webgl": "<p>Votre navigateur peut rencontrer des problèmes de performance ou de fonctionnalité avec Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> avec accélération matérielle est nécessaire pour que ce site fonctionne correctement.</p><p>Si votre navigateur prend en charge WebGL, vous devrez peut-être désactiver la protection contre le fingerprinting du navigateur pour ce site.</p>"
-    }
+    },
+    "disused": "Inutilisé"
 }
