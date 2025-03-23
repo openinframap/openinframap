@@ -1,529 +1,657 @@
+import { DataDrivenPropertyValueSpecification } from 'maplibre-gl'
 import { LayerSpecificationWithZIndex } from './types.ts'
-// Base Style, adapted from MapTiler's Positron theme.
+// Base style, adapted from the Protomaps style.
+
+function landcover_colour(hue: any, sat: any, initial_lum = '85%') {
+  return [
+    'interpolate-lab',
+    ['linear'],
+    ['zoom'],
+    2,
+    `hsl(${hue}, ${sat}, ${initial_lum})`,
+    6,
+    `hsl(${hue}, ${sat}, 93%)`
+  ]
+}
+
+const colours: Record<string, any> = {
+  background: 'rgb(242,243,240)',
+  land: landcover_colour(42, '10%'),
+  ice: landcover_colour(180, '10%'),
+  urban: landcover_colour(245, '9%', '82%'),
+  water: ['interpolate-lab', ['linear'], ['zoom'], 2, 'hsl(207, 25%, 75%)', 12, 'hsl(207, 14%, 86%)'],
+  green: landcover_colour(115, '9%', '86%'),
+  wood: landcover_colour(100, '20%', '81%'),
+  road_casing: 'hsl(0, 0%, 96%)',
+  road_minor: 'hsl(0, 0%, 88%)',
+  road_major: 'hsl(0, 0%, 86%)',
+  rail_2: 'hsl(0, 0%, 92%)',
+  rail: 'hsl(0, 0%, 80%)',
+  border: ['interpolate-lab', ['linear'], ['zoom'], 2, 'hsl(0, 30%, 60%)', 12, 'hsl(0, 10%, 80%)']
+}
+
+const road_base_size = 18
+const rail_base_size = 10
+
+const landcover_opacity: DataDrivenPropertyValueSpecification<number> = [
+  'interpolate',
+  ['linear'],
+  ['zoom'],
+  6,
+  1,
+  7,
+  0
+]
 
 const layers: LayerSpecificationWithZIndex[] = [
   {
     id: 'background',
     type: 'background',
     paint: {
-      'background-color': 'rgb(242,243,240)'
+      'background-color': colours['background']
     }
   },
   {
-    id: 'park',
+    id: 'earth',
     type: 'fill',
-    source: 'openmaptiles',
-    'source-layer': 'park',
+    source: 'basemap',
+    'source-layer': 'earth',
     filter: ['==', '$type', 'Polygon'],
+    paint: { 'fill-color': colours['land'] }
+  },
+  {
+    id: 'landuse_ice',
+    type: 'fill',
+    source: 'basemap',
+    'source-layer': 'landuse',
+    filter: ['==', 'kind', 'glacier'],
+    paint: { 'fill-color': colours['ice'] }
+  },
+  {
+    id: 'landcover_ice',
+    type: 'fill',
+    source: 'basemap',
+    'source-layer': 'landcover',
+    filter: ['==', 'kind', 'glacier'],
     paint: {
-      'fill-color': 'rgb(230, 233, 229)'
+      'fill-color': colours['ice'],
+      'fill-opacity': landcover_opacity
+    }
+  },
+  {
+    id: 'landuse_green',
+    type: 'fill',
+    source: 'basemap',
+    'source-layer': 'landuse',
+    filter: [
+      'in',
+      'kind',
+      'scrub',
+      'grassland',
+      'grass',
+      'national_park',
+      'park',
+      'cemetery',
+      'protected_area',
+      'nature_reserve',
+      'golf_course',
+      'allotments',
+      'village_green',
+      'playground',
+      'farmland',
+      'cemetery',
+      'orchard'
+    ],
+    paint: { 'fill-color': colours['green'] }
+  },
+  {
+    id: 'landcover_green',
+    type: 'fill',
+    source: 'basemap',
+    'source-layer': 'landcover',
+    filter: ['in', 'kind', 'scrub', 'grassland', 'grass', 'farmland'],
+    paint: { 'fill-color': colours['green'], 'fill-opacity': landcover_opacity }
+  },
+  {
+    id: 'landuse_wood',
+    type: 'fill',
+    source: 'basemap',
+    'source-layer': 'landuse',
+    filter: ['in', 'kind', 'wood', 'forest'],
+    paint: { 'fill-color': colours['wood'] }
+  },
+  {
+    id: 'landcover_wood',
+    type: 'fill',
+    source: 'basemap',
+    'source-layer': 'landcover',
+    filter: ['in', 'kind', 'forest'],
+    paint: { 'fill-color': colours['wood'], 'fill-opacity': landcover_opacity }
+  },
+  {
+    id: 'landuse_urban',
+    type: 'fill',
+    source: 'basemap',
+    'source-layer': 'landuse',
+    filter: [
+      'in',
+      'kind',
+      'military',
+      'naval_base',
+      'aerodrome',
+      'commercial',
+      'industrial',
+      'residential',
+      'farmyard',
+      'hospital',
+      'university'
+    ],
+    paint: {
+      'fill-color': colours['urban']
+    }
+  },
+  {
+    id: 'landcover_urban',
+    type: 'fill',
+    source: 'basemap',
+    'source-layer': 'landcover',
+    filter: ['==', 'kind', 'urban_area'],
+    paint: {
+      'fill-color': colours['urban'],
+      'fill-opacity': landcover_opacity
     }
   },
   {
     id: 'water',
     type: 'fill',
-    source: 'openmaptiles',
+    source: 'basemap',
     'source-layer': 'water',
     filter: ['==', '$type', 'Polygon'],
+    paint: { 'fill-color': colours['water'] }
+  },
+  {
+    id: 'water_stream',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'water',
+    minzoom: 14,
+    filter: ['in', 'kind', 'stream'],
+    paint: { 'line-color': colours['water'], 'line-width': 0.5 }
+  },
+  {
+    id: 'water_river',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'water',
+    minzoom: 9,
+    filter: ['in', 'kind', 'river'],
     paint: {
-      'fill-color': 'hsl(207, 12%, 78%)',
-      'fill-antialias': true
+      'line-color': colours['water'],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 9, 0, 9.5, 1, 18, 12]
     }
   },
   {
-    id: 'landcover_ice_shelf',
+    id: 'landuse_pedestrian',
     type: 'fill',
-    source: 'openmaptiles',
-    'source-layer': 'landcover',
-    maxzoom: 8,
-    filter: ['all', ['==', '$type', 'Polygon'], ['==', 'subclass', 'ice_shelf']],
-    paint: {
-      'fill-color': 'hsl(0, 0%, 98%)',
-      'fill-opacity': 0.7
-    }
-  },
-  {
-    id: 'landcover_glacier',
-    type: 'fill',
-    source: 'openmaptiles',
-    'source-layer': 'landcover',
-    maxzoom: 8,
-    filter: ['all', ['==', '$type', 'Polygon'], ['==', 'subclass', 'glacier']],
-    paint: {
-      'fill-color': 'hsl(0, 0%, 98%)',
-      'fill-opacity': ['interpolate', ['linear'], ['zoom'], 0, 1, 8, 0.5]
-    }
-  },
-  {
-    id: 'landuse_residential',
-    type: 'fill',
-    source: 'openmaptiles',
+    source: 'basemap',
     'source-layer': 'landuse',
-    maxzoom: 16,
-    filter: ['all', ['==', '$type', 'Polygon'], ['==', 'class', 'residential']],
-    paint: {
-      'fill-color': 'rgb(234, 234, 230)',
-      'fill-opacity': ['interpolate', ['exponential', 0.6], ['zoom'], 8, 0.8, 9, 0.6]
-    }
+    filter: ['in', 'kind', 'pedestrian', 'dam'],
+    paint: { 'fill-color': colours['road_minor'] }
   },
   {
-    id: 'landcover_wood',
+    id: 'landuse_pier',
     type: 'fill',
-    source: 'openmaptiles',
-    'source-layer': 'landcover',
-    minzoom: 10,
-    filter: ['all', ['==', '$type', 'Polygon'], ['==', 'class', 'wood']],
-    paint: {
-      'fill-color': 'rgb(220,226,220)',
-      'fill-opacity': ['interpolate', ['linear'], ['zoom'], 8, 0, 12, 1]
-    }
+    source: 'basemap',
+    'source-layer': 'landuse',
+    filter: ['==', 'kind', 'pier'],
+    paint: { 'fill-color': colours['road_minor'] }
   },
   {
-    id: 'waterway',
+    id: 'roads_tunnels_other_casing',
     type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'waterway',
-    filter: ['==', '$type', 'LineString'],
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['has', 'is_tunnel'], ['in', 'kind', 'other', 'path']],
     paint: {
-      'line-color': 'hsl(207, 20%, 78%)'
+      'line-color': '#d6d6d6',
+      'line-gap-width': ['interpolate', ['exponential', 1.6], ['zoom'], 14, 0, 20, 7]
     }
   },
   {
-    id: 'building',
+    id: 'roads_tunnels_minor_casing',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['has', 'is_tunnel'], ['==', 'kind', 'minor_road']],
+    paint: {
+      'line-color': '#fcfcfc',
+      'line-dasharray': [3, 2],
+      'line-gap-width': ['interpolate', ['exponential', 1.6], ['zoom'], 11, 0, 12.5, 0.5, 15, 2, 18, 11],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 12, 0, 12.5, 1]
+    }
+  },
+  {
+    id: 'roads_tunnels_link_casing',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['has', 'is_tunnel'], ['has', 'is_link']],
+    paint: {
+      'line-color': '#fcfcfc',
+      'line-dasharray': [3, 2],
+      'line-gap-width': ['interpolate', ['exponential', 1.6], ['zoom'], 13, 0, 13.5, 1, 18, 11],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 12, 0, 12.5, 1]
+    }
+  },
+  {
+    id: 'roads_tunnels_major_casing',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['!has', 'is_tunnel'], ['!has', 'is_bridge'], ['==', 'kind', 'major_road']],
+    paint: {
+      'line-color': '#fcfcfc',
+      'line-dasharray': [3, 2],
+      'line-gap-width': ['interpolate', ['exponential', 1.6], ['zoom'], 7, 0, 7.5, 0.5, 18, 13],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 9, 0, 9.5, 1]
+    }
+  },
+  {
+    id: 'roads_tunnels_highway_casing',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: [
+      'all',
+      ['!has', 'is_tunnel'],
+      ['!has', 'is_bridge'],
+      ['==', 'kind', 'highway'],
+      ['!has', 'is_link']
+    ],
+    paint: {
+      'line-color': '#fcfcfc',
+      'line-dasharray': [6, 0.5],
+      'line-gap-width': ['interpolate', ['exponential', 1.6], ['zoom'], 3, 0, 3.5, 0.5, 18, 15],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 7, 0, 7.5, 1, 20, 15]
+    }
+  },
+  {
+    id: 'roads_tunnels_other',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['has', 'is_tunnel'], ['in', 'kind', 'other', 'path']],
+    paint: {
+      'line-color': '#d6d6d6',
+      'line-dasharray': [4.5, 0.5],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 14, 0, 20, 7]
+    }
+  },
+  {
+    id: 'roads_tunnels_minor',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['has', 'is_tunnel'], ['==', 'kind', 'minor_road']],
+    paint: {
+      'line-color': '#d6d6d6',
+      'line-width': [
+        'interpolate',
+        ['exponential', 1.6],
+        ['zoom'],
+        11,
+        0,
+        12.5,
+        0.5,
+        15,
+        2,
+        18,
+        road_base_size
+      ]
+    }
+  },
+  {
+    id: 'roads_tunnels_link',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['has', 'is_tunnel'], ['has', 'is_link']],
+    paint: {
+      'line-color': '#d6d6d6',
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 13, 0, 13.5, 1, 18, road_base_size]
+    }
+  },
+  {
+    id: 'roads_tunnels_major',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['has', 'is_tunnel'], ['==', 'kind', 'major_road']],
+    paint: {
+      'line-color': '#d6d6d6',
+      'line-width': [
+        'interpolate',
+        ['exponential', 1.6],
+        ['zoom'],
+        6,
+        0,
+        12,
+        1.6,
+        15,
+        3,
+        18,
+        road_base_size * 1.2
+      ]
+    }
+  },
+  {
+    id: 'roads_tunnels_highway',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['has', 'is_tunnel'], ['==', ['get', 'kind'], 'highway'], ['!', ['has', 'is_link']]],
+    paint: {
+      'line-color': '#d6d6d6',
+      'line-width': [
+        'interpolate',
+        ['exponential', 1.6],
+        ['zoom'],
+        3,
+        0,
+        6,
+        1.1,
+        12,
+        1.6,
+        15,
+        5,
+        18,
+        road_base_size * 2
+      ]
+    }
+  },
+  {
+    id: 'buildings',
     type: 'fill',
-    source: 'openmaptiles',
-    'source-layer': 'building',
+    source: 'basemap',
+    'source-layer': 'buildings',
+    filter: ['in', 'kind', 'building', 'building_part'],
+    paint: {
+      'fill-color': [
+        'interpolate-lab',
+        ['linear'],
+        ['zoom'],
+        10,
+        'hsl(32, 12%, 96%)',
+        15,
+        'hsl(32, 12%, 90%)',
+        19,
+        'hsl(32, 12%, 85%)'
+      ]
+    }
+  },
+  {
+    id: 'roads_pier',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['==', 'kind_detail', 'pier'],
+    paint: {
+      'line-color': '#efefef',
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 12, 0, 12.5, 0.5, 20, 16]
+    }
+  },
+  {
+    id: 'roads_minor_service_casing',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    minzoom: 13,
+    filter: ['all', ['!has', 'is_tunnel'], ['==', 'kind', 'minor_road'], ['==', 'kind_detail', 'service']],
+    paint: {
+      'line-color': colours['road_casing'],
+      'line-gap-width': ['interpolate', ['exponential', 1.6], ['zoom'], 13, 0, 18, 8],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 13, 0, 13.5, 0.8]
+    }
+  },
+  {
+    id: 'roads_minor_casing',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['!has', 'is_tunnel'], ['==', 'kind', 'minor_road'], ['!=', 'kind_detail', 'service']],
+    paint: {
+      'line-color': colours['road_casing'],
+      'line-gap-width': ['interpolate', ['exponential', 1.6], ['zoom'], 11, 0, 12.5, 0.5, 15, 2, 18, 11],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 12, 0, 12.5, 1]
+    }
+  },
+  {
+    id: 'roads_link_casing',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    minzoom: 13,
+    filter: ['has', 'is_link'],
+    paint: {
+      'line-color': colours['road_casing'],
+      'line-gap-width': ['interpolate', ['exponential', 1.6], ['zoom'], 13, 0, 13.5, 1, 18, 11],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 13, 0, 13.5, 1.5]
+    }
+  },
+  {
+    id: 'roads_major_casing_late',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
     minzoom: 12,
+    filter: ['all', ['!has', 'is_tunnel'], ['==', 'kind', 'major_road']],
     paint: {
-      'fill-color': 'rgb(234, 234, 229)',
-      'fill-outline-color': 'rgb(219, 219, 218)',
-      'fill-antialias': true
+      'line-color': colours['road_casing'],
+      'line-gap-width': ['interpolate', ['exponential', 1.6], ['zoom'], 6, 0, 12, 1.6, 15, 3, 18, 13],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 9, 0, 9.5, 1]
     }
   },
   {
-    id: 'tunnel_motorway_casing',
+    id: 'roads_highway_casing_late',
     type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 6,
-    filter: [
-      'all',
-      ['==', '$type', 'LineString'],
-      ['all', ['==', 'brunnel', 'tunnel'], ['==', 'class', 'motorway']]
-    ],
-    layout: {
-      'line-cap': 'butt',
-      'line-join': 'miter'
-    },
-    paint: {
-      'line-color': 'rgb(213, 213, 213)',
-      'line-width': ['interpolate', ['exponential', 1.4], ['zoom'], 5.8, 0, 6, 3, 20, 40]
-    }
-  },
-  {
-    id: 'tunnel_motorway_inner',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 6,
-    filter: [
-      'all',
-      ['==', '$type', 'LineString'],
-      ['all', ['==', 'brunnel', 'tunnel'], ['==', 'class', 'motorway']]
-    ],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': 'rgb(234,234,234)',
-      'line-width': ['interpolate', ['exponential', 1.4], ['zoom'], 4, 2, 6, 1.3, 20, 30]
-    }
-  },
-  {
-    id: 'aeroway-taxiway',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'aeroway',
+    source: 'basemap',
+    'source-layer': 'roads',
     minzoom: 12,
-    filter: ['all', ['in', 'class', 'taxiway']],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round'
-    },
+    filter: ['all', ['!has', 'is_tunnel'], ['==', 'kind', 'highway'], ['!has', 'is_link']],
     paint: {
-      'line-color': 'hsl(0, 0%, 88%)',
-      'line-width': ['interpolate', ['exponential', 1.55], ['zoom'], 13, 1.8, 20, 20]
+      'line-color': colours['road_casing'],
+      'line-gap-width': ['interpolate', ['exponential', 1.6], ['zoom'], 3, 0, 3.5, 0.5, 18, 15],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 7, 0, 7.5, 1, 20, 15]
     }
   },
   {
-    id: 'aeroway-runway-casing',
+    id: 'roads_other',
     type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'aeroway',
-    minzoom: 11,
-    filter: ['all', ['in', 'class', 'runway']],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round'
-    },
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['!has', 'is_tunnel'], ['in', 'kind', 'other', 'path'], ['!=', 'kind_detail', 'pier']],
     paint: {
-      'line-color': 'hsl(0, 0%, 88%)',
-      'line-width': ['interpolate', ['exponential', 1.5], ['zoom'], 11, 6, 17, 55]
+      'line-color': colours['road_minor'],
+      'line-dasharray': [3, 1],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 14, 0, 20, road_base_size]
     }
   },
   {
-    id: 'aeroway-area',
+    id: 'roads_link',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['has', 'is_link'],
+    paint: {
+      'line-color': colours['road_minor'],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 13, 0, 13.5, 1, 18, road_base_size]
+    }
+  },
+  {
+    id: 'roads_minor_service',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['!has', 'is_tunnel'], ['==', 'kind', 'minor_road'], ['==', 'kind_detail', 'service']],
+    paint: {
+      'line-color': colours['road_minor'],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 13, 0, 18, road_base_size]
+    }
+  },
+  {
+    id: 'roads_minor',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['!has', 'is_tunnel'], ['==', 'kind', 'minor_road'], ['!=', 'kind_detail', 'service']],
+    paint: {
+      'line-color': ['interpolate', ['exponential', 1.6], ['zoom'], 11, '#ebebeb', 16, colours['road_minor']],
+      'line-width': [
+        'interpolate',
+        ['exponential', 1.6],
+        ['zoom'],
+        11,
+        0,
+        12.5,
+        0.5,
+        15,
+        2,
+        18,
+        road_base_size * 1.2
+      ]
+    }
+  },
+  {
+    id: 'roads_major',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['!has', 'is_tunnel'], ['==', 'kind', 'major_road']],
+    paint: {
+      'line-color': colours['road_major'],
+      'line-width': [
+        'interpolate',
+        ['exponential', 1.6],
+        ['zoom'],
+        6,
+        0,
+        12,
+        1.6,
+        15,
+        3,
+        18,
+        road_base_size * 1.6
+      ]
+    }
+  },
+  {
+    id: 'roads_highway',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['all', ['!has', 'is_tunnel'], ['==', 'kind', 'highway'], ['!has', 'is_link']],
+    paint: {
+      'line-color': colours['road_major'],
+      'line-width': [
+        'interpolate',
+        ['exponential', 1.6],
+        ['zoom'],
+        3,
+        0,
+        6,
+        1.1,
+        12,
+        1.6,
+        15,
+        5,
+        18,
+        road_base_size * 2
+      ]
+    }
+  },
+  {
+    id: 'roads_taxiway',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['==', 'kind_detail', 'taxiway'],
+    paint: {
+      'line-color': colours['road_major'],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 10, 0, 12, 2, 20, 100]
+    }
+  },
+  {
+    id: 'roads_runway',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['==', 'kind_detail', 'runway'],
+    layout: {
+      'line-cap': 'round'
+    },
+    paint: {
+      'line-color': colours['road_major'],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 10, 0, 12, 6, 20, 250]
+    }
+  },
+  {
+    id: 'landuse_runway',
     type: 'fill',
-    source: 'openmaptiles',
-    'source-layer': 'aeroway',
-    minzoom: 4,
-    filter: ['all', ['==', '$type', 'Polygon'], ['in', 'class', 'runway', 'taxiway']],
-
+    source: 'basemap',
+    'source-layer': 'landuse',
+    filter: ['any', ['in', 'kind', 'runway', 'taxiway']],
+    paint: { 'fill-color': '#efefef' }
+  },
+  {
+    id: 'roads_runway_centreline',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['==', 'kind_detail', 'runway'],
+    minzoom: 12,
+    layout: {
+      'line-cap': 'round'
+    },
     paint: {
-      'fill-opacity': ['interpolate', ['linear'], ['zoom'], 13, 0, 14, 1],
-      'fill-color': 'rgba(255, 255, 255, 1)'
+      'line-color': '#ffffff',
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 12, 2, 20, 4],
+      'line-dasharray': ['step', ['zoom'], ['literal', [2]], 14, ['literal', [2, 4]]]
     }
   },
   {
-    id: 'aeroway-runway',
+    id: 'roads_rail_case',
     type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'aeroway',
-    minzoom: 11,
-    filter: ['all', ['in', 'class', 'runway'], ['==', '$type', 'LineString']],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round'
-    },
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['==', 'kind', 'rail'],
     paint: {
-      'line-color': 'rgba(255, 255, 255, 1)',
-      'line-width': ['interpolate', ['exponential', 1.5], ['zoom'], 11, 4, 17, 50]
+      'line-color': colours['rail_2'],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 3, 0, 6, 1.1, 18, rail_base_size]
     }
   },
   {
-    id: 'highway_path',
+    id: 'roads_rail',
     type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    filter: ['all', ['==', '$type', 'LineString'], ['==', 'class', 'path']],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round'
-    },
+    source: 'basemap',
+    'source-layer': 'roads',
+    filter: ['==', 'kind', 'rail'],
     paint: {
-      'line-color': 'rgb(234, 234, 234)',
-      'line-width': ['interpolate', ['exponential', 1.2], ['zoom'], 13, 1, 20, 10],
-      'line-opacity': 0.9
+      'line-dasharray': [3, 5],
+      'line-color': colours['rail'],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 3, 0, 6, 1.1, 18, rail_base_size]
     }
   },
   {
-    id: 'highway_minor_casing',
+    id: 'boundaries_country',
     type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 8,
-    filter: ['all', ['==', '$type', 'LineString'], ['in', 'class', 'minor', 'service', 'track']],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round'
-    },
+    source: 'basemap',
+    'source-layer': 'boundaries',
+    filter: ['<=', 'kind_detail', 2],
+    layout: { 'line-join': 'round' },
     paint: {
-      'line-color': 'hsl(0, 0%, 83%)',
-      'line-width': ['interpolate', ['exponential', 1.3], ['zoom'], 13, 1.9, 20, 21]
-    }
-  },
-  {
-    id: 'highway_minor',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 8,
-    filter: ['all', ['==', '$type', 'LineString'], ['in', 'class', 'minor', 'service', 'track']],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': 'hsl(0, 0%, 92%)',
-      'line-width': ['interpolate', ['exponential', 1.55], ['zoom'], 13, 1.8, 20, 20]
-    }
-  },
-  {
-    id: 'highway_major_casing',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 11,
-    filter: [
-      'all',
-      ['==', '$type', 'LineString'],
-      ['in', 'class', 'primary', 'secondary', 'tertiary', 'trunk']
-    ],
-    layout: {
-      'line-cap': 'butt',
-      'line-join': 'miter'
-    },
-    paint: {
-      'line-color': 'rgb(213, 213, 213)',
-      'line-dasharray': [12, 0],
-      'line-width': ['interpolate', ['exponential', 1.3], ['zoom'], 10, 3, 20, 23]
-    }
-  },
-  {
-    id: 'highway_major_inner',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 11,
-    filter: [
-      'all',
-      ['==', '$type', 'LineString'],
-      ['in', 'class', 'primary', 'secondary', 'tertiary', 'trunk']
-    ],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': '#fff',
-      'line-width': ['interpolate', ['exponential', 1.3], ['zoom'], 10, 2, 20, 20]
-    }
-  },
-  {
-    id: 'highway_major_subtle',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    maxzoom: 11,
-    filter: [
-      'all',
-      ['==', '$type', 'LineString'],
-      ['in', 'class', 'primary', 'secondary', 'tertiary', 'trunk']
-    ],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': 'hsla(0, 0%, 85%, 0.69)',
-      'line-width': 1
-    }
-  },
-  {
-    id: 'highway_motorway_casing',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 6,
-    filter: [
-      'all',
-      ['==', '$type', 'LineString'],
-      ['all', ['!in', 'brunnel', 'bridge', 'tunnel'], ['==', 'class', 'motorway']]
-    ],
-    layout: {
-      'line-cap': 'butt',
-      'line-join': 'miter'
-    },
-    paint: {
-      'line-color': 'rgb(213, 213, 213)',
-      'line-width': ['interpolate', ['exponential', 1.4], ['zoom'], 5.8, 0, 6, 3, 20, 40],
-      'line-dasharray': [2, 0]
-    }
-  },
-  {
-    id: 'highway_motorway_inner',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 6,
-    filter: [
-      'all',
-      ['==', '$type', 'LineString'],
-      ['all', ['!in', 'brunnel', 'bridge', 'tunnel'], ['==', 'class', 'motorway']]
-    ],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': ['interpolate', ['linear'], ['zoom'], 6, 'hsla(0, 0%, 85%, 0.53)', 8, '#fff'],
-      'line-width': ['interpolate', ['exponential', 1.4], ['zoom'], 4, 2, 6, 1.3, 20, 30]
-    }
-  },
-  {
-    id: 'highway_motorway_subtle',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    maxzoom: 6,
-    filter: ['all', ['==', '$type', 'LineString'], ['==', 'class', 'motorway']],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': 'hsla(0, 0%, 85%, 0.53)',
-      'line-width': ['interpolate', ['linear'], ['zoom'], 4, 1, 6, 1.3]
-    }
-  },
-  {
-    id: 'railway_transit',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 16,
-    filter: [
-      'all',
-      ['==', '$type', 'LineString'],
-      ['all', ['==', 'class', 'transit'], ['!in', 'brunnel', 'tunnel']]
-    ],
-    layout: {
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': '#dddddd',
-      'line-width': 3
-    }
-  },
-  {
-    id: 'railway_transit_dashline',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 16,
-    filter: [
-      'all',
-      ['==', '$type', 'LineString'],
-      ['all', ['==', 'class', 'transit'], ['!in', 'brunnel', 'tunnel']]
-    ],
-    layout: {
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': '#fafafa',
-      'line-width': 2,
-      'line-dasharray': [3, 3]
-    }
-  },
-  {
-    id: 'railway_service',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 16,
-    filter: ['all', ['==', '$type', 'LineString'], ['all', ['==', 'class', 'rail'], ['has', 'service']]],
-    layout: {
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': '#dddddd',
-      'line-width': 3
-    }
-  },
-  {
-    id: 'railway_service_dashline',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 16,
-    filter: ['all', ['==', '$type', 'LineString'], ['==', 'class', 'rail'], ['has', 'service']],
-    layout: {
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': '#fafafa',
-      'line-width': 2,
-      'line-dasharray': [3, 3]
-    }
-  },
-  {
-    id: 'railway',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 7,
-    filter: ['all', ['==', '$type', 'LineString'], ['all', ['!has', 'service'], ['==', 'class', 'rail']]],
-    layout: {
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': '#c0c0c0',
-      'line-width': ['interpolate', ['exponential', 1.3], ['zoom'], 9, 1, 20, 7]
-    }
-  },
-  {
-    id: 'railway_dashline',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 11,
-    filter: ['all', ['==', '$type', 'LineString'], ['all', ['!has', 'service'], ['==', 'class', 'rail']]],
-    layout: {
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': '#fafafa',
-      'line-width': ['interpolate', ['exponential', 1.3], ['zoom'], 11, 1, 20, 6],
-      'line-dasharray': [3, 3]
-    }
-  },
-  {
-    id: 'highway_motorway_bridge_casing',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 6,
-    filter: [
-      'all',
-      ['==', '$type', 'LineString'],
-      ['all', ['==', 'brunnel', 'bridge'], ['==', 'class', 'motorway']]
-    ],
-    layout: {
-      'line-cap': 'butt',
-      'line-join': 'miter'
-    },
-    paint: {
-      'line-color': 'rgb(213, 213, 213)',
-      'line-width': ['interpolate', ['exponential', 1.4], ['zoom'], 5.8, 0, 6, 5, 20, 45],
-      'line-dasharray': [2, 0]
-    }
-  },
-  {
-    id: 'highway_motorway_bridge_inner',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'transportation',
-    minzoom: 6,
-    filter: [
-      'all',
-      ['==', '$type', 'LineString'],
-      ['all', ['==', 'brunnel', 'bridge'], ['==', 'class', 'motorway']]
-    ],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': ['interpolate', ['linear'], ['zoom'], 5.8, 'hsla(0, 0%, 85%, 0.53)', 6, '#fff'],
-      'line-width': ['interpolate', ['exponential', 1.4], ['zoom'], 4, 2, 6, 1.3, 20, 30]
-    }
-  },
-  {
-    id: 'boundary_country',
-    type: 'line',
-    source: 'openmaptiles',
-    'source-layer': 'boundary',
-    filter: ['==', 'admin_level', 2],
-    layout: {
-      'line-cap': 'round',
-      'line-join': 'round'
-    },
-    paint: {
-      'line-color': ['interpolate-hcl', ['exponential', 1.1], ['zoom'], 2, '#99656B', 8, '#CC9BA1'],
-      'line-width': ['interpolate', ['exponential', 1.1], ['zoom'], 3, 1, 22, 20],
-      'line-blur': ['interpolate', ['linear'], ['zoom'], 0, 0.4, 22, 4],
-      'line-dasharray': [3, 3]
+      'line-color': colours['border'],
+      'line-width': ['interpolate', ['linear'], ['zoom'], 3, 0.5, 20, 9],
+      'line-dasharray': [2, 1]
     }
   },
   {

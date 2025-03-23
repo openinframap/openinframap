@@ -1,268 +1,208 @@
-import i18next from 'i18next'
 import { LayerSpecificationWithZIndex } from './types.ts'
-import { coalesce, concat, get, interpolate, zoom } from './stylehelpers.ts'
-import { ExpressionSpecification } from 'maplibre-gl'
+import { get_country_name } from '@protomaps/basemaps'
+import { font } from './common.ts'
+import { DataDrivenPropertyValueSpecification } from 'maplibre-gl'
 
-const text_color = 'hsl(0, 0%, 20%)'
+const label_color = ['hsl(0, 0%, 20%)', 'hsl(0, 0%, 30%)', 'hsl(0, 0%, 40%)']
 const text_halo_color = 'rgb(242,243,240)'
 
-function omtLabel(): ExpressionSpecification {
-  const lang = i18next.language.split('-')[0]
-  return concat(coalesce(get(`name:${lang}`), get('name:latin'), get('name')))
+function pmLabel(lang: string): DataDrivenPropertyValueSpecification<string> {
+  return get_country_name(lang, undefined) as DataDrivenPropertyValueSpecification<string>
 }
 
-export default function layers(): LayerSpecificationWithZIndex[] {
+export default function layers(lang: string): LayerSpecificationWithZIndex[] {
   return [
     {
-      id: 'place_suburb',
+      id: 'address_label',
       type: 'symbol',
-      source: 'openmaptiles',
-      'source-layer': 'place',
-      minzoom: 12,
-      maxzoom: 17,
-      filter: ['all', ['==', '$type', 'Point'], ['==', 'class', 'suburb']],
+      source: 'basemap',
+      'source-layer': 'buildings',
+      minzoom: 18,
+      filter: ['==', 'kind', 'address'],
       layout: {
-        'text-anchor': 'center',
-        'text-field': omtLabel(),
-        'text-font': ['Noto Sans Regular'],
-        'text-justify': 'center',
-        'text-offset': [0.5, 0],
-        'text-size': ['interpolate', ['linear'], ['zoom'], 12, 9, 17, 17]
+        'symbol-placement': 'point',
+        'text-font': font,
+        'text-field': ['get', 'addr_housenumber'],
+        'text-size': 12
       },
       paint: {
-        'text-color': text_color,
-        'text-halo-blur': 1,
+        'text-color': label_color[2],
         'text-halo-color': text_halo_color,
-        'text-halo-width': 2
+        'text-halo-width': 1
       }
     },
     {
-      id: 'place_village',
+      id: 'water_waterway_label',
       type: 'symbol',
-      source: 'openmaptiles',
-      'source-layer': 'place',
-      minzoom: 12,
-      maxzoom: 17,
-      filter: ['all', ['==', '$type', 'Point'], ['==', 'class', 'village']],
+      source: 'basemap',
+      'source-layer': 'water',
+      minzoom: 13,
+      filter: ['in', 'kind', 'river', 'stream'],
       layout: {
-        'text-anchor': 'center',
-        'text-field': omtLabel(),
-        'text-font': ['Noto Sans Regular'],
-        'text-justify': 'center',
-        'text-offset': [0.5, 0.2],
-        'text-size': ['interpolate', ['linear'], ['zoom'], 12, 9, 17, 18]
+        'symbol-placement': 'line',
+        'text-font': font,
+        'text-field': pmLabel(lang),
+        'text-size': 12,
+        'text-letter-spacing': 0.2
       },
       paint: {
-        'text-color': text_color,
-        'text-halo-blur': 1,
+        'text-color': label_color[2],
         'text-halo-color': text_halo_color,
-        'text-halo-width': 2
+        'text-halo-width': 1
       }
     },
     {
-      id: 'place_town',
+      id: 'roads_labels_minor',
       type: 'symbol',
-      source: 'openmaptiles',
-      'source-layer': 'place',
-      minzoom: 10,
-      maxzoom: 15,
-      filter: ['all', ['==', '$type', 'Point'], ['==', 'class', 'town']],
+      source: 'basemap',
+      'source-layer': 'roads',
+      minzoom: 15,
+      filter: ['in', 'kind', 'minor_road', 'other', 'path'],
       layout: {
-        'text-anchor': 'center',
-        'text-field': omtLabel(),
-        'text-font': ['Noto Sans Regular'],
-        'text-justify': 'center',
-        'text-offset': [0.5, 0.2],
-        'text-size': ['interpolate', ['linear'], ['zoom'], 10, 9, 15, 18]
+        'symbol-sort-key': ['get', 'min_zoom'],
+        'symbol-placement': 'line',
+        'text-font': font,
+        'text-field': pmLabel(lang),
+        'text-size': 12
       },
       paint: {
-        'text-color': text_color,
-        'text-halo-blur': 1,
+        'text-color': label_color[2],
         'text-halo-color': text_halo_color,
-        'text-halo-width': 2
+        'text-halo-width': 1
       }
     },
     {
-      id: 'place_city',
+      id: 'roads_labels_major',
       type: 'symbol',
-      source: 'openmaptiles',
-      'source-layer': 'place',
-      minzoom: 7.5,
-      maxzoom: 12,
-      filter: [
-        'all',
-        ['==', '$type', 'Point'],
-        ['all', ['!=', 'capital', 2], ['==', 'class', 'city'], ['>', 'rank', 3]]
-      ],
+      source: 'basemap',
+      'source-layer': 'roads',
+      minzoom: 11,
+      filter: ['in', 'kind', 'highway', 'major_road'],
       layout: {
-        'text-anchor': 'center',
-        'text-field': omtLabel(),
-        'text-font': ['Noto Sans Regular'],
-        'text-justify': 'center',
-        'text-offset': [0.5, 0.2],
-        'text-size': interpolate(zoom, [
-          [7.5, 8],
-          [12, 18]
-        ]),
-        visibility: 'visible'
+        'symbol-sort-key': ['get', 'min_zoom'],
+        'symbol-placement': 'line',
+        'text-font': font,
+        'text-field': pmLabel(lang),
+        'text-size': 12
       },
       paint: {
-        'text-color': text_color,
-        'text-halo-blur': 1,
+        'text-color': label_color[2],
         'text-halo-color': text_halo_color,
-        'text-halo-width': 2
+        'text-halo-width': 1
       }
     },
     {
-      id: 'place_capital',
+      id: 'places_subplace',
       type: 'symbol',
-      source: 'openmaptiles',
-      'source-layer': 'place',
+      source: 'basemap',
+      'source-layer': 'places',
+      minzoom: 13,
+      maxzoom: 14,
+      filter: ['==', 'kind', 'neighbourhood'],
+      layout: {
+        'symbol-sort-key': ['get', 'min_zoom'],
+        'text-font': font,
+        'text-field': pmLabel(lang),
+        'text-max-width': 7,
+        'text-letter-spacing': 0.1,
+        'text-padding': ['interpolate', ['linear'], ['zoom'], 5, 2, 8, 4, 12, 18, 15, 20],
+        'text-size': ['interpolate', ['exponential', 1.2], ['zoom'], 11, 8, 14, 14, 18, 24]
+      },
+      paint: {
+        'text-color': label_color[2],
+        'text-halo-color': text_halo_color,
+        'text-halo-width': 1
+      }
+    },
+    {
+      id: 'places_locality',
+      type: 'symbol',
+      source: 'basemap',
+      'source-layer': 'places',
       minzoom: 5.5,
       maxzoom: 12,
-      filter: ['all', ['==', '$type', 'Point'], ['all', ['==', 'capital', 2], ['==', 'class', 'city']]],
+      filter: ['==', 'kind', 'locality'],
       layout: {
-        'text-anchor': 'center',
-        'text-field': omtLabel(),
-        'text-font': ['Noto Sans Regular'],
-        'text-justify': 'center',
-        'text-offset': [0.5, 0.2],
-        'text-size': interpolate(zoom, [
-          [5.5, 9],
-          [12, 18]
-        ]),
-        visibility: 'visible'
+        'icon-size': 0.7,
+        'text-font': font,
+        'text-field': pmLabel(lang),
+        'text-padding': ['interpolate', ['linear'], ['zoom'], 5, 3, 8, 7, 12, 11],
+        'text-size': [
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          2,
+          ['case', ['<', ['get', 'population_rank'], 13], 8, ['>=', ['get', 'population_rank'], 13], 13, 0],
+          4,
+          ['case', ['<', ['get', 'population_rank'], 13], 10, ['>=', ['get', 'population_rank'], 13], 15, 0],
+          6,
+          ['case', ['<', ['get', 'population_rank'], 12], 11, ['>=', ['get', 'population_rank'], 12], 17, 0],
+          8,
+          ['case', ['<', ['get', 'population_rank'], 11], 11, ['>=', ['get', 'population_rank'], 11], 18, 0],
+          10,
+          ['case', ['<', ['get', 'population_rank'], 9], 12, ['>=', ['get', 'population_rank'], 9], 20, 0],
+          15,
+          ['case', ['<', ['get', 'population_rank'], 8], 12, ['>=', ['get', 'population_rank'], 8], 22, 0]
+        ],
+        'icon-padding': ['interpolate', ['linear'], ['zoom'], 0, 0, 8, 4, 10, 8, 12, 6, 22, 2],
+        'text-justify': 'auto'
       },
       paint: {
-        'text-color': text_color,
-        'text-halo-blur': 1,
+        'text-color': label_color[2],
         'text-halo-color': text_halo_color,
-        'text-halo-width': 2
+        'text-halo-width': 1.5
       }
     },
     {
-      id: 'place_city_large',
+      id: 'places_region',
       type: 'symbol',
-      source: 'openmaptiles',
-      'source-layer': 'place',
-      minzoom: 7,
-      maxzoom: 12,
-      filter: [
-        'all',
-        ['==', '$type', 'Point'],
-        ['all', ['!=', 'capital', 2], ['<=', 'rank', 3], ['==', 'class', 'city']]
-      ],
-      layout: {
-        'text-anchor': 'center',
-        'text-field': omtLabel(),
-        'text-font': ['Noto Sans Regular'],
-        'text-justify': 'center',
-        'text-offset': [0.5, 0.2],
-        'text-size': 14,
-        visibility: 'visible'
-      },
-      paint: {
-        'text-color': text_color,
-        'text-halo-blur': 1,
-        'text-halo-color': text_halo_color,
-        'text-halo-width': 2
-      }
-    },
-    {
-      id: 'place_state',
-      type: 'symbol',
-      source: 'openmaptiles',
-      'source-layer': 'place',
+      source: 'basemap',
+      'source-layer': 'places',
       minzoom: 5,
-      maxzoom: 12,
-      filter: ['all', ['==', '$type', 'Point'], ['==', 'class', 'state']],
-      layout: {
-        'text-field': omtLabel(),
-        'text-font': ['Noto Sans Regular'],
-        'text-size': interpolate(zoom, [
-          [5, 9],
-          [12, 14]
-        ]),
-        visibility: 'visible'
-      },
-      paint: {
-        'text-color': text_color,
-        'text-halo-blur': 1,
-        'text-halo-color': text_halo_color,
-        'text-halo-width': 2
-      }
-    },
-    {
-      id: 'place_country_other',
-      type: 'symbol',
-      source: 'openmaptiles',
-      'source-layer': 'place',
       maxzoom: 8,
-      filter: ['all', ['==', '$type', 'Point'], ['==', 'class', 'country'], ['!has', 'iso_a2']],
+      filter: ['==', 'kind', 'region'],
       layout: {
-        'text-field': omtLabel(),
-        'text-font': ['Metropolis Light Italic', 'Noto Sans Regular Italic'],
-        'text-size': ['interpolate', ['linear'], ['zoom'], 0, 9, 6, 15]
+        'symbol-sort-key': ['get', 'min_zoom'],
+        'text-font': font,
+        'text-field': pmLabel(lang),
+        'text-size': ['interpolate', ['linear'], ['zoom'], 3, 7, 7, 14],
+        'text-radial-offset': 0.2,
+        'text-anchor': 'center'
       },
       paint: {
-        'text-color': text_color,
+        'text-color': label_color[1],
         'text-halo-color': text_halo_color,
         'text-halo-width': 2
       }
     },
     {
-      id: 'place_country_minor',
+      id: 'places_country',
       type: 'symbol',
-      source: 'openmaptiles',
-      'source-layer': 'place',
-      minzoom: 3,
-      maxzoom: 7,
-      filter: [
-        'all',
-        ['==', '$type', 'Point'],
-        ['==', 'class', 'country'],
-        ['>=', 'rank', 2],
-        ['has', 'iso_a2']
-      ],
+      source: 'basemap',
+      'source-layer': 'places',
+      minzoom: 2,
+      filter: ['==', 'kind', 'country'],
       layout: {
-        'text-field': omtLabel(),
-        'text-font': ['Noto Sans Regular'],
-        'text-size': ['interpolate', ['linear'], ['zoom'], 0, 10, 6, 12]
+        'symbol-sort-key': ['get', 'min_zoom'],
+        'text-field': pmLabel(lang),
+        'text-font': font,
+        'text-size': [
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          2,
+          ['case', ['<', ['get', 'population_rank'], 10], 7, ['>=', ['get', 'population_rank'], 10], 10, 0],
+          6,
+          ['case', ['<', ['get', 'population_rank'], 8], 8, ['>=', ['get', 'population_rank'], 8], 18, 0],
+          8,
+          ['case', ['<', ['get', 'population_rank'], 7], 11, ['>=', ['get', 'population_rank'], 7], 20, 0]
+        ],
+        'icon-padding': ['interpolate', ['linear'], ['zoom'], 0, 2, 14, 2, 16, 20, 17, 2, 22, 2]
       },
       paint: {
-        'text-color': text_color,
+        'text-color': label_color[0],
         'text-halo-color': text_halo_color,
         'text-halo-width': 2
-      }
-    },
-    {
-      id: 'place_country_major',
-      type: 'symbol',
-      source: 'openmaptiles',
-      'source-layer': 'place',
-      minzoom: 2.5,
-      maxzoom: 5,
-      filter: [
-        'all',
-        ['==', '$type', 'Point'],
-        ['<=', 'rank', 1],
-        ['==', 'class', 'country'],
-        ['has', 'iso_a2']
-      ],
-      layout: {
-        'text-anchor': 'center',
-        'text-field': omtLabel(),
-        'text-font': ['Noto Sans Regular'],
-        'text-size': interpolate(zoom, [
-          [2.5, 10],
-          [3, 12],
-          [5, 16]
-        ])
-      },
-      paint: {
-        'text-color': text_color,
-        'text-halo-color': text_halo_color,
-        'text-halo-width': 2.4
       }
     }
   ]

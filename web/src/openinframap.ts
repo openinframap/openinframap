@@ -10,17 +10,7 @@ import KeyControl from './key/key.js'
 import WarningBox from './warning-box/warning-box.js'
 import OpenInfraMapGeocoder from './geocoder.js'
 
-import map_style from './style/style.js'
-import style_base from './style/style_base.js'
-import style_labels from './style/style_labels.js'
-import style_oim_power from './style/style_oim_power.js'
-import style_oim_power_heatmap from './style/style_oim_power_heatmap.js'
-import style_oim_telecoms from './style/style_oim_telecoms.js'
-import style_oim_petroleum from './style/style_oim_petroleum.js'
-import style_oim_water from './style/style_oim_water.js'
-import style_oim_other_pipelines from './style/style_oim_other_pipelines.js'
-import style_osmose from './style/style_osmose.js'
-import { LayerSpecificationWithZIndex } from './style/types.js'
+import { getStyle, getLayers } from './style/style.js'
 
 import { manifest } from 'virtual:render-svg'
 import { ValidationErrorPopup } from './popup/validation-error-popup.js'
@@ -51,15 +41,7 @@ export default class OpenInfraMap {
   constructor() {
     if (!this.isWebglSupported()) {
       const infobox = new WarningBox(t('warning', 'Warning'))
-      infobox.update(
-        t(
-          'warnings.webgl',
-          '<p>Your browser may have performance or functionality issues with Open Infrastructure Map.</p>' +
-            '<p><a href="http://webglreport.com">WebGL</a> with hardware acceleration is required for this site ' +
-            'to perform well.</p>' +
-            '<p>If your browser supports WebGL, you may need to disable browser fingerprinting protection for this site.</p>'
-        )
-      )
+      infobox.update(t('warnings.webgl'))
       mount(document.body, infobox)
     }
 
@@ -70,24 +52,6 @@ export default class OpenInfraMap {
   }
 
   init() {
-    const oim_layers: LayerSpecificationWithZIndex[] = [
-      ...style_oim_power(),
-      ...style_oim_power_heatmap,
-      ...style_oim_petroleum(),
-      ...style_oim_telecoms(),
-      ...style_oim_water(),
-      ...style_oim_other_pipelines()
-    ]
-
-    oim_layers.sort((a, b) => {
-      if (!a.zorder || !b.zorder) {
-        throw new Error('zorder is required for all layers')
-      }
-      if (a.zorder < b.zorder) return -1
-      if (a.zorder > b.zorder) return 1
-      return 0
-    })
-
     const layer_switcher = new LayerSwitcher(
       [
         new LayerGroup(t('layers.background'), [
@@ -112,7 +76,7 @@ export default class OpenInfraMap {
     )
     const url_hash = new URLHash(layer_switcher)
 
-    map_style.layers = style_base.concat(oim_layers, ...style_osmose(), style_labels())
+    const map_style = getStyle()
 
     layer_switcher.setInitialVisibility(map_style)
 
@@ -161,7 +125,7 @@ export default class OpenInfraMap {
     map.addControl(new EditButton(), 'bottom-right')
     map.addControl(new OpenInfraMapGeocoder(), 'top-left')
     new InfoPopup(
-      oim_layers.map((layer: { [x: string]: any }) => layer['id']),
+      getLayers().map((layer: { [x: string]: any }) => layer['id']),
       6
     ).add(map, clickRouter)
     new ValidationErrorPopup(map, clickRouter)

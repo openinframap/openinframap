@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@opencage/geosearch-core": "^0.1.10",
+    "@protomaps/basemaps": "https://gitpkg.now.sh/russss/protomaps-basemaps/styles?main",
     "@ts-stack/markdown": "^1.5.0",
     "geo-coordinates-parser": "^1.7.4",
     "i18next": "^23.15.2",

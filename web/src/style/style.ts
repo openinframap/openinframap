@@ -1,3 +1,13 @@
+import i18next from 'i18next'
+import style_base from './style_base.js'
+import style_labels from './style_labels.js'
+import style_oim_power from './style_oim_power.js'
+import style_oim_power_heatmap from './style_oim_power_heatmap.js'
+import style_oim_telecoms from './style_oim_telecoms.js'
+import style_oim_petroleum from './style_oim_petroleum.js'
+import style_oim_water from './style_oim_water.js'
+import style_oim_other_pipelines from './style_oim_other_pipelines.js'
+import style_osmose from './style_osmose.js'
 import { StyleSpecification } from 'maplibre-gl'
 
 const oim_attribution =
@@ -16,20 +26,20 @@ const style: StyleSpecification = {
     'sky-horizon-blend': 0.5,
     'horizon-fog-blend': 0.5,
     'fog-ground-blend': 0.5,
-    'atmosphere-blend': ['interpolate', ['linear'], ['zoom'], 2, 0.4, 4, 0]
+    'atmosphere-blend': ['interpolate', ['linear'], ['zoom'], 0, 0.8, 4, 0]
   },
   light: {
     anchor: 'viewport',
     color: '#F5F02E',
-    intensity: 1,
-    position: [1, 90, 90]
+    intensity: 0.8,
+    position: [1, 85, 90]
   },
   sources: {
-    openmaptiles: {
+    basemap: {
       type: 'vector',
-      tiles: ['https://openinframap.org/20221105/{z}/{x}/{y}.mvt'],
-      maxzoom: 14,
-      attribution: '<a href="https://openmaptiles.org/">OpenMapTiles</a>'
+      tiles: ['https://openinframap.org/20250311/{z}/{x}/{y}.mvt'],
+      maxzoom: 15,
+      attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a>'
     },
     blackmarble: {
       type: 'raster',
@@ -81,8 +91,36 @@ const style: StyleSpecification = {
       minzoom: 11
     }
   },
-  glyphs: '/fonts/{fontstack}/{range}.pbf',
+  //glyphs: '/fonts/{fontstack}/{range}.pbf',
+  glyphs: 'https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf',
+  sprite: 'https://protomaps.github.io/basemaps-assets/sprites/v4/light',
   layers: []
 }
 
-export default style
+export function getLayers() {
+  return [
+    ...style_oim_power(),
+    ...style_oim_power_heatmap,
+    ...style_oim_petroleum(),
+    ...style_oim_telecoms(),
+    ...style_oim_water(),
+    ...style_oim_other_pipelines(),
+    ...style_osmose()
+  ]
+}
+
+export function getStyle() {
+  const oim_layers = getLayers()
+
+  oim_layers.sort((a, b) => {
+    if (!a.zorder || !b.zorder) {
+      throw new Error('zorder is required for all layers')
+    }
+    if (a.zorder < b.zorder) return -1
+    if (a.zorder > b.zorder) return 1
+    return 0
+  })
+
+  style.layers = [...style_base, ...oim_layers, ...style_labels(i18next.language)]
+  return style
+}

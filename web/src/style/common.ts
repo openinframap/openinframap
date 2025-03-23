@@ -52,8 +52,8 @@ export type OIMSymbolOptions = {
   textMinZoom: number
   textOffset?: number
   iconImage: ExpressionSpecification | string
-  iconScale?: number // Icon scale at max icon zoom
-  iconMinScale?: ExpresisonSpecification | number // Icon scale at initial icon zoom
+  iconScale?: ExpressionSpecification | number // Icon scale at max icon zoom
+  iconMinScale?: ExpressionSpecification | number // Icon scale at initial icon zoom
   iconMaxZoom?: number
 }
 

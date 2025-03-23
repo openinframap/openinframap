@@ -339,7 +339,7 @@ class InfoPopup {
     return el('span.voltages', text)
   }
 
-  popupHtml(feature: MapGeoJSONFeature) {
+  async popupHtml(feature: MapGeoJSONFeature) {
     const attrs_table = el('table', { class: 'item_info' })
     const renderedProperties = Object.keys(feature.properties)
       .sort()
@@ -356,6 +356,7 @@ class InfoPopup {
     const links_container = el('div.infobox-external-links')
     const image_container = el('div.infobox-image')
     if (feature.properties['wikidata']) {
+      // Start wikidata fetching asynchronously
       this.fetch_wikidata(feature.properties['wikidata'], image_container, links_container)
     } else {
       const wp_link = this.wp_link(feature.properties['wikipedia'])
@@ -394,7 +395,7 @@ class InfoPopup {
     return content
   }
 
-  popup(feature: MapGeoJSONFeature, location: LngLat) {
+  async popup(feature: MapGeoJSONFeature, location: LngLat) {
     if (this.popup_obj && this.popup_obj.isOpen()) {
       this.popup_obj.remove()
     }
@@ -405,79 +406,77 @@ class InfoPopup {
 
     this.popup_obj = new maplibregl.Popup()
       .setLngLat(location)
-      .setDOMContent(this.popupHtml(feature))
+      .setDOMContent(await this.popupHtml(feature))
       .addTo(this._map)
       .addClassName('oim-popup')
       .addClassName('oim-popup-info')
   }
 
-  fetch_wikidata(id: string, imageContainer: RedomElement, linksContainer: RedomElement) {
-    fetch(`https://openinframap.org/wikidata/${id}`)
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        if (data['thumbnail']) {
-          mount(
-            imageContainer,
-            el(
-              'a',
-              el('img.wikidata_image', {
-                src: data['thumbnail']
-              }),
-              {
-                href: `https://commons.wikimedia.org/wiki/File:${data['image']}`,
-                target: '_blank'
-              }
-            )
-          )
-        }
+  async fetch_wikidata(id: string, imageContainer: RedomElement, linksContainer: RedomElement) {
+    const data = await fetch(`https://openinframap.org/wikidata/${id}`).then((response) => {
+      return response.json()
+    })
 
-        for (const lang of [i18next.language.split('-')[0], 'en']) {
-          if (data['sitelinks'][`${lang}wiki`]) {
-            mount(
-              linksContainer,
-              el('a', el('div.ext_link.wikipedia_link'), {
-                href: data['sitelinks'][`${lang}wiki`]['url'],
-                target: '_blank',
-                title: t('wikipedia', 'Wikipedia')
-              })
-            )
-            break
+    if (data['thumbnail']) {
+      mount(
+        imageContainer,
+        el(
+          'a',
+          el('img.wikidata_image', {
+            src: data['thumbnail']
+          }),
+          {
+            href: `https://commons.wikimedia.org/wiki/File:${data['image']}`,
+            target: '_blank'
           }
-        }
+        )
+      )
+    }
 
-        if (data['sitelinks']['commonswiki']) {
-          mount(
-            linksContainer,
-            el('a', el('div.ext_link.commons_link'), {
-              href: data['sitelinks']['commonswiki']['url'],
-              target: '_blank',
-              title: t('wikimedia-commons', 'Wikimedia Commons')
-            })
-          )
-        }
-
-        if (data['gem_id']) {
-          mount(
-            linksContainer,
-            el('a', el('div.ext_link.gem_link'), {
-              href: `https://www.gem.wiki/${data['gem_id']}`,
-              target: '_blank',
-              title: 'Global Energy Monitor'
-            })
-          )
-        }
-
+    for (const lang of [i18next.language.split('-')[0], 'en']) {
+      if (data['sitelinks'][`${lang}wiki`]) {
         mount(
           linksContainer,
-          el('a', el('div.ext_link.wikidata_link'), {
-            href: `https://wikidata.org/wiki/${id}`,
+          el('a', el('div.ext_link.wikipedia_link'), {
+            href: data['sitelinks'][`${lang}wiki`]['url'],
             target: '_blank',
-            title: t('wikidata', 'Wikidata')
+            title: t('wikipedia', 'Wikipedia')
           })
         )
+        break
+      }
+    }
+
+    if (data['sitelinks']['commonswiki']) {
+      mount(
+        linksContainer,
+        el('a', el('div.ext_link.commons_link'), {
+          href: data['sitelinks']['commonswiki']['url'],
+          target: '_blank',
+          title: t('wikimedia-commons', 'Wikimedia Commons')
+        })
+      )
+    }
+
+    if (data['gem_id']) {
+      mount(
+        linksContainer,
+        el('a', el('div.ext_link.gem_link'), {
+          href: `https://www.gem.wiki/${data['gem_id']}`,
+          target: '_blank',
+          title: 'Global Energy Monitor'
+        })
+      )
+    }
+
+    mount(
+      linksContainer,
+      el('a', el('div.ext_link.wikidata_link'), {
+        href: `https://wikidata.org/wiki/${id}`,
+        target: '_blank',
+        title: t('wikidata', 'Wikidata')
       })
+    )
   }
 
   wp_link(value: string) {
