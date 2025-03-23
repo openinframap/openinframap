@@ -76,7 +76,7 @@ export function get_country_name(lang: string, script?: string) {
   }
   return [
     'format',
-    ['coalesce', ['get', `${name_prefix}name:${lang}`], ['get', 'name:en']],
+    ['coalesce', ['get', `${name_prefix}name:${lang}`], ['get', 'name:en'], ['get', 'name']],
     get_font_formatting(_script)
   ]
 }

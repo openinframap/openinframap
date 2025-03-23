@@ -181,6 +181,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       source: 'basemap',
       'source-layer': 'places',
       minzoom: 2,
+      maxzoom: 8,
       filter: ['==', 'kind', 'country'],
       layout: {
         'symbol-sort-key': ['get', 'min_zoom'],

@@ -529,19 +529,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     filter: ['all', ['!has', 'is_tunnel'], ['==', 'kind', 'major_road']],
     paint: {
       'line-color': colours['road_major'],
-      'line-width': [
-        'interpolate',
-        ['exponential', 1.6],
-        ['zoom'],
-        6,
-        0,
-        12,
-        1.6,
-        15,
-        3,
-        18,
-        road_base_size * 1.6
-      ]
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 6, 0, 18, road_base_size * 1.6]
     }
   },
   {
@@ -552,21 +540,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     filter: ['all', ['!has', 'is_tunnel'], ['==', 'kind', 'highway'], ['!has', 'is_link']],
     paint: {
       'line-color': colours['road_major'],
-      'line-width': [
-        'interpolate',
-        ['exponential', 1.6],
-        ['zoom'],
-        3,
-        0,
-        6,
-        1.1,
-        12,
-        1.6,
-        15,
-        5,
-        18,
-        road_base_size * 2
-      ]
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 3, 0, 6, 1.1, 18, road_base_size * 2]
     }
   },
   {
