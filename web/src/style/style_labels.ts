@@ -1,5 +1,5 @@
 import { LayerSpecificationWithZIndex } from './types.ts'
-import { get_country_name } from '@protomaps/basemaps'
+import { get_country_name } from './protomaps_language.ts'
 import { font } from './common.ts'
 import { DataDrivenPropertyValueSpecification } from 'maplibre-gl'
 
