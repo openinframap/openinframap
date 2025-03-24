@@ -27,3 +27,11 @@ CREATE TABLE stats.power_generator (
 	count INTEGER,
 	output BIGINT
 );
+
+CREATE TABLE stats.substation (
+	id SERIAL PRIMARY KEY,
+	time TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+	country TEXT NOT NULL,
+	voltage INTEGER,
+	count INTEGER
+);
