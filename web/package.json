@@ -28,13 +28,12 @@
     "eslint-plugin-prettier": "^5.1.2",
     "prettier": "^3.5.2",
     "typescript": "^5.5.4",
-    "vite": "^6.0.3",
+    "vite": "^6.2.2",
     "vite-plugin-i18next-loader": "^3.0.0",
     "vite-plugin-render-svg": "^1.1.1"
   },
   "dependencies": {
     "@opencage/geosearch-core": "^0.1.10",
-    "@protomaps/basemaps": "https://gitpkg.now.sh/russss/protomaps-basemaps/styles?main",
     "@ts-stack/markdown": "^1.5.0",
     "geo-coordinates-parser": "^1.7.4",
     "i18next": "^23.15.2",
@@ -42,7 +41,7 @@
     "lodash.invert": "^4.3.0",
     "lodash.isequal": "^4.5.0",
     "lodash.sortby": "^4.7.0",
-    "maplibre-gl": "^v5.1.0",
+    "maplibre-gl": "^v5.2.0",
     "redom": "^3.29.1",
     "title-case": "^3.0.3"
   }
