@@ -1,0 +1,32 @@
+name: Build SQL Jobs container
+
+on:
+  push:
+    branches: 
+      - main
+    paths:
+      - 'schema/jobs/**'
+      - '.github/workflows/sql-jobs.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push SQL Jobs image
+        id: docker_build
+        uses: docker/build-push-action@v6
+        with:
+          context: ./schema/jobs
+          file: ./schema/jobs/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/openinframap/sql-jobs:${{ github.sha }}-${{ github.run_number }}
+            ghcr.io/openinframap/sql-jobs:latest
