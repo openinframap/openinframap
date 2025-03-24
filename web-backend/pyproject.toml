@@ -14,6 +14,8 @@ dependencies = [
     "httpx",
     "more-itertools",
     "async_lru",
+    "pandas>=2.2.3",
+    "bokeh==3.7.0",
 ]
 
 [tool.ruff]
@@ -27,6 +29,7 @@ ignore = []
 [dependency-groups]
 dev = [
     "mypy>=1.15.0",
+    "pandas-stubs>=2.2.3.250308",
     "pytest>=8.3.4",
     "pytest-asyncio>=0.25.3",
     "ruff>=0.9.7",

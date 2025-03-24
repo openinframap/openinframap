@@ -1,0 +1,30 @@
+{% extends "_base.html" %}
+{% import "_tables.html" as tables %}
+{% set breadcrumbs = [('Stats', url_for('stats')), ('Charts', None)] %}
+{% block title %}Charts{% endblock %}
+{% block content -%}
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.7.0.js"
+        crossorigin="anonymous"></script>
+
+<h3>Lines</h3>
+  <div class="chart" id="lines_plot"></div>
+
+<h3>Plants</h3>
+  <div class="chart" id="plants_plot"></div>
+
+<h3>Plant Output</h3>
+  <div class="chart" id="output_plot"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var linesItem = JSON.parse('{{lines_plot|safe}}');
+      Bokeh.embed.embed_item(linesItem, "lines_plot");
+
+      var plantsItem = JSON.parse('{{plants_plot|safe}}');
+      Bokeh.embed.embed_item(plantsItem, "plants_plot");
+
+      var outputItem = JSON.parse('{{output_plot|safe}}');
+      Bokeh.embed.embed_item(outputItem, "output_plot");
+    });
+</script>
+{% endblock %}

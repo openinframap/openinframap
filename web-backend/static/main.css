@@ -12,6 +12,7 @@ body {
   color: #333;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 a,
@@ -47,15 +48,16 @@ h3 {
   margin-block-end: 0;
 }
 
-#content {
+main {
   margin: 1rem auto;
   margin-bottom: 20px;
   padding: 0px 10px;
   max-width: 1100px;
+  min-width: 50vw;
   flex: 1 0 auto;
 }
 
-#content > * + * {
+main > * + * {
   margin-block-start: 1rem;
 }
 
@@ -217,4 +219,8 @@ figure.plant_image {
     display: inline-block;
     margin: auto;
   }
+}
+
+.chart {
+  min-width: 80vw;
 }

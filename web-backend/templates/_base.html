@@ -19,7 +19,7 @@
 </head>
 <body>
   <header>
-    <h1><a href="{{url_for('main')}}">OpenInfraMap</a>
+    <h1><a href="{{url_for('main')}}">OpenInfraMap</a></h1>
     {%- if breadcrumbs -%}
       <h2>
       {%- for name, url in breadcrumbs -%}
@@ -33,9 +33,9 @@
       </h2>
     {%- endif %}
   </header>
-  <div id="content">
+  <main>
     {% block content %}{% endblock %}
-  </div>
+  </main>
   <footer>
     <p>Purchase data exports at <a target="_blank" href="https://www.infrageomatics.com/products/osm-export">Infrageomatics</a>.</p>
     <p class="copyright">

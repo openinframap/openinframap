@@ -7,6 +7,10 @@ from starlette.templating import Jinja2Templates
 from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException
+import bokeh.resources
+import json
+
+from bokeh.embed import json_item
 
 from template_functions import (
     format_power,
@@ -28,7 +32,7 @@ from data import (
     get_wikidata,
     get_commons_thumbnail,
 )
-
+import charts
 
 DEBUG = config("DEBUG", cast=bool, default=False)
 templates = Jinja2Templates(directory="templates")
@@ -40,6 +44,7 @@ templates.env.filters["percent"] = format_percent
 templates.env.filters["country_name"] = country_name
 templates.env.globals["osm_link"] = osm_link
 templates.env.filters["external_url"] = format_external_url
+templates.env.globals["BOKEH_JS"] = bokeh.resources.INLINE
 
 
 class State(TypedDict):
@@ -102,6 +107,27 @@ async def stats(request):
             "request": request,
             "countries": await get_countries(),
             "power_lines": power_lines,
+        },
+    )
+
+
+@app.route("/stats/charts")
+@cache_for(86400)
+async def stats_charts(request):
+    lines_plot = await charts.line_length()
+    plants_plot = await charts.plant_count()
+    output_plot = await charts.plant_output()
+    return templates.TemplateResponse(
+        "charts.html",
+        {
+            "request": request,
+            "lines_plot": json.dumps(json_item(lines_plot, "lines_plot", charts.theme)),
+            "plants_plot": json.dumps(
+                json_item(plants_plot, "plants_plot", charts.theme)
+            ),
+            "output_plot": json.dumps(
+                json_item(output_plot, "output_plot", charts.theme)
+            ),
         },
     )
 
