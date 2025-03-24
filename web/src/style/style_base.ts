@@ -15,7 +15,6 @@ function landcover_colour(hue: any, sat: any, initial_lum = '85%') {
 }
 
 const colours: Record<string, any> = {
-  background: 'rgb(242,243,240)',
   land: landcover_colour(42, '10%'),
   ice: landcover_colour(180, '10%'),
   urban: landcover_colour(245, '9%', '82%'),
@@ -48,16 +47,8 @@ const layers: LayerSpecificationWithZIndex[] = [
     id: 'background',
     type: 'background',
     paint: {
-      'background-color': colours['background']
+      'background-color': colours['land']
     }
-  },
-  {
-    id: 'earth',
-    type: 'fill',
-    source: 'basemap',
-    'source-layer': 'earth',
-    filter: ['==', '$type', 'Polygon'],
-    paint: { 'fill-color': colours['land'] }
   },
   {
     id: 'landuse_ice',
