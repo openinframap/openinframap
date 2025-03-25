@@ -1,3 +1,4 @@
+import asyncio
 import contextlib
 from typing import AsyncIterator, TypedDict
 import httpx
@@ -100,13 +101,15 @@ async def copyright(request):
 @app.route("/stats")
 @cache_for(86400)
 async def stats(request):
-    power_lines = await stats_power_line()
+    async with asyncio.TaskGroup() as tg:
+        power_lines = tg.create_task(stats_power_line())
+        countries = tg.create_task(get_countries())
     return templates.TemplateResponse(
         "index.html",
         {
             "request": request,
-            "countries": await get_countries(),
-            "power_lines": power_lines,
+            "countries": countries.result(),
+            "power_lines": power_lines.result(),
         },
     )
 
@@ -114,24 +117,27 @@ async def stats(request):
 @app.route("/stats/charts")
 @cache_for(86400)
 async def stats_charts(request):
-    lines_plot = await charts.line_length()
-    plants_plot = await charts.plant_count()
-    output_plot = await charts.plant_output()
-    substation_plot = await charts.substation_count()
+    async with asyncio.TaskGroup() as tg:
+        lines_plot = tg.create_task(charts.line_length())
+        plants_plot = tg.create_task(charts.plant_count())
+        output_plot = tg.create_task(charts.plant_output())
+        substation_plot = tg.create_task(charts.substation_count())
 
     return templates.TemplateResponse(
         "charts.html",
         {
             "request": request,
-            "lines_plot": json.dumps(json_item(lines_plot, "lines_plot", charts.theme)),
+            "lines_plot": json.dumps(
+                json_item(lines_plot.result(), "lines_plot", charts.theme)
+            ),
             "plants_plot": json.dumps(
-                json_item(plants_plot, "plants_plot", charts.theme)
+                json_item(plants_plot.result(), "plants_plot", charts.theme)
             ),
             "output_plot": json.dumps(
-                json_item(output_plot, "output_plot", charts.theme)
+                json_item(output_plot.result(), "output_plot", charts.theme)
             ),
             "substation_plot": json.dumps(
-                json_item(substation_plot, "substations_plot", charts.theme)
+                json_item(substation_plot.result(), "substations_plot", charts.theme)
             ),
         },
     )
@@ -141,39 +147,44 @@ async def stats_charts(request):
 @country_required
 @cache_for(3600)
 async def country(request, country):
-    plant_stats = await database.fetch_one(
-        query="""SELECT SUM(convert_power(output)) AS output, COUNT(*)
-                    FROM power_plant
-                    WHERE ST_Contains(
-                        (SELECT ST_Transform(geom, 3857) FROM countries.country_eez where gid = :gid),
-                        geometry)
-                    AND tags -> 'construction:power' IS NULL
-                    """,
-        values={"gid": country["gid"]},
-    )
-
-    plant_source_stats = await database.fetch_all(
-        query="""SELECT first_semi(source) AS source, sum(convert_power(output)) AS output, count(*)
-                    FROM power_plant
-                    WHERE ST_Contains(
-                            (SELECT ST_Transform(geom, 3857) FROM countries.country_eez WHERE gid = :gid),
+    async with asyncio.TaskGroup() as tg:
+        plant_stats = tg.create_task(
+            database.fetch_one(
+                query="""SELECT SUM(convert_power(output)) AS output, COUNT(*)
+                        FROM power_plant
+                        WHERE ST_Contains(
+                            (SELECT ST_Transform(geom, 3857) FROM countries.country_eez where gid = :gid),
                             geometry)
-                    AND tags -> 'construction:power' IS NULL
-                    GROUP BY first_semi(source)
-                    ORDER BY SUM(convert_power(output)) DESC NULLS LAST""",
-        values={"gid": country["gid"]},
-    )
+                        AND tags -> 'construction:power' IS NULL
+                        """,
+                values={"gid": country["gid"]},
+            )
+        )
 
-    power_lines = await stats_power_line(country["union"])
+        plant_source_stats = tg.create_task(
+            database.fetch_all(
+                query="""SELECT first_semi(source) AS source, sum(convert_power(output)) AS output, count(*)
+                        FROM power_plant
+                        WHERE ST_Contains(
+                                (SELECT ST_Transform(geom, 3857) FROM countries.country_eez WHERE gid = :gid),
+                                geometry)
+                        AND tags -> 'construction:power' IS NULL
+                        GROUP BY first_semi(source)
+                        ORDER BY SUM(convert_power(output)) DESC NULLS LAST""",
+                values={"gid": country["gid"]},
+            )
+        )
+
+        power_lines = tg.create_task(stats_power_line(country["union"]))
 
     return templates.TemplateResponse(
         "country.html",
         {
             "request": request,
             "country": country["union"],
-            "plant_stats": plant_stats._mapping,
-            "plant_source_stats": plant_source_stats,
-            "power_lines": power_lines,
+            "plant_stats": plant_stats.result()._mapping,
+            "plant_source_stats": plant_source_stats.result(),
+            "power_lines": power_lines.result(),
             "canonical": request.url_for("country", country=country["union"]),
         },
     )
