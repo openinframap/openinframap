@@ -10,6 +10,7 @@ CREATE TABLE stats.power_line (
 	length INTEGER NOT NULL
 );
 
+-- Power plants, grouped by output. (Note you need to sum(count * output) to get the total)
 CREATE TABLE stats.power_plant (
 	id SERIAL PRIMARY KEY,
 	time TIMESTAMP WITHOUT TIME ZONE NOT NULL,
