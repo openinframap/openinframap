@@ -71,7 +71,10 @@ async def line_length():
                 (SELECT SUM(length) FROM stats.power_line WHERE time = a.time) AS total_length,
                 (SELECT SUM(length) FROM stats.power_line WHERE time = a.time
                     AND voltage IS NOT NULL) AS with_voltage
-                FROM stats.power_line a GROUP BY time"""
+                FROM stats.power_line a
+                GROUP BY time
+                ORDER BY time
+        """
     )
 
     data = result_to_df(data)
