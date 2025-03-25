@@ -4,7 +4,7 @@ from bokeh.models import ColumnDataSource
 import pandas as pd
 from bokeh.palettes import Category10
 import decimal
-from bokeh.models import NumeralTickFormatter
+from bokeh.models import NumeralTickFormatter, HoverTool
 from bokeh.themes import Theme
 
 # Define a shared color palette for source categories
@@ -67,13 +67,13 @@ def figure(**kwargs):
 
 async def line_length():
     data = await database.fetch_all(
-        """SELECT time AS date,
-                (SELECT SUM(length) FROM stats.power_line WHERE time = a.time) AS total_length,
-                (SELECT SUM(length) FROM stats.power_line WHERE time = a.time
-                    AND voltage IS NOT NULL) AS with_voltage
+        """SELECT date_trunc('week', time) AS date,
+                avg((SELECT SUM(length) FROM stats.power_line WHERE time = a.time)) AS total_length,
+                avg((SELECT SUM(length) FROM stats.power_line WHERE time = a.time
+                    AND voltage IS NOT NULL)) AS with_voltage
                 FROM stats.power_line a
-                GROUP BY time
-                ORDER BY time
+                GROUP BY date_trunc('week', time)
+                ORDER BY date_trunc('week', time)
         """
     )
 
@@ -94,9 +94,50 @@ async def line_length():
     return p
 
 
+def _plot_stacked_areas(p, data: pd.DataFrame, colors: dict[str, str], hover=None):
+    """
+    Helper function to plot stacked areas with lines and points using Bokeh's stack functions
+
+    Args:
+        p: Bokeh figure
+        pivot_data: DataFrame with date index and columns for each category
+        source_colors: Dictionary mapping categories to colors
+
+    Returns:
+        The updated Bokeh figure
+    """
+    source = ColumnDataSource(data)
+
+    color_list = [colors.get(series, "gray") for series in data.columns]
+
+    p.varea_stack(
+        stackers=list(data.columns),
+        x="date",
+        color=color_list,
+        alpha=0.3,
+        legend_label=list(data.columns),
+        source=source,
+    )
+
+    lines = p.vline_stack(
+        stackers=list(data.columns),
+        x="date",
+        color=color_list,
+        legend_label=list(data.columns),
+        source=source,
+    )
+
+    if hover:
+        hover.renderers = lines
+        p.add_tools(hover)
+
+    return p
+
+
 async def plant_count():
     data = await database.fetch_all(
-        """SELECT time AS date,
+        """SELECT date_trunc('week', time) AS date, type, avg(total_count) AS total_count FROM (
+                SELECT time,
                   CASE
                       WHEN source IN ('solar') THEN 'Solar'
                       WHEN source IN ('coal', 'gas', 'oil', 'diesel', 'nuclear') THEN 'Fossil Fuels'
@@ -107,7 +148,10 @@ async def plant_count():
                   SUM(count) AS total_count
            FROM stats.power_plant
            GROUP BY time, type
-           ORDER BY time"""
+           ) AS a
+            GROUP BY date_trunc('week', time), type
+            ORDER BY date_trunc('week', time)
+           """
     )
 
     data = result_to_df(data)
@@ -131,31 +175,15 @@ async def plant_count():
     p.yaxis.axis_label = "Count"
     p.yaxis.formatter = NumeralTickFormatter(format="0,0")
 
-    cumulative_sum = pivot_data.cumsum(axis=1)
-    previous_line = pd.Series(0, index=pivot_data.index)
-
-    for plant_type in pivot_data.columns:
-        color = SOURCE_COLORS.get(plant_type, "gray")
-        p.line(
-            pivot_data.index,
-            cumulative_sum[plant_type],
-            legend_label=plant_type,
-            color=color,
-        )
-        p.scatter(
-            pivot_data.index,
-            cumulative_sum[plant_type],
-            size=2,
-            color=color,
-        )
-        p.varea(
-            x=pivot_data.index,
-            y1=previous_line,
-            y2=cumulative_sum[plant_type],
-            fill_color=color,
-            fill_alpha=0.3,
-        )
-        previous_line = cumulative_sum[plant_type]
+    hover = HoverTool(
+        tooltips=[
+            ("Date", "@date{%F}"),
+            ("Source", "$name"),
+            ("Count", "@$name{0,0}"),
+        ]
+    )
+    hover.formatters = {"@date": "datetime"}
+    p = _plot_stacked_areas(p, pivot_data, SOURCE_COLORS, hover=hover)
 
     p.legend.location = "top_left"
     return p
@@ -198,31 +226,55 @@ async def plant_output():
     p.yaxis.axis_label = "Output (GW)"
     p.yaxis.formatter = NumeralTickFormatter(format="0,0")
 
-    cumulative_sum = pivot_data.cumsum(axis=1)
-    previous_line = pd.Series(0, index=pivot_data.index)
+    hover = HoverTool(
+        tooltips=[
+            ("Date", "@date{%F}"),
+            ("Source", "$name"),
+            ("Output", "@$name{0,0} GW"),
+        ]
+    )
+    hover.formatters = {"@date": "datetime"}
+    p = _plot_stacked_areas(p, pivot_data, SOURCE_COLORS, hover=hover)
 
-    for plant_type in pivot_data.columns:
-        color = SOURCE_COLORS.get(plant_type, "gray")
-        p.line(
-            pivot_data.index,
-            cumulative_sum[plant_type],
-            legend_label=plant_type,
-            color=color,
-        )
-        p.scatter(
-            pivot_data.index,
-            cumulative_sum[plant_type],
-            size=2,
-            color=color,
-        )
-        p.varea(
-            x=pivot_data.index,
-            y1=previous_line,
-            y2=cumulative_sum[plant_type],
-            fill_color=color,
-            fill_alpha=0.3,
-        )
-        previous_line = cumulative_sum[plant_type]
+    p.legend.location = "bottom_right"
+    return p
 
+
+async def substation_count():
+    data = await database.fetch_all(
+        """SELECT date_trunc('week', time) AS date,
+                  avg((SELECT SUM(count) FROM stats.substation WHERE time = s.time)) AS total_count,
+                  avg((SELECT SUM(count) FROM stats.substation WHERE time = s.time
+                      AND voltage IS NOT NULL)) AS with_voltage
+           FROM stats.substation s
+           GROUP BY date_trunc('week', time)
+           ORDER BY date_trunc('week', time)
+        """
+    )
+
+    data = result_to_df(data)
+    cds = ColumnDataSource(data)
+
+    p = figure(
+        x_axis_type="datetime",
+        title="Substation Count",
+        y_range=(0, data["total_count"].max() * 1.1),
+        x_range=(
+            pd.to_datetime("2014-01-01"),
+            data["date"].max() + pd.Timedelta(days=10),
+        ),
+    )
+    p.yaxis.axis_label = "Count"
+    p.yaxis.formatter = NumeralTickFormatter(format="0,0")
+    p.varea("date", 0, "total_count", source=cds, alpha=0.3, legend_label="Total")
+    p.scatter("date", "total_count", source=cds, size=2)
+    p.line(
+        "date",
+        "with_voltage",
+        source=cds,
+        legend_label="With voltage",
+        line_color="red",
+    )
+    p.scatter("date", "with_voltage", source=cds, size=2, color="red")
     p.legend.location = "bottom_right"
     return p

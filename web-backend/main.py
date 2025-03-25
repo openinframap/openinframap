@@ -117,6 +117,8 @@ async def stats_charts(request):
     lines_plot = await charts.line_length()
     plants_plot = await charts.plant_count()
     output_plot = await charts.plant_output()
+    substation_plot = await charts.substation_count()
+
     return templates.TemplateResponse(
         "charts.html",
         {
@@ -127,6 +129,9 @@ async def stats_charts(request):
             ),
             "output_plot": json.dumps(
                 json_item(output_plot, "output_plot", charts.theme)
+            ),
+            "substation_plot": json.dumps(
+                json_item(substation_plot, "substations_plot", charts.theme)
             ),
         },
     )

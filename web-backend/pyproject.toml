@@ -28,6 +28,7 @@ ignore = []
 
 [dependency-groups]
 dev = [
+    "ipython>=9.0.2",
     "mypy>=1.15.0",
     "pandas-stubs>=2.2.3.250308",
     "pytest>=8.3.4",
