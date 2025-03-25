@@ -28,7 +28,7 @@
     "eslint-plugin-prettier": "^5.1.2",
     "prettier": "^3.5.2",
     "typescript": "^5.5.4",
-    "vite": "^6.2.2",
+    "vite": "^6.2.3",
     "vite-plugin-i18next-loader": "^3.0.0",
     "vite-plugin-render-svg": "^1.1.1"
   },
