@@ -124,7 +124,7 @@ async def plant_count():
         title="Power Plants by Type",
         y_range=(0, pivot_data.sum(axis=1).max() * 1.1),
         x_range=(
-            pivot_data.index.min(),
+            pd.to_datetime("2014-01-01"),
             pivot_data.index.max() + pd.Timedelta(days=10),
         ),
     )
@@ -191,7 +191,7 @@ async def plant_output():
         title="Power Plants by Output",
         y_range=(0, pivot_data.sum(axis=1).max() * 1.1),
         x_range=(
-            pivot_data.index.min(),
+            pd.to_datetime("2021-01-11"),
             pivot_data.index.max() + pd.Timedelta(days=10),
         ),
     )
