@@ -1,3 +1,11 @@
+* {
+  --light-grey: #fafafa;
+  --mid-grey: #eee;
+  --dark-grey: #ccc;
+
+  --text: #333;
+}
+
 html,
 body {
   margin: 0;
@@ -9,7 +17,7 @@ body {
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #333;
+  color: var(--text);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -17,13 +25,13 @@ body {
 
 a,
 a:visited {
-  color: #333;
+  color: var(--text);
 }
 
 header {
   padding: 3px 8px;
-  border-bottom: 1px solid #ccc;
-  background-color: #eee;
+  border-bottom: 1px solid var(--dark-grey);
+  background-color: var(--mid-grey);
   flex: 0 0 auto;
 }
 
@@ -65,11 +73,7 @@ footer {
   flex-shrink: 0;
   padding: 8px 8px;
   font-size: 0.8rem;
-  background-color: #fafafa;
-  @media only screen and (min-width: 1024px) {
-      bottom: 0px;
-      position: sticky;
-  }
+  background-color: var(--light-grey);
 }
 
 footer > * + * {
@@ -83,7 +87,7 @@ footer .copyright {
 footer,
 footer a,
 footer a:visited {
-  color: #666;
+  color: var(--text);
 }
 
 input {
@@ -104,7 +108,7 @@ p.footnote {
 .table-wrapper p.footnote {
   font-size: 0.7em;
   margin-top: 5px;
-  color: #666;
+  color: var(--text);
 }
 
 table {
@@ -112,7 +116,7 @@ table {
   margin-top: 8px;
   table-layout: fixed;
   border-collapse: collapse;
-  border: 1px solid #eee;
+  border: 1px solid var(--mid-grey);
   min-width: 500px;
 }
 
@@ -128,15 +132,15 @@ caption {
 }
 
 thead {
-  background-color: #eee;
+  background-color: var(--mid-grey);
 }
 
 tbody tr:nth-child(even) {
-  background-color: #fafafa;
+  background-color: var(--light-grey);
 }
 
 tfoot tr {
-  background-color: #eee;
+  background-color: var(--mid-grey);
   font-weight: bold;
 }
 
@@ -147,8 +151,8 @@ td {
 
 figure {
   margin: 5px;
-  background-color: #eee;
-  border: 1px #999 solid;
+  background-color: var(--mid-grey);
+  border: 1px var(--dark-grey) solid;
 }
 
 figcaption {
@@ -158,7 +162,7 @@ figcaption {
 
 figcaption a,
 figcaption a:visited {
-  color: #666;
+  color: var(--dark-grey);
 }
 
 figure.plant_image {
