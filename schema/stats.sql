@@ -9,6 +9,7 @@ CREATE TABLE stats.power_line (
 	voltage INTEGER,
 	length INTEGER NOT NULL
 );
+CREATE INDEX power_line_country ON stats.power_line(country);
 
 -- Power plants, grouped by output. (Note you need to sum(count * output) to get the total)
 CREATE TABLE stats.power_plant (
@@ -19,6 +20,7 @@ CREATE TABLE stats.power_plant (
 	count INTEGER,
 	output BIGINT
 );
+CREATE INDEX power_plant_country ON stats.power_line(country);
 
 CREATE TABLE stats.power_generator (
 	id SERIAL PRIMARY KEY,
@@ -28,6 +30,7 @@ CREATE TABLE stats.power_generator (
 	count INTEGER,
 	output BIGINT
 );
+CREATE INDEX power_generator_country ON stats.power_line(country);
 
 CREATE TABLE stats.substation (
 	id SERIAL PRIMARY KEY,
@@ -36,5 +39,4 @@ CREATE TABLE stats.substation (
 	voltage INTEGER,
 	count INTEGER
 );
-
-grant select on ALL tables in schema stats TO web_backend;
+CREATE INDEX power_substation_country ON stats.power_line(country);
