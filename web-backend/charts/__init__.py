@@ -1,9 +1,9 @@
+from charts.util import result_to_df
+from charts.util import figure
 from config import database
-from bokeh.plotting import figure as bokeh_figure
 from bokeh.models import ColumnDataSource
 import pandas as pd
 from bokeh.palettes import Category10
-import decimal
 from bokeh.models import NumeralTickFormatter, HoverTool
 from bokeh.themes import Theme
 
@@ -30,39 +30,6 @@ theme = Theme(
         }
     }
 )
-
-# Apply the custom theme globally
-
-
-def result_to_df(result):
-    # Convert rows to dictionaries and handle decimal.Decimal conversion
-    return pd.DataFrame.from_records(
-        [
-            dict(
-                (k, float(v) if isinstance(v, decimal.Decimal) else v)
-                for k, v in dict(row).items()  # Explicitly convert row to a dictionary
-            )
-            for row in result
-        ]
-    )
-
-
-def figure(**kwargs):
-    kwargs = {
-        "width": 600,
-        "height": 400,
-        "sizing_mode": "stretch_width",
-        "tools": "box_zoom,reset",
-        **kwargs,
-    }
-    fig = bokeh_figure(**kwargs)
-    fig.toolbar.active_drag = None
-    fig.toolbar.active_scroll = None
-    fig.toolbar.active_tap = None
-    fig.outline_line_width = 0
-    fig.xgrid.grid_line_color = None
-    fig.ygrid.grid_line_alpha = 0.5
-    return fig
 
 
 async def line_length():
@@ -165,7 +132,7 @@ async def plant_count():
 
     p = figure(
         x_axis_type="datetime",
-        title="Power Plants by Type",
+        title="Power plant count by source",
         y_range=(0, pivot_data.sum(axis=1).max() * 1.1),
         x_range=(
             pd.to_datetime("2014-01-01"),
@@ -199,7 +166,7 @@ async def plant_output():
                       WHEN source IN ('hydro', 'tidal', 'wave') THEN 'Hydro'
                       ELSE 'Other'
                   END AS type,
-                  SUM(output) / 1e9 AS total_output  -- Convert watts to gigawatts
+                  SUM(count * output) / 1e9 AS total_output  -- Convert watts to gigawatts
            FROM stats.power_plant
            GROUP BY time, type
            ORDER BY time"""
@@ -216,7 +183,7 @@ async def plant_output():
 
     p = figure(
         x_axis_type="datetime",
-        title="Power Plants by Output",
+        title="Power plant output by source",
         y_range=(0, pivot_data.sum(axis=1).max() * 1.1),
         x_range=(
             pd.to_datetime("2021-01-11"),
@@ -257,7 +224,7 @@ async def substation_count():
 
     p = figure(
         x_axis_type="datetime",
-        title="Substation Count",
+        title="Substation count",
         y_range=(0, data["total_count"].max() * 1.1),
         x_range=(
             pd.to_datetime("2014-01-01"),

@@ -34,6 +34,7 @@ from data import (
     get_commons_thumbnail,
 )
 import charts
+import charts.country
 
 DEBUG = config("DEBUG", cast=bool, default=False)
 templates = Jinja2Templates(directory="templates")
@@ -151,11 +152,10 @@ async def country(request, country):
         plant_stats = tg.create_task(
             database.fetch_one(
                 query="""SELECT SUM(convert_power(output)) AS output, COUNT(*)
-                        FROM power_plant
-                        WHERE ST_Contains(
-                            (SELECT ST_Transform(geom, 3857) FROM countries.country_eez where gid = :gid),
-                            geometry)
-                        AND tags -> 'construction:power' IS NULL
+                        FROM power_plant, countries.country_eez_3857 AS eez
+                        WHERE ST_Contains(eez.geom, geometry)
+                            AND eez.gid = :gid
+                            AND tags -> 'construction:power' IS NULL
                         """,
                 values={"gid": country["gid"]},
             )
@@ -164,11 +164,10 @@ async def country(request, country):
         plant_source_stats = tg.create_task(
             database.fetch_all(
                 query="""SELECT first_semi(source) AS source, sum(convert_power(output)) AS output, count(*)
-                        FROM power_plant
-                        WHERE ST_Contains(
-                                (SELECT ST_Transform(geom, 3857) FROM countries.country_eez WHERE gid = :gid),
-                                geometry)
-                        AND tags -> 'construction:power' IS NULL
+                        FROM power_plant, countries.country_eez_3857 AS eez
+                        WHERE ST_Contains(eez.geom, geometry)
+                            AND eez.gid = :gid
+                            AND tags -> 'construction:power' IS NULL
                         GROUP BY first_semi(source)
                         ORDER BY SUM(convert_power(output)) DESC NULLS LAST""",
                 values={"gid": country["gid"]},
@@ -176,6 +175,12 @@ async def country(request, country):
         )
 
         power_lines = tg.create_task(stats_power_line(country["union"]))
+        grid_summary_chart = tg.create_task(
+            charts.country.grid_summary(country["union"])
+        )
+        plant_summary_chart = tg.create_task(
+            charts.country.plant_summary(country["union"])
+        )
 
     return templates.TemplateResponse(
         "country.html",
@@ -185,6 +190,14 @@ async def country(request, country):
             "plant_stats": plant_stats.result()._mapping,
             "plant_source_stats": plant_source_stats.result(),
             "power_lines": power_lines.result(),
+            "country_grid_summary": json.dumps(
+                json_item(
+                    grid_summary_chart.result(), "country-grid-summary", charts.theme
+                )
+            ),
+            "plant_summary": json.dumps(
+                json_item(plant_summary_chart.result(), "plant-summary", charts.theme)
+            ),
             "canonical": request.url_for("country", country=country["union"]),
         },
     )

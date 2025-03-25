@@ -6,6 +6,9 @@
 Statistics on the electricity network in {{country|country_name}} from OpenStreetMap.
 {%- endblock %}
 {% block content -%}
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.7.0.min.js"
+        crossorigin="anonymous"></script>
+
   <p><strong>{{country|country_name(true)}}</strong> has
   {{plant_stats.count}} power plant{%if plant_stats.count != 1 %}s{% endif -%}
   {%- if plant_stats.output %}
@@ -43,7 +46,15 @@ Statistics on the electricity network in {{country|country_name}} from OpenStree
     <p class="footnote">If multiple sources are listed for a power plant, only the first source is used in this breakdown.</p>
   </div>
   <p><a href="{{url_for('plants_construction_country', country=country)}}">Show plants under construction</a></p>
+    <div id="plant-summary"></div>
+  <script>
+    Bokeh.embed.embed_item({{ plant_summary | safe }}, "plant-summary");
+  </script>
   {% if power_lines.total > 1 %}
     {{ tables.power_lines_table(power_lines) }}
+      <div id="country-grid-summary"></div>
+    <script>
+      Bokeh.embed.embed_item({{ country_grid_summary | safe }}, "country-grid-summary");
+    </script>
   {% endif %}
 {% endblock %}
