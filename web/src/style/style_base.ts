@@ -16,11 +16,12 @@ function landcover_colour(hue: any, sat: any, initial_lum = '85%') {
 
 const colours: Record<string, any> = {
   land: landcover_colour(42, '10%'),
-  ice: landcover_colour(180, '10%'),
+  ice: landcover_colour(180, '14%'),
   urban: landcover_colour(245, '9%', '82%'),
   water: ['interpolate-lab', ['linear'], ['zoom'], 2, 'hsl(207, 25%, 75%)', 12, 'hsl(207, 14%, 86%)'],
-  green: landcover_colour(115, '9%', '86%'),
+  green: landcover_colour(90, '20%', '86%'),
   wood: landcover_colour(100, '20%', '81%'),
+  sand: landcover_colour(57, '20%'),
   road_casing: 'hsl(0, 0%, 96%)',
   road_minor: 'hsl(0, 0%, 88%)',
   road_major: 'hsl(0, 0%, 86%)',
@@ -70,6 +71,22 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
+    id: 'landuse_sand',
+    type: 'fill',
+    source: 'basemap',
+    'source-layer': 'landuse',
+    filter: ['in', 'kind', 'beach', 'sand'],
+    paint: { 'fill-color': colours['sand'] }
+  },
+  {
+    id: 'landcover_sand',
+    type: 'fill',
+    source: 'basemap',
+    'source-layer': 'landcover',
+    filter: ['==', 'kind', 'barren'],
+    paint: { 'fill-color': colours['sand'], 'fill-opacity': landcover_opacity }
+  },
+  {
     id: 'landuse_green',
     type: 'fill',
     source: 'basemap',
@@ -80,7 +97,6 @@ const layers: LayerSpecificationWithZIndex[] = [
       'scrub',
       'grassland',
       'grass',
-      'national_park',
       'park',
       'cemetery',
       'protected_area',
@@ -127,8 +143,6 @@ const layers: LayerSpecificationWithZIndex[] = [
     filter: [
       'in',
       'kind',
-      'military',
-      'naval_base',
       'aerodrome',
       'commercial',
       'industrial',
