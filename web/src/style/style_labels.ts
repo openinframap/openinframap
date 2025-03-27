@@ -13,7 +13,7 @@ function pmLabel(lang: string): DataDrivenPropertyValueSpecification<string> {
 export default function layers(lang: string): LayerSpecificationWithZIndex[] {
   return [
     {
-      id: 'address_label',
+      id: 'label_address',
       type: 'symbol',
       source: 'basemap',
       'source-layer': 'buildings',
@@ -32,7 +32,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
-      id: 'water_waterway_label',
+      id: 'label_water_waterway',
       type: 'symbol',
       source: 'basemap',
       'source-layer': 'water',
@@ -52,7 +52,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
-      id: 'roads_labels_minor',
+      id: 'label_roads_minor',
       type: 'symbol',
       source: 'basemap',
       'source-layer': 'roads',
@@ -72,7 +72,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
-      id: 'roads_labels_major',
+      id: 'label_roads_major',
       type: 'symbol',
       source: 'basemap',
       'source-layer': 'roads',
@@ -92,7 +92,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
-      id: 'places_subplace',
+      id: 'label_places_subplace',
       type: 'symbol',
       source: 'basemap',
       'source-layer': 'places',
@@ -115,7 +115,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
-      id: 'places_locality',
+      id: 'label_places_locality',
       type: 'symbol',
       source: 'basemap',
       'source-layer': 'places',
@@ -154,7 +154,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
-      id: 'places_region',
+      id: 'label_places_region',
       type: 'symbol',
       source: 'basemap',
       'source-layer': 'places',
@@ -176,7 +176,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
-      id: 'places_country',
+      id: 'label_places_country',
       type: 'symbol',
       source: 'basemap',
       'source-layer': 'places',
