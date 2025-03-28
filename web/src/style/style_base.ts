@@ -17,14 +17,15 @@ function landcover_colour(hue: any, sat: any, initial_lum = '85%') {
 const colours: Record<string, any> = {
   land: landcover_colour(42, '10%'),
   ice: landcover_colour(180, '14%'),
-  urban: landcover_colour(245, '9%', '82%'),
+  urban: landcover_colour(245, '6%', '82%'),
   water: ['interpolate-lab', ['linear'], ['zoom'], 2, 'hsl(207, 25%, 75%)', 12, 'hsl(207, 14%, 86%)'],
   green: landcover_colour(90, '20%', '86%'),
   wood: landcover_colour(100, '20%', '81%'),
   sand: landcover_colour(57, '20%'),
   road_casing: 'hsl(0, 0%, 96%)',
-  road_minor: 'hsl(0, 0%, 88%)',
-  road_major: 'hsl(0, 0%, 86%)',
+  road_minor: 'hsl(0, 0%, 86%)',
+  road_minor_low: 'hsl(0, 0%, 89%)',
+  road_major: 'hsl(0, 0%, 84%)',
   rail_2: 'hsl(0, 0%, 92%)',
   rail: 'hsl(0, 0%, 80%)',
   border: ['interpolate-lab', ['linear'], ['zoom'], 2, 'hsl(0, 30%, 60%)', 12, 'hsl(0, 10%, 80%)']
@@ -510,20 +511,16 @@ const layers: LayerSpecificationWithZIndex[] = [
     'source-layer': 'roads',
     filter: ['all', ['!has', 'is_tunnel'], ['==', 'kind', 'minor_road'], ['!=', 'kind_detail', 'service']],
     paint: {
-      'line-color': ['interpolate', ['exponential', 1.6], ['zoom'], 11, '#ebebeb', 16, colours['road_minor']],
-      'line-width': [
+      'line-color': [
         'interpolate',
         ['exponential', 1.6],
         ['zoom'],
         11,
-        0,
-        12.5,
-        0.5,
-        15,
-        2,
-        18,
-        road_base_size * 1.2
-      ]
+        colours['road_minor_low'],
+        16,
+        colours['road_minor']
+      ],
+      'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 11, 0, 12.5, 1, 18, road_base_size * 1.2]
     }
   },
   {

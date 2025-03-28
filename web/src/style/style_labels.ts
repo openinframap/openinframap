@@ -36,7 +36,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       type: 'symbol',
       source: 'basemap',
       'source-layer': 'water',
-      minzoom: 13,
+      minzoom: 15,
       filter: ['in', 'kind', 'river', 'stream'],
       layout: {
         'symbol-placement': 'line',
@@ -56,7 +56,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       type: 'symbol',
       source: 'basemap',
       'source-layer': 'roads',
-      minzoom: 15,
+      minzoom: 17,
       filter: ['in', 'kind', 'minor_road', 'other', 'path'],
       layout: {
         'symbol-sort-key': ['get', 'min_zoom'],
@@ -76,7 +76,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       type: 'symbol',
       source: 'basemap',
       'source-layer': 'roads',
-      minzoom: 11,
+      minzoom: 15,
       filter: ['in', 'kind', 'highway', 'major_road'],
       layout: {
         'symbol-sort-key': ['get', 'min_zoom'],
