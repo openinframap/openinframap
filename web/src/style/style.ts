@@ -13,9 +13,29 @@ import { StyleSpecification } from 'maplibre-gl'
 const oim_attribution =
   '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="https://openinframap.org/copyright">Open Infrastructure Map</a>'
 
+function sunDeclinationAngle(date: Date): number {
+  const dayOfYear =
+    (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) /
+    24 /
+    60 /
+    60 /
+    1000
+
+  return -23.44 * Math.cos((360 / 365) * (dayOfYear + 10) * (Math.PI / 180))
+}
+
+function sunPolarAngle(date: Date): number {
+  const angle = ((date.getUTCHours() + date.getUTCMinutes() / 60) / 24) * 360
+  return angle
+}
+
+function sunPosition(date: Date): [number, number, number] {
+  return [1.5, 90 + sunDeclinationAngle(date), sunPolarAngle(date)]
+}
+
 const style: StyleSpecification = {
   version: 8,
-  name: 'OpenInfraMap',
+  name: 'Open Infrastructure Map',
   projection: {
     type: 'globe'
   },
@@ -26,13 +46,13 @@ const style: StyleSpecification = {
     'sky-horizon-blend': 0.5,
     'horizon-fog-blend': 0.5,
     'fog-ground-blend': 0.5,
-    'atmosphere-blend': ['interpolate', ['linear'], ['zoom'], 0, 0.8, 4, 0]
+    'atmosphere-blend': ['interpolate', ['linear'], ['zoom'], 2, 0.4, 4, 0]
   },
   light: {
-    anchor: 'viewport',
+    anchor: 'map',
     color: '#F5F02E',
     intensity: 0.8,
-    position: [1, 85, 90]
+    position: sunPosition(new Date())
   },
   sources: {
     basemap: {
@@ -91,9 +111,7 @@ const style: StyleSpecification = {
       minzoom: 11
     }
   },
-  //glyphs: '/fonts/{fontstack}/{range}.pbf',
-  glyphs: 'https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf',
-  sprite: 'https://protomaps.github.io/basemaps-assets/sprites/v4/light',
+  glyphs: '/fonts/{fontstack}/{range}.pbf',
   layers: []
 }
 
