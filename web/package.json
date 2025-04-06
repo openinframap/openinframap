@@ -23,7 +23,6 @@
   "homepage": "https://github.com/openinframap/web#readme",
   "devDependencies": {
     "@russss/maplibregl-layer-switcher": "^2.0.1",
-    "@types/jest": "^29.5.14",
     "@typescript-eslint/eslint-plugin": "^8.18.0",
     "@typescript-eslint/parser": "^8.18.0",
     "eslint-config-prettier": "^9.1.0",
