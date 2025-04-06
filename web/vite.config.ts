@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from 'vite'
 import { renderSVG } from 'vite-plugin-render-svg'
 import i18nextLoader from 'vite-plugin-i18next-loader'
@@ -32,5 +33,11 @@ export default defineConfig({
       outputOriginal: true
     }),
     i18nextLoader({ paths: ['./locales'], namespaceResolution: 'relativePath' })
-  ]
+  ],
+
+  test: {
+    environment: 'puppeteer',
+    globalSetup: 'vitest-environment-puppeteer/global-init',
+    globals: true
+  }
 })
