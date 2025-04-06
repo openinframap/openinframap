@@ -1,4 +1,3 @@
-// @ts-expect-error Vite virtual module
 import { manifest } from 'virtual:render-svg'
 
 // Map layers icons to show in the infobox

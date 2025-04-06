@@ -37,7 +37,7 @@ export class ClickRouter {
     }
   }
 
-  private async handleClick(e: MapMouseEvent & { features?: MapGeoJSONFeature[] | undefined }) {
+  private handleClick(e: MapMouseEvent & { features?: MapGeoJSONFeature[] | undefined }) {
     if (this.map.getZoom() < this.minZoom) return
     if (e.features === undefined || e.features.length === 0) return
 
