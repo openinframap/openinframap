@@ -30,7 +30,7 @@ describe('Page structure', () => {
       waitUntil: 'networkidle0',
       timeout: 30000
     })
-  })
+  }, 30000)
 
   test('page has expected title', async () => {
     const title = await page.title()
