@@ -73,7 +73,7 @@ DECLARE
   parts TEXT[];
   res NUMERIC;
 BEGIN
-    parts := regexp_matches(value, '^([0-9][0-9,\.]*)', '');
+    parts := regexp_matches(value, '^([0-9]+[\.,]?[0-9]*)', '');
     res := replace(parts[1], ',', '.')::NUMERIC;
     RETURN res;
 END
