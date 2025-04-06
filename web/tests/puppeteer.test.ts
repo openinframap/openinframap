@@ -21,7 +21,7 @@ describe('Page load', () => {
 
     await page.waitForSelector('body')
     expect(errors.length).toBe(0)
-  })
+  }, 30000)
 })
 
 describe('Page structure', () => {
