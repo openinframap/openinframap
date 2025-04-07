@@ -8,6 +8,8 @@ from starlette.templating import Jinja2Templates
 from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 import bokeh.resources
 import json
 
@@ -71,6 +73,9 @@ app = Starlette(
     routes=[
         Mount("/static", app=StaticFiles(directory="static"), name="static"),
         Route("/sitemap.xml", sitemap),
+    ],
+    middleware=[
+        Middleware(CORSMiddleware, allow_origin_regex="http://localhost.*"),
     ],
 )
 

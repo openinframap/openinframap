@@ -6,6 +6,7 @@ from starlette.responses import JSONResponse
 
 from main import app
 from config import database
+from util import cache_for
 
 
 async def search_substations(query: str) -> list[dict]:
@@ -79,6 +80,7 @@ def sort_key(row: dict) -> int:
 
 
 @app.route("/search/typeahead")
+@cache_for(86400)
 async def search(request):
     query = request.query_params.get("q")
     if not query:
