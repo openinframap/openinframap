@@ -33,7 +33,7 @@ export default class OIMSearchProvider implements ISearchProvider {
     this.regionNames = new Intl.DisplayNames([language], { type: 'region' })
   }
 
-  async search(query: string, _limit: number = 5): Promise<SearchResult[]> {
+  async search(query: string): Promise<SearchResult[]> {
     const searchParams = new URLSearchParams({
       q: query,
       lang: this.language,
@@ -64,7 +64,7 @@ export default class OIMSearchProvider implements ISearchProvider {
   }
 
   description(result: OIMResult): string {
-    var description = ''
+    let description = ''
     if (result.type === 'substation' && result.voltage) {
       description += `${t('names.power.substation')} (${formatVoltage(result.voltage / 1000)})`
     } else if (result.type === 'plant' && result.output) {
