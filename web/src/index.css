@@ -1,18 +1,12 @@
 @import 'maplibre-gl/dist/maplibre-gl.css';
 
 :root {
-  --aa-search-input-height: 33px !important;
-  --aa-input-icon-size: 20px !important;
-  --aa-primary-color-rgb: 100, 100, 100 !important;
-  --aa-input-background-color-rgb: 250, 250, 250 !important;
-  --aa-input-background-color-alpha: 0.8 !important;
-
   --oim-font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --oim-font-family-monospace: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono',
-    'Oxygen Mono', 'Ubuntu Mono', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Consolas', 'Courier New',
-    monospace;
+  --oim-font-family-monospace:
+    ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Oxygen Mono',
+    'Ubuntu Mono', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Consolas', 'Courier New', monospace;
 
-  --oim-content-background: #fcfcfc;
+  --oim-content-background: rgb(252, 252, 252);
   --oim-text-color: #333;
   --oim-text-color-light: #666;
   --oim-text-color-dark: #000;
@@ -26,6 +20,9 @@
 
   --oim-popup-header-info-background: #e0f6f6;
   --oim-popup-header-validation-background: #f9e2e4;
+
+  --oim-drop-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  --oim-blur: blur(3px) saturate(80%);
 }
 
 * {
@@ -69,7 +66,7 @@ header {
   position: absolute;
   display: block;
   font-size: 13px;
-  backdrop-filter: blur(3px) saturate(80%);
+  backdrop-filter: var(--oim-blur);
 }
 
 nav ul {

@@ -101,7 +101,8 @@
       "gasification": "Gasification",
       "anaerobic-digestion": "Anaerobic digestion"
     },
-    "other-pumping-station": "Other pumping station"
+    "other-pumping-station": "Other pumping station",
+    "place": "Place"
   },
   "info": {
     "name": "Name",
@@ -208,5 +209,9 @@
     "osmose-power": "Osmose (Power)"
   },
   "construction": "under construction",
-  "disused": "disused"
+  "disused": "disused",
+  "search": {
+    "clear": "Clear search",
+    "no-results": "No results found"
+  }
 }

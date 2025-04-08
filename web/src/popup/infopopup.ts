@@ -3,7 +3,7 @@ import './infopopup.css'
 import i18next, { t } from 'i18next'
 import maplibregl, { LngLat, MapGeoJSONFeature, Popup } from 'maplibre-gl'
 import { titleCase } from 'title-case'
-import { local_name_tags } from '../l10n.ts'
+import { local_name_tags, formatVoltage, formatFrequency, formatPower } from '../l10n.ts'
 import friendlyNames from '../friendlynames.ts'
 import friendlyIcons from '../friendlyicons.ts'
 import { el, mount, setChildren, RedomElement } from 'redom'
@@ -149,47 +149,6 @@ function truncateUrl(urlString: string, length: number): string {
   }
 
   return [parsed.host, ...pathPartsReturnValue.reverse()].join('/')
-}
-
-function formatVoltage(value: number | number[]): string {
-  if (!Array.isArray(value)) {
-    value = [value]
-  }
-
-  const formatter = new Intl.NumberFormat(i18next.language, { maximumFractionDigits: 2 })
-
-  let text = [...value]
-    .sort((a, b) => a - b)
-    .reverse()
-    .map((val) => formatter.format(val))
-    .join('/')
-  text += ' ' + t('units.kV', 'kV')
-  return text
-}
-
-function formatFrequency(value: number | number[]): string {
-  if (!Array.isArray(value)) {
-    value = [value]
-  }
-
-  const formatter = new Intl.NumberFormat(i18next.language, { maximumFractionDigits: 2 })
-
-  let text = [...value]
-    .sort((a, b) => a - b)
-    .reverse()
-    .map((val) => formatter.format(val))
-    .join('/')
-  text += ' ' + t('units.Hz', 'Hz')
-  return text
-}
-
-function formatPower(value: number): string {
-  const formatter = new Intl.NumberFormat(i18next.language, { maximumFractionDigits: 2 })
-  if (value < 1) {
-    return formatter.format(value * 1000) + ' ' + t('units.kW', 'kW')
-  } else {
-    return formatter.format(value) + ' ' + t('units.MW', 'MW')
-  }
 }
 
 class InfoPopup {

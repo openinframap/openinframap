@@ -19,7 +19,7 @@
   min-width: 220px;
   min-height: 300px;
   margin: 0px 0px 8px 0px !important;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--oim-drop-shadow);
 }
 
 .oim-key-panel.visible {
