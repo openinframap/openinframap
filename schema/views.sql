@@ -1,32 +1,6 @@
--- Indexes for typeahead search
-CREATE INDEX CONCURRENTLY osm_power_substation_name 
-	ON osm_power_substation(substr(lower(tags->'name'), 1, 20) text_pattern_ops)
-	WHERE tags->'name' IS NOT NULL;
-CREATE INDEX CONCURRENTLY osm_power_substation_name_en
-	ON osm_power_substation(substr(lower(tags->'name:en'), 1, 20) text_pattern_ops)
-	WHERE tags->'name:en' IS NOT NULL;
-
-CREATE INDEX CONCURRENTLY power_substation_relation_name
-	ON power_substation_relation(substr(lower(name), 1, 20) text_pattern_ops)
-	WHERE name IS NOT NULL;
-CREATE INDEX CONCURRENTLY power_substation_relation_name_en
- 	ON power_substation_relation(substr(lower(tags->'name:en'), 1, 20) text_pattern_ops)
-	WHERE tags->'name:en' IS NOT NULL;
-
-CREATE INDEX CONCURRENTLY osm_power_plant_name
-	ON osm_power_plant(substr(lower(tags->'name'), 1, 20) text_pattern_ops)
-	WHERE tags->'name' IS NOT NULL;
-CREATE INDEX CONCURRENTLY osm_power_plant_name_en
-	ON osm_power_plant(substr(lower(tags->'name:en'), 1, 20) text_pattern_ops)
-	WHERE tags->'name:en' IS NOT NULL;
-
-CREATE INDEX CONCURRENTLY power_plant_relation_name
-	ON power_plant_relation(substr(lower(name), 1, 20) text_pattern_ops)
-	WHERE name IS NOT NULL;
-CREATE INDEX CONCURRENTLY power_plant_relation_name_en
-	ON power_plant_relation(substr(lower(tags->'name:en'), 1, 20) text_pattern_ops)
-	WHERE tags->'name:en' IS NOT NULL;
-
+---- Indexes for typeahead search
+-- You need to run the `create_indexes.py` script from the `web_backend` package
+-- to create  language-specific indexes for the typeahead search.
 ---------------------------------------------------------
 
 CREATE MATERIALIZED VIEW power_substation_relation AS

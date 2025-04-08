@@ -10,8 +10,22 @@ from main import app
 from config import database
 from util import cache_for
 
-# Ensure languages in this list have an index in the database.
-SEARCH_LANGUAGES = {"en"}
+# Ensure the `create_indexes` script is run after changing this list.
+SEARCH_LANGUAGES = {
+    "en",
+    "es",
+    "el",
+    "de",
+    "fr",
+    "hi",
+    "ur",
+    "zh",
+    "ru",
+    "pt",
+    "ja",
+    "it",
+    "nl",
+}
 
 
 async def search_substations(
@@ -122,8 +136,8 @@ async def search(request):
 
     start = time.monotonic_ns()
     async with asyncio.TaskGroup() as tg:
-        substations = tg.create_task(search_substations(query, language))
-        plants = tg.create_task(search_plants(query, language))
+        substations = tg.create_task(search_substations(query, language, limit))
+        plants = tg.create_task(search_plants(query, language, limit))
 
     results = sorted(await substations + await plants, key=sort_key, reverse=True)
     end = time.monotonic_ns()
