@@ -16,6 +16,7 @@ dependencies = [
     "async_lru",
     "pandas>=2.2.3",
     "bokeh==3.7.0",
+    "pycountry>=24.6.1",
 ]
 
 [tool.ruff]

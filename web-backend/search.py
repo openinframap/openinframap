@@ -1,6 +1,7 @@
 import asyncio
 import json
 import time
+import pycountry
 from typing import Optional
 from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse
@@ -24,10 +25,14 @@ async def search_substations(
             tags->'name:{language}' AS loc_name,
             tags->'operator' AS operator,
             convert_voltage(voltage) AS voltage,
+            country.iso_sov1 AS country,
             ST_AsGeoJSON(ST_Transform(ST_Centroid(geometry), 4326)) AS geometry
-        FROM substation
-        WHERE (substr(lower(name), 1, 20) LIKE lower(:query))
-            OR (substr(lower(tags->'name:{language}'), 1, 20) LIKE lower(:query))
+        FROM substation, countries.country_eez_sub AS country
+        WHERE (
+                (substr(lower(name), 1, 20) LIKE lower(:query))
+                OR (substr(lower(tags->'name:{language}'), 1, 20) LIKE lower(:query))
+              )
+            AND ST_Intersects(substation.geometry, country.geom)
         ORDER BY convert_voltage(voltage) DESC NULLS LAST, name ASC NULLS LAST
         LIMIT :limit
         """,
@@ -41,6 +46,7 @@ async def search_substations(
             "local_name": row["name"],
             "operator": row["operator"],
             "voltage": int(row["voltage"]) if row["voltage"] else None,
+            "country": pycountry.countries.get(alpha_3=row["country"]).alpha_2,
             "geometry": json.loads(row["geometry"]),
         }
         for row in results
@@ -59,10 +65,13 @@ async def search_plants(
             convert_power(output) as output,
             source,
             tags -> 'operator' AS operator,
+            country.iso_sov1 AS country,
             ST_AsGeoJSON(ST_Transform(ST_Centroid(geometry), 4326)) AS geometry
-        FROM power_plant
-        WHERE substr(lower(name), 1, 20) LIKE lower(:query)
-            OR (substr(lower(tags->'name:{language}'), 1, 20) LIKE lower(:query))
+        FROM power_plant, countries.country_eez_sub AS country
+        WHERE (substr(lower(name), 1, 20) LIKE lower(:query)
+                OR (substr(lower(tags->'name:{language}'), 1, 20) LIKE lower(:query))
+              )
+            AND ST_Intersects(power_plant.geometry, country.geom)
         ORDER BY output DESC NULLS LAST, name ASC NULLS LAST
         LIMIT :limit
     """,
@@ -77,6 +86,7 @@ async def search_plants(
             "output": int(row["output"]) if row["output"] else None,
             "source": row["source"],
             "operator": row["operator"],
+            "country": pycountry.countries.get(alpha_3=row["country"]).alpha_2,
             "geometry": json.loads(row["geometry"]),
         }
         for row in result
@@ -101,6 +111,12 @@ async def search(request):
     if language not in SEARCH_LANGUAGES:
         language = "en"
 
+    limit = request.query_params.get("limit", "10")
+    try:
+        limit = min(int(limit), 100)
+    except ValueError:
+        raise HTTPException(400, "Invalid limit")
+
     if not query:
         raise HTTPException(400, "No query provided")
 
@@ -111,6 +127,8 @@ async def search(request):
 
     results = sorted(await substations + await plants, key=sort_key, reverse=True)
     end = time.monotonic_ns()
+
+    results = results[:limit]
 
     response = {"time": (end - start) / 1e9, "results": results}
     return JSONResponse(response)
