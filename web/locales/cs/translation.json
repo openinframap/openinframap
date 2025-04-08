@@ -106,7 +106,8 @@
             "gasification": "Zplyňování",
             "anaerobic-digestion": "Anaerobní digestní proces",
             "wind-turbine": "Větrná turbína"
-        }
+        },
+        "place": "Místo"
     },
     "info": {
         "generation-method": "Způsob výroby",
@@ -208,5 +209,10 @@
     "warnings": {
         "webgl": "<p>Váš prohlížeč může mít výkonnostní nebo funkční problémy s Open Infrastructure Map.</p><p>Aby tento web fungoval správně, je vyžadován <a href=\"http://webglreport.com\">WebGL</a> s hardwarovou akcelerací.</p><p>Pokud váš prohlížeč podporuje WebGL, možná budete muset u tohoto webu v prohlížeči zakázat ochranu před sledováním.</p>"
     },
-    "disused": "nepoužívané"
+    "disused": "nepoužívané",
+    "coordinates": "Souřadnice",
+    "search": {
+        "clear": "Vymazat vyhledávání",
+        "no-results": "Nenalezeny žádné výsledky"
+    }
 }
