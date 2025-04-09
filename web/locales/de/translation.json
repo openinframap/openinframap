@@ -5,7 +5,7 @@
             "tower": "Hochspannungsmast",
             "pole": "Strommast",
             "generator": "Generator",
-            "generator-solar": "Solaranlage",
+            "generator-solar": "Solargenerator",
             "wind-turbine": "Windkraftanlage",
             "substation": "Schaltanlage",
             "switch": "Hochspannungsschalter",
@@ -95,7 +95,8 @@
             "combustion": "Verbrennung",
             "anaerobic-digestion": "Anaerobe Vergärung",
             "gasification": "Vergasung"
-        }
+        },
+        "place": "Ort"
     },
     "key": {
         "name": "Legende",
@@ -208,5 +209,10 @@
         "roof": "Dach",
         "overhead": "über Kopf"
     },
-    "disused": "stillgelegt"
+    "disused": "stillgelegt",
+    "coordinates": "Koordinaten",
+    "search": {
+        "clear": "Suche löschen",
+        "no-results": "Keine Ergebnisse gefunden"
+    }
 }
