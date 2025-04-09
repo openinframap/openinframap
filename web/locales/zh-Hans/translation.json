@@ -101,7 +101,8 @@
             "cabinet": "通信柜"
         },
         "cable": "线数",
-        "cabinet": "柜"
+        "cabinet": "柜",
+        "place": "地点"
     },
     "nav": {
         "about": "关于",
@@ -208,5 +209,10 @@
     "warnings": {
         "webgl": "<p>您的浏览器可能有Open Infrastructure Map的效能或功能问题。</p><p>需要有<a href=\"http://webglreport.com\">WebGL</a> 硬件加速功能，此网站才能正常运作。</p><p>若您的浏览器支持WebGL，您可能需要停用该网站的浏览器指纹识别保护。</p>"
     },
-    "disused": "废弃"
+    "disused": "废弃",
+    "coordinates": "坐标",
+    "search": {
+        "clear": "清除搜索",
+        "no-results": "未找到结果"
+    }
 }
