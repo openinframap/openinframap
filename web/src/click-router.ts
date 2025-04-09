@@ -24,8 +24,25 @@ export class ClickRouter {
       this.layerPriorities[layer.id] = layer.zorder
     }
 
-    // Always reset the cursor on zoom
-    map.on('zoom', () => this.clearCursor())
+    map.on('zoomend', () => {
+      if (this.map.getZoom() < this.minZoom) {
+        this.map.getCanvas().style.cursor = ''
+        return
+      }
+
+      // Reset the cursor on mouse move
+      this.map.once('mousemove', (e) => {
+        const features = this.map.queryRenderedFeatures(e.point, {
+          layers: this.getLayers()
+        })
+
+        if (features.length > 0) {
+          this.setCursor()
+        } else {
+          this.clearCursor()
+        }
+      })
+    })
   }
 
   registerHandler(layerIds: LayerId | LayerId[], handler: ClickHandler) {
