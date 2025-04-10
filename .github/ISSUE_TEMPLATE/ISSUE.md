@@ -1,3 +1,10 @@
+---
+name: Issue
+about: Create an issue to suggest a feature or report a bug
+title: ""
+labels: ""
+assignees: ""
+---
 If you're reporting an issue with rendering, please provide:
 
 ### Screenshot
