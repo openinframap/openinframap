@@ -106,7 +106,8 @@
             "water-pumped-storage": "Αντλησιοταμίευση",
             "solar-photovoltaic": "Φωτοβολταϊκά",
             "solar-thermal": "Θερμική"
-        }
+        },
+        "place": "Μέρος"
     },
     "units": {
         "kW": "kW",
@@ -126,7 +127,13 @@
         "petroleum": "Πετρέλαιο & Φυσικό Αέριο",
         "labels": "Ετικέτες",
         "nighttime-lights": "Νυχτερινά Φώτα",
-        "other-pipelines": "Άλλοι Αγωγοί"
+        "other-pipelines": "Άλλοι Αγωγοί",
+        "heatmaps": "Θερμικοί Χάρτες",
+        "background": "Υπόβαθρο",
+        "infrastructure": "Υποδομές",
+        "validation": "Έλεγχος Εγκυρότητας",
+        "solar-generation": "Παραγωγή Ηλιακής Ενέργειας",
+        "osmose-power": "Osmose (Ρεύμα)"
     },
     "info": {
         "operator": "Διαχειριστής",
@@ -202,5 +209,10 @@
         "surface": "Επιφάνεια",
         "indoor": "Εσωτερικά"
     },
-    "disused": "αχρησιμοποίητο"
+    "disused": "αχρησιμοποίητο",
+    "search": {
+        "clear": "Καθαρισμός αναζήτησης",
+        "no-results": "Δεν βρέθηκαν αποτελέσματα"
+    },
+    "coordinates": "Συντεταγμένες"
 }
