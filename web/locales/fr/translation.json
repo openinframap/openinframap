@@ -3,7 +3,7 @@
         "power": {
             "transformer": "Transformateur",
             "tower": "Pylône électrique",
-            "generator-solar": "Panneau solaire",
+            "generator-solar": "Générateur solaire",
             "line-reference": "Référence de la ligne",
             "substation": "Sous-station",
             "generator": "Générateur",
@@ -139,7 +139,7 @@
         "kW": "kW"
     },
     "key": {
-        "name": "Clé",
+        "name": "Légende",
         "telecoms": "Télécommunications",
         "petroleum": "Pétrolier",
         "power-lines": "Lignes électriques",
@@ -180,9 +180,10 @@
         "power": "Electricité",
         "water": "Eau",
         "labels": "Etiquettes",
-        "petroleum": "Pétrole & Gaz",
+        "petroleum": "Pétrole & Gaz naturel",
         "infrastructure": "Infrastructure",
-        "background": "Arrière-plan"
+        "background": "Arrière-plan",
+        "nighttime-lights": "Lumières de nuit"
     },
     "more_info": "Plus d'infos",
     "wikipedia": "Wikipedia",
@@ -199,5 +200,10 @@
     "warnings": {
         "webgl": "<p>Votre navigateur peut rencontrer des problèmes de performance ou de fonctionnalité avec Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> avec accélération matérielle est nécessaire pour que ce site fonctionne correctement.</p><p>Si votre navigateur prend en charge WebGL, vous devrez peut-être désactiver la protection contre le fingerprinting du navigateur pour ce site.</p>"
     },
-    "disused": "Inutilisé"
+    "disused": "Inutilisé",
+    "coordinates": "Coordonnées",
+    "search": {
+        "clear": "Vider la recherche",
+        "no-results": "Aucun résultat trouvé"
+    }
 }
