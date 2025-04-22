@@ -5,21 +5,21 @@ from urllib.parse import unquote_plus
 from config import database
 
 
-def country_required(func):
+def region_required(func):
     @wraps(func)
-    async def wrap_country(request):
-        country = unquote_plus(request.path_params["country"])
+    async def wrap_region(request):
+        region = unquote_plus(request.path_params["region"])
 
         res = await database.fetch_one(
             query='SELECT gid, "union" FROM countries.country_eez WHERE "union" = :union',
-            values={"union": country},
+            values={"union": region},
         )
 
         if not res:
             raise HTTPException(404)
         return await func(request, res)
 
-    return wrap_country
+    return wrap_region
 
 
 def cache_for(lifetime):

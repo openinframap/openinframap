@@ -29,7 +29,7 @@ Statistics on the electricity network in {{country|country_name}} from OpenStree
       <tbody>
       {% for row in plant_source_stats %}
         <tr>
-          <td><a href="{{url_for('plants_country', country=country)}}?source={{row.source or ''}}">{{row.source or '[unspecified]'}}</a></td>
+          <td><a href="{{url_for('plants_region', region=country)}}?source={{row.source or ''}}">{{row.source or '[unspecified]'}}</a></td>
           <td>{{row.output|power}}</td>
           <td>{{row._mapping.count}}</td>
         </tr>
@@ -37,7 +37,7 @@ Statistics on the electricity network in {{country|country_name}} from OpenStree
       </tbody>
       <tfoot>
         <tr>
-          <td><a href="{{url_for('plants_country', country=country)}}">All</a></td>
+          <td><a href="{{url_for('plants_region', region=country)}}">All</a></td>
           <td>{{plant_stats.output|power}}</td>
           <td>{{plant_stats.count}}</td>
         </tr>
@@ -45,7 +45,7 @@ Statistics on the electricity network in {{country|country_name}} from OpenStree
     </table>
     <p class="footnote">If multiple sources are listed for a power plant, only the first source is used in this breakdown.</p>
   </div>
-  <p><a href="{{url_for('plants_construction_country', country=country)}}">Show plants under construction</a></p>
+  <p><a href="{{url_for('plants_construction_region', region=country)}}">Show plants under construction</a></p>
     <div id="plant-summary"></div>
   <script>
     Bokeh.embed.embed_item({{ plant_summary | safe }}, "plant-summary");

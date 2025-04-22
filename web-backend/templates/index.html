@@ -17,7 +17,7 @@ Statistics on the global electricity network from OpenStreetMap
     <input list="areas" placeholder="Select area" id="area_select">
     <datalist id="areas">
     {% for country in countries %}
-      <option><a href="{{url_for('plants_country', country=country.union)}}">{{country.union}}</a></option>
+      <option><a href="{{url_for('plants_region', region=country.union)}}">{{country.union}}</a></option>
     {% endfor %}
     </datalist>
   </form>

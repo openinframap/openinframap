@@ -6,8 +6,8 @@
 {% endif %}
 {% set breadcrumbs = [
   ('Stats', url_for('stats')),
-  (country, url_for('country', country=country)),
-  ("Power Plants", url_for('plants_country', country=country)),
+  (country, url_for('region', region=country)),
+  ("Power Plants", url_for('plants_region', region=country)),
   (name, None)
 ]%}
 {% block title %}{{name}}{% endblock %}

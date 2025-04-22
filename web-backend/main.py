@@ -25,7 +25,7 @@ from template_functions import (
     format_external_url,
 )
 from config import database, config
-from util import cache_for, country_required
+from util import cache_for, region_required
 from sitemap import sitemap
 from data import (
     get_countries,
@@ -149,10 +149,10 @@ async def stats_charts(request):
     )
 
 
-@app.route("/stats/area/{country}")
-@country_required
+@app.route("/stats/area/{region}")
+@region_required
 @cache_for(3600)
-async def country(request, country):
+async def region(request, region):
     async with asyncio.TaskGroup() as tg:
         plant_stats = tg.create_task(
             database.fetch_one(
@@ -162,7 +162,7 @@ async def country(request, country):
                             AND eez.gid = :gid
                             AND tags -> 'construction:power' IS NULL
                         """,
-                values={"gid": country["gid"]},
+                values={"gid": region["gid"]},
             )
         )
 
@@ -175,23 +175,23 @@ async def country(request, country):
                             AND tags -> 'construction:power' IS NULL
                         GROUP BY first_semi(source)
                         ORDER BY SUM(convert_power(output)) DESC NULLS LAST""",
-                values={"gid": country["gid"]},
+                values={"gid": region["gid"]},
             )
         )
 
-        power_lines = tg.create_task(stats_power_line(country["union"]))
+        power_lines = tg.create_task(stats_power_line(region["union"]))
         grid_summary_chart = tg.create_task(
-            charts.country.grid_summary(country["union"])
+            charts.country.grid_summary(region["union"])
         )
         plant_summary_chart = tg.create_task(
-            charts.country.plant_summary(country["union"])
+            charts.country.plant_summary(region["union"])
         )
 
     return templates.TemplateResponse(
         "country.html",
         {
             "request": request,
-            "country": country["union"],
+            "country": region["union"],
             "plant_stats": plant_stats.result()._mapping,
             "plant_source_stats": plant_source_stats.result(),
             "power_lines": power_lines.result(),
@@ -203,16 +203,16 @@ async def country(request, country):
             "plant_summary": json.dumps(
                 json_item(plant_summary_chart.result(), "plant-summary", charts.theme)
             ),
-            "canonical": request.url_for("country", country=country["union"]),
+            "canonical": request.url_for("region", region=region["union"]),
         },
     )
 
 
-@app.route("/stats/area/{country}/plants")
-@country_required
+@app.route("/stats/area/{region}/plants")
+@region_required
 @cache_for(3600)
-async def plants_country(request, country):
-    gid = country[0]
+async def plants_region(request, region):
+    gid = region[0]
 
     plants = await database.fetch_all(
         query="""SELECT osm_id, name, tags->'name:en' AS name_en, tags->'wikidata' AS wikidata,
@@ -252,20 +252,20 @@ async def plants_country(request, country):
         {
             "request": request,
             "plants": plants,
-            "country": country["union"],
+            "country": region["union"],
             "source": source,
             "min_output": min_output,
             # Canonical URL for all plants without the source filter, to avoid confusing Google.
-            "canonical": request.url_for("plants_country", country=country["union"]),
+            "canonical": request.url_for("plants_region", region=region["union"]),
         },
     )
 
 
-@app.route("/stats/area/{country}/plants/construction")
-@country_required
+@app.route("/stats/area/{region}/plants/construction")
+@region_required
 @cache_for(3600)
-async def plants_construction_country(request, country):
-    gid = country[0]
+async def plants_construction_region(request, region):
+    gid = region[0]
 
     plants = await database.fetch_all(
         query="""SELECT osm_id, name, tags->'name:en' AS name_en, tags->'wikidata' AS wikidata,
@@ -288,7 +288,7 @@ async def plants_construction_country(request, country):
             "construction": True,
             "request": request,
             "plants": plants,
-            "country": country["union"],
+            "country": region["union"],
         },
     )
 
@@ -312,15 +312,13 @@ async def stats_object(request):
     if not res:
         raise HTTPException(404)
 
-    return RedirectResponse(
-        request.url_for("plant_detail", country=res["union"], id=id)
-    )
+    return RedirectResponse(request.url_for("plant_detail", region=res["union"], id=id))
 
 
-@app.route("/stats/area/{country}/plants/{id}")
-@country_required
+@app.route("/stats/area/{region}/plants/{id}")
+@region_required
 @cache_for(3600)
-async def plant_detail(request, country):
+async def plant_detail(request, region):
     try:
         plant_id = int(request.path_params["id"])
     except ValueError:
@@ -328,7 +326,7 @@ async def plant_detail(request, country):
 
     http_client = request.state.http_client
 
-    plant = await get_plant(plant_id, country["gid"])
+    plant = await get_plant(plant_id, region["gid"])
     if plant is None:
         raise HTTPException(404, "Nonexistent power plant")
 
@@ -362,7 +360,7 @@ async def plant_detail(request, country):
             "plant": plant,
             "request": request,
             "generator_summary": generator_summary,
-            "country": country["union"],
+            "country": region["union"],
             "wikidata": wd,
             "image_data": image_data,
             "ref_tags": ref_tags,

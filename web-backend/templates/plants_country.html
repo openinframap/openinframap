@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-{% set breadcrumbs = [('Stats', url_for('stats')), (country, url_for('country', country=country)), ("Power Plants", None)] %}
+{% set breadcrumbs = [('Stats', url_for('stats')), (country, url_for('region', region=country)), ("Power Plants", None)] %}
 {% if source == '' %}
   {% set pretty_source = 'unspecified' %}
 {% elif source %}
@@ -49,7 +49,7 @@
     <tbody>
     {% for plant in plants -%}
       <tr>
-        <td class="row-name"><a href="{{url_for('plant_detail', country=country, id=plant.osm_id)}}">
+        <td class="row-name"><a href="{{url_for('plant_detail', region=country, id=plant.osm_id)}}">
             {{plant.name or '[unnamed]'}}</a></td>
         {% if english_name %}
           <td class="row-subhead">{{plant.name_en or  ''}}</td>
@@ -73,7 +73,7 @@
     </tbody>
   </table>
   {% if pretty_source %}
-    <p><a href="{{url_for('plants_country', country=country)}}">View all power plants in {{country|country_name}}</a>.</p>
+    <p><a href="{{url_for('plants_region', region=country)}}">View all power plants in {{country|country_name}}</a>.</p>
   {% endif %}
   {% if construction %}
     <p class="footnote">Under-construction power plants are indicated based on the <code>construction:power</code> tag in OSM.</p>
