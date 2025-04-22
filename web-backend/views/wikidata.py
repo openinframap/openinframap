@@ -1,4 +1,4 @@
-""" Endpoints to proxy WikiData requests for info popups on the map """
+"""Endpoints to proxy WikiData requests for info popups on the map"""
 
 from typing import Any, Optional
 import httpx
