@@ -1,4 +1,5 @@
 from functools import wraps
+from typing import Optional
 from starlette.exceptions import HTTPException
 from urllib.parse import unquote_plus
 from datetime import timedelta
@@ -22,7 +23,11 @@ def region_required(func):
     return wrap_region
 
 
-def cache_for(seconds: int = None, hours: int = None, days: int = None):
+def cache_for(
+    seconds: Optional[int] = None,
+    hours: Optional[int] = None,
+    days: Optional[int] = None,
+):
     def cache_for_inner(func):
         @wraps(func)
         async def wrap_cache(*args, **kwargs):

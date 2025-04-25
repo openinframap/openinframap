@@ -69,7 +69,18 @@ async def get_plant_generator_summary(plant_id):
 
 
 async def latest_stats_date():
-    return (await database.fetch_one("SELECT max(time) FROM stats.power_line"))[0]
+    res = await database.fetch_one("SELECT max(time) FROM stats.power_line")
+    return res[0] if res else None
+
+
+def coalesce_result(result, value):
+    if result is None:
+        return value
+
+    res = result.result()
+    if res is None:
+        return value
+    return res[0] or value
 
 
 async def stats_power_line(union=None, territory_iso3=None, date=None) -> dict:
@@ -94,7 +105,7 @@ async def stats_power_line(union=None, territory_iso3=None, date=None) -> dict:
 
     async with asyncio.TaskGroup() as tg:
         for low, high in windowed(chain(VOLTAGE_SCALE, [None]), 2):
-            low = low * 1000
+            low = (low or 0) * 1000
             query = f"""SELECT sum(length)
                 FROM stats.power_line {join_clause}
                 WHERE time = :time
@@ -135,16 +146,18 @@ async def stats_power_line(union=None, territory_iso3=None, date=None) -> dict:
             )
         )
 
-    lines = {(low, high): res.result()[0] or 0 for (low, high), res in lines.items()}
-
     return {
-        "lines": lines,
-        "total": total.result()[0] or 0.01,
-        "unspecified": unspecified.result()[0] or 0,
+        "lines": {
+            (low, high): coalesce_result(res, 0) for (low, high), res in lines.items()
+        },
+        "total": coalesce_result(total, 0.01),
+        "unspecified": coalesce_result(unspecified, 0),
     }
 
 
-async def plant_stats(country_gid: int = None, territory_iso3: str = None, date=None):
+async def plant_stats(
+    country_gid: Optional[int] = None, territory_iso3: Optional[str] = None, date=None
+):
     where_clause = ""
     values = {
         "time": date or await latest_stats_date(),

@@ -3,7 +3,7 @@ Programmatically create search indexes for tables. This has to be run manually a
 `ADMIN_DATABASE_URL` must be set to a connection with the privileges to create indexes.
 """
 
-from search import SEARCH_LANGUAGES
+from views.search import SEARCH_LANGUAGES
 from databases import Database
 from config import config
 
