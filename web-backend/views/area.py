@@ -13,41 +13,22 @@ from data import (
     get_plant_generator_summary,
     get_wikidata,
     get_commons_thumbnail,
+    plant_source_stats,
+    plant_stats,
+    latest_stats_date,
 )
-import charts
+import charts.country
 
 
 @app.route("/stats/area/{region}")
 @region_required
-@cache_for(3600)
+@cache_for(hours=1)
 async def region(request, region):
+    stats_date = await latest_stats_date()
     async with asyncio.TaskGroup() as tg:
-        plant_stats = tg.create_task(
-            database.fetch_one(
-                query="""SELECT SUM(convert_power(output)) AS output, COUNT(*)
-                        FROM power_plant, countries.country_eez_3857 AS eez
-                        WHERE ST_Contains(eez.geom, geometry)
-                            AND eez.gid = :gid
-                            AND tags -> 'construction:power' IS NULL
-                        """,
-                values={"gid": region["gid"]},
-            )
-        )
-
-        plant_source_stats = tg.create_task(
-            database.fetch_all(
-                query="""SELECT first_semi(source) AS source, sum(convert_power(output)) AS output, count(*)
-                        FROM power_plant, countries.country_eez_3857 AS eez
-                        WHERE ST_Contains(eez.geom, geometry)
-                            AND eez.gid = :gid
-                            AND tags -> 'construction:power' IS NULL
-                        GROUP BY first_semi(source)
-                        ORDER BY SUM(convert_power(output)) DESC NULLS LAST""",
-                values={"gid": region["gid"]},
-            )
-        )
-
-        power_lines = tg.create_task(stats_power_line(region["union"]))
+        plants = tg.create_task(plant_stats(region["gid"], date=stats_date))
+        sources = tg.create_task(plant_source_stats(region["gid"], date=stats_date))
+        power_lines = tg.create_task(stats_power_line(region["union"], date=stats_date))
         grid_summary_chart = tg.create_task(
             charts.country.grid_summary(region["union"])
         )
@@ -56,12 +37,13 @@ async def region(request, region):
         )
 
     return templates.TemplateResponse(
-        "country.html",
+        "area.html",
         {
             "request": request,
             "country": region["union"],
-            "plant_stats": plant_stats.result()._mapping,
-            "plant_source_stats": plant_source_stats.result(),
+            "stats_date": stats_date,
+            "plant_stats": plants.result(),
+            "plant_source_stats": sources.result(),
             "power_lines": power_lines.result(),
             "country_grid_summary": json.dumps(
                 json_item(
@@ -78,7 +60,7 @@ async def region(request, region):
 
 @app.route("/stats/area/{region}/plants")
 @region_required
-@cache_for(3600)
+@cache_for(hours=1)
 async def plants_region(request, region):
     gid = region[0]
 
@@ -131,7 +113,7 @@ async def plants_region(request, region):
 
 @app.route("/stats/area/{region}/plants/construction")
 @region_required
-@cache_for(3600)
+@cache_for(hours=1)
 async def plants_construction_region(request, region):
     gid = region[0]
 
@@ -162,7 +144,7 @@ async def plants_construction_region(request, region):
 
 
 @app.route("/stats/object/plant/{id}")
-@cache_for(86400)
+@cache_for(hours=1)
 async def stats_object(request):
     try:
         id = int(request.path_params["id"])
@@ -185,7 +167,7 @@ async def stats_object(request):
 
 @app.route("/stats/area/{region}/plants/{id}")
 @region_required
-@cache_for(3600)
+@cache_for(hours=1)
 async def plant_detail(request, region):
     try:
         plant_id = int(request.path_params["id"])

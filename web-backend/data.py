@@ -1,3 +1,4 @@
+import asyncio
 import json
 import logging
 import re
@@ -67,51 +68,144 @@ async def get_plant_generator_summary(plant_id):
     return res
 
 
-async def stats_power_line(country=None):
-    stats_date = (await database.fetch_one("SELECT max(time) FROM stats.power_line"))[0]
+async def latest_stats_date():
+    return (await database.fetch_one("SELECT max(time) FROM stats.power_line"))[0]
+
+
+async def stats_power_line(union=None, territory_iso3=None, date=None) -> dict:
+    stats_date = date or await latest_stats_date()
     values = {"time": stats_date}
     country_clause = ""
+    join_clause = ""
 
-    if country:
+    if union:
         country_clause = " AND country = :country"
-        values["country"] = country
+        values["country"] = union
+    elif territory_iso3:
+        join_clause = ", countries.country_eez AS eez"
+        country_clause = """
+            AND eez."union" = country
+            AND eez.iso_sov1 = :iso3
+            AND (eez.iso_ter1 IS NULL OR eez.iso_ter1 = eez.iso_sov1)
+        """
+        values["iso3"] = territory_iso3
 
     lines = {}
-    for low, high in windowed(chain(VOLTAGE_SCALE, [None]), 2):
-        low = low * 1000
-        query = (
-            "SELECT sum(length) FROM stats.power_line WHERE time = :time AND voltage >= :low"
-            + country_clause
+
+    async with asyncio.TaskGroup() as tg:
+        for low, high in windowed(chain(VOLTAGE_SCALE, [None]), 2):
+            low = low * 1000
+            query = f"""SELECT sum(length)
+                FROM stats.power_line {join_clause}
+                WHERE time = :time
+                AND voltage >= :low
+                {country_clause}
+            """
+            vals = values.copy()
+            vals["low"] = low
+
+            if high is not None:
+                high = high * 1000
+                query += " AND voltage < :high"
+                vals["high"] = high
+
+            res = tg.create_task(database.fetch_one(query, vals))
+            lines[(low, high)] = res
+
+        unspecified = tg.create_task(
+            database.fetch_one(
+                f"""SELECT sum(length)
+                FROM stats.power_line {join_clause}
+                WHERE time = :time
+                AND voltage IS NULL
+                {country_clause}
+            """,
+                values,
+            )
         )
-        vals = values.copy()
-        vals["low"] = low
 
-        if high is not None:
-            high = high * 1000
-            query += " AND voltage < :high"
-            vals["high"] = high
+        total = tg.create_task(
+            database.fetch_one(
+                f"""SELECT sum(length)
+                FROM stats.power_line {join_clause}
+                WHERE time = :time
+                {country_clause}
+            """,
+                values,
+            )
+        )
 
-        res = await database.fetch_one(query, vals)
-        lines[(low, high)] = res[0] or 0
+    lines = {(low, high): res.result()[0] or 0 for (low, high), res in lines.items()}
 
-    unspecified = await database.fetch_one(
-        "SELECT sum(length) FROM stats.power_line WHERE time = :time AND voltage IS NULL"
-        + country_clause,
-        values,
-    )
-
-    total = await database.fetch_one(
-        "SELECT sum(length) FROM stats.power_line WHERE time = :time" + country_clause,
-        values,
-    )
-
-    data = {
-        "date": stats_date.date(),
+    return {
         "lines": lines,
-        "total": total[0] or 0.01,
-        "unspecified": unspecified[0] or 0,
+        "total": total.result()[0] or 0.01,
+        "unspecified": unspecified.result()[0] or 0,
     }
-    return data
+
+
+async def plant_stats(country_gid: int = None, territory_iso3: str = None, date=None):
+    where_clause = ""
+    values = {
+        "time": date or await latest_stats_date(),
+    }
+
+    if country_gid:
+        where_clause = "eez.gid = :gid"
+        values["gid"] = country_gid
+    elif territory_iso3:
+        where_clause = "eez.iso_sov1 = :iso3 AND (eez.iso_ter1 IS NULL OR eez.iso_ter1 = eez.iso_sov1)"
+        values["iso3"] = territory_iso3
+
+    result = await database.fetch_one(
+        query=f"""SELECT sum(output * count) AS output, sum(count) AS count
+                FROM stats.power_plant, countries.country_eez AS eez
+                WHERE eez."union" = country
+                AND {where_clause}
+                AND time = :time
+        """,
+        values=values,
+    )
+
+    if not result:
+        return {
+            "output": 0,
+            "count": 0,
+        }
+
+    return {
+        "output": int(result[0] or 0),
+        "count": result[1] or 0,
+    }
+
+
+async def plant_source_stats(country_gid=None, territory_iso3=None, date=None):
+    where_clause = ""
+    values = {
+        "time": date or await latest_stats_date(),
+    }
+
+    if country_gid:
+        where_clause = "eez.gid = :gid"
+        values["gid"] = country_gid
+    elif territory_iso3:
+        where_clause = "eez.iso_sov1 = :iso3 AND (eez.iso_ter1 IS NULL OR eez.iso_ter1 = eez.iso_sov1)"
+        values["iso3"] = territory_iso3
+
+    return await database.fetch_all(
+        query=f"""SELECT
+                first_semi(source) AS source,
+                sum(output * count) AS output,
+                sum(count) AS count
+            FROM stats.power_plant, countries.country_eez AS eez
+            WHERE eez."union" = country
+                AND {where_clause}
+                AND time = :time
+            GROUP BY first_semi(source)
+            ORDER BY output DESC NULLS LAST
+        """,
+        values=values,
+    )
 
 
 @alru_cache(maxsize=1000)

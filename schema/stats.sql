@@ -20,7 +20,7 @@ CREATE TABLE stats.power_plant (
 	count INTEGER,
 	output BIGINT
 );
-CREATE INDEX power_plant_country ON stats.power_line(country);
+CREATE INDEX power_plant_country ON stats.power_plant(country);
 
 CREATE TABLE stats.power_generator (
 	id SERIAL PRIMARY KEY,
@@ -30,7 +30,7 @@ CREATE TABLE stats.power_generator (
 	count INTEGER,
 	output BIGINT
 );
-CREATE INDEX power_generator_country ON stats.power_line(country);
+CREATE INDEX power_generator_country ON stats.power_generator(country);
 
 CREATE TABLE stats.substation (
 	id SERIAL PRIMARY KEY,
@@ -39,4 +39,4 @@ CREATE TABLE stats.substation (
 	voltage INTEGER,
 	count INTEGER
 );
-CREATE INDEX power_substation_country ON stats.power_line(country);
+CREATE INDEX power_substation_country ON stats.substation(country);

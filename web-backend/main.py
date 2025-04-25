@@ -23,7 +23,7 @@ from template_functions import (
     format_percent,
     format_external_url,
 )
-from config import database, config
+from config import database, DEBUG
 from util import cache_for
 from sitemap import sitemap
 from data import (
@@ -32,7 +32,6 @@ from data import (
 )
 import charts
 
-DEBUG = config("DEBUG", cast=bool, default=False)
 templates = Jinja2Templates(directory="templates")
 
 templates.env.filters["power"] = format_power
@@ -146,3 +145,4 @@ async def stats_charts(request):
 import views.wikidata  # noqa
 import views.search  # noqa
 import views.area  # noqa
+import views.country  # noqa

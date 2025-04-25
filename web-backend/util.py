@@ -1,8 +1,8 @@
 from functools import wraps
 from starlette.exceptions import HTTPException
 from urllib.parse import unquote_plus
-
-from config import database
+from datetime import timedelta
+from config import database, DEBUG
 
 
 def region_required(func):
@@ -22,11 +22,23 @@ def region_required(func):
     return wrap_region
 
 
-def cache_for(lifetime):
+def cache_for(seconds: int = None, hours: int = None, days: int = None):
     def cache_for_inner(func):
         @wraps(func)
         async def wrap_cache(*args, **kwargs):
             response = await func(*args, **kwargs)
+            if DEBUG:
+                return response
+
+            lifetime = timedelta(
+                seconds=seconds or 0,
+                hours=hours or 0,
+                days=days or 0,
+            ).total_seconds()
+
+            if response.headers is None:
+                return response
+
             response.headers["Cache-Control"] = f"public, max-age={lifetime}"
             return response
 
