@@ -145,7 +145,9 @@
         "heatmaps": "Teplotní mapy",
         "solar-generation": "Solární výroba",
         "infrastructure": "Infrastruktura",
-        "validation": "Validace"
+        "validation": "Validace",
+        "overlays": "Překrytí",
+        "borders": "Hranice"
     },
     "key": {
         "telecoms": "Telekomunikace",
@@ -214,5 +216,6 @@
     "search": {
         "clear": "Vymazat vyhledávání",
         "no-results": "Nenalezeny žádné výsledky"
-    }
+    },
+    "openstreetmap": "OpenStreetMap"
 }
