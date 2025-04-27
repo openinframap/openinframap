@@ -49,7 +49,7 @@
     "lodash.invert": "^4.3.0",
     "lodash.isequal": "^4.5.0",
     "lodash.sortby": "^4.7.0",
-    "maplibre-gl": "^v5.3.0",
+    "maplibre-gl": "^v5.4.0",
     "redom": "^3.29.1",
     "title-case": "^3.0.3"
   }
