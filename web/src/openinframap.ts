@@ -55,8 +55,12 @@ export default class OpenInfraMap {
     const layer_switcher = new LayerSwitcher(
       [
         new LayerGroup(t('layers.background'), [
-          new Layer('N', t('layers.nighttime-lights'), 'black_marble', false),
-          new Layer('L', t('layers.labels'), 'label_', true)
+          new Layer('A', t('openstreetmap'), 'osm_', 'background', true),
+          new Layer('N', t('layers.nighttime-lights'), 'black_marble', 'background', false)
+        ]),
+        new LayerGroup(t('layers.overlays'), [
+          new Layer('L', t('layers.labels'), 'label_', true),
+          new Layer('B', t('layers.borders'), 'boundaries_', true)
         ]),
         new LayerGroup(t('layers.heatmaps'), [
           new Layer('S', t('layers.solar-generation'), 'heatmap_', false)

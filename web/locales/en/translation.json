@@ -195,6 +195,7 @@
   "layers": {
     "background": "Background",
     "heatmaps": "Heatmaps",
+    "overlays": "Overlays",
     "infrastructure": "Infrastructure",
     "validation": "Validation",
     "nighttime-lights": "Nighttime Lights",
@@ -203,6 +204,7 @@
     "telecoms": "Telecoms",
     "petroleum": "Oil & Natural Gas",
     "water": "Water",
+    "borders": "Borders",
     "labels": "Labels",
     "title": "Layers",
     "other-pipelines": "Other Pipelines",
@@ -214,5 +216,6 @@
   "search": {
     "clear": "Clear search",
     "no-results": "No results found"
-  }
+  },
+  "openstreetmap": "OpenStreetMap"
 }

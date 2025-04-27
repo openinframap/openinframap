@@ -46,14 +46,14 @@ const landcover_opacity: DataDrivenPropertyValueSpecification<number> = [
 
 const layers: LayerSpecificationWithZIndex[] = [
   {
-    id: 'background',
+    id: 'osm_background',
     type: 'background',
     paint: {
       'background-color': colours['land']
     }
   },
   {
-    id: 'landuse_ice',
+    id: 'osm_landuse_ice',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'landuse',
@@ -61,7 +61,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: { 'fill-color': colours['ice'] }
   },
   {
-    id: 'landcover_ice',
+    id: 'osm_landcover_ice',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'landcover',
@@ -72,7 +72,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'landuse_sand',
+    id: 'osm_landuse_sand',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'landuse',
@@ -80,7 +80,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: { 'fill-color': colours['sand'] }
   },
   {
-    id: 'landcover_sand',
+    id: 'osm_landcover_sand',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'landcover',
@@ -88,7 +88,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: { 'fill-color': colours['sand'], 'fill-opacity': landcover_opacity }
   },
   {
-    id: 'landuse_green',
+    id: 'osm_landuse_green',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'landuse',
@@ -113,7 +113,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: { 'fill-color': colours['green'] }
   },
   {
-    id: 'landcover_green',
+    id: 'osm_landcover_green',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'landcover',
@@ -121,7 +121,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: { 'fill-color': colours['green'], 'fill-opacity': landcover_opacity }
   },
   {
-    id: 'landuse_wood',
+    id: 'osm_landuse_wood',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'landuse',
@@ -129,7 +129,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: { 'fill-color': colours['wood'] }
   },
   {
-    id: 'landcover_wood',
+    id: 'osm_landcover_wood',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'landcover',
@@ -137,7 +137,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: { 'fill-color': colours['wood'], 'fill-opacity': landcover_opacity }
   },
   {
-    id: 'landuse_urban',
+    id: 'osm_landuse_urban',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'landuse',
@@ -157,7 +157,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'landcover_urban',
+    id: 'osm_landcover_urban',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'landcover',
@@ -168,7 +168,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'water',
+    id: 'osm_water',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'water',
@@ -176,7 +176,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: { 'fill-color': colours['water'] }
   },
   {
-    id: 'water_stream',
+    id: 'osm_water_stream',
     type: 'line',
     source: 'basemap',
     'source-layer': 'water',
@@ -185,7 +185,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: { 'line-color': colours['water'], 'line-width': 0.5 }
   },
   {
-    id: 'water_river',
+    id: 'osm_water_river',
     type: 'line',
     source: 'basemap',
     'source-layer': 'water',
@@ -197,7 +197,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'landuse_pedestrian',
+    id: 'osm_landuse_pedestrian',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'landuse',
@@ -205,7 +205,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: { 'fill-color': colours['road_minor'] }
   },
   {
-    id: 'landuse_pier',
+    id: 'osm_landuse_pier',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'landuse',
@@ -213,7 +213,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: { 'fill-color': colours['road_minor'] }
   },
   {
-    id: 'roads_tunnels_other_casing',
+    id: 'osm_roads_tunnels_other_casing',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -224,7 +224,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_tunnels_minor_casing',
+    id: 'osm_roads_tunnels_minor_casing',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -237,7 +237,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_tunnels_link_casing',
+    id: 'osm_roads_tunnels_link_casing',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -250,7 +250,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_tunnels_major_casing',
+    id: 'osm_roads_tunnels_major_casing',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -263,7 +263,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_tunnels_highway_casing',
+    id: 'osm_roads_tunnels_highway_casing',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -282,7 +282,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_tunnels_other',
+    id: 'osm_roads_tunnels_other',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -294,7 +294,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_tunnels_minor',
+    id: 'osm_roads_tunnels_minor',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -317,7 +317,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_tunnels_link',
+    id: 'osm_roads_tunnels_link',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -328,7 +328,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_tunnels_major',
+    id: 'osm_roads_tunnels_major',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -351,7 +351,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_tunnels_highway',
+    id: 'osm_roads_tunnels_highway',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -376,7 +376,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'buildings',
+    id: 'osm_buildings',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'buildings',
@@ -396,7 +396,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_pier',
+    id: 'osm_roads_pier',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -407,7 +407,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_minor_service_casing',
+    id: 'osm_roads_minor_service_casing',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -420,7 +420,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_minor_casing',
+    id: 'osm_roads_minor_casing',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -432,7 +432,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_link_casing',
+    id: 'osm_roads_link_casing',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -445,7 +445,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_major_casing_late',
+    id: 'osm_roads_major_casing_late',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -458,7 +458,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_highway_casing_late',
+    id: 'osm_roads_highway_casing_late',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -471,7 +471,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_other',
+    id: 'osm_roads_other',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -483,7 +483,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_link',
+    id: 'osm_roads_link',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -494,7 +494,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_minor_service',
+    id: 'osm_roads_minor_service',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -505,7 +505,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_minor',
+    id: 'osm_roads_minor',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -524,7 +524,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_major',
+    id: 'osm_roads_major',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -535,7 +535,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_highway',
+    id: 'osm_roads_highway',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -546,7 +546,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_taxiway',
+    id: 'osm_taxiway',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -557,7 +557,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_runway',
+    id: 'osm_runway',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -571,7 +571,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'landuse_runway',
+    id: 'osm_landuse_runway',
     type: 'fill',
     source: 'basemap',
     'source-layer': 'landuse',
@@ -579,7 +579,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     paint: { 'fill-color': '#efefef' }
   },
   {
-    id: 'roads_runway_centreline',
+    id: 'osm_runway_centreline',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -595,7 +595,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_rail_case',
+    id: 'osm_rail_case',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -606,7 +606,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
-    id: 'roads_rail',
+    id: 'osm_rail',
     type: 'line',
     source: 'basemap',
     'source-layer': 'roads',
@@ -615,19 +615,6 @@ const layers: LayerSpecificationWithZIndex[] = [
       'line-dasharray': [3, 5],
       'line-color': colours['rail'],
       'line-width': ['interpolate', ['exponential', 1.6], ['zoom'], 3, 0, 6, 1.1, 18, rail_base_size]
-    }
-  },
-  {
-    id: 'boundaries_country',
-    type: 'line',
-    source: 'basemap',
-    'source-layer': 'boundaries',
-    filter: ['<=', 'kind_detail', 2],
-    layout: { 'line-join': 'round' },
-    paint: {
-      'line-color': colours['border'],
-      'line-width': ['interpolate', ['linear'], ['zoom'], 3, 0.5, 20, 9],
-      'line-dasharray': [2, 1]
     }
   },
   {
@@ -641,6 +628,19 @@ const layers: LayerSpecificationWithZIndex[] = [
     id: 'black_marble',
     type: 'raster',
     source: 'blackmarble'
+  },
+  {
+    id: 'boundaries_country',
+    type: 'line',
+    source: 'basemap',
+    'source-layer': 'boundaries',
+    filter: ['<=', 'kind_detail', 2],
+    layout: { 'line-join': 'round' },
+    paint: {
+      'line-color': colours['border'],
+      'line-width': ['interpolate', ['linear'], ['zoom'], 3, 0.5, 20, 9],
+      'line-dasharray': [2, 1]
+    }
   }
 ]
 
