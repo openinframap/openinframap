@@ -133,7 +133,9 @@
         "infrastructure": "Υποδομές",
         "validation": "Έλεγχος Εγκυρότητας",
         "solar-generation": "Παραγωγή Ηλιακής Ενέργειας",
-        "osmose-power": "Osmose (Ρεύμα)"
+        "osmose-power": "Osmose (Ρεύμα)",
+        "borders": "Σύνορα",
+        "overlays": "Επικαλύψεις"
     },
     "info": {
         "operator": "Διαχειριστής",
@@ -214,5 +216,6 @@
         "clear": "Καθαρισμός αναζήτησης",
         "no-results": "Δεν βρέθηκαν αποτελέσματα"
     },
-    "coordinates": "Συντεταγμένες"
+    "coordinates": "Συντεταγμένες",
+    "openstreetmap": "OpenStreetMap"
 }
