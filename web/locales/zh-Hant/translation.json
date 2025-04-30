@@ -101,7 +101,8 @@
             "tower-mast": "塔"
         },
         "cabinet": "櫃",
-        "other-pumping-station": "其他泵站"
+        "other-pumping-station": "其他泵站",
+        "place": "地名"
     },
     "info": {
         "location": "位置",
@@ -203,10 +204,18 @@
         "osmose-power": "Osmose (電力)",
         "solar-generation": "太陽能發電",
         "validation": "檢驗",
-        "heatmaps": "熱圖"
+        "heatmaps": "熱圖",
+        "overlays": "疊加層",
+        "borders": "邊界"
     },
     "construction": "在建",
     "wikimedia-commons": "維基共享資源",
     "more_info": "更多資訊",
-    "disused": "廢棄"
+    "disused": "廢棄",
+    "coordinates": "座標",
+    "search": {
+        "clear": "清除搜尋",
+        "no-results": "未找到結果"
+    },
+    "openstreetmap": "開放街圖"
 }
