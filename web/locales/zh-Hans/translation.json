@@ -102,7 +102,7 @@
         },
         "cable": "线数",
         "cabinet": "柜",
-        "place": "地点"
+        "place": "地名"
     },
     "nav": {
         "about": "关于",
@@ -200,7 +200,9 @@
         "validation": "检验",
         "solar-generation": "太阳能发电",
         "background": "背景",
-        "heatmaps": "热图"
+        "heatmaps": "热图",
+        "borders": "边界",
+        "overlays": "叠加层"
     },
     "more_info": "更多资讯",
     "wikipedia": "维基百科",
@@ -214,5 +216,6 @@
     "search": {
         "clear": "清除搜索",
         "no-results": "未找到结果"
-    }
+    },
+    "openstreetmap": "开放街图"
 }
