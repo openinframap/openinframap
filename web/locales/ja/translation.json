@@ -90,7 +90,8 @@
         "cable": "ケーブル",
         "telecom": {
             "datacenter": "データセンター"
-        }
+        },
+        "place": "地名"
     },
     "edit": {
         "edit": "編集"
@@ -155,9 +156,11 @@
         "solar-generation": "太陽光発電",
         "validation": "検証",
         "background": "背景",
-        "osmose-power": "Osmose (電力)"
+        "osmose-power": "Osmose (電力)",
+        "borders": "境界"
     },
     "construction": "工事中",
     "wikipedia": "Wikipedia",
-    "disused": "廃止"
+    "disused": "廃止",
+    "coordinates": "座標"
 }
