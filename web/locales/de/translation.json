@@ -197,7 +197,9 @@
         "validation": "Prüfung",
         "solar-generation": "Sonnenerzeugung",
         "osmose-power": "Osmose (Energie)",
-        "heatmaps": "Heatmaps"
+        "heatmaps": "Heatmaps",
+        "borders": "Grenzen",
+        "overlays": "Überlagerungen"
     },
     "construction": "im Bau",
     "location": {
@@ -214,5 +216,6 @@
     "search": {
         "clear": "Suche löschen",
         "no-results": "Keine Ergebnisse gefunden"
-    }
+    },
+    "openstreetmap": "OpenStreetMap"
 }
