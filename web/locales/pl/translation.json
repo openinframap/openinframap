@@ -84,13 +84,19 @@
             "fission": "Rozszczepienie",
             "fusion": "Fuzja",
             "gasification": "Zgazowanie",
-            "anaerobic-digestion": "Fermentacja metanowa"
+            "anaerobic-digestion": "Fermentacja metanowa",
+            "tidal-barrage": "Zapora",
+            "water-pumped-storage": "Szczytowo-pompowa",
+            "solar-thermal": "Cieplna",
+            "tidal-stream": "Pływowa"
         },
         "petroleum": {
-            "well": "Szyb naftowy"
+            "well": "Szyb naftowy",
+            "facility": "Zakład naftowy"
         },
         "cabinet": "Skrzynka",
-        "other-pumping-station": "Inna stacja pomp"
+        "other-pumping-station": "Inna stacja pomp",
+        "place": "Miejscowość"
     },
     "info": {
         "substation-type": "Rodzaj podstacji",
@@ -196,11 +202,20 @@
         "heatmaps": "Mapy ciepła",
         "validation": "Walidacja danych",
         "background": "Tło",
-        "osmose-power": "Osmose (Elektroenergetyka)"
+        "osmose-power": "Osmose (Elektroenergetyka)",
+        "overlays": "Nakładki",
+        "solar-generation": "Wytwarzanie słoneczne",
+        "borders": "Granice"
     },
     "construction": "w budowie",
     "disused": "nieużywany",
     "warnings": {
         "webgl": "<p>Twoja przeglądarka może mieć problemy z wydajnością lub funkcjonalnością Open Infrastructure Map.</p><p>Aby strona działa dobrze, potrzebne jest <a href=\"http://webglreport.com\">WebGL</a> z przyspieszeniem sprzętowym.</p><p>Jeśli twoja przeglądarka wspiera WebGL, być może musisz wyłączyć cyfrowy odcisk palca (fingerprinting) przeglądarki.</p>"
-    }
+    },
+    "coordinates": "Współrzędne",
+    "search": {
+        "clear": "Wyczyść wyszukiwanie",
+        "no-results": "Brak wyników"
+    },
+    "openstreetmap": "OpenStreetMap"
 }
