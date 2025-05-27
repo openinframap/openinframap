@@ -1,166 +1,218 @@
 {
-    "power": {
-        "source": {
-            "hydro": "水力",
-            "geothermal": "地熱",
-            "coal": "石炭",
-            "nuclear": "原子力",
-            "wind": "風力",
-            "solar": "太陽光",
-            "waste": "廃棄物",
-            "battery": "電池"
-        },
-        "substation-type": {
-            "transmission": "送電",
-            "traction": "鉄道",
-            "converter": "交直変流器",
-            "distribution": "配電"
-        }
-    },
-    "names": {
-        "power": {
-            "transformer": "変圧器",
-            "generator": "発電機",
-            "substation": "変電所",
-            "switch": "開閉器",
-            "tower": "送電塔",
-            "pole": "電柱",
-            "generator-solar": "太陽光発電装置",
-            "wind-turbine": "風力原動機",
-            "converter": "交直変換所",
-            "plant": "発電所",
-            "line": "架空電線",
-            "cable": "地中電線",
-            "hvdc": "高圧直流",
-            "compensator": "補償装置",
-            "other-generator": "その他の発電機",
-            "line-reference": "線路番号",
-            "switch-disconnector": "断路器",
-            "switch-breaker": "遮断器",
-            "transformer-3": "三相変圧器",
-            "statcom": "静止型無効電力補償装置",
-            "switch-other": "その他の開閉器",
-            "compensator-other": "その他の補償装置",
-            "solar-panel": "ソーラーパネル",
-            "current-transformer": "計器用変流器",
-            "potential-transformer": "計器用変圧器"
-        },
-        "telecoms": {
-            "exchange": "電話交換",
-            "communication-line": "通信線路"
-        },
-        "water": {
-            "treatment-plant": "浄水場",
-            "sewage-treatment-plant": "下水処理場",
-            "pipeline": "水道管",
-            "reservoir": "貯水池",
-            "well": "井戸水"
-        },
-        "petroleum": {
-            "well": "井戸",
-            "facility": "石油施設"
-        },
-        "substance": {
-            "hydrogen": "水素",
-            "fuel": "燃料",
-            "oil": "原油",
-            "co2": "二酸化炭素",
-            "fresh-water": "淡水",
-            "rainwater": "雨水",
-            "wastewater": "廃水",
-            "steam": "蒸気",
-            "hot-water": "温水",
-            "nitrogen": "窒素",
-            "oxygen": "酸素"
-        },
-        "method": {
-            "fission": "核分裂",
-            "wind-turbine": "風力原動機",
-            "water-run-of-river": "流れ込み式",
-            "water-storage": "貯水池式",
-            "water-pumped-storage": "揚水式",
-            "combustion": "燃焼",
-            "solar-thermal": "太陽熱",
-            "solar-photovoltaic": "太陽光",
-            "tidal-stream": "蒸気",
-            "anaerobic-digestion": "嫌気性消化",
-            "fusion": "核融合"
-        },
-        "pipeline": "パイプライン",
-        "cable": "ケーブル",
-        "telecom": {
-            "datacenter": "データセンター"
-        },
-        "place": "地名"
-    },
-    "edit": {
-        "edit": "編集"
-    },
-    "info": {
-        "name": "名前",
-        "generation-method": "発電方法",
-        "operator": "運営者",
-        "substation-type": "変電所種類",
-        "usage": "用途",
-        "type": "種類",
-        "circuits": "回路",
-        "location": "位置",
-        "material": "材質",
-        "reference": "番号",
-        "substance": "物質",
-        "start-date": "開始日",
-        "website": "ウェブサイト",
-        "transformer-type": "変成器種類"
-    },
-    "nav": {
-        "stats": "統計",
-        "about": "概要"
-    },
-    "units": {
-        "kV": "kV",
-        "Hz": "Hz",
-        "MW": "MW",
-        "DC": "直流",
-        "below_10kv": "< 10 kV",
-        "ge_kv": "≥ {{voltage}} kV",
-        "kW": "kW",
-        "V": "V"
-    },
-    "more_info": "詳細情報",
-    "key": {
-        "power-plants": "発電所",
-        "power-lines": "電線路",
-        "telecoms": "通信",
-        "switchgear": "開閉装置",
-        "power-generators": "発電機",
-        "water": "水",
-        "name": "記号",
-        "petroleum": "石油"
-    },
-    "location": {
-        "outdoor": "屋外",
-        "indoor": "屋内",
-        "underwater": "水中",
-        "underground": "地中",
-        "roof": "屋根",
-        "surface": "地面"
-    },
-    "warning": "警告",
-    "other": "その他",
-    "layers": {
-        "telecoms": "通信",
-        "power": "電力",
-        "labels": "地名",
-        "water": "水",
-        "nighttime-lights": "夜間照明",
-        "solar-generation": "太陽光発電",
-        "validation": "検証",
-        "background": "背景",
-        "osmose-power": "Osmose (電力)",
-        "borders": "境界"
-    },
-    "construction": "工事中",
-    "wikipedia": "Wikipedia",
-    "disused": "廃止",
-    "coordinates": "座標"
+	"power": {
+		"source": {
+			"hydro": "水力",
+			"geothermal": "地熱",
+			"coal": "石炭",
+			"nuclear": "原子力",
+			"oil-gas": "石油ガス",
+			"gas": "ガス",
+			"wind": "風力",
+			"solar": "太陽光",
+			"biomass": "バイオマス",
+			"waste": "廃棄物",
+			"battery": "電池"
+		},
+		"substation-type": {
+			"transmission": "送電",
+			"traction": "鉄道",
+			"converter": "交直変流器",
+			"distribution": "配電"
+		}
+	},
+	"names": {
+		"power": {
+			"transformer": "変圧器",
+			"generator": "発電機",
+			"substation": "変電所",
+			"switch": "開閉器",
+			"tower": "送電塔",
+			"pole": "電柱",
+			"generator-solar": "太陽光発電装置",
+			"wind-turbine": "風力原動機",
+			"converter": "交直変換所",
+			"plant": "発電所",
+			"line": "架空電線",
+			"cable": "地中電線",
+			"hvdc": "高圧直流",
+			"compensator": "補償装置",
+			"other-generator": "その他の発電機",
+			"line-reference": "線路番号",
+			"switch-disconnector": "断路器",
+			"switch-breaker": "遮断器",
+			"transformer-3": "三相変圧器",
+			"statcom": "静止型無効電力補償装置",
+			"switch-other": "その他の開閉器",
+			"compensator-other": "その他の補償装置",
+			"solar-panel": "ソーラーパネル",
+			"current-transformer": "計器用変流器",
+			"potential-transformer": "計器用変圧器",
+			"solar-panel-node": "ソーラーパネル(ノード)",
+			"tower-pylon": "鉄塔",
+			"tower-transition": "引留鉄塔",
+			"pole-transition": "引込柱",
+			"reactor-series": "直列リアクトル",
+			"reactor-shunt": "シャントリアクトル",
+			"capacitor-series": "直列コンデンサ",
+			"capacitor-shunt": "シャントコンデンサ",
+			"synchronous-condenser": "同期調相機",
+			"filter": "フィルタ"
+		},
+		"telecoms": {
+			"exchange": "電話交換",
+			"communication-line": "通信線路",
+			"data-center": "通信ビル",
+			"cabinet": "通信キャビネット"
+		},
+		"water": {
+			"treatment-plant": "浄水場",
+			"sewage-treatment-plant": "下水処理場",
+			"pipeline": "水道管",
+			"reservoir": "貯水池",
+			"well": "井戸水",
+			"pumping-station": "ポンプ場",
+			"water-pumping-station": "揚水施設",
+			"sewage-pumping-station": "排水機場"
+		},
+		"petroleum": {
+			"well": "井戸",
+			"facility": "石油施設"
+		},
+		"substance": {
+			"hydrogen": "水素",
+			"fuel": "燃料",
+			"oil": "原油",
+			"co2": "二酸化炭素",
+			"fresh-water": "淡水",
+			"rainwater": "雨水",
+			"wastewater": "廃水",
+			"steam": "蒸気",
+			"hot-water": "温水",
+			"nitrogen": "窒素",
+			"oxygen": "酸素",
+			"gas": "ガス",
+			"petroleum-intermediate": "石油半製品",
+			"beer": "ビール"
+		},
+		"method": {
+			"fission": "核分裂",
+			"wind-turbine": "風力原動機",
+			"water-run-of-river": "流れ込み式",
+			"water-storage": "貯水池式",
+			"water-pumped-storage": "揚水式",
+			"combustion": "燃焼",
+			"solar-thermal": "太陽熱",
+			"solar-photovoltaic": "太陽光",
+			"tidal-stream": "蒸気",
+			"anaerobic-digestion": "嫌気性消化",
+			"fusion": "核融合",
+			"tidal-barrage": "防潮堰",
+			"gasification": "ガス化"
+		},
+		"pipeline": "パイプライン",
+		"cable": "ケーブル",
+		"telecom": {
+			"tower-mast": "塔",
+			"datacenter": "データセンター"
+		},
+		"place": "地名",
+		"cabinet": "キャビネット",
+		"other-pumping-station": "その他の揚水施設"
+	},
+	"edit": {
+		"edit": "編集",
+		"remote": "リモートコントロールで編集 (JSOM等)",
+		"browser": "ブラウザで編集 (ID)"
+	},
+	"info": {
+		"name": "名前",
+		"generation-method": "発電方法",
+		"operator": "運営者",
+		"substation-type": "変電所種類",
+		"usage": "用途",
+		"type": "種類",
+		"circuits": "回路",
+		"location": "位置",
+		"material": "材質",
+		"reference": "番号",
+		"substance": "物質",
+		"start-date": "開始日",
+		"website": "ウェブサイト",
+		"transformer-type": "変成器種類",
+		"output": "出力",
+		"view-openstreetmap": "OpenStreetMapで見る",
+		"design": "鉄塔種別",
+		"line-attachment": "電線の接続",
+		"line-management": "電線管理"
+	},
+	"nav": {
+		"stats": "統計",
+		"about": "概要",
+		"exports": "エクスポート"
+	},
+	"units": {
+		"kV": "kV",
+		"Hz": "Hz",
+		"MW": "MW",
+		"DC": "直流",
+		"below_10kv": "< 10 kV",
+		"ge_kv": "≥ {{voltage}} kV",
+		"kW": "kW",
+		"V": "V"
+	},
+	"more_info": "詳細情報",
+	"key": {
+		"power-plants": "発電所",
+		"power-lines": "電線路",
+		"telecoms": "通信",
+		"switchgear": "開閉装置",
+		"power-line-supports": "鉄塔種別",
+		"power-generators": "発電機",
+		"water": "水",
+		"name": "記号",
+		"petroleum": "石油",
+		"traction": "牽引 (<50Hz)"
+	},
+	"location": {
+		"outdoor": "屋外",
+		"indoor": "屋内",
+		"underwater": "水中",
+		"underground": "地中",
+		"roof": "屋根",
+		"surface": "地面"
+	},
+	"warning": "警告",
+	"other": "その他",
+	"layers": {
+		"telecoms": "通信",
+		"power": "電力",
+		"labels": "地名",
+		"water": "水",
+		"nighttime-lights": "夜間照明",
+		"solar-generation": "太陽光発電",
+		"validation": "検証",
+		"background": "背景",
+		"osmose-power": "Osmose (電力)",
+		"borders": "境界",
+		"heatmaps": "ヒートマップ",
+		"overlays": "オーバーレイ",
+		"petroleum": "石油・天然ガス",
+		"infrastructure": "インフラ設備",
+		"title": "レイヤ",
+		"other-pipelines": "その他のパイプライン"
+	},
+	"warnings": {
+		"webgl": "<p>お使いのブラウザはOpen Infrastructure Mapのパフォーマンスまたは機能に問題が発生する可能性があります。</p><p>このサイトを正常に動作させるためには&gt;<a href=\"http://webglreport.com\">WebGL</a> のハードウェアアクセラレーションが必要です。</p><p>ブラウザがWebGLをサポートしている場合は、ブラウザのフィンガープリント保護機能をオフにしてください</p>"
+	},
+	"construction": "工事中",
+	"wikipedia": "Wikipedia",
+	"wikimedia-commons": "Wikimedia Commons",
+	"wikidata": "ウィキデータ",
+	"disused": "廃止",
+	"coordinates": "座標",
+	"search": {
+		"clear": "検索を消去",
+		"no-results": "一意する結果が見つかりませんでした"
+	},
+	"openstreetmap": "OpenStreetMap"
 }
