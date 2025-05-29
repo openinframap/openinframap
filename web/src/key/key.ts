@@ -6,7 +6,12 @@ import comms_layers from '../style/style_oim_telecoms.js'
 import {
   default as petroleum_layers,
   colour_oil,
-  colour_gas,
+  colour_gas_transmission_large,
+  colour_gas_transmission_medium,
+  colour_gas_transmission_other,
+  colour_gas_pressure_high,
+  colour_gas_pressure_intermediate,
+  colour_gas_other,
   colour_fuel,
   colour_intermediate,
   colour_hydrogen
@@ -111,6 +116,8 @@ class KeyControl implements IControl {
     mount(pane, await this.switchgearTable())
     pane.appendChild(el('h3', t('key.telecoms', 'Telecoms')))
     mount(pane, await this.telecomTable())
+    pane.appendChild(el('h3', t('key.gas', 'Gas')))
+    mount(pane, this.gasTable())
     pane.appendChild(el('h3', t('key.petroleum', 'Petroleum')))
     mount(pane, this.petroleumTable())
     pane.appendChild(el('h3', t('key.water', 'Water')))
@@ -246,10 +253,41 @@ class KeyControl implements IControl {
     return table
   }
 
+  gasTable() {
+    const rows = [
+      [
+        `${t('names.gas.pipeline.transmission', 'Transmission')} >= DN 700`,
+        svgLine(colour_gas_transmission_large, line_thickness)
+      ],
+      [
+        `${t('names.gas.pipeline.transmission', 'Transmission')} >= DN 300`,
+        svgLine(colour_gas_transmission_medium, line_thickness)
+      ],
+      [
+        `${t('names.gas.pipeline.transmission', 'Transmission')} < DN 300`,
+        svgLine(colour_gas_transmission_other, line_thickness)
+      ],
+      [
+        `${t('names.gas.pipeline.distribution', 'Distribution')} ${t('names.gas.pipeline.pressure.high', 'High Pressure')}`,
+        svgLine(colour_gas_pressure_high, line_thickness)
+      ],
+      [
+        `${t('names.gas.pipeline.distribution', 'Distribution')} ${t('names.gas.pipeline.pressure.intermediate', 'Intermediate Pressure')}`,
+        svgLine(colour_gas_pressure_intermediate, line_thickness)
+      ],
+      [
+        `${t('names.gas.pipeline.distribution', 'Distribution')} ${t('names.gas.pipeline.pressure.low', 'Low Pressure')}`,
+        svgLine(colour_gas_other, line_thickness)
+      ],
+    ]
+    const table = list('table', Tr)
+    table.update(rows)
+    return table
+  }
+
   petroleumTable() {
     const rows = [
       [t('names.substance.oil', 'Oil'), svgLine(colour_oil, line_thickness)],
-      [t('names.substance.gas', 'Gas'), svgLine(colour_gas, line_thickness)],
       [
         t('names.substance.petroleum-intermediate', 'Petroleum intermediate'),
         svgLine(colour_intermediate, line_thickness)

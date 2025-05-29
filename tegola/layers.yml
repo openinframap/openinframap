@@ -452,6 +452,8 @@ layers:
         sql: tags -> 'usage'
       - name: diameter
         sql: tags -> 'diameter'
+      - name: pressure
+        sql: tags -> 'pressure'
       - name: material
         sql: tags -> 'material'
     from: osm_pipeline
