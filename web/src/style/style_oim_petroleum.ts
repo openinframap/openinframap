@@ -20,32 +20,23 @@ const transmission_large_p = all(
   has('usage'),
   has('diameter'),
   ['==', get('usage'), 'transmission'],
-  ['>=', ['to-number', get('diameter'), 0], 700],
-);
+  ['>=', ['to-number', get('diameter'), 0], 700]
+)
 const transmission_medium_p = all(
   has('usage'),
   has('diameter'),
   ['==', get('usage'), 'transmission'],
-  ['>=', ['to-number', get('diameter'), 0], 300],
-);
-const transmission_p = all(
-  has('usage'),
-  ['==', get('usage'), 'transmission'],
-);
+  ['>=', ['to-number', get('diameter'), 0], 300]
+)
+const transmission_p = all(has('usage'), ['==', get('usage'), 'transmission'])
 const pressure_high_p = all(
   has('pressure'),
-  any(
-    ['==', get('pressure'), 'high'],
-    ['>=', ['to-number', get('pressure'), 0], 1],
-  ),
-);
+  any(['==', get('pressure'), 'high'], ['>=', ['to-number', get('pressure'), 0], 1])
+)
 const pressure_intermediate_p = all(
   has('pressure'),
-  any(
-    ['==', get('pressure'), 'intermediate'],
-    ['>=', ['to-number', get('pressure'), 0], 0.1],
-  ),
-);
+  any(['==', get('pressure'), 'intermediate'], ['>=', ['to-number', get('pressure'), 0], 0.1])
+)
 
 const usage_diameter_pressure_colour: ExpressionSpecification = case_(
   [
@@ -53,10 +44,10 @@ const usage_diameter_pressure_colour: ExpressionSpecification = case_(
     [transmission_medium_p, colour_gas_transmission_medium],
     [transmission_p, colour_gas_transmission_other],
     [pressure_high_p, colour_gas_pressure_high],
-    [pressure_intermediate_p, colour_gas_pressure_intermediate],
+    [pressure_intermediate_p, colour_gas_pressure_intermediate]
   ],
   colour_gas_other
-);
+)
 
 const pipeline_colour: ExpressionSpecification = match(
   substance,

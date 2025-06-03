@@ -278,7 +278,7 @@ class KeyControl implements IControl {
       [
         `${t('names.gas.pipeline.distribution', 'Distribution')} ${t('names.gas.pipeline.pressure.low', 'Low Pressure')}`,
         svgLine(colour_gas_other, line_thickness)
-      ],
+      ]
     ]
     const table = list('table', Tr)
     table.update(rows)
