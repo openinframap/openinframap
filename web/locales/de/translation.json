@@ -74,6 +74,17 @@
             "well": "Bohrloch",
             "facility": "Erdöl-Betrieb"
         },
+        "gas": {
+            "pipeline": {
+                "transmission": "Fernleitung",
+                "distribution": "Verteilung",
+                "pressure": {
+                    "high": "Hochdruck",
+                    "intermediate": "Mitteldruck",
+                    "low": "Niederdruck"
+                }
+            }
+        },
         "cable": "Erdkabel",
         "telecom": {
             "tower-mast": "Sendemast",
@@ -106,6 +117,7 @@
         "power-line-supports": "Strommasten",
         "switchgear": "Schaltanlagen",
         "telecoms": "Telekommunikation",
+        "gas": "Gas",
         "petroleum": "Brennstoffe",
         "water": "Wasser",
         "traction": "Traktion (< 50 Hz)"
