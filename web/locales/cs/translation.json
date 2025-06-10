@@ -107,7 +107,18 @@
             "anaerobic-digestion": "Anaerobní digestní proces",
             "wind-turbine": "Větrná turbína"
         },
-        "place": "Místo"
+        "place": "Místo",
+        "gas": {
+            "pipeline": {
+                "distribution": "Distribuční",
+                "pressure": {
+                    "high": "Vysoký tlak",
+                    "low": "Nízký tlak",
+                    "intermediate": "Střední tlak"
+                },
+                "transmission": "Přenosná"
+            }
+        }
     },
     "info": {
         "generation-method": "Způsob výroby",
@@ -159,7 +170,8 @@
         "power-line-supports": "Části elektrického vedení",
         "power-generators": "Generátory",
         "switchgear": "Rozvodné zařízení",
-        "petroleum": "Ropa"
+        "petroleum": "Ropa",
+        "gas": "Plyn"
     },
     "units": {
         "V": "V",
