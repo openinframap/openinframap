@@ -21,7 +21,7 @@ function sunDeclinationAngle(date: Date): number {
     60 /
     1000
 
-  return -23.44 * Math.cos((360 / 365) * (dayOfYear + 10) * (Math.PI / 180))
+  return 23.44 * Math.cos((360 / 365) * (dayOfYear + 10) * (Math.PI / 180))
 }
 
 function sunPolarAngle(date: Date): number {
