@@ -54,6 +54,17 @@
       "well": "Well",
       "facility": "Petroleum facility"
     },
+    "gas": {
+      "pipeline": {
+        "transmission": "Transmission",
+        "distribution": "Distribution",
+        "pressure": {
+          "high": "High Pressure",
+          "intermediate": "Intermediate Pressure",
+          "low": "Low Pressure"
+        }
+      }
+    },
     "water": {
       "pipeline": "Water pipeline",
       "sewage-treatment-plant": "Sewage treatment plant",
@@ -153,6 +164,7 @@
     "power-line-supports": "Power Line Supports",
     "switchgear": "Switchgear",
     "telecoms": "Telecoms",
+    "gas": "Gas",
     "petroleum": "Petroleum",
     "water": "Water",
     "traction": "Traction (< 50 Hz)"

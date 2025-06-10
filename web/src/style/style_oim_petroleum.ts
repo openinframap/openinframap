@@ -2,19 +2,57 @@ import { t } from 'i18next'
 import { ColorSpecification, ExpressionSpecification } from 'maplibre-gl'
 import { text_paint, font, get_local_name, substance } from './common.js'
 import { LayerSpecificationWithZIndex } from './types.ts'
-import { interpolate, match, get, has, concat, if_, zoom, any, all } from './stylehelpers.ts'
+import { interpolate, match, get, has, concat, if_, zoom, any, all, case_ } from './stylehelpers.ts'
 
-const colour_gas: ColorSpecification = '#BFBC6B'
+const colour_gas_transmission_large: ColorSpecification = '#8A3976'
+const colour_gas_transmission_medium: ColorSpecification = '#E65757'
+const colour_gas_transmission_other: ColorSpecification = '#EA972D'
+const colour_gas_pressure_high: ColorSpecification = '#ECCD25'
+const colour_gas_pressure_intermediate: ColorSpecification = '#E1DD69'
+const colour_gas_other: ColorSpecification = '#BFBC6B'
 const colour_oil: ColorSpecification = '#6B6B6B'
 const colour_fuel: ColorSpecification = '#CC9F83'
 const colour_intermediate: ColorSpecification = '#78CC9E'
 const colour_hydrogen: ColorSpecification = '#CC78AB'
 const colour_unknown: ColorSpecification = '#BABABA'
 
+const transmission_large_p = all(
+  has('usage'),
+  has('diameter'),
+  ['==', get('usage'), 'transmission'],
+  ['>=', ['to-number', get('diameter'), 0], 700]
+)
+const transmission_medium_p = all(
+  has('usage'),
+  has('diameter'),
+  ['==', get('usage'), 'transmission'],
+  ['>=', ['to-number', get('diameter'), 0], 300]
+)
+const transmission_p = all(has('usage'), ['==', get('usage'), 'transmission'])
+const pressure_high_p = all(
+  has('pressure'),
+  any(['==', get('pressure'), 'high'], ['>=', ['to-number', get('pressure'), 0], 1])
+)
+const pressure_intermediate_p = all(
+  has('pressure'),
+  any(['==', get('pressure'), 'intermediate'], ['>=', ['to-number', get('pressure'), 0], 0.1])
+)
+
+const usage_diameter_pressure_colour: ExpressionSpecification = case_(
+  [
+    [transmission_large_p, colour_gas_transmission_large],
+    [transmission_medium_p, colour_gas_transmission_medium],
+    [transmission_p, colour_gas_transmission_other],
+    [pressure_high_p, colour_gas_pressure_high],
+    [pressure_intermediate_p, colour_gas_pressure_intermediate]
+  ],
+  colour_gas_other
+)
+
 const pipeline_colour: ExpressionSpecification = match(
   substance,
   [
-    [['gas', 'natural_gas', 'cng', 'lpg', 'lng'], colour_gas],
+    [['gas', 'natural_gas', 'cng', 'lpg', 'lng'], usage_diameter_pressure_colour],
     ['oil', colour_oil],
     ['fuel', colour_fuel],
     [['ngl', 'y-grade', 'hydrocarbons', 'condensate', 'naphtha'], colour_intermediate],
@@ -173,7 +211,12 @@ export default function layers(): LayerSpecificationWithZIndex[] {
 }
 
 export {
-  colour_gas,
+  colour_gas_transmission_large,
+  colour_gas_transmission_medium,
+  colour_gas_transmission_other,
+  colour_gas_pressure_high,
+  colour_gas_pressure_intermediate,
+  colour_gas_other,
   colour_oil,
   colour_fuel,
   colour_intermediate,
