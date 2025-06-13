@@ -107,7 +107,18 @@
             "solar-photovoltaic": "Φωτοβολταϊκά",
             "solar-thermal": "Θερμική"
         },
-        "place": "Μέρος"
+        "place": "Μέρος",
+        "gas": {
+            "pipeline": {
+                "pressure": {
+                    "high": "υψηλής πίεσης",
+                    "intermediate": "μέσης πίεσης",
+                    "low": "χαμηλής πίεσης"
+                },
+                "transmission": "Μετάδοση",
+                "distribution": "Διανομή"
+            }
+        }
     },
     "units": {
         "kW": "kW",
@@ -170,7 +181,8 @@
         "power-generators": "Γεννήτριες Ρεύματος",
         "power-line-supports": "Στηρίγματα Γραμμών Ρεύματος",
         "telecoms": "Τηλεπικοινωνίες",
-        "water": "Νερό"
+        "water": "Νερό",
+        "gas": "Αέριο"
     },
     "power": {
         "source": {
