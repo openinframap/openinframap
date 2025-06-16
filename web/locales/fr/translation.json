@@ -32,7 +32,10 @@
             "hvdc": "CCHT",
             "switch-other": "Autre interrupteur",
             "statcom": "Compensateur statique d'énergie réactive",
-            "tower-transition": "Tour/pylône de transition"
+            "tower-transition": "Tour/pylône de transition",
+            "potential-transformer": "Transformateur de tension",
+            "pole-transition": "Poteau de transition",
+            "current-transformer": "Transformateur de courant"
         },
         "substance": {
             "co2": "CO<sub>2</sub>",
@@ -43,7 +46,7 @@
             "gas": "Gaz",
             "fresh-water": "Eau froide",
             "hot-water": "Eau chaude",
-            "oil": "Huile",
+            "oil": "Pétrole",
             "petroleum-intermediate": "Produits intermédiaires du pétrole",
             "fuel": "Carburant",
             "nitrogen": "Diazote",
@@ -93,7 +96,18 @@
             "water-run-of-river": "Au fil de l'eau",
             "tidal-stream": "Hydrolienne"
         },
-        "place": "Lieu"
+        "place": "Lieu",
+        "gas": {
+            "pipeline": {
+                "transmission": "Transport",
+                "distribution": "Distribution",
+                "pressure": {
+                    "intermediate": "Moyenne Pression",
+                    "low": "Basse Pression",
+                    "high": "Haute Pression"
+                }
+            }
+        }
     },
     "edit": {
         "edit": "Editer",
@@ -125,7 +139,7 @@
         "material": "Matériau",
         "design": "Design",
         "line-attachment": "Armement aérien",
-        "line-management": "Gestion de ligne",
+        "line-management": "Topologie",
         "transformer-type": "Type de transformateur"
     },
     "other": "Autre",
@@ -149,7 +163,8 @@
         "switchgear": "Appareillage de connexion",
         "traction": "Traction (< 50 Hz)",
         "power-plants": "Centrales électriques",
-        "power-generators": "Générateur électrique"
+        "power-generators": "Générateur électrique",
+        "gas": "Gaz"
     },
     "wikidata": "Wikidata",
     "power": {
@@ -187,7 +202,11 @@
         "nighttime-lights": "Lumières de nuit",
         "heatmaps": "Carte de chaleur",
         "validation": "Contrôle qualité",
-        "other-pipelines": "Autres canalisations"
+        "other-pipelines": "Autres canalisations",
+        "overlays": "Surcouches",
+        "osmose-power": "Osmose (Électricité)",
+        "solar-generation": "Solaire",
+        "borders": "Frontières"
     },
     "more_info": "Plus d'infos",
     "wikipedia": "Wikipedia",
@@ -209,5 +228,6 @@
     "search": {
         "clear": "Vider la recherche",
         "no-results": "Aucun résultat trouvé"
-    }
+    },
+    "openstreetmap": "OpenStreetMap"
 }
