@@ -96,7 +96,18 @@
         },
         "cabinet": "Skrzynka",
         "other-pumping-station": "Inna stacja pomp",
-        "place": "Miejscowość"
+        "place": "Miejscowość",
+        "gas": {
+            "pipeline": {
+                "transmission": "Przesyłowy",
+                "distribution": "Rozdzielczy",
+                "pressure": {
+                    "high": "Wysokiego ciśnienia",
+                    "low": "Niskiego ciśnienia",
+                    "intermediate": "Średniego ciśnienia"
+                }
+            }
+        }
     },
     "info": {
         "substation-type": "Rodzaj podstacji",
@@ -141,7 +152,8 @@
         "switchgear": "Rozdzielnia",
         "telecoms": "Telekomunikacja",
         "petroleum": "Ropa naftowa",
-        "power-line-supports": "Konstrukcje wsporcze linii napowietrznych"
+        "power-line-supports": "Konstrukcje wsporcze linii napowietrznych",
+        "gas": "Gaz"
     },
     "power": {
         "source": {
