@@ -92,7 +92,8 @@
             "tidal-barrage": "Marémotrice",
             "water-run-of-river": "Au fil de l'eau",
             "tidal-stream": "Hydrolienne"
-        }
+        },
+        "place": "Lieu"
     },
     "edit": {
         "edit": "Editer",
@@ -183,7 +184,10 @@
         "petroleum": "Pétrole & Gaz naturel",
         "infrastructure": "Infrastructure",
         "background": "Arrière-plan",
-        "nighttime-lights": "Lumières de nuit"
+        "nighttime-lights": "Lumières de nuit",
+        "heatmaps": "Carte de chaleur",
+        "validation": "Contrôle qualité",
+        "other-pipelines": "Autres canalisations"
     },
     "more_info": "Plus d'infos",
     "wikipedia": "Wikipedia",
