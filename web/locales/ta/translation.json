@@ -39,7 +39,9 @@
             "reactor-series": "தொடர் உலை",
             "statcom": "நிலையான வர் ஈடுசெய்யும்",
             "synchronous-condenser": "ஒத்திசைவான மின்தேக்கி",
-            "compensator-other": "மற்ற ஈடுசெய்யும்"
+            "compensator-other": "மற்ற ஈடுசெய்யும்",
+            "current-transformer": "தற்போதைய மின்மாற்றி",
+            "potential-transformer": "சாத்தியமான மின்மாற்றி"
         },
         "petroleum": {
             "well": "நன்றாக",
@@ -90,18 +92,33 @@
             "petroleum-intermediate": "பெட்ரோலிய இடைநிலை",
             "fuel": "எரிபொருள்",
             "hydrogen": "நீரகம்",
-            "co2": "கோ <சப்> 2 </ சப்>",
+            "co2": "சிஒ<sub>2</sub>",
             "fresh-water": "புதிய நீர்",
             "hot-water": "சூடான நீர்",
             "steam": "நீராவி",
             "wastewater": "கழிவு நீர்",
-            "rainwater": "மழைநீர்"
-        }
+            "rainwater": "மழைநீர்",
+            "oxygen": "உயிரகம், உயிர்வளி",
+            "nitrogen": "தழைச்சத்து",
+            "beer": "பீர்"
+        },
+        "gas": {
+            "pipeline": {
+                "transmission": "பரவும் முறை",
+                "distribution": "பரவல்",
+                "pressure": {
+                    "high": "உயர் அழுத்தம்",
+                    "intermediate": "இடைநிலை அழுத்தம்",
+                    "low": "குறைந்த அழுத்தம்"
+                }
+            }
+        },
+        "place": "இடம்"
     },
     "info": {
         "name": "பெயர்",
         "operator": "ஆபரேட்டர்",
-        "output": "விசை",
+        "output": "ஆற்றல்",
         "source": "மூலம்",
         "start-date": "தொடக்க தேதி",
         "reference": "குறிப்பு",
@@ -117,7 +134,8 @@
         "design": "வடிவமைப்பு",
         "material": "பொருள்",
         "line-attachment": "வரி இணைப்பு",
-        "line-management": "வரி மேலாண்மை"
+        "line-management": "வரி மேலாண்மை",
+        "transformer-type": "மின்மாற்றி வகை"
     },
     "power": {
         "source": {
@@ -142,12 +160,21 @@
     },
     "layers": {
         "nighttime-lights": "இரவு நேர விளக்குகள்",
-        "power": "விசை",
+        "power": "ஆற்றல்",
         "title": "அடுக்குகள்",
         "telecoms": "தொலைத் தொடர்பு",
-        "petroleum": "எண்ணெய் & எரிவாயு",
+        "petroleum": "எண்ணெய் & இயற்கை எரிவாயு",
         "water": "நீர்",
-        "labels": "சிட்டைகள்"
+        "labels": "சிட்டைகள்",
+        "solar-generation": "சூரிய தலைமுறை",
+        "osmose-power": "ஆச்மோச் (சக்தி)",
+        "background": "பின்னணி",
+        "heatmaps": "வெப்ப வரைபடங்கள்",
+        "infrastructure": "உள்கட்டமைப்பு",
+        "overlays": "மேலடுக்குகள்",
+        "validation": "சரிபார்ப்பு",
+        "borders": "எல்லைகள்",
+        "other-pipelines": "பிற குழாய்கள்"
     },
     "construction": "கட்டுமானத்தின் கீழ்",
     "disused": "பயன்படுத்தப்பட்டது",
@@ -161,7 +188,7 @@
         "Hz": "Hz",
         "MW": "மெகாவாட்",
         "DC": "நேர்மின்னழுத்தம்",
-        "below_10kv": "<10 கே.வி.",
+        "below_10kv": "<10 கிவோ",
         "ge_kv": "≥ {{voltage}} kv",
         "kW": "கிலோவாட்",
         "V": "V"
@@ -180,7 +207,8 @@
         "telecoms": "தொலைத் தொடர்பு",
         "petroleum": "பாறையெண்ணை, பாறைநெய்",
         "water": "நீர்",
-        "traction": "இழுவை (<50 எர்ட்ச்)"
+        "traction": "இழுவை (<50 எர்ட்ச்)",
+        "gas": "வளிமம்"
     },
     "location": {
         "underground": "நிலத்தடி",
@@ -195,5 +223,11 @@
     "warning": "எச்சரிக்கை",
     "warnings": {
         "webgl": "<p> உங்கள் உலாவியில் திறந்த உள்கட்டமைப்பு வரைபடத்துடன் செயல்திறன் அல்லது செயல்பாட்டு சிக்கல்கள் இருக்கலாம். சிறப்பாக செயல்பட.</p>"
-    }
+    },
+    "search": {
+        "clear": "தேடலை அழி",
+        "no-results": "முடிவுகள் எதுவும் கிடைக்கவில்லை"
+    },
+    "openstreetmap": "ஓபன்ச்ட்ரீட் வரைபடம்",
+    "coordinates": "ஒருங்கிணைப்புகள்"
 }
