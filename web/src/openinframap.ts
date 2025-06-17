@@ -73,7 +73,7 @@ export default class OpenInfraMap {
           new Layer('W', t('layers.water'), 'water_', false)
         ]),
         new LayerGroup(t('layers.validation'), [
-          new Layer('E', t('layers.power'), 'osmose_errors_power', false)
+          new Layer('E', t('layers.osmose-power'), 'osmose_errors_power', false)
         ])
       ],
       t('layers.title', 'Layers')
