@@ -1,1 +1,89 @@
-{}
+{
+    "nav": {
+        "about": "Относно",
+        "stats": "Статистики"
+    },
+    "edit": {
+        "edit": "Редактирай"
+    },
+    "names": {
+        "power": {
+            "wind-turbine": "Вятърна турбина",
+            "substation": "Подстанция",
+            "filter": "Филтър",
+            "generator": "Генератор",
+            "transformer": "Трансформатор",
+            "solar-panel": "Соларен панел"
+        },
+        "telecom": {
+            "datacenter": "Датацентър",
+            "tower-mast": "Кула"
+        },
+        "substance": {
+            "fuel": "Гориво",
+            "hydrogen": "Водород",
+            "beer": "Бира",
+            "oil": "Нефт",
+            "oxygen": "Кислород",
+            "co2": "Въглероден диоксид",
+            "fresh-water": "Прясна вода",
+            "hot-water": "Гореща вода",
+            "wastewater": "Отпадни води",
+            "steam": "Пара",
+            "rainwater": "Дъждовна вода",
+            "nitrogen": "Азот",
+            "gas": "Газ"
+        },
+        "method": {
+            "wind-turbine": "Вятърна турбина"
+        },
+        "gas": {
+            "pipeline": {
+                "pressure": {
+                    "low": "Ниско налягане",
+                    "high": "Високо налягане",
+                    "intermediate": "Средно налягане"
+                }
+            }
+        },
+        "water": {
+            "pumping-station": "Помпена станция",
+            "pipeline": "Водопровод",
+            "well": "Кладенец",
+            "reservoir": "Резервоар",
+            "sewage-treatment-plant": "ПСОВ"
+        },
+        "cable": "Кабел",
+        "place": "Място",
+        "pipeline": "Тръбопровод"
+    },
+    "openstreetmap": "OpenStreetMap",
+    "info": {
+        "name": "Име",
+        "operator": "Оператор",
+        "output": "Количество електрическа енергия произведена от генератор",
+        "source": "Източник",
+        "start-date": "Дата на откриване",
+        "generation-method": "Метод за генериране на електричество"
+    },
+    "warning": "Предупреждение",
+    "other": "Друго",
+    "layers": {
+        "validation": "Валидация",
+        "infrastructure": "Инфраструктура",
+        "background": "Фон",
+        "telecoms": "Телекоми",
+        "solar-generation": "Соларно производство",
+        "power": "Мощност",
+        "title": "Слоеве",
+        "labels": "Етикети",
+        "water": "Вода",
+        "petroleum": "Нефт и природен газ",
+        "borders": "Граници"
+    },
+    "search": {
+        "no-results": "Няма резултати",
+        "clear": "Изчисти търсенето"
+    },
+    "coordinates": "Координати"
+}
