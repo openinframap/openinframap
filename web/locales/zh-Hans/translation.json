@@ -102,7 +102,18 @@
         },
         "cable": "线数",
         "cabinet": "柜",
-        "place": "地名"
+        "place": "地名",
+        "gas": {
+            "pipeline": {
+                "pressure": {
+                    "high": "高压",
+                    "intermediate": "中压",
+                    "low": "低压"
+                },
+                "transmission": "输气",
+                "distribution": "配气"
+            }
+        }
     },
     "nav": {
         "about": "关于",
@@ -151,7 +162,8 @@
         "petroleum": "石化",
         "power-line-supports": "电线支撑",
         "switchgear": "开关设备",
-        "traction": "牵引（< 50 Hz）"
+        "traction": "牵引（< 50 Hz）",
+        "gas": "天然气"
     },
     "location": {
         "underground": "地下",
