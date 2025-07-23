@@ -117,7 +117,18 @@
         },
         "place": "地名",
         "other-pumping-station": "その他の揚水施設",
-        "cabinet": "キャビネット"
+        "cabinet": "キャビネット",
+        "gas": {
+            "pipeline": {
+                "pressure": {
+                    "high": "高圧",
+                    "intermediate": "中圧",
+                    "low": "低圧"
+                },
+                "transmission": "送気",
+                "distribution": "配気"
+            }
+        }
     },
     "edit": {
         "edit": "編集",
@@ -143,7 +154,8 @@
         "line-management": "電線管理",
         "view-openstreetmap": "OpenStreetMapで見る",
         "line-attachment": "電線の接続",
-        "design": "鉄塔種別"
+        "design": "鉄塔種別",
+        "source": "源"
     },
     "nav": {
         "stats": "統計",
