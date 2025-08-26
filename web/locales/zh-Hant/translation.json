@@ -102,7 +102,18 @@
         },
         "cabinet": "櫃",
         "other-pumping-station": "其他泵站",
-        "place": "地名"
+        "place": "地名",
+        "gas": {
+            "pipeline": {
+                "pressure": {
+                    "high": "高壓",
+                    "intermediate": "中壓",
+                    "low": "低壓"
+                },
+                "transmission": "輸氣",
+                "distribution": "配氣"
+            }
+        }
     },
     "info": {
         "location": "位置",
@@ -171,7 +182,8 @@
         "switchgear": "開關裝置",
         "power-line-supports": "電線支撐",
         "petroleum": "石化",
-        "traction": "牽引 (< 50 Hz)"
+        "traction": "牽引 (< 50 Hz)",
+        "gas": "天然氣"
     },
     "wikidata": "維基數據",
     "warning": "警告",

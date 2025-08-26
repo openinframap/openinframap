@@ -33,7 +33,9 @@
             "solar-panel-node": "Panel surya (titik)",
             "tower-pylon": "Menara",
             "pole-transition": "Tiang transisi",
-            "transformer-3": "Trafo (3 belitan)"
+            "transformer-3": "Trafo (3 belitan)",
+            "potential-transformer": "Transformer potensial",
+            "current-transformer": "Transformer arus"
         },
         "petroleum": {
             "well": "Sumur",
@@ -69,7 +71,10 @@
             "hydrogen": "Hidrogen",
             "co2": "CO<sub>2</sub>",
             "fresh-water": "Air bersih",
-            "hot-water": "Air panas"
+            "hot-water": "Air panas",
+            "beer": "Bir",
+            "oxygen": "Oksigen",
+            "nitrogen": "Nitrogen"
         },
         "method": {
             "fission": "Fisi",
@@ -90,7 +95,19 @@
             "datacenter": "Pusat data",
             "tower-mast": "Menara"
         },
-        "other-pumping-station": "Rumah pompa lain"
+        "other-pumping-station": "Rumah pompa lain",
+        "place": "Tempat",
+        "gas": {
+            "pipeline": {
+                "pressure": {
+                    "low": "Tekanan Rendah",
+                    "intermediate": "Tekanan Sedang",
+                    "high": "Tekanan Tinggi"
+                },
+                "distribution": "Distribusi",
+                "transmission": "Transmisi"
+            }
+        }
     },
     "edit": {
         "remote": "Pakai program (JOSM, dll)",
@@ -117,7 +134,8 @@
         "website": "Situs web",
         "type": "Jenis",
         "line-attachment": "Sambungan kabel",
-        "line-management": "Penataan kabel"
+        "line-management": "Penataan kabel",
+        "transformer-type": "Jenis transformer"
     },
     "nav": {
         "about": "tentang",
@@ -135,7 +153,8 @@
         "power-lines": "Jaringan Listrik",
         "power-generators": "Generator",
         "switchgear": "Switchyard",
-        "power-line-supports": "Struktur penopang kabel"
+        "power-line-supports": "Struktur penopang kabel",
+        "gas": "Gas"
     },
     "location": {
         "overhead": "Atas Tanah",
@@ -170,11 +189,20 @@
     "layers": {
         "power": "Listrik",
         "telecoms": "Telekomunikasi",
-        "petroleum": "Minyak & Gas",
+        "petroleum": "Minyak & Gas Alam",
         "water": "Air",
-        "title": "Label",
+        "title": "Data",
         "labels": "Label",
-        "nighttime-lights": "Lampu Malam Hari"
+        "nighttime-lights": "Lampu Malam Hari",
+        "osmose-power": "Osmose (Listrik)",
+        "other-pipelines": "Pipa Lain",
+        "borders": "Perbatasan",
+        "solar-generation": "Tenaga Surya",
+        "validation": "Validasi",
+        "infrastructure": "Infrastruktur",
+        "overlays": "Informasi",
+        "heatmaps": "Sebaran",
+        "background": "Latar"
     },
     "construction": "sedang dibangun",
     "units": {
@@ -195,5 +223,11 @@
     "warnings": {
         "webgl": "<p>Peramban Anda kesulitan mengakses Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> dan akselerasi perangkat perlu diaktifkan agar situs ini lancar.</p><p>Kalau WebGL tersedia di peramban ini, Anda perlu menonaktifkan pengamanan privasi (fingerprinting) untuk situs ini.</p>"
     },
-    "disused": "tidak digunakan"
+    "disused": "tidak digunakan",
+    "search": {
+        "no-results": "Tidak ada hasil",
+        "clear": "Hapus pencarian"
+    },
+    "coordinates": "Koordinat",
+    "openstreetmap": "OpenStreetMap"
 }
