@@ -1,1 +1,8 @@
-{}
+{
+    "nav": {
+        "about": "om"
+    },
+    "edit": {
+        "edit": "Redigera"
+    }
+}
