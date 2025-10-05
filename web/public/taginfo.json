@@ -17,6 +17,12 @@
       "key": "construction:power",
       "object_types": ["node", "way", "relation", "area"]
     },
+		{
+			"key": "type",
+			"value": "site",
+			"object_types": ["relation"],
+			"description": "Distributed power plants mapped as relations"
+		},
     {
       "key": "plant:source",
       "object_types": ["relation", "area"]
