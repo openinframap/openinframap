@@ -31,7 +31,8 @@ await i18next.use(LanguageDetector).init({
     'zh-Hans',
     'ja',
     'id',
-    'ta'
+    'ta',
+    'sv'
   ],
   resources: resources,
   debug: import.meta.env.DEV,
