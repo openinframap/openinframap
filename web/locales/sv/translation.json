@@ -1,1 +1,233 @@
-{}
+{
+    "nav": {
+        "about": "om",
+        "stats": "statistik",
+        "exports": "export"
+    },
+    "edit": {
+        "edit": "Redigera",
+        "remote": "Redigera med fjärrkontroll (JOSM, etc.)",
+        "browser": "Redigera i webbläsaren (iD)",
+        "error": "Det går inte att ladda fjärredigeraren - kontrollera att den körs och att fjärrkontrollen är aktiverad.\nFelmeddelande: "
+    },
+    "names": {
+        "power": {
+            "transformer": "Transformator",
+            "tower": "Kraftverkstorn",
+            "pole": "Kraftledningsstolpe",
+            "generator": "Generator",
+            "generator-solar": "Solgenerator",
+            "wind-turbine": "Vindkraftverk",
+            "substation": "Understation",
+            "switch": "Omkoppla",
+            "compensator": "Kompensator",
+            "converter": "Transformatorstation för DC-omvandlare",
+            "cable": "Strömkabel",
+            "line": "Kraftledning",
+            "solar-panel": "Solpanel",
+            "plant": "Kraftverk",
+            "hvdc": "HVDC",
+            "line-reference": "Referens för linje",
+            "solar-panel-node": "Solpanel (nod)",
+            "other-generator": "Annan generator",
+            "tower-pylon": "Torn/Pylon",
+            "tower-transition": "Övergångstorn",
+            "pole-transition": "Övergångsstolpe",
+            "transformer-3": "Transformator (3 lindningar)",
+            "switch-disconnector": "Frånskiljare",
+            "switch-breaker": "Strömbrytare",
+            "switch-other": "Annan växel",
+            "reactor-series": "Reaktor i serie",
+            "reactor-shunt": "Shuntreaktor",
+            "capacitor-series": "Serie kondensator",
+            "capacitor-shunt": "Shunt-kondensator",
+            "statcom": "Statisk VAR-kompensator",
+            "synchronous-condenser": "Synkron kondensor",
+            "filter": "Filtrera",
+            "compensator-other": "Annan kompensator",
+            "current-transformer": "Strömtransformator",
+            "potential-transformer": "Potentialtransformator"
+        },
+        "telecoms": {
+            "communication-line": "Telekomlinje",
+            "data-center": "Telekom-byggnad",
+            "exchange": "Telefonväxel",
+            "cabinet": "Telekomskåp"
+        },
+        "pipeline": "Rörledning",
+        "petroleum": {
+            "well": "Brunn",
+            "facility": "Petroleumanläggning"
+        },
+        "gas": {
+            "pipeline": {
+                "transmission": "Växellåda",
+                "distribution": "Distribution",
+                "pressure": {
+                    "high": "Högt tryck",
+                    "intermediate": "Mellantryck",
+                    "low": "Lågt tryck"
+                }
+            }
+        },
+        "water": {
+            "pipeline": "Vattenledning",
+            "sewage-treatment-plant": "Reningsverk för avloppsvatten",
+            "treatment-plant": "Vattenreningsverk",
+            "pumping-station": "Pumpstation",
+            "well": "Vattenbrunn",
+            "reservoir": "Vattenreservoar",
+            "water-pumping-station": "Pumpstation för vatten",
+            "sewage-pumping-station": "Pumpstation för avloppsvatten"
+        },
+        "cable": "Kabel",
+        "telecom": {
+            "tower-mast": "Torn/Mast",
+            "datacenter": "Datacenter"
+        },
+        "cabinet": "Kabinett",
+        "substance": {
+            "oil": "Olja",
+            "gas": "Gas",
+            "petroleum-intermediate": "Petroleum mellanprodukt",
+            "fuel": "Drivmedel",
+            "hydrogen": "Väte",
+            "nitrogen": "Kväve",
+            "oxygen": "Syre",
+            "beer": "Öl",
+            "co2": "<sub>CO2</sub>",
+            "fresh-water": "Sötvatten",
+            "hot-water": "Varmvatten",
+            "steam": "Ånga",
+            "wastewater": "Avlopp",
+            "rainwater": "Regnvatten"
+        },
+        "method": {
+            "fission": "Fission",
+            "fusion": "Fusion",
+            "wind-turbine": "Vindkraftverk",
+            "water-storage": "Förvaring av vatten",
+            "water-pumped-storage": "Pumpad lagring",
+            "water-run-of-river": "Rinnande vatten",
+            "tidal-barrage": "Damm",
+            "tidal-stream": "Ström",
+            "solar-thermal": "Termisk",
+            "solar-photovoltaic": "Fotovoltaisk",
+            "combustion": "Förbränning",
+            "gasification": "Förgasning",
+            "anaerobic-digestion": "Anaerobisk rötning"
+        },
+        "other-pumping-station": "Annan pumpstation",
+        "place": "Plats"
+    },
+    "info": {
+        "name": "Namn",
+        "operator": "Operatör",
+        "output": "Power",
+        "source": "Källa",
+        "start-date": "Startdatum",
+        "generation-method": "Metod för generering",
+        "substation-type": "Typ av understation",
+        "reference": "Referens",
+        "circuits": "Kretsar",
+        "type": "Typ",
+        "website": "Webbplats",
+        "view-openstreetmap": "Visa på OpenStreetMap",
+        "substance": "Ingrediens",
+        "usage": "Användning",
+        "location": "Plats",
+        "design": "Design",
+        "material": "Material",
+        "line-attachment": "Linjeinfästning",
+        "line-management": "Linjestyrning",
+        "transformer-type": "Typ av transformator"
+    },
+    "units": {
+        "kV": "kV",
+        "Hz": "Hz",
+        "MW": "MW",
+        "DC": "DC",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V",
+        "below_10kv": "< 10 kV"
+    },
+    "more_info": "Mer info",
+    "wikipedia": "Wikipedia",
+    "wikimedia-commons": "Wikimedia Commons",
+    "wikidata": "Wikidata",
+    "key": {
+        "name": "Nyckel",
+        "power-lines": "Kraftledningar",
+        "power-plants": "Kraftverk",
+        "power-generators": "Kraftgeneratorer",
+        "power-line-supports": "Stöd för kraftledningar",
+        "switchgear": "Ställverk",
+        "telecoms": "Telekom",
+        "gas": "Gas",
+        "petroleum": "Petroleum",
+        "water": "Vatten",
+        "traction": "Traktion (< 50 Hz)"
+    },
+    "location": {
+        "underground": "Underjords",
+        "underwater": "Under vatten",
+        "overhead": "Överliggande",
+        "roof": "Tak",
+        "surface": "Yta",
+        "outdoor": "Utomhus",
+        "indoor": "Inomhus"
+    },
+    "power": {
+        "source": {
+            "coal": "Kol",
+            "geothermal": "Geotermisk",
+            "hydro": "Vattenkraft",
+            "nuclear": "Kärnkraft",
+            "oil-gas": "Olja/Gas",
+            "gas": "Gas",
+            "solar": "Solkraft",
+            "wind": "Vind",
+            "biomass": "Biomassa",
+            "waste": "Avfall",
+            "battery": "Batteri"
+        },
+        "substation-type": {
+            "transmission": "Växellåda",
+            "distribution": "Distribution",
+            "traction": "Dragkraft",
+            "converter": "DC-omvandlare"
+        }
+    },
+    "other": "Annat",
+    "warning": "Varning",
+    "layers": {
+        "background": "Bakgrund",
+        "heatmaps": "Värmekartor",
+        "overlays": "Överlägg",
+        "infrastructure": "Infrastruktur",
+        "validation": "Validering",
+        "nighttime-lights": "Belysning nattetid",
+        "power": "Power",
+        "solar-generation": "Solenergiproduktion",
+        "telecoms": "Telekom",
+        "water": "Vatten",
+        "borders": "Ramar",
+        "labels": "Etiketter",
+        "title": "Sikt",
+        "other-pipelines": "Övriga pipelines",
+        "osmose-power": "Osmose (Power)",
+        "petroleum": "Olja och naturgas"
+    },
+    "construction": "under uppbyggnad",
+    "disused": "nedlagd",
+    "coordinates": "Koordinater",
+    "search": {
+        "clear": "Tydlig sökning",
+        "no-results": "Inga resultat hittades"
+    },
+    "openstreetmap": "OpenStreetMap",
+    "warnings": {
+        "webgl": "<p>Din webbläsare kan ha prestanda- eller funktionsproblem med Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> med hårdvaruacceleration krävs för att denna webbplats ska fungera korrekt.</p><p>Om din webbläsare stöder WebGL kan du behöva inaktivera webbläsarens fingeravtrycksskydd för denna webbplats.</p>"
+    }
+}
