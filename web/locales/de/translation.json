@@ -11,7 +11,7 @@
             "switch": "Hochspannungsschalter",
             "compensator": "Blindleistungskompensator",
             "converter": "Stromrichterstation",
-            "cable": "Erdkabel",
+            "cable": "Stromkabel",
             "line": "Freileitung",
             "solar-panel": "Solarpanel",
             "plant": "Kraftwerk",
