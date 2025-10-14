@@ -67,9 +67,9 @@
             "communication-line": "Telefonleitung",
             "data-center": "Rechenzentrum",
             "exchange": "Vermittlungsstelle",
-            "cabinet": "Straßenschrank"
+            "cabinet": "Telekommunikationsgehäuse"
         },
-        "pipeline": "Pipeline",
+        "pipeline": "Rohrleitung",
         "petroleum": {
             "well": "Bohrloch",
             "facility": "Erdöl-Betrieb"
@@ -129,7 +129,7 @@
             "solar": "Solar",
             "wind": "Wind",
             "coal": "Kohle",
-            "geothermal": "Geothermal",
+            "geothermal": "Geothermie",
             "hydro": "Hydroelektrisch",
             "biomass": "Biomasse",
             "waste": "Abfall",
