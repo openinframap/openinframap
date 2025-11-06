@@ -3,5 +3,5 @@ FROM python:3.12-slim AS build
 COPY . .
 RUN python main.py > ./mapping.json
 
-FROM ghcr.io/openinframap/imposm3:latest
+FROM ghcr.io/openinframap/imposm3:1f00c6c
 COPY --from=build mapping.json /mapping.json
