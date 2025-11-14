@@ -1,3 +1,7 @@
+[![IRC](https://img.shields.io/badge/IRC-%23osm--infrastructure-brightgreen)](https://webchat.oftc.net/?channels=osm-infrastructure)
+[![Matrix](https://img.shields.io/matrix/osm-infrastructure:matrix.org?server_fqdn=matrix.org&logo=matrix)](https://matrix.to/#/#osm-infrastructure:matrix.org)
+[![Mastodon](https://img.shields.io/badge/dynamic/json?label=Mastodon&color=6364ff&query=followers_count&url=https://en.osm.town/api/v1/accounts/lookup?acct=OpenInfraMap&logo=mastodon)](https://en.osm.town/@OpenInfraMap)
+
 # Open Infrastructure Map
 This is the main repository for [Open Infrastructure Map](https://openinframap.org), a map showing the world's
 infrastructure from [OpenStreetMap](https://www.openstreetmap.org).
