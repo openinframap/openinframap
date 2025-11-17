@@ -165,6 +165,8 @@ layers:
         sql: tags -> 'design:ref'
       - name: material
         sql: tags -> 'material'
+      - name: angle
+        sql: round(power_line_angle(geometry))::integer % 180
     from: osm_power_tower
     where: geometry && !BBOX!
 
