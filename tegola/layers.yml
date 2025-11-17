@@ -62,6 +62,8 @@ field_sets:
       sql: tags -> 'name:nl'
     - name: operator
       sql: tags -> 'operator'
+    - name: operator_wikidata
+      sql: tags -> 'operator:wikidata'
     - name: ref
       sql: tags -> 'ref'
   lifecycle:
