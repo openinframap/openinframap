@@ -32,14 +32,16 @@ field_sets:
   name:
     - name: name
       sql: tags -> 'name'
+    - name: name_cy
+      sql: tags -> 'name:cy'
+    - name: name_de
+      sql: tags -> 'name:de'
     - name: name_en
       sql: tags -> 'name:en'
     - name: name_es
       sql: tags -> 'name:es'
     - name: name_el
       sql: tags -> 'name:el'
-    - name: name_de
-      sql: tags -> 'name:de'
     - name: name_fr
       sql: tags -> 'name:fr'
     - name: name_hi
@@ -60,6 +62,12 @@ field_sets:
       sql: tags -> 'name:it'
     - name: name_nl
       sql: tags -> 'name:nl'
+    - name: name_sv
+      sql: tags -> 'name:sv'
+    - name: name_ta
+      sql: tags -> 'name:ta'
+    - name: name_id
+      sql: tags -> 'name:id'
     - name: operator
       sql: tags -> 'operator'
     - name: operator_wikidata

@@ -4,6 +4,7 @@ import i18next, { t } from 'i18next'
  * This should be kept up to date with the list in tegola/layers.yml.
  */
 export const layer_supported_languages: string[] = [
+  'cy',
   'en',
   'es',
   'el',
@@ -15,8 +16,12 @@ export const layer_supported_languages: string[] = [
   'ru',
   'pt',
   'ja',
+  'pl',
   'it',
-  'nl'
+  'nl',
+  'sv',
+  'ta',
+  'id'
 ]
 
 /* List of name tags to check, in order */
