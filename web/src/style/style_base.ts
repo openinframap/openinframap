@@ -621,7 +621,7 @@ const layers: LayerSpecificationWithZIndex[] = [
     id: 'black_marble_background',
     type: 'background',
     paint: {
-      'background-color': 'rgb(3,1,19)'
+      'background-color': 'rgb(0,0,0)'
     }
   },
   {
