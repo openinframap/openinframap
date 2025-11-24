@@ -67,7 +67,7 @@ const style: StyleSpecification = {
       tileSize: 256,
       maxzoom: 8,
       attribution:
-        '<a href="https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/products/VNP46A4/">NASA Black Marble 2023</a>'
+        '<a href="https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/products/VNP46A4/">NASA Black Marble 2024</a>'
     },
     power: {
       type: 'vector',
