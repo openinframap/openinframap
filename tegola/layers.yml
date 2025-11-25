@@ -176,7 +176,7 @@ layers:
       - name: angle
         sql: round(power_line_angle(geometry))::integer % 180
     from: osm_power_tower
-    where: geometry && !BBOX!
+    where: geometry && !BBOX! AND ST_GeometryType(geometry) = 'ST_Point'
 
   - name: power_portal_way
     map:
