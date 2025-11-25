@@ -178,6 +178,16 @@ layers:
     from: osm_power_tower
     where: geometry && !BBOX!
 
+  - name: power_portal_way
+    map:
+      - power
+    geometry_type: LineString
+    min_zoom: 14
+    field_sets: [geom, name]
+    id_field: osm_id
+    from: osm_power_tower
+    where: type = 'portal' AND geometry && !BBOX!
+
   - name: power_substation
     map:
       - openinframap
