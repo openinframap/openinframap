@@ -1,16 +1,43 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 80 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-    <g>
-        <path d="M12.252,45.361L67.748,45.765" style="fill:none;stroke:white;stroke-width:14.58px;"/>
-        <path d="M12.252,54.504L67.748,54.908" style="fill:none;stroke:white;stroke-width:14.58px;"/>
-        <path d="M40,45.361L40,10.219" style="fill:none;stroke:white;stroke-width:14.58px;"/>
-        <path d="M40,54.908L40,89.781" style="fill:none;stroke:white;stroke-width:14.58px;"/>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="35.0px" height="35.0px" viewBox="0 0 85.039 85.039">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+
+      .e {
+        mix-blend-mode: multiply;
+        opacity: 1;
+      }
+
+      .f {
+        isolation: isolate;
+      }
+
+      .d {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g class="f">
+    <g id="b" data-name="Layer 1" class="e">
+      <g>
+        <path class="d" d="M42.441,81.892c21.8,0,39.5-17.6,39.5-39.5S64.241,2.892,42.441,2.892,2.941,20.592,2.941,42.392s17.6,39.5,39.5,39.5Z" />
+        <line class="c" x1="19.741" y1="49.792" x2="65.441" y2="49.792" />
+        <line class="c" x1="19.741" y1="49.792" x2="65.441" y2="49.792" />
+        <line class="c" x1="20.041" y1="34.992" x2="65.741" y2="34.992" />
+        <line class="c" x1="20.041" y1="34.992" x2="65.741" y2="34.992" />
+        <path class="c" d="M42.441,49.792v23.596" />
+        <path class="c" d="M42.441,11.396v23.596" />
+      </g>
     </g>
-    <g>
-        <path d="M12.252,45.361L67.748,45.765" style="fill:none;stroke:rgb(25,25,25);stroke-width:5.21px;stroke-linecap:butt;"/>
-        <path d="M12.252,54.504L67.748,54.908" style="fill:none;stroke:rgb(25,25,25);stroke-width:5.21px;stroke-linecap:butt;"/>
-        <path d="M40,45.361L40,10.219" style="fill:none;stroke:rgb(25,25,25);stroke-width:3.13px;"/>
-        <path d="M40,54.908L40,89.781" style="fill:none;stroke:rgb(25,25,25);stroke-width:3.13px;"/>
-    </g>
+  </g>
 </svg>

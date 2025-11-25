@@ -1,18 +1,24 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 50 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
-    <g id="Layer_1" transform="matrix(3.33333,0,0,3.33333,1.37833,-0.183333)">
-        <g transform="matrix(1,0,0,1,-0.5385,-0.601)">
-            <path d="M7.625,22C3.966,22 1,19.034 1,15.375C1,11.716 3.966,8.75 7.625,8.75C11.284,8.75 14.25,11.716 14.25,15.375C14.25,19.034 11.284,22 7.625,22Z" style="fill:white;fill-rule:nonzero;"/>
-            <path d="M7.625,22C3.966,22 1,19.034 1,15.375C1,11.716 3.966,8.75 7.625,8.75C11.284,8.75 14.25,11.716 14.25,15.375C14.25,19.034 11.284,22 7.625,22Z" style="fill-opacity:0;fill-rule:nonzero;stroke:rgb(59,59,59);stroke-width:1px;"/>
-        </g>
-        <g transform="matrix(1,0,0,1,-0.5385,-0.601)">
-            <path d="M7.625,14.562C3.966,14.562 1,11.596 1,7.938C1,4.279 3.966,1.312 7.625,1.312C11.284,1.312 14.25,4.279 14.25,7.938C14.25,11.596 11.284,14.562 7.625,14.562Z" style="fill:white;fill-rule:nonzero;"/>
-            <path d="M7.625,14.562C3.966,14.562 1,11.596 1,7.938C1,4.279 3.966,1.312 7.625,1.312C11.284,1.312 14.25,4.279 14.25,7.938C14.25,11.596 11.284,14.562 7.625,14.562Z" style="fill-opacity:0;fill-rule:nonzero;stroke:rgb(59,59,59);stroke-width:1px;"/>
-        </g>
-        <g transform="matrix(1,0,0,1,-0.5385,-0.601)">
-            <path d="M7.625,22C3.966,22 1,19.034 1,15.375C1,11.716 3.966,8.75 7.625,8.75C11.284,8.75 14.25,11.716 14.25,15.375C14.25,19.034 11.284,22 7.625,22Z" style="fill:white;fill-opacity:0;fill-rule:nonzero;"/>
-            <path d="M7.625,22C3.966,22 1,19.034 1,15.375C1,11.716 3.966,8.75 7.625,8.75C11.284,8.75 14.25,11.716 14.25,15.375C14.25,19.034 11.284,22 7.625,22Z" style="fill-opacity:0;fill-rule:nonzero;stroke:rgb(59,59,59);stroke-width:1px;"/>
-        </g>
-    </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 85.0394 85.0394">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+
+      .d {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path class="d" d="M42.46756,82.10003c21.8,0,39.5-17.6,39.5-39.5,0-21.8-17.7-39.5-39.5-39.5C20.56756,3.10003,2.96756,20.80003,2.96756,42.60003c0,21.9,17.6,39.5,39.5,39.5Z"/>
+  <path class="c" d="M42.45958,69.05487c9.07575,0,16.55483-7.47909,16.55483-16.63887,0-9.07575-7.47909-16.4708-16.55483-16.4708-9.15978,0-16.63887,7.39505-16.63887,16.4708,0,9.15978,7.47909,16.63887,16.63887,16.63887Z"/>
+  <path class="c" d="M42.45958,49.35487c9.07575,0,16.55483-7.39505,16.55483-16.55483,0-9.07575-7.47909-16.55483-16.55483-16.55483-9.15978,0-16.63887,7.47909-16.63887,16.55483,0,9.15978,7.47909,16.55483,16.63887,16.55483Z"/>
 </svg>

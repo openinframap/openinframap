@@ -129,7 +129,7 @@ export function getLayers() {
 }
 
 export function getStyle() {
-  const oim_layers = getLayers()
+  const oim_layers = [...getLayers(), ...style_labels(i18next.language)]
 
   oim_layers.sort((a, b) => {
     if (!a.zorder || !b.zorder) {
@@ -140,6 +140,6 @@ export function getStyle() {
     return 0
   })
 
-  style.layers = [...style_base, ...oim_layers, ...style_labels(i18next.language)]
+  style.layers = [...style_base, ...oim_layers]
   return style
 }

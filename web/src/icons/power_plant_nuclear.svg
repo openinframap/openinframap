@@ -1,11 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="28.346" height="28.346" viewBox="0, 0, 28.346, 28.346">
-  <g id="Layer_1">
-    <g>
-      <path d="M2.579,2.579 L26.767,2.579 L26.767,26.767 L2.579,26.767 L2.579,2.579 z" fill="#FFFFFF"/>
-      <path d="M2.579,2.579 L26.767,2.579 L26.767,26.767 L2.579,26.767 L2.579,2.579 z" fill-opacity="0" stroke="#3B3B3B" stroke-width="4"/>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="35.0px" height="35.0px" viewBox="0 0 85.039 85.039">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+        stroke-width: 5px;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .e {
+        mix-blend-mode: multiply;
+        opacity: 1;
+      }
+
+      .f {
+        isolation: isolate;
+      }
+
+      .d {
+        fill: #fff;
+        stroke-width: 5px;
+      }
+    </style>
+  </defs>
+  <g class="f">
+    <g id="b" data-name="Layer 1" class="e">
+      <g>
+        <rect class="d" x="3.02" y="3.02" width="78.999" height="78.999" />
+        <path class="c" d="M42.441,67.461c13.8,0,25-11,25-25.2,0-13.8-11.2-24.8-25-24.8s-25,11-25,24.8c0,14.2,11.2,25.2,25,25.2Z" />
+      </g>
     </g>
-    <path d="M14.673,19.361 C12.084,19.361 9.986,17.262 9.986,14.673 C9.986,12.084 12.084,9.986 14.673,9.986 C17.262,9.986 19.361,12.084 19.361,14.673 C19.361,17.262 17.262,19.361 14.673,19.361 z" fill-opacity="0" stroke="#3B3B3B" stroke-width="2"/>
   </g>
 </svg>

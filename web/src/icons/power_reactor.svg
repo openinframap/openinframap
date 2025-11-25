@@ -1,9 +1,38 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 80 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;">
-    <g transform="matrix(0.875853,0,0,0.844677,-4.12918,7.31623)">
-        <path d="M16.282,47.278C16.282,28.456 31.563,13.175 50.384,13.175C69.206,13.175 84.487,28.456 84.487,47.278C84.487,66.099 69.206,81.38 50.384,81.38M16.282,47.278L50.384,47.278L50.384,-0.912M50,81.38L50,97.163" style="fill:rgb(235,235,235);fill-opacity:0;"/>
-        <path d="M16.282,47.278C16.282,28.456 31.563,13.175 50.384,13.175C69.206,13.175 84.487,28.456 84.487,47.278C84.487,66.099 69.206,81.38 50.384,81.38M16.282,47.278L50.384,47.278L50.384,-0.912M50,81.38L50,97.163" style="fill:none;stroke:white;stroke-width:12.11px;"/>
-        <path d="M16.282,47.278C16.282,28.456 31.563,13.175 50.384,13.175C69.206,13.175 84.487,28.456 84.487,47.278C84.487,66.099 69.206,81.38 50.384,81.38M16.282,47.278L50.384,47.278L50.384,-0.912M50,81.38L50,97.163" style="fill:none;stroke:black;stroke-width:3.63px;stroke-miterlimit:1.5;"/>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="35.0px" height="35.0px" viewBox="0 0 85.039 85.039">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+
+      .e {
+        mix-blend-mode: multiply;
+        opacity: 1;
+      }
+
+      .f {
+        isolation: isolate;
+      }
+
+      .d {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g class="f">
+    <g id="b" data-name="Layer 1" class="e">
+      <g>
+        <path class="d" d="M42.492,81.892c21.8,0,39.5-17.6,39.5-39.5S64.292,2.892,42.492,2.892,2.992,20.592,2.992,42.392s17.6,39.5,39.5,39.5Z" />
+        <path class="c" d="M42.492,11.396l-.4,29.996h-16.2c0-9.1,7.4-16.4,16.6-16.4s16.6,7.3,16.6,16.4c0,9.5-7.4,16.8-16.6,16.8v15.196" />
+      </g>
     </g>
+  </g>
 </svg>

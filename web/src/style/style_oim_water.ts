@@ -287,8 +287,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         'sewage_pumping_station',
         'pumping_station'
       ],
-      iconScale: 0.25,
-      iconMinScale: 0.08,
+      iconMinScale: 0.5,
       iconMaxZoom: 14.5
     }),
     oimSymbol({
@@ -300,8 +299,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       textField: get_local_name(),
       textMinZoom: 10,
       iconImage: 'water_treatment_plant',
-      iconScale: 0.4,
-      iconMinScale: 0.08,
+      iconMinScale: 0.2,
       iconMaxZoom: 14.5,
       textOffset: 1.9
     }),
@@ -314,8 +312,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       textField: ['step', ['zoom'], '', 10, get_local_name()],
       textMinZoom: 10,
       iconImage: 'sewage_treatment_plant',
-      iconScale: 0.4,
-      iconMinScale: 0.08,
+      iconMinScale: 0.2,
       iconMaxZoom: 14.5,
       textOffset: 1.9
     })

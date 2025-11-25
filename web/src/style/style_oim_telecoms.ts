@@ -54,11 +54,13 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       sourceLayer: 'telecoms_mast',
       filter: all(not(construction_p), not(disused_p)),
       minZoom: 10,
+      iconScale: 0.5,
       textField: operator_text,
       iconImage: 'comms_tower',
+      iconAnchor: 'bottom',
       iconMaxZoom: 21,
       textMinZoom: 12,
-      textOffset: 1.5
+      textOffset: 3
     }),
     oimSymbol({
       zorder: 562,
@@ -74,10 +76,10 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         not(construction_p),
         not(disused_p)
       ),
-      minZoom: 6,
+      minZoom: 6.5,
       textField: operator_text,
       iconImage: 'telecom_exchange',
-      iconScale: 0.2,
+      iconScale: 0.4,
       textMinZoom: 11.5,
       iconMaxZoom: 13.5
     }),
@@ -94,10 +96,10 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       minZoom: 5,
       textField: operator_text,
       iconImage: 'telecom_datacenter',
-      iconScale: 0.3,
+      iconScale: 0.6,
       textMinZoom: 8,
       iconMaxZoom: 13.5,
-      textOffset: 1.9
+      textOffset: 1.4
     }),
     {
       zorder: 564,

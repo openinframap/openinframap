@@ -178,6 +178,7 @@ class KeyControl implements IControl {
     plant_entries[t('power.source.biomass')] = 'power_plant_biomass'
     plant_entries[t('power.source.waste')] = 'power_plant_waste'
     plant_entries[t('power.source.battery')] = 'power_plant_battery'
+    plant_entries[t('power.source.unknown')] = 'power_plant'
 
     const rows = []
     for (const [key, value] of Object.entries(plant_entries)) {

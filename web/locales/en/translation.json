@@ -190,7 +190,8 @@
       "wind": "Wind",
       "biomass": "Biomass",
       "waste": "Waste",
-      "battery": "Battery"
+      "battery": "Battery",
+      "unknown": "Other/Unknown"
     },
     "substation-type": {
       "transmission": "Transmission",

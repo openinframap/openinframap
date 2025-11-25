@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 60 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;">
-    <g id="Layer_1" transform="matrix(3.125,0,0,2.85714,5,2)">
-        <path d="M1,5.359L5.116,5.359L8.821,1.641" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:3.48px;"/>
-        <g transform="matrix(1,0,0,1,0.47414,0)">
-            <path d="M9.665,5.359L14.853,5.359" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:3.48px;"/>
+<svg width="100%" height="100%" viewBox="0 0 35 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;">
+    <g>
+        <g id="b">
+            <path d="M19.105,11.48L11.984,17.489L4.783,17.489M30.298,17.448L23.22,17.448" style="fill:none;fill-rule:nonzero;stroke:white;stroke-opacity:0.8;stroke-width:8px;"/>
         </g>
-        <path d="M1,5.359L5.116,5.359L8.821,1.641" style="fill:none;fill-rule:nonzero;stroke:rgb(25,25,25);stroke-width:1.04px;stroke-miterlimit:1.5;"/>
-        <g transform="matrix(1,0,0,1,0.47414,0)">
-            <path d="M9.665,5.359L14.853,5.359" style="fill:none;fill-rule:nonzero;"/>
-        </g>
-        <g transform="matrix(1,0,0,1,0.47414,0)">
-            <path d="M9.665,5.359L14.853,5.359" style="fill:none;fill-rule:nonzero;stroke:rgb(25,25,25);stroke-width:1.04px;stroke-miterlimit:1.5;"/>
+        <g id="b1" serif:id="b">
+            <g>
+                <path d="M19.105,11.48L11.984,17.489L4.783,17.489" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:2.06px;"/>
+                <path d="M30.298,17.448L23.22,17.448" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:2.06px;"/>
+            </g>
         </g>
     </g>
 </svg>

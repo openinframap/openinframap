@@ -1,13 +1,39 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 100 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-    <g transform="matrix(0.89149,0,0,0.632698,5.36502,3.43722)">
-        <rect x="3.834" y="3.653" width="92.467" height="92.467" style="fill:white;stroke:black;stroke-width:4.04px;"/>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="35.0px" height="35.0px" viewBox="0 0 85.039 85.039">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+
+      .e {
+        mix-blend-mode: multiply;
+        opacity: 1;
+      }
+
+      .f {
+        isolation: isolate;
+      }
+
+      .d {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g class="f">
+    <g id="b" data-name="Layer 1" class="e">
+      <g>
+        <path class="d" d="M42.415,81.875c21.8,0,39.5-17.6,39.5-39.5S64.215,2.875,42.415,2.875,2.915,20.575,2.915,42.375s17.6,39.5,39.5,39.5Z" />
+        <rect class="c" x="24.015" y="23.975" width="36.9" height="36.8" />
+        <line class="c" x1="42.415" y1="60.775" x2="42.415" y2="23.975" />
+      </g>
     </g>
-    <g transform="matrix(1,0,0,1,0,-7.3509)">
-        <path d="M50,13.099L50,71.603" style="fill:none;stroke:black;stroke-width:2.08px;"/>
-    </g>
-    <g transform="matrix(1.34462,0,0,1.34462,-15.4305,-19.3279)">
-        <path d="M57.383,39.43C57.383,38.893 56.947,38.457 56.41,38.457L54.184,38.457C53.646,38.457 53.21,38.893 53.21,39.43L53.21,41.377C53.21,41.915 53.646,42.351 54.184,42.351L56.41,42.351C56.947,42.351 57.383,41.915 57.383,41.377L57.383,39.43Z" style="stroke:white;stroke-width:0.74px;"/>
-    </g>
+  </g>
 </svg>

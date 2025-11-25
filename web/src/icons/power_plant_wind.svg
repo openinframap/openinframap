@@ -1,13 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="28.346" height="28.346" viewBox="0, 0, 28.346, 28.346">
-  <g id="Layer_1">
-    <g>
-      <path d="M2.579,2.579 L26.767,2.579 L26.767,26.767 L2.579,26.767 L2.579,2.579 z" fill="#FFFFFF"/>
-      <path d="M2.579,2.579 L26.767,2.579 L26.767,26.767 L2.579,26.767 L2.579,2.579 z" fill-opacity="0" stroke="#3B3B3B" stroke-width="4"/>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="35.0px" height="35.0px" viewBox="0 0 85.039 85.039">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+        stroke-width: 5px;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .e {
+        mix-blend-mode: multiply;
+        opacity: 1;
+      }
+
+      .f {
+        isolation: isolate;
+      }
+
+      .d {
+        fill: #fff;
+        stroke-width: 5px;
+      }
+    </style>
+  </defs>
+  <g class="f">
+    <g id="b" data-name="Layer 1" class="e">
+      <g>
+        <rect class="d" x="3.02" y="3.02" width="78.999" height="78.999" />
+        <g>
+          <polyline class="c" points="26.692 18.844 42.492 42.444 42.492 73.44" />
+          <polyline class="c" points="69.592 42.244 42.492 42.444 29.092 66.044" />
+        </g>
+      </g>
     </g>
-    <path d="M2.445,14.673 L20.747,14.673" fill-opacity="0" stroke="#3B3B3B" stroke-width="2" stroke-linecap="round"/>
-    <path d="M17.122,2.32 L25.435,26.767" fill-opacity="0" stroke="#3B3B3B" stroke-width="1"/>
-    <path d="M25.435,2.32 L17.81,26.767" fill-opacity="0" stroke="#3B3B3B" stroke-width="1"/>
   </g>
 </svg>

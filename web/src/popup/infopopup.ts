@@ -13,6 +13,7 @@ const hidden_keys = [
   'osm_id',
   'name',
   'wikidata',
+  'operator_wikidata',
   'wikipedia',
   'construction',
   'tunnel',

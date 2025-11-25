@@ -1,21 +1,42 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-    <g transform="matrix(0.974987,0,0,0.965938,1.50148,1.70308)">
-        <g transform="matrix(1.0539,0,0,1.0539,-1.87758,-4.45753)">
-            <path d="M28.334,91.592C13.975,84.057 4.171,69 4.171,51.672C4.171,26.807 24.359,6.619 49.224,6.619C70.563,6.619 88.456,21.486 93.103,41.418" style="fill:rgb(235,235,235);stroke:black;stroke-width:6.06px;"/>
-        </g>
-        <g transform="matrix(1.0539,0,0,1.0539,-1.87758,-4.45753)">
-            <path d="M93.103,41.418C93.871,44.712 94.277,48.145 94.277,51.672C94.277,76.538 74.09,96.725 49.224,96.725C41.687,96.725 34.58,94.87 28.334,91.592" style="fill:rgb(114,107,169);stroke:black;stroke-width:6.06px;"/>
-        </g>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="35.0px" height="35.0px" viewBox="0 0 85.039 85.039">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+
+      .e {
+        mix-blend-mode: multiply;
+        opacity: 1;
+      }
+
+      .f {
+        isolation: isolate;
+      }
+
+      .d {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g class="f">
+    <g id="b" data-name="Layer 1" class="e">
+      <g>
+        <path class="d" d="M42.467,81.927c21.8,0,39.5-17.6,39.5-39.5S64.267,2.927,42.467,2.927,2.967,20.627,2.967,42.427s17.6,39.5,39.5,39.5Z" />
+        <line class="c" x1="15.567" y1="34.427" x2="29.667" y2="48.527" />
+        <line class="c" x1="35.167" y1="15.227" x2="49.267" y2="29.327" />
+        <polyline class="c" points="37.267 41.127 37.267 56.127 22.267 56.127" />
+        <polyline class="c" points="56.867 21.927 56.867 36.927 41.867 36.927" />
+        <line class="c" x1="34.867" y1="71.027" x2="70.767" y2="35.127" />
+      </g>
     </g>
-    <g transform="matrix(0.502803,0.684469,-0.680672,0.500015,24.1819,-10.5527)">
-        <path d="M37.189,37.377L37.189,32.29L78.905,32.29L78.905,22.962L90.71,34.833L78.905,46.705L78.905,37.377L37.189,37.377Z"/>
-    </g>
-    <g transform="matrix(0.502803,0.684469,-0.680672,0.500015,49.6324,-29.5056)">
-        <path d="M37.189,37.377L37.189,32.29L78.905,32.29L78.905,22.962L90.71,34.833L78.905,46.705L78.905,37.377L37.189,37.377Z"/>
-    </g>
-    <g transform="matrix(0.994864,0.0343776,-0.0268535,0.996496,1.28994,-1.30264)">
-        <path d="M29.329,92.516C29.329,92.516 83.414,48.004 88.336,44.032C89.039,43.465 98.524,35.585 96.451,37.31C79.872,51.105 29.329,92.516 29.329,92.516Z" style="fill:rgb(114,107,169);stroke:black;stroke-width:0.63px;"/>
-    </g>
+  </g>
 </svg>

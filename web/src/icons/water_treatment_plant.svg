@@ -1,7 +1,38 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-    <g transform="matrix(1.42098,0,0,0.992483,-45.9548,1.87542)">
-        <path d="M67.527,2.382C67.527,2.382 46.271,45.658 46.271,64.205C46.271,80.978 55.796,94.596 67.527,94.596C79.259,94.596 88.783,80.978 88.783,64.205C88.783,45.658 67.527,2.382 67.527,2.382Z" style="fill:rgb(123,186,172);stroke:black;stroke-width:5.1px;"/>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="35.0px" height="35.0px" viewBox="0 0 85.039 85.039">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+
+      .e {
+        mix-blend-mode: multiply;
+        opacity: 1;
+      }
+
+      .f {
+        isolation: isolate;
+      }
+
+      .d {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g class="f">
+    <g id="b" data-name="Layer 1" class="e">
+      <g>
+        <path class="d" d="M42.518,81.858c21.8,0,39.5-17.6,39.5-39.5S64.318,2.858,42.518,2.858,3.018,20.558,3.018,42.358s17.6,39.5,39.5,39.5Z" />
+        <path class="c" d="M42.518,69.858c12,0,21.8-9.6,21.8-22,0-14.1-21.8-34.3-21.8-34.3,0,0-21.8,20.2-21.8,34.3,0,12.4,9.8,22,21.8,22Z" />
+      </g>
     </g>
+  </g>
 </svg>
