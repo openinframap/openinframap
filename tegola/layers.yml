@@ -319,10 +319,14 @@ layers:
         sql: tags -> 'location'
       - name: windings
         sql: tags -> 'windings'
+      - name: phases
+        sql: tags -> 'phases'
       - name: configuration
         sql: tags -> 'windings:configuration'
       - name: transformer_type
         sql: tags -> 'transformer'
+      - name: devices
+        sql: tags -> 'transformer:devices'
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'transformer' AND geometry && !BBOX!
