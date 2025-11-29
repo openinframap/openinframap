@@ -783,7 +783,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       zorder: 266,
       id: 'power_pole_transformer',
       type: 'symbol',
-      filter: any(has('transformer'), has('substation')),
+      filter: any(has('transformer_type'), has('substation')),
       source: 'power',
       'source-layer': 'power_tower',
       minzoom: 14,
