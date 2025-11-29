@@ -102,6 +102,28 @@ field_sets:
     - name: start_date
       sql: tags->'start_date'
 
+  transformer:
+    - name: voltage_primary
+      sql: convert_voltage(tags -> 'voltage:primary') / 1000
+    - name: voltage_secondary
+      sql: convert_voltage(tags -> 'voltage:secondary') / 1000
+    - name: voltage_tertiary
+      sql: convert_voltage(tags -> 'voltage:tertiary') / 1000
+    - name: rating
+      sql: tags -> 'rating'
+    - name: location
+      sql: tags -> 'location'
+    - name: windings
+      sql: tags -> 'windings'
+    - name: phases
+      sql: tags -> 'phases'
+    - name: configuration
+      sql: tags -> 'windings:configuration'
+    - name: transformer_type
+      sql: tags -> 'transformer'
+    - name: devices
+      sql: tags -> 'transformer:devices'
+
 layers:
   - name: power_line
     map:
@@ -150,15 +172,13 @@ layers:
       - power
     geometry_type: Point
     min_zoom: 13
-    field_sets: [geom, name, lifecycle, url, start_date]
+    field_sets: [geom, name, lifecycle, url, start_date, transformer]
     id_field: osm_id
     fields:
       - name: transition
       - name: type
       - name: switch
         sql: tags -> 'switch'
-      - name: transformer
-        sql: tags -> 'transformer'
       - name: substation
         sql: tags -> 'substation'
       - name: design
@@ -305,28 +325,7 @@ layers:
       - power
     geometry_type: Point
     min_zoom: 14
-    field_sets: [geom_centroid, name, start_date, frequency]
-    fields:
-      - name: voltage_primary
-        sql: convert_voltage(tags -> 'voltage:primary') / 1000
-      - name: voltage_secondary
-        sql: convert_voltage(tags -> 'voltage:secondary') / 1000
-      - name: voltage_tertiary
-        sql: convert_voltage(tags -> 'voltage:tertiary') / 1000
-      - name: rating
-        sql: tags -> 'rating'
-      - name: location
-        sql: tags -> 'location'
-      - name: windings
-        sql: tags -> 'windings'
-      - name: phases
-        sql: tags -> 'phases'
-      - name: configuration
-        sql: tags -> 'windings:configuration'
-      - name: transformer_type
-        sql: tags -> 'transformer'
-      - name: devices
-        sql: tags -> 'transformer:devices'
+    field_sets: [geom_centroid, name, start_date, frequency, transformer]
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'transformer' AND geometry && !BBOX!
