@@ -695,7 +695,8 @@ layers:
     where: first_semi(utility) IN ('water', 'sewerage') AND geometry && !BBOX!
 
   - name: eez
-    map: eez
+    map: 
+      - eez
     geometry_type: Polygon
     from: countries.country_eez_3857
     id_field: gid
