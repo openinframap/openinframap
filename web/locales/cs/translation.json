@@ -211,7 +211,8 @@
             "solar": "Solární",
             "battery": "Bateriová",
             "biomass": "Biomasová",
-            "oil-gas": "Ropná/plynová"
+            "oil-gas": "Ropná/plynová",
+            "unknown": "Jiné/Neznámé"
         },
         "substation-type": {
             "transmission": "Přenosová",
