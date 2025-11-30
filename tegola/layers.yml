@@ -693,3 +693,14 @@ layers:
     field_sets: [geom_centroid, name, wiki, start_date]
     from: osm_street_cabinet
     where: first_semi(utility) IN ('water', 'sewerage') AND geometry && !BBOX!
+
+  - name: eez
+    map: eez
+    geometry_type: Polygon
+    from: countries.country_eez_3857
+    id_field: gid
+    fields:
+      - name: union
+      - name: geom
+        sql: ST_AsMVTGeom(ST_SimplifyPreserveTopology(geom, !PIXEL_WIDTH! / 4), !BBOX!)
+    where: geom && !BBOX!
