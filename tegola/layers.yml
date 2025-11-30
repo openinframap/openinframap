@@ -219,6 +219,8 @@ layers:
       - name: substation
       - name: location
         sql: tags -> 'location'
+      - name: rating
+        sql: tags -> 'rating'
     id_field: osm_id
     from: substation
     where: geometry && !BBOX!
