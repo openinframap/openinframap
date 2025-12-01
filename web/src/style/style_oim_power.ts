@@ -669,6 +669,25 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       }
     },
     {
+      zorder: 263,
+      id: 'power_portal_way',
+      type: 'line',
+      source: 'power',
+      'source-layer': 'power_portal_way',
+      minzoom: 14,
+      layout: {
+        'line-join': 'bevel',
+        'line-cap': 'square'
+      },
+      paint: {
+        'line-color': '#444',
+        'line-width': interpolate(zoom, [
+          [14, 2],
+          [20, 6]
+        ])
+      }
+    },
+    {
       zorder: 264,
       id: 'power_tower',
       type: 'symbol',
@@ -758,25 +777,6 @@ export default function layers(): LayerSpecificationWithZIndex[] {
           [20, 1]
         ]),
         'icon-rotate': ['get', 'angle']
-      }
-    },
-    {
-      zorder: 265,
-      id: 'power_portal_way',
-      type: 'line',
-      source: 'power',
-      'source-layer': 'power_portal_way',
-      minzoom: 14,
-      layout: {
-        'line-join': 'bevel',
-        'line-cap': 'square'
-      },
-      paint: {
-        'line-color': '#444',
-        'line-width': interpolate(zoom, [
-          [14, 2],
-          [20, 6]
-        ])
       }
     },
     {
@@ -953,7 +953,8 @@ export default function layers(): LayerSpecificationWithZIndex[] {
           [17, 11],
           [20, 14]
         ]),
-        'text-offset': [0, 2]
+        'text-variable-anchor': ['top', 'bottom'],
+        'text-radial-offset': 1.5
       }
     },
     oimSymbol({
