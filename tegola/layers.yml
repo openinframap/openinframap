@@ -699,7 +699,7 @@ layers:
       - base
     geometry_type: Polygon
     from: countries.country_eez_layer
-    id_field: gid
+    id_field: id
     fields:
       - name: label_left
       - name: label_right
