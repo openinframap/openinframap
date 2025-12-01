@@ -14,8 +14,6 @@ export class SymbolLoader {
   }
 
   async styleImageMissing(e: MapStyleImageMissingEvent) {
-    if (this.loadedIcons.has(e.id)) return
-
     const image_url = this.icons[e.id]
     const metadata: StyleImageMetadata = {
       pixelRatio: this.icon_ratio,
@@ -28,6 +26,7 @@ export class SymbolLoader {
     }
 
     const image = await this.map.loadImage(image_url)
+    if (this.loadedIcons.has(e.id)) return
     this.loadedIcons.add(e.id)
     this.map.addImage(e.id, image.data, metadata)
   }
