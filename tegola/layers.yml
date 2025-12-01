@@ -696,12 +696,13 @@ layers:
 
   - name: eez
     map: 
-      - eez
+      - base
     geometry_type: Polygon
-    from: countries.country_eez_3857
+    from: countries.country_eez_layer
     id_field: gid
     fields:
-      - name: union
+      - name: label_left
+      - name: label_right
       - name: geom
         sql: ST_AsMVTGeom(ST_SimplifyPreserveTopology(geom, !PIXEL_WIDTH! / 4), !BBOX!)
     where: geom && !BBOX!
