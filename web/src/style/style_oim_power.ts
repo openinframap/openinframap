@@ -938,6 +938,24 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         )
       }
     },
+    {
+      zorder: 265,
+      id: 'power_compensator_label',
+      type: 'symbol',
+      source: 'power',
+      'source-layer': 'power_compensator',
+      minzoom: 17,
+      paint: text_paint,
+      layout: {
+        'text-field': get('rating'),
+        'text-font': font,
+        'text-size': interpolate(zoom, [
+          [17, 11],
+          [20, 14]
+        ]),
+        'text-offset': [0, 2]
+      }
+    },
     oimSymbol({
       zorder: 264,
       id: 'power_generator_solar',
