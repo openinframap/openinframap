@@ -44,7 +44,9 @@
             "filter": "Filtro",
             "synchronous-condenser": "Condensador síncrono",
             "statcom": "Compensador estático VAR",
-            "pole": "Poste eléctrico"
+            "pole": "Poste eléctrico",
+            "current-transformer": "Transformador de corriente",
+            "potential-transformer": "Transformador de potencial"
         },
         "water": {
             "well": "Pozo de agua",
@@ -68,7 +70,10 @@
             "hot-water": "Agua caliente",
             "wastewater": "Aguas residuales",
             "rainwater": "Aguas pluviales",
-            "hydrogen": "Hidrógeno"
+            "hydrogen": "Hidrógeno",
+            "nitrogen": "Nitrógeno",
+            "oxygen": "Oxígeno",
+            "beer": "Cerveza"
         },
         "telecoms": {
             "communication-line": "Línea de telecomunicaciones",
@@ -101,7 +106,19 @@
             "combustion": "Combustión",
             "gasification": "Gasificación",
             "anaerobic-digestion": "Digestión anaerobia"
-        }
+        },
+        "gas": {
+            "pipeline": {
+                "transmission": "Transmisión",
+                "distribution": "Distribución",
+                "pressure": {
+                    "high": "Alta Presión",
+                    "intermediate": "Presión intermedia",
+                    "low": "Baja Presión"
+                }
+            }
+        },
+        "place": "Lugar"
     },
     "units": {
         "kV": "kV",
@@ -132,7 +149,8 @@
         "line-attachment": "Fijación de línea",
         "material": "Material",
         "design": "Diseño",
-        "line-management": "Gestión de línea"
+        "line-management": "Gestión de línea",
+        "transformer-type": "Tipo de transformador"
     },
     "more_info": "Más información",
     "wikipedia": "Wikipedia",
@@ -147,7 +165,8 @@
         "telecoms": "Telecomunicaciones",
         "water": "Agua",
         "traction": "Tracción (< 50 Hz)",
-        "petroleum": "Petróleo"
+        "petroleum": "Petróleo",
+        "gas": "Gas"
     },
     "power": {
         "source": {
@@ -174,11 +193,20 @@
     "layers": {
         "power": "Electricidad",
         "water": "Agua",
-        "petroleum": "Petróleo y gas",
+        "petroleum": "Petróleo y gas natural",
         "labels": "Etiquetas",
         "title": "Capas",
         "telecoms": "Telecomunicaciones",
-        "nighttime-lights": "Luces nocturnas"
+        "nighttime-lights": "Luces nocturnas",
+        "background": "Fondo",
+        "heatmaps": "Mapas de calor",
+        "overlays": "Sobrecapas",
+        "infrastructure": "Infraestructura",
+        "validation": "Validación",
+        "solar-generation": "Generación solar",
+        "borders": "Fronteras",
+        "other-pipelines": "Otras tuberías",
+        "osmose-power": "Osmose (Electricidad)"
     },
     "warning": "Aviso",
     "wikidata": "Wikidata",
@@ -195,5 +223,11 @@
     "warnings": {
         "webgl": "<p>Su navegador puede tener problemas de rendimiento o funcionalidad con Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> con aceleración de hardware es necesario para que este sitio funcione bien.</p><p>Si su navegador es compatible con WebGL, es posible que tenga que desactivar la protección de rastreo de huellas digitales (fingerprinting) del navegador para este sitio.</p>"
     },
-    "disused": "en desuso"
+    "disused": "en desuso",
+    "coordinates": "Coordenadas",
+    "search": {
+        "clear": "Limpiar la búsqueda",
+        "no-results": "No se encontraron resultados"
+    },
+    "openstreetmap": "OpenStreetMap"
 }

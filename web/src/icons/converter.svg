@@ -1,15 +1,38 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
-    <g transform="matrix(1,0,0,1,0.5,0.313814)">
-        <g id="Layer_1">
-            <g>
-                <g transform="matrix(1,0,0,1,-0.5,-0.284314)">
-                    <path d="M12.5,23.529C6.377,23.529 1.413,18.578 1.413,12.471C1.413,6.363 6.377,1.412 12.5,1.412C18.623,1.412 23.587,6.363 23.587,12.471C23.587,18.578 18.623,23.529 12.5,23.529Z" style="fill:white;fill-rule:nonzero;"/>
-                    <path d="M12.5,23.529C6.377,23.529 1.413,18.578 1.413,12.471C1.413,6.363 6.377,1.412 12.5,1.412C18.623,1.412 23.587,6.363 23.587,12.471C23.587,18.578 18.623,23.529 12.5,23.529Z" style="fill-opacity:0;fill-rule:nonzero;stroke:black;stroke-width:1.8px;"/>
-                </g>
-                <path d="M4.078,20.886L20.848,4.056" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:0.72px;"/>
-            </g>
-        </g>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="35.0px" height="35.0px" viewBox="0 0 85.039 85.039">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+
+      .e {
+        mix-blend-mode: multiply;
+        opacity: 1;
+      }
+
+      .f {
+        isolation: isolate;
+      }
+
+      .d {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g class="f">
+    <g id="b" data-name="Layer 1" class="e">
+      <g>
+        <path class="d" d="M42.518,81.875c21.8,0,39.5-17.6,39.5-39.5S64.318,2.875,42.518,2.875,3.018,20.575,3.018,42.375s17.6,39.5,39.5,39.5Z" />
+        <line class="c" x1="14.618" y1="70.275" x2="70.718" y2="14.175" />
+      </g>
     </g>
+  </g>
 </svg>

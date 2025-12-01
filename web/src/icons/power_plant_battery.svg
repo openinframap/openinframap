@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="28.346" height="28.346" viewBox="0, 0, 28.346, 28.346">
-  <g id="Background">
-    <rect x="0" y="0" width="28.346" height="28.346" fill="#000000" fill-opacity="0"/>
-  </g>
-  <g id="Layer_1">
-    <g>
-      <path d="M2.079,2.079 L26.267,2.079 L26.267,26.267 L2.079,26.267 L2.079,2.079 z" fill="#FFFFFF"/>
-      <path d="M2.079,2.079 L26.267,2.079 L26.267,26.267 L2.079,26.267 L2.079,2.079 z" fill-opacity="0" stroke="#3B3B3B" stroke-width="4"/>
-    </g>
-    <path d="M5.017,7.193 L23.329,7.193" fill-opacity="0" stroke="#3B3B3B" stroke-width="1" stroke-linecap="round"/>
-    <path d="M8.142,9.318 L20.204,9.318" fill-opacity="0" stroke="#3B3B3B" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M5.017,18.5 L23.329,18.5" fill-opacity="0" stroke="#3B3B3B" stroke-width="1" stroke-linecap="round"/>
-    <path d="M8.142,20.625 L20.204,20.625" fill-opacity="0" stroke="#3B3B3B" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M14.173,3.131 L14.173,7.193" fill-opacity="0" stroke="#3B3B3B" stroke-width="1"/>
-    <path d="M14.173,20.562 L14.173,24.625" fill-opacity="0" stroke="#3B3B3B" stroke-width="1"/>
-    <path d="M14.173,9.318 L14.173,18.5" fill-opacity="0" stroke="#3B3B3B" stroke-width="1" stroke-dasharray="2,2"/>
-  </g>
+<svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="35.0px" height="35.0px" viewBox="0 0 85.0394 85.0394">
+  <defs>
+    <style>
+      .c {
+        stroke-width: 5px;
+      }
+
+      .c, .d {
+        fill: none;
+      }
+
+      .c, .d, .e {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .d, .e {
+        stroke-width: 4.99996px;
+      }
+
+      .e {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <rect class="e" x="3.0731" y="2.91112" width="78.99874" height="78.99874"/>
+  <line class="c" x1="35.39344" y1="64.98295" x2="35.39344" y2="19.28295"/>
+  <path class="c" d="M50.19344,42.58295c11,0,12.59606,0,23.59606,0"/>
+  <path class="c" d="M11.79738,42.58295c11,0,12.59606,0,23.59606,0"/>
+  <line class="d" x1="50.19344" y1="59.92046" x2="50.19344" y2="24.92046"/>
 </svg>

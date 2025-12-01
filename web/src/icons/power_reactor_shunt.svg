@@ -1,7 +1,47 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 80 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;">
-    <path d="M13.381,44.171C13.381,30.002 25.308,18.499 40,18.499C54.692,18.499 66.619,30.002 66.619,44.171C66.619,58.34 54.692,69.843 40,69.843M13.381,44.171L40,44.171L40,7.895M39.7,69.843L39.7,81.724M24.258,81.724L55.742,81.724M29.254,87.538L50.746,87.538M33.839,93.324L46.161,93.324" style="fill:rgb(235,235,235);fill-opacity:0;"/>
-    <path d="M13.381,44.171C13.381,30.002 25.308,18.499 40,18.499C54.692,18.499 66.619,30.002 66.619,44.171C66.619,58.34 54.692,69.843 40,69.843M13.381,44.171L40,44.171L40,7.895M39.7,69.843L39.7,81.724M24.258,81.724L55.742,81.724M29.254,87.538L50.746,87.538M33.839,93.324L46.161,93.324" style="fill:none;stroke:white;stroke-width:10.42px;"/>
-    <path d="M13.381,44.171C13.381,30.002 25.308,18.499 40,18.499C54.692,18.499 66.619,30.002 66.619,44.171C66.619,58.34 54.692,69.843 40,69.843M13.381,44.171L40,44.171L40,7.895M39.7,69.843L39.7,81.724M24.258,81.724L55.742,81.724M29.254,87.538L50.746,87.538M33.839,93.324L46.161,93.324" style="fill:none;stroke:black;stroke-width:3.13px;stroke-miterlimit:1.5;"/>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="35.0px" height="35.0px" viewBox="0 0 85.039 85.039">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+
+      .e {
+        mix-blend-mode: multiply;
+        opacity: 1;
+      }
+
+      .f {
+        fill: #1d1d1b;
+        font-family: Topography-Regularcondensed, Topography;
+        font-size: 10px;
+      }
+
+      .g {
+        isolation: isolate;
+      }
+
+      .d {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g class="g">
+    <g id="b" data-name="Layer 1" class="e">
+      <g>
+        <path class="d" d="M42.467,81.892c21.8,0,39.5-17.6,39.5-39.5S64.267,2.892,42.467,2.892,2.967,20.592,2.967,42.392s17.6,39.5,39.5,39.5Z" />
+        <line class="c" x1="34.667" y1="73.192" x2="50.367" y2="73.192" />
+        <line class="c" x1="30.667" y1="65.692" x2="54.367" y2="65.692" />
+        <path class="c" d="M42.467,11.396l-.4,29.996h-16.2c0-9.1,7.4-16.4,16.6-16.4s16.6,7.3,16.6,16.4c0,9.5-7.4,16.8-16.6,16.8v7.3" />
+      </g>
+      <text class="f" transform="translate(11.997 -8.641)"><tspan x="0" y="0">DISCONNECTOR</tspan></text>
+    </g>
+  </g>
 </svg>

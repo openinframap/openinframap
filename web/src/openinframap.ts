@@ -12,8 +12,8 @@ import OIMSearch from './search/search.ts'
 
 import { getStyle, getLayers } from './style/style.js'
 
-import { manifest } from 'virtual:render-svg'
 import { ValidationErrorPopup } from './popup/validation-error-popup.js'
+import { SymbolLoader } from './symbol-loader.ts'
 import { ClickRouter } from './click-router.js'
 
 export default class OpenInfraMap {
@@ -96,17 +96,7 @@ export default class OpenInfraMap {
     )
 
     const clickRouter = new ClickRouter(map, map_style.layers)
-
-    const icon_ratio = Math.min(Math.round(window.devicePixelRatio), 2)
-    const icons = manifest[icon_ratio.toString()]
-    const loadedIcons = new Set<string>()
-
-    map.on('styleimagemissing', async (e) => {
-      const image = await map.loadImage(icons[e.id])
-      if (loadedIcons.has(e.id)) return
-      loadedIcons.add(e.id)
-      map.addImage(e.id, image.data, { pixelRatio: icon_ratio })
-    })
+    new SymbolLoader(map)
 
     map.dragRotate.disable()
     map.touchZoomRotate.disableRotation()

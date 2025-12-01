@@ -1,3 +1,9 @@
+# /// script
+# dependencies = [
+#   "pyyaml",
+#   "toml",
+# ]
+# ///
 import sys
 import yaml
 import toml
@@ -24,8 +30,7 @@ with open(sys.argv[2], "r") as f:
 
 def build_field(name, val):
     nl_char = "\n"
-    if ":" in name:
-        name = '"' + name + '"'
+    name = '"' + name + '"'
 
     if val is None:
         return name
@@ -73,9 +78,9 @@ def build_sql(data):
 
 
 for layer in config["layers"]:
-    layer_maps = layer.get("map")
-    if "map" not in layer:
-        layer_maps = [default_map]
+    layer_maps = layer.get("map", [default_map])
+    if not isinstance(layer_maps, list):
+        raise ValueError("Map key must be a list, found " + str(type(layer_maps)))
 
     for map_name in layer_maps:
         map_layers[map_name].append(

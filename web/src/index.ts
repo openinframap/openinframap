@@ -15,8 +15,9 @@ await i18next.use(LanguageDetector).init({
     default: ['en']
   },
   supportedLngs: [
-    'en',
+    'cy',
     'de',
+    'en',
     'es',
     'it',
     'cs',

@@ -63,10 +63,11 @@ const style: StyleSpecification = {
     },
     blackmarble: {
       type: 'raster',
-      tiles: ['https://openinframap.org/black-marble-2023/{z}/{x}/{y}.webp'],
+      tiles: ['https://openinframap.org/black-marble-2024/{z}/{x}/{y}.webp'],
+      tileSize: 256,
       maxzoom: 8,
       attribution:
-        '<a href="https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/products/VNP46A4/">NASA Black Marble 2023</a>'
+        '<a href="https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/products/VNP46A4/">NASA Black Marble 2024</a>'
     },
     power: {
       type: 'vector',
@@ -128,7 +129,7 @@ export function getLayers() {
 }
 
 export function getStyle() {
-  const oim_layers = getLayers()
+  const oim_layers = [...getLayers(), ...style_labels(i18next.language)]
 
   oim_layers.sort((a, b) => {
     if (!a.zorder || !b.zorder) {
@@ -139,6 +140,6 @@ export function getStyle() {
     return 0
   })
 
-  style.layers = [...style_base, ...oim_layers, ...style_labels(i18next.language)]
+  style.layers = [...style_base, ...oim_layers]
   return style
 }

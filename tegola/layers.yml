@@ -32,14 +32,16 @@ field_sets:
   name:
     - name: name
       sql: tags -> 'name'
+    - name: name_cy
+      sql: tags -> 'name:cy'
+    - name: name_de
+      sql: tags -> 'name:de'
     - name: name_en
       sql: tags -> 'name:en'
     - name: name_es
       sql: tags -> 'name:es'
     - name: name_el
       sql: tags -> 'name:el'
-    - name: name_de
-      sql: tags -> 'name:de'
     - name: name_fr
       sql: tags -> 'name:fr'
     - name: name_hi
@@ -60,8 +62,16 @@ field_sets:
       sql: tags -> 'name:it'
     - name: name_nl
       sql: tags -> 'name:nl'
+    - name: name_sv
+      sql: tags -> 'name:sv'
+    - name: name_ta
+      sql: tags -> 'name:ta'
+    - name: name_id
+      sql: tags -> 'name:id'
     - name: operator
       sql: tags -> 'operator'
+    - name: operator_wikidata
+      sql: tags -> 'operator:wikidata'
     - name: ref
       sql: tags -> 'ref'
   lifecycle:
@@ -91,6 +101,28 @@ field_sets:
   start_date:
     - name: start_date
       sql: tags->'start_date'
+
+  transformer:
+    - name: voltage_primary
+      sql: convert_voltage(tags -> 'voltage:primary') / 1000
+    - name: voltage_secondary
+      sql: convert_voltage(tags -> 'voltage:secondary') / 1000
+    - name: voltage_tertiary
+      sql: convert_voltage(tags -> 'voltage:tertiary') / 1000
+    - name: rating
+      sql: tags -> 'rating'
+    - name: location
+      sql: tags -> 'location'
+    - name: windings
+      sql: tags -> 'windings'
+    - name: phases
+      sql: tags -> 'phases'
+    - name: configuration
+      sql: tags -> 'windings:configuration'
+    - name: transformer_type
+      sql: tags -> 'transformer'
+    - name: devices
+      sql: tags -> 'transformer:devices'
 
 layers:
   - name: power_line
@@ -140,15 +172,13 @@ layers:
       - power
     geometry_type: Point
     min_zoom: 13
-    field_sets: [geom, name, lifecycle, url, start_date]
+    field_sets: [geom, name, lifecycle, url, start_date, transformer]
     id_field: osm_id
     fields:
       - name: transition
       - name: type
       - name: switch
         sql: tags -> 'switch'
-      - name: transformer
-        sql: tags -> 'transformer'
       - name: substation
         sql: tags -> 'substation'
       - name: design
@@ -163,8 +193,20 @@ layers:
         sql: tags -> 'design:ref'
       - name: material
         sql: tags -> 'material'
+      - name: angle
+        sql: round(power_line_angle(geometry))::integer % 180
     from: osm_power_tower
-    where: geometry && !BBOX!
+    where: geometry && !BBOX! AND ST_GeometryType(geometry) = 'ST_Point'
+
+  - name: power_portal_way
+    map:
+      - power
+    geometry_type: LineString
+    min_zoom: 14
+    field_sets: [geom, name]
+    id_field: osm_id
+    from: osm_power_tower
+    where: type = 'portal' AND geometry && !BBOX!
 
   - name: power_substation
     map:
@@ -177,6 +219,8 @@ layers:
       - name: substation
       - name: location
         sql: tags -> 'location'
+      - name: rating
+        sql: tags -> 'rating'
     id_field: osm_id
     from: substation
     where: geometry && !BBOX!
@@ -283,24 +327,7 @@ layers:
       - power
     geometry_type: Point
     min_zoom: 14
-    field_sets: [geom_centroid, name, start_date, frequency]
-    fields:
-      - name: voltage_primary
-        sql: convert_voltage(tags -> 'voltage:primary') / 1000
-      - name: voltage_secondary
-        sql: convert_voltage(tags -> 'voltage:secondary') / 1000
-      - name: voltage_tertiary
-        sql: convert_voltage(tags -> 'voltage:tertiary') / 1000
-      - name: rating
-        sql: tags -> 'rating'
-      - name: location
-        sql: tags -> 'location'
-      - name: windings
-        sql: tags -> 'windings'
-      - name: configuration
-        sql: tags -> 'windings:configuration'
-      - name: transformer_type
-        sql: tags -> 'transformer'
+    field_sets: [geom_centroid, name, start_date, frequency, transformer]
     id_field: osm_id
     from: osm_power_switchgear
     where: type = 'transformer' AND geometry && !BBOX!

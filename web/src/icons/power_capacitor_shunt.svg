@@ -1,50 +1,28 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 80 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-    <g transform="matrix(1.08347,0,0,1.08347,-3.33867,0.72)">
-        <g>
-            <g transform="matrix(0.92296,0,0,0.92296,3.08134,-0.12591)">
-                <path d="M22.944,78.4L57.056,78.4" style="fill:none;stroke:white;stroke-width:7.5px;"/>
-            </g>
-            <g transform="matrix(0.92296,0,0,0.92296,3.08134,-1.41703)">
-                <path d="M28.357,84.7L51.643,84.7" style="fill:none;stroke:white;stroke-width:7.5px;"/>
-            </g>
-            <g transform="matrix(0.92296,0,0,0.92296,3.08134,-3.05585)">
-                <path d="M33.325,90.969L46.675,90.969" style="fill:none;stroke:white;stroke-width:7.5px;"/>
-            </g>
-            <g transform="matrix(0.92296,0,0,0.92296,3.08146,-1.60378)">
-                <path d="M12.252,45.361L67.748,45.765" style="fill:none;stroke:white;stroke-width:14.58px;"/>
-            </g>
-            <g transform="matrix(0.92296,0,0,0.92296,3.08146,-1.60378)">
-                <path d="M12.252,54.504L67.748,54.908" style="fill:none;stroke:white;stroke-width:14.58px;"/>
-            </g>
-            <g transform="matrix(0.92296,0,0,0.92296,3.08146,-1.60378)">
-                <path d="M40,45.361L40,10.219" style="fill:none;stroke:white;stroke-width:14.58px;"/>
-            </g>
-            <g transform="matrix(0.92296,0,0,0.55529,3.08146,18.5842)">
-                <path d="M40,54.908L40,89.781" style="fill:none;stroke:white;stroke-width:17.67px;"/>
-            </g>
-            <g transform="matrix(0.92296,0,0,0.92296,3.08146,-1.60378)">
-                <path d="M12.252,45.361L67.748,45.765" style="fill:none;stroke:rgb(25,25,25);stroke-width:5.21px;stroke-linecap:butt;"/>
-            </g>
-            <g transform="matrix(0.92296,0,0,0.92296,3.08146,-1.60378)">
-                <path d="M12.252,54.504L67.748,54.908" style="fill:none;stroke:rgb(25,25,25);stroke-width:5.21px;stroke-linecap:butt;"/>
-            </g>
-            <g transform="matrix(0.92296,0,0,0.92296,3.08146,-1.60378)">
-                <path d="M40,45.361L40,10.219" style="fill:none;stroke:rgb(25,25,25);stroke-width:3.13px;"/>
-            </g>
-            <g transform="matrix(0.92296,0,0,0.638932,3.08146,13.9916)">
-                <path d="M40,54.908L40,89.781" style="fill:none;stroke:rgb(25,25,25);stroke-width:3.63px;"/>
-            </g>
-            <g transform="matrix(0.92296,0,0,0.92296,3.08134,-0.12591)">
-                <path d="M22.944,78.4L57.056,78.4" style="fill:none;stroke:rgb(25,25,25);stroke-width:2px;"/>
-            </g>
-            <g transform="matrix(0.92296,0,0,0.92296,3.08134,-1.41703)">
-                <path d="M28.357,84.7L51.643,84.7" style="fill:none;stroke:rgb(25,25,25);stroke-width:2px;"/>
-            </g>
-            <g transform="matrix(0.92296,0,0,0.92296,3.08134,-3.05585)">
-                <path d="M33.325,90.969L46.675,90.969" style="fill:none;stroke:rgb(25,25,25);stroke-width:2px;"/>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 85.0394 85.0394">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+
+      .d {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path class="d" d="M42.73001,82.13573c21.8,0,39.5-17.6,39.5-39.5,0-21.8-17.7-39.5-39.5-39.5C20.83001,3.13573,3.23001,20.83573,3.23001,42.63573c0,21.9,17.6,39.5,39.5,39.5Z"/>
+  <line class="c" x1="20.03001" y1="50.03573" x2="65.73001" y2="50.03573"/>
+  <line class="c" x1="20.03001" y1="50.03573" x2="65.73001" y2="50.03573"/>
+  <line class="c" x1="20.33001" y1="35.23573" x2="66.03001" y2="35.23573"/>
+  <line class="c" x1="20.33001" y1="35.23573" x2="66.03001" y2="35.23573"/>
+  <path class="c" d="M42.73001,50.03573v23.59606"/>
+  <path class="c" d="M42.73001,11.63967v23.59606"/>
 </svg>

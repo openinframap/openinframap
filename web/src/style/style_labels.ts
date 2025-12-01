@@ -13,6 +13,7 @@ function pmLabel(lang: string): DataDrivenPropertyValueSpecification<string> {
 export default function layers(lang: string): LayerSpecificationWithZIndex[] {
   return [
     {
+      zorder: 301,
       id: 'label_address',
       type: 'symbol',
       source: 'basemap',
@@ -32,6 +33,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
+      zorder: 302,
       id: 'label_water_waterway',
       type: 'symbol',
       source: 'basemap',
@@ -52,6 +54,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
+      zorder: 303,
       id: 'label_roads_minor',
       type: 'symbol',
       source: 'basemap',
@@ -72,6 +75,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
+      zorder: 304,
       id: 'label_roads_major',
       type: 'symbol',
       source: 'basemap',
@@ -92,6 +96,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
+      zorder: 305,
       id: 'label_places_subplace',
       type: 'symbol',
       source: 'basemap',
@@ -115,6 +120,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
+      zorder: 306,
       id: 'label_places_locality',
       type: 'symbol',
       source: 'basemap',
@@ -154,6 +160,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
+      zorder: 310,
       id: 'label_places_region',
       type: 'symbol',
       source: 'basemap',
@@ -176,6 +183,7 @@ export default function layers(lang: string): LayerSpecificationWithZIndex[] {
       }
     },
     {
+      zorder: 311,
       id: 'label_places_country',
       type: 'symbol',
       source: 'basemap',

@@ -1,0 +1,233 @@
+{
+    "nav": {
+        "about": "ynghylch",
+        "stats": "ystadegau",
+        "exports": "allforiadau"
+    },
+    "edit": {
+        "edit": "Golygu",
+        "remote": "Agor gyda golygydd allanol (JOSM, ac ati)",
+        "browser": "Golygu mewn porwr (iD)",
+        "error": "Ni ellir llwytho golygydd allanol - gwnewch yn siŵr ei fod yn rhedeg ac mae golygydd allanol wedi'i alluogi.\nGwall: "
+    },
+    "names": {
+        "power": {
+            "transformer": "Trawsnewidydd",
+            "tower": "Tŵr pŵer",
+            "pole": "Polyn pŵer",
+            "generator": "Generadur",
+            "generator-solar": "Generadur solar",
+            "wind-turbine": "Tyrbin gwynt",
+            "substation": "Is-orsaf",
+            "switch": "Switsh",
+            "compensator": "Digolledwr",
+            "converter": "Is-orsaf drosi DC",
+            "cable": "Cebl pŵer",
+            "line": "Llinell bŵer",
+            "solar-panel": "Panel solar",
+            "plant": "Gorsaf ynni",
+            "hvdc": "HVDC",
+            "line-reference": "Cyfeirnod y llinell",
+            "solar-panel-node": "Panel solar (nod)",
+            "other-generator": "Generadur arall",
+            "tower-pylon": "Tŵr/Peilon",
+            "tower-transition": "Tŵr trosi",
+            "pole-transition": "Polyn trosi",
+            "transformer-3": "Trawsnewidydd (3 dirwyniad)",
+            "switch-disconnector": "Datgysylltwr",
+            "switch-breaker": "Torrwr cylched",
+            "switch-other": "Switsh arall",
+            "reactor-series": "Adweithydd cyfres",
+            "reactor-shunt": "Adweithydd siynt",
+            "capacitor-series": "Cynhwysydd cyfres",
+            "capacitor-shunt": "Cynhwysydd siynt",
+            "filter": "Hidlydd",
+            "current-transformer": "Trawsnewidydd cerrynt",
+            "statcom": "Digolledwr VAR sefydlog",
+            "synchronous-condenser": "Cyddwyswr cydamserol",
+            "compensator-other": "Cyddwyswr arall",
+            "potential-transformer": "Trawsnewidydd potensial"
+        },
+        "telecoms": {
+            "communication-line": "Llinell delathrebu",
+            "data-center": "Adeilad telathrebu",
+            "exchange": "Cyfnewidfa ffôn",
+            "cabinet": "Cwpwrdd telathrebu"
+        },
+        "pipeline": "Piblinell",
+        "petroleum": {
+            "well": "Ffynnon",
+            "facility": "Cyfleuster petroliwm"
+        },
+        "gas": {
+            "pipeline": {
+                "pressure": {
+                    "high": "Pwysau Uchel",
+                    "intermediate": "Pwysau Canolig",
+                    "low": "Pwysau Isel"
+                },
+                "transmission": "Trosglwyddiad",
+                "distribution": "Dosbarthu"
+            }
+        },
+        "water": {
+            "pipeline": "Piblinell ddŵr",
+            "sewage-treatment-plant": "Gwaith trin carthion",
+            "treatment-plant": "Gwaith trin dŵr",
+            "pumping-station": "Gorsaf bwmpio",
+            "well": "Ffynnon dŵr",
+            "reservoir": "Cronfa ddŵr",
+            "water-pumping-station": "Gorsaf bwmpio dŵr",
+            "sewage-pumping-station": "Gorsaf bwmpio carthion"
+        },
+        "cable": "Cebl",
+        "telecom": {
+            "tower-mast": "Tŵr/Mast",
+            "datacenter": "Canolfan ddata"
+        },
+        "cabinet": "Cwpwrdd",
+        "substance": {
+            "oil": "Olew",
+            "gas": "Nwy",
+            "fuel": "Tanwydd",
+            "hydrogen": "Hydrogen",
+            "nitrogen": "Nitrogen",
+            "oxygen": "Ocsigen",
+            "beer": "Cwrw",
+            "co2": "CO<sub>2</sub>",
+            "fresh-water": "Dŵr ffres",
+            "hot-water": "Dŵr poeth",
+            "steam": "Stêm",
+            "wastewater": "Dŵr gwastraff",
+            "rainwater": "Dŵr glaw",
+            "petroleum-intermediate": "Canolig Petroliwm"
+        },
+        "method": {
+            "fission": "Ymholltiad",
+            "fusion": "Ymasiad",
+            "wind-turbine": "Tyrbin gwynt",
+            "water-storage": "Storfa ddŵr",
+            "water-pumped-storage": "Storfa bwmpio",
+            "tidal-barrage": "Argae",
+            "tidal-stream": "Nant",
+            "solar-thermal": "Thermol",
+            "solar-photovoltaic": "Ffotofoltaidd",
+            "combustion": "Hylosgi",
+            "gasification": "Nwyeiddio",
+            "anaerobic-digestion": "Treulio anaerobig",
+            "water-run-of-river": "Llif-yr-afon"
+        },
+        "other-pumping-station": "Gorsaf bwmpio arall",
+        "place": "Lle"
+    },
+    "info": {
+        "name": "Enw",
+        "operator": "Gweithredwr",
+        "output": "Pŵer",
+        "source": "Ffynhonnell",
+        "start-date": "Dyddiad dechrau",
+        "generation-method": "Dull o gynhyrchu",
+        "substation-type": "Math o is-orsaf",
+        "reference": "Cyfeirnod",
+        "circuits": "Cylchedau",
+        "type": "Math",
+        "website": "Gwefan",
+        "view-openstreetmap": "Gweld ar OpenStreetMap",
+        "substance": "Sylwedd",
+        "usage": "Defnydd",
+        "location": "Lleoliad",
+        "design": "Dyluniad",
+        "material": "Deunydd",
+        "transformer-type": "Math o drawsnewidydd",
+        "line-attachment": "Dull atodi llinellau",
+        "line-management": "Dull rheoli llinellau"
+    },
+    "units": {
+        "kV": "kV",
+        "Hz": "Hz",
+        "MW": "MW",
+        "DC": "DC",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V"
+    },
+    "more_info": "Rhagor o wybodaeth",
+    "wikipedia": "Wicipedia",
+    "wikimedia-commons": "Comin Wicimedia",
+    "wikidata": "Wicidata",
+    "key": {
+        "name": "Allwedd",
+        "power-lines": "Llinellau Pŵer",
+        "power-plants": "Gorsafoedd Ynni",
+        "power-generators": "Generaduron Pŵer",
+        "power-line-supports": "Cefnogwyr Llinellau Pŵer",
+        "switchgear": "Peirianwaith switsio",
+        "telecoms": "Telathrebu",
+        "gas": "Nwy",
+        "petroleum": "Petroliwm",
+        "water": "Dŵr",
+        "traction": "Tyniant (< 50 Hz)"
+    },
+    "location": {
+        "underground": "Dan ddaear",
+        "underwater": "Dan ddŵr",
+        "overhead": "Uwchben",
+        "roof": "To",
+        "surface": "Arwyneb",
+        "outdoor": "Awyr agored",
+        "indoor": "Dan do"
+    },
+    "power": {
+        "source": {
+            "coal": "Glo",
+            "geothermal": "Geothermol",
+            "hydro": "Hydrodrydanol",
+            "nuclear": "Niwclear",
+            "oil-gas": "Olew/Nwy",
+            "gas": "Nwy",
+            "solar": "Solar",
+            "wind": "Gwynt",
+            "biomass": "Biomas",
+            "waste": "Gwastraff",
+            "battery": "Batri"
+        },
+        "substation-type": {
+            "transmission": "Trosglwyddiad",
+            "distribution": "Dosbarthiad",
+            "traction": "Tyniant",
+            "converter": "Troswr DC"
+        }
+    },
+    "other": "Arall",
+    "warning": "Rhybudd",
+    "layers": {
+        "background": "Cefndir",
+        "heatmaps": "Mapiau gwres",
+        "overlays": "Troshaenau",
+        "infrastructure": "Seilwaith",
+        "validation": "Dilysu",
+        "nighttime-lights": "Goleuadau'r Nos",
+        "power": "Pŵer",
+        "solar-generation": "Cynhyrchu Solar",
+        "telecoms": "Telathrebu",
+        "petroleum": "Olew a Nwy Naturiol",
+        "water": "Dŵr",
+        "borders": "Ffiniau",
+        "labels": "Labeli",
+        "title": "Haenau",
+        "other-pipelines": "Piblinellau Eraill",
+        "osmose-power": "Osmose (Pŵer)"
+    },
+    "construction": "wrthi'n adeiladu",
+    "disused": "nas defnyddir",
+    "coordinates": "Cyfresurynnau",
+    "search": {
+        "clear": "Clirio chwiliad",
+        "no-results": "Dim canlyniadau"
+    },
+    "openstreetmap": "OpenStreetMap",
+    "warnings": {
+        "webgl": "<p>Efallai bydd eich porwr yn cael problemau perfformiad neu broblemau rhedeg Open Infrastructure Map.</p> <p>Mae angen <a href=\"http://webglreport.com\">WebGL</a> gyda chyflymiad caledwedd i sicrhau bod y wefan hon yn rhedeg yn dda.</p><p>Os bydd eich porwr yn cefnogi WebGL, efallai y bydd angen i chi ddiffodd diogelu adnabod olion bysedd porwr ar gyfer y wefan hon.</p>"
+    }
+}

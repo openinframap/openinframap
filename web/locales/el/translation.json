@@ -196,7 +196,8 @@
             "biomass": "Βιομάζα",
             "waste": "Απορρίμματα",
             "battery": "Μπαταρία",
-            "gas": "Αέριο"
+            "gas": "Αέριο",
+            "unknown": "Άλλη/Άγνωστη"
         },
         "substation-type": {
             "transmission": "Μετάδοσης",

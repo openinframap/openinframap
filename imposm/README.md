@@ -70,3 +70,5 @@ We create a materialized view from this, using `ST_Subdivide` to improve indexin
         ST_Transform(country_eez.geom, 3857) AS geom
     FROM countries.country_eez
     WHERE country_eez."union"::text <> 'Antarctica'::text;
+
+    CREATE INDEX country_eez_3857_geom ON countries.country_eez_3857 USING GIST (geom);

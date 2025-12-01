@@ -1,19 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="28.346" height="28.346" viewBox="0, 0, 28.346, 28.346">
-  <g id="Background">
-    <rect x="0" y="0" width="28.346" height="28.346" fill="#000000" fill-opacity="0"/>
-  </g>
-  <g id="Layer_1">
-    <g>
-      <path d="M2.079,2.079 L26.267,2.079 L26.267,26.267 L2.079,26.267 L2.079,2.079 z" fill="#FFFFFF"/>
-      <path d="M2.079,2.079 L26.267,2.079 L26.267,26.267 L2.079,26.267 L2.079,2.079 z" fill-opacity="0" stroke="#3B3B3B" stroke-width="4"/>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="35.0px" height="35.0px" viewBox="0 0 85.039 85.039">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+        stroke-width: 5px;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .e {
+        mix-blend-mode: multiply;
+        opacity: 1;
+      }
+
+      .f {
+        isolation: isolate;
+      }
+
+      .d {
+        fill: #fff;
+        stroke-width: 5px;
+      }
+    </style>
+  </defs>
+  <g class="f">
+    <g id="b" data-name="Layer 1" class="e">
+      <g>
+        <rect class="d" x="3.02" y="3.02" width="78.999" height="78.999" />
+        <g>
+          <path class="c" d="M37.641,44.644c11,0,15.7-3.5,15.7-9.4,0-6.5,11.4-2.7,11.4-9.9,0-2.6-2.7-5.1-7.3-5.1-10.2,0-9.1,8.3-18,8.3-8.4,0-13.4,3.3-13.4,8.7,0,4.6,4.4,7.4,11.6,7.4Z" />
+          <polyline class="c" points="39.6 44.604 41.842 69.604 25.603 69.604 28.141 41.844" />
+        </g>
+      </g>
     </g>
-    <path d="M21.159,9.495 L19.346,22.557 L9,22.557 L7.187,9.495 L21.159,9.495 z" fill-opacity="0" stroke="#3B3B3B" stroke-width="1.5"/>
-    <path d="M6.142,7.37 L22.204,7.37" fill-opacity="0" stroke="#3B3B3B" stroke-width="1"/>
-    <path d="M11.97,7.091 L11.97,5.497 L16.376,5.497 L16.376,7.091" fill-opacity="0" stroke="#3B3B3B" stroke-width="1"/>
-    <path d="M14.227,11.713 L14.227,20.338" fill-opacity="0" stroke="#3B3B3B" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M11.236,11.713 L11.236,20.338" fill-opacity="0" stroke="#3B3B3B" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M17.111,11.713 L17.111,20.338" fill-opacity="0" stroke="#3B3B3B" stroke-width="1.5" stroke-linecap="round"/>
   </g>
 </svg>

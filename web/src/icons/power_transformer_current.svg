@@ -1,11 +1,28 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 50 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;">
-    <g transform="matrix(1,0,0,1,1.13106,0)">
-        <g id="Layer_1">
-            <path d="M22.491,35.259C16.56,35.259 11.744,30.135 11.744,23.823C11.744,17.511 16.56,12.385 22.491,12.385M22.491,58.134C16.56,58.134 11.744,53.009 11.744,46.697C11.744,40.385 16.56,35.259 22.491,35.259M23.205,12.385L35.994,12.385M23.205,58.134L35.994,58.134M23.869,5.672L23.869,68.328" style="fill:white;"/>
-            <path d="M22.491,35.259C16.56,35.259 11.744,30.135 11.744,23.823C11.744,17.511 16.56,12.385 22.491,12.385M22.491,58.134C16.56,58.134 11.744,53.009 11.744,46.697C11.744,40.385 16.56,35.259 22.491,35.259M23.205,12.385L35.994,12.385M23.205,58.134L35.994,58.134M23.869,5.672L23.869,68.328" style="fill:none;stroke:white;stroke-width:9px;"/>
-            <path d="M22.491,35.259C16.56,35.259 11.744,30.135 11.744,23.823C11.744,17.511 16.56,12.385 22.491,12.385M22.491,58.134C16.56,58.134 11.744,53.009 11.744,46.697C11.744,40.385 16.56,35.259 22.491,35.259M23.205,12.385L35.994,12.385M23.205,58.134L35.994,58.134M23.869,5.672L23.869,68.328" style="fill:none;stroke:rgb(59,59,59);stroke-width:3.51px;stroke-miterlimit:1.5;"/>
-        </g>
-    </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 85.0394 85.0394">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+
+      .d {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path class="d" d="M42.46756,82.29021c21.8,0,39.5-17.6,39.5-39.5,0-21.8-17.7-39.5-39.5-39.5C20.56756,3.29021,2.96756,20.99021,2.96756,42.79021c0,21.9,17.6,39.5,39.5,39.5Z"/>
+  <line class="c" x1="38.36756" y1="62.09021" x2="52.66756" y2="62.09021"/>
+  <line class="c" x1="38.36756" y1="42.79021" x2="42.46756" y2="42.79021"/>
+  <line class="c" x1="38.36756" y1="23.49021" x2="52.66756" y2="23.49021"/>
+  <path class="c" d="M38.46756,42.79021c-5.4,0-9.7,4.3-9.7,9.7,0,5.3,4.3,9.6,9.7,9.6"/>
+  <path class="c" d="M38.46756,23.49021c-5.4,0-9.7,4.3-9.7,9.7,0,5.3,4.3,9.6,9.7,9.6"/>
+  <line class="c" x1="42.46756" y1="11.79414" x2="42.46756" y2="73.78627"/>
 </svg>

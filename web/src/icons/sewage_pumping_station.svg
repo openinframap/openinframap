@@ -1,10 +1,51 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-    <g transform="matrix(6.12323e-17,1,-1,6.12323e-17,100.687,-0.928587)">
-        <circle cx="50.929" cy="50.687" r="46.602" style="fill:rgb(193,150,83);stroke:black;stroke-width:4.17px;"/>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="35.0px" height="35.0px" viewBox="0 0 85.039 85.039">
+  <defs>
+    <style>
+      .c {
+        fill: none;
+      }
+
+      .c, .d {
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+
+      .e {
+        mix-blend-mode: multiply;
+        opacity: 1;
+      }
+
+      .f {
+        isolation: isolate;
+      }
+
+      .d {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g class="f">
+    <g id="b" data-name="Layer 1" class="e">
+      <g>
+        <path class="d" d="M42.441,81.858c21.8,0,39.5-17.6,39.5-39.5S64.241,2.858,42.441,2.858,2.941,20.558,2.941,42.358s17.6,39.5,39.5,39.5Z" />
+        <g>
+          <line class="c" x1="72.989" y1="42.445" x2="25.758" y2="67.008" />
+          <line class="c" x1="25.758" y1="17.807" x2="72.989" y2="42.37" />
+        </g>
+        <path d="M18.537,63.458c1.4,0,2.5-1.1,2.5-2.5s-1.1-2.5-2.5-2.5-2.5,1.1-2.5,2.5,1.1,2.5,2.5,2.5Z" />
+        <path d="M18.537,51.658c1.4,0,2.5-1.1,2.5-2.5s-1.1-2.5-2.5-2.5-2.5,1.1-2.5,2.5,1.1,2.5,2.5,2.5Z" />
+        <path d="M18.537,38.058c1.4,0,2.5-1.1,2.5-2.5s-1.1-2.5-2.5-2.5-2.5,1.1-2.5,2.5,1.1,2.5,2.5,2.5Z" />
+        <path d="M30.237,32.058c1.4,0,2.5-1.1,2.5-2.5s-1.1-2.5-2.5-2.5-2.5,1.1-2.5,2.5,1.1,2.5,2.5,2.5Z" />
+        <path d="M30.237,44.558c1.4,0,2.5-1.1,2.5-2.5s-1.1-2.5-2.5-2.5-2.5,1.1-2.5,2.5,1.1,2.5,2.5,2.5Z" />
+        <path d="M40.937,51.658c1.4,0,2.5-1.1,2.5-2.5s-1.1-2.5-2.5-2.5-2.5,1.1-2.5,2.5,1.1,2.5,2.5,2.5Z" />
+        <path d="M18.537,26.458c1.4,0,2.5-1.1,2.5-2.5s-1.1-2.5-2.5-2.5-2.5,1.1-2.5,2.5,1.1,2.5,2.5,2.5Z" />
+        <path d="M40.937,38.058c1.4,0,2.5-1.1,2.5-2.5s-1.1-2.5-2.5-2.5-2.5,1.1-2.5,2.5,1.1,2.5,2.5,2.5Z" />
+        <path d="M52.737,44.658c1.4,0,2.5-1.1,2.5-2.5s-1.1-2.5-2.5-2.5-2.5,1.1-2.5,2.5,1.1,2.5,2.5,2.5Z" />
+        <path d="M30.237,57.558c1.4,0,2.5-1.1,2.5-2.5s-1.1-2.5-2.5-2.5-2.5,1.1-2.5,2.5,1.1,2.5,2.5,2.5Z" />
+      </g>
     </g>
-    <g transform="matrix(5.85927e-17,0.956892,-1.2889,7.89221e-17,101.867,1.26687)">
-        <path d="M4.327,50L50.929,4.085L97.53,50" style="fill:rgb(235,235,235);fill-opacity:0;stroke:black;stroke-width:3.67px;"/>
-    </g>
+  </g>
 </svg>

@@ -1,4 +1,8 @@
-import { ExpressionSpecification, FilterSpecification } from 'maplibre-gl'
+import {
+  DataDrivenPropertyValueSpecification,
+  ExpressionSpecification,
+  FilterSpecification
+} from 'maplibre-gl'
 import { LayerSpecificationWithZIndex } from './types.ts'
 import { local_name_tags } from '../l10n.ts'
 import { step, interpolate, get, has, all, any, concat, case_, coalesce } from './stylehelpers.ts'
@@ -9,9 +13,10 @@ export function get_local_name(): ExpressionSpecification {
 }
 
 export const text_paint = {
-  'text-halo-width': 4,
-  'text-halo-blur': 2,
-  'text-halo-color': 'rgba(230, 230, 230, 1)'
+  'text-color': 'hsl(0, 0%, 10%)',
+  'text-halo-width': 6,
+  'text-halo-blur': 3,
+  'text-halo-color': 'hsla(0, 0%, 98%, 0.9)'
 }
 
 export const operator_text: ExpressionSpecification = step(['zoom'], get('name'), [
@@ -55,6 +60,9 @@ export type OIMSymbolOptions = {
   iconScale?: ExpressionSpecification | number // Icon scale at max icon zoom
   iconMinScale?: ExpressionSpecification | number // Icon scale at initial icon zoom
   iconMaxZoom?: number
+  iconAnchor?: DataDrivenPropertyValueSpecification<
+    'bottom' | 'center' | 'left' | 'right' | 'top' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+  >
 }
 
 /**
@@ -69,6 +77,7 @@ export function oimSymbol(options: OIMSymbolOptions): LayerSpecificationWithZInd
   const textSize = options.textSize || 12
   const textOffset = options.textOffset || 1.4
   const iconMaxZoom = options.iconMaxZoom || 21
+  const iconAnchor = options.iconAnchor || 'center'
   return {
     id: options.id,
     zorder: options.zorder,
@@ -98,6 +107,7 @@ export function oimSymbol(options: OIMSymbolOptions): LayerSpecificationWithZInd
           [iconMaxZoom, iconScale]
         ]
       ),
+      'icon-anchor': iconAnchor,
       'text-field': options.textField,
       'text-font': font,
       'text-size': interpolate(
@@ -107,7 +117,7 @@ export function oimSymbol(options: OIMSymbolOptions): LayerSpecificationWithZInd
           [18, textSize]
         ]
       ),
-      'text-variable-anchor': ['top', 'bottom'],
+      'text-variable-anchor': iconAnchor == 'center' ? ['top', 'bottom'] : ['center'],
       // Increase the textOffset as iconSize increases. Beyond iconMaxZoom, ease the textOffset to 0,
       // unless the feature is a node, in which case we'll still be showing the icon.
       'text-radial-offset': interpolate(

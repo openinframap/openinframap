@@ -2,7 +2,7 @@
 meta {
 	title: "Open Infrastructure Map";
 	description: "Render power lines with the Open Infrastructure Map colour scheme";
-	version: "0.0.1";
+	version: "0.0.4";
 	author: "russss";
 }
 
@@ -11,116 +11,238 @@ way["power"="portal"]{
 	width:2;
 	color:#FFFFFF;
 }
+
 way[power="portal"] node{
-        symbol-shape:triangle;
-        symbol-size:10;
-        symbol-fill-color:#EDEDED;
+	symbol-shape:triangle;
+	symbol-size:10;
+	symbol-fill-color:#EDEDED;
 }
 
+/* Power Lines */
 
-/* Power lines */
-way[power=line]{
-	text:cables;
-	font-size:14px;
-	text-halo-radius:2;
-}
-way[power=cable]{
+way[power=~/line|minor_line|cable/],
+ way[construction:power=~/line|minor_line|cable/]{
+	set power_line;
+	text: cables;
+	font-size: 16px;
+	text-halo-radius: 2;
+} 
+
+way[power=cable], way[construction:power=cable]{
 	dashes:2,2;
-	text:cables;
-	font-size:14px;
-	text-halo-radius:2;
 }
+
+way[construction:power=~/line|minor_line|cable/] {
+	casing-dashes:2,2;
+	casing-width:2;
+	casing-color:#FFF635;
+	casing-opacity:0.5;
+}
+
 way[power=line][line=busbar]{
 	casing-color:#FFD800;
 	casing-width:1;
 	width:3;
 }
+
 way[power=line][line=bay]{
 	casing-color:#A0A0A0;
 	casing-width:2;
 	width:3;
 }
 
-/* Voltages */
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),0))<10000]{
+/* Line Voltages */
+way.power_line[to_int(get(split(";",tag(voltage)),0))<10000]{
 	width:1;
 	color:#7A7A85;
 	text-halo-color:#7A7A85;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),0))>=10000][to_int(get(split(";",tag(voltage)),0))<25000]{
+way.power_line[to_int(get(split(";",tag(voltage)),0))>=10000][to_int(get(split(";",tag(voltage)),0))<25000]{
 	width:1;
 	color:#6E97B8;
 	text-halo-color:#6E97B8;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),0))>=25000][to_int(get(split(";",tag(voltage)),0))<52000]{
+way.power_line[to_int(get(split(";",tag(voltage)),0))>=25000][to_int(get(split(";",tag(voltage)),0))<52000]{
 	width:2;
 	color:#55B555;
 	text-halo-color:#55B555;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),0))>=52000][to_int(get(split(";",tag(voltage)),0))<132000]{
+way.power_line[to_int(get(split(";",tag(voltage)),0))>=52000][to_int(get(split(";",tag(voltage)),0))<132000]{
 	width:2;
 	color:#B59F10;
 	text-halo-color:#B59F10;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),0))>=132000][to_int(get(split(";",tag(voltage)),0))<220000]{
+way.power_line[to_int(get(split(";",tag(voltage)),0))>=132000][to_int(get(split(";",tag(voltage)),0))<220000]{
 	width:3;
 	color:#B55D00;
 	text-halo-color:#B55D00;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),0))>=220000][to_int(get(split(";",tag(voltage)),0))<310000]{
+way.power_line[to_int(get(split(";",tag(voltage)),0))>=220000][to_int(get(split(";",tag(voltage)),0))<310000]{
 	width:4;
 	color:#C73030;
 	text-halo-color:#C73030;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),0))>=310000][to_int(get(split(";",tag(voltage)),0))<550000]{
+way.power_line[to_int(get(split(";",tag(voltage)),0))>=310000][to_int(get(split(";",tag(voltage)),0))<550000]{
 	width:5;
 	color:#B54EB2;
 	text-halo-color:#B54EB2;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),0))>=550000]{
+way.power_line[to_int(get(split(";",tag(voltage)),0))>=550000]{
 	width:5;
 	color:#00C1CF;
 	text-halo-color:#00C1CF;
 }
 
-way[power=~/line|cable/][cables>3], way[power=~/line|cable/][circuits>1]{
+way.power_line[to_int(get(split(";",tag(frequency)),0))=0]{
+	color:#4E01B5;
+}
+
+way.power_line[to_float(get(split(";",tag(frequency)),0))>16][to_float(get(split(";",tag(frequency)),0))<17]{
+	color:#A8B596;
+}
+
+way.power_line[circuits>1]{
 	left-casing-dashes:2,14;
 	left-casing-width:5;
 }
-way[power=minor_line][cables>3], way[power=minor_line][circuits>1]{
-	left-casing-dashes:2,10;
-	left-casing-width:3;
+
+way.power_line[circuits>2]{
+	right-casing-dashes:2,14;
+	right-casing-width:5;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),1))<10000],
-way[power=~/line|minor_line|cable/][circuits>1][count(split(";",tag(voltage)))=1][voltage<10000]{
+
+/* Second circuit voltages */
+way.power_line[to_int(get(split(";",tag(voltage)),1))<10000],
+way.power_line[circuits>1][count(split(";",tag(voltage)))=1][voltage<10000]{
 	left-casing-color:#7A7A85;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),1))>=10000][to_int(get(split(";",tag(voltage)),1))<25000],
-way[power=~/line|minor_line|cable/][circuits>1][count(split(";",tag(voltage)))=1][voltage>=10000][voltage<25000]{
+way.power_line[to_int(get(split(";",tag(voltage)),1))>=10000][to_int(get(split(";",tag(voltage)),1))<25000],
+way.power_line[circuits>1][count(split(";",tag(voltage)))=1][voltage>=10000][voltage<25000]{
 	left-casing-color:#6E97B8;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),1))>=25000][to_int(get(split(";",tag(voltage)),1))<52000],
-way[power=~/line|minor_line|cable/][circuits>1][count(split(";",tag(voltage)))=1][voltage>=25000][voltage<52000]{
+way.power_line[to_int(get(split(";",tag(voltage)),1))>=25000][to_int(get(split(";",tag(voltage)),1))<52000],
+way.power_line[circuits>1][count(split(";",tag(voltage)))=1][voltage>=25000][voltage<52000]{
 	left-casing-color:#55B555;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),1))>=52000][to_int(get(split(";",tag(voltage)),1))<132000],
-way[power=~/line|minor_line|cable/][circuits>1][count(split(";",tag(voltage)))=1][voltage>=52000][voltage<132000]{
+way.power_line[to_int(get(split(";",tag(voltage)),1))>=52000][to_int(get(split(";",tag(voltage)),1))<132000],
+way.power_line[circuits>1][count(split(";",tag(voltage)))=1][voltage>=52000][voltage<132000]{
 	left-casing-color:#B59F10;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),1))>=132000][to_int(get(split(";",tag(voltage)),1))<220000],
-way[power=~/line|minor_line|cable/][circuits>1][count(split(";",tag(voltage)))=1][voltage>=132000][voltage<220000]{
+way.power_line[to_int(get(split(";",tag(voltage)),1))>=132000][to_int(get(split(";",tag(voltage)),1))<220000],
+way.power_line[circuits>1][count(split(";",tag(voltage)))=1][voltage>=132000][voltage<220000]{
 	left-casing-color:#B55D00;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),1))>=220000][to_int(get(split(";",tag(voltage)),1))<310000],
-way[power=~/line|minor_line|cable/][circuits>1][count(split(";",tag(voltage)))=1][voltage>=220000][voltage<310000]{
+way.power_line[to_int(get(split(";",tag(voltage)),1))>=220000][to_int(get(split(";",tag(voltage)),1))<310000],
+way.power_line[circuits>1][count(split(";",tag(voltage)))=1][voltage>=220000][voltage<310000]{
 	left-casing-color:#C73030;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),1))>=310000][to_int(get(split(";",tag(voltage)),1))<550000],
-way[power=~/line|minor_line|cable/][circuits>1][count(split(";",tag(voltage)))=1][voltage>=310000][voltage<550000]{
+way.power_line[to_int(get(split(";",tag(voltage)),1))>=310000][to_int(get(split(";",tag(voltage)),1))<550000],
+way.power_line[circuits>1][count(split(";",tag(voltage)))=1][voltage>=310000][voltage<550000]{
 	left-casing-color:#B54EB2;
 }
-way[power=~/line|minor_line|cable/][to_int(get(split(";",tag(voltage)),1))>=550000],
-way[power=~/line|minor_line|cable/][circuits>1][count(split(";",tag(voltage)))=1][voltage>=550000]{
+way.power_line[to_int(get(split(";",tag(voltage)),1))>=550000],
+way.power_line[circuits>1][count(split(";",tag(voltage)))=1][voltage>=550000]{
 	left-casing-color:#00C1CF;
 }
 
+way.power_line[to_int(get(split(";",tag(frequency)),1))=0],
+way.power_line[circuits>1][count(split(";",tag(frequency)))=1][frequency=0]{
+	left-casing-color:#4E01B5;
+}
+
+way.power_line[to_float(get(split(";",tag(frequency)),1))>16][to_float(get(split(";",tag(frequency)),1))<17],
+way.power_line[circuits>1][count(split(";",tag(frequency)))=1][frequency>16][frequency<17] {
+	left-casing-color:#A8B596;
+}
+
+
+/* Third circuit voltages */
+way.power_line[to_int(get(split(";",tag(voltage)),2))<10000],
+way.power_line[circuits>2][count(split(";",tag(voltage)))=1][voltage<10000]{
+	right-casing-color:#7A7A85;
+}
+way.power_line[to_int(get(split(";",tag(voltage)),2))>=10000][to_int(get(split(";",tag(voltage)),2))<25000],
+way.power_line[circuits>2][count(split(";",tag(voltage)))=1][voltage>=10000][voltage<25000]{
+	right-casing-color:#6E97B8;
+}
+way.power_line[to_int(get(split(";",tag(voltage)),2))>=25000][to_int(get(split(";",tag(voltage)),2))<52000],
+way.power_line[circuits>2][count(split(";",tag(voltage)))=1][voltage>=25000][voltage<52000]{
+	right-casing-color:#55B555;
+}
+way.power_line[to_int(get(split(";",tag(voltage)),2))>=52000][to_int(get(split(";",tag(voltage)),2))<132000],
+way.power_line[circuits>2][count(split(";",tag(voltage)))=1][voltage>=52000][voltage<132000]{
+	right-casing-color:#B59F10;
+}
+way.power_line[to_int(get(split(";",tag(voltage)),2))>=132000][to_int(get(split(";",tag(voltage)),2))<220000],
+way.power_line[circuits>2][count(split(";",tag(voltage)))=1][voltage>=132000][voltage<220000]{
+	right-casing-color:#B55D00;
+}
+way.power_line[to_int(get(split(";",tag(voltage)),2))>=220000][to_int(get(split(";",tag(voltage)),2))<310000],
+way.power_line[circuits>2][count(split(";",tag(voltage)))=1][voltage>=220000][voltage<310000]{
+	right-casing-color:#C73030;
+}
+way.power_line[to_int(get(split(";",tag(voltage)),2))>=310000][to_int(get(split(";",tag(voltage)),2))<550000],
+way.power_line[circuits>2][count(split(";",tag(voltage)))=1][voltage>=310000][voltage<550000]{
+	right-casing-color:#B54EB2;
+}
+way.power_line[to_int(get(split(";",tag(voltage)),2))>=550000],
+way.power_line[circuits>2][count(split(";",tag(voltage)))=1][voltage>=550000]{
+	right-casing-color:#00C1CF;
+}
+
+way.power_line[to_int(get(split(";",tag(frequency)),2))=0],
+way.power_line[circuits>2][count(split(";",tag(frequency)))=1][frequency=0]{
+	right-casing-color:#4E01B5;
+}
+
+way.power_line[to_float(get(split(";",tag(frequency)),2))>16][to_float(get(split(";",tag(frequency)),2))<17],
+way.power_line[circuits>2][count(split(";",tag(frequency)))=1][frequency>16][frequency<17] {
+	right-casing-color:#A8B596;
+}
+
+
+/* Substation colours */
+area[power=substation]{
+	fill-opacity:0.6;
+	fill-extent:10;
+}
+
+area[power=substation][to_int(get(split(";",tag(voltage)),0))<10000]{
+	fill-color:#7A7A85;
+}
+
+area[power=substation][to_int(get(split(";",tag(voltage)),0))>=10000][to_int(get(split(";",tag(voltage)),0))<25000]{
+	fill-color:#6E97B8;
+}
+
+area[power=substation][to_int(get(split(";",tag(voltage)),0))>=25000][to_int(get(split(";",tag(voltage)),0))<52000]{
+	fill-color:#55B555;
+}
+
+area[power=substation][to_int(get(split(";",tag(voltage)),0))>=52000][to_int(get(split(";",tag(voltage)),0))<132000]{
+	fill-color:#B59F10;
+}
+
+area[power=substation][to_int(get(split(";",tag(voltage)),0))>=132000][to_int(get(split(";",tag(voltage)),0))<220000]{
+	fill-color:#B55D00;
+}
+
+area[power=substation][to_int(get(split(";",tag(voltage)),0))>=220000][to_int(get(split(";",tag(voltage)),0))<310000]{
+	fill-color:#C73030;
+}
+
+area[power=substation][to_int(get(split(";",tag(voltage)),0))>=310000][to_int(get(split(";",tag(voltage)),0))<550000]{
+	fill-color:#B54EB2;
+}
+
+area[power=substation][to_int(get(split(";",tag(voltage)),0))>=550000]{
+	fill-color:#00C1CF;
+}
+
+area[power=substation][to_int(get(split(";",tag(frequency)),0))=0]{
+	fill-color:#4E01B5;
+}
+
+area[power=substation][to_float(get(split(";",tag(frequency)),0))>16][to_float(get(split(";",tag(frequency)),0))<17]{
+	fill-color:#A8B596;
+}
