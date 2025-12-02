@@ -167,7 +167,8 @@
             "wind": "Elektrownia wiatrowa",
             "biomass": "Biomasa",
             "waste": "Odpadki",
-            "battery": "Bateria"
+            "battery": "Bateria",
+            "unknown": "Inne/Nieznane"
         },
         "substation-type": {
             "transmission": "Przesyłowa",
