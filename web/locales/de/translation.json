@@ -134,7 +134,8 @@
             "biomass": "Biomasse",
             "waste": "Abfall",
             "battery": "Batterie",
-            "gas": "Gas"
+            "gas": "Gas",
+            "unknown": "Sonstiges/Unbekannt"
         },
         "substation-type": {
             "converter": "Gleichrichter",
