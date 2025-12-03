@@ -154,7 +154,8 @@
             "gas": "天然氣",
             "wind": "風能",
             "biomass": "生物質能",
-            "battery": "電池"
+            "battery": "電池",
+            "unknown": "其他/未知"
         },
         "substation-type": {
             "converter": "直流轉換",
