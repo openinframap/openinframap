@@ -74,8 +74,7 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
--- Convert a text integer value into an integer
--- Trailing text is discarded. Leading text, or any other invalid value, results in a NULL.
+-- Convert a text integer value into an integer. 
 CREATE OR REPLACE FUNCTION convert_integer(value TEXT) RETURNS INTEGER
 IMMUTABLE
 PARALLEL SAFE
@@ -84,7 +83,7 @@ AS $$
 DECLARE
   parts TEXT[];
 BEGIN
-    parts := regexp_matches(value, '^([0-9]+)', '');
+    parts := regexp_matches(value, '^([0-9]+)$', '');
     RETURN parts[1];
 END
 $$ LANGUAGE plpgsql;
