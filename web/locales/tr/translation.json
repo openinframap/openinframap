@@ -1,1 +1,14 @@
-{}
+{
+    "nav": {
+        "about": "hakkında",
+        "stats": "istatistikler"
+    },
+    "edit": {
+        "edit": "Düzenle"
+    },
+    "names": {
+        "power": {
+            "substation": "Trafo merkezi"
+        }
+    }
+}
