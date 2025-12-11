@@ -75,6 +75,7 @@ END
 $$ LANGUAGE plpgsql;
 
 -- Convert a text integer value into an integer. 
+-- Only supports 9-decimal-digit positive integers
 CREATE OR REPLACE FUNCTION convert_integer(value TEXT) RETURNS INTEGER
 IMMUTABLE
 PARALLEL SAFE
@@ -83,7 +84,7 @@ AS $$
 DECLARE
   parts TEXT[];
 BEGIN
-    parts := regexp_matches(value, '^([0-9]+)$', '');
+    parts := regexp_matches(value, '^([0-9]{1,9})$', '');
     RETURN parts[1];
 END
 $$ LANGUAGE plpgsql;
