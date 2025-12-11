@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: config
+Version: 0.5.1
+Summary: A hierarchical, easy-to-use, powerful configuration module for Python
+Home-page: http://docs.red-dove.com/cfg/python.html
+Author: Vinay Sajip
+Author-email: vinay_sajip@red-dove.com
+Maintainer: Vinay Sajip
+Maintainer-email: vinay_sajip@red-dove.com
+License: Copyright (C) 2004-2020 by Vinay Sajip. All Rights Reserved. See LICENSE for license.
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Software Development
+
+This module allows a hierarchical configuration scheme with support for mappings and sequences, cross-references between one part of the configuration and another, the ability to flexibly access real Python objects without full-blown eval(), an include facility, simple expression evaluation and the ability to change, save, cascade and merge configurations. Interfaces easily with environment variables and command-line options.
+
+

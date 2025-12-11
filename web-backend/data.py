@@ -83,6 +83,107 @@ def coalesce_result(result, value):
     return res[0] or value
 
 
+async def stats_power_line_full(union=None, territory_iso3=None, date=None) -> dict:
+    stats_date = date or await latest_stats_date()
+    values = {"time": stats_date}
+    country_clause = ""
+    join_clause = ""
+
+    if union:
+        country_clause = " AND country = :country"
+        values["country"] = union
+    elif territory_iso3:
+        join_clause = ", countries.country_eez AS eez"
+        country_clause = """
+            AND eez."union" = country
+            AND eez.iso_sov1 = :iso3
+            AND (eez.iso_ter1 IS NULL OR eez.iso_ter1 = eez.iso_sov1)
+        """
+        values["iso3"] = territory_iso3
+
+    def coalesce(res):
+        return coalesce_result(res, 0)
+
+    line_types = {
+        "AC": "line NOT IN ('hvdc', 'rail')",
+        "HVDC": "line = 'hvdc'",
+        "Rail": "line = 'rail'",
+    }
+    voltage_stats = {}
+
+    async with asyncio.TaskGroup() as tg:
+        tasks = {}
+        for ltype, ltype_filter in line_types.items():
+            voltage_stats[ltype] = {}
+            for low, high in windowed(chain(VOLTAGE_SCALE, [None]), 2):
+                low_kv = (low or 0) * 1000
+                query = f"""
+                    SELECT sum(length)
+                    FROM stats.power_line {join_clause}
+                    WHERE time = :time
+                      AND voltage >= :low
+                      AND {ltype_filter}
+                      {country_clause}
+                """
+                vals = values.copy()
+                vals["low"] = low_kv
+                if high is not None:
+                    high_kv = high * 1000
+                    query += " AND voltage < :high"
+                    vals["high"] = high_kv
+
+                tasks[(ltype, (low_kv, high))] = tg.create_task(database.fetch_one(query, vals))
+
+            tasks[(ltype, "unspecified")] = tg.create_task(
+                database.fetch_one(
+                    f"""
+                    SELECT sum(length)
+                    FROM stats.power_line {join_clause}
+                    WHERE time = :time
+                      AND {ltype_filter}
+                      AND voltage IS NULL
+                      {country_clause}
+                    """,
+                    values,
+                )
+            )
+
+            tasks[(ltype, "total")] = tg.create_task(
+                database.fetch_one(
+                    f"""
+                    SELECT sum(length)
+                    FROM stats.power_line {join_clause}
+                    WHERE time = :time
+                      AND {ltype_filter}
+                      {country_clause}
+                    """,
+                    values,
+                )
+            )
+
+    for (ltype, key), task in tasks.items():
+        voltage_stats[ltype][key] = coalesce(task)
+
+    frequency_stats = {}
+    for ltype, ltype_filter in line_types.items():
+        freq_query = f"""
+            SELECT frequency, sum(length) AS total_length
+            FROM stats.power_line {join_clause}
+            WHERE time = :time
+              AND {ltype_filter}
+              {country_clause}
+            GROUP BY frequency
+            ORDER BY frequency
+        """
+        freq_result = await database.fetch_all(freq_query, values)
+        frequency_stats[ltype] = {row["frequency"]: row["total_length"] for row in freq_result}
+
+    return {
+        "voltage": voltage_stats,
+        "frequency": frequency_stats,
+    }
+
+
 async def stats_power_line(union=None, territory_iso3=None, date=None) -> dict:
     stats_date = date or await latest_stats_date()
     values = {"time": stats_date}
