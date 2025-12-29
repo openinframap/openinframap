@@ -190,7 +190,8 @@
             "wind": "Vind",
             "biomass": "Biomassa",
             "waste": "Avfall",
-            "battery": "Batteri"
+            "battery": "Batteri",
+            "unknown": "Annat/Okänt"
         },
         "substation-type": {
             "transmission": "Växellåda",
