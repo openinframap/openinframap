@@ -15,7 +15,7 @@ dependencies = [
     "more-itertools",
     "async_lru",
     "pandas>=2.2.3",
-    "bokeh==3.7.0",
+    "bokeh==3.8.2",
     "pycountry>=24.6.1",
 ]
 
