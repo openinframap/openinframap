@@ -10,7 +10,7 @@ from config import database
 from itertools import chain
 from more_itertools import windowed
 
-VOLTAGE_SCALE = [0, 10, 25, 52, 132, 220, 330, 550]
+VOLTAGE_SCALE = [0, 10, 40, 100, 200, 300, 500, 600]
 
 logger = logging.getLogger(__name__)
 

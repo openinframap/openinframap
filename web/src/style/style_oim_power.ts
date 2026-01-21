@@ -33,12 +33,12 @@ import { DataDrivenPropertyValueSpecification, ExpressionSpecification } from 'm
 export const voltage_scale: [number | null, string][] = [
   [null, '#7A7A85'],
   [10, '#6E97B8'],
-  [25, '#55B555'],
-  [52, '#B59F10'],
-  [132, '#B55D00'],
-  [220, '#C73030'],
-  [310, '#B54EB2'],
-  [550, '#00C1CF']
+  [40, '#55B555'],
+  [100, '#B59F10'],
+  [200, '#B55D00'],
+  [300, '#C73030'],
+  [500, '#B54EB2'],
+  [600, '#00C1CF']
 ]
 
 export const special_voltages = {
