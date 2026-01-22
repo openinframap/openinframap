@@ -1,1 +1,10 @@
-{}
+{
+    "nav": {
+        "about": "om",
+        "stats": "statistikker"
+    },
+    "edit": {
+        "edit": "Rediger",
+        "browser": "Rediger i browser (iD)"
+    }
+}
