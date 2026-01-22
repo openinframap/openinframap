@@ -1,1 +1,108 @@
-{}
+{
+    "info": {
+        "generation-method": "Спосаб выпрацоўкі",
+        "substation-type": "Тып падстанцыі",
+        "reference": "Нумар",
+        "circuits": "Ланцугі",
+        "type": "Тып",
+        "website": "Вэб-сайт",
+        "view-openstreetmap": "Паглядзець на OpenStreetMap",
+        "substance": "Рэчыва",
+        "usage": "Выкарыстаньне",
+        "location": "Месцазнаходжаньне",
+        "design": "Форма",
+        "material": "Матэрыял",
+        "transformer-type": "Тып трансфарматару"
+    },
+    "units": {
+        "kV": "кВ",
+        "Hz": "Гц",
+        "MW": "МВ",
+        "below_10kv": "< 10 кВ",
+        "ge_kv": "≥ {{voltage}} кВ",
+        "kW": "кВт",
+        "V": "В"
+    },
+    "more_info": "Падрабязней",
+    "wikipedia": "Вікіпэдыя",
+    "wikidata": "Вікізьвесткі",
+    "key": {
+        "name": "Легенда",
+        "power-lines": "Лініі электраперадачы",
+        "power-plants": "Электрастанцыі",
+        "power-generators": "Электрагенэратары",
+        "telecoms": "Тэлекамунікацыі",
+        "gas": "Газ",
+        "petroleum": "Нафта",
+        "water": "Вада",
+        "traction": "Цягавая (< 50 Гц)"
+    },
+    "location": {
+        "underground": "Падземнае",
+        "underwater": "Падводнае",
+        "roof": "На даху",
+        "surface": "На паверхні",
+        "outdoor": "На адкрытым паветры",
+        "indoor": "У памяшканні"
+    },
+    "power": {
+        "source": {
+            "coal": "Вугальная",
+            "geothermal": "Геатэрмальная",
+            "hydro": "Гідраэлектрычная",
+            "nuclear": "Ядзерная",
+            "gas": "Газавая",
+            "solar": "Сонечная",
+            "wind": "Паветраныя",
+            "biomass": "Біямасавыя",
+            "waste": "Смеццяпальная",
+            "unknown": "Іншая/Невядомая"
+        },
+        "substation-type": {
+            "distribution": "Размеркавальная",
+            "traction": "Цягавая"
+        }
+    },
+    "other": "Іншая",
+    "warning": "Папярэджанне",
+    "layers": {
+        "background": "Фон",
+        "heatmaps": "Цеплавыя карты",
+        "infrastructure": "Інфраструктура",
+        "nighttime-lights": "Начныя агні",
+        "power": "Электраэнэргетыка",
+        "telecoms": "Сувязь",
+        "petroleum": "Нафтаправоды і газправоды",
+        "water": "Вадаправоды",
+        "borders": "Межы",
+        "labels": "Назвы",
+        "title": "Слаі",
+        "other-pipelines": "Іншыя трубаправоды"
+    },
+    "construction": "будуецца",
+    "disused": "закінуты",
+    "coordinates": "Каардынаты",
+    "search": {
+        "no-results": "Вынікаў не знойдзена"
+    },
+    "openstreetmap": "OpenStreetMap",
+    "nav": {
+        "about": "пра гэты сайт",
+        "stats": "статыстыка"
+    },
+    "edit": {
+        "edit": "Рэдагаваць",
+        "remote": "Рэдагаваць з дапамогай дыстанцыйнага кіравання (JOSM і г.д.)",
+        "browser": "Рэдагаваць у браўзэры (iD)"
+    },
+    "names": {
+        "power": {
+            "transformer": "Трансфарматар",
+            "tower": "Вежа",
+            "pole": "Слуп",
+            "generator": "Генэратар",
+            "wind-turbine": "Ветрагенэратар",
+            "substation": "Падстанцыя"
+        }
+    }
+}
