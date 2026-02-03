@@ -190,7 +190,8 @@
             "wind": "Gwynt",
             "biomass": "Biomas",
             "waste": "Gwastraff",
-            "battery": "Batri"
+            "battery": "Batri",
+            "unknown": "Arall/Anhysbys"
         },
         "substation-type": {
             "transmission": "Trosglwyddiad",
