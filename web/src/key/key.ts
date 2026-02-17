@@ -148,7 +148,7 @@ class KeyControl implements IControl {
     rows = rows.map((row) => [row[0], svgLine(row[1], line_thickness)])
 
     rows.push([t('location.underground', 'Underground'), svgLine('#7A7A85', line_thickness, '3 2')])
-    rows.push([t('names.power.line-reference', 'Line reference'), await this.sprite('power_line_ref')])
+    rows.push([t('names.power.line-reference', 'Line reference'), await this.sprite('line_ref')])
 
     const table = list('table', Tr)
     table.update(rows)

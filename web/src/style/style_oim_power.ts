@@ -1054,7 +1054,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       'source-layer': 'power_line',
       minzoom: 7,
       layout: {
-        'icon-image': 'power_line_ref',
+        'icon-image': 'line_ref',
         'text-field': '{ref}',
         'text-font': font,
         'symbol-placement': 'line-center',

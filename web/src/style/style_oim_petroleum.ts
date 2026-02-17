@@ -2,7 +2,7 @@ import { t } from 'i18next'
 import { ColorSpecification, ExpressionSpecification } from 'maplibre-gl'
 import { text_paint, font, get_local_name, substance } from './common.js'
 import { LayerSpecificationWithZIndex } from './types.ts'
-import { interpolate, match, get, has, concat, if_, zoom, any, all, case_ } from './stylehelpers.ts'
+import { interpolate, match, get, has, coalesce, concat, if_, zoom, any, all, case_ } from './stylehelpers.ts'
 
 const colour_gas_transmission_large: ColorSpecification = '#8A3976'
 const colour_gas_transmission_medium: ColorSpecification = '#E65757'
@@ -89,6 +89,12 @@ function pipeline_label(): ExpressionSpecification {
     )
   )
 }
+
+const pipeline_ref_visible_p: ExpressionSpecification = any(all(transmission_p, ['>', zoom, 7]), [
+  '>',
+  zoom,
+  11
+])
 
 export default function layers(): LayerSpecificationWithZIndex[] {
   return [
@@ -206,6 +212,27 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         'text-size': 10
       },
       paint: text_paint
+    },
+    {
+      zorder: 503,
+      id: 'petroleum_pipeline_ref',
+      type: 'symbol',
+      source: 'petroleum',
+      'source-layer': 'petroleum_pipeline',
+      minzoom: 7,
+      filter: all(
+        pipeline_ref_visible_p,
+        ['!=', coalesce(get('ref'), ''), ''],
+        ['<', ['length', get('ref')], 5]
+      ),
+      layout: {
+        'icon-image': 'line_ref',
+        'text-field': '{ref}',
+        'text-font': font,
+        'symbol-placement': 'line-center',
+        'text-size': 10,
+        'text-max-angle': 10
+      }
     }
   ]
 }
