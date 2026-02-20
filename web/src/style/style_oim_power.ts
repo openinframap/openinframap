@@ -976,11 +976,14 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       minZoom: 11,
       source: 'power',
       sourceLayer: 'power_generator',
-      filter: all(match(get('source'), [[['wind', 'solar'], false]], true), has('output')),
+      filter: all(match(get('source'), [[['wind', 'solar'], false]], true)),
       textField: name_output_label(11, 14),
       iconImage: 'power_generator',
       textMinZoom: 13,
-      iconScale: 1,
+      iconScale: interpolate(coalesce(get('output'), 1), [
+        [1, 0.4],
+        [100, 1]
+      ]),
       iconMinScale: 0.1
     }),
     {
