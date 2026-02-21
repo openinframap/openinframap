@@ -12,6 +12,11 @@ await i18next.use(LanguageDetector).init({
     'en-GB': ['en'],
     'zh-Hant': ['zh-Hans', 'en'],
     'zh-Hans': ['zh-Hant', 'en'],
+    'zh-TW': ['zh-Hant', 'en'],
+    'zh-HK': ['zh-Hant', 'en'],
+    'zh-MO': ['zh-Hant', 'en'],
+    'zh-CN': ['zh-Hans', 'en'],
+    'zh-SG': ['zh-Hans', 'en'],
     default: ['en']
   },
   supportedLngs: [
