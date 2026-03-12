@@ -22,7 +22,11 @@
             "generator-solar": "Zonnegenerator",
             "substation": "Onderstation",
             "hvdc": "HVDC",
-            "tower-pylon": "Hoogspanningsmast"
+            "tower-pylon": "Hoogspanningsmast",
+            "converter": "Converter",
+            "tower-transition": "Omschakelingsmast",
+            "pole-transition": "Wisselmast",
+            "transformer-3": "Omschakelaar (3-windig)"
         },
         "telecoms": {
             "communication-line": "Telecomlijn",
