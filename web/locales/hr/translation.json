@@ -1,1 +1,124 @@
-{}
+{
+    "nav": {
+        "about": "o nama",
+        "stats": "statistika"
+    },
+    "edit": {
+        "edit": "Uredi",
+        "remote": "Uredi pomoću Remote controll (JOSM, itd..)",
+        "browser": "Uredi u pregledniku (iD)",
+        "error": "Ne mogu učitati udaljeni editor - provjeri da je upaljen i da ima upaljeni opciju Remote Control.\nGreška: "
+    },
+    "names": {
+        "power": {
+            "transformer": "Transformator",
+            "tower": "Stup dalekovoda",
+            "pole": "Stup malog dalekovoda",
+            "generator": "Generator",
+            "generator-solar": "Solarni generator",
+            "wind-turbine": "Vjetroturbina",
+            "substation": "Trafostanica",
+            "switch": "Sklopka",
+            "compensator": "Kompenzator",
+            "converter": "DC pretvaračka trafostanica",
+            "cable": "Energetski kabel",
+            "line": "Dalekovod",
+            "solar-panel": "Solarni panel",
+            "plant": "Elektrana",
+            "hvdc": "HVDC",
+            "line-reference": "Oznaka voda",
+            "solar-panel-node": "Solarni panel (čvor)",
+            "other-generator": "Drugi generator",
+            "tower-pylon": "Stup",
+            "tower-transition": "Prijelazni stup",
+            "pole-transition": "Prijelazni stup manjeg dalekovoda",
+            "transformer-3": "Transformator (3 zavojnice)",
+            "switch-disconnector": "Rastavljač",
+            "switch-breaker": "Prekidač",
+            "switch-other": "Druga sklopka",
+            "reactor-series": "Serijski vezana prigušnica",
+            "reactor-shunt": "Paralelno vezana prigušnica",
+            "capacitor-series": "Serijski vezani kondenzator",
+            "capacitor-shunt": "Paralelno vezani kondenzator",
+            "statcom": "Statički VAR kompenzator",
+            "synchronous-condenser": "Sinkroni kompenzator",
+            "filter": "Filter",
+            "compensator-other": "Drugi kompenzator",
+            "current-transformer": "Strujni mjerni transformator",
+            "potential-transformer": "Naponski mjerni transformator"
+        },
+        "telecoms": {
+            "communication-line": "Telekomunikacijski vod",
+            "data-center": "Telekomunikacijska građevina",
+            "exchange": "Telefonska centrala",
+            "cabinet": "Telekomunikacijski ormarić"
+        },
+        "pipeline": "Cjevovod",
+        "petroleum": {
+            "well": "Naftna bušotina",
+            "facility": "Objekt naftne infrastrukture"
+        },
+        "gas": {
+            "pipeline": {
+                "transmission": "Prijenosni",
+                "distribution": "Distribucijski",
+                "pressure": {
+                    "high": "Visokotlačni",
+                    "intermediate": "Srednjetlačni",
+                    "low": "Niskotlačni"
+                }
+            }
+        },
+        "water": {
+            "pipeline": "Vodovod",
+            "sewage-treatment-plant": "Postrojenje za pročišćavanje otpadnih voda",
+            "treatment-plant": "Postrojenje za pročišćavanje vode",
+            "pumping-station": "Pumpna stanica",
+            "well": "Vodna bušotina",
+            "reservoir": "Spremnik vode",
+            "water-pumping-station": "Crpna stanica za vodu",
+            "sewage-pumping-station": "Crpna stanica za otpadne vode"
+        },
+        "cable": "Kabel",
+        "telecom": {
+            "tower-mast": "Toranj",
+            "datacenter": "Podatkovni centar"
+        },
+        "cabinet": "Ormarić",
+        "substance": {
+            "oil": "Nafta",
+            "gas": "Plin",
+            "petroleum-intermediate": "Naftni međuprodukt",
+            "fuel": "Gorivo",
+            "hydrogen": "Vodik",
+            "nitrogen": "Dušik",
+            "oxygen": "Kisik",
+            "beer": "Pivo",
+            "co2": "CO<sub>2</sub>",
+            "fresh-water": "Slatka voda",
+            "hot-water": "Vrela voda",
+            "steam": "Para",
+            "wastewater": "Otpadna voda",
+            "rainwater": "Kišnica"
+        },
+        "method": {
+            "fission": "Fizija",
+            "fusion": "Fuzija",
+            "wind-turbine": "Vjetroturbina",
+            "water-storage": "Akumulacijska",
+            "water-pumped-storage": "Reverzibilna",
+            "water-run-of-river": "Protočna"
+        }
+    },
+    "layers": {
+        "overlays": "Dodatni slojevi",
+        "infrastructure": "Infrastruktura",
+        "validation": "Validacija",
+        "nighttime-lights": "Noćna svjetla",
+        "power": "Električna energija",
+        "solar-generation": "Solarna proizvodnja",
+        "telecoms": "Telekomunikacije",
+        "petroleum": "Nafta i prirodni plin",
+        "water": "Voda"
+    }
+}
