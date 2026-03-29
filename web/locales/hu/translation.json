@@ -1,1 +1,149 @@
-{}
+{
+    "nav": {
+        "about": "a projektről",
+        "stats": "statisztika",
+        "exports": "export"
+    },
+    "edit": {
+        "edit": "Szerkesztés",
+        "remote": "Szerkesztés távoli irányítással (JSOM, stb.)",
+        "browser": "Szerkesztés böngészőben (iD)",
+        "error": "Nem sikerült a távoli szerkesztő betöltése - győződjönb meg róla, hogy fut és a távoli irányítás engedélyezve van.\nHiba: "
+    },
+    "names": {
+        "power": {
+            "transformer": "Transzformátor",
+            "tower": "Távvezeték-oszlop",
+            "pole": "Villanyoszlop",
+            "generator": "Generátor",
+            "generator-solar": "Napelemes generátor",
+            "wind-turbine": "Szélturbina",
+            "substation": "Alállomás",
+            "switch": "Kapcsoló",
+            "compensator": "Kompenzátor",
+            "converter": "DC-átalakító alállomás",
+            "cable": "Áramkábel",
+            "line": "Távvezeték",
+            "solar-panel": "Napelem",
+            "plant": "Erőmű",
+            "hvdc": "HVDC",
+            "line-reference": "Vonalreferencia",
+            "other-generator": "Egyéb generátor",
+            "tower-pylon": "Torony/Oszlop",
+            "filter": "Szűrő",
+            "switch-other": "Egyéb kapcsoló",
+            "statcom": "Statikus var-kompenzátor"
+        },
+        "method": {
+            "fission": "Maghasadás",
+            "fusion": "Magfúzió",
+            "wind-turbine": "Szélturbina",
+            "water-storage": "Vízraktározó",
+            "solar-photovoltaic": "Fotovoltaikus",
+            "solar-thermal": "Termális"
+        },
+        "substance": {
+            "fuel": "Üzemanyag",
+            "hydrogen": "Hidrogén",
+            "nitrogen": "Nitrogén",
+            "oxygen": "Oxigén",
+            "beer": "Sör",
+            "co2": "CO<sub>2</sub>",
+            "steam": "Gőz",
+            "wastewater": "Szennyvíz",
+            "rainwater": "Esővíz",
+            "oil": "Kőolaj",
+            "gas": "Földgáz"
+        },
+        "cable": "Kábel",
+        "telecom": {
+            "datacenter": "Adatközpont"
+        },
+        "gas": {
+            "pipeline": {
+                "pressure": {
+                    "low": "Alacsony Nyomás",
+                    "high": "Magas Nyomás",
+                    "intermediate": "Közepes Nyomás"
+                }
+            }
+        },
+        "water": {
+            "pipeline": "Vízvezeték",
+            "sewage-treatment-plant": "Szennyvíztisztító telep",
+            "treatment-plant": "Víztisztító telep",
+            "reservoir": "Víztározó",
+            "well": "Kút"
+        },
+        "pipeline": "Csővezeték",
+        "telecoms": {
+            "communication-line": "Távközlési kábel"
+        },
+        "place": "Hely"
+    },
+    "units": {
+        "Hz": "Hz",
+        "MW": "MW",
+        "kV": "kV",
+        "DC": "DC",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V"
+    },
+    "info": {
+        "website": "Weboldal",
+        "view-openstreetmap": "Megtekintés OpenStreetMap-en",
+        "source": "Forrás",
+        "location": "Helyszín",
+        "design": "Kialakítás",
+        "start-date": "Kezdő dátum",
+        "generation-method": "Áramtermelési módszer",
+        "substation-type": "Alállomás típusa",
+        "operator": "Üzemeltető",
+        "output": "Teljesítmény",
+        "usage": "Használat",
+        "name": "Név",
+        "type": "Típus",
+        "reference": "Hivatkozás",
+        "material": "Összetétel",
+        "line-attachment": "Áramvezeték-csatlakozó"
+    },
+    "more_info": "Bővebben",
+    "wikipedia": "Wikipédia",
+    "wikimedia-commons": "Wikimédia Commons",
+    "wikidata": "Wikidata",
+    "key": {
+        "name": "Jelmagyarázat",
+        "water": "Víz",
+        "power-lines": "Áramvezeték"
+    },
+    "location": {
+        "roof": "Tető",
+        "surface": "Felszín"
+    },
+    "power": {
+        "source": {
+            "battery": "Akkumulátor"
+        },
+        "substation-type": {
+            "converter": "DC-Átalakító"
+        }
+    },
+    "other": "Egyéb",
+    "warning": "Figyelmeztetés",
+    "layers": {
+        "background": "Háttértérkép",
+        "heatmaps": "Hőtérképek",
+        "infrastructure": "Infrastruktúra",
+        "borders": "Határok",
+        "title": "Rétegek",
+        "other-pipelines": "Egyéb Csővezetékek"
+    },
+    "coordinates": "Koordináták",
+    "search": {
+        "clear": "Keresés törlése",
+        "no-results": "Nincs találat"
+    },
+    "openstreetmap": "OpenStreetMap"
+}
