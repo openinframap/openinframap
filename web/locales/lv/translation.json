@@ -1,1 +1,234 @@
-{}
+{
+    "nav": {
+        "about": "par projektu",
+        "stats": "statistika",
+        "exports": "datu izvade"
+    },
+    "info": {
+        "website": "Tīmekļvietne",
+        "type": "Tips",
+        "reference": "Atsauce",
+        "transformer-type": "Transformātora tips",
+        "material": "Materiāls",
+        "view-openstreetmap": "Skatīt OpenStreetMap",
+        "circuits": "Elektriskās ķēdes",
+        "name": "Nosaukums",
+        "generation-method": "Ģenerācijas metode",
+        "substation-type": "Apakšstacijas tips",
+        "start-date": "Sākuma datums",
+        "source": "Avots",
+        "output": "Jauda",
+        "operator": "Operators",
+        "substance": "Viela",
+        "location": "Atrašanās vieta",
+        "design": "Projekts",
+        "usage": "Pielietojums",
+        "line-attachment": "Līnijas pieslēgums",
+        "line-management": "Līnijas topoloģija"
+    },
+    "names": {
+        "place": "Vieta",
+        "method": {
+            "gasification": "Gazifikācija",
+            "combustion": "Degšana",
+            "solar-photovoltaic": "Fotoelektriskais",
+            "solar-thermal": "Siltumenerģijas",
+            "tidal-stream": "Plūsma",
+            "fission": "Sašķelšana",
+            "fusion": "Kušana",
+            "wind-turbine": "Vēja turbīna",
+            "water-storage": "Hidroakumulācija",
+            "water-pumped-storage": "Hidroakumulācija",
+            "water-run-of-river": "Caurteces",
+            "tidal-barrage": "Dambis",
+            "anaerobic-digestion": "Anaerobā raudzēšana"
+        },
+        "substance": {
+            "hot-water": "Karsts ūdens",
+            "fresh-water": "Saldūdens",
+            "steam": "Tvaiks",
+            "wastewater": "Notekūdeņi",
+            "rainwater": "Lietusūdens",
+            "co2": "CO<sub>2</sub>",
+            "beer": "Alus",
+            "oxygen": "Skābeklis",
+            "nitrogen": "Slāpeklis",
+            "hydrogen": "Ūdeņradis",
+            "fuel": "Degviela",
+            "petroleum-intermediate": "Naftas starpprodukts",
+            "gas": "Gāze",
+            "oil": "Nafta"
+        },
+        "telecom": {
+            "datacenter": "Datu centrs",
+            "tower-mast": "Tornis/Masts"
+        },
+        "cable": "Kabelis",
+        "water": {
+            "sewage-pumping-station": "Notekūdeņu sūkņu stacija",
+            "water-pumping-station": "Ūdens sūkņu stacija",
+            "reservoir": "Ūdenskrātuve",
+            "well": "Ūdens aka",
+            "pumping-station": "Sūkņu stacija",
+            "treatment-plant": "Ūdens attīrīšanas stacija",
+            "sewage-treatment-plant": "Notekūdeņu attīrīšanas stacija",
+            "pipeline": "Ūdensvads"
+        },
+        "power": {
+            "reactor-shunt": "Šuntējošais reaktors",
+            "reactor-series": "Virknes reaktors",
+            "switch-breaker": "Strāvas slēdzis",
+            "compensator": "Kompensators",
+            "converter": "Pārveidotājapakšstacija",
+            "solar-panel": "Saules panelis",
+            "plant": "Spēkstacija",
+            "line": "Elektroapgādes līnija",
+            "cable": "Spēka kabelis",
+            "hvdc": "HVDC",
+            "wind-turbine": "Vēja turbīna",
+            "substation": "Apakšstacija",
+            "generator": "Ģenerātors",
+            "transformer": "Transformators",
+            "generator-solar": "Saules enerģijas ģenerātors",
+            "solar-panel-node": "Saules panelis (mezgls)",
+            "other-generator": "Cits ģenerātors",
+            "filter": "Filtrs",
+            "current-transformer": "Strāvmainis",
+            "pole": "Elektrības stabs",
+            "tower": "Elektrības tornis",
+            "tower-pylon": "Tornis/torņbalsts",
+            "transformer-3": "Tristinumu transformators",
+            "switch-disconnector": "Atdalītājs",
+            "switch-other": "Cits slēdzis",
+            "statcom": "Statiskais sinhronais kompensators",
+            "synchronous-condenser": "Sinhronais kompensators",
+            "compensator-other": "Cits kompensators",
+            "potential-transformer": "Sprieguma transformators",
+            "switch": "Slēdzis",
+            "line-reference": "Līnijas atsauce",
+            "tower-transition": "Pārejas torņbalsts",
+            "pole-transition": "Pārejas balsts",
+            "capacitor-series": "Sērijas kondensators",
+            "capacitor-shunt": "Paralēlais kondensators"
+        },
+        "telecoms": {
+            "data-center": "Telekomunikāciju ēka",
+            "communication-line": "Telekomunikāciju līnija",
+            "exchange": "Telefonu centrāle",
+            "cabinet": "Telekomunikāciju kabinets"
+        },
+        "pipeline": "Cauruļvads",
+        "petroleum": {
+            "well": "Urbums",
+            "facility": "Naftas rūpnīca"
+        },
+        "gas": {
+            "pipeline": {
+                "transmission": "Pārvade",
+                "distribution": "Sadale",
+                "pressure": {
+                    "high": "Augsts spiediens",
+                    "low": "Zems spiediens",
+                    "intermediate": "Vidējs spiediens"
+                }
+            }
+        },
+        "cabinet": "Kabinets",
+        "other-pumping-station": "Cita sūkņu stacija"
+    },
+    "edit": {
+        "edit": "Rediģēt",
+        "error": "Neizdevās ielādēt attālināto redaktoru – pārliecinieties, ka tas darbojas un ka ir iespējota attālā pārvaldība.\nKļūda: ",
+        "browser": "Rediģēt pārlūkprogrammā (iD)”",
+        "remote": "Rediģēt, izmantojot attālo kontroli (JOSM utt.)"
+    },
+    "coordinates": "Koordinātas",
+    "power": {
+        "source": {
+            "biomass": "Biomasa",
+            "battery": "Akumulators / Baterija",
+            "coal": "Akmeņogles",
+            "geothermal": "Geotermālā",
+            "hydro": "Hidroelektriskā",
+            "nuclear": "Kodolenerģijas",
+            "oil-gas": "Naftas/Gāzes",
+            "gas": "Gāzes",
+            "solar": "Saules",
+            "wind": "Vēja",
+            "waste": "Atkritumu",
+            "unknown": "Cits/nezināms"
+        },
+        "substation-type": {
+            "transmission": "Pārvades",
+            "distribution": "Sadales",
+            "traction": "Vilces",
+            "converter": "Līdzstrāvas pārveidotājs"
+        }
+    },
+    "openstreetmap": "OpenStreetMap",
+    "other": "Cits",
+    "location": {
+        "roof": "Jumts",
+        "underground": "Pazemē",
+        "underwater": "Zemūdens",
+        "overhead": "Virszemes",
+        "surface": "Virs zemes",
+        "outdoor": "Ārpustelpu",
+        "indoor": "Iekštelpu"
+    },
+    "units": {
+        "kV": "kV",
+        "Hz": "Hz",
+        "MW": "MW",
+        "DC": "Līdzstrāva",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V"
+    },
+    "more_info": "Papildu informācija",
+    "wikipedia": "Wikipedia",
+    "wikimedia-commons": "Wikimedia Commons",
+    "wikidata": "Wikidata",
+    "key": {
+        "power-lines": "Elektropārvades līnijas",
+        "power-plants": "Elektrostacijas",
+        "power-generators": "Elektroģenerators",
+        "power-line-supports": "Elektroapgādes līnijas balsti",
+        "switchgear": "Slēgiekārtas",
+        "telecoms": "Telekomunikācijas",
+        "gas": "Gāze",
+        "petroleum": "Nafta",
+        "water": "Ūdens",
+        "traction": "Vilce (< 50 Hz)",
+        "name": "Simbolu skaidrojums"
+    },
+    "warning": "Brīdinājums",
+    "warnings": {
+        "webgl": "<p>Jūsu pārlūkprogramma var radīt veiktspējas vai funkcionalitātes problēmas ar Open Infrastructure Map.</p> <p>Lai šī vietne darbotos optimāli, nepieciešams <a href=\"http://webglreport.com\">WebGL</a> ar aparatūras paātrinājumu.</p> <p>Ja jūsu pārlūkprogramma atbalsta WebGL, iespējams, jums būs jāatspējo pārlūkprogrammas datu aizsardzība (fingerprinting protection) šai vietnei.</p>"
+    },
+    "layers": {
+        "background": "Fons",
+        "heatmaps": "Siltuma karte",
+        "overlays": "Pārklājumi",
+        "infrastructure": "Infrastruktūra",
+        "validation": "Validācija",
+        "nighttime-lights": "Nakts apgaismojums",
+        "power": "Jauda",
+        "solar-generation": "Saules enerģijas ražošana",
+        "telecoms": "Telekomunikācijas",
+        "petroleum": "Nafta un dabasgāze",
+        "water": "Ūdens",
+        "borders": "Robežas",
+        "labels": "Etiķetes",
+        "title": "Slāņi",
+        "other-pipelines": "Citi cauruļvadi",
+        "osmose-power": "Osmose (Jauda)"
+    },
+    "construction": "būvniecības stadijā",
+    "disused": "lietošanā neesošs",
+    "search": {
+        "clear": "Notīrīt meklēšanu",
+        "no-results": "Rezultāts nav atrasts"
+    }
+}
