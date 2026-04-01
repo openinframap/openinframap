@@ -5,23 +5,24 @@ import i18next, { t } from 'i18next'
  */
 export const layer_supported_languages: string[] = [
   'cy',
+  'de',
+  'el',
   'en',
   'es',
-  'el',
-  'de',
   'fr',
   'hi',
-  'ur',
-  'zh',
-  'ru',
-  'pt',
-  'ja',
-  'pl',
+  'id',
   'it',
+  'ja',
+  'lv',
   'nl',
+  'pl',
+  'pt',
+  'ru',
   'sv',
   'ta',
-  'id'
+  'ur',
+  'zh'
 ]
 
 /* List of name tags to check, in order */

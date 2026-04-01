@@ -68,6 +68,8 @@ field_sets:
       sql: tags -> 'name:ta'
     - name: name_id
       sql: tags -> 'name:id'
+    - name: name_lv
+      sql: tags -> 'name:lv'
     - name: operator
       sql: tags -> 'operator'
     - name: operator_wikidata
@@ -373,7 +375,7 @@ layers:
     where: type = 'switch' AND geometry && !BBOX!
 
   - name: power_heatmap_solar
-    map: 
+    map:
       - solar_heatmap
     geometry_type: Point
     id_field: mvt_id_field
@@ -683,7 +685,7 @@ layers:
       - name: substance
     from: osm_pumping_station
     where: geometry && !BBOX!
-  
+
   - name: water_cabinet
     map:
       - water
