@@ -1,6 +1,6 @@
 {
   "tilejson": "2.2.0",
-  "name": "openinframap",
+  "name": "openinframap [DEPRECATED]",
   "attribution": "<a href=\"https://www.openstreetmap.org/copyright\">© OpenStreetMap contributors</a>, <a href=\"https://openinframap.org/copyright\">OpenInfraMap</a>",
   "bounds": [-180, -85.0511, 180, 85.0511],
   "center": [0, 0, 0],
