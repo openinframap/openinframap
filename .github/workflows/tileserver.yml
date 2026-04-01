@@ -2,27 +2,27 @@ name: Build tile server containers
 
 on:
   push:
-    branches: 
+    branches:
       - main
     paths:
-      - 'tegola/**'
-      - '.github/workflows/tileserver.yml'
+      - "tegola/**"
+      - ".github/workflows/tileserver.yml"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push tileserver image
         id: docker_build
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v7
         with:
           context: ./tegola
           file: ./tegola/Dockerfile
@@ -32,7 +32,7 @@ jobs:
             ghcr.io/openinframap/tileserver:latest
       - name: Build and push tileserver-expiry image
         id: docker_build_expiry
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v7
         with:
           context: ./tegola
           file: ./tegola/Dockerfile.expiry
