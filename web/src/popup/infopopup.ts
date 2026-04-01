@@ -179,8 +179,8 @@ class InfoPopup {
   }
 
   osmLink(id: number, is_node: boolean) {
-    let url = ''
-    let value = ''
+    let url
+    let value
     if (id > 0) {
       if (is_node) {
         url = `https://openstreetmap.org/node/${id}`
@@ -238,7 +238,7 @@ class InfoPopup {
       prettyValue = t('units.DC')
     }
 
-    let prettyKey = key
+    let prettyKey
     if (key == 'url') {
       prettyKey = t('info.website')
       prettyValue = el('a', truncateUrl(value, 30), {
