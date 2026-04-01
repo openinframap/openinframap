@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'imposm/**'
-      - '.github/workflows/imposm.yml'
+      - "imposm/**"
+      - ".github/workflows/imposm.yml"
 
 jobs:
   login:
@@ -15,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -32,7 +32,7 @@ jobs:
             type=sha
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./imposm
           file: ./imposm/Dockerfile

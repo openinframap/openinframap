@@ -5,14 +5,14 @@ on:
     branches:
       - main
     paths:
-      - 'web/**'
-      - '.github/workflows/web.yml'
+      - "web/**"
+      - ".github/workflows/web.yml"
   pull_request:
     branches:
       - main
     paths:
-      - 'web/**'
-      - '.github/workflows/web.yml'
+      - "web/**"
+      - ".github/workflows/web.yml"
 
 jobs:
   test:
@@ -21,17 +21,17 @@ jobs:
       run:
         working-directory: ./web
     steps:
-        - uses: actions/checkout@v4
-        - name: Install dependencies
-          run: npm ci
-        - name: Run linter
-          run: npm run lint
-        - name: Start dev server
-          run: npm start &
-        - name: Wait for server to start
-          run: npx wait-on http://localhost:5173
-        - name: Run tests
-          run: npm run test
+      - uses: actions/checkout@v6
+      - name: Install dependencies
+        run: npm ci
+      - name: Run linter
+        run: npm run lint
+      - name: Start dev server
+        run: npm start &
+      - name: Wait for server to start
+        run: npx wait-on http://localhost:5173
+      - name: Run tests
+        run: npm run test
 
   build:
     needs: test
@@ -41,16 +41,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./web
           file: ./web/Dockerfile.prod
