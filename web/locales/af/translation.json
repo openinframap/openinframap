@@ -1,1 +1,19 @@
-{}
+{
+    "info": {
+        "generation-method": "Generasie metode",
+        "substation-type": "Substasie tipe",
+        "reference": "Verwysing",
+        "circuits": "Bane",
+        "type": "Tipe",
+        "name": "Naam",
+        "operator": "Operateur",
+        "output": "Krag",
+        "source": "Bron"
+    },
+    "units": {
+        "kV": "kV"
+    },
+    "names": {
+        "place": "Plek"
+    }
+}
