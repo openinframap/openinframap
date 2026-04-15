@@ -8,12 +8,153 @@
         "name": "Naam",
         "operator": "Operateur",
         "output": "Krag",
-        "source": "Bron"
+        "source": "Bron",
+        "website": "Webwerf",
+        "view-openstreetmap": "Besigting in OpenStreetMap",
+        "substance": "Materiaal",
+        "usage": "Gebruik",
+        "location": "Posisie",
+        "design": "Ontwerp",
+        "material": "Materiaal",
+        "line-attachment": "Lyn verbinding",
+        "line-management": "Lyn bestuur",
+        "transformer-type": "Transformator tipe"
     },
     "units": {
-        "kV": "kV"
+        "kV": "kV",
+        "Hz": "Hz",
+        "MW": "MW",
+        "DC": "DC",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V"
     },
     "names": {
-        "place": "Plek"
+        "place": "Plek",
+        "power": {
+            "transformer": "Transformator",
+            "tower": "Kraglyn toring",
+            "generator": "Generator",
+            "generator-solar": "Son generator",
+            "switch": "Skakelaar",
+            "pole": "Kraglyn paal",
+            "wind-turbine": "Wind turbine",
+            "substation": "Substasie",
+            "compensator": "Kompensator",
+            "converter": "DC omskakeling substasie",
+            "cable": "Krag kabel",
+            "line": "Kraglyn",
+            "solar-panel": "Sonpaneel",
+            "plant": "Kragstasie",
+            "hvdc": "HVDC",
+            "other-generator": "Ander generator",
+            "solar-panel-node": "Son paneel (node)",
+            "reactor-series": "Serie reaktor",
+            "reactor-shunt": "Parallel reaktor",
+            "capacitor-series": "Serie kapasitor",
+            "filter": "Filter",
+            "capacitor-shunt": "Parallel kapasitor",
+            "pole-transition": "Oorgangs paal",
+            "line-reference": "Lyn verwysing",
+            "tower-transition": "Oorgangs toring",
+            "switch-other": "Ander skakelaar",
+            "current-transformer": "Stroom transformator",
+            "potential-transformer": "Spanning transformator",
+            "transformer-3": "Transformator (3 winding)"
+        },
+        "pipeline": "Pyplyn",
+        "telecoms": {
+            "communication-line": "Telekommunikasie lyn",
+            "data-center": "Telekommunikasie gebou",
+            "cabinet": "Telekommunikasie kabinet"
+        },
+        "gas": {
+            "pipeline": {
+                "transmission": "Transmissie",
+                "distribution": "Distribusie",
+                "pressure": {
+                    "high": "Hoë Druk",
+                    "low": "Lae Druk",
+                    "intermediate": "Intermediëre Druk"
+                }
+            }
+        },
+        "petroleum": {
+            "facility": "Petroleum fasiliteit"
+        },
+        "water": {
+            "reservoir": "Water reservoir",
+            "water-pumping-station": "Water pomp stasie",
+            "pumping-station": "Pomp stasie",
+            "pipeline": "Water pyplyn",
+            "well": "Boorgat",
+            "sewage-pumping-station": "Riool pompstasie"
+        },
+        "cabinet": "Kabinet",
+        "cable": "Kabel",
+        "telecom": {
+            "tower-mast": "Toring/Mas",
+            "datacenter": "Data sentrum"
+        },
+        "substance": {
+            "oil": "Olie",
+            "gas": "Gas",
+            "fuel": "Brandstof",
+            "hydrogen": "Waterstof",
+            "nitrogen": "Stikstof",
+            "beer": "Bier",
+            "oxygen": "Suurstof",
+            "fresh-water": "Vars water",
+            "hot-water": "Warm water",
+            "steam": "Stoom",
+            "wastewater": "Afval water",
+            "rainwater": "Reën water"
+        },
+        "method": {
+            "fission": "Fissie",
+            "wind-turbine": "Wind turbine",
+            "water-storage": "Water stoor",
+            "water-pumped-storage": "Pomp stoor",
+            "water-run-of-river": "Vloei van rivier",
+            "tidal-stream": "Stroom",
+            "solar-thermal": "Termies",
+            "solar-photovoltaic": "Fotovoltaïs",
+            "combustion": "Verbranding",
+            "gasification": "Vergassing",
+            "anaerobic-digestion": "Anarobiese vertering"
+        },
+        "other-pumping-station": "Ander pompstasie"
+    },
+    "nav": {
+        "about": "inligting",
+        "stats": "statistiek",
+        "exports": "uitvoer"
+    },
+    "edit": {
+        "edit": "Verander"
+    },
+    "more_info": "Additionele inligting",
+    "wikipedia": "Wikipedia",
+    "wikimedia-commons": "Wikimedia Commons",
+    "wikidata": "Wikidata",
+    "key": {
+        "name": "Sleutel",
+        "power-lines": "Krag Lyne",
+        "power-plants": "Krag Stasies",
+        "power-generators": "Krag Opwekkers",
+        "power-line-supports": "Krag Lyn Strukture",
+        "switchgear": "Skakeltuig",
+        "telecoms": "Telekomminikasie",
+        "gas": "Gas",
+        "petroleum": "Petroleum",
+        "water": "Water",
+        "traction": "Spoorweg (<50 Hz)"
+    },
+    "location": {
+        "underground": "Ondergrond",
+        "underwater": "Onder water",
+        "overhead": "Oorhoofs",
+        "roof": "Dak"
     }
 }
