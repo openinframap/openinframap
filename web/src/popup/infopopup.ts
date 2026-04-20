@@ -429,6 +429,17 @@ class InfoPopup {
       )
     }
 
+    if (data['peeringdb_facility_id']) {
+      mount(
+        linksContainer,
+        el('a', el('div.ext_link.peeringdb_link'), {
+          href: `https://www.peeringdb.com/fac/${data['peeringdb_facility_id']}`,
+          target: '_blank',
+          title: 'PeeringDB'
+        })
+      )
+    }
+
     mount(
       linksContainer,
       el('a', el('div.ext_link.wikidata_link'), {

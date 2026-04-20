@@ -99,3 +99,8 @@ div.gem_link {
   background-size: 20px 20px;
   background-image: url('./assets/gem.png');
 }
+
+div.peeringdb_link {
+  background-size: 20px 20px;
+  background-image: url('./assets/peeringdb.png');
+}
