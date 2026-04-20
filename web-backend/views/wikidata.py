@@ -1,12 +1,14 @@
 """Endpoints to proxy WikiData requests for info popups on the map"""
 
 from typing import Any, Optional
+
 import httpx
 from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse, Response
-from data import get_wikidata, get_commons_thumbnail
-from util import cache_for
+
+from data import get_commons_thumbnail, get_wikidata
 from main import app
+from util import cache_for
 
 
 @app.route("/wikidata/{wikidata_id}")
@@ -25,24 +27,20 @@ async def wikidata(request) -> Response:
     )
 
 
-async def wikidata_json(
-    wikidata_id: str, http_client: httpx.AsyncClient
-) -> Optional[dict]:
+WIKIDATA_EXTERNAL = {"P13333": "gem_id", "P14320": "peeringdb_facility_id"}
+
+
+async def wikidata_json(wikidata_id: str, http_client: httpx.AsyncClient) -> Optional[dict]:
     data = await get_wikidata(wikidata_id, http_client)
     if data is None:
         return None
 
     response: dict[str, Any] = {"part_of": []}
-    response["labels"] = {
-        label["language"]: label["value"] for label in data["labels"].values()
-    }
+    response["labels"] = {label["language"]: label["value"] for label in data["labels"].values()}
 
     response["sitelinks"] = data["sitelinks"]
 
-    if (
-        "P18" in data["claims"]
-        and data["claims"]["P18"][0]["mainsnak"]["datatype"] == "commonsMedia"
-    ):
+    if "P18" in data["claims"] and data["claims"]["P18"][0]["mainsnak"]["datatype"] == "commonsMedia":
         response["image"] = data["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"]
         image_data = await get_commons_thumbnail(
             data["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"], http_client
@@ -50,16 +48,13 @@ async def wikidata_json(
         if image_data is not None:
             response["thumbnail"] = image_data["imageinfo"][0]["thumburl"]
 
-    if "P13333" in data["claims"]:
-        response["gem_id"] = data["claims"]["P13333"][0]["mainsnak"]["datavalue"][
-            "value"
-        ]
+    for wikidata_property, name in WIKIDATA_EXTERNAL.items():
+        if wikidata_property in data["claims"]:
+            response[name] = data["claims"][wikidata_property][0]["mainsnak"]["datavalue"]["value"]
 
     if "P361" in data["claims"]:
         for claim in data["claims"]["P361"]:
-            part_info = await wikidata_json(
-                claim["mainsnak"]["datavalue"]["value"]["id"], http_client
-            )
+            part_info = await wikidata_json(claim["mainsnak"]["datavalue"]["value"]["id"], http_client)
             if part_info is not None:
                 response["part_of"].append(part_info)
 
