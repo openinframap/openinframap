@@ -1,1 +1,23 @@
-{}
+{
+    "edit": {
+        "edit": "Ẓreg",
+        "browser": "Ẓreg deg yiminig (iD)"
+    },
+    "info": {
+        "name": "Isem",
+        "source": "Aɣbalu",
+        "type": "Askar",
+        "website": "Asmel Web"
+    },
+    "nav": {
+        "about": "ɣef",
+        "stats": "tidaddanin"
+    },
+    "wikipedia": "Wikipidya",
+    "search": {
+        "clear": "Sfeḍ anadi"
+    },
+    "units": {
+        "ge_kv": "≥ {{voltage}} kV"
+    }
+}
