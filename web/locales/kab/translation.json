@@ -19,5 +19,17 @@
     },
     "units": {
         "ge_kv": "≥ {{voltage}} kV"
-    }
+    },
+    "key": {
+        "water": "Aman"
+    },
+    "location": {
+        "underground": "Ddaw n tmurt"
+    },
+    "layers": {
+        "water": "Aman"
+    },
+    "openstreetmap": "OpenStreetMap",
+    "more_info": "Ugar n talɣut",
+    "wikimedia-commons": "Wikimedia Commons"
 }
