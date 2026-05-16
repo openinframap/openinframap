@@ -133,7 +133,8 @@
     "edit": {
         "edit": "編集",
         "browser": "ブラウザで編集 (ID)",
-        "remote": "リモートコントロールで編集 (JSOM等)"
+        "remote": "リモートコントロールで編集 (JSOM等)",
+        "error": "Otworzenie edytora zewnętrznego nie powiodło się - upewnij się, że jest otwary i ma załączoną kontrolę zewnętrzną.\nBłąd: "
     },
     "info": {
         "name": "名前",
