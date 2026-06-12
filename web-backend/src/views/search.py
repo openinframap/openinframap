@@ -4,9 +4,13 @@ import time
 from typing import Optional
 
 import pycountry
+from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncConnection
 from starlette.exceptions import HTTPException
-from starlette.responses import JSONResponse
+from starlette.responses import JSONResponse, Response
 from starlette.routing import Route
+
+from src import Request
 
 from ..util import cache_for
 
@@ -35,9 +39,12 @@ def country_alpha_2(alpha_3: str) -> str | None:
     return country.alpha_2
 
 
-async def search_substations(database, query: str, language: str, limit: Optional[int] = 10) -> list[dict]:
-    results = await database.fetch_all(
-        f"""
+async def search_substations(
+    database: AsyncConnection, query: str, language: str, limit: Optional[int] = 10
+) -> list[dict]:
+    results = await database.execute(
+        text(
+            f"""
         SELECT
             osm_id,
             name,
@@ -54,27 +61,31 @@ async def search_substations(database, query: str, language: str, limit: Optiona
             AND ST_Intersects(substation.geometry, country.geom)
         ORDER BY convert_voltage(voltage) DESC NULLS LAST, name ASC NULLS LAST
         LIMIT :limit
-        """,
+        """
+        ),
         {"query": f"{query}%", "limit": limit},
     )
     return [
         {
             "type": "substation",
-            "id": row["osm_id"],
-            "name": row["loc_name"] or row["name"],
-            "local_name": row["name"],
-            "operator": row["operator"],
-            "voltage": int(row["voltage"]) if row["voltage"] else None,
-            "country": country_alpha_2(row["country"]),
-            "geometry": json.loads(row["geometry"]),
+            "id": row._mapping["osm_id"],
+            "name": row._mapping["loc_name"] or row._mapping["name"],
+            "local_name": row._mapping["name"],
+            "operator": row._mapping["operator"],
+            "voltage": int(row._mapping["voltage"]) if row._mapping["voltage"] else None,
+            "country": country_alpha_2(row._mapping["country"]),
+            "geometry": json.loads(row._mapping["geometry"]),
         }
         for row in results
     ]
 
 
-async def search_plants(database, query: str, language: str, limit: Optional[int] = 10) -> list[dict]:
-    result = await database.fetch_all(
-        f"""
+async def search_plants(
+    database: AsyncConnection, query: str, language: str, limit: Optional[int] = 10
+) -> list[dict]:
+    result = await database.execute(
+        text(
+            f"""
         SELECT
             osm_id,
             name,
@@ -91,20 +102,21 @@ async def search_plants(database, query: str, language: str, limit: Optional[int
             AND ST_Intersects(power_plant.geometry, country.geom)
         ORDER BY output DESC NULLS LAST, name ASC NULLS LAST
         LIMIT :limit
-    """,
+    """
+        ),
         {"query": f"{query}%", "limit": limit},
     )
     return [
         {
             "type": "plant",
-            "id": row["osm_id"],
-            "name": row["loc_name"] or row["name"],
-            "local_name": row["name"],
-            "output": int(row["output"]) if row["output"] else None,
-            "source": row["source"],
-            "operator": row["operator"],
-            "country": country_alpha_2(row["country"]),
-            "geometry": json.loads(row["geometry"]),
+            "id": row._mapping["osm_id"],
+            "name": row._mapping["loc_name"] or row._mapping["name"],
+            "local_name": row._mapping["name"],
+            "output": int(row._mapping["output"]) if row._mapping["output"] else None,
+            "source": row._mapping["source"],
+            "operator": row._mapping["operator"],
+            "country": country_alpha_2(row._mapping["country"]),
+            "geometry": json.loads(row._mapping["geometry"]),
         }
         for row in result
     ]
@@ -121,16 +133,16 @@ def sort_key(row: dict) -> int:
 
 
 @cache_for(86400)
-async def search(request):
+async def search(request: Request) -> Response:
     database = request.state["db"]
     query = request.query_params.get("q")
     language = request.query_params.get("lang", "en")
     if language not in SEARCH_LANGUAGES:
         language = "en"
 
-    limit = request.query_params.get("limit", "10")
+    limit_str = request.query_params.get("limit", "10")
     try:
-        limit = min(int(limit), 100)
+        limit = min(int(limit_str), 100)
     except ValueError:
         raise HTTPException(400, "Invalid limit")
 
