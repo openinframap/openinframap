@@ -26,6 +26,8 @@ async def lifespan(app: Starlette) -> AsyncGenerator[State]:
         db_engine.begin() as db,
     ):
         yield {"http_client": client, "db": db}
+        if db.in_transaction():
+            await db.rollback()
 
 
 app = Starlette(

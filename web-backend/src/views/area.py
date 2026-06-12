@@ -6,7 +6,7 @@ from bokeh.core.types import ID
 from bokeh.embed import json_item
 from sqlalchemy import text
 from starlette.exceptions import HTTPException
-from starlette.responses import RedirectResponse
+from starlette.responses import RedirectResponse, Response
 from starlette.routing import Route
 
 from .. import Request, charts
@@ -115,12 +115,13 @@ async def plants_region(request: Request, region):
 
 @region_required
 @cache_for(hours=1)
-async def plants_construction_region(request, region):
+async def plants_construction_region(request: Request, region) -> Response:
     database = request.state["db"]
     gid = region["gid"]
 
-    plants = await database.fetch_all(
-        query="""SELECT osm_id, name, tags->'name:en' AS name_en, tags->'wikidata' AS wikidata,
+    plants = await database.execute(
+        text(
+            """SELECT osm_id, name, tags->'name:en' AS name_en, tags->'wikidata' AS wikidata,
                         tags->'plant:method' AS method, tags->'operator' AS operator,
                         tags->'start_date' AS start_date,
                         convert_power(output) AS output,
@@ -130,8 +131,9 @@ async def plants_construction_region(request, region):
                         (SELECT ST_Transform(geom, 3857) FROM countries.country_eez WHERE gid = :gid),
                         geometry)
                   AND tags -> 'construction:power' IS NOT NULL
-                  ORDER BY convert_power(output) DESC NULLS LAST, name ASC NULLS LAST """,
-        values={"gid": gid},
+                  ORDER BY convert_power(output) DESC NULLS LAST, name ASC NULLS LAST """
+        ),
+        {"gid": gid},
     )
 
     return render_template(
@@ -147,37 +149,41 @@ async def plants_construction_region(request, region):
 
 
 @cache_for(hours=1)
-async def stats_object(request):
+async def stats_object(request: Request) -> Response:
     database = request.state["db"]
     try:
         id = int(request.path_params["id"])
     except ValueError:
         raise HTTPException(400)
 
-    res = await database.fetch_one(
-        """SELECT country_eez."union" FROM power_plant, countries.country_eez WHERE
+    res = (
+        await database.execute(
+            text(
+                """SELECT country_eez."union" FROM power_plant, countries.country_eez WHERE
                 ST_Contains(ST_Transform(country_eez.geom, 3857), geometry)
                 AND country_eez."union" != 'Antarctica'
-                AND power_plant.osm_id = :id""",
-        values={"id": id},
-    )
+                AND power_plant.osm_id = :id"""
+            ),
+            {"id": id},
+        )
+    ).fetchone()
 
     if not res:
         raise HTTPException(404)
 
-    return RedirectResponse(request.url_for("plant_detail", region=res["union"], id=id))
+    return RedirectResponse(request.url_for("plant_detail", region=res._mapping["union"], id=id))
 
 
 @region_required
 @cache_for(hours=1)
-async def plant_detail(request, region):
+async def plant_detail(request: Request, region) -> Response:
     database = request.state["db"]
     try:
         plant_id = int(request.path_params["id"])
     except ValueError:
         raise HTTPException(404, "Invalid plant ID")
 
-    http_client = request.state.http_client
+    http_client = request.state["http_client"]
 
     plant = await get_plant(database, plant_id, region["gid"])
     if plant is None:
