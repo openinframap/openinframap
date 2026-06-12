@@ -1,19 +1,22 @@
-from config import database
 from bokeh.models import (
     ColumnDataSource,
+    HoverTool,
+    LinearAxis,
     NumeralTickFormatter,
     Range1d,
-    LinearAxis,
-    HoverTool,
 )
-from charts.util import result_to_df, figure
+from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncConnection
+
+from .util import figure, result_to_df
 
 
-async def grid_summary(country_name: str):
+async def grid_summary(database: AsyncConnection, country_name: str):
     """Generate a Bokeh plot of the length of power lines and the number of substations in a country."""
 
-    data = await database.fetch_all(
-        """
+    data = await database.execute(
+        text(
+            """
         select date_trunc('month', coalesce(pl.time, ss.time)) AS date,
                 avg(pl.line_length) AS line_length,
                 avg(ss.substation_count) AS substation_count
@@ -27,11 +30,12 @@ async def grid_summary(country_name: str):
                     ON ss.time = pl.time
                 group by date_trunc('month', coalesce(pl.time, ss.time))
                 order by date_trunc('month', coalesce(pl.time, ss.time))
-        """,
+        """
+        ),
         {"country_name": country_name},
     )
 
-    df = result_to_df(data)
+    df = result_to_df(data.fetchall())
     df["line_length"] /= 1000  # Convert to km
     cds = ColumnDataSource(df)
 
@@ -43,9 +47,7 @@ async def grid_summary(country_name: str):
     p.yaxis.axis_label = "Power Line Length (km)"
     p.yaxis.formatter = NumeralTickFormatter(format="0,0")
 
-    p.extra_y_ranges = {
-        "substation_count": Range1d(start=0, end=df["substation_count"].max() * 1.4)
-    }
+    p.extra_y_ranges = {"substation_count": Range1d(start=0, end=df["substation_count"].max() * 1.4)}
 
     ax2 = LinearAxis(y_range_name="substation_count", axis_label="Substation Count")
     p.add_layout(ax2, "right")
@@ -91,11 +93,12 @@ async def grid_summary(country_name: str):
     return p
 
 
-async def plant_summary(country_name: str):
+async def plant_summary(database: AsyncConnection, country_name: str):
     """Two-axis plot showing the number of power plants and their total output."""
 
-    data = await database.fetch_all(
-        """
+    data = await database.execute(
+        text(
+            """
         SELECT date_trunc('month', time) AS date,
                avg(count) AS plant_count,
                avg(output) / 1e9 AS total_output  -- Convert watts to gigawatts
@@ -107,11 +110,12 @@ async def plant_summary(country_name: str):
         ) subquery
         GROUP BY date_trunc('month', time)
         ORDER BY date_trunc('month', time)
-        """,
+        """
+        ),
         {"country_name": country_name},
     )
 
-    df = result_to_df(data)
+    df = result_to_df(data.fetchall())
     cds = ColumnDataSource(df)
 
     p = figure(
@@ -122,9 +126,7 @@ async def plant_summary(country_name: str):
     p.yaxis.axis_label = "Plant Count"
     p.yaxis.formatter = NumeralTickFormatter(format="0,0")
 
-    p.extra_y_ranges = {
-        "total_output": Range1d(start=0, end=df["total_output"].max() * 1.2)
-    }
+    p.extra_y_ranges = {"total_output": Range1d(start=0, end=df["total_output"].max() * 1.2)}
 
     ax2 = LinearAxis(y_range_name="total_output", axis_label="Total Output (GW)")
     p.add_layout(ax2, "right")

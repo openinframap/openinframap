@@ -1,8 +1,9 @@
-import asgi_sitemaps
-from starlette.requests import Request
 from urllib.parse import quote
 
-from data import get_countries
+import asgi_sitemaps
+from starlette.requests import Request
+
+from .data import get_countries
 
 
 class StaticSitemap(asgi_sitemaps.Sitemap):
@@ -25,6 +26,4 @@ class CountryPageSitemap(asgi_sitemaps.Sitemap):
         return url.path
 
 
-sitemap = asgi_sitemaps.SitemapApp(
-    [StaticSitemap(), CountryPageSitemap()], domain="openinframap.org"
-)
+sitemap = asgi_sitemaps.SitemapApp([StaticSitemap(), CountryPageSitemap()], domain="openinframap.org")

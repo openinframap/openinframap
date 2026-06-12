@@ -17,6 +17,7 @@ dependencies = [
     "pandas>=2.2.3",
     "bokeh==3.7.0",
     "pycountry>=24.6.1",
+    "sqlalchemy[asyncio]>=2.0.50",
 ]
 
 [tool.ruff]
@@ -29,6 +30,7 @@ ignore = []
 
 [dependency-groups]
 dev = [
+    "asyncpg-stubs>=0.30.2",
     "ipython>=9.0.2",
     "mypy>=1.15.0",
     "pandas-stubs>=2.2.3.250308",

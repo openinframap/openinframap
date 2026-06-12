@@ -1,14 +1,14 @@
 import asyncio
 import json
 import time
-import pycountry
 from typing import Optional
+
+import pycountry
 from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse
+from starlette.routing import Route
 
-from main import app
-from config import database
-from util import cache_for
+from ..util import cache_for
 
 # Ensure the `create_indexes` script is run after changing this list.
 SEARCH_LANGUAGES = {
@@ -28,9 +28,14 @@ SEARCH_LANGUAGES = {
 }
 
 
-async def search_substations(
-    query: str, language: str, limit: Optional[int] = 10
-) -> list[dict]:
+def country_alpha_2(alpha_3: str) -> str | None:
+    country = pycountry.countries.get(alpha_3=alpha_3)
+    if not country:
+        return None
+    return country.alpha_2
+
+
+async def search_substations(database, query: str, language: str, limit: Optional[int] = 10) -> list[dict]:
     results = await database.fetch_all(
         f"""
         SELECT
@@ -60,16 +65,14 @@ async def search_substations(
             "local_name": row["name"],
             "operator": row["operator"],
             "voltage": int(row["voltage"]) if row["voltage"] else None,
-            "country": pycountry.countries.get(alpha_3=row["country"]).alpha_2,
+            "country": country_alpha_2(row["country"]),
             "geometry": json.loads(row["geometry"]),
         }
         for row in results
     ]
 
 
-async def search_plants(
-    query: str, language: str, limit: Optional[int] = 10
-) -> list[dict]:
+async def search_plants(database, query: str, language: str, limit: Optional[int] = 10) -> list[dict]:
     result = await database.fetch_all(
         f"""
         SELECT
@@ -100,7 +103,7 @@ async def search_plants(
             "output": int(row["output"]) if row["output"] else None,
             "source": row["source"],
             "operator": row["operator"],
-            "country": pycountry.countries.get(alpha_3=row["country"]).alpha_2,
+            "country": country_alpha_2(row["country"]),
             "geometry": json.loads(row["geometry"]),
         }
         for row in result
@@ -117,9 +120,9 @@ def sort_key(row: dict) -> int:
     return 0
 
 
-@app.route("/search/typeahead")
 @cache_for(86400)
 async def search(request):
+    database = request.state["db"]
     query = request.query_params.get("q")
     language = request.query_params.get("lang", "en")
     if language not in SEARCH_LANGUAGES:
@@ -136,8 +139,8 @@ async def search(request):
 
     start = time.monotonic_ns()
     async with asyncio.TaskGroup() as tg:
-        substations = tg.create_task(search_substations(query, language, limit))
-        plants = tg.create_task(search_plants(query, language, limit))
+        substations = tg.create_task(search_substations(database, query, language, limit))
+        plants = tg.create_task(search_plants(database, query, language, limit))
 
     results = sorted(await substations + await plants, key=sort_key, reverse=True)
     end = time.monotonic_ns()
@@ -146,3 +149,6 @@ async def search(request):
 
     response = {"time": (end - start) / 1e9, "results": results}
     return JSONResponse(response)
+
+
+routes = [Route("/search/typeahead", endpoint=search)]

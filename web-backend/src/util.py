@@ -1,24 +1,31 @@
+from datetime import timedelta
 from functools import wraps
 from typing import Optional
-from starlette.exceptions import HTTPException
 from urllib.parse import unquote_plus
-from datetime import timedelta
-from config import database, DEBUG
+
+from sqlalchemy import text
+from starlette.exceptions import HTTPException
+
+from . import Request
+from .config import DEBUG
 
 
 def region_required(func):
     @wraps(func)
-    async def wrap_region(request):
+    async def wrap_region(request: Request):
         region = unquote_plus(request.path_params["region"])
+        database = request.state["db"]
 
-        res = await database.fetch_one(
-            query='SELECT gid, "union" FROM countries.country_eez WHERE "union" = :union',
-            values={"union": region},
-        )
+        res = (
+            await database.execute(
+                text('SELECT gid, "union" FROM countries.country_eez WHERE "union" = :union'),
+                {"union": region},
+            )
+        ).fetchone()
 
         if not res:
             raise HTTPException(404)
-        return await func(request, res)
+        return await func(request, res._mapping)
 
     return wrap_region
 

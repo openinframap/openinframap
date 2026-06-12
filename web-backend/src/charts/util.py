@@ -1,17 +1,15 @@
-from bokeh.plotting import figure as bokeh_figure
-import pandas as pd
-
-
 import decimal
+from typing import Any, Sequence
+
+import pandas as pd
+from bokeh.plotting import figure as bokeh_figure
+from sqlalchemy import Row
 
 
-def result_to_df(result) -> pd.DataFrame:
+def result_to_df(result: Sequence[Row[Any]]) -> pd.DataFrame:
     return pd.DataFrame.from_records(
         [
-            dict(
-                (k, float(v) if isinstance(v, decimal.Decimal) else v)
-                for k, v in dict(row).items()
-            )
+            dict((k, float(v) if isinstance(v, decimal.Decimal) else v) for k, v in row._mapping.items())
             for row in result
         ]
     )

@@ -3,12 +3,13 @@ Programmatically create search indexes for tables. This has to be run manually a
 `ADMIN_DATABASE_URL` must be set to a connection with the privileges to create indexes.
 """
 
-from views.search import SEARCH_LANGUAGES
 from databases import Database
-from config import config
+
+from src.config import config
+from src.views.search import SEARCH_LANGUAGES
 
 MAIN_INDEXES = [
-    """CREATE INDEX CONCURRENTLY IF NOT EXISTS osm_power_substation_name 
+    """CREATE INDEX CONCURRENTLY IF NOT EXISTS osm_power_substation_name
         ON osm_power_substation(substr(lower(tags->'name'), 1, 20) text_pattern_ops)
         WHERE tags->'name' IS NOT NULL""",
     """CREATE INDEX CONCURRENTLY IF NOT EXISTS power_substation_relation_name
@@ -34,16 +35,16 @@ async def create_indexes():
     for lang in SEARCH_LANGUAGES:
         print(f"Creating indexes for language: {lang}...", end="", flush=True)
         queries = [
-            f"""CREATE INDEX CONCURRENTLY IF NOT EXISTS osm_power_substation_name_{lang} 
+            f"""CREATE INDEX CONCURRENTLY IF NOT EXISTS osm_power_substation_name_{lang}
                 ON osm_power_substation(substr(lower(tags->'name:{lang}'), 1, 20) text_pattern_ops)
                 WHERE tags->'name:{lang}' IS NOT NULL""",
-            f"""CREATE INDEX CONCURRENTLY IF NOT EXISTS power_substation_relation_name_{lang} 
+            f"""CREATE INDEX CONCURRENTLY IF NOT EXISTS power_substation_relation_name_{lang}
                 ON power_substation_relation(substr(lower(tags->'name:{lang}'), 1, 20) text_pattern_ops)
                 WHERE tags->'name:{lang}' IS NOT NULL""",
-            f"""CREATE INDEX CONCURRENTLY IF NOT EXISTS osm_power_plant_name_{lang} 
+            f"""CREATE INDEX CONCURRENTLY IF NOT EXISTS osm_power_plant_name_{lang}
                 ON osm_power_plant(substr(lower(tags->'name:{lang}'), 1, 20) text_pattern_ops)
                 WHERE tags->'name:{lang}' IS NOT NULL""",
-            f"""CREATE INDEX CONCURRENTLY IF NOT EXISTS power_plant_relation_name_{lang} 
+            f"""CREATE INDEX CONCURRENTLY IF NOT EXISTS power_plant_relation_name_{lang}
                 ON power_plant_relation(substr(lower(tags->'name:{lang}'), 1, 20) text_pattern_ops)
                 WHERE tags->'name:{lang}' IS NOT NULL""",
         ]
