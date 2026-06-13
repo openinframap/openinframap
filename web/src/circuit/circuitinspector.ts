@@ -1,5 +1,5 @@
 import './circuitinspector.css'
-import i18next, { t } from 'i18next'
+import i18next from 'i18next'
 import { URLHash } from '@russss/maplibregl-layer-switcher'
 import { el, mount, unmount } from 'redom'
 import { OpenInfraMapAPI } from '../api'
