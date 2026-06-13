@@ -77,7 +77,7 @@ class CircuitSubstation(BaseModel):
     id: int
     name: str | None
     local_names: dict[str, str]
-    location: tuple[float, float]
+    location: tuple[float, float] | None
 
 
 class CircuitResponse(Circuit):
@@ -140,15 +140,17 @@ async def circuit(request: Request) -> Response:
         {"relation_id": circuit_id},
     )
 
-    circuit_substations = [
-        CircuitSubstation(
-            id=s._mapping["id"],
-            name=s._mapping["name"],
-            local_names=extract_local_names(s._mapping["tags"]),
-            location=from_wkt(s._mapping["location"]).coords[0],
+    circuit_substations = []
+    for s in substations:
+        location = from_wkt(s._mapping["location"])
+        circuit_substations.append(
+            CircuitSubstation(
+                id=s._mapping["id"],
+                name=s._mapping["name"],
+                local_names=extract_local_names(s._mapping["tags"]),
+                location=location.coords[0] if len(location.coords) > 0 else None,
+            )
         )
-        for s in substations
-    ]
 
     return Response(
         CircuitResponse(
