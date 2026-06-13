@@ -113,6 +113,11 @@ export class CircuitInspector {
     url_hash.registerHandler('circuit', (value) => {
       this.hashChange(value)
     })
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.hide()
+      }
+    })
   }
 
   updateData(data: GeoJSON.GeoJSON) {
