@@ -10,7 +10,7 @@ from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse, Response
 from starlette.routing import Route
 
-from .. import Request
+from .. import Request, get_db
 from ..util import cache_for
 
 # Ensure the `create_indexes` script is run after changing this list.
@@ -133,7 +133,7 @@ def sort_key(row: dict) -> int:
 
 @cache_for(86400)
 async def search(request: Request) -> Response:
-    database = request.state["db"]
+    database = get_db(request)
     query = request.query_params.get("q")
     language = request.query_params.get("lang", "en")
     if language not in SEARCH_LANGUAGES:

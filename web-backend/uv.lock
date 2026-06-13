@@ -47,6 +47,15 @@ wheels = [
 ]
 
 [[package]]
+name = "asgiref"
+version = "3.11.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/63/40/f03da1264ae8f7cfdbf9146542e5e7e8100a4c66ab48e791df9a03d3f6c0/asgiref-3.11.1.tar.gz", hash = "sha256:5f184dc43b7e763efe848065441eac62229c9f7b0475f41f80e207a114eda4ce", size = 38550, upload-time = "2026-02-03T13:30:14.33Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/5c/0a/a72d10ed65068e115044937873362e6e32fab1b7dce0046aeb224682c989/asgiref-3.11.1-py3-none-any.whl", hash = "sha256:e8667a091e69529631969fd45dc268fa79b99c92c5fcdda727757e52146ec133", size = 24345, upload-time = "2026-02-03T13:30:13.039Z" },
+]
+
+[[package]]
 name = "ast-serialize"
 version = "0.5.0"
 source = { registry = "https://pypi.org/simple" }
@@ -519,6 +528,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "aiofiles" },
     { name = "asgi-sitemaps" },
+    { name = "asgiref" },
     { name = "async-lru" },
     { name = "asyncpg" },
     { name = "bokeh" },
@@ -550,6 +560,7 @@ dev = [
 requires-dist = [
     { name = "aiofiles" },
     { name = "asgi-sitemaps" },
+    { name = "asgiref", specifier = ">=3.11.1" },
     { name = "async-lru" },
     { name = "asyncpg" },
     { name = "bokeh", specifier = "==3.9.1" },

@@ -6,7 +6,7 @@ from urllib.parse import unquote_plus
 from sqlalchemy import text
 from starlette.exceptions import HTTPException
 
-from . import Request
+from . import Request, get_db
 from .config import DEBUG
 
 
@@ -14,7 +14,7 @@ def region_required(func):
     @wraps(func)
     async def wrap_region(request: Request):
         region = unquote_plus(request.path_params["region"])
-        database = request.state["db"]
+        database = get_db(request)
 
         res = (
             await database.execute(

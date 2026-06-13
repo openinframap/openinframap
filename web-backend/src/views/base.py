@@ -7,7 +7,7 @@ from bokeh.embed import json_item
 from starlette.responses import PlainTextResponse, RedirectResponse, Response
 from starlette.routing import Route
 
-from .. import Request, charts
+from .. import Request, charts, get_db
 from ..data import (
     get_countries,
     stats_power_line,
@@ -38,8 +38,8 @@ async def copyright(request: Request) -> Response:
 
 @cache_for(86400)
 async def stats(request: Request) -> Response:
+    db = get_db(request)
     async with asyncio.TaskGroup() as tg:
-        db = request.state["db"]
         power_lines = tg.create_task(stats_power_line(db))
         countries = tg.create_task(get_countries(db))
     return render_template(
@@ -55,7 +55,7 @@ async def stats(request: Request) -> Response:
 
 @cache_for(86400)
 async def stats_charts(request: Request) -> Response:
-    db = request.state["db"]
+    db = get_db(request)
     async with asyncio.TaskGroup() as tg:
         lines_plot = tg.create_task(charts.line_length(db))
         plants_plot = tg.create_task(charts.plant_count(db))

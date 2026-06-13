@@ -9,7 +9,7 @@ from starlette.exceptions import HTTPException
 from starlette.responses import RedirectResponse, Response
 from starlette.routing import Route
 
-from .. import Request, charts
+from .. import Request, charts, get_db
 from ..data import (
     get_commons_thumbnail,
     get_plant,
@@ -27,7 +27,7 @@ from ..util import cache_for, region_required
 @region_required
 @cache_for(hours=1)
 async def region(request: Request, region):
-    database = request.state["db"]
+    database = get_db(request)
     stats_date = await latest_stats_date(database)
     async with asyncio.TaskGroup() as tg:
         plants = tg.create_task(plant_stats(database, region["gid"], date=stats_date))
@@ -60,7 +60,7 @@ async def region(request: Request, region):
 @region_required
 @cache_for(hours=1)
 async def plants_region(request: Request, region):
-    database = request.state["db"]
+    database = get_db(request)
     gid = region["gid"]
 
     plants = (
@@ -116,7 +116,7 @@ async def plants_region(request: Request, region):
 @region_required
 @cache_for(hours=1)
 async def plants_construction_region(request: Request, region) -> Response:
-    database = request.state["db"]
+    database = get_db(request)
     gid = region["gid"]
 
     plants = await database.execute(
@@ -150,7 +150,7 @@ async def plants_construction_region(request: Request, region) -> Response:
 
 @cache_for(hours=1)
 async def stats_object(request: Request) -> Response:
-    database = request.state["db"]
+    database = get_db(request)
     try:
         id = int(request.path_params["id"])
     except ValueError:
@@ -177,7 +177,7 @@ async def stats_object(request: Request) -> Response:
 @region_required
 @cache_for(hours=1)
 async def plant_detail(request: Request, region) -> Response:
-    database = request.state["db"]
+    database = get_db(request)
     try:
         plant_id = int(request.path_params["id"])
     except ValueError:

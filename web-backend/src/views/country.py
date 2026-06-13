@@ -6,7 +6,7 @@ from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse, RedirectResponse, Response
 from starlette.routing import Route
 
-from .. import Request
+from .. import Request, get_db
 from ..data import latest_stats_date, plant_source_stats, plant_stats, stats_power_line
 from ..templates import render_template
 from ..util import cache_for
@@ -23,7 +23,7 @@ def json_area_stats(lines: dict, plants, sources) -> dict:
 
 @cache_for(hours=1)
 async def country_json(request: Request) -> Response:
-    database = request.state["db"]
+    database = get_db(request)
     iso2 = request.path_params["iso2"]
     if iso2.upper() != iso2:
         return RedirectResponse(request.url.replace(path=f"/stats/country/{iso2.upper()}.json"))
@@ -45,7 +45,7 @@ async def country_json(request: Request) -> Response:
 
 @cache_for(hours=1)
 async def country(request: Request) -> Response:
-    database = request.state["db"]
+    database = get_db(request)
     iso2 = request.path_params["iso2"]
     if iso2.upper() != iso2:
         return RedirectResponse(request.url.replace(path=f"/stats/country/{iso2.upper()}"))
