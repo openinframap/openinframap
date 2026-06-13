@@ -190,7 +190,7 @@ async def line(request: Request) -> Response:
                 WHERE member = :line_id
                 AND member.osm_id = relation.osm_id
             """
-        ),
+        ).columns(tags=HSTORE),
         {"line_id": line_id},
     )
 
