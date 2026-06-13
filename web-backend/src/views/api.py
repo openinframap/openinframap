@@ -1,6 +1,5 @@
 from typing import Any
 
-from numpy import number
 from pydantic import BaseModel
 from shapely import from_wkt
 from sqlalchemy.dialects.postgresql import HSTORE
