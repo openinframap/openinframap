@@ -35,6 +35,10 @@ export function local_name_tags(): string[] {
 }
 
 export function formatVoltage(value: number | number[]): string {
+  if (!value) {
+    return ''
+  }
+
   if (!Array.isArray(value)) {
     value = [value]
   }

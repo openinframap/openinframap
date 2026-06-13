@@ -8,6 +8,9 @@ import friendlyNames from '../friendlynames.ts'
 import friendlyIcons from '../friendlyicons.ts'
 import { el, mount, setChildren, RedomElement } from 'redom'
 import { ClickRouter } from '../click-router.ts'
+import { OpenInfraMapAPI } from '../api.ts'
+import { CircuitInspector } from '../circuit/circuitinspector.ts'
+import ExternalLinks from '../elements/external-links.ts'
 
 const hidden_keys = [
   'osm_id',
@@ -111,6 +114,18 @@ function fieldValue(key: string, value: any): any {
   return titleCase(value)
 }
 
+export function circuitName(data) {
+  const lang = i18next.language.split('-')[0]
+
+  if (lang in data['local_names']) {
+    return data['local_names'][lang]
+  }
+  if (data['name']) {
+    return data['name']
+  }
+  return `-`
+}
+
 function truncateUrl(urlString: string, length: number): string {
   // Trim trailing slash
   urlString = urlString.replace(/\/$/, '')
@@ -152,18 +167,29 @@ function truncateUrl(urlString: string, length: number): string {
   return [parsed.host, ...pathPartsReturnValue.reverse()].join('/')
 }
 
+interface InfoPopupOptions {
+  layers: string[]
+  min_zoom: number
+  api: OpenInfraMapAPI
+  circuit_inspector: CircuitInspector
+}
+
 class InfoPopup {
   layers: string[]
   min_zoom: any
   popup_obj: Popup | null
   _map!: maplibregl.Map
   friendlyNames: { [key: string]: string }
+  api: OpenInfraMapAPI
+  circuit_inspector: CircuitInspector
 
-  constructor(layers: string[], min_zoom: number) {
-    this.layers = layers
-    this.min_zoom = min_zoom
+  constructor(options: InfoPopupOptions) {
+    this.api = options.api
+    this.layers = options.layers
+    this.min_zoom = options.min_zoom
     this.popup_obj = null
     this.friendlyNames = friendlyNames()
+    this.circuit_inspector = options.circuit_inspector
   }
 
   add(map: maplibregl.Map, clickRouter: ClickRouter) {
@@ -300,6 +326,8 @@ class InfoPopup {
   }
 
   async popupHtml(feature: MapGeoJSONFeature) {
+    const layer_id = feature.layer.id
+
     const attrs_table = el('table', { class: 'item_info' })
     const renderedProperties = Object.keys(feature.properties)
       .sort()
@@ -312,38 +340,49 @@ class InfoPopup {
     if (feature.properties['voltage'] || feature.properties['voltage_primary']) {
       mount(content, this.voltageField(feature))
     }
-
-    const links_container = el('div.infobox-external-links')
     const image_container = el('div.infobox-image')
+
+    const external_links = new ExternalLinks(feature.properties['osm_id'], feature.properties['is_node'])
+
     if (feature.properties['wikidata']) {
-      // Start wikidata fetching asynchronously
-      this.fetch_wikidata(feature.properties['wikidata'], image_container, links_container)
-    } else {
-      const wp_link = this.wp_link(feature.properties['wikipedia'])
-      if (wp_link) {
-        mount(links_container, wp_link)
-      }
+      this.api.fetchWikidata(feature.properties['wikidata']).then((data) => {
+        external_links.updateWikidata(feature.properties['wikidata'], data)
+        if (data && data['thumbnail']) {
+          mount(
+            image_container,
+            el(
+              'a',
+              el('img.wikidata_image', {
+                src: data['thumbnail']
+              }),
+              {
+                href: `https://commons.wikimedia.org/wiki/File:${data['image']}`,
+                target: '_blank'
+              }
+            )
+          )
+        }
+      })
     }
 
     mount(content, image_container)
     mount(content, attrs_table)
 
-    if (feature.properties['osm_id']) {
-      mount(
-        links_container,
-        el('a', el('div.ext_link.osm_link'), {
-          href: this.osmLink(feature.properties['osm_id'], feature.properties['is_node']),
-          target: '_blank',
-          title: t('info.view-openstreetmap', 'View on OpenStreetMap')
-        })
-      )
+    if (layer_id.startsWith('power_substation') || layer_id.startsWith('power_converter')) {
+      const circuits_container = await this.fetch_substation_circuits(feature.properties['osm_id'])
+      circuits_container.forEach((e) => mount(content, e))
+    }
+
+    if (layer_id.startsWith('power_line')) {
+      const circuits_container = await this.fetch_line_circuits(feature.properties['osm_id'])
+      circuits_container.forEach((e) => mount(content, e))
     }
 
     const footer = el('div.oim-info-footer')
     mount(content, footer)
-    mount(footer, links_container)
+    mount(footer, external_links)
 
-    if (feature.layer.id.startsWith('power_plant')) {
+    if (layer_id.startsWith('power_plant')) {
       mount(
         footer,
         el('a.oim-button', t('more_info', 'More info'), {
@@ -372,97 +411,44 @@ class InfoPopup {
       .addClassName('oim-popup-info')
   }
 
-  async fetch_wikidata(id: string, imageContainer: RedomElement, linksContainer: RedomElement) {
-    const data = await fetch(`https://openinframap.org/wikidata/${id}`).then((response) => {
-      return response.json()
-    })
-
-    if (data['thumbnail']) {
-      mount(
-        imageContainer,
-        el(
-          'a',
-          el('img.wikidata_image', {
-            src: data['thumbnail']
-          }),
-          {
-            href: `https://commons.wikimedia.org/wiki/File:${data['image']}`,
-            target: '_blank'
-          }
+  circuits_table(circuits: Array<object>) {
+    return el(
+      'table.circuits-table',
+      el('tr', el('th', t('info.name')), el('th', t('info.voltage')), el('th', '')),
+      circuits
+        .sort((a, b) => b['circuit']['voltage'] - a['circuit']['voltage'])
+        .map((c) =>
+          el(
+            'tr',
+            el('td', circuitName(c['circuit'])),
+            el('td', formatVoltage(c['circuit']['voltage'])),
+            el('button', 'view', {
+              onclick: () => {
+                this.circuit_inspector.show(c['circuit']['id'])
+                this.popup_obj?.remove()
+              }
+            })
+          )
         )
-      )
-    }
-
-    for (const lang of [i18next.language.split('-')[0], 'en']) {
-      if (data['sitelinks'][`${lang}wiki`]) {
-        mount(
-          linksContainer,
-          el('a', el('div.ext_link.wikipedia_link'), {
-            href: data['sitelinks'][`${lang}wiki`]['url'],
-            target: '_blank',
-            title: t('wikipedia', 'Wikipedia')
-          })
-        )
-        break
-      }
-    }
-
-    if (data['sitelinks']['commonswiki']) {
-      mount(
-        linksContainer,
-        el('a', el('div.ext_link.commons_link'), {
-          href: data['sitelinks']['commonswiki']['url'],
-          target: '_blank',
-          title: t('wikimedia-commons', 'Wikimedia Commons')
-        })
-      )
-    }
-
-    if (data['gem_id']) {
-      mount(
-        linksContainer,
-        el('a', el('div.ext_link.gem_link'), {
-          href: `https://www.gem.wiki/${data['gem_id']}`,
-          target: '_blank',
-          title: 'Global Energy Monitor'
-        })
-      )
-    }
-
-    if (data['peeringdb_facility_id']) {
-      mount(
-        linksContainer,
-        el('a', el('div.ext_link.peeringdb_link'), {
-          href: `https://www.peeringdb.com/fac/${data['peeringdb_facility_id']}`,
-          target: '_blank',
-          title: 'PeeringDB'
-        })
-      )
-    }
-
-    mount(
-      linksContainer,
-      el('a', el('div.ext_link.wikidata_link'), {
-        href: `https://wikidata.org/wiki/${id}`,
-        target: '_blank',
-        title: t('wikidata', 'Wikidata')
-      })
     )
   }
 
-  wp_link(value: string) {
-    if (!value) {
-      return null
+  async circuits_section(response) {
+    if (response.circuits.length == 0) {
+      return []
     }
-    const parts = value.split(':', 2)
-    if (parts.length > 1) {
-      const url = `https://${parts[0]}.wikipedia.org/wiki/${parts[1]}`
-      return el('a', el('div.ext_link.wikipedia_link'), {
-        href: url,
-        target: '_blank',
-        title: t('wikipedia', 'Wikipedia')
-      })
-    }
+
+    return [el('h4', t('info.circuits')), el('div#circuits', this.circuits_table(response.circuits))]
+  }
+
+  async fetch_substation_circuits(id: string) {
+    const response = await this.api.fetch(`/api/substation/${id}`)
+    return this.circuits_section(response)
+  }
+
+  async fetch_line_circuits(id: string) {
+    const response = await this.api.fetch(`/api/line/${id}`)
+    return this.circuits_section(response)
   }
 }
 

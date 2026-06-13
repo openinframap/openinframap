@@ -6,20 +6,35 @@
     ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Oxygen Mono',
     'Ubuntu Mono', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Consolas', 'Courier New', monospace;
 
+  --Grey100: rgb(247, 242, 239);
+  --Grey200: rgb(226, 209, 199);
+  --Grey300: rgb(197, 164, 144);
+  --Grey400: rgb(148, 119, 102);
+  --Grey500: rgb(109, 87, 75);
+  --Grey600: rgb(73, 58, 50);
+  --Green100: rgb(237, 244, 232);
+  --Green200: rgb(192, 219, 185);
+  --Green300: rgb(133, 184, 125);
+  --Green400: rgb(67, 140, 65);
+  --Green500: rgb(16, 107, 27);
+  --Green600: rgb(0, 72, 2);
+
+  --warning: rgb(255, 240, 240);
+
   --oim-content-background: rgb(252, 252, 252);
   --oim-text-color: #333;
   --oim-text-color-light: #666;
   --oim-text-color-dark: #000;
 
-  --oim-light-grey: #f3f3f3;
-  --oim-grey: #ddd;
-  --oim-dark-grey: #888;
+  --oim-light-grey: var(--Grey100);
+  --oim-grey: var(--Grey200);
+  --oim-dark-grey: var(--Grey400);
 
   --oim-radius-large: 6px;
   --oim-radius-small: 3px;
 
-  --oim-popup-header-info-background: #e0f6f6;
-  --oim-popup-header-validation-background: #f9e2e4;
+  --oim-popup-header-info-background: var(--Green100);
+  --oim-popup-header-validation-background: var(--Grey100);
 
   --oim-drop-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
   --oim-blur: blur(3px) saturate(80%);

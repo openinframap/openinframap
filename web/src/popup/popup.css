@@ -12,7 +12,7 @@
 }
 
 .oim-popup-content > * + * {
-  margin-block-start: 0.5em;
+  margin-block-start: 0.6em;
 }
 
 .oim-popup .oim-popup-header {
@@ -29,7 +29,6 @@
 .oim-popup h4 {
   font-weight: normal;
   color: var(--oim-text-color-light);
-  margin: 0.1em 0 0 0;
 }
 
 .oim-popup .maplibregl-popup-close-button {
@@ -44,4 +43,35 @@
 .oim-popup .maplibregl-popup-close-button:hover {
   color: var(--oim-text-color-light);
   background-color: var(--oim-grey);
+}
+
+.oim-popup table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--oim-light-grey);
+  border-radius: 4px;
+}
+
+.oim-popup table td,
+.oim-popup table th {
+  padding: 0.1em 0.5em;
+}
+
+.oim-popup table th {
+  text-align: left;
+  text-wrap: nowrap;
+}
+
+.oim-popup table td {
+  width: 100%;
+  overflow: hidden;
+}
+
+.oim-popup table tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.oim-popup ul {
+  margin: 0;
+  padding-left: 1.5em;
 }

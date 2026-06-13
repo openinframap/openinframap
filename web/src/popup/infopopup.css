@@ -9,30 +9,11 @@
   margin-right: 0.3em;
 }
 
-table.item_info {
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid var(--oim-light-grey);
-  border-radius: 4px;
-}
-
-table.item_info td,
-table.item_info th {
-  padding: 0.1em 0.5em;
-}
-
-table.item_info th {
-  text-align: left;
-  text-wrap: nowrap;
-}
-
-table.item_info td {
-  width: 100%;
-  overflow: hidden;
-}
-
-table.item_info tr:nth-child(odd) {
-  background-color: #f9f9f9;
+.oim-popup-info h4 {
+  font-weight: bold;
+  color: inherit;
+  margin-block-end: 0.2em;
+  margin-left: 0.2em;
 }
 
 .wikidata_image {
@@ -59,6 +40,23 @@ table.item_info tr:nth-child(odd) {
 
 .infobox-external-links a {
   display: block;
+}
+
+#circuits {
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.circuits-table {
+  font-size: 0.9em;
+
+  td {
+    vertical-align: middle;
+  }
+
+  button {
+    margin-top: auto;
+  }
 }
 
 div.ext_link {

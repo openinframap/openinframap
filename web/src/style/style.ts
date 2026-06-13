@@ -9,6 +9,8 @@ import style_oim_water from './style_oim_water.js'
 import style_oim_other_pipelines from './style_oim_other_pipelines.js'
 import style_osmose from './style_osmose.js'
 import { StyleSpecification } from 'maplibre-gl'
+import { interpolate, zoom } from './stylehelpers.js'
+import { LayerSpecificationWithZIndex } from './types.js'
 
 const oim_attribution =
   '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="https://openinframap.org/copyright">Open Infrastructure Map</a>'
@@ -110,13 +112,20 @@ const style: StyleSpecification = {
       tiles: ['https://osmose.openstreetmap.fr/api/0.3/issues/{z}/{x}/{y}.mvt?tags=power'],
       maxzoom: 17,
       minzoom: 11
+    },
+    circuit_highlight: {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: []
+      }
     }
   },
   glyphs: '/fonts/{fontstack}/{range}.pbf',
   layers: []
 }
 
-export function getLayers() {
+export function getPrimaryLayers() {
   return [
     ...style_oim_power(),
     ...style_oim_power_heatmap,
@@ -128,8 +137,31 @@ export function getLayers() {
   ]
 }
 
+const circuit_highlight_layer: LayerSpecificationWithZIndex = {
+  zorder: 59,
+  id: 'circuit_highlight',
+  type: 'line',
+  source: 'circuit_highlight',
+  paint: {
+    'line-opacity': interpolate(zoom, [
+      [5, 1],
+      [20, 0.8]
+    ]),
+    'line-blur': 3,
+    'line-color': '#fdef32',
+    'line-width': interpolate(zoom, [
+      [5, 10],
+      [20, 30]
+    ])
+  },
+  layout: {
+    'line-join': 'round',
+    'line-cap': 'round'
+  }
+}
+
 export function getStyle() {
-  const oim_layers = [...getLayers(), ...style_labels(i18next.language)]
+  const oim_layers = [circuit_highlight_layer, ...getPrimaryLayers(), ...style_labels(i18next.language)]
 
   oim_layers.sort((a, b) => {
     if (!a.zorder || !b.zorder) {

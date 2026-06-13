@@ -10,11 +10,13 @@ import KeyControl from './key/key.js'
 import WarningBox from './warning-box/warning-box.js'
 import OIMSearch from './search/search.ts'
 
-import { getStyle, getLayers } from './style/style.js'
+import { getStyle, getPrimaryLayers } from './style/style.js'
 
 import { ValidationErrorPopup } from './popup/validation-error-popup.js'
 import { SymbolLoader } from './symbol-loader.ts'
 import { ClickRouter } from './click-router.js'
+import { CircuitInspector } from './circuit/circuitinspector.ts'
+import { OpenInfraMapAPI } from './api.ts'
 
 export default class OpenInfraMap {
   map?: maplibregl.Map
@@ -79,10 +81,11 @@ export default class OpenInfraMap {
       t('layers.title', 'Layers')
     )
     const url_hash = new URLHash(layer_switcher)
-
     const map_style = getStyle()
 
     layer_switcher.setInitialVisibility(map_style)
+
+    const api = new OpenInfraMapAPI('https://openinframap.org')
 
     const map = new maplibregl.Map(
       url_hash.init({
@@ -97,6 +100,7 @@ export default class OpenInfraMap {
 
     const clickRouter = new ClickRouter(map, map_style.layers)
     new SymbolLoader(map)
+    const circuit_inspector = new CircuitInspector(map, url_hash, api)
 
     map.dragRotate.disable()
     map.touchZoomRotate.disableRotation()
@@ -118,10 +122,12 @@ export default class OpenInfraMap {
     map.addControl(layer_switcher, 'top-right')
     map.addControl(new EditButton(), 'bottom-right')
     map.addControl(new OIMSearch(), 'top-left')
-    new InfoPopup(
-      getLayers().map((layer: { [x: string]: any }) => layer['id']),
-      6
-    ).add(map, clickRouter)
+    new InfoPopup({
+      layers: getPrimaryLayers().map((layer: { [x: string]: any }) => layer['id']),
+      min_zoom: 6,
+      api,
+      circuit_inspector
+    }).add(map, clickRouter)
     new ValidationErrorPopup(map, clickRouter)
 
     clickRouter.register()

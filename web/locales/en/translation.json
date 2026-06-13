@@ -132,6 +132,7 @@
     "usage": "Usage",
     "location": "Location",
     "design": "Design",
+    "voltage": "Voltage",
     "material": "Material",
     "line-attachment": "Line attachment",
     "line-management": "Line management",

@@ -1,0 +1,70 @@
+div.circuit-inspector {
+  overflow: hidden;
+  position: absolute;
+  bottom: 7em;
+  right: 1em;
+  background-color: var(--oim-content-background);
+  min-width: 15em;
+  min-height: 5em;
+  border: 1px solid #eee;
+  max-width: 25em;
+  border-radius: 3px;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 800px) {
+  div.circuit-inspector {
+    width: 100vw;
+    max-width: 100vw;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+  }
+}
+
+div.circuit-inspector-header {
+  display: flex;
+  gap: 1em;
+  padding-left: 1em;
+  padding-bottom: 0.5em;
+  background: var(--oim-popup-header-info-background);
+
+  h3 {
+    flex: 1;
+    margin: 0;
+    margin-top: 0.2em;
+  }
+}
+
+div.circuit-inspector-body {
+  margin: 0.1em 0.5em 0.5em 0.5em;
+
+  h4 {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--oim-text-color);
+    margin-top: 0.2em;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+}
+
+div.circuit-legacy {
+  font-size: 0.9em;
+  background-color: var(--warning);
+  border: 1px solid var(--Grey200);
+  border-radius: 5px;
+  padding: 0.5em;
+  text-align: center;
+}
+
+div.circuit-info {
+  display: flex;
+  flex-direction: row;
+  font-size: 0.9em;
+
+  * {
+    flex: 1;
+    text-align: center;
+  }
+}
