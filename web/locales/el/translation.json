@@ -168,7 +168,8 @@
         "design": "Μορφή",
         "material": "Υλικό",
         "line-attachment": "Σύνδεση γραμμής",
-        "transformer-type": "Είδος μετασχηματιστή"
+        "transformer-type": "Είδος μετασχηματιστή",
+        "voltage": "Τάση"
     },
     "wikidata": "Wikidata",
     "key": {
