@@ -55,6 +55,10 @@ export function formatVoltage(value: number | number[]): string {
 }
 
 export function formatFrequency(value: number | number[]): string {
+  if (value === null || value === undefined) {
+    return ''
+  }
+
   if (!Array.isArray(value)) {
     value = [value]
   }
