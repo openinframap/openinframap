@@ -18,6 +18,8 @@ dependencies = [
     "bokeh==3.9.1",
     "pycountry>=24.6.1",
     "sqlalchemy[asyncio]>=2.0.50",
+    "pydantic>=2.13.4",
+    "geojson>=3.3.0",
 ]
 
 [tool.ruff]

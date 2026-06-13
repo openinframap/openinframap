@@ -2,12 +2,12 @@ import asyncio
 import logging
 import re
 from itertools import chain
-from typing import Optional
+from typing import Optional, Sequence
 
 import httpx
 from async_lru import alru_cache
 from more_itertools import windowed
-from sqlalchemy import text
+from sqlalchemy import Row, text
 from sqlalchemy.ext.asyncio import AsyncConnection
 from starlette.exceptions import HTTPException
 
@@ -49,7 +49,7 @@ async def get_plant(database: AsyncConnection, plant_id: int, country_gid: int):
     return res._mapping
 
 
-async def get_plant_generator_summary(database: AsyncConnection, plant_id):
+async def get_plant_generator_summary(database: AsyncConnection, plant_id: int) -> Sequence[Row]:
     res = await database.execute(
         text(
             """SELECT g.source,

@@ -10,8 +10,7 @@ from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse, Response
 from starlette.routing import Route
 
-from src import Request
-
+from .. import Request
 from ..util import cache_for
 
 # Ensure the `create_indexes` script is run after changing this list.

@@ -14,19 +14,17 @@ from .config import DATABASE_URL, DEBUG
 from .sitemap import sitemap
 from .views import routes
 
-db_engine = create_async_engine(DATABASE_URL)
-
 
 @contextlib.asynccontextmanager
 async def lifespan(app: Starlette) -> AsyncGenerator[State]:
+    db_engine = create_async_engine(DATABASE_URL)
     async with (
         httpx.AsyncClient(
             headers={"User-Agent": "Open Infrastructure Map backend (https://openinframap.org)"}
         ) as client,
-        db_engine.begin() as db,
+        db_engine.connect() as db,
     ):
         yield {"http_client": client, "db": db}
-        await db.rollback()
 
 
 app = Starlette(
