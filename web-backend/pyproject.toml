@@ -21,6 +21,7 @@ dependencies = [
     "pydantic>=2.13.4",
     "geojson>=3.3.0",
     "asgiref>=3.11.1",
+    "shapely>=2.1.2",
 ]
 
 [tool.ruff]
