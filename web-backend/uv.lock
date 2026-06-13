@@ -555,6 +555,7 @@ dev = [
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "ruff" },
+    { name = "types-shapely" },
 ]
 
 [package.metadata]
@@ -588,6 +589,7 @@ dev = [
     { name = "pytest", specifier = ">=8.3.4" },
     { name = "pytest-asyncio", specifier = ">=0.25.3" },
     { name = "ruff", specifier = ">=0.9.7" },
+    { name = "types-shapely", specifier = ">=2.1.0.20260603" },
 ]
 
 [[package]]
@@ -1016,6 +1018,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/57/a9/a2584b8313b89f94869ddb3c4074617a691de1812a614d2d50e32ca5a7a6/traitlets-5.15.1.tar.gz", hash = "sha256:7b1c07854fe25acb39e009bae49f11b79ff6cbb2f27999104e9110e7a6b53722", size = 163344, upload-time = "2026-06-03T12:26:06.181Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/96/8d/1080ee4c231f361b6ce4470d556c8c435b67c7e0753aaa641497ee92f88b/traitlets-5.15.1-py3-none-any.whl", hash = "sha256:770a53705f84b81ac107e83a1b3328ff2dae16094d8fc3cfc004e4b22dfd8e92", size = 85858, upload-time = "2026-06-03T12:26:04.395Z" },
+]
+
+[[package]]
+name = "types-shapely"
+version = "2.1.0.20260603"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/13/8d/b1ee75d100855ce214788b2e05b3648db50d6f0ff110fa986328a25e1fa1/types_shapely-2.1.0.20260603.tar.gz", hash = "sha256:0373ef71caa8c17aff0b810b8155f744ceaeee802f6f1438d09dd1c919612180", size = 27246, upload-time = "2026-06-03T06:42:05.798Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/10/e8/dfb9d2f832260d64d3b0b603ac6382ccc9b1a332535e434e9d5f97f7aed3/types_shapely-2.1.0.20260603-py3-none-any.whl", hash = "sha256:bc9ea51658b05db3b92e453cc74614af1d70eb391e4c36e15d80567fea6a61a8", size = 38338, upload-time = "2026-06-03T06:42:04.732Z" },
 ]
 
 [[package]]
