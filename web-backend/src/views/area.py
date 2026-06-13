@@ -119,9 +119,10 @@ async def plants_construction_region(request: Request, region) -> Response:
     database = get_db(request)
     gid = region["gid"]
 
-    plants = await database.execute(
-        text(
-            """SELECT osm_id, name, tags->'name:en' AS name_en, tags->'wikidata' AS wikidata,
+    plants = (
+        await database.execute(
+            text(
+                """SELECT osm_id, name, tags->'name:en' AS name_en, tags->'wikidata' AS wikidata,
                         tags->'plant:method' AS method, tags->'operator' AS operator,
                         tags->'start_date' AS start_date,
                         convert_power(output) AS output,
@@ -132,9 +133,10 @@ async def plants_construction_region(request: Request, region) -> Response:
                         geometry)
                   AND tags -> 'construction:power' IS NOT NULL
                   ORDER BY convert_power(output) DESC NULLS LAST, name ASC NULLS LAST """
-        ),
-        {"gid": gid},
-    )
+            ),
+            {"gid": gid},
+        )
+    ).fetchall()
 
     return render_template(
         request,
