@@ -91,5 +91,5 @@ async def country(request: Request) -> Response:
 
 routes = [
     Route("/stats/country/{iso2}.json", endpoint=country_json),
-    Route("/stats/country/{iso2}", name="country", endpoint=country),
+    Route("/stats/country/{iso2}", endpoint=country),
 ]

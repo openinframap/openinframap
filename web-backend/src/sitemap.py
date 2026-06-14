@@ -26,7 +26,7 @@ class CountryPageSitemap(asgi_sitemaps.Sitemap):
 
     def location(self, item):
         request = Request(scope=self.scope)
-        url = request.url_for("area", region=quote(item))
+        url = request.url_for("region", region=quote(item))
         return url.path
 
 

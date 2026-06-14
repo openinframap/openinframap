@@ -227,7 +227,7 @@ async def plant_detail(request: Request, region) -> Response:
 
 
 routes = [
-    Route("/stats/area/{region}", name="area", endpoint=region),
+    Route("/stats/area/{region}", endpoint=region),
     Route("/stats/area/{region}/plants", endpoint=plants_region),
     Route("/stats/area/{region}/plants/construction", endpoint=plants_construction_region),
     Route("/stats/object/plant/{id}", endpoint=stats_object),
