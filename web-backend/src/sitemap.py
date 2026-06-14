@@ -3,6 +3,8 @@ from urllib.parse import quote
 import asgi_sitemaps
 from starlette.requests import Request
 
+from . import Request as OIMRequest
+from . import get_db
 from .data import get_countries
 
 
@@ -18,11 +20,13 @@ class StaticSitemap(asgi_sitemaps.Sitemap):
 
 class CountryPageSitemap(asgi_sitemaps.Sitemap):
     async def items(self):
-        return [row[0] for row in await get_countries()]
+        request: OIMRequest = Request(scope=self.scope)
+        db = get_db(request)
+        return [row[0] for row in await get_countries(db)]
 
     def location(self, item):
         request = Request(scope=self.scope)
-        url = request.url_for("country", country=quote(item))
+        url = request.url_for("area", region=quote(item))
         return url.path
 
 
