@@ -5,11 +5,10 @@ from shapely import from_wkt
 from sqlalchemy.dialects.postgresql import HSTORE
 from sqlalchemy.sql import text
 from starlette.exceptions import HTTPException
-from starlette.responses import Response
 from starlette.routing import Route
 
 from .. import Request, get_db, path_param
-from ..util import cache_for
+from ..openapi import APIRoute
 
 
 def extract_local_names(tags: dict[str, str]) -> dict[str, str]:
@@ -22,6 +21,8 @@ def extract_local_names(tags: dict[str, str]) -> dict[str, str]:
 
 
 class Circuit(BaseModel):
+    """A circuit relation"""
+
     id: int
     name: str | None
     local_names: dict[str, str]
@@ -30,6 +31,8 @@ class Circuit(BaseModel):
 
 
 class CircuitMembership(BaseModel):
+    """Membership of a substation or line in a circuit relation"""
+
     circuit: Circuit
     role: str | None
 
@@ -38,8 +41,8 @@ class SubstationResponse(BaseModel):
     circuits: list[CircuitMembership]
 
 
-@cache_for(600)
-async def substation(request: Request) -> Response:
+async def substation(request: Request) -> SubstationResponse:
+    """Fetch circuit metadata for a substation."""
     database = get_db(request)
     substation_id = path_param(request, "substation_id", int)
     res = await database.execute(
@@ -70,7 +73,7 @@ async def substation(request: Request) -> Response:
         for r in res
     ]
 
-    return Response(SubstationResponse(circuits=circuits).model_dump_json(), media_type="application/json")
+    return SubstationResponse(circuits=circuits)
 
 
 class CircuitSubstation(BaseModel):
@@ -90,8 +93,8 @@ class CircuitResponse(Circuit):
     geometry: dict[str, Any]  # GeoJSON
 
 
-@cache_for(600)
-async def circuit(request: Request) -> Response:
+async def circuit(request: Request) -> CircuitResponse:
+    """Fetch data for a circuit relation"""
     database = get_db(request)
     circuit_id = path_param(request, "circuit_id", int)
     relation = (
@@ -152,20 +155,17 @@ async def circuit(request: Request) -> Response:
             )
         )
 
-    return Response(
-        CircuitResponse(
-            id=relation._mapping["relation_id"],
-            name=relation._mapping["name"],
-            local_names=extract_local_names(relation._mapping["tags"]),
-            voltage=relation._mapping["voltage"] / 1000 if relation._mapping["voltage"] else None,
-            frequency=relation._mapping["frequency"],
-            geometry=geojson,
-            length=round((relation._mapping["length"] or 0) / 1000, 2),
-            substations=circuit_substations,
-            type=relation._mapping["type"],
-            wikidata=relation._mapping["wikidata"],
-        ).model_dump_json(),
-        media_type="application/json",
+    return CircuitResponse(
+        id=relation._mapping["relation_id"],
+        name=relation._mapping["name"],
+        local_names=extract_local_names(relation._mapping["tags"]),
+        voltage=relation._mapping["voltage"] / 1000 if relation._mapping["voltage"] else None,
+        frequency=relation._mapping["frequency"],
+        geometry=geojson,
+        length=round((relation._mapping["length"] or 0) / 1000, 2),
+        substations=circuit_substations,
+        type=relation._mapping["type"],
+        wikidata=relation._mapping["wikidata"],
     )
 
 
@@ -173,8 +173,8 @@ class LineResponse(BaseModel):
     circuits: list[CircuitMembership]
 
 
-@cache_for(600)
-async def line(request: Request) -> Response:
+async def line(request: Request) -> LineResponse:
+    """Fetch circuits for a power line"""
     database = get_db(request)
     line_id = path_param(request, "line_id", int)
 
@@ -210,11 +210,11 @@ async def line(request: Request) -> Response:
         for r in res
     ]
 
-    return Response(LineResponse(circuits=circuits).model_dump_json(), media_type="application/json")
+    return LineResponse(circuits=circuits)
 
 
-routes = [
-    Route("/api/substation/{substation_id}", endpoint=substation),
-    Route("/api/circuit/{circuit_id}", endpoint=circuit),
-    Route("/api/line/{line_id}", endpoint=line),
+routes: list[Route] = [
+    APIRoute("/api/substation/{substation_id}", endpoint=substation),
+    APIRoute("/api/circuit/{circuit_id}", endpoint=circuit),
+    APIRoute("/api/line/{line_id}", endpoint=line),
 ]
