@@ -1,8 +1,7 @@
 """Low-budget FastAPI"""
 
-from collections.abc import Callable, Iterable
+from collections.abc import Callable, Coroutine, Iterable
 from inspect import signature
-from types import CoroutineType
 from typing import Any
 
 from pydantic import BaseModel
@@ -15,9 +14,7 @@ from .util import cache_for
 
 
 class APIRoute(Route):
-    def __init__(
-        self, path: str, endpoint: Callable[[Request], CoroutineType[Any, Any, BaseModel]], cache=600
-    ):
+    def __init__(self, path: str, endpoint: Callable[[Request], Coroutine[Any, Any, BaseModel]], cache=600):
         self._return_type = signature(endpoint).return_annotation
         self._doc = endpoint.__doc__
 
