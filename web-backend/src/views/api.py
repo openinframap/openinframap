@@ -27,7 +27,7 @@ class Circuit(BaseModel):
     name: str | None
     local_names: dict[str, str]
     voltage: int | None
-    frequency: int | None
+    frequency: float | None
 
 
 class CircuitMembership(BaseModel):
