@@ -150,7 +150,8 @@
         "material": "Material",
         "design": "Diseño",
         "line-management": "Gestión de línea",
-        "transformer-type": "Tipo de transformador"
+        "transformer-type": "Tipo de transformador",
+        "voltage": "Tensión"
     },
     "more_info": "Más información",
     "wikipedia": "Wikipedia",
