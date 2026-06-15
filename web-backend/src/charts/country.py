@@ -36,6 +36,8 @@ async def grid_summary(database: AsyncConnection, country_name: str):
     )
 
     df = result_to_df(data.fetchall())
+    if "line_length" not in df:
+        return None
     df["line_length"] /= 1000  # Convert to km
     cds = ColumnDataSource(df)
 
@@ -116,6 +118,8 @@ async def plant_summary(database: AsyncConnection, country_name: str):
     )
 
     df = result_to_df(data.fetchall())
+    if "plant_count" not in df:
+        return None
     cds = ColumnDataSource(df)
 
     p = figure(

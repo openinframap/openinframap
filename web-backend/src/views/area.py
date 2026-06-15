@@ -24,6 +24,12 @@ from ..templates import render_template
 from ..util import cache_for, region_required
 
 
+def dump_chart(fig, fig_id: str):
+    if not fig:
+        return None
+    return json_item(fig, cast(ID, fig_id), charts.theme)
+
+
 @region_required
 @cache_for(hours=1)
 async def region(request: Request, region):
@@ -46,12 +52,8 @@ async def region(request: Request, region):
             "plant_stats": plants.result(),
             "plant_source_stats": sources.result(),
             "power_lines": power_lines.result(),
-            "country_grid_summary": json.dumps(
-                json_item(grid_summary_chart.result(), cast(ID, "country-grid-summary"), charts.theme)
-            ),
-            "plant_summary": json.dumps(
-                json_item(plant_summary_chart.result(), cast(ID, "plant-summary"), charts.theme)
-            ),
+            "country_grid_summary": dump_chart(grid_summary_chart.result(), "country-grid-summary"),
+            "plant_summary": dump_chart(plant_summary_chart.result(), "plant-summary"),
             "canonical": request.url_for("region", region=region["union"]),
         },
     )
