@@ -140,7 +140,8 @@
         "design": "Vzhled",
         "material": "Materiál",
         "line-attachment": "Připojení vedení",
-        "line-management": "Správa vedení"
+        "line-management": "Správa vedení",
+        "voltage": "Napětí"
     },
     "layers": {
         "telecoms": "Telekomunikace",
