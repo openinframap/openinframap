@@ -120,11 +120,11 @@ export class CircuitInspector {
     })
   }
 
-  updateData(data: GeoJSON.GeoJSON) {
-    if (!this._map.loaded()) {
-      this._map.on('load', () => {
-        this.updateData(data)
-      })
+  async updateData(data: GeoJSON.GeoJSON) {
+    if (!this._map.isStyleLoaded()) {
+      // Spin wait for style to be loaded.
+      setTimeout(() => this.updateData(data), 100)
+      return
     }
     this._bbox = data['bbox']
     const source: GeoJSONSource = this._map.getSource('circuit_highlight')!
