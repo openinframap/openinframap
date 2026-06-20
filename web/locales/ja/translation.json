@@ -156,7 +156,8 @@
         "view-openstreetmap": "OpenStreetMapで見る",
         "line-attachment": "電線の接続",
         "design": "鉄塔種別",
-        "source": "源"
+        "source": "源",
+        "voltage": "電圧"
     },
     "nav": {
         "stats": "統計",
