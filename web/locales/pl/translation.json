@@ -129,7 +129,8 @@
         "circuits": "Obwody",
         "line-attachment": "Sposób montażu linii",
         "line-management": "Przebieg linii",
-        "transformer-type": "Rodzaj transformatora"
+        "transformer-type": "Rodzaj transformatora",
+        "voltage": "Napięcie"
     },
     "units": {
         "kV": "kV",
