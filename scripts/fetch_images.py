@@ -256,26 +256,45 @@ def main() -> None:
         # ----------------------------------------------------------------
         # Step 1 — fetch entity data from Wikidata (50 IDs/request)
         #          saves labels+sitelinks+claims to data/wikidata_json/
+        #          items already cached on disk are read locally (no API call)
         # ----------------------------------------------------------------
-        print(f"\nStep 1{'/' + ('1' if args.json_only else '3')}  "
-              f"Wikidata entity data ({len(todo)} IDs, 50/request, 1 req/sec)")
         id_to_filename: dict[str, str] = {}
         all_fetched: dict[str, dict] = {}
-        batches = list(chunks(todo, 50))
+        todo_api: list[str] = []
+        for uid in todo:
+            cache_file = WIKIDATA_JSON_DIR / f"{uid}.json"
+            if cache_file.exists():
+                try:
+                    all_fetched[uid] = json.loads(cache_file.read_text())
+                except (json.JSONDecodeError, OSError):
+                    todo_api.append(uid)
+            else:
+                todo_api.append(uid)
+
+        def _collect_p18(uid: str, entity: dict) -> None:
+            if local_path(uid):
+                return
+            claims = entity.get("claims", {})
+            if "P18" not in claims:
+                return
+            snak = claims["P18"][0]["mainsnak"]
+            if snak.get("datatype") == "commonsMedia":
+                id_to_filename[uid] = snak["datavalue"]["value"]
+
+        for uid, entity in all_fetched.items():
+            _collect_p18(uid, entity)
+
+        print(f"\nStep 1{'/' + ('1' if args.json_only else '3')}  "
+              f"Wikidata entity data "
+              f"({len(todo_api)} API, {len(all_fetched)} from cache, 50/request, 1 req/sec)")
+        batches = list(chunks(todo_api, 50))
         for i, batch in enumerate(batches, 1):
             print(f"  batch {i}/{len(batches)} ({len(batch)} IDs) ...", end=" ", flush=True)
             try:
                 entities = fetch_entity_data(client, batch)
                 all_fetched.update(entities)
                 for uid, entity in entities.items():
-                    if local_path(uid):
-                        continue
-                    claims = entity.get("claims", {})
-                    if "P18" not in claims:
-                        continue
-                    snak = claims["P18"][0]["mainsnak"]
-                    if snak.get("datatype") == "commonsMedia":
-                        id_to_filename[uid] = snak["datavalue"]["value"]
+                    _collect_p18(uid, entity)
                 print(f"{len(entities)} fetched")
             except httpx.HTTPError as e:
                 print(f"FAILED ({e})", file=sys.stderr)
@@ -314,7 +333,8 @@ def main() -> None:
         filename_to_url: dict[str, str] = {}
         fn_batches = list(chunks(all_filenames, 50))
         for i, batch in enumerate(fn_batches, 1):
-            time.sleep(API_DELAY)
+            if i > 1:
+                time.sleep(API_DELAY)
             print(f"  batch {i}/{len(fn_batches)} ({len(batch)} files) ...", end=" ", flush=True)
             try:
                 got = fetch_thumbnail_urls(client, batch)

@@ -10,7 +10,7 @@ Copy the example env file and configure it:
 cp .env.example .env
 ```
 
-Edit `.env` and set `VITE_BACKEND_BASE_URL=http://localhost:8000` to point at your local
+Edit `.env` and set `VITE_BACKEND_BASE_URL=http://localhost:8001` to point at your local
 backend (see `web-backend/`). `VITE_TILE_BASE_URL` defaults to production tiles and can be
 left as-is unless you are running a local tile server.
 

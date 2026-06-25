@@ -26,7 +26,7 @@ different credentials.
 uv run uvicorn main:app --reload
 ```
 
-The backend listens on `http://localhost:8000`.
+The backend listens on `http://localhost:8001`.
 
 ## Offline Wikidata cache
 

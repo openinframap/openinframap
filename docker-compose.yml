@@ -39,4 +39,4 @@ services:
     environment:
       DB_URI: "postgres://osm:osm@db:5432/osm"
     ports:
-      - "8080:80"
+      - "7800:80"

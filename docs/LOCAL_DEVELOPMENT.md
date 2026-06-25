@@ -80,10 +80,10 @@ See [Wikidata image cache](#wikidata-image-cache) for more details.
 ```bash
 cd web-backend
 cp .env.example .env
-uv run uvicorn main:app --reload
+uv run uvicorn main:app --reload --port 8001
 ```
 
-The backend listens on `http://localhost:8000`. Leave this terminal running.
+The backend listens on `http://localhost:8001`. Leave this terminal running.
 
 ### 6. Configure and start the frontend
 
@@ -97,7 +97,7 @@ cp .env.example .env
 Edit `web/.env` and set:
 
 ```
-VITE_BACKEND_BASE_URL=http://localhost:8000
+VITE_BACKEND_BASE_URL=http://localhost:8001
 ```
 
 `VITE_TILE_BASE_URL` can be left at the production default unless you are
@@ -123,10 +123,10 @@ Open http://localhost:5173.
 VITE_TILE_BASE_URL=https://openinframap.org
 
 # Web-backend — point at your local uvicorn process.
-VITE_BACKEND_BASE_URL=http://localhost:8000
+VITE_BACKEND_BASE_URL=http://localhost:8001
 
 # Optional: point directly at a local Tegola instance.
-# VITE_TEGOLA_URL=http://localhost:8080
+# VITE_TEGOLA_URL=http://localhost:7800
 ```
 
 ### `web-backend/.env`
@@ -210,7 +210,7 @@ docker compose up tegola
 Then set in `web/.env`:
 
 ```
-VITE_TILE_BASE_URL=http://localhost:8080
+VITE_TILE_BASE_URL=http://localhost:7800
 ```
 
 ---
@@ -232,6 +232,84 @@ wipe Docker volumes manually:
 ```bash
 docker compose down -v
 bash scripts/setup-local-db.sh
+```
+
+---
+
+## Copying the database to another machine
+
+A full Europe import takes 10+ hours. If you need to set up a second machine,
+copy the pre-built Docker volume instead of reimporting from scratch.
+
+**Check current database size:**
+
+```bash
+docker run --rm -v openinframap_postgres_data:/data alpine du -sh /data
+```
+
+**On the source machine** — archive the volume (stop the DB first to avoid torn writes):
+
+```bash
+docker compose stop db
+docker run --rm \
+  -v openinframap_postgres_data:/data \
+  -v $(pwd):/backup \
+  alpine tar czf /backup/postgres_data.tar.gz -C /data .
+docker compose start db
+```
+
+This produces `postgres_data.tar.gz` in the repo root (~2–4 GB compressed;
+Postgres data compresses well). Transfer it to the target machine via scp,
+rsync, or a USB drive.
+
+**On the target machine** — restore before running `launch.sh`:
+
+```bash
+# Clone the repo and place the archive in the repo root, then:
+docker volume create openinframap_postgres_data
+docker run --rm \
+  -v openinframap_postgres_data:/data \
+  -v $(pwd):/backup \
+  alpine sh -c "cd /data && tar xzf /backup/postgres_data.tar.gz"
+```
+
+Then run the normal setup script — it detects the existing database and skips
+the import:
+
+```bash
+bash scripts/launch.sh
+```
+
+**Wikidata cache** — the `data/wikidata_json/` and `data/images/` directories
+are plain files (not Docker volumes). Copy them alongside the archive if you
+want offline Wikidata popups on the target machine without re-downloading:
+
+```bash
+# On source:
+tar czf wikidata_cache.tar.gz data/wikidata_json/ data/images/
+
+# On target (from repo root):
+tar xzf wikidata_cache.tar.gz
+```
+
+**Optional: copy the imposm cache** — saves time if you ever need to reimport.
+Not required for normal operation.
+
+```bash
+# On source:
+docker compose stop
+docker run --rm \
+  -v openinframap_imposm_cache:/data \
+  -v $(pwd):/backup \
+  alpine tar czf /backup/imposm_cache.tar.gz -C /data .
+docker compose start db tegola
+
+# On target:
+docker volume create openinframap_imposm_cache
+docker run --rm \
+  -v openinframap_imposm_cache:/data \
+  -v $(pwd):/backup \
+  alpine sh -c "cd /data && tar xzf /backup/imposm_cache.tar.gz"
 ```
 
 ---

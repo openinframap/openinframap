@@ -203,8 +203,8 @@ else
     section "Creating web/.env..."
     cat > "$WEB_ENV" <<'EOF'
 VITE_TILE_BASE_URL=https://openinframap.org
-VITE_TEGOLA_URL=http://localhost:8080
-VITE_BACKEND_BASE_URL=http://localhost:8000
+VITE_TEGOLA_URL=http://localhost:7800
+VITE_BACKEND_BASE_URL=http://localhost:8001
 EOF
 fi
 
@@ -228,7 +228,13 @@ section "Starting Tegola tile server..."
 docker compose up -d tegola
 
 # ---------------------------------------------------------------------------
-# 7. Done
+# 7. Wikidata image cache
+# ---------------------------------------------------------------------------
+section "Caching Wikidata entity data and images (skips already-cached)..."
+uv run scripts/fetch_images.py
+
+# ---------------------------------------------------------------------------
+# 8. Done
 # ---------------------------------------------------------------------------
 echo ""
 echo "======================================================"
@@ -238,16 +244,16 @@ echo ""
 echo "Start the stack in two separate terminals:"
 echo ""
 echo "  Terminal 1 (backend):"
-echo "    cd web-backend && uv run uvicorn main:app --reload"
+echo "    cd web-backend && uv run uvicorn main:app --reload --port 8001"
 echo ""
 echo "  Terminal 2 (frontend):"
-echo "    cd web && npm run dev"
+echo "    cd web && npm install && npm run dev"
 echo ""
 echo "  Then open: http://localhost:5173"
 echo ""
 echo "What works:"
 echo "  - Map with local infrastructure tiles (power, telecoms, etc.)"
-echo "  - Wikidata info popups (requires internet — fetches from wikidata.org)"
+echo "  - Wikidata info popups (offline — served from local cache)"
 echo "  - Search"
 echo "  - Area/stats pages"
 echo ""

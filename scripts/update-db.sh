@@ -120,6 +120,13 @@ echo ""
 echo "==> Restarting Tegola..."
 docker compose up -d tegola
 
+# ---------------------------------------------------------------------------
+# Wikidata image cache
+# ---------------------------------------------------------------------------
+echo ""
+echo "==> Caching Wikidata entity data and images (skips already-cached)..."
+uv run "$REPO_ROOT/scripts/fetch_images.py"
+
 echo ""
 echo "======================================================"
 echo " Database update complete."

@@ -37,10 +37,10 @@ bash scripts/launch.sh
 uv run scripts/fetch_images.py
 
 # 4. Start the backend
-cd web-backend && uv run uvicorn main:app --reload
+cd web-backend && uv run uvicorn main:app --reload --port 8001
 
 # 5. Start the frontend (separate terminal)
-cd web && npm run dev
+cd web && npm install && npm run dev
 # → http://localhost:5173
 ```
 

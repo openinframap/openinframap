@@ -26,7 +26,7 @@ docker compose up tegola
 cd web-backend && uv run uvicorn main:app --reload
 
 # Terminal 3 - frontend:
-cd web && npm run dev   # http://localhost:5173
+cd web && npm install && npm run dev   # http://localhost:5173
 ```
 
 ## Commands
@@ -42,7 +42,7 @@ npm run extract   # Extract i18n translation strings
 
 ### Backend (`web-backend/`)
 ```bash
-uv run uvicorn main:app --reload   # Dev server on port 8000
+uv run uvicorn main:app --reload --port 8001   # Dev server on port 8001
 uv run ruff check                  # Lint
 uv run mypy .                      # Type check
 uv run pytest                      # Tests
@@ -87,7 +87,7 @@ Mapping YAML defines which OSM tags are imported into which DB tables. Runs as a
 ## Environment Variables
 
 Both services need a `.env` file (created by `launch.sh`):
-- `web/.env` — `VITE_TILESERVER_URL` pointing to local Tegola (default `http://localhost:8080`)
+- `web/.env` — `VITE_TILESERVER_URL` pointing to local Tegola (default `http://localhost:7800`)
 - `web-backend/.env` — `DATABASE_URL` for the local PostGIS instance
 
 ## CI/CD
