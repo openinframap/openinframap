@@ -181,7 +181,8 @@
             "solar": "Solar",
             "oil-gas": "Petróleo/Gas",
             "waste": "Residuos",
-            "battery": "Batería"
+            "battery": "Batería",
+            "unknown": "Otro/Desconocido"
         },
         "substation-type": {
             "distribution": "Distribución",
