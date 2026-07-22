@@ -11,7 +11,8 @@
             "battery": "電池",
             "biomass": "バイオマス",
             "oil-gas": "石油ガス",
-            "gas": "ガス"
+            "gas": "ガス",
+            "unknown": "その他・不明"
         },
         "substation-type": {
             "transmission": "送電",
@@ -132,7 +133,7 @@
     },
     "edit": {
         "edit": "編集",
-        "browser": "ブラウザで編集 (ID)",
+        "browser": "ブラウザで編集 (iD)",
         "remote": "リモートコントロールで編集 (JSOM等)",
         "error": "Otworzenie edytora zewnętrznego nie powiodło się - upewnij się, że jest otwary i ma załączoną kontrolę zewnętrzną.\nBłąd: "
     },
@@ -193,7 +194,8 @@
         "underwater": "水中",
         "underground": "地中",
         "roof": "屋根",
-        "surface": "地面"
+        "surface": "地面",
+        "overhead": "高架"
     },
     "warning": "警告",
     "other": "その他",
