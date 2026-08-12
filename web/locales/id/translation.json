@@ -135,7 +135,8 @@
         "type": "Jenis",
         "line-attachment": "Sambungan kabel",
         "line-management": "Penataan kabel",
-        "transformer-type": "Jenis transformer"
+        "transformer-type": "Jenis transformer",
+        "voltage": "Tegangan"
     },
     "nav": {
         "about": "tentang",
@@ -177,7 +178,8 @@
             "solar": "Surya",
             "gas": "Gas",
             "biomass": "Biomassa",
-            "waste": "Sampah"
+            "waste": "Sampah",
+            "unknown": "Lain-lain/Tak diketahui"
         },
         "substation-type": {
             "transmission": "Transmisi",
