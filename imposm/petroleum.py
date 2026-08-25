@@ -1,24 +1,6 @@
 from funcs import table, type_col, str_col
 
 table(
-    "marker",
-    {"pipeline": ["marker"], "power": ["marker"], "marker": ["__any__"]},
-    "point",
-    columns=[type_col],
-)
-
-table(
-    "pipeline",
-    {"man_made": ["pipeline"], "construction:man_made": ["pipeline"]},
-    "linestring",
-    columns=[
-        str_col("substance"),
-        str_col("type"),
-        str_col("construction:man_made", "construction"),
-    ],
-)
-
-table(
     "petroleum_site",
     {
         "industrial": [
@@ -39,14 +21,11 @@ table(
         "pipeline": ["substation"],
     },
     "polygon",
-    columns=[type_col, str_col("name")],
-)
-
-table(
-    "pipeline_feature",
-    {"pipeline": ["valve", "flare"]},
-    "point",
-    columns=[type_col],
+    columns=[
+        type_col,
+        str_col("name"),
+        str_col("utility")
+    ],
 )
 
 table(

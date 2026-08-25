@@ -83,6 +83,7 @@ table(
     {
         "power": ["substation"],
         "construction:power": ["substation"],
+        "disused:power": ["substation"],
     },
     ["points", "polygons"],
     columns=[
@@ -91,6 +92,7 @@ table(
         str_col("voltage"),
         str_col("frequency"),
         str_col("construction:power", "construction"),
+        str_col("disused:power", "disused"),
         bool_col("tunnel"),
     ],
 )
@@ -100,6 +102,7 @@ relation_tables(
     {
         "power": ["substation"],
         "construction:power": ["substation"],
+        "disused:power": ["substation"],
     },
     relation_types=["site"],
     relation_columns=[
@@ -107,6 +110,7 @@ relation_tables(
         str_col("voltage"),
         str_col("frequency"),
         str_col("construction:power", "construction"),
+        str_col("disused:power", "disused"),
         bool_col("tunnel"),
     ],
 )
@@ -131,29 +135,43 @@ table(
 
 table(
     "power_plant",
-    {"power": ["plant"], "construction:power": ["plant"]},
+    {
+        "power": ["plant"],
+        "construction:power": ["plant"],
+        "disused:power": ["plant"]
+    },
     "polygon",
     columns=[
         str_col("plant:output:electricity", "output"),
         str_col("plant:source", "source"),
         str_col("construction:power", "construction"),
+        str_col("disused:power", "disused"),
     ],
 )
 
 relation_tables(
     "power_plant_relation",
-    {"power": ["plant"], "construction:power": ["plant"]},
+    {
+        "power": ["plant"],
+        "construction:power": ["plant"],
+        "disused:power": ["plant"]
+    },
     ["site"],
     relation_columns=[
         str_col("plant:output:electricity", "output"),
         str_col("plant:source", "source"),
         str_col("construction:power", "construction"),
+        str_col("disused:power", "disused"),
     ],
 )
 
 table(
     "power_generator",
-    {"power": ["generator"], "construction:power": ["generator"]},
+    {
+        "power": ["generator"],
+        "construction:power": ["generator"],
+        "disused:power": ["disused"]
+    },
     ["points", "polygons"],
     columns=[
         str_col("generator:source", "source"),
@@ -161,5 +179,6 @@ table(
         str_col("generator:type", "type"),
         str_col("generator:output:electricity", "output"),
         str_col("construction:power", "construction"),
+        str_col("disused:power", "disused"),
     ],
 )
