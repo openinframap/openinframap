@@ -140,7 +140,8 @@
         "material": "Material",
         "line-attachment": "Linjeinfästning",
         "line-management": "Linjestyrning",
-        "transformer-type": "Typ av transformator"
+        "transformer-type": "Typ av transformator",
+        "voltage": "Volt"
     },
     "units": {
         "kV": "kV",
