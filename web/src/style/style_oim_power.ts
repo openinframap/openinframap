@@ -179,14 +179,14 @@ const substation_radius: ExpressionSpecification = interpolate(zoom, [
     5.5,
     interpolate(voltage, [
       [0, 0],
-      [200, 1],
+      [200, 1.2],
       [750, 3]
     ])
   ],
   [
-    13,
+    14,
     interpolate(voltage, [
-      [10, 1],
+      [10, 0.5],
       [30, 3],
       [100, 4],
       [500, 8]
@@ -251,6 +251,7 @@ const plant_label_visible_p: ExpressionSpecification = any(
   all(['>', output, 250], ['>', zoom, 6]),
   all(['>', output, 100], ['>', zoom, 7]),
   all(['>', output, 10], ['>', zoom, 9]),
+  all(['>', output, 1], ['>', zoom, 10]),
   ['>', zoom, 11]
 )
 
@@ -1038,7 +1039,13 @@ export default function layers(): LayerSpecificationWithZIndex[] {
         'circle-stroke-width': interpolate(zoom, [
           [5, 0],
           [8, 0.5],
-          [20, 2]
+          [
+            20,
+            interpolate(voltage, [
+              [0, 0.5],
+              [1000, 4]
+            ])
+          ]
         ]),
         'circle-opacity': power_opacity,
         'circle-stroke-opacity': power_opacity
@@ -1235,7 +1242,6 @@ export default function layers(): LayerSpecificationWithZIndex[] {
       filter: plant_label_visible_p,
       'source-layer': 'power_plant_point',
       minzoom: 5.5,
-      maxzoom: 24,
       layout: {
         'symbol-sort-key': ['-', 10000, output],
         'symbol-z-order': 'source',
@@ -1251,7 +1257,7 @@ export default function layers(): LayerSpecificationWithZIndex[] {
           [
             11,
             interpolate(output, [
-              [0, 0.6],
+              [0, 0.5],
               [1000, 0.8]
             ])
           ]
