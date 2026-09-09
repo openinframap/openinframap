@@ -1,1 +1,235 @@
-{}
+{
+    "nav": {
+        "about": "о проекте",
+        "stats": "статистика",
+        "exports": "экспорт"
+    },
+    "edit": {
+        "edit": "Правка",
+        "remote": "Редактировать с помощью дистанционного управления (JOSM и т.п.)",
+        "browser": "Редактировать с помощью браузера (iD)",
+        "error": "Не удалось запустить редактор – убедитесь, что он запущен и дистанционное управление включено. \nОшибка: "
+    },
+    "names": {
+        "power": {
+            "transformer": "Трансформатор",
+            "tower": "Опора ЛЭП",
+            "pole": "Столб ЛЭП",
+            "generator": "Генератор",
+            "generator-solar": "Солнечный энергогенератор",
+            "wind-turbine": "Ветроэнергетическая установка",
+            "substation": "Подстанция",
+            "switch": "Пункт переключения",
+            "cable": "Кабельная линия",
+            "line": "ЛЭП",
+            "solar-panel": "Солнечная батарея",
+            "plant": "Электростанция",
+            "hvdc": "ПТВН",
+            "line-reference": "Номер линии",
+            "solar-panel-node": "Солнечная батарея (узел)",
+            "other-generator": "Прочие генераторы",
+            "tower-pylon": "Опора",
+            "tower-transition": "Переходная опора",
+            "pole-transition": "Переходной столб",
+            "transformer-3": "Трансформатор (трёхобмоточный)",
+            "switch-disconnector": "Разъединитель",
+            "switch-breaker": "Выключатель",
+            "switch-other": "Коммутационный аппарат",
+            "reactor-series": "Токоограничивающий реактор",
+            "reactor-shunt": "Дугогасящий реактор (ДГР)",
+            "capacitor-series": "Устройство продольной компенсации",
+            "capacitor-shunt": "Статический конденсатор (БСК)",
+            "statcom": "Компенсатор реактивной мощности",
+            "synchronous-condenser": "Синхронный компенсатор",
+            "filter": "Фильтр",
+            "compensator-other": "Прочие компенсирующие устройства",
+            "current-transformer": "Трансформатор тока",
+            "potential-transformer": "Трансформатор напряжения",
+            "converter": "Преобразовательная подстанция",
+            "compensator": "Статический синхронный компенсатор"
+        },
+        "telecoms": {
+            "communication-line": "Линия связи",
+            "exchange": "Телефонная станция (АТС)",
+            "cabinet": "Телекоммуникационный шкаф",
+            "data-center": "Здание узла связи"
+        },
+        "pipeline": "Трубопровод",
+        "petroleum": {
+            "well": "Скважина",
+            "facility": "Нефтеперерабатывающая установка"
+        },
+        "gas": {
+            "pipeline": {
+                "transmission": "Магистральный",
+                "distribution": "Распределительный",
+                "pressure": {
+                    "high": "Высокого давления",
+                    "intermediate": "Среднего давления",
+                    "low": "Низкого давления"
+                }
+            }
+        },
+        "water": {
+            "pipeline": "Водопровод",
+            "sewage-treatment-plant": "Очистные сооружения",
+            "treatment-plant": "Станция водоподготовки",
+            "pumping-station": "Насосная станция",
+            "well": "Колодец",
+            "reservoir": "Резервуар (водоём)",
+            "water-pumping-station": "Водозаборная насосная станция",
+            "sewage-pumping-station": "Канализационная насосная станция (КНС)"
+        },
+        "cable": "Кабельная линия",
+        "telecom": {
+            "tower-mast": "Опора",
+            "datacenter": "Центр обработки данных (ЦОД)"
+        },
+        "cabinet": "Шкаф",
+        "substance": {
+            "oil": "Нефть",
+            "gas": "Природный газ",
+            "fuel": "Топливо",
+            "hydrogen": "Водород",
+            "nitrogen": "Азот",
+            "oxygen": "Кислород",
+            "beer": "Пиво",
+            "co2": "Углекислота",
+            "fresh-water": "Пресная вода",
+            "hot-water": "Теплофикационная вода",
+            "steam": "Водяной пар",
+            "wastewater": "Сточные воды",
+            "rainwater": "Ливневые сточные воды",
+            "petroleum-intermediate": "Нефтепродукты"
+        },
+        "method": {
+            "fission": "Ядерный распад",
+            "fusion": "Термоядерный синтез",
+            "wind-turbine": "Ветроэнергетическая установка",
+            "water-storage": "Водохранилище",
+            "water-pumped-storage": "Гидроаккумулирование",
+            "water-run-of-river": "Русловой",
+            "tidal-barrage": "Водоподъёмная плотина",
+            "tidal-stream": "Поточная",
+            "solar-thermal": "Гелиотермальная",
+            "solar-photovoltaic": "Фотоэлектрическая",
+            "combustion": "Сжигание",
+            "gasification": "Газификация",
+            "anaerobic-digestion": "Анаэробная переработка"
+        },
+        "other-pumping-station": "Прочие насосные станции",
+        "place": "Размещение"
+    },
+    "units": {
+        "kV": "кВ",
+        "Hz": "Гц",
+        "MW": "МВт",
+        "DC": "п.т.",
+        "below_10kv": "< 10 кВ",
+        "ge_kv": "≥ {{voltage}} кВ",
+        "kW": "кВт",
+        "V": "В"
+    },
+    "more_info": "Подробно",
+    "wikipedia": "Википедия",
+    "wikimedia-commons": "Викисклад",
+    "wikidata": "Викиданные",
+    "key": {
+        "name": "Легенда",
+        "power-lines": "ЛЭП",
+        "power-plants": "Электростанции",
+        "power-generators": "Источники энергии",
+        "power-line-supports": "Опорные конструкции",
+        "switchgear": "Распредустройство",
+        "telecoms": "Связь",
+        "gas": "Газ",
+        "petroleum": "Нефть",
+        "water": "Вода",
+        "traction": "Тяговые (< 50 Гц)"
+    },
+    "location": {
+        "underground": "Подземное",
+        "underwater": "Подводное",
+        "overhead": "Воздушное",
+        "roof": "Крышное",
+        "outdoor": "Уличное",
+        "indoor": "В помещении",
+        "surface": "На поверхности"
+    },
+    "power": {
+        "source": {
+            "coal": "Угольная",
+            "geothermal": "Геотермальная",
+            "hydro": "Гидроэлектрическая",
+            "nuclear": "Атомная",
+            "oil-gas": "Нефтяная/Газовая",
+            "gas": "Газовая",
+            "solar": "Солнечная",
+            "wind": "Ветряная",
+            "biomass": "Биотопливная",
+            "waste": "Мусоросжигающая",
+            "battery": "Батарейная",
+            "unknown": "Прочие/Неизвестные"
+        },
+        "substation-type": {
+            "transmission": "Магистральная",
+            "distribution": "Распределительная",
+            "traction": "Тяговая",
+            "converter": "Преобразовательная постоянного тока"
+        }
+    },
+    "other": "Другая",
+    "warning": "Предупреждение",
+    "warnings": {
+        "webgl": "<p> Работа Open Infrastructure Map в этом браузере может быть медленной или не полноценной.</p><p>Для работы сайта требуется поддержка аппаратного ускорения <a href=\"http://webglreport.com\">WebGL</a>.</p><p> Если WebGL поддерживается, возможно, потребуется отключить защиту от снятия отпечатков для этого сайта в браузере.</p>"
+    },
+    "layers": {
+        "background": "Фон",
+        "heatmaps": "Карты интенсивности",
+        "overlays": "Наложения",
+        "infrastructure": "Инфраструктура",
+        "validation": "Проверка",
+        "nighttime-lights": "Ночное освещение",
+        "power": "Энергетика",
+        "solar-generation": "Солнечная генерация",
+        "telecoms": "Связь",
+        "petroleum": "Нефтяная и газовая",
+        "water": "Водоснабжение",
+        "borders": "Границы",
+        "labels": "Надписи",
+        "title": "Слои",
+        "other-pipelines": "Прочие трубопроводы",
+        "osmose-power": "Osmose (Энергетика)"
+    },
+    "construction": "на этапе строительства",
+    "disused": "не эксплуатируется",
+    "coordinates": "Координаты",
+    "search": {
+        "clear": "Очистить запрос",
+        "no-results": "Ничего не найдено"
+    },
+    "openstreetmap": "OpenStreetMap",
+    "info": {
+        "name": "Название",
+        "operator": "Управляющий",
+        "output": "Мощность",
+        "source": "Источник",
+        "start-date": "В эксплуатации с",
+        "generation-method": "Способ выработки",
+        "substation-type": "Тип подстанции",
+        "reference": "Обозначение",
+        "type": "Тип",
+        "website": "Сайт",
+        "view-openstreetmap": "Показать на OpenStreetMap",
+        "substance": "Вещество",
+        "circuits": "Цепи",
+        "location": "Расположение",
+        "voltage": "Напряжение",
+        "material": "Материал",
+        "line-attachment": "Крепление проводов",
+        "line-management": "Трасса и прокладка",
+        "transformer-type": "Тип трансформатора",
+        "design": "Исполнение",
+        "usage": "Статус"
+    }
+}
