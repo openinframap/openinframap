@@ -1,7 +1,7 @@
 import './infopopup.css'
 
 import i18next, { t } from 'i18next'
-import maplibregl, { LngLat, MapGeoJSONFeature, Popup } from 'maplibre-gl'
+import { LngLat, MapGeoJSONFeature, Popup, Map } from 'maplibre-gl'
 import { titleCase } from 'title-case'
 import { local_name_tags, formatVoltage, formatFrequency, formatPower } from '../l10n.ts'
 import friendlyNames from '../friendlynames.ts'
@@ -178,7 +178,7 @@ class InfoPopup {
   layers: string[]
   min_zoom: any
   popup_obj: Popup | null
-  _map!: maplibregl.Map
+  _map!: Map
   friendlyNames: { [key: string]: string }
   api: OpenInfraMapAPI
   circuit_inspector: CircuitInspector
@@ -192,7 +192,7 @@ class InfoPopup {
     this.circuit_inspector = options.circuit_inspector
   }
 
-  add(map: maplibregl.Map, clickRouter: ClickRouter) {
+  add(map: Map, clickRouter: ClickRouter) {
     this._map = map
 
     clickRouter.registerHandler(this.layers, (f, l) => this.popup(f, l))
@@ -403,7 +403,7 @@ class InfoPopup {
       console.info('Clicked feature on layer', feature.layer.id, 'at', location, '\n', feature.properties)
     }
 
-    this.popup_obj = new maplibregl.Popup()
+    this.popup_obj = new Popup()
       .setLngLat(location)
       .setDOMContent(await this.popupHtml(feature))
       .addTo(this._map)

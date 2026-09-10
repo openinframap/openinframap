@@ -3,18 +3,18 @@ import { OSMRemoteControl } from '../remote-control'
 import i18next, { t } from 'i18next'
 import { Marked } from '@ts-stack/markdown'
 import { el, mount } from 'redom'
-import maplibregl, { MapGeoJSONFeature } from 'maplibre-gl'
+import { Popup, Map, MapGeoJSONFeature, LngLat } from 'maplibre-gl'
 import { ClickRouter } from '../click-router'
 import { TabPane } from '../elements/tab-pane'
 
 export class ValidationErrorPopup {
   osmose_endpoint = 'https://osmose.openstreetmap.fr/api/0.3'
 
-  map: maplibregl.Map
+  map: Map
   layers = ['osmose_errors_power', 'osmose_errors_power_symbol']
-  popup_obj?: maplibregl.Popup
+  popup_obj?: Popup
 
-  constructor(map: maplibregl.Map, clickRouter: ClickRouter) {
+  constructor(map: Map, clickRouter: ClickRouter) {
     this.map = map
 
     clickRouter.registerHandler(this.layers, (f, l) => this.popup(f, l))
@@ -54,7 +54,7 @@ export class ValidationErrorPopup {
     return list
   }
 
-  popup_content(issue: any, detail: any, location: maplibregl.LngLat) {
+  popup_content(issue: any, detail: any, location: LngLat) {
     const content = el(
       'div.oim-popup-content',
       el('div.oim-popup-header', el('h3', issue.title.auto), el('h4', 'Osmose validation issue'))
@@ -105,14 +105,14 @@ export class ValidationErrorPopup {
     return content
   }
 
-  async popup(feature: MapGeoJSONFeature, location: maplibregl.LngLat) {
+  async popup(feature: MapGeoJSONFeature, location: LngLat) {
     const uuid = feature.properties.uuid
     const [issue, detail] = await Promise.all([
       this.fetchIssue(uuid),
       this.fetchItemDetail(feature.properties.item, feature.properties.class)
     ])
 
-    this.popup_obj = new maplibregl.Popup()
+    this.popup_obj = new Popup()
       .setLngLat(location)
       .setDOMContent(this.popup_content(issue, detail, location))
       .addTo(this.map)
