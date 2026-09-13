@@ -44,7 +44,9 @@ class SubstationResponse(BaseModel):
 async def substation(request: Request) -> SubstationResponse:
     """Fetch circuit metadata for a substation."""
     database = get_db(request)
-    substation_id = path_param(request, "substation_id", int)
+    # Imposm uses negative IDs for OSM relations in geometry tables, while
+    # relation member references retain the original positive OSM ID.
+    substation_id = abs(path_param(request, "substation_id", int))
     res = await database.execute(
         text(
             """SELECT relation.osm_id AS relation_id,
