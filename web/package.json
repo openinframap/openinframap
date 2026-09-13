@@ -4,9 +4,8 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
+    "start": "pwa-assets-generator --preset minimal-2023 ./public/favicon.svg && vite",
+    "build": "pwa-assets-generator --preset minimal-2023 ./public/favicon.svg && vite build",
     "lint": "eslint ./src",
     "test": "vitest run",
     "extract": "i18next-parser 'src/**/*.{ts,tsx}' --output 'src/locales/{{locale}}/{{ns}}.json' --keep"
@@ -24,6 +23,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@russss/maplibregl-layer-switcher": "^3.0.0",
+    "@vite-pwa/assets-generator": "^1.0.2",
     "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.0",
@@ -33,6 +33,7 @@
     "typescript-eslint": "^8.58.0",
     "vite": "<8.0",
     "vite-plugin-i18next-loader": "^3.0.0",
+    "vite-plugin-pwa": "^1.3.0",
     "vite-plugin-render-svg": "^1.1.1",
     "vitest": "^3.1.1",
     "vitest-environment-puppeteer": "^11.0.3",
