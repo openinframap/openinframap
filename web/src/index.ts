@@ -35,6 +35,7 @@ await i18next.use(LanguageDetector).init({
     'nl',
     'no',
     'pl',
+    'ru',
     'sv',
     'ta',
     'zh',

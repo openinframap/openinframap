@@ -1,8 +1,10 @@
-import maplibregl from 'maplibre-gl'
+import * as maplibregl from 'maplibre-gl'
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import { t } from 'i18next'
 import { mount } from 'redom'
 
 import { LayerSwitcher, URLHash, Layer, LayerGroup } from '@russss/maplibregl-layer-switcher'
+import '@russss/maplibregl-layer-switcher/maplibregl-layer-switcher.css'
 
 import EditButton from './edit-control.js'
 import InfoPopup from './popup/infopopup.js'
@@ -41,16 +43,12 @@ export default class OpenInfraMap {
   }
 
   constructor() {
+    maplibregl.setWorkerUrl(workerUrl)
     if (!this.isWebglSupported()) {
       const infobox = new WarningBox(t('warning', 'Warning'))
       infobox.update(t('warnings.webgl'))
       mount(document.body, infobox)
     }
-
-    maplibregl.setRTLTextPlugin(
-      'https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.min.js',
-      true // Lazy load the plugin
-    )
   }
 
   init() {

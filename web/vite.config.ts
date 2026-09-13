@@ -1,5 +1,6 @@
 /// <reference types="vitest/config" />
 import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
 import { renderSVG } from 'vite-plugin-render-svg'
 import i18nextLoader from 'vite-plugin-i18next-loader'
 
@@ -32,7 +33,43 @@ export default defineConfig({
       urlPrefix: 'icons/',
       outputOriginal: true
     }),
-    i18nextLoader({ paths: ['./locales'], namespaceResolution: 'relativePath' })
+    i18nextLoader({ paths: ['./locales'], namespaceResolution: 'relativePath' }),
+    VitePWA({
+      registerType: 'autoUpdate',
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
+      },
+      manifest: {
+        name: 'Open Infrastructure Map',
+        short_name: 'OpenInfraMap',
+        description:
+          "Open map of the world's electricity, telecoms, oil, and gas infrastructure, using data from OpenStreetMap.",
+        theme_color: '#ffffff',
+        icons: [
+          {
+            src: 'pwa-64x64.png',
+            sizes: '64x64',
+            type: 'image/png'
+          },
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          },
+          {
+            src: 'maskable-icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable'
+          }
+        ]
+      }
+    })
   ],
 
   test: {
