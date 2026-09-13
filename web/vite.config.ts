@@ -24,6 +24,14 @@ export default defineConfig({
     fs: {
       // Allow serving files from one level up to the project root
       allow: ['..']
+    },
+    proxy: {
+      '/stats': {
+        target: 'http://localhost:8000'
+      },
+      '/static': {
+        target: 'http://localhost:8000'
+      }
     }
   },
 
@@ -37,7 +45,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        navigateFallbackDenylist: [/^\/stats/, /^\/map/, /^\/fonts/, /^\/static/]
       },
       manifest: {
         name: 'Open Infrastructure Map',
