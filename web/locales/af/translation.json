@@ -109,7 +109,8 @@
             "hot-water": "Warm water",
             "steam": "Stoom",
             "wastewater": "Afval water",
-            "rainwater": "Reën water"
+            "rainwater": "Reën water",
+            "petroleum-intermediate": "Petroleum-tussenproduk"
         },
         "method": {
             "fission": "Fissie",
