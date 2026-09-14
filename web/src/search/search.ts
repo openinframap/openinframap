@@ -1,7 +1,7 @@
 import './search.css'
 import i18next, { t } from 'i18next'
 import { el } from 'redom'
-import { IControl } from 'maplibre-gl'
+import { IControl, Map } from 'maplibre-gl'
 import OpenCageSearch from './opencage'
 import CoordinatesSearch from './coordinates'
 import OIMSearchProvider from './openinframap'
@@ -19,7 +19,7 @@ export interface ISearchProvider {
 }
 
 export default class OIMSearch implements IControl {
-  map?: maplibregl.Map
+  map?: Map
   container: HTMLElement
   input: HTMLInputElement
   dropdown: HTMLElement
@@ -69,9 +69,12 @@ export default class OIMSearch implements IControl {
     this.dropdown.addEventListener('click', this.onDropdownClick.bind(this))
   }
 
-  onAdd(map: maplibregl.Map): HTMLElement {
+  onAdd(map: Map): HTMLElement {
     this.map = map
-    this.map.on('move', () => {
+
+    // For unclear reasons, some browsers will cause a move event when the input box is selected,
+    // so don't clear search on move.
+    this.map.on('click', () => {
       this.clearSearch()
     })
     return this.container
