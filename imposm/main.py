@@ -1,6 +1,8 @@
 import json
 from funcs import tables, generalized_tables
 
+import utility  # noqa
+import pipeline  # noqa
 import power  # noqa
 import telecoms  # noqa
 import petroleum  # noqa
