@@ -46,7 +46,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
-        navigateFallbackDenylist: [/^\/stats/, /^\/map/, /^\/fonts/, /^\/static/]
+        navigateFallbackDenylist: [/^\/stats/, /^\/map/, /^\/fonts/, /^\/static/, /^\/about/]
       },
       manifest: {
         name: 'Open Infrastructure Map',
