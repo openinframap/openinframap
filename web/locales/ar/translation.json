@@ -1,5 +1,235 @@
 {
     "nav": {
-        "about": "حول"
-    }
+        "about": "حول",
+        "stats": "الإحصاءات",
+        "exports": "التصدير"
+    },
+    "edit": {
+        "edit": "تحرير",
+        "remote": "التحرير عبر التحكم عن بُعد (JOSM وغيره)",
+        "browser": "التحرير في المتصفح (iD)",
+        "error": "تعذر تحميل المحرر البعيد - تأكد من أنه قيد التشغيل وأن التحكم عن بُعد مفعّل.\nالخطأ: "
+    },
+    "names": {
+        "power": {
+            "transformer": "محول كهربائي",
+            "tower": "برج كهرباء",
+            "pole": "عمود كهرباء",
+            "generator": "مولد",
+            "generator-solar": "مولد بالطاقة الشمسية",
+            "wind-turbine": "توربين رياح",
+            "substation": "محطة كهرباء فرعية",
+            "switch": "مفتاح كهربائي",
+            "compensator": "معوض كهربائي",
+            "converter": "محطة تحويل للتيار المستمر",
+            "cable": "كابل كهربائي",
+            "line": "خط كهرباء",
+            "solar-panel": "لوح شمسي",
+            "plant": "محطة توليد كهرباء",
+            "hvdc": "HVDC",
+            "line-reference": "مرجع الخط",
+            "solar-panel-node": "لوح شمسي (عقدة)",
+            "other-generator": "مولد آخر",
+            "tower-pylon": "برج/صرح",
+            "tower-transition": "برج انتقال",
+            "pole-transition": "عمود انتقال",
+            "transformer-3": "محول (ثلاثي الملفات)",
+            "switch-disconnector": "فاصل كهربائي",
+            "switch-breaker": "قاطع دائرة",
+            "switch-other": "مفتاح كهربائي آخر",
+            "reactor-series": "مفاعل تسلسلي",
+            "reactor-shunt": "مفاعل تفرعي",
+            "capacitor-series": "مكثف تسلسلي",
+            "capacitor-shunt": "مكثف تفرعي",
+            "statcom": "معوض القدرة غير الفعالة الساكن",
+            "synchronous-condenser": "مكثف تزامني",
+            "filter": "مرشح",
+            "compensator-other": "معوض آخر",
+            "current-transformer": "محول تيار",
+            "potential-transformer": "محول جهد"
+        },
+        "telecoms": {
+            "communication-line": "خط اتصالات",
+            "data-center": "مبنى اتصالات",
+            "exchange": "مقسم هاتفي",
+            "cabinet": "خزانة اتصالات"
+        },
+        "pipeline": "خط أنابيب",
+        "petroleum": {
+            "well": "بئر",
+            "facility": "منشأة نفطية"
+        },
+        "gas": {
+            "pipeline": {
+                "transmission": "نقل",
+                "distribution": "توزيع",
+                "pressure": {
+                    "high": "ضغط مرتفع",
+                    "intermediate": "ضغط متوسط",
+                    "low": "ضغط منخفض"
+                }
+            }
+        },
+        "water": {
+            "pipeline": "خط أنابيب مياه",
+            "sewage-treatment-plant": "محطة معالجة مياه الصرف الصحي",
+            "treatment-plant": "محطة معالجة مياه",
+            "pumping-station": "محطة ضخ",
+            "well": "بئر مياه",
+            "reservoir": "خزان مياه",
+            "water-pumping-station": "محطة ضخ مياه",
+            "sewage-pumping-station": "محطة ضخ مياه الصرف الصحي"
+        },
+        "cable": "كابل",
+        "telecom": {
+            "tower-mast": "برج/سارية",
+            "datacenter": "مركز بيانات"
+        },
+        "cabinet": "خزانة",
+        "substance": {
+            "oil": "نفط",
+            "gas": "غاز",
+            "petroleum-intermediate": "منتج بترولي وسيط",
+            "fuel": "وقود",
+            "hydrogen": "هيدروجين",
+            "nitrogen": "نيتروجين",
+            "oxygen": "أكسجين",
+            "beer": "بيرة",
+            "co2": "CO<sub>2</sub>",
+            "fresh-water": "مياه عذبة",
+            "hot-water": "مياه ساخنة",
+            "steam": "بخار",
+            "wastewater": "مياه صرف",
+            "rainwater": "مياه أمطار"
+        },
+        "method": {
+            "fission": "انشطار نووي",
+            "fusion": "اندماج نووي",
+            "wind-turbine": "توربين رياح",
+            "water-storage": "تخزين المياه",
+            "water-pumped-storage": "التخزين بالضخ",
+            "water-run-of-river": "جريان النهر",
+            "tidal-barrage": "سدّ مدّي",
+            "tidal-stream": "تيار مدّي",
+            "solar-thermal": "حرارية",
+            "solar-photovoltaic": "كهروضوئية",
+            "combustion": "احتراق",
+            "gasification": "تغويز",
+            "anaerobic-digestion": "هضم لاهوائي"
+        },
+        "other-pumping-station": "محطة ضخ أخرى",
+        "place": "مكان"
+    },
+    "info": {
+        "name": "الاسم",
+        "operator": "المشغّل",
+        "output": "القدرة",
+        "source": "المصدر",
+        "start-date": "تاريخ البدء",
+        "generation-method": "طريقة التوليد",
+        "substation-type": "نوع المحطة الفرعية",
+        "reference": "المرجع",
+        "circuits": "الدوائر",
+        "type": "النوع",
+        "website": "الموقع الإلكتروني",
+        "view-openstreetmap": "عرض على OpenStreetMap",
+        "substance": "المادة",
+        "usage": "الاستخدام",
+        "location": "الموقع",
+        "design": "التصميم",
+        "voltage": "الجهد",
+        "material": "المادة المصنّعة",
+        "line-attachment": "تثبيت الخط",
+        "line-management": "إدارة الخط",
+        "transformer-type": "نوع المحول"
+    },
+    "units": {
+        "kV": "kV",
+        "Hz": "Hz",
+        "MW": "MW",
+        "DC": "DC",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V"
+    },
+    "more_info": "مزيد من المعلومات",
+    "wikipedia": "ويكيبيديا",
+    "wikimedia-commons": "ويكيميديا كومنز",
+    "wikidata": "ويكي بيانات",
+    "key": {
+        "name": "مفتاح الخريطة",
+        "power-lines": "خطوط الكهرباء",
+        "power-plants": "محطات توليد الكهرباء",
+        "power-generators": "مولدات الكهرباء",
+        "power-line-supports": "دعامات خطوط الكهرباء",
+        "switchgear": "معدات الفصل والتوصيل",
+        "telecoms": "الاتصالات",
+        "gas": "الغاز",
+        "petroleum": "النفط",
+        "water": "المياه",
+        "traction": "الجر الكهربائي (< 50 Hz)"
+    },
+    "location": {
+        "underground": "تحت الأرض",
+        "underwater": "تحت الماء",
+        "overhead": "هوائي",
+        "roof": "على السطح",
+        "surface": "على سطح الأرض",
+        "outdoor": "خارجي",
+        "indoor": "داخلي"
+    },
+    "power": {
+        "source": {
+            "coal": "الفحم",
+            "geothermal": "الطاقة الحرارية الأرضية",
+            "hydro": "الطاقة الكهرومائية",
+            "nuclear": "الطاقة النووية",
+            "oil-gas": "النفط/الغاز",
+            "gas": "الغاز",
+            "solar": "الطاقة الشمسية",
+            "wind": "طاقة الرياح",
+            "biomass": "الكتلة الحيوية",
+            "waste": "النفايات",
+            "battery": "البطاريات",
+            "unknown": "أخرى/غير معروفة"
+        },
+        "substation-type": {
+            "transmission": "نقل",
+            "distribution": "توزيع",
+            "traction": "جر كهربائي",
+            "converter": "محول تيار مستمر"
+        }
+    },
+    "other": "أخرى",
+    "warning": "تحذير",
+    "warnings": {
+        "webgl": "<p>قد يواجه متصفحك مشكلات في الأداء أو الوظائف عند استخدام Open Infrastructure Map.</p><p>يتطلب هذا الموقع <a href=\"http://webglreport.com\">WebGL</a> مع تسريع الأجهزة ليعمل بصورة جيدة.</p><p>إذا كان متصفحك يدعم WebGL، فقد تحتاج إلى تعطيل حماية بصمة المتصفح لهذا الموقع.</p>"
+    },
+    "layers": {
+        "background": "الخلفية",
+        "heatmaps": "الخرائط الحرارية",
+        "overlays": "الطبقات التراكبية",
+        "infrastructure": "البنية التحتية",
+        "validation": "التحقق",
+        "nighttime-lights": "الأضواء الليلية",
+        "power": "الكهرباء",
+        "solar-generation": "التوليد الشمسي",
+        "telecoms": "الاتصالات",
+        "petroleum": "النفط والغاز الطبيعي",
+        "water": "المياه",
+        "borders": "الحدود",
+        "labels": "التسميات",
+        "title": "الطبقات",
+        "other-pipelines": "خطوط أنابيب أخرى",
+        "osmose-power": "Osmose (الكهرباء)"
+    },
+    "construction": "قيد الإنشاء",
+    "disused": "خارج الاستخدام",
+    "coordinates": "الإحداثيات",
+    "search": {
+        "clear": "مسح البحث",
+        "no-results": "لم يتم العثور على نتائج"
+    },
+    "openstreetmap": "OpenStreetMap"
 }
