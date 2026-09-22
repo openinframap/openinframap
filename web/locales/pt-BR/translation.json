@@ -1,1 +1,98 @@
-{}
+{
+    "nav": {
+        "about": "sobre",
+        "stats": "estatísticas"
+    },
+    "edit": {
+        "edit": "Editar",
+        "remote": "Editar via controle remoto (JOSM etc)",
+        "browser": "Editar no navegador (iD)",
+        "error": "Não foi possível carregar o editor remoto - verifique se ele está em execução e se o controle remoto está ativado.\nErro: "
+    },
+    "names": {
+        "power": {
+            "transformer": "Transformador",
+            "tower": "Torre de transmissão",
+            "pole": "Poste de energia",
+            "generator": "Gerador",
+            "generator-solar": "Gerador solar",
+            "wind-turbine": "Turbina eólica",
+            "substation": "Subestação",
+            "switch": "Chave elétrica",
+            "compensator": "Compensador",
+            "converter": "Subestação conversora CC",
+            "cable": "Cabo de energia",
+            "line": "Linha de transmissão",
+            "solar-panel": "Painel Solar",
+            "plant": "Usina elétrica",
+            "hvdc": "HVDC",
+            "line-reference": "Referência da linha",
+            "solar-panel-node": "Painel solar (nó)",
+            "other-generator": "Outro gerador",
+            "tower-pylon": "Torre/Pylon",
+            "tower-transition": "Torre de transição",
+            "pole-transition": "Poste de transição",
+            "transformer-3": "Transformador (3 enrolamentos)",
+            "switch-disconnector": "Seccionador",
+            "switch-breaker": "Disjuntor",
+            "switch-other": "Outra chave",
+            "reactor-series": "Reator em série",
+            "reactor-shunt": "Reator em derivação",
+            "capacitor-series": "Capacitor em série",
+            "capacitor-shunt": "Capacitor em derivação",
+            "statcom": "Compensador estático de VAR",
+            "synchronous-condenser": "Compensador síncrono",
+            "filter": "Filtro",
+            "compensator-other": "Outro compensador",
+            "current-transformer": "Transformador de corrente",
+            "potential-transformer": "Transformador de potencial"
+        },
+        "telecoms": {
+            "communication-line": "Linha de telecomunicações",
+            "data-center": "Edifício de telecomunicações",
+            "exchange": "Central telefônica",
+            "cabinet": "Armário de telecomunicações"
+        },
+        "pipeline": "Duto",
+        "petroleum": {
+            "well": "Poço",
+            "facility": "Instalações de petróleo"
+        },
+        "gas": {
+            "pipeline": {
+                "transmission": "Transmissão",
+                "distribution": "Distribuição",
+                "pressure": {
+                    "high": "Alta pressão",
+                    "intermediate": "Pressão intermediária",
+                    "low": "Baixa pressão"
+                }
+            }
+        },
+        "water": {
+            "pipeline": "Duto de água",
+            "sewage-treatment-plant": "Planta de tratamento de esgoto",
+            "treatment-plant": "Planta de tratamento de água",
+            "pumping-station": "Estação de bombeamento",
+            "well": "Poço de água",
+            "reservoir": "Reservatório de água",
+            "water-pumping-station": "Estação de bombeamento de água",
+            "sewage-pumping-station": "Estação de bombeamento de esgoto"
+        },
+        "cable": "Cabo",
+        "telecom": {
+            "tower-mast": "Torre / Mastro",
+            "datacenter": "Datacenter"
+        },
+        "cabinet": "Armário",
+        "substance": {
+            "oil": "Petróleo",
+            "gas": "Gás",
+            "petroleum-intermediate": "Produto intermediário de petróleo",
+            "fuel": "Combustivel",
+            "hydrogen": "Hidrogênio",
+            "nitrogen": "Nitrogênio",
+            "oxygen": "Oxigênio"
+        }
+    }
+}
