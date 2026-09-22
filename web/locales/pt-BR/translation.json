@@ -1,7 +1,8 @@
 {
     "nav": {
         "about": "sobre",
-        "stats": "estatísticas"
+        "stats": "estatísticas",
+        "exports": "Exportações"
     },
     "edit": {
         "edit": "Editar",
@@ -92,7 +93,143 @@
             "fuel": "Combustivel",
             "hydrogen": "Hidrogênio",
             "nitrogen": "Nitrogênio",
-            "oxygen": "Oxigênio"
+            "oxygen": "Oxigênio",
+            "beer": "Cerveja",
+            "co2": "CO<sub>2</sub>",
+            "fresh-water": "Água doce",
+            "hot-water": "Água quente",
+            "steam": "Vapor",
+            "wastewater": "Água residuária",
+            "rainwater": "Água pluvial"
+        },
+        "method": {
+            "fission": "Fissão",
+            "fusion": "Fusão",
+            "wind-turbine": "Turbina eólica",
+            "water-storage": "Armazenamento de água",
+            "water-pumped-storage": "Armazenamento por bombeamento",
+            "water-run-of-river": "A fio d’água",
+            "tidal-barrage": "Barragem",
+            "tidal-stream": "Corrente de maré",
+            "solar-thermal": "Térmica",
+            "solar-photovoltaic": "Fotovoltaico",
+            "combustion": "Combustão",
+            "gasification": "Gasificação",
+            "anaerobic-digestion": "Digestão anaeróbica"
+        },
+        "other-pumping-station": "Outra estação de bombeamento",
+        "place": "Lugar"
+    },
+    "info": {
+        "name": "Nome",
+        "operator": "Operador",
+        "output": "Potência",
+        "source": "Fonte",
+        "start-date": "Data de início",
+        "generation-method": "Método de geração",
+        "substation-type": "Tipo de subestação",
+        "reference": "Referência",
+        "circuits": "Circuitos",
+        "type": "Tipo",
+        "website": "Site",
+        "view-openstreetmap": "Ver no OpenStreetMap",
+        "substance": "Substância",
+        "usage": "Uso",
+        "location": "Localização",
+        "design": "Design",
+        "voltage": "Voltagem",
+        "material": "Material",
+        "line-attachment": "Fixação da linha",
+        "line-management": "Traçado da linha",
+        "transformer-type": "Tipo de transformador"
+    },
+    "units": {
+        "kV": "kV",
+        "Hz": "Hz",
+        "MW": "MW",
+        "DC": "DC",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V"
+    },
+    "more_info": "Mais informações",
+    "wikipedia": "Wikipédia",
+    "wikimedia-commons": "Wikimedia Commons",
+    "wikidata": "Wikidata",
+    "key": {
+        "name": "Legenda",
+        "power-lines": "Linhas de alimentação",
+        "power-plants": "Central Elétrica",
+        "power-generators": "Gerador de energia",
+        "power-line-supports": "Suportes de linhas elétricas",
+        "switchgear": "Equipamentos de manobra",
+        "telecoms": "Telecomunicações",
+        "gas": "Gás",
+        "petroleum": "Petróleo",
+        "water": "Água",
+        "traction": "Tração (< 50 Hz)"
+    },
+    "location": {
+        "underground": "Subterrâneo",
+        "underwater": "Subaquático",
+        "overhead": "Aéreo",
+        "roof": "Telhado",
+        "surface": "Superfície",
+        "outdoor": "Ao ar livre",
+        "indoor": "Interior"
+    },
+    "power": {
+        "source": {
+            "coal": "Carvão",
+            "geothermal": "Geotérmica",
+            "hydro": "Hidrelétrica",
+            "nuclear": "Nuclear",
+            "oil-gas": "Petróleo/Gás",
+            "gas": "Gás",
+            "solar": "Solar",
+            "wind": "Eólica",
+            "biomass": "Biomassa",
+            "waste": "Resíduos",
+            "battery": "Bateria",
+            "unknown": "Outros / Desconhecido"
+        },
+        "substation-type": {
+            "transmission": "Transmissão",
+            "distribution": "Distribuição",
+            "traction": "Tração",
+            "converter": "Conversor de DC"
         }
-    }
+    },
+    "other": "Outros",
+    "warning": "Aviso",
+    "warnings": {
+        "webgl": "<p>Seu navegador pode apresentar problemas de desempenho ou funcionalidade com o Open Infrastructure Map.</p><p>O <a href=\"http://webglreport.com\">WebGL</a> com aceleração de hardware é necessário para que este site tenha um bom desempenho.</p><p>Se o seu navegador oferece suporte a WebGL, talvez seja necessário desativar a proteção contra impressão digital do navegador para este site.</p>"
+    },
+    "layers": {
+        "background": "Plano de fundo",
+        "heatmaps": "Mapas de calor",
+        "overlays": "Sobreposições",
+        "infrastructure": "Infraestrutura",
+        "validation": "Validação",
+        "nighttime-lights": "Luzes noturnas",
+        "power": "Energia elétrica",
+        "solar-generation": "Geração solar",
+        "telecoms": "Telecomunicações",
+        "petroleum": "Petróleo e gás natural",
+        "water": "Água",
+        "borders": "Limites",
+        "labels": "Rótulos",
+        "title": "Camadas",
+        "other-pipelines": "Outros dutos",
+        "osmose-power": "Osmose (Energia elétrica)"
+    },
+    "construction": "em construção",
+    "disused": "desuso",
+    "coordinates": "Coordenadas",
+    "search": {
+        "clear": "Limpar pesquisa",
+        "no-results": "Nenhum resultado encontrado"
+    },
+    "openstreetmap": "OpenStreetMap"
 }
