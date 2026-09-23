@@ -20,6 +20,7 @@ await i18next.use(LanguageDetector).init({
     default: ['en']
   },
   supportedLngs: [
+    'ar',
     'cs',
     'cy',
     'de',
@@ -35,6 +36,7 @@ await i18next.use(LanguageDetector).init({
     'nl',
     'no',
     'pl',
+    'pt-BR',
     'ru',
     'sv',
     'ta',
@@ -51,7 +53,13 @@ await i18next.use(LanguageDetector).init({
   }
 })
 
-document.documentElement.lang = i18next.language
+document.documentElement.setAttribute('lang', i18next.language)
+document.documentElement.setAttribute('dir', i18next.dir())
+
+i18next.on('languageChanged', (lng) => {
+  document.documentElement.setAttribute('lang', i18next.language)
+  document.documentElement.setAttribute('dir', i18next.dir())
+})
 
 // Translate HTML elements.
 document.querySelectorAll('[data-i18n]').forEach((element) => {
