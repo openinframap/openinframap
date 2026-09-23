@@ -56,7 +56,7 @@ await i18next.use(LanguageDetector).init({
 document.documentElement.setAttribute('lang', i18next.language)
 document.documentElement.setAttribute('dir', i18next.dir())
 
-i18next.on('languageChanged', (lng) => {
+i18next.on('languageChanged', () => {
   document.documentElement.setAttribute('lang', i18next.language)
   document.documentElement.setAttribute('dir', i18next.dir())
 })
