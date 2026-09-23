@@ -10,8 +10,10 @@
 }
 
 .oim-popup-info h4 {
-  font-weight: bold;
+  font-weight: normal;
+  font-size: 0.95em;
   color: inherit;
+  margin-block-start: 0.2em;
   margin-block-end: 0.2em;
   margin-left: 0.2em;
 }
