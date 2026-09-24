@@ -68,6 +68,7 @@ export default class OpenInfraMap {
         new LayerGroup(t('layers.infrastructure'), [
           new Layer('P', t('layers.power'), 'power_', true),
           new Layer('T', t('layers.telecoms'), 'telecoms_', false),
+          new Layer('D', t('layers.data-centers'), 'telecoms_data_', false),
           new Layer('O', t('layers.petroleum'), 'petroleum_', false),
           new Layer('I', t('layers.other-pipelines'), 'pipeline_', false),
           new Layer('W', t('layers.water'), 'water_', false)
