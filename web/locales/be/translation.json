@@ -93,16 +93,76 @@
     "edit": {
         "edit": "Рэдагаваць",
         "remote": "Рэдагаваць з дапамогай дыстанцыйнага кіравання (JOSM і г.д.)",
-        "browser": "Рэдагаваць у браўзэры (iD)"
+        "browser": "Рэдагаваць у браўзэры (iD)",
+        "error": "Немагчыма загрузіць аддалены рэдактар. Пераканайцеся, што рэдактар запушчаны і аддаленае кіраваньне ва ў ім уключана \nПамылка: "
     },
     "names": {
         "power": {
             "transformer": "Трансфарматар",
-            "tower": "Вежа",
+            "tower": "Вежа ЛЭП",
             "pole": "Слуп",
             "generator": "Генэратар",
             "wind-turbine": "Ветрагенэратар",
-            "substation": "Падстанцыя"
-        }
+            "substation": "Падстанцыя",
+            "generator-solar": "Сонечны генэратар",
+            "switch": "Выключальнік",
+            "compensator": "Кампэнсатар",
+            "converter": "Падстанцыя пераўтварэння пастаяннага току",
+            "cable": "Сілавы кабэль",
+            "line": "Лінія электраперадачы",
+            "solar-panel": "Сонечная батарэя",
+            "plant": "Электрастанцыя",
+            "hvdc": "HVDC",
+            "line-reference": "Нумар лініі",
+            "solar-panel-node": "Сонечная панэль",
+            "other-generator": "Іншыя генэратары",
+            "tower-pylon": "Вежа",
+            "tower-transition": "Пераходная вежа",
+            "pole-transition": "Пераходны слуп",
+            "transformer-3": "Трансфарматар (3 навоі)",
+            "switch-disconnector": "Раз’ядноўвальнік",
+            "switch-breaker": "Выключальнік",
+            "switch-other": "Іншы выключальнік",
+            "reactor-series": "Рэактар абмежваньня току",
+            "reactor-shunt": "Шунтааы рэактар",
+            "capacitor-series": "Пасьлядоўны кандэнсатар",
+            "capacitor-shunt": "Шунтавы кандэнсатар",
+            "filter": "Фільтар",
+            "compensator-other": "Іншы кампэнсатар",
+            "current-transformer": "Трансфарматар току",
+            "potential-transformer": "Трансфарматар напругі"
+        },
+        "telecoms": {
+            "communication-line": "Лінія сувязі",
+            "data-center": "Будынак сувязі",
+            "cabinet": "Тэлекамунікацыйная шафа"
+        },
+        "pipeline": "Трубаправод",
+        "petroleum": {
+            "well": "Сьвідравіна",
+            "facility": "Нафтавая ўстаноўка"
+        },
+        "gas": {
+            "pipeline": {
+                "transmission": "Магістральны",
+                "distribution": "Размеркавальны",
+                "pressure": {
+                    "high": "Высокага ціску",
+                    "intermediate": "Сярэдняга ціску",
+                    "low": "Нізкага ціску"
+                }
+            }
+        },
+        "water": {
+            "pipeline": "Вадаправод",
+            "sewage-treatment-plant": "Ачышчальныя збудаваньні",
+            "treatment-plant": "Водаачышчальная станцыя",
+            "pumping-station": "Помпавая станцыя",
+            "well": "Вадзяная сьвідравіна",
+            "reservoir": "Вадзяны рэзэрвуар",
+            "water-pumping-station": "Вадзяная помпавая станцыя",
+            "sewage-pumping-station": "Каналізацыйная помпавая станцыя"
+        },
+        "cable": "Кабэль"
     }
 }
