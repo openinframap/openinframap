@@ -216,24 +216,34 @@ def main() -> None:
             "Sufficient for offline popup metadata; run without this flag later to add images."
         ),
     )
+    parser.add_argument(
+        "--count",
+        action="store_true",
+        help="Print '<IDs missing entity JSON> <IDs missing an image>' as the last line and exit (used by launch.sh).",
+    )
     args = parser.parse_args()
 
     IMAGES_DIR.mkdir(parents=True, exist_ok=True)
     WIKIDATA_JSON_DIR.mkdir(parents=True, exist_ok=True)
 
-    print("Connecting to database...")
+    if not args.count:
+        print("Connecting to database...")
     try:
         conn = psycopg2.connect(args.db_url)
     except psycopg2.OperationalError as e:
         sys.exit(f"ERROR: could not connect to database: {e}")
 
-    print("Collecting wikidata IDs from all tagged tables...")
+    if not args.count:
+        print("Collecting wikidata IDs from all tagged tables...")
     all_ids = get_wikidata_ids(conn)
     conn.close()
     print(f"  {len(all_ids)} distinct wikidata IDs found")
 
     todo_json  = sorted(id_ for id_ in all_ids if not (WIKIDATA_JSON_DIR / f"{id_}.json").exists())
     todo_image = sorted(id_ for id_ in all_ids if not local_path(id_))
+    if args.count:
+        print(len(todo_json), len(todo_image))
+        return
     todo = sorted(set(todo_json) | set(todo_image if not args.json_only else []))
 
     already_cached = len(all_ids) - len(set(todo_json) | set(todo_image))

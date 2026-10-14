@@ -1,5 +1,11 @@
 export const TILE_BASE_URL: string = import.meta.env.VITE_TILE_BASE_URL ?? 'https://openinframap.org'
 
+// Basemap (roads, buildings, water, labels) vector tiles in the Protomaps
+// schema. Defaults to openinframap.org; set VITE_BASEMAP_URL to use your own
+// tile server, e.g. `pmtiles serve` or a Martin instance.
+export const BASEMAP_URL: string =
+  import.meta.env.VITE_BASEMAP_URL ?? `${TILE_BASE_URL}/20250311/{z}/{x}/{y}.mvt`
+
 export const BACKEND_BASE_URL: string = import.meta.env.VITE_BACKEND_BASE_URL ?? 'https://openinframap.org'
 
 // Full URL prefix for OIM infrastructure tile layers (power, petroleum, etc.).

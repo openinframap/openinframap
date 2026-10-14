@@ -17,7 +17,7 @@ so the project still works out of the box for contributors who just clone withou
 | **Background toggle** | Hidden — single tile source for local dev |
 | **Wikidata image cache** | `scripts/fetch_images.py` pre-downloads thumbnails and entity JSON to `data/` |
 | **Offline Wikidata popups** | Backend serves cached entity JSON and images; falls back to remote if not cached |
-| **Setup scripts** | `scripts/launch.sh`, `scripts/setup-local-db.sh`, `scripts/update-db.sh` |
+| **Setup scripts** | `scripts/launch.sh` (first-time setup), `scripts/start.sh` (start everything + open the map), `scripts/build-region.sh` (interactive region download + import), `scripts/export-db.sh` / `scripts/import-db.sh` (share a built database, e.g. on a USB drive) |
 
 ## Getting started
 
@@ -26,22 +26,12 @@ See **[docs/LOCAL_DEVELOPMENT.md](./docs/LOCAL_DEVELOPMENT.md)** for the full se
 The short version:
 
 ```bash
-# 1. Get a regional PBF (Netherlands ~200 MB)
-mkdir -p data
-curl -L https://download.geofabrik.de/europe/netherlands-latest.osm.pbf -o data/region.osm.pbf
-
-# 2. Bootstrap everything (DB import, Tegola, .env files)
+# First time: pick a region, build the database, create .env files,
+# then start the app and open it in your browser
 bash scripts/launch.sh
 
-# 3. Pre-cache Wikidata images for offline use
-uv run scripts/fetch_images.py
-
-# 4. Start the backend
-cd web-backend && uv run uvicorn src.main:app --reload --port 8001
-
-# 5. Start the frontend (separate terminal)
-cd web && npm install && npm run dev
-# → http://localhost:5173
+# Every time after that: start everything and open the map
+bash scripts/start.sh
 ```
 
 ## Upstream project

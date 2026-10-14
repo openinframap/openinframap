@@ -18,7 +18,7 @@ Install dependencies and start the dev server:
 
 ```bash
 npm install
-npm run dev   # → http://localhost:5173
+npm start   # → http://localhost:5173
 ```
 
 The Vite dev server proxies `/stats`, `/about`, `/static`, and `/local-images` to the

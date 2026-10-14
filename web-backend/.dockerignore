@@ -1,0 +1,8 @@
+# Built inside the image by `uv sync`; a host venv doesn't work in the container.
+.venv
+.env
+.env.*
+**/__pycache__
+.mypy_cache
+.ruff_cache
+.pytest_cache

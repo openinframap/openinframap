@@ -40,3 +40,28 @@ services:
       DB_URI: "postgres://osm:osm@db:5432/osm"
     ports:
       - "7800:80"
+
+  # Web backend (stats pages, search, Wikidata popups). The image has its own
+  # Python and packages, so it also runs on a computer without internet once
+  # the image is loaded (scripts/export-db.sh saves it). For development with
+  # auto-reload you can still run it on the host instead (see web-backend/).
+  backend:
+    build: web-backend
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://osm:osm@db:5432/osm"
+    # Run the venv built into the image directly: `uv run` would try to sync
+    # (and download) packages at startup.
+    entrypoint: ["/app/.venv/bin/uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "80"]
+    ports:
+      - "8001:80"
+    volumes:
+      # Offline Wikidata cache filled by scripts/fetch_images.py on the host.
+      - ./data/images:/data/images:z
+      - ./data/wikidata_json:/data/wikidata_json:z
+    depends_on:
+      - db
+
+  # Helper image for scripts/build-region.sh. Not started by `docker compose up`.
+  osmium:
+    build: tools/osmium
+    profiles: [tools]

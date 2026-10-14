@@ -11,10 +11,10 @@ requests go to `openinframap.org` at runtime.
 | Tool | Minimum version | Notes |
 |------|----------------|-------|
 | Docker + Compose v2 | Docker 24 | `docker compose` (not `docker-compose`) |
-| [uv](https://docs.astral.sh/uv/) | any recent | Python package manager for the backend and scripts |
+| [uv](https://docs.astral.sh/uv/) | any recent | Optional: for the Wikidata cache script, and to run the backend outside Docker |
 | Node.js + npm | Node 20 | Used by the frontend |
-| shp2pgsql | any | Only needed for the optional EEZ import; part of PostGIS client tools (`postgis-client` / `postgis` package) |
-| Free disk space | ~6 GB | PBF ~200 MB, Docker volumes ~2 GB, node_modules ~1 GB, Wikidata image cache ~100 MB |
+| curl, python3, unzip | any | Used by the setup scripts |
+| Free disk space | depends on region | The raw Geofabrik extract (46 MB for Luxembourg, 33 GB for Europe) plus a few GB for Docker. The script checks before starting. |
 
 ---
 
@@ -27,37 +27,44 @@ git clone <your-fork-url>
 cd openinframap
 ```
 
-### 2. Download a regional PBF
-
-The import script expects a PBF at `data/region.osm.pbf`. Any Geofabrik
-extract works; Netherlands is a good size for testing (~200 MB):
+### 2. Build the map database
 
 ```bash
-mkdir -p data
-curl -L https://download.geofabrik.de/europe/netherlands-latest.osm.pbf \
-     -o data/region.osm.pbf
+bash scripts/build-region.sh
 ```
 
-Any other region from https://download.geofabrik.de works — just rename the
-file to `region.osm.pbf`. The map will be empty outside the imported region.
+It asks which region you want (a continent, a tiny test region, or any
+country/state from [Geofabrik](https://download.geofabrik.de) by name, or the whole
+world — a ~95 GB download from planet.openstreetmap.org that takes a few hours
+to build), then:
 
-### 3. Bootstrap the database
+- Downloads the extract to `data/osm/` (resumable, checksum-verified, reused on re-runs)
+- Filters it down to infrastructure with osmium (`scripts/osm_filter.py` derives the
+  filter from the imposm mapping, so the imported data is identical, just ~100× faster)
+- **Wipes** the local database and imports the region with imposm
+- Applies `schema/views.sql` and `schema/stats.sql`
+- Imports the EEZ country boundaries (see [below](#eez-country-boundaries))
+- Restarts Tegola
+- Optionally caches Wikidata images (step 4)
+
+All questions come first; after that it runs unattended. For a quick test pick
+**Luxembourg** (under a minute). Run it again any time to switch region or
+refresh the data.
+
+Unattended, e.g. on a server:
 
 ```bash
-bash scripts/setup-local-db.sh
+bash scripts/build-region.sh --region europe --yes
+bash scripts/build-region.sh --pbf ~/my-extract.osm.pbf --yes
 ```
 
-This script:
-- Starts the `db` Docker Compose service (PostGIS)
-- Waits for Postgres to be ready
-- Runs imposm to import the PBF (skipped if already imported)
-- Applies `schema/views.sql` and `schema/stats.sql` (skipped if already applied)
-- Prints instructions for the optional EEZ import (see below)
+`bash scripts/launch.sh` runs this automatically if no database exists yet,
+and also creates the `.env` files and offers to start the app (steps 4 and 5)
+in new terminal windows and open it in your browser. After the first setup,
+`bash scripts/start.sh` starts everything and opens the map without asking
+anything.
 
-Re-running after a successful import is safe — it detects existing data and
-skips the heavy steps.
-
-### 4. Cache Wikidata images and metadata (optional but recommended)
+### 3. Cache Wikidata images and metadata (optional but recommended)
 
 This pre-downloads Wikidata entity metadata and Wikimedia Commons thumbnails
 so feature popups work fully offline.
@@ -75,7 +82,19 @@ Files are saved to `data/wikidata_json/` and `data/images/` (both gitignored).
 
 See [Wikidata image cache](#wikidata-image-cache) for more details.
 
-### 5. Configure and start the backend
+### 4. Start the backend
+
+The backend runs in Docker (`start.sh` and `launch.sh` do this for you):
+
+```bash
+docker compose up -d backend
+docker compose logs -f backend   # its log
+```
+
+It listens on `http://localhost:8001` and reads the Wikidata cache from `data/`.
+
+**Developing the backend?** Stop the container (`docker compose stop backend`)
+and run it on the host instead, with auto-reload:
 
 ```bash
 cd web-backend
@@ -83,9 +102,7 @@ cp .env.example .env
 uv run uvicorn src.main:app --reload --port 8001
 ```
 
-The backend listens on `http://localhost:8001`. Leave this terminal running.
-
-### 6. Configure and start the frontend
+### 5. Configure and start the frontend
 
 In a separate terminal:
 
@@ -106,7 +123,7 @@ running a local tile server (see [Tile server](#tile-server) below).
 Then start the dev server:
 
 ```bash
-npm run dev
+npm start
 ```
 
 Open http://localhost:5173.
@@ -149,17 +166,19 @@ DATABASE_URL=postgresql+asyncpg://osm:osm@localhost:5432/osm
 - **Backend pages** — `/stats`, `/about`, `/copyright` proxied from the local backend through Vite
 - **Wikidata popups** — falls back to live Wikidata API if no local cache exists
 
-### Works after image cache step (step 4)
+### Works after image cache step (step 3)
 
 - **Offline Wikidata popups** — labels, Wikipedia/Commons links, thumbnails all served from disk;
   no network required
 - **P361 "part of" hierarchy** — parent entities (e.g. a wind farm for a turbine) are also cached
 
-### Works after EEZ import (optional)
+### EEZ country boundaries
 
-The EEZ (maritime boundary) shapefile must be imported manually — it requires a form submission at
-[marineregions.org](https://www.marineregions.org/sources.php#unioneezcountry). See the output of
-`setup-local-db.sh` for step-by-step instructions.
+The EEZ (maritime boundary) shapefile comes from
+[marineregions.org](https://www.marineregions.org/sources.php#unioneezcountry), which asks you to
+fill in a short form, so it's the one manual download. `build-region.sh` opens the page for you and
+picks the zip up from `~/Downloads` or `data/`. Once it's there, every later build imports it
+automatically. Without it, these don't work:
 
 - **Area/country stats pages** (`/stats/area/*`) — require `countries.country_eez_sub`
 - **Country attribution** on features — same dependency
@@ -217,100 +236,60 @@ VITE_TILE_BASE_URL=http://localhost:7800
 
 ## Updating the data
 
-There is no continuous diff update. To refresh with a newer PBF:
+There is no continuous diff update. To refresh with the latest Geofabrik extract,
+re-run the build. Downloads are kept in `data/osm/` and reused, so a wiped or
+rebuilt database never means re-downloading. If Geofabrik has a newer extract,
+the script asks whether to download it (the default is to keep yours; pass
+`--refresh` to always take the newer one). The script lists what's already
+downloaded when it starts, and `data/osm/build-history.log` records every build
+and whether it finished.
 
 ```bash
-bash scripts/update-db.sh   # wipes and reimports from data/region.osm.pbf
+bash scripts/build-region.sh
 
 # Then re-run the image cache script to pick up any new wikidata IDs:
 uv run scripts/fetch_images.py
 ```
 
-`update-db.sh` wipes the Postgres volume and reimports from scratch. To also
-wipe Docker volumes manually:
-
-```bash
-docker compose down -v
-bash scripts/setup-local-db.sh
-```
-
 ---
 
-## Copying the database to another machine
+## Sharing a built database (export / import)
 
-A full Europe import takes 10+ hours. If you need to set up a second machine,
-copy the pre-built Docker volume instead of reimporting from scratch.
-
-**Check current database size:**
+Building a big region takes time, and the whole world takes hours. Once it's
+built, save it as a ready-made export:
 
 ```bash
-docker run --rm -v openinframap_postgres_data:/data alpine du -sh /data
+bash scripts/export-db.sh
 ```
 
-**On the source machine** — archive the volume (stop the DB first to avoid torn writes):
+This writes `data/exports/<region>.oimdb` (the database, compressed; Luxembourg
+is 23 MB) and `<region>.json` (region, OSM data date, checksum). It also offers
+to save the project's Docker images to `data/exports/docker-images.tar.gz`
+(~250 MB, shared by all exports) so a computer **without internet access** can
+run it.
+
+To use it on another computer, copy the project folder (e.g. to a USB drive)
+and run `bash scripts/launch.sh` (or `bash scripts/build-region.sh`) there. The
+region menu marks the region as **"✓ ready-made export — imports in minutes"**;
+choosing it restores the database instead of downloading and processing the
+data. You can leave `data/osm/` (the raw downloads) out of the copy: it's only
+needed to rebuild from scratch. Keep `data/images/` and `data/wikidata_json/`
+for offline popups, and `data/EEZ_*` for future rebuilds.
 
 ```bash
-docker compose stop db
-docker run --rm \
-  -v openinframap_postgres_data:/data \
-  -v $(pwd):/backup \
-  alpine tar czf /backup/postgres_data.tar.gz -C /data .
-docker compose start db
+bash scripts/import-db.sh data/exports/russia.oimdb   # import directly
+bash scripts/build-region.sh --region russia --rebuild   # ignore the export, rebuild
 ```
 
-This produces `postgres_data.tar.gz` in the repo root (~2–4 GB compressed;
-Postgres data compresses well). Transfer it to the target machine via scp,
-rsync, or a USB drive.
+The import checks the file's checksum (catching a damaged copy) and warns if
+the export was made with a different version of the import mapping or views.
+Without internet access, the menu only lists exports, earlier downloads and
+local `.osm.pbf` files.
 
-**On the target machine** — restore before running `launch.sh`:
-
-```bash
-# Clone the repo and place the archive in the repo root, then:
-docker volume create openinframap_postgres_data
-docker run --rm \
-  -v openinframap_postgres_data:/data \
-  -v $(pwd):/backup \
-  alpine sh -c "cd /data && tar xzf /backup/postgres_data.tar.gz"
-```
-
-Then run the normal setup script — it detects the existing database and skips
-the import:
-
-```bash
-bash scripts/launch.sh
-```
-
-**Wikidata cache** — the `data/wikidata_json/` and `data/images/` directories
-are plain files (not Docker volumes). Copy them alongside the archive if you
-want offline Wikidata popups on the target machine without re-downloading:
-
-```bash
-# On source:
-tar czf wikidata_cache.tar.gz data/wikidata_json/ data/images/
-
-# On target (from repo root):
-tar xzf wikidata_cache.tar.gz
-```
-
-**Optional: copy the imposm cache** — saves time if you ever need to reimport.
-Not required for normal operation.
-
-```bash
-# On source:
-docker compose stop
-docker run --rm \
-  -v openinframap_imposm_cache:/data \
-  -v $(pwd):/backup \
-  alpine tar czf /backup/imposm_cache.tar.gz -C /data .
-docker compose start db tegola
-
-# On target:
-docker volume create openinframap_imposm_cache
-docker run --rm \
-  -v openinframap_imposm_cache:/data \
-  -v $(pwd):/backup \
-  alpine sh -c "cd /data && tar xzf /backup/imposm_cache.tar.gz"
-```
+**Offline limits:** the background map still comes from openinframap.org (set
+`VITE_BASEMAP_URL` for your own tile server). Everything else runs offline: the
+database, Tegola and the backend come from the saved Docker images, and the
+frontend from the copied `web/node_modules/` (Node.js and npm must be installed).
 
 ---
 

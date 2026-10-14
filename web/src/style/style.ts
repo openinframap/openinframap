@@ -1,5 +1,5 @@
 import i18next from 'i18next'
-import { TILE_BASE_URL, OIM_TILES } from '../config.js'
+import { TILE_BASE_URL, BASEMAP_URL, OIM_TILES } from '../config.js'
 import style_base from './style_base.js'
 import style_labels from './style_labels.js'
 import style_oim_power from './style_oim_power.js'
@@ -60,7 +60,7 @@ const style: StyleSpecification = {
   sources: {
     basemap: {
       type: 'vector',
-      tiles: [`${TILE_BASE_URL}/20250311/{z}/{x}/{y}.mvt`],
+      tiles: [BASEMAP_URL],
       maxzoom: 15,
       attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a>'
     },

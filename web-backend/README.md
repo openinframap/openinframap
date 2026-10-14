@@ -25,11 +25,18 @@ different credentials.
 
 ## Running
 
+Normally it runs in Docker as the `backend` Compose service (`bash scripts/start.sh`
+starts it): `docker compose up -d backend`. That uses the database URL from
+`docker-compose.yml`, not `.env`.
+
+To work on the backend with auto-reload, stop the container and run it on the host:
+
 ```bash
-uv run uvicorn src.main:app --reload
+docker compose stop backend
+uv run uvicorn src.main:app --reload --port 8001
 ```
 
-The backend listens on `http://localhost:8001`.
+Either way it listens on `http://localhost:8001`.
 
 ## Offline Wikidata cache
 

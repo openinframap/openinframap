@@ -8,32 +8,32 @@ Open Infrastructure Map is a web geospatial application displaying world infrast
 
 ## Development Setup
 
-Prerequisites: `docker`, `uv`, `node`, `npm`, `unzip`, `shp2pgsql`.
+Prerequisites: `docker`, `node`, `npm`, `curl`, `python3`, `unzip` (`uv` optional: Wikidata cache script, running the backend on the host).
 
-For a fresh setup, place a regional OSM PBF file at `data/region.osm.pbf` (e.g. from Geofabrik), then run:
+For a fresh setup run:
 ```bash
 bash scripts/launch.sh
 ```
 
-This downloads EEZ boundary data, imports OSM data into Postgres, generates Tegola config, and creates `.env` files. The DB import can be re-run idempotently with `bash scripts/setup-local-db.sh`.
+If there's no database yet it runs `scripts/build-region.sh`, which asks for a Geofabrik region, downloads it to `data/osm/`, pre-filters it with osmium (filter generated from the imposm mapping by `scripts/osm_filter.py`), imports it, and imports the EEZ boundaries (`data/EEZ_land_union_v4_202410.zip`, a manual download). It then creates the `.env` files, starts Tegola, and offers to open the backend and frontend in new terminal windows and the map in the browser. For day-to-day use, `bash scripts/start.sh` does that last part with no questions.
 
 Start services:
 ```bash
 # Terminal 1 - tile server (already started by launch.sh, or manually):
 docker compose up tegola
 
-# Terminal 2 - web backend:
-cd web-backend && uv run uvicorn src.main:app --reload
+# Web backend (Docker; or on the host for auto-reload: cd web-backend && uv run uvicorn src.main:app --reload --port 8001):
+docker compose up -d backend
 
-# Terminal 3 - frontend:
-cd web && npm install && npm run dev   # http://localhost:5173
+# Terminal 2 - frontend:
+cd web && npm install && npm start   # http://localhost:5173
 ```
 
 ## Commands
 
 ### Frontend (`web/`)
 ```bash
-npm run dev       # Dev server on port 5173
+npm start       # Dev server on port 5173
 npm run build     # Production build
 npm run lint      # ESLint + Prettier
 npm run test      # Vitest (+ Puppeteer integration tests)
@@ -58,8 +58,10 @@ python3 ./generate_tegola_config.py ./tegola.yml ./layers.yml > ./config.toml
 ```bash
 docker compose up db                     # Start PostGIS container
 docker compose down -v                   # Wipe all volumes (full reset)
-bash scripts/setup-local-db.sh          # Re-import OSM + rebuild schema (idempotent)
-bash scripts/update-db.sh               # Wipe DB and reimport from data/region.osm.pbf
+bash scripts/build-region.sh            # Interactive: pick a region, wipe DB, download + import
+bash scripts/build-region.sh --region luxembourg --yes   # Unattended (tiny test region)
+bash scripts/export-db.sh               # Save the built DB to data/exports/<region>.oimdb (+ Docker images)
+bash scripts/import-db.sh data/exports/<region>.oimdb    # Restore it; build-region.sh offers this in its menu
 ```
 
 ## Architecture
@@ -79,7 +81,7 @@ The `config.toml` Tegola reads is **generated** — never edit it directly. Edit
 MapLibre GL JS map with i18next for internationalisation. The dev server proxies tile requests; configure the tile server URL in `.env` (created by `launch.sh`). Tests use Vitest with Puppeteer for browser-level integration tests.
 
 ### Backend (`/web-backend/`)
-Starlette ASGI app (code under `src/`, entry point `src.main:app`) using SQLAlchemy async + asyncpg for DB access. Bokeh + Pandas are used to generate SVG/HTML stats charts. Requires `DATABASE_URL` env var using the `postgresql+asyncpg://` scheme.
+Starlette ASGI app (code under `src/`, entry point `src.main:app`; runs as the `backend` Docker Compose service on port 8001, which mounts `data/images` and `data/wikidata_json`) using SQLAlchemy async + asyncpg for DB access. Bokeh + Pandas are used to generate SVG/HTML stats charts. Requires `DATABASE_URL` env var using the `postgresql+asyncpg://` scheme.
 
 ### Imposm (`/imposm/`)
 Mapping YAML defines which OSM tags are imported into which DB tables. Runs as a Docker Compose service; the `imposm_diff` and `imposm_expiry` volumes support continuous replication updates.
