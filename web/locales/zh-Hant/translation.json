@@ -135,7 +135,8 @@
         "design": "塔架設計",
         "name": "名稱",
         "circuits": "迴路",
-        "transformer-type": "變壓器類型"
+        "transformer-type": "變壓器類型",
+        "voltage": "伏特"
     },
     "nav": {
         "about": "關於",

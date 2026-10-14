@@ -11,7 +11,8 @@
             "battery": "電池",
             "biomass": "バイオマス",
             "oil-gas": "石油ガス",
-            "gas": "ガス"
+            "gas": "ガス",
+            "unknown": "その他・不明"
         },
         "substation-type": {
             "transmission": "送電",
@@ -132,8 +133,9 @@
     },
     "edit": {
         "edit": "編集",
-        "browser": "ブラウザで編集 (ID)",
-        "remote": "リモートコントロールで編集 (JSOM等)"
+        "browser": "ブラウザで編集 (iD)",
+        "remote": "リモートコントロールで編集 (JSOM等)",
+        "error": "Otworzenie edytora zewnętrznego nie powiodło się - upewnij się, że jest otwary i ma załączoną kontrolę zewnętrzną.\nBłąd: "
     },
     "info": {
         "name": "名前",
@@ -155,7 +157,8 @@
         "view-openstreetmap": "OpenStreetMapで見る",
         "line-attachment": "電線の接続",
         "design": "鉄塔種別",
-        "source": "源"
+        "source": "源",
+        "voltage": "電圧"
     },
     "nav": {
         "stats": "統計",
@@ -191,7 +194,8 @@
         "underwater": "水中",
         "underground": "地中",
         "roof": "屋根",
-        "surface": "地面"
+        "surface": "地面",
+        "overhead": "高架"
     },
     "warning": "警告",
     "other": "その他",

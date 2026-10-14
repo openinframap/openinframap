@@ -84,9 +84,7 @@ export function match(
 ): ExpressionSpecification {
   // The following contortion is required to satisfy the typechecker.
   const cases_flat = cases.slice(1).flat() as (
-    | ExpressionInputType
-    | ExpressionInputType[]
-    | ExpressionSpecification
+    ExpressionInputType | ExpressionInputType[] | ExpressionSpecification
   )[]
   return ['match', property, cases[0][0], cases[0][1], ...cases_flat, fallback]
 }

@@ -170,7 +170,8 @@
         "line-management": "Leitungstopologie",
         "design": "Form",
         "line-attachment": "Leitungsbefestigung",
-        "transformer-type": "Transformer Typ"
+        "transformer-type": "Transformer Typ",
+        "voltage": "Spannung"
     },
     "nav": {
         "about": "Über",

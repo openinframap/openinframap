@@ -1,0 +1,29 @@
+{% extends "_base.html" %} {% import "_tables.html" as tables %}
+{% set breadcrumbs = [('Stats', url_for('stats')), ('Circuits', None)] %}
+{% block title%}Circuits {%- endblock %}
+{% block content -%}
+
+<div class="table-wrapper">
+  <table>
+    <caption>Circuits</caption>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Length</th>
+        <th>Substations</th>
+        <th>Wikidata</th>
+      <tr>
+    </thead>
+    <tbody>
+        {% for row in circuits %}
+        <tr>
+            <td>{{row.name}}{% if row.name_en%}{% if row.name %}<br>{% endif %}({{row.name_en}}){% endif %}</td>
+            <td>{{row.circuit_length|round|int}}&nbsp;km</td>
+            <td>{{row.substations}}</td>
+            <td>{% if row.wikidata %}{{row.wikidata}}{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

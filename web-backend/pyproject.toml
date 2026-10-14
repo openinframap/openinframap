@@ -15,8 +15,13 @@ dependencies = [
     "more-itertools",
     "async_lru",
     "pandas>=2.2.3",
-    "bokeh==3.7.0",
+    "bokeh==3.9.1",
     "pycountry>=24.6.1",
+    "sqlalchemy[asyncio]>=2.0.50",
+    "pydantic>=2.13.4",
+    "geojson>=3.3.0",
+    "asgiref>=3.11.1",
+    "shapely>=2.1.2",
 ]
 
 [tool.ruff]
@@ -29,10 +34,12 @@ ignore = []
 
 [dependency-groups]
 dev = [
+    "asyncpg-stubs>=0.30.2",
     "ipython>=9.0.2",
     "mypy>=1.15.0",
     "pandas-stubs>=2.2.3.250308",
     "pytest>=8.3.4",
     "pytest-asyncio>=0.25.3",
     "ruff>=0.9.7",
+    "types-shapely>=2.1.0.20260603",
 ]

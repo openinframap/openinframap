@@ -1,15 +1,16 @@
 """Endpoints to proxy WikiData requests for info popups on the map"""
 
-from pathlib import Path
 from typing import Any, Optional
 
 import httpx
 from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse, Response
+from starlette.routing import Route
 
-from data import get_commons_thumbnail, get_wikidata
-from main import app, IMAGES_DIR
-from util import cache_for
+from .. import Request
+from ..config import IMAGES_DIR
+from ..data import get_commons_thumbnail, get_wikidata
+from ..util import cache_for
 
 
 def _local_thumbnail(wikidata_id: str) -> Optional[str]:
@@ -18,11 +19,10 @@ def _local_thumbnail(wikidata_id: str) -> Optional[str]:
     return f"/local-images/{matches[0].name}" if matches else None
 
 
-@app.route("/wikidata/{wikidata_id}")
 @cache_for(86400)
-async def wikidata(request) -> Response:
+async def wikidata(request: Request) -> Response:
     wikidata_id = request.path_params["wikidata_id"].upper()
-    http_client = request.state.http_client
+    http_client = request.state["http_client"]
 
     response = await wikidata_json(wikidata_id, http_client)
     if response is None:
@@ -70,3 +70,6 @@ async def wikidata_json(wikidata_id: str, http_client: httpx.AsyncClient) -> Opt
                 response["part_of"].append(part_info)
 
     return response
+
+
+routes = [Route("/wikidata/{wikidata_id}", endpoint=wikidata)]

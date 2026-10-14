@@ -1,42 +1,48 @@
 import asyncio
-import json
-from starlette.exceptions import HTTPException
-from starlette.responses import RedirectResponse
+from typing import cast
 
+from bokeh.core.types import ID
 from bokeh.embed import json_item
+from sqlalchemy import text
+from starlette.exceptions import HTTPException
+from starlette.responses import RedirectResponse, Response
+from starlette.routing import Route
 
-from main import app, database, templates
-from util import cache_for, region_required
-from data import (
-    stats_power_line,
+from .. import Request, charts, get_db
+from ..data import (
+    get_commons_thumbnail,
     get_plant,
     get_plant_generator_summary,
     get_wikidata,
-    get_commons_thumbnail,
+    latest_stats_date,
     plant_source_stats,
     plant_stats,
-    latest_stats_date,
+    stats_power_line,
 )
-import charts.country
+from ..templates import render_template
+from ..util import cache_for, region_required
 
 
-@app.route("/stats/area/{region}")
+def dump_chart(fig, fig_id: str):
+    if not fig:
+        return None
+    return json_item(fig, cast(ID, fig_id), charts.theme)
+
+
 @region_required
 @cache_for(hours=1)
-async def region(request, region):
-    stats_date = await latest_stats_date()
+async def region(request: Request, region):
+    database = get_db(request)
+    stats_date = await latest_stats_date(database)
     async with asyncio.TaskGroup() as tg:
-        plants = tg.create_task(plant_stats(region["gid"], date=stats_date))
-        sources = tg.create_task(plant_source_stats(region["gid"], date=stats_date))
-        power_lines = tg.create_task(stats_power_line(region["union"], date=stats_date))
-        grid_summary_chart = tg.create_task(
-            charts.country.grid_summary(region["union"])
-        )
-        plant_summary_chart = tg.create_task(
-            charts.country.plant_summary(region["union"])
-        )
+        plants = tg.create_task(plant_stats(database, region["gid"], date=stats_date))
+        sources = tg.create_task(plant_source_stats(database, region["gid"], date=stats_date))
+        power_lines = tg.create_task(stats_power_line(database, region["union"], date=stats_date))
+        grid_summary_chart = tg.create_task(charts.country.grid_summary(database, region["union"]))
+        plant_summary_chart = tg.create_task(charts.country.plant_summary(database, region["union"]))
 
-    return templates.TemplateResponse(
+    return render_template(
+        request,
         "area.html",
         {
             "request": request,
@@ -45,27 +51,23 @@ async def region(request, region):
             "plant_stats": plants.result(),
             "plant_source_stats": sources.result(),
             "power_lines": power_lines.result(),
-            "country_grid_summary": json.dumps(
-                json_item(
-                    grid_summary_chart.result(), "country-grid-summary", charts.theme
-                )
-            ),
-            "plant_summary": json.dumps(
-                json_item(plant_summary_chart.result(), "plant-summary", charts.theme)
-            ),
+            "country_grid_summary": dump_chart(grid_summary_chart.result(), "country-grid-summary"),
+            "plant_summary": dump_chart(plant_summary_chart.result(), "plant-summary"),
             "canonical": request.url_for("region", region=region["union"]),
         },
     )
 
 
-@app.route("/stats/area/{region}/plants")
 @region_required
 @cache_for(hours=1)
-async def plants_region(request, region):
-    gid = region[0]
+async def plants_region(request: Request, region):
+    database = get_db(request)
+    gid = region["gid"]
 
-    plants = await database.fetch_all(
-        query="""SELECT osm_id, name, tags->'name:en' AS name_en, tags->'wikidata' AS wikidata,
+    plants = (
+        await database.execute(
+            text(
+                """SELECT osm_id, name, tags->'name:en' AS name_en, tags->'wikidata' AS wikidata,
                         tags->'plant:method' AS method, tags->'operator' AS operator,
                         convert_power(output) AS output,
                         source, ST_GeometryType(geometry) AS geom_type
@@ -74,16 +76,16 @@ async def plants_region(request, region):
                         (SELECT ST_Transform(geom, 3857) FROM countries.country_eez WHERE gid = :gid),
                         geometry)
                   AND tags -> 'construction:power' IS NULL
-                  ORDER BY convert_power(output) DESC NULLS LAST, name ASC NULLS LAST """,
-        values={"gid": gid},
-    )
+                  ORDER BY convert_power(output) DESC NULLS LAST, name ASC NULLS LAST """
+            ),
+            {"gid": gid},
+        )
+    ).fetchall()
 
     source = None
     if "source" in request.query_params:
         source = request.query_params["source"].lower()
-        plants = [
-            plant for plant in plants if source in plant["source"].lower().split(";")
-        ]
+        plants = [plant for plant in plants if source in plant._mapping["source"].lower().split(";")]
 
     min_output = None
     if "min_output" in request.query_params:
@@ -92,12 +94,13 @@ async def plants_region(request, region):
             plants = [
                 plant
                 for plant in plants
-                if plant["output"] and plant["output"] >= min_output
+                if plant._mapping["output"] and plant._mapping["output"] >= min_output
             ]
         except ValueError:
             pass
 
-    return templates.TemplateResponse(
+    return render_template(
+        request,
         "plants_country.html",
         {
             "request": request,
@@ -111,14 +114,16 @@ async def plants_region(request, region):
     )
 
 
-@app.route("/stats/area/{region}/plants/construction")
 @region_required
 @cache_for(hours=1)
-async def plants_construction_region(request, region):
-    gid = region[0]
+async def plants_construction_region(request: Request, region) -> Response:
+    database = get_db(request)
+    gid = region["gid"]
 
-    plants = await database.fetch_all(
-        query="""SELECT osm_id, name, tags->'name:en' AS name_en, tags->'wikidata' AS wikidata,
+    plants = (
+        await database.execute(
+            text(
+                """SELECT osm_id, name, tags->'name:en' AS name_en, tags->'wikidata' AS wikidata,
                         tags->'plant:method' AS method, tags->'operator' AS operator,
                         tags->'start_date' AS start_date,
                         convert_power(output) AS output,
@@ -128,11 +133,14 @@ async def plants_construction_region(request, region):
                         (SELECT ST_Transform(geom, 3857) FROM countries.country_eez WHERE gid = :gid),
                         geometry)
                   AND tags -> 'construction:power' IS NOT NULL
-                  ORDER BY convert_power(output) DESC NULLS LAST, name ASC NULLS LAST """,
-        values={"gid": gid},
-    )
+                  ORDER BY convert_power(output) DESC NULLS LAST, name ASC NULLS LAST """
+            ),
+            {"gid": gid},
+        )
+    ).fetchall()
 
-    return templates.TemplateResponse(
+    return render_template(
+        request,
         "plants_country.html",
         {
             "construction": True,
@@ -143,44 +151,48 @@ async def plants_construction_region(request, region):
     )
 
 
-@app.route("/stats/object/plant/{id}")
 @cache_for(hours=1)
-async def stats_object(request):
+async def stats_object(request: Request) -> Response:
+    database = get_db(request)
     try:
         id = int(request.path_params["id"])
     except ValueError:
         raise HTTPException(400)
 
-    res = await database.fetch_one(
-        """SELECT country_eez."union" FROM power_plant, countries.country_eez WHERE
+    res = (
+        await database.execute(
+            text(
+                """SELECT country_eez."union" FROM power_plant, countries.country_eez WHERE
                 ST_Contains(ST_Transform(country_eez.geom, 3857), geometry)
                 AND country_eez."union" != 'Antarctica'
-                AND power_plant.osm_id = :id""",
-        values={"id": id},
-    )
+                AND power_plant.osm_id = :id"""
+            ),
+            {"id": id},
+        )
+    ).fetchone()
 
     if not res:
         raise HTTPException(404)
 
-    return RedirectResponse(request.url_for("plant_detail", region=res["union"], id=id))
+    return RedirectResponse(request.url_for("plant_detail", region=res._mapping["union"], id=id))
 
 
-@app.route("/stats/area/{region}/plants/{id}")
 @region_required
 @cache_for(hours=1)
-async def plant_detail(request, region):
+async def plant_detail(request: Request, region) -> Response:
+    database = get_db(request)
     try:
         plant_id = int(request.path_params["id"])
     except ValueError:
         raise HTTPException(404, "Invalid plant ID")
 
-    http_client = request.state.http_client
+    http_client = request.state["http_client"]
 
-    plant = await get_plant(plant_id, region["gid"])
+    plant = await get_plant(database, plant_id, region["gid"])
     if plant is None:
         raise HTTPException(404, "Nonexistent power plant")
 
-    generator_summary = await get_plant_generator_summary(plant_id)
+    generator_summary = await get_plant_generator_summary(database, plant_id)
 
     if "wikidata" in plant["tags"]:
         wd = await get_wikidata(plant["tags"]["wikidata"], http_client)
@@ -188,11 +200,7 @@ async def plant_detail(request, region):
         wd = None
 
     image_data = None
-    if (
-        wd
-        and "P18" in wd["claims"]
-        and wd["claims"]["P18"][0]["mainsnak"]["datatype"] == "commonsMedia"
-    ):
+    if wd and "P18" in wd["claims"] and wd["claims"]["P18"][0]["mainsnak"]["datatype"] == "commonsMedia":
         image_data = await get_commons_thumbnail(
             wd["claims"]["P18"][0]["mainsnak"]["datavalue"]["value"], http_client, 400
         )
@@ -203,7 +211,8 @@ async def plant_detail(request, region):
             for split_val in v.split(";"):
                 ref_tags.append((k, split_val))
 
-    return templates.TemplateResponse(
+    return render_template(
+        request,
         "plant_detail.html",
         {
             "construction": True,
@@ -216,3 +225,12 @@ async def plant_detail(request, region):
             "ref_tags": ref_tags,
         },
     )
+
+
+routes = [
+    Route("/stats/area/{region}", endpoint=region),
+    Route("/stats/area/{region}/plants", endpoint=plants_region),
+    Route("/stats/area/{region}/plants/construction", endpoint=plants_construction_region),
+    Route("/stats/object/plant/{id}", endpoint=stats_object),
+    Route("/stats/area/{region}/plants/{id}", endpoint=plant_detail),
+]

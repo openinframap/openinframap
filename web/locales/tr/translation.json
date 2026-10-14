@@ -10,5 +10,16 @@
         "power": {
             "substation": "Trafo merkezi"
         }
+    },
+    "info": {
+        "location": "Konum",
+        "generation-method": "Üretim yöntemi",
+        "substation-type": "Trafo merkezi türü",
+        "reference": "Referans",
+        "circuits": "Devreler",
+        "type": "Tip",
+        "website": "Web sayfası",
+        "view-openstreetmap": "OpenStreetMap'te görüntüle",
+        "substance": "Fiziksel Altyapı"
     }
 }

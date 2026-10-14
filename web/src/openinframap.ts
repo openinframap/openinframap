@@ -1,8 +1,10 @@
-import maplibregl from 'maplibre-gl'
+import * as maplibregl from 'maplibre-gl'
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import { t } from 'i18next'
 import { mount } from 'redom'
 
 import { LayerSwitcher, URLHash, Layer, LayerGroup } from '@russss/maplibregl-layer-switcher'
+import '@russss/maplibregl-layer-switcher/maplibregl-layer-switcher.css'
 
 import EditButton from './edit-control.js'
 import InfoPopup from './popup/infopopup.js'
@@ -10,11 +12,14 @@ import KeyControl from './key/key.js'
 import WarningBox from './warning-box/warning-box.js'
 import OIMSearch from './search/search.ts'
 
-import { getStyle, getLayers } from './style/style.js'
+import { getStyle, getPrimaryLayers } from './style/style.js'
 
 import { ValidationErrorPopup } from './popup/validation-error-popup.js'
 import { SymbolLoader } from './symbol-loader.ts'
 import { ClickRouter } from './click-router.js'
+import { CircuitInspector } from './circuit/circuitinspector.ts'
+import { OpenInfraMapAPI } from './api.ts'
+import { BACKEND_BASE_URL } from './config.js'
 
 export default class OpenInfraMap {
   map?: maplibregl.Map
@@ -39,16 +44,12 @@ export default class OpenInfraMap {
   }
 
   constructor() {
+    maplibregl.setWorkerUrl(workerUrl)
     if (!this.isWebglSupported()) {
       const infobox = new WarningBox(t('warning', 'Warning'))
       infobox.update(t('warnings.webgl'))
       mount(document.body, infobox)
     }
-
-    maplibregl.setRTLTextPlugin(
-      'https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.min.js',
-      true // Lazy load the plugin
-    )
   }
 
   init() {
@@ -81,10 +82,11 @@ export default class OpenInfraMap {
       t('layers.title', 'Layers')
     )
     const url_hash = new URLHash(layer_switcher)
-
     const map_style = getStyle()
 
     layer_switcher.setInitialVisibility(map_style)
+
+    const api = new OpenInfraMapAPI(BACKEND_BASE_URL)
 
     const map = new maplibregl.Map(
       url_hash.init({
@@ -99,6 +101,7 @@ export default class OpenInfraMap {
 
     const clickRouter = new ClickRouter(map, map_style.layers)
     new SymbolLoader(map)
+    const circuit_inspector = new CircuitInspector(map, url_hash, api)
 
     map.dragRotate.disable()
     map.touchZoomRotate.disableRotation()
@@ -120,10 +123,12 @@ export default class OpenInfraMap {
     map.addControl(layer_switcher, 'top-right')
     map.addControl(new EditButton(), 'bottom-right')
     map.addControl(new OIMSearch(), 'top-left')
-    new InfoPopup(
-      getLayers().map((layer: { [x: string]: any }) => layer['id']),
-      6
-    ).add(map, clickRouter)
+    new InfoPopup({
+      layers: getPrimaryLayers().map((layer: { [x: string]: any }) => layer['id']),
+      min_zoom: 6,
+      api,
+      circuit_inspector
+    }).add(map, clickRouter)
     new ValidationErrorPopup(map, clickRouter)
 
     clickRouter.register()

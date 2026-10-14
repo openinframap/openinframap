@@ -12,7 +12,15 @@
         "location": "Месцазнаходжаньне",
         "design": "Форма",
         "material": "Матэрыял",
-        "transformer-type": "Тып трансфарматару"
+        "transformer-type": "Тып трансфарматару",
+        "name": "Назва",
+        "operator": "Эксплюатуючая арганізацыя",
+        "output": "Магутнасьць",
+        "source": "Крыніца",
+        "start-date": "Дата запуску",
+        "voltage": "Напруга",
+        "line-attachment": "Мацаваньне правадоў",
+        "line-management": "Трасаваньне лініі"
     },
     "units": {
         "kV": "кВ",
@@ -21,7 +29,8 @@
         "below_10kv": "< 10 кВ",
         "ge_kv": "≥ {{voltage}} кВ",
         "kW": "кВт",
-        "V": "В"
+        "V": "В",
+        "DC": "DC"
     },
     "more_info": "Падрабязней",
     "wikipedia": "Вікіпэдыя",
@@ -33,9 +42,11 @@
         "power-generators": "Электрагенэратары",
         "telecoms": "Тэлекамунікацыі",
         "gas": "Газ",
-        "petroleum": "Нафта",
+        "petroleum": "Сырая нафта",
         "water": "Вада",
-        "traction": "Цягавая (< 50 Гц)"
+        "traction": "Цягавая (< 50 Гц)",
+        "power-line-supports": "Апоры ЛЭП",
+        "switchgear": "Разьмеркавальная прылада"
     },
     "location": {
         "underground": "Падземнае",
@@ -43,7 +54,8 @@
         "roof": "На даху",
         "surface": "На паверхні",
         "outdoor": "На адкрытым паветры",
-        "indoor": "У памяшканні"
+        "indoor": "У памяшканні",
+        "overhead": "Паветранае"
     },
     "power": {
         "source": {
@@ -56,11 +68,15 @@
             "wind": "Паветраныя",
             "biomass": "Біямасавыя",
             "waste": "Смеццяпальная",
-            "unknown": "Іншая/Невядомая"
+            "unknown": "Іншая/Невядомая",
+            "oil-gas": "Нафтаная / Газавая",
+            "battery": "Акумулятарная"
         },
         "substation-type": {
             "distribution": "Размеркавальная",
-            "traction": "Цягавая"
+            "traction": "Цягавая",
+            "transmission": "Сыстэмаўтваральная",
+            "converter": "Пераўтваральная пастаяннага току"
         }
     },
     "other": "Іншая",
@@ -77,32 +93,143 @@
         "borders": "Межы",
         "labels": "Назвы",
         "title": "Слаі",
-        "other-pipelines": "Іншыя трубаправоды"
+        "other-pipelines": "Іншыя трубаправоды",
+        "overlays": "Накладаны пласт",
+        "validation": "Валідацыя",
+        "solar-generation": "Сонечная генэрацыя",
+        "osmose-power": "Osmose (Энергетыка)"
     },
     "construction": "будуецца",
     "disused": "закінуты",
     "coordinates": "Каардынаты",
     "search": {
-        "no-results": "Вынікаў не знойдзена"
+        "no-results": "Вынікаў не знойдзена",
+        "clear": "Ачысьціць палі пошуку"
     },
     "openstreetmap": "OpenStreetMap",
     "nav": {
         "about": "пра гэты сайт",
-        "stats": "статыстыка"
+        "stats": "статыстыка",
+        "exports": "экспарт"
     },
     "edit": {
         "edit": "Рэдагаваць",
         "remote": "Рэдагаваць з дапамогай дыстанцыйнага кіравання (JOSM і г.д.)",
-        "browser": "Рэдагаваць у браўзэры (iD)"
+        "browser": "Рэдагаваць у браўзэры (iD)",
+        "error": "Немагчыма загрузіць аддалены рэдактар — пераканаецеся, што ён запушчаны і ў ім уключанае аддаленае кіраваньне. \nПамылка: "
     },
     "names": {
         "power": {
             "transformer": "Трансфарматар",
-            "tower": "Вежа",
-            "pole": "Слуп",
+            "tower": "Вежа ЛЭП",
+            "pole": "Слуп ЛЭП",
             "generator": "Генэратар",
             "wind-turbine": "Ветрагенэратар",
-            "substation": "Падстанцыя"
-        }
+            "substation": "Падстанцыя",
+            "generator-solar": "Сонечны генэратар",
+            "switch": "Камутацыйны апарат",
+            "compensator": "Кампэнсатар",
+            "converter": "Падстанцыя пераўтварэння пастаяннага току",
+            "cable": "Сілавы кабэль",
+            "line": "Лінія электраперадачы",
+            "solar-panel": "Сонечная батарэя",
+            "plant": "Электрастанцыя",
+            "hvdc": "HVDC",
+            "line-reference": "Нумар лініі",
+            "solar-panel-node": "Сонечная панэль",
+            "other-generator": "Іншыя генэратары",
+            "tower-pylon": "Вежа",
+            "tower-transition": "Пераходная вежа",
+            "pole-transition": "Пераходны слуп",
+            "transformer-3": "Трансфарматар (3 навоі)",
+            "switch-disconnector": "Раз’ядноўвальнік",
+            "switch-breaker": "Выключальнік",
+            "switch-other": "Іншы выключальнік",
+            "reactor-series": "Рэактар абмежваньня току",
+            "reactor-shunt": "Шунтааы рэактар",
+            "capacitor-series": "Пасьлядоўны кандэнсатар",
+            "capacitor-shunt": "Шунтавы кандэнсатар",
+            "filter": "Фільтар",
+            "compensator-other": "Іншы кампэнсатар",
+            "current-transformer": "Трансфарматар току",
+            "potential-transformer": "Трансфарматар напругі",
+            "statcom": "Статычны кампэнсатар рэактыўнай магутнасьці",
+            "synchronous-condenser": "Сынхронны кампэнсатар"
+        },
+        "telecoms": {
+            "communication-line": "Лінія сувязі",
+            "data-center": "Будынак сувязі",
+            "cabinet": "Тэлекамунікацыйная шафа",
+            "exchange": "Тэлефонная станцыя"
+        },
+        "pipeline": "Трубаправод",
+        "petroleum": {
+            "well": "Сьвідравіна",
+            "facility": "Нафтавая ўстаноўка"
+        },
+        "gas": {
+            "pipeline": {
+                "transmission": "Магістральны",
+                "distribution": "Размеркавальны",
+                "pressure": {
+                    "high": "Высокага ціску",
+                    "intermediate": "Сярэдняга ціску",
+                    "low": "Нізкага ціску"
+                }
+            }
+        },
+        "water": {
+            "pipeline": "Вадаправод",
+            "sewage-treatment-plant": "Ачышчальныя збудаваньні",
+            "treatment-plant": "Водаачышчальная станцыя",
+            "pumping-station": "Помпавая станцыя",
+            "well": "Вадзяная сьвідравіна",
+            "reservoir": "Вадзяны рэзэрвуар",
+            "water-pumping-station": "Вадзяная помпавая станцыя",
+            "sewage-pumping-station": "Каналізацыйная помпавая станцыя"
+        },
+        "cable": "Кабэль",
+        "telecom": {
+            "tower-mast": "Вышка / Шогла",
+            "datacenter": "Цэнтар апрацоўкі зьвестак"
+        },
+        "cabinet": "Шафа",
+        "substance": {
+            "oil": "Нафта",
+            "gas": "Газ",
+            "petroleum-intermediate": "Прамежкавы нафтапрадукт",
+            "fuel": "Паліва",
+            "hydrogen": "Вадарод",
+            "nitrogen": "Азот",
+            "oxygen": "Кісларод",
+            "beer": "Піва",
+            "co2": "Вуглякіслы газ",
+            "fresh-water": "Прэсная вада",
+            "hot-water": "Гарачая вада",
+            "steam": "Пара",
+            "wastewater": "Сьцёкавыя воды",
+            "rainwater": "Дажджавая вада"
+        },
+        "method": {
+            "fission": "Ядзерны падзел",
+            "fusion": "Тэрмаядзерны сынтэз",
+            "wind-turbine": "Ветравая турбіна",
+            "water-storage": "Вадасховішча",
+            "water-pumped-storage": "Гідраакумуляваньне",
+            "water-run-of-river": "Руславы",
+            "tidal-barrage": "Прыліўная плаціна",
+            "tidal-stream": "Прыліўная плыня",
+            "solar-thermal": "Сонечная цеплавая",
+            "solar-photovoltaic": "Фотаэлектрычная",
+            "combustion": "Спальваньне",
+            "gasification": "Газіфікацыя",
+            "anaerobic-digestion": "Анаэробнае збражэньне"
+        },
+        "other-pumping-station": "Помпавая станцыя іншага тыпу",
+        "place": "Пляцоўка"
+    },
+    "wikimedia-commons": "Wikimedia Commons",
+    "warnings": {
+        "webgl": "<p>У гэтага браўзэра могуць вынікаць праблемы з прадукцыйнасьцю альбо функцыянальнасьцю на гэтым сайце.</p><p>Для добрай працы сайту патрабуецца <a href=\"http://webglreport.com\">WebGL</a> з апаратным паскарэньнем.</p><p>Калі ваш браўзэр падтрымлівае WebGL, магчыма, вам спатрэбіцца адключыць ахову ад збору лічбавых адбіткаў браўзэра для гэтага сайту.</p>"
     }
 }

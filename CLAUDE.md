@@ -23,7 +23,7 @@ Start services:
 docker compose up tegola
 
 # Terminal 2 - web backend:
-cd web-backend && uv run uvicorn main:app --reload
+cd web-backend && uv run uvicorn src.main:app --reload
 
 # Terminal 3 - frontend:
 cd web && npm install && npm run dev   # http://localhost:5173
@@ -42,7 +42,7 @@ npm run extract   # Extract i18n translation strings
 
 ### Backend (`web-backend/`)
 ```bash
-uv run uvicorn main:app --reload --port 8001   # Dev server on port 8001
+uv run uvicorn src.main:app --reload --port 8001   # Dev server on port 8001
 uv run ruff check                  # Lint
 uv run mypy .                      # Type check
 uv run pytest                      # Tests
@@ -79,7 +79,7 @@ The `config.toml` Tegola reads is **generated** — never edit it directly. Edit
 MapLibre GL JS map with i18next for internationalisation. The dev server proxies tile requests; configure the tile server URL in `.env` (created by `launch.sh`). Tests use Vitest with Puppeteer for browser-level integration tests.
 
 ### Backend (`/web-backend/`)
-Starlette ASGI app with asyncpg for async DB access. Bokeh + Pandas are used to generate SVG/HTML stats charts. Requires `DATABASE_URL` env var.
+Starlette ASGI app (code under `src/`, entry point `src.main:app`) using SQLAlchemy async + asyncpg for DB access. Bokeh + Pandas are used to generate SVG/HTML stats charts. Requires `DATABASE_URL` env var using the `postgresql+asyncpg://` scheme.
 
 ### Imposm (`/imposm/`)
 Mapping YAML defines which OSM tags are imported into which DB tables. Runs as a Docker Compose service; the `imposm_diff` and `imposm_expiry` volumes support continuous replication updates.

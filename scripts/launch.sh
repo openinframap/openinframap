@@ -214,10 +214,15 @@ fi
 BACKEND_ENV="$REPO_ROOT/web-backend/.env"
 if [[ -f "$BACKEND_ENV" ]]; then
     section "web-backend/.env already exists — skipping."
+    # The backend now uses SQLAlchemy's async engine, which needs the asyncpg driver scheme.
+    if grep -q '^DATABASE_URL=postgresql://' "$BACKEND_ENV"; then
+        sed -i.bak 's#^DATABASE_URL=postgresql://#DATABASE_URL=postgresql+asyncpg://#' "$BACKEND_ENV"
+        echo "    Updated DATABASE_URL to use postgresql+asyncpg:// (backup: .env.bak)"
+    fi
 else
     section "Creating web-backend/.env..."
     cat > "$BACKEND_ENV" <<'EOF'
-DATABASE_URL=postgresql://osm:osm@localhost:5432/osm
+DATABASE_URL=postgresql+asyncpg://osm:osm@localhost:5432/osm
 EOF
 fi
 
@@ -244,7 +249,7 @@ echo ""
 echo "Start the stack in two separate terminals:"
 echo ""
 echo "  Terminal 1 (backend):"
-echo "    cd web-backend && uv run uvicorn main:app --reload --port 8001"
+echo "    cd web-backend && uv run uvicorn src.main:app --reload --port 8001"
 echo ""
 echo "  Terminal 2 (frontend):"
 echo "    cd web && npm install && npm run dev"

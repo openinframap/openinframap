@@ -1,11 +1,11 @@
-from charts.util import result_to_df
-from charts.util import figure
-from config import database
-from bokeh.models import ColumnDataSource
 import pandas as pd
+from bokeh.models import ColumnDataSource, HoverTool, NumeralTickFormatter
 from bokeh.palettes import Category10
-from bokeh.models import NumeralTickFormatter, HoverTool
 from bokeh.themes import Theme
+from sqlalchemy.ext.asyncio import AsyncConnection
+from sqlalchemy.sql import text
+
+from .util import figure, result_to_df
 
 # Define a shared color palette for source categories
 SOURCE_COLORS = {
@@ -32,9 +32,10 @@ theme = Theme(
 )
 
 
-async def line_length():
-    data = await database.fetch_all(
-        """SELECT date_trunc('week', time) AS date,
+async def line_length(database: AsyncConnection):
+    data = await database.execute(
+        text(
+            """SELECT date_trunc('week', time) AS date,
                 avg((SELECT SUM(length) FROM stats.power_line WHERE time = a.time)) AS total_length,
                 avg((SELECT SUM(length) FROM stats.power_line WHERE time = a.time
                     AND voltage IS NOT NULL)) AS with_voltage
@@ -42,11 +43,12 @@ async def line_length():
                 GROUP BY date_trunc('week', time)
                 ORDER BY date_trunc('week', time)
         """
+        )
     )
 
-    data = result_to_df(data)
+    df = result_to_df(data.fetchall())
 
-    cds = ColumnDataSource(data)
+    cds = ColumnDataSource(df)
 
     p = figure(
         x_axis_type="datetime",
@@ -101,9 +103,10 @@ def _plot_stacked_areas(p, data: pd.DataFrame, colors: dict[str, str], hover=Non
     return p
 
 
-async def plant_count():
-    data = await database.fetch_all(
-        """SELECT date_trunc('week', time) AS date, type, avg(total_count) AS total_count FROM (
+async def plant_count(database: AsyncConnection):
+    data = await database.execute(
+        text(
+            """SELECT date_trunc('week', time) AS date, type, avg(total_count) AS total_count FROM (
                 SELECT time,
                   CASE
                       WHEN source IN ('solar') THEN 'Solar'
@@ -119,13 +122,12 @@ async def plant_count():
             GROUP BY date_trunc('week', time), type
             ORDER BY date_trunc('week', time)
            """
+        )
     )
 
-    data = result_to_df(data)
+    df = result_to_df(data.fetchall())
 
-    pivot_data = data.pivot(index="date", columns="type", values="total_count").fillna(
-        0
-    )
+    pivot_data = df.pivot(index="date", columns="type", values="total_count").fillna(0)
 
     # Reorder columns to match the order in SOURCE_COLORS
     pivot_data = pivot_data[[key for key in SOURCE_COLORS.keys() if key in pivot_data]]
@@ -156,9 +158,10 @@ async def plant_count():
     return p
 
 
-async def plant_output():
-    data = await database.fetch_all(
-        """SELECT time AS date,
+async def plant_output(database: AsyncConnection):
+    data = await database.execute(
+        text(
+            """SELECT time AS date,
                   CASE
                       WHEN source IN ('solar') THEN 'Solar'
                       WHEN source IN ('coal', 'gas', 'oil', 'diesel', 'nuclear') THEN 'Fossil Fuels'
@@ -170,13 +173,12 @@ async def plant_output():
            FROM stats.power_plant
            GROUP BY time, type
            ORDER BY time"""
+        )
     )
 
-    data = result_to_df(data)
+    df = result_to_df(data.fetchall())
 
-    pivot_data = data.pivot(index="date", columns="type", values="total_output").fillna(
-        0
-    )
+    pivot_data = df.pivot(index="date", columns="type", values="total_output").fillna(0)
 
     # Reorder columns to match the order in SOURCE_COLORS
     pivot_data = pivot_data[[key for key in SOURCE_COLORS.keys() if key in pivot_data]]
@@ -207,9 +209,10 @@ async def plant_output():
     return p
 
 
-async def substation_count():
-    data = await database.fetch_all(
-        """SELECT date_trunc('week', time) AS date,
+async def substation_count(database: AsyncConnection):
+    data = await database.execute(
+        text(
+            """SELECT date_trunc('week', time) AS date,
                   avg((SELECT SUM(count) FROM stats.substation WHERE time = s.time)) AS total_count,
                   avg((SELECT SUM(count) FROM stats.substation WHERE time = s.time
                       AND voltage IS NOT NULL)) AS with_voltage
@@ -217,18 +220,19 @@ async def substation_count():
            GROUP BY date_trunc('week', time)
            ORDER BY date_trunc('week', time)
         """
+        )
     )
 
-    data = result_to_df(data)
-    cds = ColumnDataSource(data)
+    df = result_to_df(data.fetchall())
+    cds = ColumnDataSource(df)
 
     p = figure(
         x_axis_type="datetime",
         title="Substation count",
-        y_range=(0, data["total_count"].max() * 1.1),
+        y_range=(0, df["total_count"].max() * 1.1),
         x_range=(
             pd.to_datetime("2014-01-01"),
-            data["date"].max() + pd.Timedelta(days=10),
+            df["date"].max() + pd.Timedelta(days=10),
         ),
     )
     p.yaxis.axis_label = "Count"
@@ -245,3 +249,6 @@ async def substation_count():
     p.scatter("date", "with_voltage", source=cds, size=2, color="red")
     p.legend.location = "bottom_right"
     return p
+
+
+from . import country  # noqa

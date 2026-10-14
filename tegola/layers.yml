@@ -539,7 +539,7 @@ layers:
     geometry_type: Polygon
     min_zoom: 8
     id_field: osm_id
-    field_sets: [geom, name, start_date]
+    field_sets: [geom, name, start_date, wiki]
     from: osm_petroleum_site
     where: geometry && !BBOX!
 

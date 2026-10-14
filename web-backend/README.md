@@ -5,6 +5,9 @@ proxy endpoints, and search.
 
 ## Configuration
 
+This app needs `DATABASE_URL` defined with the details of the OpenInfraMap database.
+The URL must use the `postgresql+asyncpg://` scheme (SQLAlchemy async driver).
+
 Copy the example env file:
 
 ```bash
@@ -14,7 +17,7 @@ cp .env.example .env
 `.env.example` contains:
 
 ```
-DATABASE_URL=postgresql://osm:osm@localhost:5432/osm
+DATABASE_URL=postgresql+asyncpg://osm:osm@localhost:5432/osm
 ```
 
 Adjust the connection string if your local Postgres is on a different port or has
@@ -23,7 +26,7 @@ different credentials.
 ## Running
 
 ```bash
-uv run uvicorn main:app --reload
+uv run uvicorn src.main:app --reload
 ```
 
 The backend listens on `http://localhost:8001`.

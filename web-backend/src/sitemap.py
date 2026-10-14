@@ -1,8 +1,11 @@
-import asgi_sitemaps
-from starlette.requests import Request
 from urllib.parse import quote
 
-from data import get_countries
+import asgi_sitemaps
+from starlette.requests import Request
+
+from . import Request as OIMRequest
+from . import get_db
+from .data import get_countries
 
 
 class StaticSitemap(asgi_sitemaps.Sitemap):
@@ -17,14 +20,14 @@ class StaticSitemap(asgi_sitemaps.Sitemap):
 
 class CountryPageSitemap(asgi_sitemaps.Sitemap):
     async def items(self):
-        return [row[0] for row in await get_countries()]
+        request: OIMRequest = Request(scope=self.scope)
+        db = get_db(request)
+        return [row[0] for row in await get_countries(db)]
 
     def location(self, item):
         request = Request(scope=self.scope)
-        url = request.url_for("country", country=quote(item))
+        url = request.url_for("region", region=quote(item))
         return url.path
 
 
-sitemap = asgi_sitemaps.SitemapApp(
-    [StaticSitemap(), CountryPageSitemap()], domain="openinframap.org"
-)
+sitemap = asgi_sitemaps.SitemapApp([StaticSitemap(), CountryPageSitemap()], domain="openinframap.org")

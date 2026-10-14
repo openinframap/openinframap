@@ -150,7 +150,8 @@
         "material": "Material",
         "design": "Diseño",
         "line-management": "Gestión de línea",
-        "transformer-type": "Tipo de transformador"
+        "transformer-type": "Tipo de transformador",
+        "voltage": "Tensión"
     },
     "more_info": "Más información",
     "wikipedia": "Wikipedia",
@@ -180,7 +181,8 @@
             "solar": "Solar",
             "oil-gas": "Petróleo/Gas",
             "waste": "Residuos",
-            "battery": "Batería"
+            "battery": "Batería",
+            "unknown": "Otro/Desconocido"
         },
         "substation-type": {
             "distribution": "Distribución",

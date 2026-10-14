@@ -80,7 +80,7 @@ See [Wikidata image cache](#wikidata-image-cache) for more details.
 ```bash
 cd web-backend
 cp .env.example .env
-uv run uvicorn main:app --reload --port 8001
+uv run uvicorn src.main:app --reload --port 8001
 ```
 
 The backend listens on `http://localhost:8001`. Leave this terminal running.
@@ -132,7 +132,7 @@ VITE_BACKEND_BASE_URL=http://localhost:8001
 ### `web-backend/.env`
 
 ```
-DATABASE_URL=postgresql://osm:osm@localhost:5432/osm
+DATABASE_URL=postgresql+asyncpg://osm:osm@localhost:5432/osm
 
 # Uncomment to disable HTTP cache headers (useful in dev):
 # DEBUG=true
