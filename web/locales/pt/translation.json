@@ -1,1 +1,235 @@
-{}
+{
+    "nav": {
+        "about": "sobre",
+        "stats": "estatísticas",
+        "exports": "exportações"
+    },
+    "edit": {
+        "edit": "Editar",
+        "remote": "Editar com controlo remoto (JOSM, etc)",
+        "browser": "Editar no browser (iD)",
+        "error": "Não foi possível carregar o editor remoto. Certifique-se de que está em execução e de que o controlo remoto está ativado.\nErro: "
+    },
+    "names": {
+        "power": {
+            "transformer": "Transformador",
+            "tower": "Torre de transmissão",
+            "pole": "Poste elétrico",
+            "generator": "Gerador",
+            "generator-solar": "Gerador solar",
+            "wind-turbine": "Turbina eólica",
+            "substation": "Subestação",
+            "switch": "Interruptor",
+            "compensator": "Compensador",
+            "converter": "Subestação de conversão DC",
+            "cable": "Cabo elétrico",
+            "line": "Linha de transmissão",
+            "solar-panel": "Painel solar",
+            "plant": "Central de energia",
+            "hvdc": "HVDC",
+            "line-reference": "Referência de linha",
+            "solar-panel-node": "Painel solar (nodo)",
+            "other-generator": "Outro gerador",
+            "tower-pylon": "Torre/Poste",
+            "tower-transition": "Torre de transição",
+            "pole-transition": "Poste de transição",
+            "transformer-3": "Transformador (3 enrolamentos)",
+            "switch-disconnector": "Interruptor-seccionador",
+            "switch-breaker": "Disjuntor",
+            "switch-other": "Outro interruptor",
+            "reactor-series": "Reator em série",
+            "reactor-shunt": "Reator de derivação",
+            "capacitor-series": "Condensador em série",
+            "capacitor-shunt": "Condensador de derivação",
+            "statcom": "Compensador síncrono estático",
+            "synchronous-condenser": "Compensador síncrono",
+            "filter": "Filtro",
+            "compensator-other": "Outro compensador",
+            "current-transformer": "Transformador de corrente",
+            "potential-transformer": "Transformador de potencial"
+        },
+        "telecoms": {
+            "communication-line": "Linha de telecomunicações",
+            "data-center": "Edifício de telecomunicações",
+            "exchange": "Central telefónica",
+            "cabinet": "Armário de telecomunicações"
+        },
+        "pipeline": "Conduta",
+        "petroleum": {
+            "well": "Poço",
+            "facility": "Instalação petrolífera"
+        },
+        "gas": {
+            "pipeline": {
+                "transmission": "Transmissão",
+                "distribution": "Distribuição",
+                "pressure": {
+                    "high": "Alta pressão",
+                    "intermediate": "Pressão intermédia",
+                    "low": "Baixa pressão"
+                }
+            }
+        },
+        "water": {
+            "pipeline": "Conduta de água",
+            "sewage-treatment-plant": "Estação de tratamento de esgotos",
+            "treatment-plant": "Estação de tratamento de água",
+            "pumping-station": "Estação de bombagem",
+            "well": "Poço de água",
+            "reservoir": "Reservatório de água",
+            "water-pumping-station": "Estação de bombagem de água",
+            "sewage-pumping-station": "Estação de bombagem de esgotos"
+        },
+        "cable": "Cabo",
+        "telecom": {
+            "tower-mast": "Torre/Mastro",
+            "datacenter": "Datacenter"
+        },
+        "cabinet": "Armário",
+        "substance": {
+            "oil": "Petróleo",
+            "gas": "Gás",
+            "petroleum-intermediate": "Produto Petrolífero Intermédio",
+            "fuel": "Combustível",
+            "hydrogen": "Hidrogénio",
+            "nitrogen": "Nitrogénio",
+            "oxygen": "Oxigénio",
+            "beer": "Cerveja",
+            "co2": "CO<sub>2</sub>",
+            "fresh-water": "Água doce",
+            "hot-water": "Água quente",
+            "steam": "Vapor",
+            "wastewater": "Águas residuais",
+            "rainwater": "Água pluvial"
+        },
+        "method": {
+            "fission": "Fissão",
+            "fusion": "Fusão",
+            "wind-turbine": "Turbina eólica",
+            "water-storage": "Armazenamento de água",
+            "water-pumped-storage": "Armazenamento por bombagem",
+            "water-run-of-river": "Fio de água",
+            "tidal-barrage": "Barragem",
+            "tidal-stream": "Corrente de maré",
+            "solar-thermal": "Térmica",
+            "solar-photovoltaic": "Fotovoltaica",
+            "combustion": "Combustão",
+            "gasification": "Gaseificação",
+            "anaerobic-digestion": "Digestão anaeróbia"
+        },
+        "other-pumping-station": "Outra estação de bombagem",
+        "place": "Local"
+    },
+    "info": {
+        "name": "Nome",
+        "operator": "Operador",
+        "output": "Potência",
+        "source": "Fonte",
+        "start-date": "Data de início",
+        "generation-method": "Método de geração",
+        "substation-type": "Tipo de subestação",
+        "reference": "Referência",
+        "circuits": "Circuitos",
+        "type": "Tipo",
+        "website": "Site",
+        "view-openstreetmap": "Ver no OpenStreetMap",
+        "substance": "Substância",
+        "usage": "Uso",
+        "location": "Localização",
+        "design": "Design",
+        "voltage": "Tensão",
+        "material": "Material",
+        "line-attachment": "Fixação de linha",
+        "line-management": "Gestão de linha",
+        "transformer-type": "Tipo de transformador"
+    },
+    "units": {
+        "kV": "kV",
+        "Hz": "Hz",
+        "MW": "MW",
+        "DC": "DC",
+        "below_10kv": "<10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V"
+    },
+    "more_info": "Mais informações",
+    "wikipedia": "Wikipédia",
+    "wikimedia-commons": "Wikimedia Commons",
+    "wikidata": "Wikidata",
+    "key": {
+        "name": "Legenda",
+        "power-lines": "LInhas de transmissão",
+        "power-plants": "Centrais de energia",
+        "power-generators": "Geradores de energia",
+        "power-line-supports": "Suportes de linhas elétricas",
+        "switchgear": "Aparelhagem de manobra",
+        "telecoms": "Telecomunicações",
+        "gas": "Gás",
+        "petroleum": "Petróleo",
+        "water": "Água",
+        "traction": "Tração (< 50 Hz)"
+    },
+    "location": {
+        "underground": "Subterrâneo",
+        "underwater": "Subaquático",
+        "overhead": "Aéreo",
+        "roof": "Telhado",
+        "surface": "Superfície",
+        "outdoor": "Exterior",
+        "indoor": "Interior"
+    },
+    "power": {
+        "source": {
+            "coal": "Carvão",
+            "geothermal": "Geotérmica",
+            "hydro": "Hidroelétrica",
+            "nuclear": "Nuclear",
+            "oil-gas": "Petróleo/Gás",
+            "gas": "Gás",
+            "solar": "Solar",
+            "wind": "Vento",
+            "biomass": "Biomassa",
+            "waste": "Resíduos",
+            "battery": "Bateria",
+            "unknown": "Outro/Desconhecido"
+        },
+        "substation-type": {
+            "transmission": "Transmissão",
+            "distribution": "Distribuição",
+            "traction": "Tração",
+            "converter": "Conversor DC"
+        }
+    },
+    "other": "Outros",
+    "warning": "Aviso",
+    "warnings": {
+        "webgl": "<p>O seu navegador pode apresentar problemas de desempenho ou de funcionalidade com o Open Infrastructure Map.</p><p> <a href=\"http://webglreport.com\">WebGL</a> com aceleração por hardware do  é necessário para o bom funcionamento deste site.</p><p>Se o seu navegador suportar WebGL, poderá ser necessário desativar a proteção contra impressão digital do navegador para este site.</p>"
+    },
+    "layers": {
+        "background": "Fundo",
+        "heatmaps": "Mapas de calor",
+        "overlays": "Sobreposições",
+        "infrastructure": "Infraestrutura",
+        "validation": "Validação",
+        "nighttime-lights": "Luzes noturnas",
+        "power": "Energia elétrica",
+        "solar-generation": "Geração solar",
+        "telecoms": "Telecomunicações",
+        "petroleum": "Petróleo & Gás Natural",
+        "water": "Água",
+        "borders": "Fronteiras",
+        "labels": "Rótulos",
+        "title": "Camadas",
+        "other-pipelines": "Outras condutas",
+        "osmose-power": "Osmose (Energia elétrica)"
+    },
+    "construction": "em construção",
+    "disused": "desativado",
+    "coordinates": "Coordenadas",
+    "search": {
+        "clear": "Limpar pesquisa",
+        "no-results": "Nenhum resultado encontrado"
+    },
+    "openstreetmap": "OpenStreetMap"
+}
