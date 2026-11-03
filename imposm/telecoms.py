@@ -6,8 +6,13 @@ table(
     {
         "communication": ["line", "cable"],
         "construction:communication": ["line", "cable"],
+        "disused:communication": ["line", "cable"],
     },
     "linestring",
+    columns=[
+        type_col,
+        str_col("telecom:medium")
+    ]
 )
 
 table(
@@ -17,16 +22,24 @@ table(
         "telecom": ["data_center", "data_centre", "central_office", "exchange"],
         "office": ["telecommunication"],
         "man_made": ["telephone_office"],
+        "construction:telecom": ["data_center", "data_centre", "central_office", "exchange"],
+        "disused:telecom": ["data_center", "data_centre", "central_office", "exchange"]
     },
     ["points", "polygons"],
-    columns=[type_col],
+    columns=[
+        type_col,
+        str_col("telecom:medium")
+    ],
 )
 
 table(
     "telecom_location",
     {"telecom": ["connection_point", "distribution_point"]},
     ["points", "polygons"],
-    columns=[type_col],
+    columns=[
+        type_col,
+        str_col("telecom:medium")
+    ],
 )
 
 table(
@@ -46,18 +59,4 @@ table(
     },
     ["points", "polygons"],
     columns=[type_col],
-)
-
-table(
-    "utility_pole",
-    {"man_made": ["utility_pole"]},
-    "point",
-    columns=[str_col("utility")],
-)
-
-table(
-    "street_cabinet",
-    {"man_made": ["street_cabinet"]},
-    ["points", "polygons"],
-    columns=[str_col("utility")],
 )
