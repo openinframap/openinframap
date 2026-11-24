@@ -46,3 +46,68 @@ describe('Page structure', () => {
     expect(isPageInteractive).toBe(true)
   })
 })
+
+describe('Layers panel map-first behavior', () => {
+  beforeAll(async () => {
+    await page.goto(url, {
+      waitUntil: 'networkidle0',
+      timeout: 30000
+    })
+    await page.waitForSelector('.oim-unified-options')
+  }, 30000)
+
+  test('starts collapsed on load', async () => {
+    const collapsed = await page.$eval('.oim-unified-options .oim-unified-panel', (el) =>
+      el.classList.contains('oim-unified-panel-collapsed')
+    )
+    expect(collapsed).toBe(true)
+    const tall = await page.$eval('.oim-unified-options', (el) =>
+      el.classList.contains('oim-unified-options--tall')
+    )
+    expect(tall).toBe(false)
+  })
+
+  test('opens in compact mode without tall class', async () => {
+    await page.click('.oim-unified-header-icon')
+    const collapsed = await page.$eval('.oim-unified-options .oim-unified-panel', (el) =>
+      el.classList.contains('oim-unified-panel-collapsed')
+    )
+    expect(collapsed).toBe(false)
+    const tall = await page.$eval('.oim-unified-options', (el) =>
+      el.classList.contains('oim-unified-options--tall')
+    )
+    expect(tall).toBe(false)
+  })
+
+  test('expanding a power subsection applies tall class', async () => {
+    const isCollapsed = await page.$eval('.oim-unified-options .oim-unified-panel', (el) =>
+      el.classList.contains('oim-unified-panel-collapsed')
+    )
+    if (isCollapsed) {
+      await page.click('.oim-unified-header-icon')
+    }
+    await page.click('[data-power-subsection="plants"] .oim-unified-section-header')
+    const tall = await page.$eval('.oim-unified-options', (el) =>
+      el.classList.contains('oim-unified-options--tall')
+    )
+    expect(tall).toBe(true)
+  })
+
+  test('Escape closes the panel', async () => {
+    const isCollapsed = await page.$eval('.oim-unified-options .oim-unified-panel', (el) =>
+      el.classList.contains('oim-unified-panel-collapsed')
+    )
+    if (isCollapsed) {
+      await page.click('.oim-unified-header-icon')
+    }
+    await page.keyboard.press('Escape')
+    const collapsed = await page.$eval('.oim-unified-options .oim-unified-panel', (el) =>
+      el.classList.contains('oim-unified-panel-collapsed')
+    )
+    expect(collapsed).toBe(true)
+    const tall = await page.$eval('.oim-unified-options', (el) =>
+      el.classList.contains('oim-unified-options--tall')
+    )
+    expect(tall).toBe(false)
+  })
+})

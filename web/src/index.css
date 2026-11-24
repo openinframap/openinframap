@@ -283,10 +283,27 @@ canvas:focus {
   overflow: hidden;
   min-width: 15rem;
   max-width: 90vw;
-  height: 70vh;
-  max-height: 70vh;
+  /* Definite height so the flex panel (flex: 1 1 0) can grow and receive clicks */
+  height: 42vh;
+  max-height: 42vh;
   display: flex;
   flex-direction: column;
+}
+
+.oim-unified-options.oim-unified-options--tall {
+  max-height: 70vh;
+  height: 70vh;
+}
+
+/* Compact density (not applied in tall mode) */
+.oim-unified-options:not(.oim-unified-options--tall) .oim-unified-row {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.oim-unified-options:not(.oim-unified-options--tall) .oim-unified-section-header {
+  padding-top: 6px;
+  padding-bottom: 4px;
 }
 
 /* When panel is collapsed, shrink to icon-only size */
