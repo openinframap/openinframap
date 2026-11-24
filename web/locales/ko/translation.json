@@ -1,1 +1,235 @@
-{}
+{
+    "edit": {
+        "edit": "편집",
+        "remote": "원격 제어로 편집 (JOSM 등)",
+        "browser": "브라우저에서 편집 (iD)",
+        "error": "원격 편집기를 불러올 수 없습니다. 프로그램이 실행 중이고 원격 제어가 활성화되어 있는지 확인하세요.\n오류: "
+    },
+    "names": {
+        "power": {
+            "transformer": "변압기",
+            "tower": "송전탑",
+            "pole": "전신주",
+            "generator": "발전기",
+            "generator-solar": "태양광 발전기",
+            "wind-turbine": "풍력 터빈",
+            "substation": "변전소",
+            "switch": "개폐기",
+            "compensator": "보상기",
+            "converter": "직류 변환소",
+            "cable": "전력 케이블",
+            "line": "전력선",
+            "solar-panel": "태양광 패널",
+            "plant": "발전소",
+            "hvdc": "HVDC",
+            "line-reference": "선로 번호",
+            "solar-panel-node": "태양광 패널 (노드)",
+            "other-generator": "기타 발전기",
+            "tower-pylon": "송전탑/철탑",
+            "tower-transition": "전환 송전탑",
+            "pole-transition": "전환 송전탑",
+            "transformer-3": "변압기 (3권선)",
+            "switch-disconnector": "단로기",
+            "switch-breaker": "회로 차단기",
+            "switch-other": "기타 스위치",
+            "reactor-series": "직렬 리액터",
+            "reactor-shunt": "분로 리액터",
+            "capacitor-series": "직렬 커패시터",
+            "capacitor-shunt": "병렬 커패시터",
+            "statcom": "정적 VAR 보상기",
+            "synchronous-condenser": "동기 조상기",
+            "filter": "필터",
+            "compensator-other": "기타 보상기",
+            "current-transformer": "전류 변압기",
+            "potential-transformer": "계기용 변압기"
+        },
+        "telecoms": {
+            "communication-line": "통신선",
+            "data-center": "통신 건물",
+            "exchange": "전화교환기",
+            "cabinet": "통신 캐비넷"
+        },
+        "pipeline": "파이프라인",
+        "petroleum": {
+            "well": "유정",
+            "facility": "석유시설"
+        },
+        "gas": {
+            "pipeline": {
+                "transmission": "전송",
+                "distribution": "분배",
+                "pressure": {
+                    "high": "고압",
+                    "intermediate": "중압",
+                    "low": "저압"
+                }
+            }
+        },
+        "water": {
+            "pipeline": "수도관",
+            "sewage-treatment-plant": "하수 처리장",
+            "treatment-plant": "정수장",
+            "pumping-station": "펌프장",
+            "well": "우물",
+            "reservoir": "저수지",
+            "water-pumping-station": "상수 펌프장",
+            "sewage-pumping-station": "하수 펌프장"
+        },
+        "cable": "케이블",
+        "telecom": {
+            "tower-mast": "통신탑/마스트",
+            "datacenter": "데이터센터"
+        },
+        "cabinet": "함체",
+        "substance": {
+            "oil": "석유",
+            "gas": "가스",
+            "petroleum-intermediate": "석유 중간제품",
+            "fuel": "연료",
+            "hydrogen": "수소",
+            "nitrogen": "질소",
+            "oxygen": "산소",
+            "beer": "맥주",
+            "co2": "이산화탄소(CO<sub>2</sub>)",
+            "fresh-water": "담수",
+            "hot-water": "온수",
+            "steam": "증기",
+            "wastewater": "폐수",
+            "rainwater": "빗물"
+        },
+        "method": {
+            "fission": "핵분열",
+            "fusion": "핵융합",
+            "wind-turbine": "풍력 터빈",
+            "water-storage": "저수지",
+            "water-pumped-storage": "양수",
+            "water-run-of-river": "유수식",
+            "tidal-barrage": "조력 댐식",
+            "tidal-stream": "조류식",
+            "solar-thermal": "태양열",
+            "solar-photovoltaic": "태양광",
+            "combustion": "연소",
+            "gasification": "가스화",
+            "anaerobic-digestion": "혐기성 소화"
+        },
+        "other-pumping-station": "기타 펌프장",
+        "place": "장소"
+    },
+    "info": {
+        "name": "이름",
+        "operator": "운영자",
+        "output": "출력",
+        "source": "에너지원",
+        "start-date": "가동 시작일",
+        "generation-method": "발전 방식",
+        "substation-type": "변전소 유형",
+        "reference": "참조 번호",
+        "circuits": "회선 수",
+        "type": "유형",
+        "website": "웹사이트",
+        "view-openstreetmap": "오픈스트리트맵에서 보기",
+        "substance": "물질",
+        "usage": "용도",
+        "location": "위치",
+        "design": "설계",
+        "voltage": "전압",
+        "material": "재질",
+        "line-attachment": "선로 부착 방식",
+        "line-management": "선로 관리",
+        "transformer-type": "변압기 유형"
+    },
+    "nav": {
+        "exports": "내보내기",
+        "about": "소개",
+        "stats": "통계"
+    },
+    "units": {
+        "kV": "kV",
+        "Hz": "Hz",
+        "MW": "MW",
+        "DC": "직류",
+        "below_10kv": "< 10 kV",
+        "ge_kv": "≥ {{voltage}} kV",
+        "kW": "kW",
+        "V": "V"
+    },
+    "more_info": "더 보기",
+    "wikipedia": "위키백과",
+    "wikimedia-commons": "위키미디어 공용",
+    "wikidata": "위키데이터",
+    "key": {
+        "name": "범례",
+        "power-lines": "송전선",
+        "power-plants": "발전소",
+        "power-generators": "발전기",
+        "power-line-supports": "송전선 지지물",
+        "switchgear": "개폐장치",
+        "telecoms": "통신",
+        "gas": "가스",
+        "petroleum": "석유",
+        "water": "물",
+        "traction": "견인 (< 50 Hz)"
+    },
+    "location": {
+        "underground": "지중",
+        "underwater": "수중",
+        "overhead": "가공",
+        "roof": "지붕",
+        "surface": "지표",
+        "outdoor": "실외",
+        "indoor": "실내"
+    },
+    "power": {
+        "source": {
+            "coal": "석탄",
+            "geothermal": "지열",
+            "hydro": "수력",
+            "nuclear": "핵발전",
+            "oil-gas": "석유/가스",
+            "gas": "가스",
+            "solar": "태양",
+            "wind": "풍력",
+            "biomass": "바이오매스",
+            "waste": "폐기물",
+            "battery": "배터리",
+            "unknown": "기타/알 수 없음"
+        },
+        "substation-type": {
+            "transmission": "송전",
+            "distribution": "배전",
+            "traction": "철도 전력",
+            "converter": "직류 변환"
+        }
+    },
+    "other": "기타",
+    "warning": "경고",
+    "warnings": {
+        "webgl": "<p>사용 중인 브라우저에서 Open Infrastructure Map을 이용할 때 성능이나 기능상의 문제가 발생할 수 있습니다.</p><p>이 사이트가 원활하게 작동하려면 하드웨어 가속이 지원되는 <a href=\"http://webglreport.com\">WebGL</a>이 필요합니다.</p><p>사용 중인 브라우저가 WebGL을 지원하는 경우, 이 사이트에 대해 브라우저 지문 인식 방지 기능을 비활성화해야 할 수도 있습니다.</p>"
+    },
+    "layers": {
+        "background": "배경",
+        "heatmaps": "히트맵",
+        "overlays": "오버레이",
+        "infrastructure": "인프라",
+        "validation": "검증",
+        "nighttime-lights": "야간 조명",
+        "power": "전력",
+        "solar-generation": "태양 발전",
+        "telecoms": "통신",
+        "petroleum": "석유 & 천연가스",
+        "water": "물",
+        "borders": "경계",
+        "labels": "라벨",
+        "title": "레이어",
+        "other-pipelines": "기타 파이프라인",
+        "osmose-power": "Osmose (전력)"
+    },
+    "construction": "공사 중",
+    "disused": "사용 중단",
+    "coordinates": "좌표",
+    "search": {
+        "clear": "검색 지우기",
+        "no-results": "검색 결과가 없습니다"
+    },
+    "openstreetmap": "오픈스트리트맵"
+}
