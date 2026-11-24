@@ -4,9 +4,13 @@ volumes:
   imposm_expiry:
   imposm_diff:
 
+# OIM_DOCKER_PLATFORM is set by ./dev-setup.sh from the host arch (linux/arm64 or linux/amd64).
+# Official postgis/postgis:* tags are amd64-only; imresamu/postgis is a multi-arch rebuild of the
+# same Dockerfiles so Apple Silicon can run natively instead of under QEMU.
 services:
   db:
-    image: postgis/postgis:17-3.4-alpine
+    image: imresamu/postgis:17-3.4-alpine
+    platform: ${OIM_DOCKER_PLATFORM:-linux/amd64}
     shm_size: 1024mb
     environment:
       POSTGRES_PASSWORD: postgres
@@ -23,6 +27,7 @@ services:
 
   imposm:
     build: imposm
+    platform: ${OIM_DOCKER_PLATFORM:-linux/amd64}
     depends_on:
       db:
         condition: service_healthy
@@ -45,6 +50,7 @@ services:
   
   tegola:
     build: tegola
+    platform: ${OIM_DOCKER_PLATFORM:-linux/amd64}
     depends_on:
       db:
         condition: service_healthy
@@ -56,6 +62,7 @@ services:
 
   web-backend:
     build: web-backend
+    platform: ${OIM_DOCKER_PLATFORM:-linux/amd64}
     depends_on:
       db:
         condition: service_healthy

@@ -11,6 +11,11 @@ need to run this - you can just use the live tileserver.
 You'll need an OSM export file in PBF format. You're probably best off using a Geofabrik subset
 rather than the full planet for testing.
 
+`./dev-setup.sh` (or a prior run of it) writes `.env` with `OIM_DOCKER_PLATFORM` set from the host
+CPU (`linux/arm64` on Apple Silicon, `linux/amd64` otherwise). Compose uses that so PostGIS and
+imposm run natively. The imposm image is compiled from source for the target arch; the database
+image is `imresamu/postgis` (multi-arch rebuild of the official PostGIS Dockerfiles).
+
 First, start the DB container:
 
     docker compose up db

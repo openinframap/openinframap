@@ -11,7 +11,7 @@ infrastructure from [OpenStreetMap](https://www.openstreetmap.org).
 
 - **Docker dev environment fixes** -- Fixed database initialization (extension permissions, SQL function ordering) and service startup race conditions so `docker compose up` works reliably from a clean state.
 
-- **Automated dev setup** -- Added `dev-setup.sh` to automate the full local development pipeline: downloading an OSM extract, importing data, creating database views, and starting all services.
+- **Automated dev setup** -- Added `dev-setup.sh` to automate the full local development pipeline: downloading an OSM extract, importing data, creating database views, and starting all services. Detects host CPU architecture (`linux/arm64` vs `linux/amd64`) and runs PostGIS/imposm natively (multi-arch PostGIS + imposm built from source) so Apple Silicon avoids QEMU crashes.
 
 - **Full local stack** -- Added `web-backend` service to Docker Compose and Vite proxy configuration so stats pages, search, and other backend routes work in local development.
 
